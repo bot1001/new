@@ -1,0 +1,2824 @@
+2018-02-24 00:20:58 [127.0.0.1][-][avivebmfgvkursmr497mr0bgtv][error][yii\db\Exception] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'yii2advanced.sys_user' doesn't exist in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1252
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1252): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1142): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(409): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(271): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\common\models\User.php(113): yii\db\ActiveQuery->one()
+#6 C:\Apache24\htdocs\new\common\models\LoginForm.php(73): common\models\User::findByUsername('admin')
+#7 C:\Apache24\htdocs\new\common\models\LoginForm.php(44): common\models\LoginForm->getUser()
+#8 [internal function]: common\models\LoginForm->validatePassword('password', NULL, Object(yii\validators\InlineValidator))
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\validators\InlineValidator.php(72): call_user_func(Array, 'password', NULL, Object(yii\validators\InlineValidator))
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\validators\Validator.php(267): yii\validators\InlineValidator->validateAttribute(Object(common\models\LoginForm), 'password')
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Model.php(367): yii\validators\Validator->validateAttributes(Object(common\models\LoginForm), Array)
+#12 C:\Apache24\htdocs\new\common\models\LoginForm.php(58): yii\base\Model->validate()
+#13 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(90): common\models\LoginForm->login()
+#14 [internal function]: frontend\controllers\SiteController->actionLogin()
+#15 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('login', Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('site/login', Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#21 {main}
+
+Next yii\db\Exception: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'yii2advanced.sys_user' doesn't exist
+The SQL being executed was: SELECT * FROM `sys_user` WHERE `name`='admin' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:663
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1257): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1142): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(409): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(271): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\common\models\User.php(113): yii\db\ActiveQuery->one()
+#6 C:\Apache24\htdocs\new\common\models\LoginForm.php(73): common\models\User::findByUsername('admin')
+#7 C:\Apache24\htdocs\new\common\models\LoginForm.php(44): common\models\LoginForm->getUser()
+#8 [internal function]: common\models\LoginForm->validatePassword('password', NULL, Object(yii\validators\InlineValidator))
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\validators\InlineValidator.php(72): call_user_func(Array, 'password', NULL, Object(yii\validators\InlineValidator))
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\validators\Validator.php(267): yii\validators\InlineValidator->validateAttribute(Object(common\models\LoginForm), 'password')
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Model.php(367): yii\validators\Validator->validateAttributes(Object(common\models\LoginForm), Array)
+#12 C:\Apache24\htdocs\new\common\models\LoginForm.php(58): yii\base\Model->validate()
+#13 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(90): common\models\LoginForm->login()
+#14 [internal function]: frontend\controllers\SiteController->actionLogin()
+#15 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#16 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('login', Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('site/login', Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#21 {main}
+Additional Information:
+Array
+(
+    [0] => 42S02
+    [1] => 1146
+    [2] => Table 'yii2advanced.sys_user' doesn't exist
+)
+
+2018-02-24 00:20:58 [127.0.0.1][-][avivebmfgvkursmr497mr0bgtv][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = [
+    '_csrf-frontend' => '6HHfWwV4qhS5sv0G331_jEzjMIrdiLvB27r2kQ-IKOXaN7IuYyf7Ycz3v1-TFijJJLtv4Oz56q3p06HWdt1Mqw=='
+    'LoginForm' => [
+        'username' => 'admin'
+        'password' => '123456'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'avivebmfgvkursmr497mr0bgtv'
+    '_csrf-frontend' => '7e3098db3dab9289a490413c7b2ae4ce45be9d21fa48d2aae9a64fd8f5ab3a3ea:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2Fmuf_QuuEBYLkWEhX_j1qQl2iWGyUdN\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '238'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ORIGIN' => 'http://www.yuda.com'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=avivebmfgvkursmr497mr0bgtv; _csrf-frontend=7e3098db3dab9289a490413c7b2ae4ce45be9d21fa48d2aae9a64fd8f5ab3a3ea%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222Fmuf_QuuEBYLkWEhX_j1qQl2iWGyUdN%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54966'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519431658.537
+    'REQUEST_TIME' => 1519431658
+]
+2018-02-26 07:19:39 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:19:39 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:39 [192.168.190.141][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18222'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629579.714
+    'REQUEST_TIME' => 1519629579
+]
+2018-02-26 07:19:50 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:19:50 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:49 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/index'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Findex'
+    'REQUEST_URI' => '/index.php?r=site%2Findex'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629589.902
+    'REQUEST_TIME' => 1519629589
+]
+2018-02-26 07:19:50 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:143
+2018-02-26 07:19:50 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:50 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/about'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Findex'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fabout'
+    'REQUEST_URI' => '/index.php?r=site%2Fabout'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629590.45
+    'REQUEST_TIME' => 1519629590
+]
+2018-02-26 07:19:53 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:131
+2018-02-26 07:19:53 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:52 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/contact'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fabout'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fcontact'
+    'REQUEST_URI' => '/index.php?r=site%2Fcontact'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629592.923
+    'REQUEST_TIME' => 1519629592
+]
+2018-02-26 07:19:53 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:53 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/captcha'
+    'v' => '5a93b5190cf70'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fcontact'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fcaptcha&v=5a93b5190cf70'
+    'REQUEST_URI' => '/index.php?r=site%2Fcaptcha&v=5a93b5190cf70'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629593.07
+    'REQUEST_TIME' => 1519629593
+]
+2018-02-26 07:19:55 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:163
+2018-02-26 07:19:55 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:55 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/signup'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fcontact'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fsignup'
+    'REQUEST_URI' => '/index.php?r=site%2Fsignup'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629595.679
+    'REQUEST_TIME' => 1519629595
+]
+2018-02-26 07:19:56 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:96
+2018-02-26 07:19:56 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:56 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fsignup'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629596.774
+    'REQUEST_TIME' => 1519629596
+]
+2018-02-26 07:19:59 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:19:59 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:19:59 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/index'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18238'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Findex'
+    'REQUEST_URI' => '/index.php?r=site%2Findex'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629599.038
+    'REQUEST_TIME' => 1519629599
+]
+2018-02-26 07:20:11 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:163
+2018-02-26 07:20:11 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:11 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/signup'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Findex'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18275'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fsignup'
+    'REQUEST_URI' => '/index.php?r=site%2Fsignup'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629611.787
+    'REQUEST_TIME' => 1519629611
+]
+2018-02-26 07:20:27 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:20:27 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:27 [192.168.190.141][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fsignup'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18288'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629627.063
+    'REQUEST_TIME' => 1519629627
+]
+2018-02-26 07:20:34 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:20:34 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:34 [192.168.190.141][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Fsignup'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18316'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629634.271
+    'REQUEST_TIME' => 1519629634
+]
+2018-02-26 07:20:41 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:96
+2018-02-26 07:20:41 [192.168.190.141][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:41 [192.168.190.141][-][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18326'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629641.517
+    'REQUEST_TIME' => 1519629641
+]
+2018-02-26 07:20:46 [192.168.190.141][64][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:46 [192.168.190.141][64][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = [
+    '_csrf-frontend' => 'h3RZJ3a-sfRDcokMVCD16MSBAQuLf659yQNA0QFJRde-QWx_BcSIrisK7085YoW4k9dgPrIvxiWhbAmaWHw0pw=='
+    'LoginForm' => [
+        'username' => 'admin'
+        'password' => '123456'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'e05mhd83p1qguaojefj4r38ud1'
+    '_csrf-frontend' => '9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+    '__id' => '64'
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'CONTENT_LENGTH' => '238'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_COOKIE' => 'advanced-frontend=e05mhd83p1qguaojefj4r38ud1; _csrf-frontend=9689ca45a923caf864973840f5cb4e3dba9b7236e621c18e18e46e25846af30ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22955Xsz9ZhxfCmBpPWVa59PhXhoIKY5qp%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18333'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629646.696
+    'REQUEST_TIME' => 1519629646
+]
+2018-02-26 07:20:46 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:20:46 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:46 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:46 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'vr647kvqoms7mmusuqrk83vmki'
+    '_csrf-frontend' => '29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF\";}'
+    '_identity-frontend' => '63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a:2:{i:0;s:18:\"_identity-frontend\";i:1;s:19:\"[\"64\",null,2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+    '__id' => '64'
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=vr647kvqoms7mmusuqrk83vmki; _csrf-frontend=29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF%22%3B%7D; _identity-frontend=63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A19%3A%22%5B%2264%22%2Cnull%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18333'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629646.813
+    'REQUEST_TIME' => 1519629646
+]
+2018-02-26 07:20:56 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:20:56 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:56 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:56 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'vr647kvqoms7mmusuqrk83vmki'
+    '_csrf-frontend' => '29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF\";}'
+    '_identity-frontend' => '63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a:2:{i:0;s:18:\"_identity-frontend\";i:1;s:19:\"[\"64\",null,2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+    '__id' => '64'
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=vr647kvqoms7mmusuqrk83vmki; _csrf-frontend=29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF%22%3B%7D; _identity-frontend=63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A19%3A%22%5B%2264%22%2Cnull%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18346'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629656.765
+    'REQUEST_TIME' => 1519629656
+]
+2018-02-26 07:20:58 [192.168.190.141][64][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:57 [192.168.190.141][64][-][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'vr647kvqoms7mmusuqrk83vmki'
+    '_csrf-frontend' => '29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF\";}'
+    '_identity-frontend' => '63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a:2:{i:0;s:18:\"_identity-frontend\";i:1;s:19:\"[\"64\",null,2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+    '__id' => '64'
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=vr647kvqoms7mmusuqrk83vmki; _csrf-frontend=29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF%22%3B%7D; _identity-frontend=63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A19%3A%22%5B%2264%22%2Cnull%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18352'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629657.936
+    'REQUEST_TIME' => 1519629657
+]
+2018-02-26 07:20:58 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:20:58 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:58 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:20:58 [192.168.190.141][64][vr647kvqoms7mmusuqrk83vmki][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'vr647kvqoms7mmusuqrk83vmki'
+    '_csrf-frontend' => '29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF\";}'
+    '_identity-frontend' => '63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a:2:{i:0;s:18:\"_identity-frontend\";i:1;s:19:\"[\"64\",null,2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/site/captcha' => 'bifegyh'
+    '__captcha/site/captchacount' => 1
+    '__id' => '64'
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_REFERER' => 'http://192.168.172.84/index.php'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => 'advanced-frontend=vr647kvqoms7mmusuqrk83vmki; _csrf-frontend=29242e16db141ef75c44c5983cb3db86c536971d14677cb0b624fc1d72e9021aa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22_6bCyHS6QncYjKaB9RL0jyifY1nUvjKF%22%3B%7D; _identity-frontend=63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A19%3A%22%5B%2264%22%2Cnull%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18352'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629658.115
+    'REQUEST_TIME' => 1519629658
+]
+2018-02-26 07:21:08 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:21:08 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:08 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:08 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-frontend' => '63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a:2:{i:0;s:18:\"_identity-frontend\";i:1;s:19:\"[\"64\",null,2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 64
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => '_identity-frontend=63002ea7f17a6d8efe80378aa733221569b99195b5472242c8e707262884ced3a%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A19%3A%22%5B%2264%22%2Cnull%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18381'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629668.799
+    'REQUEST_TIME' => 1519629668
+]
+2018-02-26 07:21:12 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:21:12 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:12 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:12 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-frontend' => '4c5f1b6ff377b644a079a924271c83c4aaa8110604de75fc12f6f936eaa8b24da:2:{i:0;s:18:\"_identity-frontend\";i:1;s:17:\"[64,null,2592000]\";}'
+    'advanced-frontend' => '174s2hhq36cm1706orjb5f9qpo'
+    '_csrf-frontend' => '5f2c293006aba4adb9b90c5811acbff2bc2eed017d07a2b49d8cf3d9fa4828d9a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VqCuhmSoZjWHcUf5q6Jh9yaQhGH75PvR\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 64
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => '_identity-frontend=4c5f1b6ff377b644a079a924271c83c4aaa8110604de75fc12f6f936eaa8b24da%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A17%3A%22%5B64%2Cnull%2C2592000%5D%22%3B%7D; advanced-frontend=174s2hhq36cm1706orjb5f9qpo; _csrf-frontend=5f2c293006aba4adb9b90c5811acbff2bc2eed017d07a2b49d8cf3d9fa4828d9a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VqCuhmSoZjWHcUf5q6Jh9yaQhGH75PvR%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18380'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629672.742
+    'REQUEST_TIME' => 1519629672
+]
+2018-02-26 07:21:14 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\User::username in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:154
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\BaseActiveRecord.php(295): yii\base\Component->__get('username')
+#1 C:\Apache24\htdocs\new\frontend\views\layouts\main.php(50): yii\db\BaseActiveRecord->__get('username')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#6 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#7 [internal function]: frontend\controllers\SiteController->actionIndex()
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#13 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#14 {main}
+2018-02-26 07:21:14 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:14 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.190.141
+2018-02-26 07:21:14 [192.168.190.141][64][174s2hhq36cm1706orjb5f9qpo][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity-frontend' => '4c5f1b6ff377b644a079a924271c83c4aaa8110604de75fc12f6f936eaa8b24da:2:{i:0;s:18:\"_identity-frontend\";i:1;s:17:\"[64,null,2592000]\";}'
+    'advanced-frontend' => '174s2hhq36cm1706orjb5f9qpo'
+    '_csrf-frontend' => '5f2c293006aba4adb9b90c5811acbff2bc2eed017d07a2b49d8cf3d9fa4828d9a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VqCuhmSoZjWHcUf5q6Jh9yaQhGH75PvR\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 64
+]
+
+$_SERVER = [
+    'HTTP_ACCEPT' => 'text/html, application/xhtml+xml, image/jxr, */*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_COOKIE' => '_identity-frontend=4c5f1b6ff377b644a079a924271c83c4aaa8110604de75fc12f6f936eaa8b24da%3A2%3A%7Bi%3A0%3Bs%3A18%3A%22_identity-frontend%22%3Bi%3A1%3Bs%3A17%3A%22%5B64%2Cnull%2C2592000%5D%22%3B%7D; advanced-frontend=174s2hhq36cm1706orjb5f9qpo; _csrf-frontend=5f2c293006aba4adb9b90c5811acbff2bc2eed017d07a2b49d8cf3d9fa4828d9a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VqCuhmSoZjWHcUf5q6Jh9yaQhGH75PvR%22%3B%7D'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.190.141'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '18379'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629674.803
+    'REQUEST_TIME' => 1519629674
+]
+2018-02-26 07:26:10 [192.168.172.64][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.64
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:26:10 [192.168.172.64][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.64
+2018-02-26 07:26:10 [192.168.172.64][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Version/7.0 Mobile/15D100 Safari/9537.53'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-cn'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.64'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58604'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519629970.471
+    'REQUEST_TIME' => 1519629970
+]
+2018-02-26 07:27:10 [192.168.172.64][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.64
+    in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:80
+    in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+2018-02-26 07:27:10 [192.168.172.64][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.64
+2018-02-26 07:27:10 [192.168.172.64][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'd49f00c1464c68bfc978be9d2f7106c58d68794ca71886755a78890f86579752a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"UDuEm1CdTzDef0ZjqAaLRn1si_Jhn1ZE\";}'
+    'advanced-frontend' => 'otu0mleug6v60l3tkgd39gkjvp'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_COOKIE' => '_csrf-frontend=d49f00c1464c68bfc978be9d2f7106c58d68794ca71886755a78890f86579752a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22UDuEm1CdTzDef0ZjqAaLRn1si_Jhn1ZE%22%3B%7D; advanced-frontend=otu0mleug6v60l3tkgd39gkjvp'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Version/7.0 Mobile/15D100 Safari/9537.53'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-cn'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.64'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58618'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1519630030.216
+    'REQUEST_TIME' => 1519630030
+]
+2018-03-05 08:50:45 [127.0.0.1][-][0isqpc1sgvifufu2keeeni04ba][error][ParseError] ParseError: syntax error, unexpected ']' in C:\Apache24\htdocs\new\frontend\views\layouts\main.php:38
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('<div class="sit...')
+#3 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#4 [internal function]: frontend\controllers\SiteController->actionIndex()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('', Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#11 {main}
+2018-03-05 08:50:45 [127.0.0.1][-][0isqpc1sgvifufu2keeeni04ba][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '0isqpc1sgvifufu2keeeni04ba'
+    '_csrf-frontend' => 'a8d1c5c782bf5ae353385b4e6331e9c61bb3af1bd23172047ea7edd9cf663b9ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"7sLDz8TbGYZ0a_HIOgHtkVCrYtR2lXne\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:58.0) Gecko/20100101 Firefox/58.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'advanced-frontend=0isqpc1sgvifufu2keeeni04ba; _csrf-frontend=a8d1c5c782bf5ae353385b4e6331e9c61bb3af1bd23172047ea7edd9cf663b9ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%227sLDz8TbGYZ0a_HIOgHtkVCrYtR2lXne%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '59751'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1520239845.902
+    'REQUEST_TIME' => 1520239845
+]
+2018-03-22 13:06:10 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][Error] Error: Class 'Url' not found in C:\Apache24\htdocs\new\frontend\views\site\index.php:21
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('index', Array, Object(frontend\controllers\SiteController))
+#4 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#5 [internal function]: frontend\controllers\SiteController->actionIndex()
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#12 {main}
+2018-03-22 13:06:10 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '64591'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521723970.117
+    'REQUEST_TIME' => 1521723970
+]
+2018-03-22 13:13:48 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\ErrorException:8] yii\base\ErrorException: Use of undefined constant login - assumed 'login' in C:\Apache24\htdocs\new\frontend\views\site\index.php:13
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\site\index.php(13): yii\base\ErrorHandler->handleError(8, 'Use of undefine...', 'C:\\Apache24\\htd...', 13, Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('index', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\Controller->render('index')
+#6 [internal function]: frontend\controllers\SiteController->actionIndex()
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+2018-03-22 13:13:48 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '64741'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521724428.068
+    'REQUEST_TIME' => 1521724428
+]
+2018-03-22 13:18:00 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\UnknownClassException] yii\base\UnknownClassException: Unable to find 'frontend\controllers\LoginController' in file: C:\Apache24\htdocs\new/frontend/controllers/LoginController.php. Namespace missing? in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php:296
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('login')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('qq')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 13:18:00 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Mobile Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65144'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521724680.129
+    'REQUEST_TIME' => 1521724680
+]
+2018-03-22 13:19:17 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\UnknownClassException] yii\base\UnknownClassException: Unable to find 'frontend\controllers\LoginController' in file: C:\Apache24\htdocs\new/frontend/controllers/LoginController.php. Namespace missing? in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php:296
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('login')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('qq')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 13:19:17 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65192'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521724757.479
+    'REQUEST_TIME' => 1521724757
+]
+2018-03-22 13:19:20 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\UnknownClassException] yii\base\UnknownClassException: Unable to find 'frontend\controllers\LoginController' in file: C:\Apache24\htdocs\new/frontend/controllers/LoginController.php. Namespace missing? in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php:296
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('login')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('qq')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 13:19:20 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65193'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521724760.037
+    'REQUEST_TIME' => 1521724760
+]
+2018-03-22 13:20:12 [127.0.0.1][-][us8a6prkfv2id729fr6ieki3dg][error][yii\base\UnknownClassException] yii\base\UnknownClassException: Unable to find 'frontend\controllers\LoginController' in file: C:\Apache24\htdocs\new/frontend/controllers/LoginController.php. Namespace missing? in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php:296
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('login')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('qq')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 13:20:12 [127.0.0.1][-][us8a6prkfv2id729fr6ieki3dg][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'us8a6prkfv2id729fr6ieki3dg'
+    '_csrf-frontend' => '4375ecc67df9a94a9f8b8c30846eb739cf4260b38b2ccd8973802d6506317a61a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"oqkz8koOzYFlUodrsRvgOVwaO3eBrd87\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_COOKIE' => 'advanced-frontend=us8a6prkfv2id729fr6ieki3dg; _csrf-frontend=4375ecc67df9a94a9f8b8c30846eb739cf4260b38b2ccd8973802d6506317a61a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22oqkz8koOzYFlUodrsRvgOVwaO3eBrd87%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65256'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521724812.57
+    'REQUEST_TIME' => 1521724812
+]
+2018-03-22 13:24:14 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\ErrorException:8] yii\base\ErrorException: A session had already been started - ignoring session_start() in C:\Apache24\htdocs\new\vendor\qq\qqConnectAPI.php:2
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(8, 'A session had a...', 'C:\\Apache24\\htd...', 2, Array)
+#1 C:\Apache24\htdocs\new\vendor\qq\qqConnectAPI.php(2): session_start()
+#2 C:\Apache24\htdocs\new\frontend\controllers\LoginController.php(13): require_once('C:\\Apache24\\htd...')
+#3 [internal function]: frontend\controllers\LoginController->actionQq()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('qq', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#10 {main}
+2018-03-22 13:24:13 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65340'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521725053.958
+    'REQUEST_TIME' => 1521725053
+]
+2018-03-22 13:24:35 [127.0.0.1][-][m6v472d84id3q6jci38kjajlv2][error][yii\base\ErrorException:8] yii\base\ErrorException: A session had already been started - ignoring session_start() in C:\Apache24\htdocs\new\vendor\qq\qqConnectAPI.php:2
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(8, 'A session had a...', 'C:\\Apache24\\htd...', 2, Array)
+#1 C:\Apache24\htdocs\new\vendor\qq\qqConnectAPI.php(2): session_start()
+#2 C:\Apache24\htdocs\new\frontend\controllers\LoginController.php(13): require_once('C:\\Apache24\\htd...')
+#3 [internal function]: frontend\controllers\LoginController->actionQq()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('qq', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#10 {main}
+2018-03-22 13:24:34 [127.0.0.1][-][m6v472d84id3q6jci38kjajlv2][info][application] $_GET = [
+    'r' => 'login/qq'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'm6v472d84id3q6jci38kjajlv2'
+    '_csrf-frontend' => 'c082303a893bf608dc9672b4ebab830ace4a530fef4516d71f4957b5590222d9a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"M7Fi0RSoxD1d1ZdVuWrYCzovgC9WbfQr\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_COOKIE' => 'advanced-frontend=m6v472d84id3q6jci38kjajlv2; _csrf-frontend=c082303a893bf608dc9672b4ebab830ace4a530fef4516d71f4957b5590222d9a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22M7Fi0RSoxD1d1ZdVuWrYCzovgC9WbfQr%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '65400'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=login%2Fqq'
+    'REQUEST_URI' => '/index.php?r=login%2Fqq'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521725074.958
+    'REQUEST_TIME' => 1521725074
+]
+2018-03-22 14:11:57 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: state in C:\Apache24\htdocs\new\vendor\qq\class\Oauth.class.php:57
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\qq\class\Oauth.class.php(57): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 57, Array)
+#1 C:\Apache24\htdocs\new\frontend\controllers\LoginController.php(16): Oauth->qq_callback()
+#2 [internal function]: frontend\controllers\LoginController->actionQq()
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2018-03-22 14:11:57 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'QC_userData' => [
+        'state' => '528190195ca4aaefc50d28771f61aa46'
+    ]
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '51111'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/login/qq'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/login/qq'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\login\\qq'
+    'PHP_SELF' => '/index.php/login/qq'
+    'REQUEST_TIME_FLOAT' => 1521727917.781
+    'REQUEST_TIME' => 1521727917
+]
+2018-03-22 14:13:37 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: qc in C:\Apache24\htdocs\new\frontend\controllers\LoginController.php:15
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\LoginController.php(15): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 15, Array)
+#1 [internal function]: frontend\controllers\LoginController->actionQq()
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('qq', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 14:13:37 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'QC_userData' => [
+        'state' => '528190195ca4aaefc50d28771f61aa46'
+    ]
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '51248'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/login/qq'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/login/qq'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\login\\qq'
+    'PHP_SELF' => '/index.php/login/qq'
+    'REQUEST_TIME_FLOAT' => 1521728017.132
+    'REQUEST_TIME' => 1521728017
+]
+2018-03-22 14:20:10 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][error][Error] Error: Class 'QC' not found in C:\Apache24\htdocs\new\frontend\controllers\LoginController.php:14
+Stack trace:
+#0 [internal function]: frontend\controllers\LoginController->actionQq()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('qq', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/qq', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2018-03-22 14:20:10 [127.0.0.1][-][1n65rd2b1pthb9vc4okkeep4ln][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => '1n65rd2b1pthb9vc4okkeep4ln'
+    '_csrf-frontend' => '57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"HeNdwWmZ5ah23LM_esR5oNEuolJO71ov\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'QC_userData' => [
+        'state' => 'a1764aeda0815bc24a1210af7ae16837'
+    ]
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.wuye.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=1n65rd2b1pthb9vc4okkeep4ln; _csrf-frontend=57821c233e297d94a1ca23dcde7bf783bb6069b8b9ac43d62cb83c33f8f0865ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22HeNdwWmZ5ah23LM_esR5oNEuolJO71ov%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '51400'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/login/qq'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/login/qq'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\login\\qq'
+    'PHP_SELF' => '/index.php/login/qq'
+    'REQUEST_TIME_FLOAT' => 1521728410.459
+    'REQUEST_TIME' => 1521728410
+]
+2018-03-22 16:44:28 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Use of undefined constant home - assumed 'home' in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\ErrorHandler->handleError(8, 'Use of undefine...', 'C:\\Apache24\\htd...', 75, Array)
+#1 [internal function]: frontend\controllers\SiteController->actionIndex()
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 16:44:28 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58352'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521737068.229
+    'REQUEST_TIME' => 1521737068
+]
+2018-03-22 16:44:46 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Use of undefined constant main - assumed 'main' in C:\Apache24\htdocs\new\frontend\controllers\SiteController.php:75
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(75): yii\base\ErrorHandler->handleError(8, 'Use of undefine...', 'C:\\Apache24\\htd...', 75, Array)
+#1 [internal function]: frontend\controllers\SiteController->actionIndex()
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-03-22 16:44:45 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58359'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521737085.962
+    'REQUEST_TIME' => 1521737085
+]
+2018-03-22 16:48:10 [127.0.0.1][-][n3cac6ttf8ot0qdqni6kfclh88][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: menuItems in C:\Apache24\htdocs\new\frontend\views\layouts\home.php:40
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\layouts\home.php(40): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 40, Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('\r\n<style>\r\n\tdiv...')
+#5 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(76): yii\base\Controller->render('index')
+#6 [internal function]: frontend\controllers\SiteController->actionIndex()
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+2018-03-22 16:48:10 [127.0.0.1][-][n3cac6ttf8ot0qdqni6kfclh88][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'n3cac6ttf8ot0qdqni6kfclh88'
+    '_csrf-frontend' => 'f1f785d25e6cc8ac7183a59cabd644e219cca43ed5c480268f7d3ab4086b9181a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"Inrv6PmL_OGO9deem92CA2gqudQCPer2\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=n3cac6ttf8ot0qdqni6kfclh88; _csrf-frontend=f1f785d25e6cc8ac7183a59cabd644e219cca43ed5c480268f7d3ab4086b9181a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22Inrv6PmL_OGO9deem92CA2gqudQCPer2%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58511'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521737290.726
+    'REQUEST_TIME' => 1521737290
+]
+2018-03-22 16:51:15 [127.0.0.1][-][n3cac6ttf8ot0qdqni6kfclh88][error][Error] Error: Class 'AppAsset' not found in C:\Apache24\htdocs\new\frontend\views\layouts\home.php:8
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(399): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(385): yii\base\Controller->renderContent('\r\n<style>\r\n\tdiv...')
+#4 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(76): yii\base\Controller->render('index')
+#5 [internal function]: frontend\controllers\SiteController->actionIndex()
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#12 {main}
+2018-03-22 16:51:14 [127.0.0.1][-][n3cac6ttf8ot0qdqni6kfclh88][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'n3cac6ttf8ot0qdqni6kfclh88'
+    '_csrf-frontend' => 'f1f785d25e6cc8ac7183a59cabd644e219cca43ed5c480268f7d3ab4086b9181a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"Inrv6PmL_OGO9deem92CA2gqudQCPer2\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.wuye.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=n3cac6ttf8ot0qdqni6kfclh88; _csrf-frontend=f1f785d25e6cc8ac7183a59cabd644e219cca43ed5c480268f7d3ab4086b9181a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22Inrv6PmL_OGO9deem92CA2gqudQCPer2%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.wuye.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58649'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521737474.941
+    'REQUEST_TIME' => 1521737474
+]
+2018-03-23 01:49:47 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: http://www.yuda.com in C:\Apache24\htdocs\new\frontend\views\site\index.php:27
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\site\index.php(27): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 27, Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('index', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(76): yii\base\Controller->render('index')
+#6 [internal function]: frontend\controllers\SiteController->actionIndex()
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+2018-03-23 01:49:47 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54311'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1521769787.311
+    'REQUEST_TIME' => 1521769787
+]
+2018-03-23 03:14:32 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/download in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('download', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('site/download', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-03-23 03:14:32 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg\";}'
+    'advanced-frontend' => 'bs50vnjgn4gsvhranrntrahmju'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => '_csrf-frontend=e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg%22%3B%7D; advanced-frontend=bs50vnjgn4gsvhranrntrahmju'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '58795'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/site/download'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/download'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\site\\download'
+    'PHP_SELF' => '/index.php/site/download'
+    'REQUEST_TIME_FLOAT' => 1521774872.721
+    'REQUEST_TIME' => 1521774872
+]
+2018-03-23 03:25:35 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/Android in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('Android', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('site/Android', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-03-23 03:25:35 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg\";}'
+    'advanced-frontend' => 'bs50vnjgn4gsvhranrntrahmju'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => '_csrf-frontend=e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg%22%3B%7D; advanced-frontend=bs50vnjgn4gsvhranrntrahmju'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '59263'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/site/Android'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/site/Android'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\site\\Android'
+    'PHP_SELF' => '/index.php/site/Android'
+    'REQUEST_TIME_FLOAT' => 1521775534.998
+    'REQUEST_TIME' => 1521775534
+]
+2018-03-23 03:26:00 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "android". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('android', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-03-23 03:26:00 [127.0.0.1][-][bs50vnjgn4gsvhranrntrahmju][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"2vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg\";}'
+    'advanced-frontend' => 'bs50vnjgn4gsvhranrntrahmju'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => '_csrf-frontend=e7a3782b8e8a95a46b3bfcc57eeae7bae76c987423dfdfcd4fe5a190d5e56d36a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%222vvkx44gZCtgS6-cTeLwL8BLB4VJZVOg%22%3B%7D; advanced-frontend=bs50vnjgn4gsvhranrntrahmju'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '59278'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index.php/android'
+    'SCRIPT_NAME' => '/index.php'
+    'PATH_INFO' => '/android'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\frontend\\web\\android'
+    'PHP_SELF' => '/index.php/android'
+    'REQUEST_TIME_FLOAT' => 1521775560.582
+    'REQUEST_TIME' => 1521775560
+]
