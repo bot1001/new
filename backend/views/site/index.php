@@ -4,6 +4,7 @@ use app\models\UserInvoice;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 $script = <<< JS
@@ -51,18 +52,21 @@ $this->title = '裕达物业';
 
    </div>
 
-<?php
-	if($name == 'admin'){
-		echo "<h5>欢迎您，<h>超级管理员！</h></h5>";
-	}else{
-		echo "<h5>欢迎您，<h>$name ！</h></h5>";
-	}
-    echo "<br />";
-    echo "<h5>您的登录地址是：<h>$a</h></h5>";
-	
-    Pjax::begin();
-	
-	echo '<g>'.Html::a("北京时间：", ['index'], ['id' => 'refreshButton']);
-	echo date('Y-m-d H:i:s').'</g>';
-	Pjax::end(); ?>
+    <?php
+    	if($name == 'admin'){
+    		echo "<h5>欢迎您，<h>超级管理员！</h></h5>";
+    	}else{
+    		echo "<h5>欢迎您，<h>$name ！</h></h5>";
+    	}
+        echo "<br />";
+        echo "<h5>您的登录地址是：<h>$a</h></h5>";
+    	
+        Pjax::begin();
+    	
+    	echo '<g>'.Html::a("北京时间：", ['index'], ['id' => 'refreshButton']);
+    	echo date('Y-m-d H:i:s').'</g>';
+    	Pjax::end(); 
+    	
+    	?>
+	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 </div>

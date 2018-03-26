@@ -45,8 +45,23 @@ class UserInvoiceController extends Controller {
 	 * Lists all UserInvoice models.
 	 * @return mixed
 	 */
-	public function actionIndex() {
+	public function actionIndex() 
+	{
+		$get = $_GET;
 		$searchModel = new UserInvoiceSearch();
+		
+		if(isset($get['order_id'])){
+			$searchModel->order_id = $get['order_id'];
+		}
+		
+		if(isset($get['one']) && isset($get['two']))
+		{
+			$one = date('Y-m-d', time($get['one']));
+			$two = date('Y-m-d', strtotime("+1day", $get['two']));
+			$time =  $one.' to '.$two;
+			$searchModel->payment_time = $time;			
+		}
+		
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
 		return $this->render( 'index', [

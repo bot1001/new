@@ -76,7 +76,7 @@ class UserInvoiceSearch extends UserInvoice
         }
 
 		//自定义搜索
-		if($this->payment_time!=''){
+		if($this->payment_time !=''){
 			$time = explode(' to ',$this->payment_time);
 			$one = (reset($time));
 			$two = end($time);

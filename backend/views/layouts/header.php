@@ -7,31 +7,26 @@ use app\models\CommunityBasic;
 use app\models\CommunityBuilding;
 use app\models\UserData;
 use yii\helpers\ArrayHelper;
+use app\models\OrderBasic;
 
 $session= $_SESSION['user'];
 $a = $session['community']; //获取小区
-$t = TicketBasic::getTicket();
+$t = TicketBasic::getTicket(); //调用获取投诉数据方法
+$o = OrderBasic::getOr(); //调用获取订单数据方法
 
 $one = strtotime(date('Y-m-d')); // 本日时间戳
 $two = date(time()); //当前时间戳
-       //var_dump($a);exit;
+    
     if(empty($a))
 	{
+		//获取订单
+		$or = $o ->andwhere(['between', 'payment_time', $one, $two])->limit(8);
+			
 		//获取小区投诉
 		$ticket = $t->andwhere(['ticket_status' => 1])
 	        ->asArray()
 			->all();
 		
-		//获取小区名称
-    	$c_name = CommunityBasic::find()
-    	   ->select('community_id, community_name')
-    	   ->asArray()
-    	   ->all();
-		//获取楼宇
-    	$b_name = CommunityBuilding::find()
-    		->select('building_id, building_name')
-    		->asArray()
-    		->all();
 		//计算当日注册量
 		$query = (new \yii\db\Query())->select([
 			    'user_data.reg_time',
@@ -40,26 +35,23 @@ $two = date(time()); //当前时间戳
 			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_data.account_id')
 			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
 			->where(['between', 'user_data.reg_time', $one, $two]);
-		
     }else{
+		//获取关联小区名字
+		$community_name = CommunityBasic::find()->select('community_name')
+			->where(['in', 'community_id', $a])
+			->asArray()
+			->one();
 		//获取小区投诉
 		$ticket = $t->andwhere(['ticket_basic.community_id' => $a])
 			->andwhere(['ticket_status' => 1])
 	        ->asArray()
 			->all();
 		
-		//获取小区名称
-    	$c_name = CommunityBasic::find()
-    	    ->select('community_id, community_name')
-    	    ->where(['community_id' => $a])
-    	    ->asArray()
-    	    ->all();
-		//获取楼宇
-    	$b_name = CommunityBuilding::find()
-    		->select('building_name, building_id')
-    		->where(['community_id' => $a])
-    		->asArray()
-    		->all();
+	    //获取订单
+		$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
+			->andwhere(['like', 'order_relationship_address.address', $community_name['community_name']])
+			->limit(5);
+		
 		//计算当日注册量
 		$query = (new \yii\db\Query())->select([
 			    'user_data.reg_time',
@@ -67,19 +59,38 @@ $two = date(time()); //当前时间戳
 			->from ('user_data')
 			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_data.account_id')
 			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
-			->andwhere(['between', 'user_data.reg_time', strtotime(date('Y-m-d')),date(time())])
+			->andwhere(['between', 'user_data.reg_time', $one, $two])
 		    ->andwhere(['community_realestate.community_id' => $a]);
     }
 
-	$user = $query->all();
-    $today = $query->count();
+	$user = $query->all(); //获取注册数据
+    $today = $query->count(); //计算注册量总数
+    $o_count = $or->count(); //订单总量
+    $order = $or->all(); // 当日缴费数据
+
+    $o_c = array_column($order, 'community_id'); //订单中的小区编号
+    $o_b = array_column($order, 'building_id'); //订单中的楼宇编号
+    $t_c = array_column(array_column($ticket, 'r'), 'community_id'); //投诉列表总的小区编号
+    $t_b = array_column(array_column($ticket, 'r'), 'building_id'); //投诉列表总的楼宇编号
+    
+    $comm_id = array_unique(array_merge($o_c,$t_c)); //合并和去重复小区编号
+    $build_id = array_unique(array_merge($o_b,$t_b)); //合并和去重复小区编号
+
+    //获取楼宇
+    $b_name = CommunityBuilding::find()
+    	->select('building_name, building_id')
+    	->where(['in', 'building_id', $build_id])
+    	->asArray()
+    	->all();
+    //获取小区名称
+    $c_name = CommunityBasic::find()
+       ->select('community_id, community_name')
+	   ->where(['in', 'community_id',$comm_id])
+       ->asArray()
+       ->all();
+
     $community = ArrayHelper::map($c_name, 'community_id', 'community_name'); //重新组合小区
     $building = ArrayHelper::map($b_name, 'building_id', 'building_name'); //重新组合楼宇
-
-
-/*foreach($ticket as $t){
-	print_r($t);echo '<br />';
-}*/
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -104,7 +115,7 @@ $two = date(time()); //当前时间戳
     <nav class="navbar navbar-static-top" role="navigation">
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">隐藏左边导航栏按钮</span>
         </a>
 
         <div class="navbar-custom-menu">
@@ -118,48 +129,48 @@ $two = date(time()); //当前时间戳
                         <span class="label label-success"><?php echo count($ticket); ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><h4>你有<?php echo count($ticket); ?>条未处理的投诉</h4></li>
+                        <li class="header"><h4>未处理投诉量：<l><?php echo count($ticket); ?> </l>例</h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <!-- 提醒信息开始 -->
 								<li>
-                                                                            
-                                        <?php
-                                        foreach($ticket as $t)
-										{	
-											if(isset($t)){
-											$c_id = $t['r']['community_id'];
-                                            $b_id = $t['r']['building_id'];
-										}else{
-												$c_id = $b_id = '';
-											}
-                                             ?>
-                                            
-											<a href="<?php 
-											     if(($c_id && $b_id) == ''){
-											     	echo Url::to(['#']);
-											     }else{
-											     	echo Url::to(['/ticket/index',
-											     							'community' => $community[$c_id],
-											     							'building' => $building[$b_id]
-											     							]);
-											     }
-											 ?>">
-										    <?php 
-											    if(($c_id && $b_id) == '')
-											    {
-											    	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
-											    	date('Y-m-d H',$t['create_time']);
-											    }else{
-											    	echo $community[$c_id].' '.
-											    	$building[$b_id].' '.
-											    	$t['r']['room_name'].' '.
-											    	date('Y-m-d H',$t['create_time']);
-											    }
-                                                }
-								            ?>
-                                           </a>
+                                     <?php
+                                     foreach($ticket as $t)
+								    {	
+								    	if(isset($t)){
+								    	$c_id = $t['r']['community_id'];
+                                             $b_id = $t['r']['building_id'];
+								    }else{
+								    	$c_id = $b_id = '';
+								    }
+                                         ?>
+                                        
+								   <a href="<?php 
+								       if(($c_id && $b_id) == ''){
+								       	echo Url::to(['#']);
+								       }else{
+								       	echo Url::to(['/ticket/index',
+								       							'community' => $community[$c_id],
+								       							'building' => $building[$b_id]
+								       							]);
+								       }
+								   ?>">
+								   
+								   <?php 
+								    if(($c_id && $b_id) == '')
+								    {
+								    	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
+								    	date('Y-m-d H',$t['create_time']);
+								    }else{
+								    	echo $community[$c_id].' '.
+								    	$building[$b_id].' '.
+								    	$t['r']['room_name'].' '.
+								    	date('Y-m-d H',$t['create_time']);
+								    }
+                                    }
+								        ?>
+                                      </a>
                                 </li>
                                 <!-- 提醒信息结束 -->                                                                                            
                             </ul>
@@ -173,7 +184,7 @@ $two = date(time()); //当前时间戳
                         <span class="label label-warning"><?php echo $today ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">本日注册量：<l><?php echo $today ?></l>个</li>
+                        <li class="header"><h4>本日注册量：<l><?php echo $today ?></l>个</h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -190,6 +201,7 @@ $two = date(time()); //当前时间戳
 	                                     			continue;
 	                                     		}
 	                                     		$c_c = count($k);
+												unset($community[$key]);
 	                                     		unset($k);
 	                                     	}
 	                                     	?>
@@ -212,81 +224,40 @@ $two = date(time()); //当前时间戳
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
+                        <span class="label label-danger"><?php echo $o_count; ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 9 tasks</li>
+                        <li class="header"><h4>当日订单数量：<l><?php echo $o_count; ?> </l>条</h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                <li><!-- Task item -->
+                                <li>
+                                   <?php foreach($order as $o){?>
+									<a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $o['order_id']]) ?>">	
+								   <?php echo $o['address'].' '.'时间：'.date('H:i', $o['payment_time']).' '.'<l>'.$o['order_amount'].'</l>'; ?>
+									
+									</a>
+                                  <?php } ?>
+                                  
+                                   <!-- Task item 
                                     <a href="#">
                                         <h3>
                                             Design some buttons
-                                            <small class="pull-right">20%</small>
+                                            <small class="pull-right">50%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                            <div class="progress-bar progress-bar-aqua" style="width: 50%"
                                                  role="progressbar" aria-valuenow="20" aria-valuemin="0"
                                                  aria-valuemax="100">
                                                 <span class="sr-only">20% Complete</span>
                                             </div>
                                         </div>
-                                    </a>
+                                    </a>-->
                                 </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <h3>
-                                            Create a nice theme
-                                            <small class="pull-right">40%</small>
-                                        </h3>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 40%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">40% Complete</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <h3>
-                                            Some task I need to do
-                                            <small class="pull-right">60%</small>
-                                        </h3>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-red" style="width: 60%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- end task item -->
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <h3>
-                                            Make beautiful transitions
-                                            <small class="pull-right">80%</small>
-                                        </h3>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">80% Complete</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <!-- end task item -->
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="#">View all tasks</a>
+                            <a href="<?php echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]) ?>">查看全部</a>
                         </li>
                     </ul>
                 </li>

@@ -8,10 +8,6 @@ use yii\helpers\Url;
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
 
-$this->title = '统计';
-$this->params['breadcrumbs'][] = ['label' => '缴费', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-
 ?>
 
 <style type="text/css">

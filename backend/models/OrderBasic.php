@@ -132,4 +132,17 @@ class OrderBasic extends \yii\db\ActiveRecord
     {
         return $this->hasOne(UserInvoice::className(), ['order_id' => 'order_id']);
     }
+	
+	//首页显示订单
+	public static function getOr()
+	{
+		$order = (new \yii\db\Query())->select([
+			'order_basic.order_id','order_basic.order_amount','order_basic.payment_time',
+			'order_relationship_address.address',
+		])
+			->from('order_basic')
+			->join('left join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id');
+		
+		return $order;
+	}
 }
