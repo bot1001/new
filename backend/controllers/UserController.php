@@ -45,6 +45,11 @@ class UserController extends Controller
 			$searchModel->reg_time = $one.' to '.$two;
 		};
 		
+		if(isset($get['name']))
+		{
+			$searchModel->community_name = $get['name'];
+		}
+		
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

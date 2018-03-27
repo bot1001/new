@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 
 $script = <<< JS
 $(document).ready(function() {
-    setInterval(function(){ $("#refreshButton").click(); }, 60000);
+    setInterval(function(){ $("#refreshButton").click(); }, 300000);
 });
 JS;
 $this->registerJs($script);

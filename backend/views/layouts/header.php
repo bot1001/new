@@ -49,8 +49,7 @@ $two = date(time()); //当前时间戳
 		
 	    //获取订单
 		$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
-			->andwhere(['like', 'order_relationship_address.address', $community_name['community_name']])
-			->limit(5);
+			->andwhere(['like', 'order_relationship_address.address', $community_name['community_name']]);
 		
 		//计算当日注册量
 		$query = (new \yii\db\Query())->select([
@@ -66,14 +65,19 @@ $two = date(time()); //当前时间戳
 	$user = $query->all(); //获取注册数据
     $today = $query->count(); //计算注册量总数
     $o_count = $or->count(); //订单总量
-    $order = $or->all(); // 当日缴费数据
+    $order = $or->orderBy('payment_time DESC')->all(); // 当日订单数据
 
     $o_c = array_column($order, 'community_id'); //订单中的小区编号
+    $u_c = array_column($user, 'community_id'); //订单中的小区编号
     $o_b = array_column($order, 'building_id'); //订单中的楼宇编号
     $t_c = array_column(array_column($ticket, 'r'), 'community_id'); //投诉列表总的小区编号
     $t_b = array_column(array_column($ticket, 'r'), 'building_id'); //投诉列表总的楼宇编号
     
-    $comm_id = array_unique(array_merge($o_c,$t_c)); //合并和去重复小区编号
+    $b = [$a];
+    $comm_id = array_merge($o_c,$t_c); //合并小区编号
+    $comm_id = array_merge($comm_id,$b); //合小区编号
+    $comm_id = array_merge($comm_id,$u_c); //合并和去重复小区编号
+
     $build_id = array_unique(array_merge($o_b,$t_b)); //合并和去重复小区编号
 
     //获取楼宇
@@ -82,6 +86,7 @@ $two = date(time()); //当前时间戳
     	->where(['in', 'building_id', $build_id])
     	->asArray()
     	->all();
+
     //获取小区名称
     $c_name = CommunityBasic::find()
        ->select('community_id, community_name')
@@ -129,7 +134,7 @@ $two = date(time()); //当前时间戳
                         <span class="label label-success"><?php echo count($ticket); ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><h4>未处理投诉量：<l><?php echo count($ticket); ?> </l>例</h4></li>
+						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单']) ?>"><l><?php echo count($ticket); ?> </l>例</a></h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -147,8 +152,8 @@ $two = date(time()); //当前时间戳
                                          ?>
                                         
 								   <a href="<?php 
-								       if(($c_id && $b_id) == ''){
-								       	echo Url::to(['#']);
+								       if($c_id && $b_id == ''){
+								       	echo '';
 								       }else{
 								       	echo Url::to(['/ticket/index',
 								       							'community' => $community[$c_id],
@@ -158,16 +163,18 @@ $two = date(time()); //当前时间戳
 								   ?>">
 								   
 								   <?php 
-								    if(($c_id && $b_id) == '')
-								    {
-								    	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
-								    	date('Y-m-d H',$t['create_time']);
-								    }else{
-								    	echo $community[$c_id].' '.
-								    	$building[$b_id].' '.
-								    	$t['r']['room_name'].' '.
-								    	date('Y-m-d H',$t['create_time']);
-								    }
+								        if($c_id && $b_id == '')
+								        {
+									    	
+								        	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
+								        	date('Y-m-d H',$t['create_time']);
+								        }else{
+											//print_r($community);//exit;
+								        	echo $community[$c_id].' '.
+								        	$building[$b_id].' '.
+								        	$t['r']['room_name'].' '.
+								        	date('Y-m-d H',$t['create_time']);
+								        }
                                     }
 								        ?>
                                       </a>
@@ -184,7 +191,10 @@ $two = date(time()); //当前时间戳
                         <span class="label label-warning"><?php echo $today ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><h4>本日注册量：<l><?php echo $today ?></l>个</h4></li>
+                        <li class="header"><h4>本日注册量：<a href="<?php echo Url::to(['/user/index', 
+																		'one' => $one, 
+																		'two' => $two
+																				 ]); ?>"><l><?php echo $today ?></l>个</a></h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -201,11 +211,15 @@ $two = date(time()); //当前时间戳
 	                                     			continue;
 	                                     		}
 	                                     		$c_c = count($k);
-												unset($community[$key]);
+												//unset($community[$key]);
 	                                     		unset($k);
 	                                     	}
 	                                     	?>
-	                                 <a href="#">
+	                                 <a href="<?php echo Url::to(['/user/index',
+																  'name' => $community[$community_id],
+																  'one' => $one,
+																  'two' => $two
+																 ]) ?>">
 	                                 <?php
 	                                    echo '<i class="fa fa-users text-aqua"></i>'.$community[$community_id].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
 	                                  }
@@ -227,7 +241,7 @@ $two = date(time()); //当前时间戳
                         <span class="label label-danger"><?php echo $o_count; ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><h4>当日订单数量：<l><?php echo $o_count; ?> </l>条</h4></li>
+						<li class="header"><h4>当日订单数量：<a href="<?php echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]) ?>"><l><?php echo $o_count; ?> </l>条</a></h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -275,7 +289,11 @@ $two = date(time()); //当前时间戳
                                  alt="User Image"/>
 
                             <p>
-                                绑定小区<?php echo $session['community'] ?>
+								绑定小区：<l><?php if($a){
+                                                       	echo $community[$a];
+                                                       }else{
+                                                       	echo '全部';
+                                                       } ?></l>
                                 <small>角色：<?php echo $session['role'] ?></small>
                             </p>
                         </li>
