@@ -8,6 +8,7 @@ use app\models\CommunityBuilding;
 use app\models\UserData;
 use yii\helpers\ArrayHelper;
 use app\models\OrderBasic;
+use app\models\SysRole;
 
 $session= $_SESSION['user'];
 $a = $session['community']; //获取小区
@@ -16,6 +17,7 @@ $o = OrderBasic::getOr(); //调用获取订单数据方法
 
 $one = strtotime(date('Y-m-d')); // 本日时间戳
 $two = date(time()); //当前时间戳
+$r_id = $session['role']; //用户角色编号
     
     if(empty($a))
 	{
@@ -94,6 +96,10 @@ $two = date(time()); //当前时间戳
        ->asArray()
        ->all();
 
+    //角色
+    $role = SysRole::find()->select('id, name')->asArray()->all();
+    $r_name = ArrayHelper::map($role, 'id', 'name');
+
     $community = ArrayHelper::map($c_name, 'community_id', 'community_name'); //重新组合小区
     $building = ArrayHelper::map($b_name, 'building_id', 'building_name'); //重新组合楼宇
 
@@ -101,8 +107,8 @@ $two = date(time()); //当前时间戳
 /* @var $content string */
 ?>
 
-<!-- 页面自动更新代码 -->
-<meta http-equiv='refresh' content='300'/>
+<!-- 页面自动更新代码 每30分钟刷新一次页面-->
+<meta http-equiv='refresh' content='1800'/>
 
 <style>
 	l{
@@ -134,7 +140,7 @@ $two = date(time()); //当前时间戳
                         <span class="label label-success"><?php echo count($ticket); ?></span>
                     </a>
                     <ul class="dropdown-menu">
-						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单']) ?>"><l><?php echo count($ticket); ?> </l>例</a></h4></li>
+						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>"><l><?php echo count($ticket); ?> </l>例</a></h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -142,8 +148,8 @@ $two = date(time()); //当前时间戳
 								<li>
                                      <?php
                                      foreach($ticket as $t)
-								    {	
-								    	if(isset($t)){
+								    {
+								    	if(isset($t['r'])){
 								    	$c_id = $t['r']['community_id'];
                                              $b_id = $t['r']['building_id'];
 								    }else{
@@ -152,24 +158,24 @@ $two = date(time()); //当前时间戳
                                          ?>
                                         
 								   <a href="<?php 
-								       if($c_id && $b_id == ''){
+								       if(empty($t['r'])){
 								       	echo '';
 								       }else{
 								       	echo Url::to(['/ticket/index',
 								       							'community' => $community[$c_id],
-								       							'building' => $building[$b_id]
+								       							'building' => $building[$b_id],
+													            'c' => $a
 								       							]);
 								       }
 								   ?>">
 								   
 								   <?php 
-								        if($c_id && $b_id == '')
+								        if(empty($t['r']))
 								        {
 									    	
 								        	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
 								        	date('Y-m-d H',$t['create_time']);
 								        }else{
-											//print_r($community);//exit;
 								        	echo $community[$c_id].' '.
 								        	$building[$b_id].' '.
 								        	$t['r']['room_name'].' '.
@@ -182,7 +188,7 @@ $two = date(time()); //当前时间戳
                                 <!-- 提醒信息结束 -->                                                                                            
                             </ul>
                         </li>
-                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','name' => '待接单']) ?>">查看全部</a></li>
+                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>">查看全部</a></li>
                     </ul>
                 </li>
                 <li class="dropdown notifications-menu">
@@ -294,7 +300,7 @@ $two = date(time()); //当前时间戳
                                                        }else{
                                                        	echo '全部';
                                                        } ?></l>
-                                <small>角色：<?php echo $session['role'] ?></small>
+                                <small>角色：<?php echo ($r_name[$r_id]); ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

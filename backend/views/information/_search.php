@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'remind_id') ?>
 
-    <?= $form->field($model, 'room_name') ?>
+    <?= $form->field($model, 'community') ?>
 
     <?= $form->field($model, 'detail') ?>
 

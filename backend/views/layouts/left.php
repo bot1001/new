@@ -1,5 +1,9 @@
 <?php
+
 use yii\helpers\Url;
+use app\models\Information;
+use app\models\TicketBasic;
+
 ?>
      
 <aside class="main-sidebar">
@@ -30,7 +34,7 @@ use yii\helpers\Url;
         </form>
         <!-- 搜索框止 -->
 
-        <?= dmstr\widgets\Menu::widget(
+        <?php echo dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
@@ -61,6 +65,7 @@ use yii\helpers\Url;
 					],
 	
                     ['label' => '用户管理', /*'icon' => 'file-code-o', */'url' => ['/user']],
+                    ['label' => '系统消息', /*'icon' => 'file-code-o', */'url' => ['/information/index']],
                     ['label' => '退出', 'url' => ['site/logout']],
 	
                     /*['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
@@ -94,7 +99,87 @@ use yii\helpers\Url;
                     ],*/
                 ],
             ]
-        ) ?>
+        );
+		
+		$c = $_SESSION['user']['community']; //用户关联小区
+		$name = $_SESSION['user']['name']; //操作用户
+		
+		if($c)
+		{
+			$ticket = TicketBasic::find()->select('ticket_id, ticket_number as number, community_id as community, create_time, remind')
+	            ->andwhere(['in', 'ticket_status', 1])
+	            ->andwhere(['<', 'remind', 10])
+				->andwhere(['in', 'community_id', $c])
+	            ->asArray()
+	            ->all();
+			
+            if($ticket)
+			{
+				$t_number = array_column($ticket, 'number'); //提取投诉单号
+				$number = implode(',',$t_number); //拼接投诉单号
+				$i_count = count($ticket); //计算未处理投诉、建议数量
+				$detail = '您小区新增'.$i_count.'例投诉或建议，请务必安排相关人员及时处理！';
+			    
+				//检查投诉单号是否存在
+				$information = Information::find()
+					->select('ticket_number, times, remind_time')
+					->where(['ticket_number' => $number])
+					->asArray()
+					->one();
+				
+				if($information)
+				{
+					$now = date(time()); //获取当前时间
+					$time = $information['remind_time']; //提醒信息中的时间
+					$second = $now-$time; //计算时间差
+					
+					if($second >= 1800)
+					{
+						$remind = $information['times'] += 1;
+						
+						Information::updateAll(['remind_time' => date(time()),
+											'times' => $remind,
+											'reading' => 0],
+										    'ticket_number = :number',
+										   [':number' => $information['ticket_number']]);
+						
+						foreach($ticket as $ts)
+                        {	
+	                        $model = new Information(); //实例化模型
+	                        
+	                        //更新投诉列表中的提醒次数
+	                        TicketBasic::updateAll(['remind' => $remind], 'ticket_id = :id', [':id' => $ts['ticket_id']]);	            
+	                    }
+						echo "<script>alert('$detail')</script>";
+					}
+				}else{
+					foreach($ticket as $ts)
+                    {	
+	                    $model = new Information(); //实例化模型
+	                    
+	                    $remind = $ts['remind']; //提醒次数
+	                    $remind += 1; //提醒次数自动递加
+	                    
+	                    //更新投诉列表中的提醒次数
+	                    TicketBasic::updateAll(['remind' => $remind], 'ticket_id = :id', [':id' => $ts['ticket_id']]);	            
+	                }
+			        
+					//模型赋值
+			        $model->community = $c;
+	                $model->target = $name;
+	                $model->detail = $detail;
+					$model->times = $remind;
+	                $model->reading = 0;
+	                $model->ticket_number = $number;
+	                $model->remind_time = date(time());
+                    
+                    $model->save(); //保存
+					echo "<script>alert('$detail')</script>";
+				}
+			}
+		}
+		
+		?>
 
     </section>
 

@@ -18,7 +18,7 @@ class InformationSearch extends Information
     public function rules()
     {
         return [
-            [['remind_id', 'room_name', 'times', 'reading', 'target', 'ticket_number', 'remind_time'], 'integer'],
+            [['remind_id', 'community', 'times', 'reading', 'target', 'ticket_number', 'remind_time'], 'integer'],
             [['detail', 'property'], 'safe'],
         ];
     }
@@ -41,7 +41,11 @@ class InformationSearch extends Information
      */
     public function search($params)
     {
-        $query = Information::find();
+		if($_SESSION['user']['community']){
+			$query = Information::find()->where(['target' => $_SESSION['user']['name']]);
+		}else{
+			$query = Information::find();
+		}
 
         // add conditions that should always apply here
 
@@ -60,7 +64,7 @@ class InformationSearch extends Information
         // grid filtering conditions
         $query->andFilterWhere([
             'remind_id' => $this->remind_id,
-            'room_name' => $this->room_name,
+            'community' => $this->community,
             'times' => $this->times,
             'reading' => $this->reading,
             'target' => $this->target,

@@ -99,6 +99,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 			return TicketBasic::find()->andwhere(['ticket_status' => 1])->andwhere(['community_id' => $c])->count();
 		}
 	}
+	
 	public static function getTicket()
 	{
 		$ticket = TicketBasic::find()

@@ -8,6 +8,7 @@ use app\models\TicketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Information;
 
 /**
  * TicketController implements the CRUD actions for TicketBasic model.
@@ -39,12 +40,19 @@ class TicketController extends Controller
         $searchModel = new TicketSearch();//实例化模型
         
 		//判断是否有信息栏传过来的参数
-		if(isset($get['community']) && isset($get['building'])){
+		if(isset($get['community']) && isset($get['building']))
+		{
 			$searchModel->community_name = $get['community'];
 			$searchModel->building_name = $get['building'];
 			$searchModel->name = '待接单';
+			if($_SESSION['user']['community']){
+				Information::updateAll(['reading' => 1], 'community = :c', [':c' => $get['c']]);
+			}
 		}elseif(isset($get['name'])){
 			$searchModel->name = '待接单';
+			if($_SESSION['user']['community']){
+				Information::updateAll(['reading' => 1], 'community = :c', [':c' => $get['c']]);
+			}
 		}
 		
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
