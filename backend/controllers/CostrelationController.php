@@ -27,8 +27,8 @@ class CostrelationController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
-	public
-	function behaviors() {
+	public function behaviors() 
+	{
 		return [
 			'verbs' => [
 				'class' => VerbFilter::className(),
@@ -132,10 +132,40 @@ class CostrelationController extends Controller {
 	}
 
 	//三级联动之 楼宇
-	public function actionB( $selected = null ) {
+	public function actionB( $selected = null ) 
+	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = CommunityBuilding::find()->where( [ 'community_id' => $id ] )->all();
+			$isSelectedIn = false;
+			if ( $id != null && count( $list ) > 0 ) {
+				foreach ( $list as $i => $account ) {
+					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'building_name' ] ];
+					if ( $i == 0 ) {
+						$first = $account[ 'building_id' ];
+					}
+					if ( $account[ 'building_id' ] == $selected ) {
+						$isSelectedIn = true;
+					}
+				}
+				if ( !$isSelectedIn ) {
+					$selected = $first;
+				}
+				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+				return;
+			}
+		}
+		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
+	
+	//三级联动之 楼宇2
+	public function actionB2( $selected = null ) 
+	{
+		print_r($_POST[ 'depdrop_parents' ]);exit;
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{
+			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
+			$list = CommunityBuilding::find()->where( ['in', 'community_id', $id ] )->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {

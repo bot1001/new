@@ -70,4 +70,5 @@ $this->title = '裕达物业';
 	//echo (round(1/3,4)*100).'%'; php字符串相除并保留两个小数点
     	?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
+	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>
 </div>

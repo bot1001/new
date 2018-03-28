@@ -270,18 +270,56 @@ class UserInvoiceController extends Controller {
 	//缴费统计列表
 	public function actionSum() 
 	{
-		$searchModel = new \app\models\InvoiceSumSearch();
-		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
+		$searchModel = new \app\models\InvoiceSumSearch(); //实例化搜索模型
+		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
+		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
+				
+		$c = $_SESSION['user']['community'];
+	    if(empty($c)){
+	    	$community = CommunityBasic::find()
+	    		->select('community_id, community_name')
+	    		->asArray()
+	    		->all();
+	    }else{
+	    	$community = CommunityBasic::find()
+	    		->select('community_id, community_name')
+	    		->where(['community_id' => $c])
+	    		->asArray()
+	    		->all();
+	    }
+		$comm = ArrayHelper::map($community,'community_id', 'community_name');
 		
-		$data = $dataProvider->getModels();
+		/*if($_POST)
+		{
+			foreach($_POST as $p);
+			$searchModel->community_id = 22;
+			if(empty($time)){
+				$from = strtotime(date('Y-m-d'));
+		        $to = date( time() );
+			}else{
+				$t = explode(' - ',$time); //分割时间
+				$from = strtotime( reset($t) ); //转换时间戳
+		        $to = strtotime( end($t) ); //转换时间戳
+			}
+		}else{
+			$from = strtotime(date('Y-m-d'));
+		    $to = date( time() );
+		}*/
 		
-        foreach ($data as $key=>$value)
-        {
-            $d = $value->attributes;
-        	
-        	print_r($key);echo '<br />';
-        }
 		
+		if($_GET){
+			//print_r($_GET);exit;
+		}
+		
+		if ( !isset($from) ) {$from = date( time() );}
+		if ( !isset($to) ) {$to = date( time() );}
+		
+		
+		return $this->render('test',['data' => $data,
+									 'searchModel' => $searchModel,
+									'comm' => $comm,
+									'from' => $from,
+									'to' => $to]);
 	}
 
 	//缴费统计查询
@@ -304,6 +342,7 @@ class UserInvoiceController extends Controller {
 				$from = strtotime( reset($t) ); //转换时间戳
 		        $to = strtotime( end($t) ); //转换时间戳
 			}
+			
 			//判断楼宇是否存在
 		    if(!empty($f['building_id'])){
 		    	$b = $f['building_id'];
@@ -447,6 +486,7 @@ class UserInvoiceController extends Controller {
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 			->where(['or not like','cost_name.cost_name',['水费']]) // 去除水费
 			//->where( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
+			->andwhere(['cost_name.inv' =>1])
 		    ->limit( 20 )
 		    ->all();
 		}else{
@@ -470,6 +510,7 @@ class UserInvoiceController extends Controller {
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
 			->andwhere(['or not like','cost_name.cost_name',['水费']])
+			->andwhere(['cost_name.inv' =>1])
 		    ->limit( 20 )
 		    ->all();
 		}
@@ -501,7 +542,8 @@ class UserInvoiceController extends Controller {
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->where(['or not like','cost_name.cost_name',['水费']]) // 去除水费
+			->andwhere(['or not like','cost_name.cost_name',['水费']]) // 去除水费
+			->andwhere(['cost_name.inv' =>1])
 			->all();
 		}else{
 			$query = ( new\ yii\ db\ Query() )->select( [
@@ -521,6 +563,7 @@ class UserInvoiceController extends Controller {
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
 			->andwhere(['or not like','cost_name.cost_name',['水费']]) // 去除水费
+			->andwhere(['cost_name.inv' =>1])
 			->all();
 		}
 		
