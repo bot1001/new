@@ -270,31 +270,18 @@ class UserInvoiceController extends Controller {
 	//缴费统计列表
 	public function actionSum() 
 	{
-		$model = new UserInvoice;
-		$comm = $_SESSION['user']['community'];
-		if(empty($comm)){
-            $community = CommunityBasic::find()->All();
-        }else{
-            $community = CommunityBasic::find()->where(['community_id' => $comm])->All();
+		$searchModel = new \app\models\InvoiceSumSearch();
+		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
+		
+		$data = $dataProvider->getModels();
+		
+        foreach ($data as $key=>$value)
+        {
+            $d = $value->attributes;
+        	
+        	print_r($key);echo '<br />';
         }
-		$de = '';
-
-		$from = date( time() );
-		$to = $from;
-		$in = 0;
-		$sum = '';
-		$c = ArrayHelper::map($community,'community_id', 'community_name');//组合小区信息
-
-		return $this->render( 'sum', [
-			'model' => $model,
-			'community' => $community,
-			'from' => $from,
-			'to' => $to,
-			'in' => $in,
-			'sum' => $sum,
-			'de' => $de,
-			'c' => $c
-		] );
+		
 	}
 
 	//缴费统计查询

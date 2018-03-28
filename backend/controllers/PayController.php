@@ -25,11 +25,11 @@ class PayController extends Controller
     //调用第三方支付
 	public function actionPay()
 	{
-		$b = $_POST;
+		$b = $_GET;
 
-		$order_id = $b['order_id'];
-	    $order_amount = $b['order_amount'];
-	    $description = $b['description'];
+		$order_id = $b['pay']['order_id'];
+	    $order_amount = $b['pay']['order_amount'];
+	    $description = $b['pay']['description'];
 	    $order_body = '物业相关费用';  // 订单描述
 		$paymethod = $b['paymethod'];
 		
@@ -181,7 +181,7 @@ class PayController extends Controller
 										  'status' => 2],
 										 'order_id = :o_id', [':o_id' => $order_id]
 										 );
-				return $this->redirect(['user-invoice/index1','order_id' => $order_id]);
+				return $this->redirect(['/order/print','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -260,7 +260,7 @@ class PayController extends Controller
 	//其他支付变更费项状态
 	public function actionqt($order_id)
 	{
-		echo '这是其他支付通道'; // 费项代码 5
+		return $this->redirect(Yii::$app->request->referrer); // 费项代码 5
 	}
 	
 	//调用支付宝

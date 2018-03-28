@@ -107,8 +107,8 @@ $r_id = $session['role']; //用户角色编号
 /* @var $content string */
 ?>
 
-<!-- 页面自动更新代码 每30分钟刷新一次页面-->
-<meta http-equiv='refresh' content='1800'/>
+<!-- 页面自动更新代码 每5分钟刷新一次页面-->
+<meta http-equiv='refresh' content='300'/>
 
 <style>
 	l{

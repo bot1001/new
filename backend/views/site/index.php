@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 
 $script = <<< JS
 $(document).ready(function() {
-    setInterval(function(){ $("#refreshButton").click(); }, 1800000);
+    setInterval(function(){ $("#refreshButton").click(); }, 300000);
 });
 JS;
 $this->registerJs($script);
@@ -67,6 +67,7 @@ $this->title = '裕达物业';
     	echo date('Y-m-d H:i:s').'</g>';
     	Pjax::end(); 
     	
+	//echo (round(1/3,4)*100).'%'; php字符串相除并保留两个小数点
     	?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 </div>

@@ -65,8 +65,10 @@ class CommunityRealestateController extends Controller
 	{
 		$model = new Up();
 		$session = Yii::$app->session;
+		
 		ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为1024M(1GB)
 		set_time_limit(300);
+		
 		$a = 0; // 更新条数
 		$b = 0; // 插入条数
 		$c = 0; // 失败条数

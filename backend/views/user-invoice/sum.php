@@ -36,6 +36,9 @@ use kartik\select2\Select2;
 </style>
 
 <?php
+
+$this->title = '缴费统计';
+
 $form = ActiveForm::begin( [
 	'action' => [ 'search' ],
 	'type' => ActiveForm::TYPE_INLINE,
@@ -63,7 +66,7 @@ $form = ActiveForm::begin( [
 		    <?= $form->field($model,'to') ?>
 		</div>
 	    <div class="col-lg-1">
-		    <?= $form->field($model,'to') ?>
+		    <?= $form->field($model,'a') ?>
 		</div>
 		<div class="col-lg-4">
 		    <?php

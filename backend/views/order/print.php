@@ -150,17 +150,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					    
 					    $YS = $l['year']; //预交末年
 					    $YM = $l['month']; //预交末月
+						$yc = count($yj); //预交数量统计
 					}else{
-						$yj = $yy = $ym = $YS = $YM = '';
+						$yc = $yj = $yy = $ym = $YS = $YM = '';
 						
 					}
-										
-					if(!empty($yc)){//预交数量统计
-						$yc = '';
-					}else{
-						$yc = count($yj); 
-					}
-					
+						
 					$amount = array_sum(array_column($des,'invoice_amount')); //费项金额
 					
 					echo ("<tr height=10>
