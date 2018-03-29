@@ -388,7 +388,7 @@ $this->title = '缴费管理';
 		'options' => [ 'id' => 'grid' ],
 		//'showFooter' => true,
 		'showPageSummary' => true,
-		'panel' => [ 'type' => 'primary', 'heading' => '缴费',
+		'panel' => [ 'type' => 'info', 'heading' => '缴费',
 			'before' => Html::a( '新费项', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 

@@ -286,7 +286,7 @@ $this->title = '订单管理';
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'showPageSummary' => true,
-		'panel' => [ 'type' => 'primary', 'heading' => '订单管理',
+		'panel' => [ 'type' => 'info', 'heading' => '订单管理',
 				   //'before' => Html::a('你好')
 				   ],
 		'columns' => $gridColumn,

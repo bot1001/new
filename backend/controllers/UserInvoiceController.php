@@ -100,8 +100,10 @@ class UserInvoiceController extends Controller {
 	{
 		$model = new Up();
 		$session = Yii::$app->session;
+		
 		ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为2048M(2GB)
 		set_time_limit(600); //等待时间是10分钟
+		
 		$t = 0; // 插入条数
 		$a = 0; // 失败条数
 		$h = 0; //重复条数		
@@ -289,37 +291,46 @@ class UserInvoiceController extends Controller {
 	    }
 		$comm = ArrayHelper::map($community,'community_id', 'community_name');
 		
-		/*if($_POST)
-		{
-			foreach($_POST as $p);
-			$searchModel->community_id = 22;
-			if(empty($time)){
-				$from = strtotime(date('Y-m-d'));
-		        $to = date( time() );
+		if($_GET){
+			if($_GET ['InvoiceSumSearch']['from'])
+			{
+				$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
+			    $l = "'\d{4}'is"; //时间提前格式
+			    
+			    $from02 = reset($time); //起始年月 str_pad($m,2,"0",STR_PAD_LEFT)
+			    $to02 = end($time); //截止年月
+			    
+			    $f = explode('-', $from02); //拆分起始年月
+			    $t = explode('-', $to02); //拆分截止年月
+			    
+                $year01 = reset($f); //提取起始年
+                $year02 = reset($t); //提取截止年
+			    
+                $month01 = str_pad(end($f),2, '0', STR_PAD_LEFT); //提取起始月并自动补“0”
+			    $month02 = str_pad(end($t), 2, '0', STR_PAD_LEFT); //提取截止月并自动补“0”
+			    $day = date("t",strtotime("$year02-$month02")); //获取截止日期天数
+			    
+			    $from = $year01.'-'.$month01.'-'.'01'; //拼接起始日期
+			    $to = $year02.'-'.$month02.'-'.$day; //拼接截止日期
 			}else{
-				$t = explode(' - ',$time); //分割时间
-				$from = strtotime( reset($t) ); //转换时间戳
-		        $to = strtotime( end($t) ); //转换时间戳
+				$from = date('Y-m-d', time() );
+			    $to = date('Y-m-d', time() );
 			}
 		}else{
-			$from = strtotime(date('Y-m-d'));
-		    $to = date( time() );
-		}*/
-		
-		
-		if($_GET){
-			//print_r($_GET);exit;
+			$from = date('Y-m-d', time() );
+			$to = date('Y-m-d', time() );
 		}
+		//print_r($month01);exit;
 		
-		if ( !isset($from) ) {$from = date( time() );}
-		if ( !isset($to) ) {$to = date( time() );}
-		
+		$cost_name = CostName::find()->select('cost_name')->asArray()->all();
+		$c_name = array_unique(ArrayHelper::map($cost_name,'cost_name','cost_name'));
 		
 		return $this->render('test',['data' => $data,
 									 'searchModel' => $searchModel,
-									'comm' => $comm,
-									'from' => $from,
-									'to' => $to]);
+									 'comm' => $comm,
+									 'from' => $from,
+									 'c_name' => $c_name,
+									 'to' => $to]);
 	}
 
 	//缴费统计查询

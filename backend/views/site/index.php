@@ -71,4 +71,14 @@ $this->title = '裕达物业';
     	?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>
+	
+	
+	<?php
+	   $str='发布时间 2015/2/11 发布时间 2015/2/13 发布的 2015/2/14';
+$regex="'\d{4}'is";
+preg_match_all($regex,$str,$matches);
+print_r ($matches[0]);
+	
+	?>
+	
 </div>

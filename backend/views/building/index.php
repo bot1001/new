@@ -67,7 +67,7 @@ $this->title = '楼宇列表';
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'primary', 'heading' => '房屋列表',
+		'panel' => ['type' => 'info', 'heading' => '房屋列表',
 				   'before' => Html::a('New', ['create'], ['class' => 'btn btn-success'])
 				   ],
 		'hover' => true,

@@ -141,7 +141,7 @@ $this->title = '费项列表';
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '费项关联',
+		'panel' => [ 'type' => 'info', 'heading' => '费项关联',
 			'before' => Html::a( 'New', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',

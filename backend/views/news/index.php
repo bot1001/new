@@ -169,7 +169,7 @@ $this->title = '公告栏';
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'primary', 'heading' => '公告列表',
+		'panel' => ['type' => 'info', 'heading' => '公告列表',
 				   'before' => Html::a('New', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#view-modal',

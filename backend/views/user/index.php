@@ -34,6 +34,7 @@ $this->title = '用户管理';
 			->all();
 	}
 	 $comm = ArrayHelper::map($community,'community_name', 'community_name');
+	
 	     $gridColumn = [     
             ['class' => 'kartik\grid\SerialColumn',
 			'header' =>'序<br />号'],
@@ -138,7 +139,7 @@ $this->title = '用户管理';
 			'options' =>['id'=>'grid'],
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
-			'panel' => ['type' => 'primary','heading' => '用户管理'],
+			'panel' => ['type' => 'info','heading' => '用户管理'],
             'columns' => $gridColumn,
 			 'hover' => true
         ]); 	

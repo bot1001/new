@@ -12,12 +12,6 @@ $this->title = '小区';
 ?>
 <div class="community-basic-index">
 
-    <h1><?php // Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php // Html::a('Create Community Basic', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?php 
 	$gridview = [
             //['class' => 'kartik\grid\SerialColumn'],
@@ -64,8 +58,8 @@ $this->title = '小区';
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-		'panel' => ['type' =>'primary', 'heading' => '小区列表',
-				   'before' => Html::a('New', ['create'],['class' => 'btn btn-primary'])],
+		'panel' => ['type' =>'info', 'heading' => '小区列表',
+				   'before' => Html::a('New', ['create'],['class' => 'btn btn-info'])],
 		'hover' => true,
         'columns' => $gridview,
     ]); ?>
