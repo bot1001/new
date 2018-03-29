@@ -25,13 +25,26 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<style>
+	#div_m
+	{
+		background: url(image/login.png);
+		background-size: cover;
+		width: 100%;
+		height: 130px;
+	}
+	</style>
+
+<div class="wrap" id="div_m">
     
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= $content ?>
+        <div>
+        	<?= $content ?>
+        </div>
+        
     </div>
 </div>
 
@@ -39,7 +52,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; 裕达物业 <?= date('Y') ?></p>
 
-        <p class="pull-right"><a href="#">裕家人 2.0</a> </p>
+        <p class="pull-right"><a href="#">裕家人 2.1.2</a> </p>
     </div>
 </footer>
 
