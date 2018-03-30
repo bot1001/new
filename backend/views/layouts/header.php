@@ -70,7 +70,7 @@ $r_id = $session['role']; //用户角色编号
     $order = $or->orderBy('payment_time DESC')->all(); // 当日订单数据
 
     $o_c = array_column($order, 'community_id'); //订单中的小区编号
-    $u_c = array_column($user, 'community_id'); //订单中的小区编号
+    $u_c = array_column($user, 'community_id'); //注册中的小区编号
     $o_b = array_column($order, 'building_id'); //订单中的楼宇编号
     $t_c = array_column(array_column($ticket, 'r'), 'community_id'); //投诉列表总的小区编号
     $t_b = array_column(array_column($ticket, 'r'), 'building_id'); //投诉列表总的楼宇编号
@@ -206,29 +206,39 @@ $r_id = $session['role']; //用户角色编号
                             <ul class="menu">
                                 <li>
                                       <?php
-	                                     foreach($user as $u){
-	                                     	$community_id = $u['community_id'];
-	                                     	
-	                                     	foreach($community as $key => $comm)
+                                      if($user){
+										  //遍历小区
+										  foreach(array_unique($u_c) as $key => $comm)
+										 {
+											 //遍历注册信息
+	                                     	foreach($user as $keys => $u)
 	                                     	{
-	                                     		if($key == $community_id){
-	                                     			$k[] = $key;
+												$community_id = $u['community_id'];
+	                                     		if($comm == $community_id){
+	                                     			$k[] = $u;
 	                                     		}else{
 	                                     			continue;
 	                                     		}
-	                                     		$c_c = count($k);
-												//unset($community[$key]);
-	                                     		unset($k);
-	                                     	}
+												$c_c = count($k); //统计数量
+											}	
+											unset($k); //释放数组
 	                                     	?>
-	                                 <a href="<?php echo Url::to(['/user/index',
+	                                 <a href="<?php 
+										  if($c_c > 0){
+											  echo Url::to(['/user/index',
 																  'name' => $community[$community_id],
 																  'one' => $one,
 																  'two' => $two
-																 ]) ?>">
+																 ]);
+										  }
+										   ?>">
 	                                 <?php
-	                                    echo '<i class="fa fa-users text-aqua"></i>'.$community[$community_id].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
-	                                  }
+										      if($c_c > 0){
+										    	  echo '<i class="fa fa-users text-aqua"></i>'.$community[$comm].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
+										      }
+											 
+	                                      }
+									  }
 									?>
                                     </a>
                                 </li>
@@ -295,7 +305,7 @@ $r_id = $session['role']; //用户角色编号
                                  alt="User Image"/>
 
                             <p>
-								绑定小区：<l><?php if($a){
+								辖区：<l><?php if($a){
                                                        	echo $community[$a];
                                                        }else{
                                                        	echo '全部';

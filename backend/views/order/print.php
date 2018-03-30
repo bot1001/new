@@ -22,13 +22,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	}
 </script>
 
-
 <div class="user-order-pay">
 
 	<span id='div1'>
 		<style>
         	h3{
         		text-align: center;
+				font-family: 仿宋;
+				font-weight: 700;
         	}
            th{
            		text-align:center;
@@ -41,11 +42,16 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         		text-align: center;
         		margin:auto;
         		width: 800px;
+				font-family: 仿宋;
         	}
+			img{
+	        	width: 25%;
+	        	border-radius:20px;
+	        }
         </style>
         
 		<h3><?php echo $comm['community_name'];  ?></h3>
-			
+			<br>
 		<table border="0">
 			<tr>
 				<td align="left"><strong>房号:</strong>
@@ -252,7 +258,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<tr>
 			<td>
 			<br />
-				<a href="javascript:printme()" rel="external nofollow" target="_self"><image src='/image/print.png' width = '10%' height = '10%'></image></a>
+				<a href="javascript:printme()" rel="external nofollow" target="_self">
+				    <img src='/image/print.png'>
+				</a>
 			</td>
 		</tr>
 	</table>

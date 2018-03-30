@@ -13,7 +13,7 @@ use dmstr\widgets\Alert;
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>版本号：</b> 2.1.2
+        <b>版本号：</b> 2.1.3.3
     </div>
     <strong>专利保护 &copy; 2016-<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong> 版权所有
 </footer>
