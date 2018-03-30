@@ -60,7 +60,7 @@ class CommunityRealestateController extends Controller
 			'model' => $model] );
 	}
 	
-	//接受导入文件并导入数据
+	//接收导入文件并导入数据
 	public function actionRead()
 	{
 		$model = new Up();

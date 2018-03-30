@@ -98,8 +98,8 @@ class PayController extends Controller
 	//建行接口
 	public function actionJh($order_id,$description,$order_amount,$order_body)
 	{		
-	    $MERCHANTID ="105910200000171";  						//商户号 
-	    $POSID="006098343";             						//$_POST["POSID"] ;  
+	    $MERCHANTID ="105635000000321";  						//商户号 
+	    $POSID="011945623";             						//$_POST["POSID"] ;  
 	    $BRANCHID="450000000"; 									//分行号码 
 	    $ORDERID=$order_id;                                     //订单号
 	    $PAYMENT=$order_amount;									//金额 
@@ -112,8 +112,9 @@ class PayController extends Controller
 	    $PUB32TR2="106b77d5d88cfd3300a95113020111";						//$_POST["PUB32TR2"] ;  
 	    $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6" ;	//请求网址
      
-	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2) ;
-	    
+	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
+		
+	    print_r($f);exit;
 		return $this->redirect(['/order/jh','f' => $f]);
 		
 	}

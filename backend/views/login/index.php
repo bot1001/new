@@ -15,11 +15,12 @@ $this->title = '用户登录';
 
 <style type="text/css">
 	#div1{
-		margin: auto;
 		width:350px; 
+		margin: auto;
 		height:auto; 
 		background: url(image/th.png);
 		border-radius:20px;
+		margin-top:25%;
 	}
 	
 	img{
@@ -37,7 +38,7 @@ $this->title = '用户登录';
    #table_wrap > table {
             font-size: 15px; /*字体*/
             text-align: center;
-        }	
+        }
 </style>
 
 <div id="div1" class="site-login">

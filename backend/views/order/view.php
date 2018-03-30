@@ -15,6 +15,14 @@ $this->params[ 'breadcrumbs' ][] = [ 'label' => '订单列表', 'url' => [ 'inde
 $this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="order-basic-view">
+	
+	<style>
+		img{
+			width:100%;
+			height: auto;
+			border-radius: 20px;
+		}
+	</style>
 
 	<?= DetailView::widget([
         'model' => $model,
@@ -84,7 +92,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         ],
     ]) ?>
 
-	<?php $pay = ['order_id'=> $model['order_id'],
+	<?php 
+	if($model['status'] != 1)
+	{
+		exit;
+	};
+	
+	
+	$pay = ['order_id'=> $model['order_id'],
 				  'description'=> $model['description'],
 				  'order_amount'=>$model['order_amount'],
 				  'status' => $model['status']]; 
@@ -93,38 +108,38 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	<div class="row">
 			<div id="zfb" class="col-lg-2">
 			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
-			<img src="/image/zfb.png" style="width:100%;height: auto">
+			<img src="/image/zfb.png">
 		  </a>
 	</div>
 	
 	<div id="jh" class="col-lg-2">
-			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'wx','pay'=> $pay ]) ?>">
-			<img src="/image/wx.png" style="width:100%;height: auto">
+			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'jh','pay'=> $pay ]) ?>">
+			<img src="/image/j.png">
 		  </a>
 	</div>
 
 	<div class="col-lg-2">
 			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
-			<img src="/image/xj.png" style="width:100%;height: auto">
+			<img src="/image/xj.png">
 		  </a>
 	</div>
 
 	<div id="up" class="col-lg-2">
 		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
-			<img src="/image/up.png" style="width:100%;height: auto">
+			<img src="/image/up.png">
 		  </a>
 	
 	</div>
 
 	<div id="yh" class="col-lg-2">
 		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
-			<img src="/image/yh.png" style="width:100%;height: auto">
+			<img src="/image/yh.png">
 		  </a>
 	
 	</div>
 	<div id="zf" class="col-lg-2">
 		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
-			<img src="/image/zf.png" style="width:100%;height: auto">
+			<img src="/image/zf.png">
 		  </a>
 	
 	</div>
