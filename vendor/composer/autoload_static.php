@@ -53,6 +53,7 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
             'kartik\\dialog\\' => 14,
             'kartik\\depdrop\\' => 15,
             'kartik\\daterange\\' => 17,
+            'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
         'd' => 
@@ -207,6 +208,10 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
         'kartik\\daterange\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-date-range',
+        ),
+        'kartik\\date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datepicker',
         ),
         'kartik\\base\\' => 
         array (

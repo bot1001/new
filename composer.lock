@@ -4,8 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a45fa20a5b77365273d6cc0c63b9cda",
+    "content-hash": "6bd1b53b1f4a0ca7144c3188ef0942aa",
     "packages": [
+        {
+            "name": "2amigos/yii2-qrcode-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-qrcode-helper.git",
+                "reference": "b034402e98c19f914946cc868e0606e657458fc8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-qrcode-helper/zipball/b034402e98c19f914946cc868e0606e657458fc8",
+                "reference": "b034402e98c19f914946cc868e0606e657458fc8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\qrcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create QrCodes based on libqrencode C library.",
+            "homepage": "http://yiiwheels.com/extension/qrcode-helper",
+            "keywords": [
+                "2amigos",
+                "extension",
+                "helper",
+                "qrcode",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "abandoned": "2amigos/qrcode-library",
+            "time": "2017-06-21T10:56:44+00:00"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v2.4.3",
@@ -1196,6 +1254,60 @@
             "time": "2018-03-17T05:06:02+00:00"
         },
         {
+            "name": "kartik-v/yii2-widget-datepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+                "reference": "eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/kartik-v/yii2-widget-datepicker/eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550.zip",
+                "reference": "eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\date\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+            "keywords": [
+                "date",
+                "extension",
+                "form",
+                "jquery",
+                "picker",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-09-06T06:18:08+00:00"
+        },
+        {
             "name": "kartik-v/yii2-widget-depdrop",
             "version": "dev-master",
             "source": {
@@ -2135,64 +2247,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "2amigos/yii2-qrcode-helper",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-qrcode-helper.git",
-                "reference": "b034402e98c19f914946cc868e0606e657458fc8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-qrcode-helper/zipball/b034402e98c19f914946cc868e0606e657458fc8",
-                "reference": "b034402e98c19f914946cc868e0606e657458fc8",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\qrcode\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "2amigOS! Consulting Group",
-                    "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Create QrCodes based on libqrencode C library.",
-            "homepage": "http://yiiwheels.com/extension/qrcode-helper",
-            "keywords": [
-                "2amigos",
-                "extension",
-                "helper",
-                "qrcode",
-                "yii",
-                "yii 2",
-                "yii2"
-            ],
-            "abandoned": "2amigos/qrcode-library",
-            "time": "2017-06-21T10:56:44+00:00"
-        },
         {
             "name": "behat/gherkin",
             "version": "v4.5.1",
@@ -4755,7 +4809,9 @@
         "kartik-v/yii2-editable": 20,
         "kartik-v/yii2-krajee-base": 20,
         "kartik-v/yii2-date-range": 20,
-        "mdmsoft/yii2-admin": 20
+        "2amigos/yii2-qrcode-helper": 20,
+        "mdmsoft/yii2-admin": 20,
+        "kartik-v/yii2-widget-datepicker": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

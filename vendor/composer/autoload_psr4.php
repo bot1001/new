@@ -28,6 +28,7 @@ return array(
     'kartik\\dialog\\' => array($vendorDir . '/kartik-v/yii2-dialog'),
     'kartik\\depdrop\\' => array($vendorDir . '/kartik-v/yii2-widget-depdrop'),
     'kartik\\daterange\\' => array($vendorDir . '/kartik-v/yii2-date-range'),
+    'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'dosamigos\\qrcode\\' => array($vendorDir . '/2amigos/yii2-qrcode-helper/src'),
     'dmstr\\' => array($vendorDir . '/dmstr/yii2-adminlte-asset'),

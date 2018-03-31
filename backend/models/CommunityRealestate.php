@@ -44,16 +44,42 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     {
        return [
             [['community_id', 'building_id', 'room_name', 'room_number', 'owners_name', 'owners_cellphone'], 'required'],
-            [['community_id', 'building_id', 'inherit', 'decoration', 'commencement', 'finish', 'delivery'], 'integer'],
+            [['community_id', 'building_id'], 'integer'],
 			[['acreage'], 'number', 'max' => 350],
 		    [['owners_name'], 'string', 'max' => 6],
 		    //[['orientation'], 'string', 'max' => 11],
+		   [['finish', 'inherit', 'decoration', 'commencement', 'delivery'], function($attr, $params) {
+                if ($this->hasErrors()) return false;
+
+                $datetime = $this->{$attr};
+                
+                $time = strtotime($datetime);
+                // 验证时间格式是否正确
+                if ($time === false) {
+                    $this->addError($attr, '时间格式错误.');
+                    return false;
+                }
+                // 将转换为时间戳后的时间赋值给time属性
+                $this->{$attr} = $time;
+                return true;
+            }],
             [['room_name', 'room_number'], 'string', 'max' => 7, 'on' => 'update'],
             [['owners_cellphone'], 'string', 'max' => 12, 'on' => 'update'],
             [['community_id', 'building_id', 'room_name', 'room_number', 'owners_name'],
 			 'unique', 'targetAttribute' => ['community_id', 'building_id', 'room_name', 'room_number'], 
 			 'message' => '数据重复，请勿再次提交！'],
         ];
+    }
+	
+	//将时间戳转换成时间然后在activeform输出
+	public function afterFind()
+    {
+        parent::afterFind();
+        $this->finish = date('Y-m-d', $this->finish);
+        $this->inherit = date('Y-m-d', $this->inherit);
+        $this->decoration = date('Y-m-d', $this->decoration);
+        $this->commencement = date('Y-m-d', $this->commencement);
+        $this->delivery = date('Y-m-d', $this->delivery);
     }
 
     /**
@@ -70,8 +96,8 @@ class CommunityRealestate extends \yii\db\ActiveRecord
             'owners_name' => '业主',
             'owners_cellphone' => '手机',
 			'acreage' => '面积',
-			'finish' => '封顶时间',
-			'inherit' => '交房时间',
+			'finish' => '交付时间',
+			'inherit' => '交房时间', //多余字段
 		    'decoration' => '装修时间',
 		    'commencement' => '开工时间',
 		    'delivery' => '交房时间',
@@ -84,8 +110,17 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['update'] = ['community_id', 'building_id' , 'room_number', 'room_name', 'owners_name', 'owners_cellphone', 'acreage' ];
-        $scenarios['create'] = ['community_id', 'building_id' , 'room_number', 'room_name', 'owners_name', 'owners_cellphone', 'acreage' ];
+        $scenarios['update'] = ['community_id', 'building_id' , 
+								'room_number', 'room_name', 'owners_name', 
+								'owners_cellphone', 'acreage', 'finish', 
+								'inherit', 'decoration', 'delivery', 'commencement', 
+								'orientation', 'property'];
+		
+        $scenarios['create'] = ['community_id', 'building_id' , 
+								'room_number', 'room_name', 'owners_name', 
+								'owners_cellphone', 'acreage', 'finish', 
+								'inherit', 'decoration', 'delivery', 'commencement',
+								'orientation', 'property'];
         return $scenarios;
     }
 

@@ -7,6 +7,7 @@ use app\ models\ CommunityBuilding;
 use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
 use kartik\ dialog\ Dialog;
+use kartik\daterange\DateRangePicker;
 
 Modal::begin( [
 	'id' => 'view-modal',
@@ -207,11 +208,115 @@ $this->title = '房屋管理';
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+		        
 			],
 			'hAlign' => 'center',
 			'width' => '70px'
 		],
-
+		
+		/*['attribute' => 'commencement',
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_DATE,
+          		'options' => [
+                      'pluginOptions' => [
+                          //设定我们日期组件的格式
+                          'format' => 'yyyy-mm-dd',
+                     ]
+                ],
+          ],
+		'width' => 'px',
+		'hAlign' => 'center'],*/
+		
+		['attribute' => 'finish',
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_DATE,
+          		'options' => [
+                      'pluginOptions' => [
+                          //设定我们日期组件的格式
+                          'format' => 'yyyy-mm-dd',
+                     ]
+                ],
+          ],
+		 'value' => function($model){
+	     	if($model->finish === '1970-01-01'){
+	     		return '未设置';
+	     	}else{
+	     	    return $model->finish;
+			}
+	     },
+		'width' => 'px',
+		'hAlign' => 'center'],
+		
+        /*['attribute' => 'inherit',
+		'width' => 'px',
+		'hAlign' => 'center'],*/
+		
+		['attribute' => 'delivery',
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_DATE,
+          		'options' => [
+                      'pluginOptions' => [
+                          //设定我们日期组件的格式
+                          'format' => 'yyyy-mm-dd',
+                     ]
+                ],
+          ],
+		 'value' => function($model){
+	     	if($model->delivery === '1970-01-01'){
+	     		return '未设置';
+	     	}else{
+	     	    return $model->delivery;
+			}
+	     },
+		'width' => 'px',
+		'hAlign' => 'center'],
+		
+		['attribute' => 'decoration',
+		 'value' => function($model){
+	     	if($model->decoration == '1970-01-01'){
+	     		return '未设置';
+	     	}else{
+	     	    return $model->decoration;
+			}
+	     },
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_DATE,
+          		'options' => [
+                      'pluginOptions' => [
+                          //设定我们日期组件的格式
+                          'format' => 'yyyy-mm-dd',
+                     ]
+                ],
+          ],
+		'width' => 'px',
+		'hAlign' => 'center'],
+				
+		['attribute' => 'orientation',
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+          ],
+		'width' => 'px',
+		'hAlign' => 'center'],
+		
+		['attribute' => 'property',
+		 'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+          ],
+		'width' => 'px',
+		'hAlign' => 'center'],
+		
 		[ 'class' => 'kartik\grid\ActionColumn',
 			'template' => '{update} {view}',
 			'buttons' => [

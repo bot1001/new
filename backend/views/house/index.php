@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\houseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'House Infos';
+$this->title = '房屋信息';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="house-info-index">
