@@ -43,7 +43,7 @@ class OrderBasic extends \yii\db\ActiveRecord
     {
         return [
             [['account_id', 'order_id', 'create_time', 'order_type', 'order_amount'], 'required'],
-            [['order_parent', 'create_time', 'order_type', 'payment_time', 'invoice_id', 'status'], 'integer'],
+            [['order_parent', 'create_time', 'order_type', 'invoice_id', 'status'], 'integer'],
             [['order_amount'], 'number'],
             [['account_id', 'payment_gateway', 'payment_number'], 'string', 'max' => 64],
             [['order_id'], 'string', 'max' => 15],

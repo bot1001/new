@@ -63,7 +63,7 @@ $this->title = '订单管理';
 		}
 		?>	
 		
-	<?php echo $this->render('_search', ['model' => $searchModel]); ?>
+	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php Pjax::begin(); ?>
 	<?php
@@ -196,8 +196,7 @@ $this->title = '订单管理';
 		],
 
 		[ 'attribute' => 'payment_time',
-			'mergeHeader' => true,
-			'label' => '付款时间',
+			//'mergeHeader' => true,
 		    'value' => function($model){
 		        if(empty($model->payment_time)){
 		        	return '';
@@ -205,6 +204,34 @@ $this->title = '订单管理';
 		                return date('Y-m-d H:i:s', $model->payment_time);
 		        }
 	        },
+		    'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>[
+                    'autoUpdateOnInit'=>false,
+                    //'showWeekNumbers' => false,
+                    'useWithAddon'=>true,
+                    'convertFormat'=>true,
+                    'timePicker'=>false,
+                    'locale'=>[
+                        'format' => 'YYYY-MM-DD',
+                        'separator'=>' to ',
+                        'applyLabel' => '确定',
+                        'cancelLabel' => '取消',
+                        'fromLabel' => '起始时间',
+                        'toLabel' => '结束时间',
+                        //'daysOfWeek'=>false,
+                    ],
+                    'opens'=>'center',
+                    //起止时间的最大间隔
+                    'dateLimit' =>[
+                        'days' => 90
+                    ]
+                ],
+                'options' => [
+                    'placeholder' => '请选择...',
+                    'style'=>'width:200px',
+                ],
+		    ],
 			'hAlign' => 'center',
 			'width' => '160px'
 		],
@@ -215,7 +242,7 @@ $this->title = '订单管理';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'filterInputOptions' => [ 'placeholder' => '' ],
+			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'value' => function ( $model ) {
 				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金' ];
 				if ( empty( $model[ 'payment_gateway' ] ) ) {
@@ -225,14 +252,14 @@ $this->title = '订单管理';
 				};
 			},
 			'hAlign' => 'center',
-			'width' => '60px'
+			'width' => '100px'
 		],
 		/*['attribute' => 'payment_number',
 		 'width' => '200px',
 		 'hAlign' => 'center'],*/
 		[ 'attribute' => 'order_amount',
 			'pageSummary' => true,
-			'width' => '50px',
+			'width' => '70px',
 			'hAlign' => 'center'
 		],
 		/* ['attribute' => 'invoice_id',
@@ -242,7 +269,7 @@ $this->title = '订单管理';
 			//'refreshGrid' => true,
 			'filterType' => GridView::FILTER_SELECT2,
 			'filter' => Status::find()->select( [ 'name', 'order_basic_status' ] )->orderBy( 'name' )->indexBy( 'order_basic_status' )->column(),
-			'filterInputOptions' => [ 'placeholder' => '' ],
+			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -262,7 +289,7 @@ $this->title = '订单管理';
 			    	return $data;
 			    	( $model == 1 ) ? [ 'class' => 'bg-info' ] : []; // 根据值改变底色
 			    },
-			'width' => '70px',
+			'width' => '90px',
 			'hAlign' => 'center'
 		],
 

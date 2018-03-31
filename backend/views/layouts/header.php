@@ -287,7 +287,13 @@ $r_id = $session['role']; //用户角色编号
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="<?php echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]) ?>">查看全部</a>
+                            <a href="<?php 
+									 if(empty($a)){
+										 echo Url::to(['/order/index', 'one' => $one, 'two' => $two]);
+									 }else{
+										 echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]);
+									 }
+									  ?>">查看全部</a>
                         </li>
                     </ul>
                 </li>

@@ -51,6 +51,11 @@ class InformationSearch extends Information
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort' => [
+		    	'defaultOrder' => [
+		        	'remind_id' => SORT_DESC
+		        ]
+		    ]
         ]);
 
         $this->load($params);

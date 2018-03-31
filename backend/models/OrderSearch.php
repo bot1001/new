@@ -22,8 +22,8 @@ class OrderSearch extends OrderBasic
     public function rules()
     {
         return [
-            [['id', 'order_parent', 'create_time', 'order_type', 'payment_time', 'invoice_id', 'status'], 'integer'],
-            [['account_id', 'order0.name','payment_gateway', 'order0.mobile_phone', 'order_id', 'order0.address', 'payment_number', 'description','todate','fromdate'], 'safe'],
+            [['id', 'order_parent', 'create_time', 'order_type', 'invoice_id', 'status'], 'integer'],
+            [['account_id', 'order0.name','payment_gateway', 'payment_time', 'order0.mobile_phone', 'order_id', 'order0.address', 'payment_number', 'description','todate','fromdate'], 'safe'],
             [['order_amount'], 'number'],
         ];
     }
@@ -81,6 +81,16 @@ class OrderSearch extends OrderBasic
 		if($this->fromdate!='' && $this->todate!=''){
             $query->andFilterWhere(['between', 'create_time', strtotime($this->fromdate),strtotime($this->todate)]);
         }
+		
+		//自定义付款时间搜索
+		if($this->payment_time != '')
+		{
+			$p_time = $_GET['OrderSearch']['payment_time'];
+			$t = explode(' to ', $p_time);
+			$t01 = reset($t);
+			$t02 = end($t);
+			$query->andFilterWhere(['between', 'payment_time', strtotime($t01), strtotime($t02)]);
+		}
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -88,7 +98,7 @@ class OrderSearch extends OrderBasic
             'order_parent' => $this->order_parent,
             'create_time' => $this->create_time,
             'order_type' => $this->order_type,
-            'payment_time' => $this->payment_time,
+           // 'payment_time' => $this->payment_time,
             'order_amount' => $this->order_amount,
             'invoice_id' => $this->invoice_id,
             'status' => $this->status,

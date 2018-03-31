@@ -14,7 +14,7 @@ class WaterSearch01 extends WaterMeter
 {
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['build', 'name']);
+		return array_merge(parent::attributes(),['build', 'name', 'type']);
 	}
 	
     /**
@@ -24,7 +24,7 @@ class WaterSearch01 extends WaterMeter
     {
         return [
             [['id', 'community', 'building', 'realestate_id', 'year', 'month', 'readout', 'property'], 'integer'],
-			[['build', 'name'],'safe'],
+			[['build', 'name', 'type'],'safe'],
         ];
     }
 
@@ -84,6 +84,7 @@ class WaterSearch01 extends WaterMeter
             'year' => $this->year,
             'month' => $this->month,
             'readout' => $this->readout,
+			'type' => $this->type,
             'property' => $this->property,
         ]);
 		

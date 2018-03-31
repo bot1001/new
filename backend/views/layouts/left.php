@@ -59,7 +59,13 @@ use app\models\TicketBasic;
                     	['label' => '费项设置','url' => ['/cost-name']],
                     	['label' => '费项关联','url' => ['/costrelation']],
                     	['label' => '订单列表','url' => ['/order']],
-                    	['label' => '水电抄表','url' => ['/water']],
+                    	['label' => '水电抄表',
+						 'url' => ['/water'],
+						 'items' => [
+                         	['label' => '水表', 'url' => ['/water', 'type' => 0]],
+                         	['label' => '电表', 'url' => ['/water', 'type' => 1]]
+                         ]
+						],
                     	['label' => '手机抄表','url' => ['/water/phone']],
                     ]
 					],

@@ -40,15 +40,29 @@ class WaterController extends Controller
      * Lists all WaterMeter models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type)
     {
         $searchModel = new WaterSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		if($type == 0)
+		{
+			$searchModel->type = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+			//水表链接
+            return $this->render('water', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+		}else{
+			$searchModel->type = 1;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+			//电表链接
+            return $this->render('tele', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+		}
     }
 	
 	//手机抄表
@@ -78,15 +92,32 @@ class WaterController extends Controller
        ]);
    }
 		
-	public function actionNew()
+	public function actionNew($type)
     {
         $searchModel = new WaterSearch01();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		if($type == 0)
+		{
+			//水表录入链接
+			$searchModel->type = 0;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('new', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('water_in', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+		}else{
+			//电表录入链接
+			$searchModel->type = 1;
+			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('tele_in', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+		}
+		
+        
     }
 
     /**
@@ -107,7 +138,7 @@ class WaterController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($type)
     {
 		$session = Yii::$app->session;
     	$comm = $_SESSION[ 'user' ][ 'community' ];
@@ -124,32 +155,38 @@ class WaterController extends Controller
 			
     		if($count != $r_count){
 				foreach ( $r_id as $id ) {
-				$community = $id['community_id'];
-				$building = $id['building_id'];
-    			$realestate_id = $id[ 'realestate_id' ];
-    			$readout = WaterMeter::find()->where( [ 'realestate_id' => $realestate_id ] )->select( 'readout' )->orderBy( 'property DESC' )->asArray()->one();
+				    $community = $id['community_id'];
+				    $building = $id['building_id'];
+    			    $realestate_id = $id[ 'realestate_id' ];
+    			    $readout = WaterMeter::find()
+						->where( [ 'realestate_id' => $realestate_id ] )
+						->select( 'readout' )
+						->orderBy( 'property DESC' )
+						->asArray()
+						->one();
+    
+    			    $read = $readout[ 'readout' ];
+    			    if ( empty( $read ) ) {
+    			    	$read = 0;
+    			    }
+    			    $y = date( 'Y' );
+    			    $m = date( 'm' );
+    			    $p = date( time() );
+    			    
+    			    set_time_limit( 60 );
+    			    ini_set( 'memory_limit', '512M' ); // 调整PHP由默认占用内存为1024M(1GB)
+				    
+				    $model = new WaterMeter;// 实例化模型
+				    
+				    $model->community = $community;
+				    $model->building = $building;
+				    $model->realestate_id = $realestate_id;
+				    $model->year = $y;
+				    $model->month = $m;
+				    $model->type = $type;
+				    $model->readout = $read;
 
-    			$read = $readout[ 'readout' ];
-    			if ( empty( $read ) ) {
-    				$read = 0;
-    			}
-    			$y = date( 'Y' );
-    			$m = date( 'm' );
-    			$p = date( time() );
-    			
-    			set_time_limit( 60 );
-    			ini_set( 'memory_limit', '512M' ); // 调整PHP由默认占用内存为1024M(1GB)
-				
-				$model = new WaterMeter;// 实例化模型
-				
-				$model->community = $community;
-				$model->building = $building;
-				$model->realestate_id = $realestate_id;
-				$model->year = $y;
-				$model->month = $m;
-				$model->readout = $read;
-				
-				$model->save(); //保存
+					$model->save(); //保存
     		    }
 			}else{
 				$session->setFlash( 'm', '2' ); //提示重复
@@ -160,8 +197,9 @@ class WaterController extends Controller
     }
 		
 	//生成水费
-	public function actionFee()
+	public function actionFee($type)
 	{
+		print_r($type);exit;
 		$session = Yii::$app->session;
 		$comm = $_SESSION[ 'user' ][ 'community' ]; //获取session中的绑定小区编号
 		
@@ -173,8 +211,14 @@ class WaterController extends Controller
 		$m = date( 'm' );
 
 		//计算当前生成水费数量
-		$water = UserInvoice::find()->andwhere( [ 'year' => date( 'Y' ) ] )->andwhere( [ 'month' => $m ] )->andwhere( [ 'community_id' => $comm ] )->count();
-		$w_meter = WaterMeter::find()->andwhere( [ 'year' => date( 'Y' ) ] )->andwhere( [ 'month' => $m ] )->andwhere( [ 'in', 'realestate_id', $reale_id ] )->count();
+		$water = UserInvoice::find()
+			->andwhere( [ 'year' => date( 'Y' ),'month' => $m, 'community_id' => $comm] )
+			->count();
+		
+		$w_meter = WaterMeter::find()
+			->andwhere( [ 'year' => date( 'Y' ),'month' => $m, 'type' => $type ] )
+			->andwhere( [ 'in', 'realestate_id', $reale_id ] )
+			->count();
 
 		if(empty($comm)){
 			$session->setFlash( 'm', '1' );// 提示权限不足，返回请教界面
@@ -187,11 +231,24 @@ class WaterController extends Controller
 			return $this->redirect( Yii::$app->request->referrer );
 		}else {
 			//获取水表号
-			$r_id = WaterMeter::find()->select( 'realestate_id' )->distinct()->where(['in', 'realestate_id', $reale_id])->orderBy( 'property' )->asArray()->all();
+			$r_id = WaterMeter::find()
+				->select( 'realestate_id' )
+				->distinct()
+				->andwhere(['in', 'realestate_id', $reale_id])
+				->andwhere(['type' => $type])
+				->orderBy( 'property' )
+				->asArray()
+				->all();
+			
 			foreach ( $r_id as $id ) {
 				//获取近两个月的费表读数
-				$water = WaterMeter::find()->select( 'year,month,readout' )->where( [ 'realestate_id' => $id ] )->limit( 2 ) //->limit(1)
-					->orderBy( 'property' )->asArray()->all();
+				$water = WaterMeter::find()
+					->select( 'year,month,readout' )
+					->where( [ 'realestate_id' => $id ] )
+					->limit( 2 ) //->limit(1)
+					->orderBy( 'property' )
+					->asArray()
+					->all();
 
 				$i = array_column( $water, 'readout' );//提取近两个月的费表读数
 
@@ -202,19 +259,35 @@ class WaterController extends Controller
 				}
 				
 				$cost = CostName::find(); //查找水费
-				$c_name = $cost->select('cost_id')->where(['cost_name' => '水费'])->asArray()->all(); //获取水费编号
+				$c_name = $cost->select('cost_id')
+					->where(['cost_name' => '水费'])
+					->asArray()
+					->all(); //获取水费编号
+				
 				$cost_id = array_column($c_name,'cost_id'); //提取水费编号
 								
 				//查询管理费项编号
-				$c_id = CostRelation::find()->select( 'cost_id' )->andwhere( [ 'realestate_id' => $id ] )->andwhere(['in','cost_id',$cost_id])->asArray()->one();
+				$c_id = CostRelation::find()
+					->select( 'cost_id' )
+					->andwhere( [ 'realestate_id' => $id ] )
+					->andwhere(['in','cost_id',$cost_id])
+					->asArray()
+					->one();
 				
 				//查找关联费项单价
-				$price = $cost->select( 'price,cost_name' )->where( [ 'cost_id' => $c_id[ 'cost_id' ] ] )->asArray()->one(); 
+				$price = $cost->select( 'price,cost_name' )
+					->where( [ 'cost_id' => $c_id[ 'cost_id' ] ] )
+					->asArray()
+					->one(); 
 				
 				$mount = $c * $price[ 'price' ];//计算金额
 
 				//查找生成水费费项的小区和楼宇
-				$info = CommunityRealestate::find()->select( 'community_id,building_id' )->where( [ 'realestate_id' => $id ] )->asArray()->one();
+				$info = CommunityRealestate::find()
+					->select( 'community_id,building_id' )
+					->where( [ 'realestate_id' => $id ] )
+					->asArray()
+					->one();
 				$community = $info[ 'community_id' ]; //小区
 				$building = $info[ 'building_id' ]; //楼宇
 				$realestate = $id[ 'realestate_id' ]; // 房屋ID
