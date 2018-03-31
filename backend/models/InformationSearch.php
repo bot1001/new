@@ -53,7 +53,8 @@ class InformationSearch extends Information
             'query' => $query,
 			'sort' => [
 		    	'defaultOrder' => [
-		        	'remind_id' => SORT_DESC
+		        	'remind_id' => SORT_DESC,
+			        'remind_time' => SORT_DESC
 		        ]
 		    ]
         ]);

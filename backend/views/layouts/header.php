@@ -226,7 +226,7 @@ $r_id = $session['role']; //用户角色编号
 	                                 <a href="<?php 
 										  if($c_c > 0){
 											  echo Url::to(['/user/index',
-																  'name' => $community[$community_id],
+																  'name' => $community[$comm],
 																  'one' => $one,
 																  'two' => $two
 																 ]);
