@@ -1,7 +1,8 @@
 <?php
 
 use yii\ helpers\ Html;
-use yii\ bootstrap\ ActiveForm;
+use kartik\form\ActiveForm;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserInvoice */
@@ -11,7 +12,7 @@ use yii\ bootstrap\ ActiveForm;
 <div class="user-invoice-form">
 
 	<?php $form = ActiveForm::begin([
-	'options' => ['class'=>'form-horizontal'],
+	//'options' => ['class'=>'form-horizontal'],
 	//'layout' => 'horizontal',
 	'action' => ['v','id' => $id],
     'method' => 'get',
@@ -19,36 +20,58 @@ use yii\ bootstrap\ ActiveForm;
 
 <table align="center" style="width:500px; background-color:#F3F3F3;border-radius:20px;" border="0">
 	<tr>
-		<td width="8%"></td>
-		<td>
-			<?= $form->field($model, 'year')->inline()->radioList($y) ?>
-		</td>
-	</tr>
-	<tr>
-		<td width="8%"></td>
-		<td>
-			<div class="row">
-				<div class="col-lg-10">
-					<?= $form->field($model, 'month')->inline()->checkBoxList($m) ?>
-				</div>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td width="8%">	</td>
-		<td>
-			<?= $form->field($model, 'cost')->inline()->checkBoxList($cost) ?>
-		</td>
-	</tr>
-	<tr>
-		<td width="8%"></td>
-		<td>
-			<div class="form-group" align="center">
-				<?= Html::submitButton('确定' , ['class' =>  'btn btn-success']) ?>
-			</div>
+
+		<td>	
 		</td>
 	</tr>
 </table>
+	<div class="row">
+		<div class="col-lg-3">
+			<?= $form->field($model, 'community_id')->dropDownList($comm) ?>
+		</div>
+		
+		<div class="col-lg-2">
+			<?= $form->field($model, 'building_id')->dropDownList($build) ?>
+		</div>
+		
+		<div class="col-lg-2">
+			<?= $form->field($model, 'year')->dropDownList($number)->label('单元') ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($model, 'realestate_id')->dropDownList($name) ?>
+		</div>
+	</div>
+			
+	<div class="row">
+		<div class="col-lg-5">
+			<?= $form->field($model, 'from', [
+                'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                'options'=>['class'=>'drp-container']])
+	                     ->widget(DateRangePicker::classname(), [
+                'useWithAddon'=>true,
+				'pluginOptions'=>[
+                    'singleDatePicker'=>true,
+                    'showDropdowns'=>true,
+					'locale'=>[
+                        'format'=>'Y-M',
+                        'separator'=>' to ',
+                    ],
+                ]
+            ])->label('起始日期'); ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($model, 'month')->label('预交月数'); ?>
+		</div>
+	</div>		
+			
+			
+			<?= $form->field($model, 'cost')->checkBoxList($cost) ?>
+			<div class="form-group" align="center">
+				<?= Html::submitButton('确定' , ['class' =>  'btn btn-success']) ?>
+			</div>
+	
 	<?php ActiveForm::end(); ?>
 
 </div>
