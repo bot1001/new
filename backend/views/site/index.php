@@ -74,10 +74,13 @@ $this->title = '裕达物业';
 	
 	
 	<?php
-	   $str='发布时间 2015/2/11 发布时间 2015/2/13 发布的 2015/2/14';
-$regex="'\d{4}'is";
-preg_match_all($regex,$str,$matches);
-print_r ($matches[0]);
+	   $i =1;
+	$date = '2018-01';
+	for($i=1; $i<=13; $i++)
+	{
+		$test = date('Y-m', strtotime("+$i month", strtotime($date)));
+		echo $test.'<br />';
+	}
 	
 	?>
 	
