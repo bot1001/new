@@ -338,7 +338,7 @@ $this->title = '房屋管理';
 					] );
 				},
 			],
-			'width' => '80px',
+			'width' => '90px',
 			'header' => '操作'
 		],
 	];

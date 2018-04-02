@@ -14,7 +14,7 @@ $this->params[ 'breadcrumbs' ][] = [ 'label' => '房屋列表', 'url' => [ 'inde
 	<?php
 	$form = ActiveForm::begin( [ 'options' => [ 'enctype' => 'multipart/form-data' ],
 		'type' => ActiveForm::TYPE_INLINE,
-		'action' => './read'
+		'action' => '/community-realestate/read'
 	] )
 	?>
 	<table style="width:340px; background-color:#F3F3F3;border-radius:20px;" align="center" border="0" height="150" cellspacing="0" cellpadding="0">

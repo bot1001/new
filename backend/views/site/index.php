@@ -72,16 +72,4 @@ $this->title = '裕达物业';
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>
 	
-	
-	<?php
-	   $i =1;
-	$date = '2018-01';
-	for($i=1; $i<=13; $i++)
-	{
-		$test = date('Y-m', strtotime("+$i month", strtotime($date)));
-		echo $test.'<br />';
-	}
-	
-	?>
-	
 </div>

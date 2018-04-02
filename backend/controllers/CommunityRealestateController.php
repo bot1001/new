@@ -16,6 +16,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 use app\models\CommunityBasic;
 use app\models\CommunityBuilding;
+use app\models\HouseInfo;
 
 /**
  * CommunityRealestateController implements the CRUD actions for CommunityRealestate model.
@@ -108,13 +109,23 @@ class CommunityRealestateController extends Controller
 					$i = count($sheetData);
 				}
 				
-				foreach($sheetData as $sheet){
+				foreach($sheetData as $sheet)
+				{
 					sleep(0.01);
-					if(count($sheet) != 7){
+					//print_r($sheet['N']);exit;
+					if(count($sheet) != 14){
 							$session->setFlash('fail','3');
 						    unlink($inputFileName);
 							return $this->redirect( Yii::$app->request->referrer );
 						}
+					
+					//判断为空字段
+					if(empty($sheet['M'])){
+						$sheet['M'] = 0;
+					}
+					if(empty($sheet['N'])){
+						$sheet['N'] = 0;
+					}
 					
 					//获取小区
 					$c_id = CommunityBasic::find()->select( 'community_id' )->where( [ 'community_name' => $sheet[ 'A' ] ] )->asArray()->one();
@@ -136,7 +147,31 @@ class CommunityRealestateController extends Controller
                                     ->one();
 						    	if(!empty($r_id)){
 						    		//更新数据库记录
-						     		$d = CommunityRealestate::updateAll(['acreage' => (float)$sheet[ 'G' ]], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
+						     		$d = CommunityRealestate::updateAll([
+										'acreage' => (float)$sheet[ 'G' ], 
+										'finish' => strtotime($sheet['H']),
+										'delivery' => strtotime($sheet['I']),
+										'decoration' => strtotime($sheet['J']),
+										'orientation' => $sheet['M'],
+										'property' => $sheet['N']
+									], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
+									
+									$house = New HouseInfo(); //实例化模型
+									//print_r($r_id);
+									$house->realestate = $r_id['realestate_id'];
+									$house->name = $sheet['E'];
+									$house->phone = $sheet['F'];
+									$house->IDcard = $sheet['K'];
+									$house->address = $sheet['L'];
+									
+									$e = $house->save();
+									
+									if($e){
+										echo '1';
+									}else{
+										echo '保存失败！';
+									}
+									
 						    		if ( $d ) {
 			                        	$a <= $i;
 			                        	$a += 1;
@@ -148,12 +183,12 @@ class CommunityRealestateController extends Controller
 						    		//插入新记录
 						    		$model = new CommunityRealestate();
 						    		$model->community_id = (int)$c_id['community_id']; //小区
-						    		$model->building_id = (int)$b_id['building_id'];//楼宇
+						    		$model->building_id = (int)$b_id['building_id']; //楼宇
 						    		$model->room_number = (int)$sheet['C']; //单元
-						    		$model->room_name = $sheet['D'];//房号
+						    		$model->room_name = $sheet['D']; //房号
 						    		$model->owners_name = $sheet['E'];
-						    		$model->owners_cellphone = (int)$sheet['F'];//手机号码
-						    		$model->acreage = (float)$sheet['G'];
+						    		$model->owners_cellphone = (int)$sheet['F']; //手机号码
+						    		$model->acreage = (float)$sheet['G']; //面积
 						    					
 						    		$e = $model->save(); //保存
 						    		if( $e ){
@@ -243,7 +278,7 @@ class CommunityRealestateController extends Controller
 			unlink($inputFileName);
 		}
 		$con = "成功更新记录：" . $a . "条！-  插入：". $b . "条！ - 失败：". $c . "条！ - 重复". $h. "条 - 合计：" . $i . "条";
-		echo "<script> alert('$con');parent.location.href='./'; </script>";
+		//echo "<script> alert('$con');parent.location.href='./'; </script>";
 	}
 
 	//检查用户是否登录

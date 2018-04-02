@@ -38,7 +38,7 @@ class HouseInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['realestate', 'name', 'creater', 'create', 'update'], 'required'],
+            /*[['realestate', 'name', 'creater', 'create', 'update'], 'required'],
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
             [['name'], 'string', 'max' => 8],
             [['phone'], 'string', 'max' => 12],
@@ -46,7 +46,7 @@ class HouseInfo extends \yii\db\ActiveRecord
             [['address', 'property'], 'string', 'max' => 50],
             [['realestate', 'name', 'IDcard'], 'unique', 'targetAttribute' => ['realestate', 'name', 'IDcard']],
             [['realestate'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate' => 'realestate_id']],
-        ];
+        */];
     }
 
     /**
@@ -69,6 +69,27 @@ class HouseInfo extends \yii\db\ActiveRecord
             'property' => '备注',
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				//插入新纪录时自动添加以下字段
+				$this->creater = $_SESSION['user']['id'];
+				$this->create = date(time());
+				$this->update = date(time());
+			}else{
+				//修改时自动更新以下记录
+				$this->update = date(time());
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
     /**
      * @return \yii\db\ActiveQuery
