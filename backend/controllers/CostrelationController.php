@@ -254,7 +254,7 @@ class CostrelationController extends Controller {
 			$l = CostName::find()->andwhere( [ 'cost_id' => $id ] )->all();
 			foreach ( $l as $li );
 			$i = $li[ 'cost_id' ];
-			$list = CostName::find()->where( [ 'parent' => $i ] )->all();
+			$list = CostName::find()->where( [ 'parent' => $i ] )->orderBy('price ASC')->all();
 			//print_r($list);die;
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {

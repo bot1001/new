@@ -38,15 +38,15 @@ class HouseInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            /*[['realestate', 'name', 'creater', 'create', 'update'], 'required'],
+            [['realestate', 'name'], 'required'],
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
             [['name'], 'string', 'max' => 8],
             [['phone'], 'string', 'max' => 12],
-            [['IDcard'], 'string', 'max' => 19],
+            [['IDcard'], 'string', 'max' => 18],
             [['address', 'property'], 'string', 'max' => 50],
             [['realestate', 'name', 'IDcard'], 'unique', 'targetAttribute' => ['realestate', 'name', 'IDcard']],
             [['realestate'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate' => 'realestate_id']],
-        */];
+        ];
     }
 
     /**

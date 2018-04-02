@@ -37,6 +37,16 @@ class CommunityRealestateController extends Controller
             ],
         ];
     }
+	
+	//检查用户是否登录
+	public function  beforeAction($action)
+    {
+        if(Yii::$app->user->isGuest){
+            $this->redirect(['/login']);
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Lists all CommunityRealestate models.
@@ -112,7 +122,7 @@ class CommunityRealestateController extends Controller
 				foreach($sheetData as $sheet)
 				{
 					sleep(0.01);
-					//print_r($sheet['N']);exit;
+					
 					if(count($sheet) != 14){
 							$session->setFlash('fail','3');
 						    unlink($inputFileName);
@@ -145,7 +155,8 @@ class CommunityRealestateController extends Controller
                                     ->andwhere( [ 'room_name' => $sheet[ 'D' ] ] )
                                     ->asArray()
                                     ->one();
-						    	if(!empty($r_id)){
+						    	if(!empty($r_id))
+								{
 						    		//更新数据库记录
 						     		$d = CommunityRealestate::updateAll([
 										'acreage' => (float)$sheet[ 'G' ], 
@@ -155,43 +166,59 @@ class CommunityRealestateController extends Controller
 										'orientation' => $sheet['M'],
 										'property' => $sheet['N']
 									], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
+
+									if($d){
+										$house = New HouseInfo(); //实例化模型
 									
-									$house = New HouseInfo(); //实例化模型
-									//print_r($r_id);
-									$house->realestate = $r_id['realestate_id'];
-									$house->name = $sheet['E'];
-									$house->phone = $sheet['F'];
-									$house->IDcard = $sheet['K'];
-									$house->address = $sheet['L'];
-									
-									$e = $house->save();
-									
-									if($e){
-										echo '1';
-									}else{
-										echo '保存失败！';
+									    $house->realestate = $r_id['realestate_id'];
+									    $house->name = $sheet['E'];
+									    $house->phone = $sheet['F'];
+									    $house->IDcard = $sheet['K'];
+									    $house->address = $sheet['L'];
+										
+										$h = $house->save(); //保存
 									}
-									
-						    		if ( $d ) {
+
+						    		if ( $h ) {
 			                        	$a <= $i;
 			                        	$a += 1;
 			                        }else {
 			                        	$h <= $i;
 			                        	$h += 1;
 			                        }
-						    	}elseif(!empty($c_id) && !empty($b_id)){
+						    	}elseif(!empty($c_id && $b_id))
+								{
 						    		//插入新记录
 						    		$model = new CommunityRealestate();
+									
 						    		$model->community_id = (int)$c_id['community_id']; //小区
 						    		$model->building_id = (int)$b_id['building_id']; //楼宇
 						    		$model->room_number = (int)$sheet['C']; //单元
 						    		$model->room_name = $sheet['D']; //房号
-						    		$model->owners_name = $sheet['E'];
+						    		$model->owners_name = $sheet['E']; //业主姓名
 						    		$model->owners_cellphone = (int)$sheet['F']; //手机号码
 						    		$model->acreage = (float)$sheet['G']; //面积
-						    					
+									$model->finish = $sheet['H'];
+									$model->delivery = $sheet['I'];
+									$model->decoration = $sheet['J'];
+									$model->orientation = $sheet['M'];
+									$model->property = $sheet['N'];
+						    		
 						    		$e = $model->save(); //保存
-						    		if( $e ){
+									if($e){
+										$house = New HouseInfo(); //实例化模型
+									    $new_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+									    
+									    $house->realestate = $new_id;
+									    $house->name = $sheet['E'];
+									    $house->phone = $sheet['F'];
+									    $house->IDcard = $sheet['K'];
+									    $house->address = $sheet['L'];
+									    
+									    $h = $house->save(); //保存
+									}
+									
+						    		if( $h ){
 						    			$b <= $i;
 						    			$b += 1;
 						    		}else{
@@ -225,10 +252,31 @@ class CommunityRealestateController extends Controller
                                     ->andwhere( [ 'room_name' => $sheet[ 'D' ] ] )
                                     ->asArray()
                                     ->one();
-							    if(!empty($r_id)){
+							    if(!empty($r_id))
+								{
 							    	//更新数据库记录
-							    	$d = CommunityRealestate::updateAll(['acreage' => (float)$sheet[ 'G' ]], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
-							    	if ( $d ) {
+						     		$d = CommunityRealestate::updateAll([
+										'acreage' => (float)$sheet[ 'G' ], 
+										'finish' => strtotime($sheet['H']),
+										'delivery' => strtotime($sheet['I']),
+										'decoration' => strtotime($sheet['J']),
+										'orientation' => $sheet['M'],
+										'property' => $sheet['N']
+									], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
+
+									if($d){
+										$house = New HouseInfo(); //实例化模型
+									
+									    $house->realestate = $r_id['realestate_id'];
+									    $house->name = $sheet['E'];
+									    $house->phone = $sheet['F'];
+									    $house->IDcard = $sheet['K'];
+									    $house->address = $sheet['L'];
+										
+										$h = $house->save(); //保存
+									}
+
+						    		if ( $h ) {
 			                        	$a <= $i;
 			                        	$a += 1;
 			                        }else {
@@ -278,18 +326,8 @@ class CommunityRealestateController extends Controller
 			unlink($inputFileName);
 		}
 		$con = "成功更新记录：" . $a . "条！-  插入：". $b . "条！ - 失败：". $c . "条！ - 重复". $h. "条 - 合计：" . $i . "条";
-		//echo "<script> alert('$con');parent.location.href='./'; </script>";
-	}
-
-	//检查用户是否登录
-	public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }
+		echo "<script> alert('$con');parent.location.href='./'; </script>";
+	}	
 	
 	//下载业主资料模板
 	public function actionDownload()

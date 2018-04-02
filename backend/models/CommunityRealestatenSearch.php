@@ -52,6 +52,11 @@ class CommunityRealestatenSearch extends CommunityRealestate
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort' => [
+		    	'defaultOrder' => [
+		        	'realestate_id' => SORT_DESC
+		        ]
+		    ]
         ]);
 
         $this->load($params);

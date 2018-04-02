@@ -25,9 +25,7 @@ $this->params['breadcrumbs'][] = '费项预览';
 		  text-align: center;
 		  font-size: 20px;
 	  }
-	  table{
-		  width: 768px;
-	  }
+	  
 	  #div1{
 		  font-size: 25px;
 		  text-align: center;
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = '费项预览';
 		  background-size:116px 54px;
 		  border-radius: 30px;
 		  margin-top: 2%;
-		  margin-left: 300px;
+		  margin-left: 400px;
 	  }
 	  
 	  a{
@@ -57,18 +55,20 @@ $this->params['breadcrumbs'][] = '费项预览';
 	
     table{ 
         border-collapse:collapse;  
+		width: 900px;
     }
   </style>
    
   <table border="1">
 	   <thead>
 		   <tr>
-	           <th>小区</th>
-               <th>楼宇</th>
-               <th>单元</th>
-               <th>房号</th>
-               <th>年</th>
-               <th>月</th>
+	           <th>序号</th>
+	           <th width="20%">小区</th>
+               <th width="8%">楼宇</th>
+               <th width = "8%">单元</th>
+               <th width = "8%">房号</th>
+               <th width = "9%">年份</th>
+               <th width = "7%">月份</th>
                <th>名称</th>
                <th>金额/元</th>
 			   <th>备注</th>
@@ -89,7 +89,8 @@ $this->params['breadcrumbs'][] = '费项预览';
 	        
 	        <?php foreach($query as $key => $a):  $a = (object)$a; ?>
              <tr>
-                <td  width="170"><?php echo $a->community_name?></td>
+                <td><?php $count ++; echo $count; ?></td>
+                <td><?php echo $a->community_name?></td>
 	      	    <td><?php echo $a->building_name; ?></td>
 	      	    <td><?php echo $a->room_name ?></td>
 	      	    <td><?php echo $a->room_number; ?></td>
@@ -120,7 +121,7 @@ $this->params['breadcrumbs'][] = '费项预览';
 				     }
 				    
 				     $sum += $price;
-				     $count ++;
+				     
 	      		   ?>
 	      		  </td>
 	      	  <td></td>
