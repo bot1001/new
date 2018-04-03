@@ -38,7 +38,7 @@ class WaterMeter extends \yii\db\ActiveRecord
     {
         return [
             [['community', 'building', 'realestate_id', 'year', 'month', 'readout', 'type', 'property'], 'integer'],
-            [['realestate_id', 'year', 'month', 'type'], 'required'],
+            [['realestate_id', 'year', 'month', 'type', 'readout'], 'required'],
             [['realestate_id', 'year', 'month', 'readout', 'type'], 'unique', 'targetAttribute' => ['realestate_id', 'year', 'month', 'readout', 'type']],
             [['community'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community' => 'community_id']],
             [['building'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBuilding::className(), 'targetAttribute' => ['building' => 'building_id']],

@@ -60,7 +60,6 @@ class OrderController extends Controller
 		if(isset($_GET['one']) && isset($_GET['two'])){
 			$searchModel->fromdate = $_GET['one'];
 			$searchModel->todate = $_GET['two'];
-			//print_r($_GET);exit;
 		}
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -319,7 +318,11 @@ class OrderController extends Controller
 		       	->asArray()
 		       	->all();
 	    }
-		
+		if(empty($invoice)){
+			$session = Yii::$app->session;
+			$session->setFlash('fail','1');
+			return $this->redirect( Yii::$app->request->referrer );
+		}
 		$in = array_column($invoice, 'invoice_amount'); //提取金额
 		$id = array_column($invoice, 'invoice_id'); //提取金额
 		$m = array_sum($in); //求和
@@ -346,7 +349,7 @@ class OrderController extends Controller
 		$user_id = $_SESSION['user']['community']; //获取账号绑定小区
 		
 		$id = $_GET['id'];
-						
+								
 		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
 		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
 		$time = date(time());//订单类型

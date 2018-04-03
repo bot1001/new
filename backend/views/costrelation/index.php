@@ -64,6 +64,7 @@ $this->title = '费项列表';
 			->all();
 	}
 	 $comm = ArrayHelper::map($community,'community_id', 'community_name');
+	
 	$gridColumn = [
 		[ 'class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'

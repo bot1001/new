@@ -141,6 +141,7 @@ $this->title = '缴费管理';
 	}
 	 $comm = ArrayHelper::map($community,'community_name', 'community_name');
 	 $build = ArrayHelper::map($building,'building_name', 'building_name');
+	
 	$w = date('Y');
 	$y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
 	$m = $m = [ '01' => '01月', '02' => '02月', '03' => '03月', '04' => '04月', '05' => '05月', '06' => '06月', '07' => '07月', '08' => '08月', '09' => '09月', 10 => '10月', 11 => '11月', 12 => '12月' ];

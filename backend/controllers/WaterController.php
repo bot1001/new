@@ -134,24 +134,24 @@ class WaterController extends Controller
     }
 
     /**
-     * Creates a new WaterMeter model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * 更新水电表读数
      */
-    public function actionCreate($type)
+    public function actionCreate($type, $name)
     {
 		$session = Yii::$app->session;
     	$comm = $_SESSION[ 'user' ][ 'community' ];
 		
     	if ( empty( $comm ) ) {
-    		$session->setFlash( 'm', '1' );
+    		$session->setFlash( 'm', '1' ); //设置权限
 			return $this->redirect( [ 'new' ] );
     	} else {
-    		$r = CommunityRealestate::find()->select( 'community_id, building_id,realestate_id' )->where( [ 'community_id' => $comm ] );
+    		$r = CommunityRealestate::find()
+				->select( 'community_id, building_id,realestate_id' )
+				->where( [ 'community_id' => $comm] );
 			$r_id = $r->asArray()->all();
 			
 			$r_count = $r->count(); //计算房号总数
-    		$count = WaterMeter::find()->andwhere( [ 'year' => date( 'Y' ) ] )->andwhere( [ 'month' => date( 'm' ) ] )->count(); //查询水表读数数量
+    		$count = WaterMeter::find()->andwhere( [ 'year' => date( 'Y' ),'month' => date( 'm' ), 'type' => $type ] )->count(); //查询水表读数数量
 			
     		if($count != $r_count){
 				foreach ( $r_id as $id ) {
@@ -196,23 +196,30 @@ class WaterController extends Controller
     	return $this->redirect( Yii::$app->request->referrer );//Yii::$app->request->referrer
     }
 		
-	//生成水费
-	public function actionFee($type)
+	//生成费用
+	public function actionFee($type, $name)
 	{
-		print_r($type);exit;
 		$session = Yii::$app->session;
 		$comm = $_SESSION[ 'user' ][ 'community' ]; //获取session中的绑定小区编号
 		
-		$realestate = CommunityRealestate::find()->where( [ 'community_id' => $comm ] );//检查是否生成水费
+		//检查是否生成水费
+		$realestate = CommunityRealestate::find()
+			->select('realestate_id, community_id as community, building_id as building')
+			->where( [ 'community_id' => $comm ] );
+		
 		$reale = $realestate->count(); // 获取绑定房号数量
 		$realestate_id = $realestate->asArray()->all();// 获取绑定小区房屋
 		$reale_id = array_column($realestate_id,'realestate_id'); // 提取房屋编号
-
+		
 		$m = date( 'm' );
+		$Y = date('Y');
+		$su = 0; //成功生成水费数量
+		$fa = 0; //失败数量
 
-		//计算当前生成水费数量
+		//计算当前当前当月存在的水费数量
 		$water = UserInvoice::find()
-			->andwhere( [ 'year' => date( 'Y' ),'month' => $m, 'community_id' => $comm] )
+			->andwhere( [ 'year' => $Y, 'month' => $m, 'community_id' => $comm, ] )
+			->andwhere(['in', 'description', $name])
 			->count();
 		
 		$w_meter = WaterMeter::find()
@@ -230,23 +237,24 @@ class WaterController extends Controller
 			$session->setFlash( 'm', '4' ); // 提示当月读数为空，需要录入最新读数
 			return $this->redirect( Yii::$app->request->referrer );
 		}else {
-			//获取水表号
-			$r_id = WaterMeter::find()
-				->select( 'realestate_id' )
+			//获取所有水表表号（默认以房屋编号为水表表号）
+			/*$r_id = WaterMeter::find()
+				->select( 'community, building, realestate_id' )
 				->distinct()
-				->andwhere(['in', 'realestate_id', $reale_id])
+				->andwhere(['in', 'realestate_id',  ])
 				->andwhere(['type' => $type])
+				->limit(4000)
 				->orderBy( 'property' )
 				->asArray()
-				->all();
+				->all();*/
 			
-			foreach ( $r_id as $id ) {
+			foreach ( $realestate_id as $id ) {
 				//获取近两个月的费表读数
 				$water = WaterMeter::find()
 					->select( 'year,month,readout' )
 					->where( [ 'realestate_id' => $id ] )
 					->limit( 2 ) //->limit(1)
-					->orderBy( 'property' )
+					->orderBy( 'property DESC' )
 					->asArray()
 					->all();
 
@@ -258,53 +266,49 @@ class WaterController extends Controller
 					$c = 0;
 				}
 				
-				$cost = CostName::find(); //查找水费
-				$c_name = $cost->select('cost_id')
-					->where(['cost_name' => '水费'])
-					->asArray()
-					->all(); //获取水费编号
-				
-				$cost_id = array_column($c_name,'cost_id'); //提取水费编号
+				//查找水费费项
+				$cost = (new \yii\db\Query())->select('cost_name.price, cost_name.cost_name')
+					->from('cost_relation')
+					->join('inner join','cost_name','cost_relation.cost_id = cost_name.cost_id')
+					->andwhere(['cost_relation.realestate_id' => $id['realestate_id'], 'cost_name.cost_name' => $name])
+					->one();
 								
-				//查询管理费项编号
-				$c_id = CostRelation::find()
-					->select( 'cost_id' )
-					->andwhere( [ 'realestate_id' => $id ] )
-					->andwhere(['in','cost_id',$cost_id])
-					->asArray()
-					->one();
-				
-				//查找关联费项单价
-				$price = $cost->select( 'price,cost_name' )
-					->where( [ 'cost_id' => $c_id[ 'cost_id' ] ] )
-					->asArray()
-					->one(); 
-				
-				$mount = $c * $price[ 'price' ];//计算金额
+				$mount = $c * $cost[ 'price' ];//计算金额
+				if($mount == 0){
+					continue;
+				}
 
-				//查找生成水费费项的小区和楼宇
-				$info = CommunityRealestate::find()
-					->select( 'community_id,building_id' )
-					->where( [ 'realestate_id' => $id ] )
-					->asArray()
-					->one();
-				$community = $info[ 'community_id' ]; //小区
-				$building = $info[ 'building_id' ]; //楼宇
+				$community = $id[ 'community' ]; //小区
+				$building = $id[ 'building' ]; //楼宇
 				$realestate = $id[ 'realestate_id' ]; // 房屋ID
-
-				//获取年月
+ 
 				$I = end( $water ); //后一月的读数信息
-				$y = $I[ 'year' ]; // 年
-				$M = $I[ 'month' ]; // 月
+				$date = date('Y-m', strtotime("-1 month", strtotime($I[ 'year' ].'-'.$I[ 'month' ]))); //水费自动退格一个月
+				$date = explode('-', $date); //拆分年月
+				
+				$y = reset($date); // 年
+				$M = end($date); // 月
 				$f = date( time() ); // 创建时间
 
-				$d = $price[ 'cost_name' ]; //$y.'年'.$m.'月份'.
+				$d = $cost[ 'cost_name' ]; //费项名称
 
 				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
 				values ('$community','$building', '$realestate','$d', '$y', '$M', '$mount','$f','0')";
 				$result = Yii::$app->db->createCommand( $sql )->execute();
+				
+				//计数
+				if($result)
+				{
+					$su ++;
+				}else{
+					$fa ++;
+				}
 			}
 		}
+		
+		$count = $su+$fa; //合计生成的条数
+		$con = "成功生成$name:" . $su . "条！-  失败：" . $fa . "条 - 合计：" . $count . "条";
+		$session->setFlash( 's', "$con" );// 设置生成水费结果
 		return $this->redirect(Yii::$app->request->referrer);
 	}
 

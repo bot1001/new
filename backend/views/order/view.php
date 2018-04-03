@@ -22,7 +22,46 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			height: auto;
 			border-radius: 20px;
 		}
-	</style>
+	
+        #box{
+            display:none;
+			font-size: 17px;
+            width: 100px;
+            height: 65px; 
+            #border:1px solid #333;
+            padding:12px;
+            text-align:center;
+			border-radius: 20px;
+			margin-top: -10%;
+			margin-left: 68%;
+        }
+		
+		#z{
+            display:none;
+			font-size: 17px;
+            width: 100px;
+            height: 65px; 
+            #border:1px solid #333;
+            padding:12px;
+            text-align:center;
+			border-radius: 20px;
+			margin-top: -10%;
+			margin-left: 85%;
+        }
+    </style>
+    <script type="text/javascript" language="javascript" >
+        function display(){
+        document.getElementById("box").style.display="block"; 
+
+        }
+		function f(){
+        document.getElementById("z").style.display="block"; 
+        }
+        function disappear(){
+        document.getElementById("box").style.display="none"; 
+        document.getElementById("z").style.display="none"; 
+        }
+    </script>
 
 	<?= DetailView::widget([
         'model' => $model,
@@ -106,43 +145,47 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	?>
 
 	<div class="row">
-			<div id="zfb" class="col-lg-2">
-			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
-			<img src="/image/zfb.png">
-		  </a>
-	</div>
-	
-	<div id="jh" class="col-lg-2">
-			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'jh','pay'=> $pay ]) ?>">
-			<img src="/image/j.png">
-		  </a>
-	</div>
-
-	<div class="col-lg-2">
-			<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
-			<img src="/image/xj.png">
-		  </a>
-	</div>
-
-	<div id="up" class="col-lg-2">
-		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
-			<img src="/image/up.png">
-		  </a>
-	
-	</div>
-
-	<div id="yh" class="col-lg-2">
-		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
-			<img src="/image/yh.png">
-		  </a>
-	
-	</div>
-	<div id="zf" class="col-lg-2">
-		<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
-			<img src="/image/zf.png">
-		  </a>
-	
-	</div>
-
+	    <div id="zfb" class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
+	    		<img src="/image/zfb.png">
+	    	</a>
+	    </div>
+	    
+	    <div id="jh" class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'jh','pay'=> $pay ]) ?>">
+	    		<img src="/image/j.png">
+	    	</a>
+	    </div>
+    
+	    <div class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
+	    		<img src="/image/xj.png">
+	    	</a>
+	    </div>
+    
+	    <div id="up" class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
+	    		<img src="/image/up.png">
+	    	</a>
+	    </div>
+    
+	    <div id="yh" class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
+	    		<img src="/image/yh.png" onmouseover="display()" onmouseout="disappear()">
+	    	</a>
+	    </div>
+	    
+	    <div id="zf" class="col-lg-2">
+	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
+	    		<img src="/image/zf.png" onmouseover="f()" onmouseout="disappear()">
+	    	</a>
+	    </div>
+        <div id="box" onmouseover="display()" onmouseout="disappear()">
+        银行代付
+        </div>
+        
+        <div id="z" onmouseover="f()" onmouseout="disappear()">
+        政府代付
+        </div>
 	</div>
 </div>

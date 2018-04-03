@@ -107,7 +107,7 @@ $this->title = '读数一览表';
 	    	'panel' => [ 'type' => 'info', 'heading' => '电表',
 					   /*'before' => Html::a( '生成水费', [ 'y' ], [ 'class' => 'btn btn-success' ] )*/],
 	    	'toolbar' => [
-	    		'centent' => Html::a( '录入', [ 'new', 'type' => 1 ], [ 'class' => 'btn btn-success' ] )
+	    		'centent' => Html::a( '录入', [ 'new', 'type' => 1, 'name' => '电费' ], [ 'class' => 'btn btn-success' ] )
 	    	],
 	    	'hover' => true,
 	    	'columns' => $gridColumn,

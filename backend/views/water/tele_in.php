@@ -99,9 +99,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'primary', 'heading' => '录入电表读数',
-				   'before' => Html::a( '更新', [ 'create', 'type' => 1 ], [ 'class' => 'btn btn-info' ] )],
+				   'before' => Html::a( '更新', [ 'create', 'type' => 1, 'name' => '电费' ], [ 'class' => 'btn btn-info' ] )],
 		'toolbar' => [
-	    		'centent' => Html::a( '提交', [ 'fee', 'type' => 1 ], [ 'class' => 'btn btn-success' ] ),
+	    		'centent' => Html::a( '提交', [ 'fee', 'type' => 1, 'name' => '电费' ], [ 'class' => 'btn btn-success' ] ),
 		'{toggleData}'
 	    	],
 		//'toolbar' => [],

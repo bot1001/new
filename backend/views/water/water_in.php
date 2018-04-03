@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
    <?php // $this->render('_search', ['model' => $searchModel]); ?>
    
     <?php
+	    $s = Yii::$app->getSession()->getflash('s');
+	
 	    $c = Yii::$app->getSession()->getflash('m');
 	    if($c == 1){
 	    	echo "<script>alert('抱歉，您无此权限！')</script>";
@@ -28,6 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			echo "<script>alert('水费已生成，请勿重复生成')</script>";
 		}elseif($c == 4){
 			echo "<script>alert('当月水表读数未更新，请先更新后生成水费！')</script>";
+		}
+	
+	    if(isset($s))
+		{
+			echo "<script>alert('$s')</script>";
 		}
 	?>
    
@@ -98,10 +105,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '录入水表读数',
-				   'before' => Html::a( '更新', [ 'create', 'type' => 0 ], [ 'class' => 'btn btn-info' ] )],
+		'panel' => [ 'type' => 'info', 'heading' => '录入水表读数',
+				   'before' => Html::a( '更新', [ 'create', 'type' => 0, 'name' => '水费' ], [ 'class' => 'btn btn-info' ] )],
 		'toolbar' => [
-	    		'centent' => Html::a( '提交', [ 'fee', 'type' => 0 ], [ 'class' => 'btn btn-success' ] ),
+	    		'centent' => Html::a( '提交', [ 'fee', 'type' => 0, 'name' => '水费' ], [ 'class' => 'btn btn-success' ] ),
 		'{toggleData}'
 	    	],
 		//'toolbar' => [],
