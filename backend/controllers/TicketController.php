@@ -80,8 +80,10 @@ class TicketController extends Controller
      */
     public function actionView($id)
     {
+		$model = new TicketBasic();
+		//odel->
         return $this->render('view', [
-            'id' =>$id,
+            'model' => $this->findModel($id),
         ]);
     }
 

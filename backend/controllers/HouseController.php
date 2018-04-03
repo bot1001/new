@@ -57,6 +57,15 @@ class HouseController extends Controller
         ]);
     }
 
+	public function actionView01($id)
+    {
+		$model = HouseInfo::find()->where(['realestate' => $id])->asArray()->all();
+		
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Creates a new HouseInfo model.
      * If creation is successful, the browser will be redirected to the 'view' page.

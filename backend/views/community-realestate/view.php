@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -49,6 +50,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		                'delivery',
 		                'orientation',
 		                'property',
+	                    'h.IDcard',
+	                    'h.address',
 	            	],
 	            ] )
 	            ?>
@@ -56,5 +59,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</tr>
 	</tbody>
 </table>
+
+	<a href="<?php echo Url::to(['/house/view01','id' => $model->realestate_id]) ?>" > 更多</a>
 
 </div>

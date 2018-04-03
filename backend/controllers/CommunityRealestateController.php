@@ -167,19 +167,22 @@ class CommunityRealestateController extends Controller
 										'property' => $sheet['N']
 									], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
 
-									if($d){
-										$house = New HouseInfo(); //实例化模型
+									/*$houseinfo = HouseInfo::find()->select('realestate,name, IDcard')->asArray()->all();
+									if($houseinfo['realestate_id'] == $r_id['realestate_id'] && 
+									   $houseinfo['name'] == $sheet['name'] && 
+									   $houseinfo['IDcard'] == $sheet['K']);*/
 									
-									    $house->realestate = $r_id['realestate_id'];
-									    $house->name = $sheet['E'];
-									    $house->phone = $sheet['F'];
-									    $house->IDcard = $sheet['K'];
-									    $house->address = $sheet['L'];
-										
-										$h = $house->save(); //保存
-									}
+									$house = New HouseInfo(); //实例化模型
+								
+									$house->realestate = $r_id['realestate_id'];
+									$house->name = $sheet['E'];
+									$house->phone = $sheet['F'];
+									$house->IDcard = $sheet['K'];
+									$house->address = $sheet['L'];
+									
+									$t = $house->save(); //保存
 
-						    		if ( $h ) {
+						    		if ( $t ) {
 			                        	$a <= $i;
 			                        	$a += 1;
 			                        }else {

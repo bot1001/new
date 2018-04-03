@@ -12,13 +12,6 @@ $this->title = '投诉/建议';
 ?>
 <div class="ticket-basic-index">
 
-    <h1><?php // Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php // Html::a('Create Ticket Basic', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
       <?php
 	  $gridColumn = [
 		  ['attribute' =>'ticket_number',
@@ -54,14 +47,20 @@ $this->title = '投诉/建议';
 		   'group' => true,
 		   'hAlign' => 'center',
 		   'width' => '80px'],
+		  
 		  ['attribute' =>'mobile_phone',
 		   'label' => '手机号码',
 		   'group' => true,
 		   'hAlign' => 'center',
 		   'width' => '10px'],
+		  
 		  ['attribute' =>'explain1',
+		   'value' => function($searchModel){
+		  return mb_substr($searchModel['explain1'],0,10);
+	  },
 		   'label' => '详情',
 		   'width' => '100px'],
+		  
           ['attribute' =>'create_time',
 		   'format' => ['date','php:Y-m-d H:i:s'],
 			'label' => '时间',
@@ -76,16 +75,16 @@ $this->title = '投诉/建议';
 		  /*['label'=>'更多',
 		   'mergeHeader' => true,
            'format'=>'raw',
-           'value' => function($model){
-                $url = Yii::$app->urlManager->createUrl(['ticket/view','id' => 2.3]);
+           'value' => function($searchModel){
+                $url = Yii::$app->urlManager->createUrl(['ticket/view','id' => $searchModel['ticket_id']]);
                 return Html::a('more', $url); 
               }
            ],*/
 
-            /*['class' => 'kartik\grid\ActionColumn',
+            ['class' => 'kartik\grid\ActionColumn',
 			 'header' => '操作',
 			 'width' => '30px',
-			'template' => '{view}'],*/
+			'template' => '{view}'],
         ];
 	  echo GridView::widget([
         'dataProvider' => $dataProvider,
@@ -93,6 +92,6 @@ $this->title = '投诉/建议';
 		'panel' => ['type' => 'primary','heading' => '投诉列表'],
         'columns' => $gridColumn,
 		'hover' => true
-      ]); ?></td>
-    
+      ]);
+	?>
 </div>

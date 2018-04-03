@@ -179,4 +179,9 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CommunityBuilding::className(), ['building_id' => 'building_id']);
     }
+	
+	public function getH()
+    {
+        return $this->hasOne(HouseInfo::className(), ['realestate' => 'realestate_id']);
+    }
 }
