@@ -9,7 +9,6 @@ use app\ models\ CommunityBuilding;
 use app\ models\ Status;
 use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
-use kartik\ form\ ActiveForm;
 use kartik\daterange\DateRangePicker;
 
 Modal::begin( [
@@ -99,7 +98,7 @@ $this->title = '缴费管理';
 ?>
 <div class="user-invoice-index">
 
-	<?php // $this->render('_search', ['model' => $searchModel]);
+	<?php
 	
 	$message = Yii::$app->getSession()->getFlash('fail');
 	if($message == 1){

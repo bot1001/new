@@ -81,8 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		[ 'attribute' => 'readout',
 		  'class' => 'kartik\grid\EditableColumn',
 		  'editableOptions' => [
-		  'formOptions' => [ 'action' => [ '/water/water' ] ],
-		  'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+		      'formOptions' => [ 'action' => [ '/water/water' ] ],
+		      'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 		  ],
 		  'hAlign' => 'right'
 		],
