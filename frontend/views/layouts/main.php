@@ -23,17 +23,17 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
     <?php
     NavBar::begin([
-		/*'brandLabel' => "<image class='header-logo' src='/image/logo.png' width = '30' height = '34' />",
-        //'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,*/
+		'brandLabel' => "<image class='header-logo' src='/image/logo01.png' width = '30' height = '34' />",
+        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-bottom',
+            'class' => 'navbar-default navbar-fixed-top navbar',
         ],
     ]);
     $menuItems = [
@@ -41,31 +41,14 @@ AppAsset::register($this);
         ['label' => '互动	', 'url' => ['/site/about']],
         ['label' => '我的', 'url' => ['/site/contact']],
     ];
-    /*if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }*/
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-center'],
+        'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
     NavBar::end();
     ?>
 
     <div class="container">
-        <?php /*Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ])*/ ?>
-        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>

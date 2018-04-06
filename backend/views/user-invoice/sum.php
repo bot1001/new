@@ -17,7 +17,7 @@ use kartik\select2\Select2;
 	td {
 		height: 30px;
 	}
-	 table tr:hover{background-color: #dafdf3;}
+	 table tr:hover{background-color: #FFFFFF;}
 	 table tr:nth-child(odd){  
         background: #efefef;  
     }  

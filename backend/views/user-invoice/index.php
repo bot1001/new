@@ -248,7 +248,7 @@ $this->title = '缴费管理';
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 				'options' => [
-					'pluginOptions' => [ 'min' => 0, 'max' => 5000 ]
+					'pluginOptions' => [ 'min' => 0, 'max' => 50 ]
 				]
 			],
 			'hAlign' => 'left',
