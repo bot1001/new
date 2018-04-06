@@ -48093,3 +48093,2536 @@ $_SESSION = [
         [yii\base\Component:_behaviors] => []
     )
 ]
+2018-04-06 08:16:10 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:16:10 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:16:10 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:16:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:16:46 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:16:46 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:21:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:21:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:21:47 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:22:18 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:22:18 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:22:18 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:22:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:22:46 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:22:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 08:22:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 08:22:47 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:22:51 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 08:22:51 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 08:22:51 [127.0.0.1][64][-][info][application] $_POST = [
+    '_csrf-backend' => 'MbS_fh787x2LqkawldNyqCJQEAgKXjsO8wD1R7sPZGlkgPo3SKbWes2ZB-n9kl_wTiVda2cqZHacV78P8EUGAA=='
+    'LoginForm' => [
+        'name' => 'admin'
+        'password' => 'yuda'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+]
+2018-04-06 08:22:51 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:22:51 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:22:51 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+]
+2018-04-06 08:23:19 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:23:19 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:23:19 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:28:19 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:28:19 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:28:19 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:28:19 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:28:19 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:28:19 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:33:20 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:33:20 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:33:20 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:38:20 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:38:20 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:38:20 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:42:07 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:42:07 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:42:07 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 08:42:07 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 08:42:07 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 08:42:10 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 08:42:10 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 08:42:10 [127.0.0.1][64][-][info][application] $_POST = [
+    '_csrf-backend' => 'DpuZsm0i1zRaYqQlffJH2nAVruMZXpeYvBZgtJtXgdxewdGEAEibTWwl92Mcg3aoB1v0hH0SxujNLy3w0xDsjg=='
+    'LoginForm' => [
+        'name' => 'admin'
+        'password' => 'yuda'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+]
+2018-04-06 08:42:10 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:42:10 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:42:10 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:42:19 [127.0.0.1][64][hnkudh5cs1d641mru0ack152t3][trace][yii\base\Controller::runAction] Route to run: account/index
+2018-04-06 08:42:19 [127.0.0.1][64][hnkudh5cs1d641mru0ack152t3][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\AccountController::actionIndex()
+2018-04-06 08:42:19 [127.0.0.1][64][hnkudh5cs1d641mru0ack152t3][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:43:20 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:43:20 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:43:20 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:44:31 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: account/index
+2018-04-06 08:44:31 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\AccountController::actionIndex()
+2018-04-06 08:44:31 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:44:53 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: account/index
+2018-04-06 08:44:53 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\AccountController::actionIndex()
+2018-04-06 08:44:53 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:48:21 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:48:21 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:48:21 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:53:21 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:53:21 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:53:21 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 08:58:21 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 08:58:21 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 08:58:21 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 09:03:22 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 09:03:22 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 09:03:22 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 09:03:52 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 09:03:52 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 09:03:52 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 10:42:15 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 10:42:15 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 10:42:15 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:15:49 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 16:15:49 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 16:15:49 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:15:54 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:15:54 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:15:54 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:20:55 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:20:55 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:20:55 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:25:56 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:25:56 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:25:56 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:26:28 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/view
+2018-04-06 16:26:28 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionView()
+2018-04-06 16:26:27 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:26:50 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/view
+2018-04-06 16:26:50 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionView()
+2018-04-06 16:26:50 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:30:57 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:30:57 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:30:57 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:35:58 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:35:58 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:35:58 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:40:59 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:40:59 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:40:58 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:45:59 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:45:59 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:45:59 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:51:00 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:51:00 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:51:00 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 16:56:00 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 16:56:00 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 16:56:00 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:01:01 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 17:01:01 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 17:01:01 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:06:02 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 17:06:02 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 17:06:02 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:11:03 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: community-realestate/index
+2018-04-06 17:11:03 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\CommunityRealestateController::actionIndex()
+2018-04-06 17:11:02 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:11:10 [127.0.0.1][64][hnkudh5cs1d641mru0ack152t3][trace][yii\base\Controller::runAction] Route to run: site/error
+2018-04-06 17:11:10 [127.0.0.1][64][hnkudh5cs1d641mru0ack152t3][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:22:58 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 17:22:58 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 17:22:58 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 17:22:58 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 17:22:58 [127.0.0.1][-][-][info][application] $_POST = []
+2018-04-06 17:23:01 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-04-06 17:23:01 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-04-06 17:23:01 [127.0.0.1][64][-][info][application] $_POST = [
+    '_csrf-backend' => 'ekHJpSvkDhCD3AP6Acpk0psN4mgg1vAmLyOIhlRkRiw8bPzdXt1sJbeIcqpF_CmWyXuBH1e1h25ldMK2ZQF3Gw=='
+    'LoginForm' => [
+        'name' => 'admin'
+        'password' => 'yuda'
+        'rememberMe' => '1'
+    ]
+    'login-button' => ''
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+]
+2018-04-06 17:23:02 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: site/index
+2018-04-06 17:23:02 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\SiteController::actionIndex()
+2018-04-06 17:23:01 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:23:10 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: user/index
+2018-04-06 17:23:10 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\UserController::actionIndex()
+2018-04-06 17:23:10 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:23:15 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/index
+2018-04-06 17:23:15 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionIndex()
+2018-04-06 17:23:15 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:23:17 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:23:17 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:23:17 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:23:57 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:23:57 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:23:57 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:24:39 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/index
+2018-04-06 17:24:39 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionIndex()
+2018-04-06 17:24:39 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:24:41 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:24:41 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:24:41 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:25:01 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:25:01 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:25:01 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:25:18 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:25:18 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:25:18 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:30:18 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:30:18 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:30:18 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]
+2018-04-06 17:35:19 [127.0.0.1][64][-][trace][yii\base\Controller::runAction] Route to run: news/update
+2018-04-06 17:35:19 [127.0.0.1][64][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\NewsController::actionUpdate()
+2018-04-06 17:35:19 [127.0.0.1][64][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => '64'
+    'user' => common\models\User#1
+    (
+        [yii\db\BaseActiveRecord:_attributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_oldAttributes] => [
+            'id' => 64
+            'company' => 0
+            'community' => null
+            'real_name' => null
+            'name' => 'admin'
+            'role' => 1
+            'phone' => null
+            'password' => 'gVIlueRV13iKhyMYM8tKcA=='
+            'status' => 1
+            'comment' => null
+            'salt' => 'c720dd344372dcff2560555061ba266a'
+            'create_id' => 0
+            'create_time' => '2016-05-21 00:00:00'
+            'update_time' => '0000-00-00 00:00:00'
+            'update_id' => null
+            'new_pd' => 'ac9053a8bd7632586c3eb663a6cf15e4'
+            'authKey' => null
+        ]
+        [yii\db\BaseActiveRecord:_related] => []
+        [yii\db\BaseActiveRecord:_relationsDependencies] => []
+        [yii\base\Model:_errors] => null
+        [yii\base\Model:_validators] => null
+        [yii\base\Model:_scenario] => 'default'
+        [yii\base\Component:_events] => []
+        [yii\base\Component:_eventWildcards] => []
+        [yii\base\Component:_behaviors] => []
+    )
+]

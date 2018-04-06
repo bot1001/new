@@ -53,51 +53,14 @@ class SiteController extends Controller
     }
 	
 	//检查用户是否登录
-	/*public function  beforeAction($action)
+	public function  beforeAction($action)
     {
         if(Yii::$app->user->isGuest){
             $this->redirect(['/login']);
             return false;
         }
         return true;
-    }*/
-	
-	public function actionTest()
-	{
-		$code = $_GET['code'];
-		$appid = 'wx6a6b40dfed3cf871';
-		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=dedd7bad5b2b3c43a8e23597dfa27698&code=$code&grant_type=authorization_code";
-		
-		$ch = curl_init();
-        // 2. 设置选项，包括URL
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($ch,CURLOPT_HEADER,0);
-        // 3. 执行并获取HTML文档内容
-        $output = curl_exec($ch);
-        
-        // 4. 释放curl句柄
-        curl_close($ch);
-		$arr = json_decode($output, true);
-		$token = $arr['access_token'];
-		$opentid = $arr['openid'];
-		
-		$user_info = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$opentid&lang=zh_CN";
-		
-		$u = curl_init();
-        // 2. 设置选项，包括URL
-        curl_setopt($u,CURLOPT_URL,$user_info);
-        curl_setopt($u,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($u,CURLOPT_HEADER,0);
-        // 3. 执行并获取HTML文档内容
-        $user = curl_exec($u);
-        
-        // 4. 释放curl句柄
-        curl_close($u);
-		$a = json_decode($user);
-		echo '<pre>';
-		print_r($a);
-	}
+    }
 	
     public function actionIndex()
     {

@@ -33,7 +33,7 @@ AppAsset::register($this);
         //'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,*/
         'options' => [
-            'class' => 'navbar-info navbar-fixed-bottom',
+            'class' => 'navbar-inverse navbar-fixed-bottom',
         ],
     ]);
     $menuItems = [

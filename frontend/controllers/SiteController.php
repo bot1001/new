@@ -87,7 +87,7 @@ class SiteController extends Controller
 	{
 		return \Yii::$app->response->sendFile('./files/wyd.apk');
 	}
-
+	
     /**
      * Logs in a user.
      *
