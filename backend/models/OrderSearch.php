@@ -49,7 +49,7 @@ class OrderSearch extends OrderBasic
     {
 		if($_SESSION['user']['community']){
 			$comm = $_SESSION['user']['community'];
-			$query = OrderBasic::find()->where(['in', 'account_id', $comm]);//'account_id' => $comm  where(['in' , 'id' , [1,2,3]])->all()
+			$query = OrderBasic::find()->where(['in', 'account_id', "$comm"]);//'account_id' => $comm  where(['in' , 'id' , [1,2,3]])->all()
 		}else{
 			$query = OrderBasic::find();
 		}

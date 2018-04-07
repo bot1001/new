@@ -13,7 +13,15 @@ return [
     'bootstrap' => ['log'],
 	'language' => 'zh-CN',
     'timeZone' => 'Asia/Shanghai',
-    'modules' => [],
+    'modules' => [
+	       'gridview' =>  [
+                'class' => '\kartik\grid\Module'
+            ],
+	       'admin' => [
+                   'class' => 'mdm\admin\Module',
+                    'layout' => 'left-menu',//yii2-admin的导航菜单
+               ]
+	],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -60,12 +68,18 @@ return [
 	            '<controller:(post|comment)>s' => '<controller>/list',
 	         ]
 	    ],
+	'authManager' => [
+            'class' => 'yii\rbac\DbManager', // 使用数据库管理配置文件
+        ]
 		
     ],
-	'modules' => [
-            'gridview' =>  [
-                'class' => '\kartik\grid\Module'
-            ]
-        ],
+	
+	'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            '*',//允许访问的节点，可自行添加
+            //'admin/*',允许所有人访问admin节点及其子节点
+        ]
+    ],
     'params' => $params,
 ];

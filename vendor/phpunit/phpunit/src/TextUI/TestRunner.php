@@ -62,6 +62,11 @@ class TestRunner extends BaseTestRunner
     public const EXCEPTION_EXIT = 2;
 
     /**
+     * @var bool
+     */
+    protected static $versionStringPrinted = false;
+
+    /**
      * @var CodeCoverageFilter
      */
     protected $codeCoverageFilter;
@@ -75,11 +80,6 @@ class TestRunner extends BaseTestRunner
      * @var ResultPrinter
      */
     protected $printer;
-
-    /**
-     * @var bool
-     */
-    protected static $versionStringPrinted = false;
 
     /**
      * @var Runtime
@@ -97,21 +97,6 @@ class TestRunner extends BaseTestRunner
     private $extensions = [];
 
     /**
-     * @param TestSuiteLoader    $loader
-     * @param CodeCoverageFilter $filter
-     */
-    public function __construct(TestSuiteLoader $loader = null, CodeCoverageFilter $filter = null)
-    {
-        if ($filter === null) {
-            $filter = new CodeCoverageFilter;
-        }
-
-        $this->codeCoverageFilter = $filter;
-        $this->loader             = $loader;
-        $this->runtime            = new Runtime;
-    }
-
-    /**
      * @param ReflectionClass|Test $test
      * @param array                $arguments
      * @param bool                 $exit
@@ -120,8 +105,6 @@ class TestRunner extends BaseTestRunner
      * @throws \InvalidArgumentException
      * @throws Exception
      * @throws \ReflectionException
-     *
-     * @return TestResult
      */
     public static function run($test, array $arguments = [], $exit = true): TestResult
     {
@@ -142,19 +125,24 @@ class TestRunner extends BaseTestRunner
         throw new Exception('No test case or test suite found.');
     }
 
+    public function __construct(TestSuiteLoader $loader = null, CodeCoverageFilter $filter = null)
+    {
+        if ($filter === null) {
+            $filter = new CodeCoverageFilter;
+        }
+
+        $this->codeCoverageFilter = $filter;
+        $this->loader             = $loader;
+        $this->runtime            = new Runtime;
+    }
+
     /**
-     * @param Test  $suite
-     * @param array $arguments
-     * @param bool  $exit
-     *
      * @throws Exception
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * @throws \ReflectionException
-     *
-     * @return TestResult
      */
-    public function doRun(Test $suite, array $arguments = [], $exit = true): TestResult
+    public function doRun(Test $suite, array $arguments = [], bool $exit = true): TestResult
     {
         if (isset($arguments['configuration'])) {
             $GLOBALS['__PHPUNIT_CONFIGURATION_FILE'] = $arguments['configuration'];
@@ -322,6 +310,21 @@ class TestRunner extends BaseTestRunner
 
         if ($this->runtime->discardsComments()) {
             $this->writeMessage('Warning', 'opcache.save_comments=0 set; annotations will not work');
+        }
+
+        if (isset($arguments['configuration']) && $arguments['configuration']->hasValidationErrors()) {
+            $this->write(
+                "\n  Warning - The configuration file did not pass validation!\n  The following problems have been detected:\n"
+            );
+
+            foreach ($arguments['configuration']->getValidationErrors() as $line => $errors) {
+                $this->write(\sprintf("\n  Line %d:\n", $line));
+
+                foreach ($errors as $msg) {
+                    $this->write(\sprintf("  - %s\n", $msg));
+                }
+            }
+            $this->write("\n  Test results may not be as expected.\n\n");
         }
 
         foreach ($arguments['listeners'] as $listener) {
@@ -496,7 +499,7 @@ class TestRunner extends BaseTestRunner
                 }
             }
 
-            if (isset($codeCoverage) && !$this->codeCoverageFilter->hasWhitelist()) {
+            if (!$this->codeCoverageFilter->hasWhitelist()) {
                 if (!$whitelistFromConfigurationFile && !$whitelistFromOption) {
                     $this->writeMessage('Error', 'No whitelist is configured, no code coverage will be generated.');
                 } else {
@@ -698,9 +701,6 @@ class TestRunner extends BaseTestRunner
         return $result;
     }
 
-    /**
-     * @param ResultPrinter $resultPrinter
-     */
     public function setPrinter(ResultPrinter $resultPrinter): void
     {
         $this->printer = $resultPrinter;
@@ -708,8 +708,6 @@ class TestRunner extends BaseTestRunner
 
     /**
      * Returns the loader to be used.
-     *
-     * @return TestSuiteLoader
      */
     public function getLoader(): TestSuiteLoader
     {
@@ -720,9 +718,6 @@ class TestRunner extends BaseTestRunner
         return $this->loader;
     }
 
-    /**
-     * @return TestResult
-     */
     protected function createTestResult(): TestResult
     {
         return new TestResult;
@@ -731,19 +726,15 @@ class TestRunner extends BaseTestRunner
     /**
      * Override to define how to handle a failed loading of
      * a test suite.
-     *
-     * @param string $message
      */
-    protected function runFailed($message): void
+    protected function runFailed(string $message): void
     {
         $this->write($message . PHP_EOL);
+
         exit(self::FAILURE_EXIT);
     }
 
-    /**
-     * @param string $buffer
-     */
-    protected function write($buffer): void
+    protected function write(string $buffer): void
     {
         if (PHP_SAPI != 'cli' && PHP_SAPI != 'phpdbg') {
             $buffer = \htmlspecialchars($buffer);
@@ -757,8 +748,6 @@ class TestRunner extends BaseTestRunner
     }
 
     /**
-     * @param array $arguments
-     *
      * @throws Exception
      */
     protected function handleConfiguration(array &$arguments): void
@@ -1130,9 +1119,6 @@ class TestRunner extends BaseTestRunner
     }
 
     /**
-     * @param TestSuite $suite
-     * @param array     $arguments
-     *
      * @throws \ReflectionException
      * @throws \InvalidArgumentException
      */
@@ -1170,11 +1156,7 @@ class TestRunner extends BaseTestRunner
         $suite->injectFilter($filterFactory);
     }
 
-    /**
-     * @param string $type
-     * @param string $message
-     */
-    private function writeMessage($type, $message): void
+    private function writeMessage(string $type, string $message): void
     {
         if (!$this->messagePrinted) {
             $this->write("\n");

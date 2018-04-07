@@ -1,10 +1,16 @@
 CHANGELOG
 =========
 
-Version 1.2.1 work in progress
+Version 1.2.2 work in progress
+------------------------------
+
+...
+
+Version 1.2.1 on 26. Mar. 2018
 ------------------------------
 
 - Improved handling of inline HTML with URL and email tags.
+- Improved handling of custom syntax with `[[`, references should not use `[` as the first character in the reference name.
 
 Version 1.2.0 on 14. Mar. 2018
 ------------------------------

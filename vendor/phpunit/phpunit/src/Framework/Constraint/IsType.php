@@ -28,6 +28,7 @@ class IsType extends Constraint
     public const TYPE_STRING   = 'string';
     public const TYPE_SCALAR   = 'scalar';
     public const TYPE_CALLABLE = 'callable';
+    public const TYPE_ITERABLE = 'iterable';
 
     /**
      * @var array
@@ -57,11 +58,9 @@ class IsType extends Constraint
     private $type;
 
     /**
-     * @param string $type
-     *
      * @throws \PHPUnit\Framework\Exception
      */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         parent::__construct();
 
@@ -80,8 +79,6 @@ class IsType extends Constraint
 
     /**
      * Returns a string representation of the constraint.
-     *
-     * @return string
      */
     public function toString(): string
     {
@@ -96,8 +93,6 @@ class IsType extends Constraint
      * constraint is met, false otherwise.
      *
      * @param mixed $other value or object to evaluate
-     *
-     * @return bool
      */
     protected function matches($other): bool
     {

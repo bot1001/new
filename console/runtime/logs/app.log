@@ -1,0 +1,583 @@
+2018-04-07 06:37:25 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'menu' already exists in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `m...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\mdmsoft\yii2-admin\migrations\m140602_111327_create_menu_table.php(32): yii\db\Migration->createTable('{{%menu}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140602_111327_create_menu_table->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140602_111327_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+
+Next yii\db\Exception: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'menu' already exists
+The SQL being executed was: CREATE TABLE `menu` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`name` varchar(128) NOT NULL,
+	`parent` int(11),
+	`route` varchar(255),
+	`order` int(11),
+	`data` blob,
+	FOREIGN KEY (`parent`) REFERENCES `menu`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'CREATE TABLE `m...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `m...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\mdmsoft\yii2-admin\migrations\m140602_111327_create_menu_table.php(32): yii\db\Migration->createTable('{{%menu}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140602_111327_create_menu_table->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140602_111327_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+Additional Information:
+Array
+(
+    [0] => 42S01
+    [1] => 1050
+    [2] => Table 'menu' already exists
+)
+
+2018-04-07 06:37:18 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083037.9846
+    'REQUEST_TIME' => 1523083037
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@mdm/admin/migrations'
+    ]
+    'argc' => 3
+]
+2018-04-07 06:37:25 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: PHP Startup: Unable to load dynamic library 'C:\php\ext\php_pdo_firebird.dll' - 找不到指定的模块。
+ in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2018-04-07 06:37:18 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083037.9846
+    'REQUEST_TIME' => 1523083037
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@mdm/admin/migrations'
+    ]
+    'argc' => 3
+]
+2018-04-07 06:43:01 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'menu' already exists in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `m...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\mdmsoft\yii2-admin\migrations\m140602_111327_create_menu_table.php(32): yii\db\Migration->createTable('{{%menu}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140602_111327_create_menu_table->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140602_111327_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+
+Next yii\db\Exception: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'menu' already exists
+The SQL being executed was: CREATE TABLE `menu` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`name` varchar(128) NOT NULL,
+	`parent` int(11),
+	`route` varchar(255),
+	`order` int(11),
+	`data` blob,
+	FOREIGN KEY (`parent`) REFERENCES `menu`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'CREATE TABLE `m...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `m...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\mdmsoft\yii2-admin\migrations\m140602_111327_create_menu_table.php(32): yii\db\Migration->createTable('{{%menu}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140602_111327_create_menu_table->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140602_111327_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+Additional Information:
+Array
+(
+    [0] => 42S01
+    [1] => 1050
+    [2] => Table 'menu' already exists
+)
+
+2018-04-07 06:42:58 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083378.9669
+    'REQUEST_TIME' => 1523083378
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@mdm/admin/migrations'
+    ]
+    'argc' => 3
+]
+2018-04-07 06:43:01 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: PHP Startup: Unable to load dynamic library 'C:\php\ext\php_pdo_firebird.dll' - 找不到指定的模块。
+ in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2018-04-07 06:42:58 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083378.9669
+    'REQUEST_TIME' => 1523083378
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@mdm/admin/migrations'
+    ]
+    'argc' => 3
+]
+2018-04-07 06:45:03 [-][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'auth_rule' already exists in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `a...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\rbac\migrations\m140506_102106_rbac_init.php(65): yii\db\Migration->createTable('{{%auth_rule}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140506_102106_rbac_init->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140506_102106_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+
+Next yii\db\Exception: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'auth_rule' already exists
+The SQL being executed was: CREATE TABLE `auth_rule` (
+	`name` varchar(64) NOT NULL,
+	`data` blob,
+	`created_at` int(11),
+	`updated_at` int(11),
+	PRIMARY KEY (`name`)
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'CREATE TABLE `a...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1075): yii\db\Command->internalExecute('CREATE TABLE `a...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Migration.php(323): yii\db\Command->execute()
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\rbac\migrations\m140506_102106_rbac_init.php(65): yii\db\Migration->createTable('{{%auth_rule}}', Array, 'CHARACTER SET u...')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(725): m140506_102106_rbac_init->up()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\controllers\BaseMigrateController.php(199): yii\console\controllers\BaseMigrateController->migrateUp('m140506_102106_...')
+#6 [internal function]: yii\console\controllers\BaseMigrateController->actionUp(0)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Controller.php(148): yii\base\Controller->runAction('', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\console\Controller->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('migrate', Array)
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('migrate', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\console\Application->handleRequest(Object(yii\console\Request))
+#14 C:\Apache24\htdocs\new\yii(23): yii\base\Application->run()
+#15 {main}
+Additional Information:
+Array
+(
+    [0] => 42S01
+    [1] => 1050
+    [2] => Table 'auth_rule' already exists
+)
+
+2018-04-07 06:45:00 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083500.615
+    'REQUEST_TIME' => 1523083500
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]
+2018-04-07 06:45:03 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: PHP Startup: Unable to load dynamic library 'C:\php\ext\php_pdo_firebird.dll' - 找不到指定的模块。
+ in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2018-04-07 06:45:00 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Roaming'
+    'CLASSPATH' => '.;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-77RLRQQ'
+    'ComSpec' => 'C:\\windows\\system32\\cmd.exe'
+    'C_EM64T_REDIST11' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GRADLE_HOME' => 'C:\\Program Files\\Java\\gradle-3.5'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\主管坐骑'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\主管坐骑\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-77RLRQQ'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\主管坐骑\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\Users\\主管坐骑\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\主管坐骑\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\主管坐骑\\AppData\\Roaming\\Composer\\vendor\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'PHP_COMMAND' => 'php.exe'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 60 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '3c03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\windows\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\windows'
+    'TEMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\主管坐骑\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-77RLRQQ'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-77RLRQQ'
+    'USERNAME' => '主管坐骑'
+    'USERPROFILE' => 'C:\\Users\\主管坐骑'
+    'windir' => 'C:\\windows'
+    'YII_PATH' => 'C:\\Apache24\\htdocs\\new\\'
+    'PHP_SELF' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_NAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'SCRIPT_FILENAME' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'PATH_TRANSLATED' => 'C:\\Apache24\\htdocs\\new\\yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1523083500.615
+    'REQUEST_TIME' => 1523083500
+    'argv' => [
+        0 => 'C:\\Apache24\\htdocs\\new\\yii'
+        1 => 'migrate'
+        2 => '--migrationPath=@yii/rbac/migrations'
+    ]
+    'argc' => 3
+]

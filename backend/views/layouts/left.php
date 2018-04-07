@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use app\models\Information;
 use app\models\TicketBasic;
+use mdm\admin\components\MenuHelper;
 
 ?>
      
@@ -36,7 +37,10 @@ use app\models\TicketBasic;
 
         <?php echo dmstr\widgets\Menu::widget(
             [
-                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
+                'options' => ['class' => 'sidebar-menu'], 
+                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id),
+	
+	            /*'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     //['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => '小区管理',
@@ -70,11 +74,12 @@ use app\models\TicketBasic;
                     ]
 					],
 	
-                    ['label' => '用户管理', /*'icon' => 'file-code-o', */'url' => ['/user']],
-                    ['label' => '系统消息', /*'icon' => 'file-code-o', */'url' => ['/information/index']],
+                    ['label' => '用户管理', 'url' => ['/user']],
+                    ['label' => '系统消息', 'url' => ['/information/index']],
                     ['label' => '退出', 'url' => ['site/logout']],
 	
-                    /*['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+	
+                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     
                     [
@@ -102,11 +107,11 @@ use app\models\TicketBasic;
                                 ],
                             ],
                         ],
-                    ],*/
-                ],
+                    ],
+                ],*/
             ]
         );
-		
+				
 		$c = $_SESSION['user']['community']; //用户关联小区
 		$name = $_SESSION['user']['name']; //操作用户
 		
