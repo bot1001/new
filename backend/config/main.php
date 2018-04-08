@@ -68,10 +68,20 @@ return [
 	            '<controller:(post|comment)>s' => '<controller>/list',
 	         ]
 	    ],
-	'authManager' => [
+	    'authManager' => [
             'class' => 'yii\rbac\DbManager', // 使用数据库管理配置文件
-        ]
-		
+        ],
+	'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'fileMap' => [
+                        'common' => 'common.php' //可以加多个，是yii::t里面的第一个参数名
+                    ],
+                    'basePath' => 'mdm\admin\message', //配置语言文件路径，现在采用默认的，就可以不配置这个
+                ],
+            ],
+        ],
     ],
 	
 	'as access' => [
@@ -79,9 +89,10 @@ return [
         'allowActions' => [
             'site/*',//允许访问的节点，可自行添加
             //'admin/*',允许所有人访问admin节点及其子节点
-	'login/*',
-	'pay/*',
+	        'login/*',
+	        'pay/*',
         ]
     ],
+	 
     'params' => $params,
 ];

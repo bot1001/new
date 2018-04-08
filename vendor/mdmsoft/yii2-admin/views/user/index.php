@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
@@ -13,14 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?=
-    GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?php
+	
+	$gridview = [
+            ['class' => 'kartik\grid\SerialColumn'],
             'name',
             //'email:email',
             //'created_at:date',
@@ -35,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => 'kartik\grid\ActionColumn',
                 'template' => Helper::filterActionColumn(['view', 'activate', 'delete']),
                 'buttons' => [
                     'activate' => function($url, $model) {
@@ -45,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $options = [
                             'title' => Yii::t('rbac-admin', 'Activate'),
                             'aria-label' => Yii::t('rbac-admin', 'Activate'),
-                            'data-confirm' => Yii::t('rbac-admin', 'Are you sure you want to activate this user?'),
+                            'data-confirm' => Yii::t('rbac-admin', '您确定激活此用户吗?'),
                             'data-method' => 'post',
                             'data-pjax' => '0',
                         ];
@@ -53,7 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     ]
                 ],
-            ],
+            ];
+	echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => $gridview,
         ]);
         ?>
 </div>

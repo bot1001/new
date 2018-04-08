@@ -18,7 +18,7 @@ class User extends SysUser
     public function rules()
     {
         return [
-            [['id', 'company', 'role', 'status', 'create_id', 'update_id'], 'integer'],
+            [['id', 'role', 'status', 'create_id', 'update_id'], 'integer'],
             [['community', 'real_name', 'name', 'phone', 'password', 'comment', 'salt', 'create_time', 'update_time', 'new_pd'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class User extends SysUser
      */
     public function search($params)
     {
-         $query = SysUser::find();
+         $query = SysUser::find()->where(['or not like', 'name', ['admin']]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,7 +55,7 @@ class User extends SysUser
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'company' => $this->company,
+            //'company' => $this->company,
             'role' => $this->role,
             'status' => $this->status,
             'create_id' => $this->create_id,

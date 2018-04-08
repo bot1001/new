@@ -214,15 +214,7 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'month',
 			'value' => function ( $model ) {
-				/*$t = explode( '年', $model->description );
-				$str = end( $t );
-				if ( $model->month ) {*/
-					return $model->month . '月';
-				/*} elseif ( preg_match( '/\d+/', $str, $arr ) ) {
-					return $arr[ 0 ] . '月';
-				} else {
-					return '';
-				};*/
+                return $model->month . '月';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $m,

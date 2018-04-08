@@ -8,7 +8,7 @@ use mdm\admin\models\form\PasswordResetRequest;
 use mdm\admin\models\form\ResetPassword;
 use mdm\admin\models\form\Signup;
 use mdm\admin\models\form\ChangePassword;
-use mdm\admin\models\User;
+use app\models\SysUser;
 use mdm\admin\models\searchs\User as UserSearch;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;

@@ -42,16 +42,10 @@ $this->registerCssFile($url.'/main.css');
         NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="">
             <?= $content ?>
         </div>
-
-        <footer class="footer">
-            <div class="container">
-                <p class="pull-right"><?= Yii::powered() ?></p>
-            </div>
-        </footer>
-
+  
         <?php $this->endBody() ?>
     </body>
 </html>

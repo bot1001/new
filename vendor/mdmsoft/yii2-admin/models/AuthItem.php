@@ -114,11 +114,11 @@ class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('rbac-admin', 'Name'),
+            'name' => Yii::t('rbac-admin', '名字'),
             'type' => Yii::t('rbac-admin', 'Type'),
-            'description' => Yii::t('rbac-admin', 'Description'),
-            'ruleName' => Yii::t('rbac-admin', 'Rule Name'),
-            'data' => Yii::t('rbac-admin', 'Data'),
+            'description' => Yii::t('rbac-admin', '描述'),
+            'ruleName' => Yii::t('rbac-admin', '路由规则'),
+            'data' => Yii::t('rbac-admin', '数据'),
         ];
     }
 

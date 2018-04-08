@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\SysUser;
+use app\models\SysRole;
 
 /**
  * SysuserSearch represents the model behind the search form about `app\models\SysUser`.
@@ -18,7 +19,7 @@ class SysuserSearch extends SysUser
     public function rules()
     {
         return [
-            [['id', 'company', 'role', 'status', 'create_id', 'update_id'], 'integer'],
+            [['id', 'role', 'status', 'create_id', 'update_id'], 'integer'],
             [['community', 'real_name', 'name', 'phone', 'password', 'comment', 'salt', 'create_time', 'update_time', 'new_pd'], 'safe'],
         ];
     }
@@ -65,7 +66,6 @@ class SysuserSearch extends SysUser
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'company' => $this->company,
             'role' => $this->role,
             'status' => $this->status,
             'create_id' => $this->create_id,

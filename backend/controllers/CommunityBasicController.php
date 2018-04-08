@@ -8,6 +8,8 @@ use app\models\CommunityBasicSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * CommunityBasicController implements the CRUD actions for CommunityBasic model.
@@ -53,6 +55,20 @@ class CommunityBasicController extends Controller
         }
         return true;
     }*/
+	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'community' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => CommunityBasic::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Displays a single CommunityBasic model.

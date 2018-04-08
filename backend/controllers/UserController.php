@@ -90,6 +90,7 @@ class UserController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
 	public function actionV($id)
     {
         return $this->render('view1', [

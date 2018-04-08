@@ -8,24 +8,24 @@ use yii\data\ActiveDataProvider;
 use app\models\CommunityBasic;
 
 /**
- * CommunityBasicSearch represents the model behind the search form about `app\models\CommunityBasic`.
+ * CommunityBasicSearch represents the model behind the search form of `app\models\CommunityBasic`.
  */
 class CommunityBasicSearch extends CommunityBasic
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['community_id', 'province_id', 'city_id', 'area_id'], 'integer'],
+            [['community_id', 'company', 'province_id', 'city_id', 'area_id'], 'integer'],
             [['community_name', 'community_logo', 'community_address'], 'safe'],
             [['community_longitude', 'community_latitude'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -42,7 +42,7 @@ class CommunityBasicSearch extends CommunityBasic
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+        $c = $_SESSION['user']['community'];
 		if(!empty($c)){
 			$query = CommunityBasic::find()->where(['community_id' => $c]);
 		}else{
@@ -66,6 +66,7 @@ class CommunityBasicSearch extends CommunityBasic
         // grid filtering conditions
         $query->andFilterWhere([
             'community_id' => $this->community_id,
+            'company' => $this->company,
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
