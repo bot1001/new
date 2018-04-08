@@ -5,12 +5,12 @@ namespace mdm\admin\models\searchs;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use mdm\admin\models\User as UserModel;
+use app\models\SysUser;
 
 /**
  * User represents the model behind the search form about `mdm\admin\models\User`.
  */
-class User extends UserModel
+class User extends SysUser
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class User extends UserModel
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['id', 'company', 'role', 'status', 'create_id', 'update_id'], 'integer'],
+            [['community', 'real_name', 'name', 'phone', 'password', 'comment', 'salt', 'create_time', 'update_time', 'new_pd'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class User extends UserModel
      */
     public function search($params)
     {
-        $query = UserModel::find();
+         $query = SysUser::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,16 +55,23 @@ class User extends UserModel
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'company' => $this->company,
+            'role' => $this->role,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'create_id' => $this->create_id,
+            'create_time' => $this->create_time,
+            'update_time' => $this->update_time,
+            'update_id' => $this->update_id,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        $query->andFilterWhere(['like', 'community', $this->community])
+            ->andFilterWhere(['like', 'real_name', $this->real_name])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'comment', $this->comment])
+            ->andFilterWhere(['like', 'salt', $this->salt])
+            ->andFilterWhere(['like', 'new_pd', $this->new_pd]);
 
         return $dataProvider;
     }

@@ -117,10 +117,10 @@ class CostrelationController extends Controller {
 		$model = new CostRelation();
 		
 		$model->load($_POST);
-        if (Yii::$app->request->isAjax) {
+        /*if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return \yii\bootstrap\ActiveForm::validate($model);
-        }
+        }*/
 
 		if ( $model->load( Yii::$app->request->post() ) && $model->save() ) {
 			return $this->redirect( [ 'index' ] );

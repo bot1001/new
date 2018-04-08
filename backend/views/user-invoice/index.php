@@ -10,6 +10,7 @@ use app\ models\ Status;
 use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
 use kartik\daterange\DateRangePicker;
+use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'update-modal',
@@ -376,11 +377,11 @@ $this->title = '缴费管理';
 		//'year',
 		//'month',
 
-		/*['class' => 'kartik\grid\ActionColumn',
+		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操作',
-			'template' =>'{delete}{view}',
+			'template' => Helper::filterActionColumn('{delete}{view}'),
 			'width' => '80px'
-			],*/
+			],
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,

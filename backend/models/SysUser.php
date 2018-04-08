@@ -80,7 +80,7 @@ class SysUser extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'real_name' => '真实姓名',
-            'name' => '新密码',
+            'name' => '名字',
 			'role' => '角色',
 			'company' => '公司',
 			'community' => '关联小区',

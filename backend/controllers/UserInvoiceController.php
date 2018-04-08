@@ -70,14 +70,14 @@ class UserInvoiceController extends Controller {
 	}
 	
 	//检查用户是否登录
-	public function beforeAction( $action ) 
+	/*public function beforeAction( $action ) 
 	{
 		if ( Yii::$app->user->isGuest ) {
 			$this->redirect( [ '/login' ] );
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 	//下载业主资料模板
 	public function actionDownload()
@@ -243,14 +243,11 @@ class UserInvoiceController extends Controller {
 	public function actionDel() 
 	{
 		$ids = Yii::$app->request->post();
-		$role = $_SESSION[ 'user' ][ 'role' ];
-		
-		if ( $role == 1 || $role == 7 || $role == 10 || $role == 14 ) {
-			//删除代码
-			foreach ( $ids as $id );
-			foreach ( $id as $i ) {
-				$this->findModel( $id )->delete();
-			}
+
+		//删除代码
+		foreach ( $ids as $id );
+		foreach ( $id as $i ) {
+			$this->findModel( $id )->delete();
 		}
 		return $this->redirect( Yii::$app->request->referrer );//返回请求页面
 	}
@@ -784,8 +781,9 @@ class UserInvoiceController extends Controller {
 	 * @param integer $id
 	 * @return mixed
 	 */
-	public function actionView( $id ) {
-		return $this->renderAjax( 'view', [
+	public function actionView( $id ) 
+	{
+		return $this->render( 'view', [
 			'model' => $this->findModel( $id ),
 		] );
 	}

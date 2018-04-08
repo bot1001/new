@@ -105,7 +105,7 @@ $this->title = '读数一览表';
 	    	'dataProvider' => $dataProvider,
 	    	'filterModel' => $searchModel,
 	    	'panel' => [ 'type' => 'info', 'heading' => '水表',
-					   /*'before' => Html::a( '生成水费', [ 'y' ], [ 'class' => 'btn btn-success' ] )*/],
+					   'before' => Html::a( '电表', [ '/water', 'type' => 1 ], [ 'class' => 'btn btn-success' ] )],
 	    	'toolbar' => [
 	    		'centent' => Html::a( '录入', [ 'new', 'type' => 0 ], [ 'class' => 'btn btn-success' ] )
 	    	],

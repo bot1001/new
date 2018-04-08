@@ -7,7 +7,7 @@ use mdm\admin\components\Helper;
 /* @var $this yii\web\View */
 /* @var $model mdm\admin\models\User */
 
-$this->title = $model->username;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -46,9 +46,9 @@ $controllerId = $this->context->uniqueId . '/';
     DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'username',
-            'email:email',
-            'created_at:date',
+            'name',
+            'phone',
+            'create_time',
             'status',
         ],
     ])
