@@ -8,6 +8,9 @@ use app\models\BuildingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
+use app\models\Company;
 
 /**
  * BuildingController implements the CRUD actions for CommunityBuilding model.
@@ -28,6 +31,20 @@ class BuildingController extends Controller
             ],
         ];
     }
+	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'building' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => CommunityBuilding::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Lists all CommunityBuilding models.
@@ -37,10 +54,12 @@ class BuildingController extends Controller
     {
         $searchModel = new BuildingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$company = Company::find()->select('name, id')->orderBy('id')->indexBy('id')->column();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'company' => $company
         ]);
     }
 
@@ -67,10 +86,10 @@ class BuildingController extends Controller
         $model = new CommunityBuilding();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->building_id]);
+            return $this->redirect(['index'/*, 'id' => $model->building_id*/]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +106,10 @@ class BuildingController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->building_id]);
+            return $this->redirect(['index'/*, 'id' => $model->building_id*/]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

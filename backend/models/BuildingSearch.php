@@ -18,7 +18,7 @@ class BuildingSearch extends CommunityBuilding
     public function rules()
     {
         return [
-            [['building_id', 'community_id', 'creater', 'create_time'], 'integer'],
+            [['building_id', 'company', 'community_id', 'creater', 'create_time'], 'integer'],
             [['building_name', 'building_parent'], 'safe'],
         ];
     }
@@ -41,11 +41,12 @@ class BuildingSearch extends CommunityBuilding
      */
     public function search($params)
     {
-		if($_SESSION['user']['community']){
-			$query = CommunityBuilding::find()->where(['community_id' => $_SESSION['user']['community']]);
-		}else{
-			$query = CommunityBuilding::find();
-		}
+        if($_SESSION['user']['community'])
+		       {
+		           $query = CommunityBuilding::find()->where(['community_id' => $_SESSION['user']['community']]);
+		       }else{
+		           $query = CommunityBuilding::find();
+		       }
 
         // add conditions that should always apply here
 
@@ -64,6 +65,7 @@ class BuildingSearch extends CommunityBuilding
         // grid filtering conditions
         $query->andFilterWhere([
             'building_id' => $this->building_id,
+            'company' => $this->company,
             'community_id' => $this->community_id,
             'creater' => $this->creater,
             'create_time' => $this->create_time,

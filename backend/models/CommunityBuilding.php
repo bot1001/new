@@ -8,14 +8,18 @@ use Yii;
  * This is the model class for table "community_building".
  *
  * @property int $building_id （楼宇ID）
+ * @property int $company （公司）
  * @property int $community_id （关联隶属小区ID）
  * @property string $building_name （楼宇名字/代号）
  * @property string $building_parent （父级）
- * @property int $creater （创建人）
- * @property int $create_time （创建时间）
+ * @property int $creater 创建者
+ * @property int $create_time 创建时间
  *
+ * @property CommunityBasic $community
+ * @property Company $company0
  * @property SysUser $creater0
  * @property CostRelation[] $costRelations
+ * @property UserInvoice[] $userInvoices
  * @property WaterMeter[] $waterMeters
  */
 class CommunityBuilding extends \yii\db\ActiveRecord
@@ -34,10 +38,12 @@ class CommunityBuilding extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['company', 'community_id', 'creater', 'create_time'], 'integer'],
             [['community_id', 'building_name', 'creater', 'create_time'], 'required'],
-            [['community_id', 'creater', 'create_time'], 'integer'],
             [['building_name', 'building_parent'], 'string', 'max' => 64],
-            [['building_name', 'community_id'], 'unique', 'targetAttribute' => ['building_name', 'community_id']],
+            [['company', 'community_id', 'building_name'], 'unique', 'targetAttribute' => ['company', 'community_id', 'building_name']],
+            [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
+            [['company'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company' => 'id']],
             [['creater'], 'exist', 'skipOnError' => true, 'targetClass' => SysUser::className(), 'targetAttribute' => ['creater' => 'id']],
         ];
     }
@@ -48,14 +54,42 @@ class CommunityBuilding extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'building_id' => '编号',
+            'building_id' => '序号',
+            'company' => '公司',
             'community_id' => '小区',
             'building_name' => '楼宇',
-            'building_parent' => '上级',
+            'building_parent' => 'Building Parent',
             'creater' => '创建人',
             'create_time' => '创建时间',
         ];
     }
+
+    public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				//插入新纪录时自动添加以下字段
+				$this->creater = $_SESSION['user']['id'];
+				$this->create_time = date(time());
+			}else{
+				//修改时自动更新以下记录
+				$this->creater = $_SESSION['user']['id'];
+				$this->create_time = date(time());
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public function getCom()
+		   {
+		       return $this->hasOne(Company::className(), ['id' => 'company']);
+		   }
+		
 
     /**
      * @return \yii\db\ActiveQuery

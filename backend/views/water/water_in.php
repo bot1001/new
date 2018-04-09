@@ -53,11 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		  'hAlign' => 'center',
 		  'value' => 'c.community_name',
 		  'filterType' => GridView::FILTER_SELECT2,
-			'filter' => CommunityBasic::find()->select( [ 'community_name' ] )->orderBy( 'community_name' )->indexBy( 'community_id' )->column(),
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
-			'filterWidgetOptions' => [
-				'pluginOptions' => [ 'allowClear' => true ],
-			]
+		  'filter' => CommunityBasic::find()->select( [ 'community_name' ] )->orderBy( 'community_name' )->indexBy( 'community_id' )->column(),
+		  'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		  'filterWidgetOptions' => [
+		  	'pluginOptions' => [ 'allowClear' => true ],
+		  ]
 		],
 		[ 'attribute' => 'build',
 		  'value' => 'b.building_name',

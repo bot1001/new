@@ -3,6 +3,37 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use app\models\CommunityBasic;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+
+Modal::begin( [
+	'id' => 'update-modal',
+	'header' => '<h4 class = "modal-tittle">费项管理</h4>',
+    ] );
+$u_Url = Url::toRoute( '/building/update' );
+$n_Url = Url::toRoute('/building/create');
+
+$uJs = <<<JS
+   $('.update').on('click',function(){
+      $.get('{$u_Url}',{id:$(this).closest('tr').data('key')},
+         function (data) {
+            $('.modal-body').html(data);
+      });
+   });
+JS;
+$this->registerJs( $uJs );
+
+$nJs = <<<JS
+   $('.new').on('click',function(){
+      $.get('{$n_Url}',{id:$(this).closest('tr').data('key')},
+         function (data) {
+            $('.modal-body').html(data);
+      });
+   });
+JS;
+$this->registerJs ($nJs);
+
+Modal::end();
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BuildingSearch */
@@ -15,11 +46,23 @@ $this->title = '楼宇列表';
 
     <?php
 	$gridview = [
-            /*['class' => 'kartik\grid\SerialColumn',
-			'header' => '序<br />号'],*/
+            ['class' => 'kartik\grid\SerialColumn',
+			'header' => '序<br />号'],
 		
-		    ['attribute' => 'building_id',
-			'hAlign' => 'center',
+		    ['attribute' => 'company',
+			 'value' => 'com.name',
+			 'class' => 'kartik\grid\EditableColumn',
+			 'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/building/building' ] ],
+		        'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'data' => $company,
+			],
+			 'filterType' => GridView::FILTER_SELECT2,
+		     'filter' => $company,
+		     'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		     'filterWidgetOptions' => [
+		     	'pluginOptions' => [ 'allowClear' => true ],
+		     ],
 			'width' => 'px',],
 		
             ['attribute' => 'community_id',
@@ -61,6 +104,16 @@ $this->title = '楼宇列表';
 
             ['class' => 'kartik\grid\ActionColumn',
 			 'template' => '{update}',
+			 'buttons' => [
+				'update' => function ( $url, $model, $key ) {
+					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
+						'data-toggle' => 'modal',
+						'data-target' => '#update-modal',
+						'class' => 'update',
+						'data-id' => $key,
+					] );
+				}
+			],
 			'header' => '操<br />作'],
         ];
 		
@@ -68,8 +121,11 @@ $this->title = '楼宇列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '房屋列表',
-				   'before' => Html::a('New', ['create'], ['class' => 'btn btn-success'])
-				   ],
+				   'before' => Html::a( 'New', '#', [
+				'data-toggle' => 'modal',
+				'data-target' => '#update-modal', 
+		        'class' => 'btn btn-success new',
+			] )],
 		'hover' => true,
         'columns' => $gridview,
     ]); ?>

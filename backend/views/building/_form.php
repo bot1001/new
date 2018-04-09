@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\CommunityBasic;
-use yii\helpers\ArrayHelper;
+use app\models\Company;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CommunityBuilding */
@@ -13,23 +13,21 @@ use yii\helpers\ArrayHelper;
 <div class="community-building-form">
 
    <?php
-	    $community = CommunityBasic::find()
+	    $com = CommunityBasic::find()
 			->select('community_name,community_id')
-			->asArray()
-			->all(); 
-	$com = ArrayHelper::map($community, 'community_id', 'community_name');
+			->indexBy('community_id')
+			->column();
+	
+	$company = Company::find()->select('name, id')->indexBy('id')->column() ;
 	?>
+   
     <?php $form = ActiveForm::begin(); ?>
 	
+    <?= $form->field($model, 'community_id')->dropDownList($company,['prompt' => '请选择']) ?>
+    
     <?= $form->field($model, 'community_id')->dropDownList($com,['prompt' => '请选择']) ?>
 
     <?= $form->field($model, 'building_name')->textInput(['maxlength' => true, 'placeHolder' => '请输入房号']) ?>
-
-    <?php // $form->field($model, 'building_parent')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'creater')->textInput() ?>
-
-    <?php // $form->field($model, 'create_time')->textInput() ?>
 
     <div class="form-group" align="center">
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>

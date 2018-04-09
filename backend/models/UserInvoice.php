@@ -50,7 +50,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             [['month'], 'integer', 'min' => 1, 'on' => ['c']],
             [['invoice_amount'], 'number'],
             [['create_time', 'invoice_notes', 'update_time'], 'string'],
-            [['description'], 'string', 'max' => 200],
+            [['description'], 'string', 'max' => 20],
             [['order_id'], 'string', 'max' => 64],
             [['month'], 'string', 'max' => 39, 'on' => 'c'],
             [['payment_time'], 'string', 'max' => 22],
