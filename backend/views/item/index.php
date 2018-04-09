@@ -4,6 +4,60 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use mdm\admin\components\RouteRule;
 use mdm\admin\components\Configs;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+use mdm\admin\components\Helper;
+
+Modal::begin( [
+	'id' => 'update-modal',
+	'header' => '<h4 class="modal-title">权限指配</h4>',
+	/*'options'=>[
+        'data-backdrop'=>'static',//点击空白处不关闭弹窗
+        'data-keyboard'=>false,
+    ],*/
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+] );
+$view = Url::toRoute( '/role/view' );
+$update = Url::toRoute( '/role/update' );
+$create = Url::toRoute( '/role/create' );
+
+$updateJs = <<<JS
+    $('.view').on('click', function () {
+	$('.modal-title').html('路由指配');
+        $.get('{$view}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+$updateJs = <<<JS
+    $('.update').on('click', function () {
+	    $('.modal-title').html('更新');
+        $.get('{$update}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+$updateJs = <<<JS
+    $('.create').on('click', function () {
+	    $('.modal-title').html('更新');
+        $.get('{$create}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+Modal::end();
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,7 +80,10 @@ unset($rules[RouteRule::RULE_NAME]);
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'primary', 'heading' => '角色列表',
-				   'before' => Html::a(Yii::t('rbac-admin', 'New'), ['create'], ['class' => 'btn btn-success']) ],
+				   'before' => Html::a(Yii::t('rbac-admin', 'New'), '#', [ 'class' => 'btn btn-info create',
+													  'data-toggle' => 'modal',
+													  'data-target' => '#update-modal',
+													  ]) ],
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br >号'],
@@ -44,8 +101,43 @@ unset($rules[RouteRule::RULE_NAME]);
                 'label' => Yii::t('rbac-admin', '描述'),
             ],
             ['class' => 'kartik\grid\ActionColumn',
+			 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
+			 'buttons' => [
+				'update' => function ( $url, $model, $key ) {
+		            if($model->name === 'admin'){
+		            	return '';
+		            }else{
+				    	return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
+				    		'data-toggle' => 'modal',
+				    		'data-target' => '#update-modal',
+				    		'class' => 'update',
+				    		'data-id' => $key,
+				    	] );
+				    }
+	            },
+		      'view' => function ( $url, $model, $key ) {
+		            if($model->name === 'admin'){
+		                        	return '';
+		                        }else{
+				    	return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [
+				    		'data-toggle' => 'modal',
+				    		'data-target' => '#update-modal',
+				    		'class' => 'view',
+				    		'data-id' => $key,
+				    	] );
+				    }
+	            },
+		      'delete' => function ( $url, $model, $key ) {
+		            if($model->name === 'admin'){
+		                        	return '';
+		                        }else{
+				    	return Html::a( '<span class="glyphicon glyphicon-trash"></span>');
+				    }
+	            },
+			],
 			'header' => '操<br >作'],
         ],
+		'hover' => true,
     ])
     ?>
 

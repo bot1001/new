@@ -633,14 +633,25 @@ class UserInvoiceController extends Controller {
 			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 			->where(['community_realestate.realestate_id' => $id])
 			->all();
+		
 		$comm = ArrayHelper::map($reale, 'c_id', 'community');
 		$build = ArrayHelper::map($reale, 'b_id', 'building');
 		$number = ArrayHelper::map($reale, 'r_id', 'number');
 		$name = ArrayHelper::map($reale, 'r_id', 'name');
 
-		$cost_id = CostRelation::find()->select( 'cost_id' )->where( [ 'realestate_id' => $id ] )->asArray()->all(); //获取关联费项序号（二维数组）
+		$cost_id = CostRelation::find()
+			->select( 'cost_id' )
+			->where( [ 'realestate_id' => $id ] )
+			->asArray()
+			->all(); //获取关联费项序号（二维数组）
+		
 		$c_id = array_column( $cost_id, 'cost_id' ); //提取关联费项序号
-		$cost_info = CostName::find()->select( 'cost_id, cost_name' )->andwhere( [ 'in','cost_id', $c_id ] )->asArray()->all();//获取关联费项信息
+		$cost_info = CostName::find()
+			->select( 'cost_id, cost_name' )
+			->andwhere( [ 'in','cost_id', $c_id ] )
+			->asArray()
+			->all();//获取关联费项信息
+		
 		$cost = ArrayHelper::map( $cost_info, 'cost_id', 'cost_name' );// 重组关联费项信息
 
 		if(empty($cost)){
@@ -652,18 +663,15 @@ class UserInvoiceController extends Controller {
 				'build' => $build,
 				'number' => $number,
 				'name' => $name,
-		    	'id' => $id,
 		    	'cost' => $cost,
 		    ] );
 		}
 	}
 
 	//单个房号生成费项预览
-	public function actionV($id) 
-	{
-		$a = Yii::$app->request->get();
-		
-		$b = $a['UserInvoice'] ;
+	public function actionV() 
+	{		
+		$b = $_GET['UserInvoice'] ;
 		
 		$community = $b['community_id']; //小区编号
 		$m = $b[ 'month' ]; //缴费月数
@@ -687,11 +695,11 @@ class UserInvoiceController extends Controller {
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->where( [ 'cost_relation.realestate_id' => $id, 'cost_name.cost_id' => $cost ] )
+			->where( [ 'cost_relation.realestate_id' => $b['realestate_id'], 'cost_name.cost_id' => $cost ] )
 			->all();
+		
 		return $this->render( 'v', [
 			'query' => $query,
-			'id' => $id,
 			'b' => $b,
 		] );
 	}
@@ -783,7 +791,7 @@ class UserInvoiceController extends Controller {
 	 */
 	public function actionView( $id ) 
 	{
-		return $this->render( 'view', [
+		return $this->renderAjax( 'view', [
 			'model' => $this->findModel( $id ),
 		] );
 	}

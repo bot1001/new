@@ -66,16 +66,12 @@ class SiteController extends Controller
     {
 		$model = new Site;
 		
-		$session = Yii::$app->session;
-		$post = Yii::$app->user->identity;
-		foreach($post as $info)
-		$session['user'] = $post;
-		$name = $post['name']; // 用户名
+		$session = Yii::$app->session;		
+		$name = $_SESSION['user']['name']; // 用户名
 		$a = Yii::$app->request->userIP; //用户IP地址
-				
+		
         return $this->render('index',[
 			'model' => $model,
-			'post' => $post,
 			'name' => $name,
 			'a' => $a,
 		]);

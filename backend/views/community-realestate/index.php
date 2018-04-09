@@ -321,7 +321,7 @@ $this->title = '房屋管理';
 			'template' => '{update} {view}',
 			'buttons' => [
 				'view' => function ( $url, $model, $key ) {
-					return Html::a( '查看', '#', [
+					return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [
 						'data-toggle' => 'modal',
 						'data-target' => '#view-modal', //modal 名字
 						'class' => 'view', //操作名
@@ -329,7 +329,7 @@ $this->title = '房屋管理';
 					] );
 				},
 				'update' => function ( $url, $model, $key ) {
-					return Html::a( '修改', '#', [
+					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
 						'data-toggle' => 'modal',
 						'data-target' => '#view-modal',
 						'class' => 'update',
@@ -338,7 +338,7 @@ $this->title = '房屋管理';
 					] );
 				},
 			],
-			'width' => '90px',
+			'width' => '60px',
 			'header' => '操作'
 		],
 	];

@@ -19,6 +19,7 @@ Modal::begin( [
 ] );
 $assignment = Url::toRoute( '/assignment/view' );
 $update = Url::toRoute( '/u/update' );
+$create = Url::toRoute( '/sysuser/create' );
 
 $updateJs = <<<JS
     $('.order').on('click', function () {
@@ -36,6 +37,18 @@ $updateJs = <<<JS
     $('.update').on('click', function () {
 	    $('.modal-title').html('编辑');
         $.get('{$update}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+$updateJs = <<<JS
+    $('.create').on('click', function () {
+	    $('.modal-title').html('编辑');
+        $.get('{$create}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
             }  
@@ -170,15 +183,20 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 						'data-id' => $key,
 					] );
 				},
-		        
 			],
 		],
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '账户列表' ],
+		'panel' => [ 'type' => 'primary', 'heading' => '账户列表',
+				   'before' => Html::a( 'New', '#', [
+				'data-toggle' => 'modal',
+				'data-target' => '#update-modal', 
+		        'class' => 'btn btn-success create',
+			] )],
 		'columns' => $gridview,
+		'hover' => true,
 	] );
 	?>
 </div>

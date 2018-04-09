@@ -47,7 +47,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'create_time', 'invoice_status', //'cost', 'year', 'month'
 			 ], 'required', 'on' => 'update'],
             [['community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['month'], 'integer', 'on' => ['c']],
+            [['month'], 'integer', 'min' => 1, 'on' => ['c']],
             [['invoice_amount'], 'number'],
             [['create_time', 'invoice_notes', 'update_time'], 'string'],
             [['description'], 'string', 'max' => 200],

@@ -14,7 +14,7 @@ use kartik\daterange\DateRangePicker;
 	<?php $form = ActiveForm::begin([
 	//'options' => ['class'=>'form-horizontal'],
 	//'layout' => 'horizontal',
-	'action' => ['v','id' => $id],
+	'action' => ['v'],
     'method' => 'get',
 ]); ?>
 
@@ -62,7 +62,7 @@ use kartik\daterange\DateRangePicker;
 		</div>
 		
 		<div class="col-lg-3">
-			<?= $form->field($model, 'month')->label('预交月数'); ?>
+			<?= $form->field($model, 'month')->input('number')->label('月数'); ?>
 		</div>
 	</div>		
 			

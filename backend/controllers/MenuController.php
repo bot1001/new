@@ -56,7 +56,7 @@ class MenuController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
                 'model' => $this->findModel($id),
         ]);
     }
@@ -74,8 +74,8 @@ class MenuController extends Controller
             Helper::invalidate();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
-                    'model' => $model,
+            return $this->renderAjax('create', [
+                  'model' => $model,
             ]);
         }
     }
@@ -96,7 +96,7 @@ class MenuController extends Controller
             Helper::invalidate();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                     'model' => $model,
             ]);
         }

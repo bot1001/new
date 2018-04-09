@@ -282,13 +282,14 @@ $this->title = '缴费管理';
 			'hAlign' => 'center',
 			'width' => '115px'
 		],
-		/*['attribute' => 'invoice_notes',
+		['attribute' => 'invoice_notes',
 			'class'=>'kartik\grid\EditableColumn',
 			 'editableOptions'=>[
               'formOptions'=>['action' => ['/user-invoice/invoice']], // point to the new action        
               'inputType'=>\kartik\editable\Editable::INPUT_TEXT,
-              //'data' => '',
-			 ],],*/
+			 ],
+		],
+		
 		[ 'attribute' => 'payment_time',
 			//'group' => true,
 		    'value' => function($model){
@@ -371,8 +372,8 @@ $this->title = '缴费管理';
 
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操作',
-			'template' => Helper::filterActionColumn('{delete}{view}'),
-			'width' => '80px'
+			'template' => Helper::filterActionColumn('{delete}'),
+			'width' => '5%'
 			],
 	];
 	echo GridView::widget( [

@@ -22,21 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'salt')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'create_id')->textInput() ?>
-
-    <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'update_time')->textInput() ?>
-
-    <?= $form->field($model, 'update_id')->textInput() ?>
 
     <?= $form->field($model, 'new_pd')->textInput(['maxlength' => true]) ?>
 

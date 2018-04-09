@@ -81,7 +81,6 @@ class TicketController extends Controller
     public function actionView($id)
     {
 		$model = new TicketBasic();
-		//odel->
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

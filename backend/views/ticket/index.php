@@ -56,7 +56,7 @@ $this->title = '投诉/建议';
 		  
 		  ['attribute' =>'explain1',
 		   'value' => function($searchModel){
-		  return mb_substr($searchModel['explain1'],0,10);
+		  return mb_substr($searchModel['explain1'],0,20);
 	  },
 		   'label' => '详情',
 		   'width' => '100px'],
@@ -79,17 +79,17 @@ $this->title = '投诉/建议';
                 $url = Yii::$app->urlManager->createUrl(['ticket/view','id' => $searchModel['ticket_id']]);
                 return Html::a('more', $url); 
               }
-           ],*/
+           ],
 
             ['class' => 'kartik\grid\ActionColumn',
 			 'header' => '操作',
 			 'width' => '30px',
-			'template' => '{view}'],
+			'template' => '{view}'],*/
         ];
 	  echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'primary','heading' => '投诉列表'],
+		'panel' => ['type' => 'info','heading' => '投诉列表'],
         'columns' => $gridColumn,
 		'hover' => true
       ]);

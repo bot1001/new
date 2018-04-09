@@ -129,9 +129,11 @@ class PayController extends Controller
 			->asArray()
 			->all();
 		
+		$p_time = date(time());
+		
 		    if($i_id){
 		    	foreach($i_id as $i){
-		    		$p_time = date(time());
+		    		
 					//变更费项状态
 		    		UserInvoice::updateAll(['payment_time' => $p_time,
 		    								'update_time' => $p_time,
@@ -163,9 +165,10 @@ class PayController extends Controller
 			->asArray()
 			->all();
 		
+		$p_time = date(time());
+		
 		    if($i_id){
 		    	foreach($i_id as $i){
-		    		$p_time = date(time());
 					//变更费项状态
 		    		UserInvoice::updateAll(['payment_time' => $p_time,
 		    								'update_time' => $p_time,
@@ -199,9 +202,10 @@ class PayController extends Controller
 			->asArray()
 			->all();
 		
+		$p_time = date(time()); // 更新时间
+		
 		    if($i_id){
 		    	foreach($i_id as $i){
-		    		$p_time = date(time());
 					//变更费项状态
 		    		UserInvoice::updateAll(['payment_time' => $p_time,
 		    								'update_time' => $p_time,
@@ -233,9 +237,10 @@ class PayController extends Controller
 			->asArray()
 			->all();
 		
+		$p_time = date(time());
+		
 		    if($i_id){
 		    	foreach($i_id as $i){
-		    		$p_time = date(time());
 					//变更费项状态
 		    		UserInvoice::updateAll(['payment_time' => $p_time,
 		    								'update_time' => $p_time,
@@ -349,29 +354,19 @@ class PayController extends Controller
 		//注意：
 		//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 			
-         }
-         else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-	     	//判断该笔订单是否在商户网站中已经做过处理
-	     		//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-	     		//请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-	     		//如果有做过处理，不执行商户的业务程序			
-	     	//注意：
-	     	//付款完成后，支付宝系统发送该交易状态通知
-			 
-			 //查询order_id 和金额order_amount
+         }else if ($_POST['trade_status'] == 'TRADE_SUCCESS'){			 
+	    //查询order_id 和金额order_amount
 		$ord = OrderBasic::find()
 				->select('order_id,order_amount')
 				->andwhere(['order_id' => $out_trade_no])
 				->andwhere(['order_amount' => $total_amount])
 				->asArray()
 				->one();
-			//print_r($ord);die;
 		
 		if($ord){
 				$transaction = Yii::$app->db->beginTransaction();
 				try{
 					foreach($ord as $order){
-					    //OrderBasic::updateAll(['status' => 3,'payment_number' => 3,'payment_time' => 4,'payment_gateway' => 1]);
 					    OrderBasic::updateAll(['status' => 2, //变更状态
 					    					   'payment_gateway' => 1, //变更支付方式
 					    					   'payment_number' => $trade_no, // 支付编码
@@ -387,7 +382,6 @@ class PayController extends Controller
 						->asArray()
 						->all();
 					
-					foreach($p_id as $_id){
 						foreach($p_id as $pid){
 							UserInvoice::updateAll(['invoice_status' => 2,
 											    'payment_time' => strtotime($p_time),
@@ -396,14 +390,11 @@ class PayController extends Controller
 									            'invoice_id = :oid', [':oid' => $pid['product_id']]
 										);
 						}
-						
-					}}
-				    
+					}
 					$transaction->commit();
 				}catch(\Exception $e) {
 					print_r($e);
                     $transaction->rollback();
-                    exit;
                 }
 			}
          }

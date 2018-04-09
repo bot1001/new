@@ -25,9 +25,9 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
     <div class="col-sm-11">
         <div class="input-group">
             <input id="inp-route" type="text" class="form-control"
-                   placeholder="<?=Yii::t('rbac-admin', 'New route(s)');?>">
+                   placeholder="<?=Yii::t('rbac-admin', '新建路由');?>">
             <span class="input-group-btn">
-                <?=Html::a(Yii::t('rbac-admin', 'Add') . $animateIcon, ['create'], [
+                <?=Html::a(Yii::t('rbac-admin', '添加') . $animateIcon, ['create'], [
     'class' => 'btn btn-success',
     'id' => 'btn-new',
 ]);?>
@@ -40,7 +40,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
     <div class="col-sm-5">
         <div class="input-group">
             <input class="form-control search" data-target="available"
-                   placeholder="<?=Yii::t('rbac-admin', 'Search for available');?>">
+                   placeholder="<?=Yii::t('rbac-admin', '搜索可用路由……');?>">
             <span class="input-group-btn">
                 <?=Html::a('<span class="glyphicon glyphicon-refresh"></span>', ['refresh'], [
     'class' => 'btn btn-default',
@@ -65,7 +65,7 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
     </div>
     <div class="col-sm-5">
         <input class="form-control search" data-target="assigned"
-               placeholder="<?=Yii::t('rbac-admin', 'Search for assigned');?>">
+               placeholder="<?=Yii::t('rbac-admin', '搜索已选路由……');?>">
         <select multiple size="20" class="form-control list" data-target="assigned"></select>
     </div>
 </div>

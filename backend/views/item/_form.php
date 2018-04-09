@@ -36,9 +36,9 @@ $this->registerJs($js);
             <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule_name']) ?>
+            <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule_name', 'placeholder' => '请输入路由（可忽略）']) ?>
 
-            <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'data')->textarea(['rows' => 6, 'placeholder' => '请输入标签']) ?>
         </div>
     </div>
     <div class="form-group" align="center">

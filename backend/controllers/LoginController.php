@@ -20,7 +20,12 @@ class LoginController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+		{
+			$session = Yii::$app->session;
+		    $post = Yii::$app->user->identity;
+			$session['user'] = $post;
+			
             return $this->goBack();
         }
 		
