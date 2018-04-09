@@ -89,7 +89,8 @@ $this->title = '投诉/建议';
 	  echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'info','heading' => '投诉列表'],
+		'panel' => ['type' => 'info','heading' => '投诉列表',
+				   'before' => Html::a('New', '/ticket/create', ['class' => 'btn btn-info'])],
         'columns' => $gridColumn,
 		'hover' => true
       ]);

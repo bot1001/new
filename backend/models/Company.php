@@ -31,7 +31,7 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'creator', 'create_time', 'property'], 'required'],
+            [['name'], 'required'],
             [['creator', 'create_time'], 'integer'],
             [['name', 'property'], 'string', 'max' => 50],
             [['name'], 'unique'],
@@ -52,11 +52,28 @@ class Company extends \yii\db\ActiveRecord
             'property' => '备注',
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				//插入新纪录时自动添加以下字段
+				$this->creator = $_SESSION['user']['id'];
+				$this->create_time = date(time());
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCreator0()
+    public function getCr()
     {
         return $this->hasOne(SysUser::className(), ['id' => 'creator']);
     }

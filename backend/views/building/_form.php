@@ -23,7 +23,7 @@ use app\models\Company;
    
     <?php $form = ActiveForm::begin(); ?>
 	
-    <?= $form->field($model, 'community_id')->dropDownList($company,['prompt' => '请选择']) ?>
+    <?= $form->field($model, 'company')->dropDownList($company,['prompt' => '请选择']) ?>
     
     <?= $form->field($model, 'community_id')->dropDownList($com,['prompt' => '请选择']) ?>
 

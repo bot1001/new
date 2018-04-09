@@ -38,7 +38,7 @@ class TicketBasic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ticket_number', 'account_id', 'community_id', 'realestate_id', 'tickets_taxonomy', 'explain1', 'create_time', 'contact_person', 'contact_phone', 'is_attachment', 'assignee_id', 'reply_total', 'ticket_status'], 'required'],
+            [['community_id', 'realestate_id', 'tickets_taxonomy', 'explain1', 'contact_person', 'contact_phone'], 'required'],
             [['community_id', 'realestate_id', 'tickets_taxonomy', 'create_time', 'is_attachment'], 'integer'],
             [['ticket_number'], 'string', 'max' => 32],
             [['account_id', 'assignee_id', 'reply_total', 'ticket_status'], 'string', 'max' => 64],
@@ -64,20 +64,41 @@ class TicketBasic extends \yii\db\ActiveRecord
         return [
             'ticket_id' => '序号',
             'ticket_number' => '编号',
-            'account_id' => 'Account ID',
-            'community_id' => 'Community ID',
-            'realestate_id' => 'Realestate ID',
-            'tickets_taxonomy' => 'Tickets Taxonomy',
-            'explain1' => 'Explain1',
-            'create_time' => 'Create Time',
-            'contact_person' => 'Contact Person',
-            'contact_phone' => 'Contact Phone',
-            'is_attachment' => 'Is Attachment',
-            'assignee_id' => 'Assignee ID',
-            'reply_total' => 'Reply Total',
-            'ticket_status' => 'Ticket Status',
+            'account_id' => '投诉人',
+            'community_id' => '小区',
+            'realestate_id' => '房号',
+            'tickets_taxonomy' => '类型',
+            'explain1' => '详情',
+            'create_time' => '创建时间',
+            'contact_person' => '联系人',
+            'contact_phone' => '手机号码',
+            'is_attachment' => '附件',
+            'assignee_id' => '接单人',
+            'reply_total' => '回复次数',
+            'ticket_status' => '状态',
+			'remind' => '提醒'
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				//插入新纪录时自动添加以下字段
+				$this->account_id = $_SESSION['user']['community'];
+				$this->create_time = date(time());
+				$this->ticket_status = '1';
+				$this->reply_total = '0';
+				$this->is_attachment = '0';
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
 	// 建立管理小区
 	public function getC()

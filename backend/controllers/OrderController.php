@@ -57,9 +57,11 @@ class OrderController extends Controller
 		if(isset($_GET['order_id'])){
 			$searchModel->order_id = $_GET['order_id'];
 		};
-		if(isset($_GET['one']) && isset($_GET['two'])){
-			$searchModel->fromdate = $_GET['one'];
-			$searchModel->todate = $_GET['two'];
+		if(isset($_GET['one']) && isset($_GET['two']))
+		{ 
+			$one = date('Y-m-d', time($_GET['one']));
+			$two = date('Y-m-d', strtotime("+1day", $_GET['two']));
+			$searchModel->payment_time = $one.' to '.$two;
 		}
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

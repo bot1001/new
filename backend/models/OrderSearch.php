@@ -74,18 +74,14 @@ class OrderSearch extends OrderBasic
         }
 		
 		if(isset($params['PostSearch']['fromdate']) && isset($params['PostSearch']['todate'])){
-        $this->fromdate = $params['PostSearch']['fromdate'];
-        $this->todate = $params['PostSearch']['todate'];
-    }
-		
-		if($this->fromdate!='' && $this->todate!=''){
-            $query->andFilterWhere(['between', 'create_time', strtotime($this->fromdate),strtotime($this->todate)]);
+            $this->fromdate = $params['PostSearch']['fromdate'];
+            $this->todate = $params['PostSearch']['todate'];
         }
-		
+				
 		//自定义付款时间搜索
 		if($this->payment_time != '')
 		{
-			$p_time = $_GET['OrderSearch']['payment_time'];
+			$p_time = $this->payment_time;
 			$t = explode(' to ', $p_time);
 			$t01 = reset($t);
 			$t02 = end($t);

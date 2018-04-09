@@ -8,13 +8,14 @@ use yii\helpers\Url;
 
 Modal::begin( [
 	'id' => 'update-modal',
-	'header' => '<h4 class = "modal-tittle">费项管理</h4>',
+	'header' => '<h4 class = "modal-tittle">楼宇管理</h4>',
     ] );
 $u_Url = Url::toRoute( '/building/update' );
 $n_Url = Url::toRoute('/building/create');
 
 $uJs = <<<JS
    $('.update').on('click',function(){
+      $('.modal-title').html('更新');
       $.get('{$u_Url}',{id:$(this).closest('tr').data('key')},
          function (data) {
             $('.modal-body').html(data);
@@ -25,6 +26,7 @@ $this->registerJs( $uJs );
 
 $nJs = <<<JS
    $('.new').on('click',function(){
+      $('.modal-title').html('创建');
       $.get('{$n_Url}',{id:$(this).closest('tr').data('key')},
          function (data) {
             $('.modal-body').html(data);

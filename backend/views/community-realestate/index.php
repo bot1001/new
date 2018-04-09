@@ -8,6 +8,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use kartik\dialog\Dialog;
 use kartik\daterange\DateRangePicker;
+use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'view-modal',
@@ -318,7 +319,7 @@ $this->title = '房屋管理';
 		'hAlign' => 'center'],
 		
 		[ 'class' => 'kartik\grid\ActionColumn',
-			'template' => '{update} {view}',
+			'template' => Helper::filterActionColumn('{update} {view}'),
 			'buttons' => [
 				'view' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [

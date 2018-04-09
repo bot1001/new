@@ -47,7 +47,7 @@ $this->registerJs( $updateJs );
 
 $updateJs = <<<JS
     $('.create').on('click', function () {
-	    $('.modal-title').html('更新');
+	    $('.modal-title').html('创建');
         $.get('{$create}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);

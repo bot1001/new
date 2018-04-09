@@ -86,9 +86,9 @@ class CommunityBuilding extends \yii\db\ActiveRecord
 	}
 	
 	public function getCom()
-		   {
-		       return $this->hasOne(Company::className(), ['id' => 'company']);
-		   }
+	{
+	    return $this->hasOne(Company::className(), ['id' => 'company']);
+	}
 		
 
     /**
