@@ -65,7 +65,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
 		$model = new Site;
-		
+
 		$session = Yii::$app->session;		
 		$name = $_SESSION['user']['name']; // 用户名
 		$a = Yii::$app->request->userIP; //用户IP地址
