@@ -46,7 +46,15 @@ class WaterSearch extends WaterMeter
      */
     public function search($params)
     {
-		$comm = $_SESSION['user']['community'];
+		if(empty($_SESSION['user']))
+		{
+			$session = Yii::$app->session;
+		    $session['user'] = Yii::$app->user->identity;
+		    $comm = $_SESSION['user']['community'];
+		}else{
+			$comm = $_SESSION['user']['community'];
+		}
+		
 		if(empty($comm)){
 			$query = WaterMeter::find();$query = (new \yii\db\Query())->select([
 			    'community_basic.community_name as community','community_building.building_name as building',
@@ -89,7 +97,7 @@ class WaterSearch extends WaterMeter
 			->join('inner join','community_realestate','community_realestate.realestate_id = water_meter.realestate_id')
 			->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
 			->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
-			->where(['water_meter.community' => $comm])
+			->where(['water_meter.community' => "$comm"])
 			->groupBy(['water_meter.realestate_id','year']);
 		}
         

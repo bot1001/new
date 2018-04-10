@@ -8,7 +8,6 @@ use app\models\TicketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Information;
 
 /**
  * TicketController implements the CRUD actions for TicketBasic model.
@@ -16,7 +15,7 @@ use app\models\Information;
 class TicketController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -36,51 +35,23 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-		$get = $_GET;//接收专递过来的参数
-        $searchModel = new TicketSearch();//实例化模型
-        
-		//判断是否有信息栏传过来的参数
-		if(isset($get['community']) && isset($get['building']))
-		{
-			$searchModel->community_name = $get['community'];
-			$searchModel->building_name = $get['building'];
-			$searchModel->name = '待接单';
-			if($_SESSION['user']['community']){
-				Information::updateAll(['reading' => 1], 'community = :c', [':c' => $get['c']]);
-			}
-		}elseif(isset($get['name'])){
-			$searchModel->name = '待接单';
-			if($_SESSION['user']['community']){
-				Information::updateAll(['reading' => 1], 'community = :c', [':c' => $get['c']]);
-			}
-		}
-		
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new TicketSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-	
-	//检查用户是否登录
-	public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }
 
     /**
      * Displays a single TicketBasic model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-		$model = new TicketBasic();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -97,11 +68,11 @@ class TicketController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ticket_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -109,6 +80,7 @@ class TicketController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -116,11 +88,11 @@ class TicketController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ticket_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -128,6 +100,7 @@ class TicketController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -147,8 +120,8 @@ class TicketController extends Controller
     {
         if (($model = TicketBasic::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

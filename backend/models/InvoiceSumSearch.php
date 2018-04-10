@@ -42,8 +42,17 @@ class InvoiceSumSearch extends UserInvoice
      */
     public function search($params)
     {
-        if($_SESSION['user']['community']){
-			$query = UserInvoice::find()->where(['user_invoice.community_id' => $_SESSION['user']['community']]);
+		if(empty($_SESSION['user']))
+		{
+			$session = Yii::$app->session;
+		    $session['user'] = Yii::$app->user->identity;
+		    $c = $_SESSION['user']['community'];
+		}else{
+			$c = $_SESSION['user']['community'];
+		}
+		
+        if($c){
+			$query = UserInvoice::find()->where(['user_invoice.community_id' => "$c"]);
 		}else{
 			$query = UserInvoice::find();
 		}

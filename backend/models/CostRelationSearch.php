@@ -46,9 +46,17 @@ class CostRelationSearch extends CostRelation
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+		if(empty($_SESSION['user']))
+		{
+			$session = Yii::$app->session;
+		    $session['user'] = Yii::$app->user->identity;
+		    $c = $_SESSION['user']['community'];
+		}else{
+			$c = $_SESSION['user']['community'];
+		}
+		
         if($c){
-			$query = Costrelation::find()->where(['cost_relation.community'=> $c ]);
+			$query = Costrelation::find()->where(['cost_relation.community'=> "$c" ]);
 		}else{
 			$query = Costrelation::find();
 		}

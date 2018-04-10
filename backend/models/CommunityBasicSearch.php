@@ -42,9 +42,17 @@ class CommunityBasicSearch extends CommunityBasic
      */
     public function search($params)
     {
-        $c = $_SESSION['user']['community'];
+		if(empty($_SESSION['user']))
+		{
+			$session = Yii::$app->session;
+		    $session['user'] = Yii::$app->user->identity;
+		    $c = $_SESSION['user']['community'];
+		}else{
+			$c = $_SESSION['user']['community'];
+		}
+		
 		if(!empty($c)){
-			$query = CommunityBasic::find()->where(['community_id' => $c]);
+			$query = CommunityBasic::find()->where(['community_id' => "$c"]);
 		}else{
 			$query = CommunityBasic::find();
 		}

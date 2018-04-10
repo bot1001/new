@@ -38,8 +38,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ticket_status')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'remind')->textInput() ?>
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

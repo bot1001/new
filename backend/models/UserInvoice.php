@@ -43,16 +43,17 @@ class UserInvoice extends \yii\db\ActiveRecord
     {
         return [
 			[['from', 'to'], 'date'],
-			[['year', 'month', 'cost'], 'required', 'on' => ['c']],
+			[['from', 'year', 'month', 'cost'], 'required', 'on' => ['c']],
             [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'create_time', 'invoice_status', //'cost', 'year', 'month'
 			 ], 'required', 'on' => 'update'],
             [['community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['month'], 'integer', 'min' => 1, 'on' => ['c']],
+            [['month'], 'integer', 'min' => 1, 'max' => 39, 'on' => ['c']],
+            [['month'], 'integer'],
             [['invoice_amount'], 'number'],
             [['create_time', 'invoice_notes', 'update_time'], 'string'],
             [['description'], 'string', 'max' => 20],
             [['order_id'], 'string', 'max' => 64],
-            [['month'], 'string', 'max' => 39, 'on' => 'c'],
+            ['month', 'in', 'range' => [1,2,3,4,5,6,7,8,9,10,11,12]], 
             [['payment_time'], 'string', 'max' => 22],
             [['community_id', 'building_id', 'realestate_id', 'year', 'month', 'description'], 'unique', 'targetAttribute' => ['community_id', 'building_id', 'realestate_id', 'year', 'month', 'description'], 'message' => '费项已存在，请勿重复提交'],
         ];
@@ -88,7 +89,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             'payment_time' => '支付时间',
             'invoice_status' => '状态',
             'update_time' => '更改时间',
-			'from' => 'from',
+			'from' => '起始日期',
             'name' => 'to',
 			'to' => '费项名称',
 			'file' => '文件',
@@ -100,7 +101,7 @@ class UserInvoice extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios['update'] = ['community_id', 'building_id' , 'realestate_id', 'description', 'invoice_amount' ];
-        $scenarios['c'] =  ['year', 'month', 'cost'];
+        $scenarios['c'] =  ['from', 'year', 'month', 'cost'];
         return $scenarios;
     }
 	

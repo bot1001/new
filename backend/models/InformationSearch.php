@@ -41,8 +41,17 @@ class InformationSearch extends Information
      */
     public function search($params)
     {
-		if($_SESSION['user']['community']){
-			$query = Information::find()->where(['target' => $_SESSION['user']['name']]);
+		if(empty($_SESSION['user']))
+		{
+			$session = Yii::$app->session;
+		    $session['user'] = Yii::$app->user->identity;
+		    $c = $_SESSION['user']['community'];
+		}else{
+			$c = $_SESSION['user']['community'];
+		}
+		
+		if($c){
+			$query = Information::find()->where(['target' => "$c"]);
 		}else{
 			$query = Information::find();
 		}
