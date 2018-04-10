@@ -59,10 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '公司',
 				   'before' => Html::a( 'New', '#', [
-				'data-toggle' => 'modal',
-				'data-target' => '#update-modal', 
-		        'class' => 'btn btn-success new',
-			] )],
+			        	'data-toggle' => 'modal',
+			        	'data-target' => '#update-modal', 
+		                'class' => 'btn btn-success new',
+			        ] )],
         'columns' => $gridview,
     ]); ?>
 </div>

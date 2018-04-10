@@ -12,6 +12,10 @@ use app\models\TicketBasic;
  */
 class TicketSearch extends TicketBasic
 {
+	public function attributes()
+	{
+		return array_merge(parent::attributes(),['building', 'name']);
+	}
     /**
      * {@inheritdoc}
      */
@@ -19,7 +23,7 @@ class TicketSearch extends TicketBasic
     {
         return [
             [['ticket_id', 'community_id', 'realestate_id', 'tickets_taxonomy', 'create_time', 'is_attachment', 'remind'], 'integer'],
-            [['ticket_number', 'account_id', 'explain1', 'contact_person', 'contact_phone', 'assignee_id', 'reply_total', 'ticket_status'], 'safe'],
+            [['building', 'name', 'ticket_number', 'account_id', 'explain1', 'contact_person', 'contact_phone', 'assignee_id', 'reply_total', 'ticket_status'], 'safe'],
         ];
     }
 
@@ -41,12 +45,25 @@ class TicketSearch extends TicketBasic
      */
     public function search($params)
     {
-        $query = TicketBasic::find();
+		$community = $_SESSION['user']['community'];
+		if($community){
+			$query = TicketBasic::find()->where(['ticket_basic.community_id' => "$community"]);
+		}else{
+			$query = TicketBasic::find();
+		}
+        
+		$query->joinWith(['c']);
+		$query->joinWith(['b']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort' => [
+		    	'defaultOrder' =>[
+		        	'ticket_id' => SORT_DESC
+		        ]
+		    ]
         ]);
 
         $this->load($params);
@@ -60,7 +77,7 @@ class TicketSearch extends TicketBasic
         // grid filtering conditions
         $query->andFilterWhere([
             'ticket_id' => $this->ticket_id,
-            'community_id' => $this->community_id,
+            'ticket_basic.community_id' => $this->community_id,
             'realestate_id' => $this->realestate_id,
             'tickets_taxonomy' => $this->tickets_taxonomy,
             'create_time' => $this->create_time,
@@ -71,11 +88,25 @@ class TicketSearch extends TicketBasic
         $query->andFilterWhere(['like', 'ticket_number', $this->ticket_number])
             ->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'explain1', $this->explain1])
+            ->andFilterWhere(['like', 'community_building.building_name', $this->building])
+            ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])
             ->andFilterWhere(['like', 'contact_person', $this->contact_person])
             ->andFilterWhere(['like', 'contact_phone', $this->contact_phone])
             ->andFilterWhere(['like', 'assignee_id', $this->assignee_id])
             ->andFilterWhere(['like', 'reply_total', $this->reply_total])
             ->andFilterWhere(['like', 'ticket_status', $this->ticket_status]);
+		
+		$dataProvider -> sort->attributes['name']=
+			[
+				'asc' => ['community_realestate.room_name'=>SORT_ASC],
+				'desc' => ['community_realestate.room_name'=>SORT_DESC],
+			];
+		
+		$dataProvider-> sort->attributes['building']=
+			[
+				'asc' => ['community_building.building_name'=>SORT_ASC],
+				'desc' => ['community_building.building_name'=>SORT_DESC],
+			];
 
         return $dataProvider;
     }
