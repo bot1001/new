@@ -66,13 +66,9 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-			//设置登录过期时间，暂定时间为15分钟
-			$lifetime = $this->rememberMe ? 900:0; //缓存有效时间
-			$session = Yii::$app->session; //生成缓存
-			session_set_cookie_params($lifetime); //缓存有效时间
-			
-			return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 900 : 0); //返回用户和缓存有效时间
+        if ($this->validate()) 
+		{			
+			return Yii::$app->user->login($this->getUser(), $this->rememberMe); //返回用户和缓存有效时间
         }
         return false;
     }

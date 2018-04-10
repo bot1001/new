@@ -66,10 +66,6 @@ class SiteController extends Controller
     {
 		$model = new Site;
 
-		$session = Yii::$app->session;
-		
-		$session['user'] = Yii::$app->user->identity;
-		
 		$name = $_SESSION['user']['name']; // 用户名
 		$a = Yii::$app->request->userIP; //用户IP地址
 		

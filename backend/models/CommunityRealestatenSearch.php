@@ -42,14 +42,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
      */
     public function search($params)
     {
-		if(empty($_SESSION['user']))
-		{
-			$session = Yii::$app->session;
-		    $session['user'] = Yii::$app->user->identity;
-		    $c = $_SESSION['user']['community'];
-		}else{
-			$c = $_SESSION['user']['community'];
-		}
+		$c = $_SESSION['user']['community'];
 		
 		if($c){
 			$query = CommunityRealestate::find()->where(['community_id' => "$c"]);

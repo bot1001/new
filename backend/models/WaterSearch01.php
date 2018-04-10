@@ -46,14 +46,7 @@ class WaterSearch01 extends WaterMeter
      */
     public function search($params)
     {
-		if(empty($_SESSION['user']))
-		{
-			$session = Yii::$app->session;
-		    $session['user'] = Yii::$app->user->identity;
-		    $comm = $_SESSION['user']['community'];
-		}else{
-			$comm = $_SESSION['user']['community'];
-		}
+		$comm = $_SESSION['user']['community'];
 		
 		if(empty($comm)){
 			$query = WaterMeter::find();

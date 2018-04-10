@@ -41,14 +41,7 @@ class NewsSearch extends CommunityNews
      */
     public function search($params)
     {
-		if(empty($_SESSION['user']))
-		{
-			$session = Yii::$app->session;
-		    $session['user'] = Yii::$app->user->identity;
-		    $c = $_SESSION['user']['community'];
-		}else{
-			$c = $_SESSION['user']['community'];
-		}
+		$c = $_SESSION['user']['community'];
 		
 		if(!empty($c)){
 			$query = CommunityNews::find()->where(['community_id' => "$c"]);

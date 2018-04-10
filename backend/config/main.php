@@ -32,7 +32,6 @@ return [
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-	         'timeout'=> 900,
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
