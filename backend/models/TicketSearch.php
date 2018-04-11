@@ -22,8 +22,8 @@ class TicketSearch extends TicketBasic
     public function rules()
     {
         return [
-            [['ticket_id', 'community_id', 'realestate_id', 'tickets_taxonomy', 'create_time', 'is_attachment', 'remind'], 'integer'],
-            [['building', 'name', 'ticket_number', 'account_id', 'explain1', 'contact_person', 'contact_phone', 'assignee_id', 'reply_total', 'ticket_status'], 'safe'],
+            [['ticket_id', 'community_id', 'realestate_id', 'tickets_taxonomy', 'is_attachment', 'remind'], 'integer'],
+            [['building', 'create_time', 'name', 'ticket_number', 'account_id', 'explain1', 'contact_person', 'contact_phone', 'assignee_id', 'reply_total', 'ticket_status'], 'safe'],
         ];
     }
 
@@ -73,6 +73,15 @@ class TicketSearch extends TicketBasic
             // $query->where('0=1');
             return $dataProvider;
         }
+		
+		//自定义搜索时间
+		if($this->create_time != '')
+		{
+			$time = explode(' to ', $this->create_time);
+			$one = reset($time); //2018-08-13 to 2018-08-23
+			$two = end($time);
+			$query->andFilterWhere(['between', 'ticket_basic.create_time', strtotime($one), strtotime($two)]);
+		}
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -80,7 +89,7 @@ class TicketSearch extends TicketBasic
             'ticket_basic.community_id' => $this->community_id,
             'realestate_id' => $this->realestate_id,
             'tickets_taxonomy' => $this->tickets_taxonomy,
-            'create_time' => $this->create_time,
+            //'create_time' => $this->create_time,
             'is_attachment' => $this->is_attachment,
             'remind' => $this->remind,
         ]);

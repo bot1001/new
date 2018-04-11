@@ -4,8 +4,6 @@ use yii\ helpers\ Html;
 use yii\ helpers\ArrayHelper;
 use kartik\ grid\ GridView;
 use yii\ widgets\ Pjax;
-use app\ models\ CommunityBasic;
-use app\ models\ CommunityBuilding;
 use app\ models\ Status;
 use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
@@ -115,36 +113,6 @@ $this->title = '缴费管理';
 	?>
 	<?php //Pjax::begin(); ?>
 	<?php
-	$c = $_SESSION['user']['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-		$building = CommunityBuilding::find()
-			->select('building_name')
-			->distinct()
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-		$building = CommunityBuilding::find()
-			->select('building_name')
-			->where(['community_id' => $c])
-			->distinct()
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_name', 'community_name');
-	 $build = ArrayHelper::map($building,'building_name', 'building_name');
-	
-	$w = date('Y');
-	$y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
-	$m = $m = [ '01' => '01月', '02' => '02月', '03' => '03月', '04' => '04月', '05' => '05月', '06' => '06月', '07' => '07月', '08' => '08月', '09' => '09月', 10 => '10月', 11 => '11月', 12 => '12月' ];
 	
 	$gridColumn = [
 		/*['class' => 'kartik\grid\SerialColumn',
@@ -159,7 +127,8 @@ $this->title = '缴费管理';
 			'width' => '70px',
 			'hAlign' => 'center'
 		],
-		[ 'attribute' => 'community.community_name',
+		[ 'attribute' => 'community_id',
+		  'value' => 'community.community_name',
 			'pageSummary' => '合计：',
 			'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $comm,
@@ -171,7 +140,8 @@ $this->title = '缴费管理';
 			'width' => '150px'
 		],
 
-		[ 'attribute' => 'building.building_name',
+		[ 'attribute' => 'building_id',
+		 'value' => 'building.building_name',
 		 'filterType' => GridView::FILTER_SELECT2,
 		 'filter' => $build,
 		 'filterInputOptions' => ['placeholder' => '请选择'],

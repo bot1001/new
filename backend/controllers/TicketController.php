@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\CommunityBasic;
 use app\models\WorkR;
+use app\models\CommunityBuilding;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * TicketController implements the CRUD actions for TicketBasic model.
@@ -39,10 +42,40 @@ class TicketController extends Controller
     {
         $searchModel = new TicketSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		
+	    $c = $_SESSION['user']['community'];
+	    if(empty($c)){
+	    	$comm = CommunityBasic::find()
+	    		->select('community_name, community_id')
+	    		->indexBy('community_id')
+	    		->column();
+			
+	    	$build = CommunityBuilding::find()
+	    		->select('building_name')
+	    		->distinct()
+	    		->indexBy('building_name')
+	    		->column();
+	    }else{
+	    	$comm = CommunityBasic::find()
+	    		->select(' community_name')
+	    		->where(['community_id' => $c])
+				->orderBy('community_name DESC')
+	    		->indexBy('community_id')
+	    		->column();
+			
+	    	$build = CommunityBuilding::find()
+	    		->select('building_name')
+	    		->where(['community_id' => $c])
+	    		->distinct()
+	    		->indexBy('building_name')
+	    		->column();
+	    }
+		
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'comm' => $comm,
+			'build' => $build
         ]);
     }
 
@@ -58,6 +91,18 @@ class TicketController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	public function actions() 
+	{
+		return ArrayHelper::merge( parent::actions(), [
+			'ticket' => [ // identifier for your editable action
+				'class' => EditableColumnAction::className(), // action class name
+				'modelClass' => TicketBasic::className(), // the update model class
+				'outputValue' => function ( $model, $attribute, $key, $index ) {},
+				'ajaxOnly' => true,
+			]
+		] );
+	}
 
     /**
      * Creates a new TicketBasic model.

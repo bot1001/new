@@ -46,13 +46,12 @@ class TicketBasic extends \yii\db\ActiveRecord
     {
         return [
             [['community_id', 'realestate_id', 'tickets_taxonomy', 'explain1', 'contact_person', 'contact_phone', 'assignee_id', 'ticket_status'], 'required'],
-            [['community_id', 'realestate_id', 'tickets_taxonomy', 'create_time', 'is_attachment', 'remind'], 'integer'],
+            [['community_id', 'realestate_id', 'tickets_taxonomy', 'is_attachment', 'remind'], 'integer'],
             [['ticket_number'], 'string', 'max' => 32],
 			['create_time', function($attr, $params) {
                 if ($this->hasErrors()) return false;
 
                 $datetime = $this->{$attr};
-                
                 $time = strtotime($datetime);
                 // 验证时间格式是否正确
                 if ($time === false) {
@@ -66,7 +65,7 @@ class TicketBasic extends \yii\db\ActiveRecord
             [['account_id', 'assignee_id', 'reply_total', 'ticket_status'], 'string', 'max' => 64],
             [['explain1'], 'string', 'max' => 50],
             [['contact_person'], 'string', 'max' => 20],
-            [['contact_phone'], 'string', 'max' => 11],
+            [['contact_phone'], 'string', 'max' => 25],
             [['account_id', 'community_id', 'realestate_id', 'explain1'], 'unique', 'targetAttribute' => ['account_id', 'community_id', 'realestate_id', 'explain1']],
             [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
             [['realestate_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate_id' => 'realestate_id']],
@@ -90,7 +89,7 @@ class TicketBasic extends \yii\db\ActiveRecord
             'realestate_id' => '房号',
             'tickets_taxonomy' => '类型',
             'explain1' => '详情',
-            'create_time' => '创建时间',
+            'create_time' => '投诉时间',
             'contact_person' => '联系人',
             'contact_phone' => '电话',
             'is_attachment' => '附件',
@@ -114,6 +113,8 @@ class TicketBasic extends \yii\db\ActiveRecord
 				$this->ticket_status = '1';
 				$this->reply_total = '0';
 				$this->is_attachment = '0';
+			}else{
+				$this->create_time = $this->create_time;
 			}
 			return true;
 		}
@@ -131,7 +132,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 		return mb_substr($tmpStr,0,20,'utf-8').(($tmpLen>20)?'...':'');	
 	}
 	
-	//输入时间转换
+	//输出时间转换
 	public function afterFind()
     {
         parent::afterFind();

@@ -49,6 +49,38 @@ class UserInvoiceController extends Controller {
 		$get = $_GET;
 		$searchModel = new UserInvoiceSearch();
 		
+		$c = $_SESSION['user']['community'];
+	    if(empty($c)){
+	    	$comm = CommunityBasic::find()
+	    		->select('community_name, community_id')
+	    		->indexBy('community_id')
+	    		->column();
+			
+	    	$build = CommunityBuilding::find()
+	    		->select('building_name, building_id')
+	    		->distinct()
+	    		->indexBy('building_id')
+	    		->column();
+	    }else{
+	    	$comm = CommunityBasic::find()
+	    		->select(' community_name')
+	    		->where(['community_id' => "$c"])
+				->orderBy('community_name DESC')
+	    		->indexBy('community_id')
+	    		->column();
+			
+			$build = CommunityBuilding::find()
+	    		->select('building_name, building_id')
+				->where(['community_id' => "$c"])
+	    		->distinct()
+	    		->indexBy('building_id')
+	    		->column();
+	    }
+		
+		$w = date('Y');
+	    $y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
+	    $m = $m = [ '01' => '01月', '02' => '02月', '03' => '03月', '04' => '04月', '05' => '05月', '06' => '06月', '07' => '07月', '08' => '08月', '09' => '09月', 10 => '10月', 11 => '11月', 12 => '12月' ];
+		
 		if(isset($get['order_id'])){
 			$searchModel->order_id = $get['order_id'];
 		}
@@ -66,6 +98,10 @@ class UserInvoiceController extends Controller {
 		return $this->render( 'index', [
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
+			'comm' => $comm,
+			'build' => $build,
+			'y' => $y,
+			'm' => $m
 		] );
 	}
 	

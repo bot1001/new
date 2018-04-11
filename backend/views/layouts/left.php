@@ -118,9 +118,10 @@ use mdm\admin\components\MenuHelper;
 		if($c)
 		{
 			$ticket = TicketBasic::find()->select('ticket_id, ticket_number as number, community_id as community, create_time, remind')
-	            ->andwhere(['in', 'ticket_status', 1])
+	            ->andwhere(['ticket_status'=> '1'])
+	            ->andwhere(['or not like', 'ticket_number', ''])
 	            ->andwhere(['<', 'remind', 10])
-				->andwhere(['in', 'community_id', $c])
+				->andwhere(['community_id'=> "$c"])
 	            ->asArray()
 	            ->all();
 			

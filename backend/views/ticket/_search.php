@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'explain1') ?>
 
-    <?php // echo $form->field($model, 'create_time') ?>
+    <?php echo $form->field($model, 'create_time') ?>
 
     <?php // echo $form->field($model, 'contact_person') ?>
 

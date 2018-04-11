@@ -54,6 +54,10 @@ class CostRelationSearch extends CostRelation
 		}else{
 			$query = Costrelation::find();
 		}
+		$query->joinWith('c');
+		$query->joinWith('b');
+		$query->joinWith('r');
+		$query->joinWith('cos');
 
         // add conditions that should always apply here
 
@@ -87,14 +91,11 @@ class CostRelationSearch extends CostRelation
 
         $query->andFilterWhere(['like', 'property', $this->property]);
 		
-		$query->join('INNER JOIN','cost_name','cost_name.cost_id = cost_relation.cost_id')
-			->join('INNER JOIN','community_building','cost_relation.building_id = community_building.building_id')
-			->join('INNER JOIN','community_realestate','community_realestate.realestate_id = cost_relation.realestate_id')
-		->andFilterWhere(['like','community_realestate.room_number',$this->number])
-		->andFilterWhere(['like','community_building.building_name',$this->building])
-		->andFilterWhere(['like','community_realestate.room_name',$this->room_name])
-		->andFilterWhere(['like','cost_name.cost_name',$this->name])
-		->andFilterWhere(['like','cost_name.price',$this->price]);
+		$query->andFilterWhere(['like','community_realestate.room_number',$this->number])
+		      ->andFilterWhere(['like','community_building.building_name',$this->building])
+		      ->andFilterWhere(['like','community_realestate.room_name',$this->room_name])
+		      ->andFilterWhere(['like','cost_name.cost_name',$this->name])
+		      ->andFilterWhere(['like','cost_name.price',$this->price]);
 		
         return $dataProvider;
     }
