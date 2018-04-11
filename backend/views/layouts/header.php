@@ -316,7 +316,10 @@ $r_id = $session['role']; //用户角色编号
                                                        }else{
                                                        	echo '全部';
                                                        } ?></l>
-                                <small>角色：<?php echo ($r_name[$r_id]); ?></small>
+                                <small>角色：<?php if(isset($r_name[$r_id]))
+                                                  {
+													  echo ($r_name[$r_id]);
+                                                   } ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

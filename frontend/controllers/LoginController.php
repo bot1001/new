@@ -140,4 +140,10 @@ class LoginController extends Controller
 	
 		
 	}
+	
+	//裕家人开放平台授权回调地址
+	public function actionYjr()
+	{
+		echo '测试';
+	}
 }

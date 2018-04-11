@@ -94,7 +94,7 @@ class TicketBasic extends \yii\db\ActiveRecord
             'contact_person' => '联系人',
             'contact_phone' => '电话',
             'is_attachment' => '附件',
-            'assignee_id' => '接单人',
+            'assignee_id' => '处理人',
             'reply_total' => '回复次数',
             'ticket_status' => '状态',
             'remind' => '提示次数',

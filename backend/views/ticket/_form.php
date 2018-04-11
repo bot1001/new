@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\TicketBasic */
@@ -9,10 +12,9 @@ use yii\widgets\ActiveForm;
 ?>
 
 <style>
-	div{
-		margin-left: 1%;
-		b	#div1{margin-left: 1%;
-
+		
+	#div1{
+        margin-left: 1%;
 		margin-left: -2%;
 		width: 100%;
 		margin: auto;
@@ -27,13 +29,31 @@ use yii\widgets\ActiveForm;
     
     <div class="row">
     	<div class="col-lg-4">
-    		<?= $form->field($model, 'community_id')->textInput() ?>
+    		<?= $form->field($model, 'community_id')->dropDownList($community,['prompt' => '请选择', 'id' => 'community']) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'building')->textInput() ?>
+    		<?= $form->field($model, 'building')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'building'],
+	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                'pluginOptions'=>[
+                    'depends'=>['community'],
+                    'placeholder'=>'请选择...',
+                    'url'=>Url::to(['/costrelation/b'])
+                ]
+            ]); ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'realestate_id')->textInput() ?>
+    		<?= $form->field($model, 'realestate_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'realestate'],
+	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                'pluginOptions'=>[
+                    'depends'=>['building'],
+                    'placeholder'=>'请选择...',
+                    'url'=>Url::to(['/costrelation/re'])
+                ]
+            ]); ?>
     	</div>
     </div>
     
@@ -54,13 +74,13 @@ use yii\widgets\ActiveForm;
         
     <div class="row">
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'assignee_id')->textInput(['maxlength' => true]) ?>
+    		<?= $form->field($model, 'assignee_id')->dropDownList($assignee,['placeholder' => '请选择']) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'ticket_status')->textInput(['maxlength' => true]) ?>
+    		<?= $form->field($model, 'ticket_status')->dropDownList([1=> '未处理', 6 => '处理中',3 => '已完成', 4 => '返修']) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'tickets_taxonomy')->textInput() ?>
+    		<?= $form->field($model, 'tickets_taxonomy')->dropDownList([1 => '建议', 2 => '投诉']) ?>
     	</div>
     </div>
 

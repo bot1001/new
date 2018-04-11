@@ -59,20 +59,22 @@ class UserController extends Controller
     }
 	
 	//检查用户是否登录
-	public function  beforeAction($action)
+	/*public function  beforeAction($action)
     {
         if(Yii::$app->user->isGuest){
             $this->redirect(['/login']);
             return false;
         }
         return true;
-    }
+    }*/
 
 	public function actionBatchdelete()
 	{
        $this->enableCsrfValidation = false;//去掉yii2的post验证
        $ids = Yii::$app->request->post();
+		
        $model = new UserAccount();
+		
        if($model->batchHandle($ids['ids']))
           return \yii\helpers\Json::encode(['status'=>1,'info'=>'删除成功！']);
        else

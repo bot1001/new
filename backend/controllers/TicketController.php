@@ -8,6 +8,8 @@ use app\models\TicketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\CommunityBasic;
+use app\models\WorkR;
 
 /**
  * TicketController implements the CRUD actions for TicketBasic model.
@@ -65,13 +67,48 @@ class TicketController extends Controller
     public function actionCreate()
     {
         $model = new TicketBasic();
+		
+		//获取用户绑定的小区
+		$c = $_SESSION['user']['community'];
+		if($c){
+			//获取数组小区
+			$community = CommunityBasic::find()
+			->select('community_name, community_id')
+			->where(['community_id' => "$c"])
+			->orderBy('community_name')
+			->indexBy('community_id')
+			->column();
+			
+		    //获取处理人数据
+		    $assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
+		    	->joinWith('data')
+		    	->where(['community_id' => "$c", 'account_superior' => '0'/*, 'account_status' => '3'*/])
+		        ->indexBy('account_id')
+		    	->orderBy('community_id')
+		    	->column();
+		}else{
+		    $community = CommunityBasic::find()
+		    	->select('community_name, community_id')
+		    	->orderBy('community_name')
+		    	->indexBy('community_id')
+		    	->column();
+			
+			$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
+				->joinWith('data')
+				->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
+			    ->indexBy('account_id')
+				->orderBy('community_id')
+				->column();
+		}
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
         return $this->renderAjax('create', [
             'model' => $model,
+			'community' => $community,
+			'assignee' => $assignee
         ]);
     }
 
