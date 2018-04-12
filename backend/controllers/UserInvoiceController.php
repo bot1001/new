@@ -57,9 +57,9 @@ class UserInvoiceController extends Controller {
 	    		->column();
 			
 	    	$build = CommunityBuilding::find()
-	    		->select('building_name, building_id')
+	    		->select('building_name')
 	    		->distinct()
-	    		->indexBy('building_id')
+	    		->indexBy('building_name')
 	    		->column();
 	    }else{
 	    	$comm = CommunityBasic::find()
@@ -70,10 +70,10 @@ class UserInvoiceController extends Controller {
 	    		->column();
 			
 			$build = CommunityBuilding::find()
-	    		->select('building_name, building_id')
+	    		->select('building_name')
 				->where(['community_id' => "$c"])
 	    		->distinct()
-	    		->indexBy('building_id')
+	    		->indexBy('building_name')
 	    		->column();
 	    }
 		

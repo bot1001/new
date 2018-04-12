@@ -47,6 +47,9 @@ class BuildingSearch extends CommunityBuilding
 		       }else{
 		           $query = CommunityBuilding::find();
 		       }
+		$query->joinWith('com');
+		$query->joinWith('c');
+		$query->joinWith('creater0');
 
         // add conditions that should always apply here
 

@@ -25,8 +25,8 @@ class UserInvoiceSearch extends UserInvoice
     public function rules()
     {
         return [
-            [['invoice_id', 'community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['description', 'year', 'month', 'create_time', 'order_id','room.room_name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
+            [['invoice_id', 'community_id', 'realestate_id', 'invoice_status'], 'integer'],
+            [['building_id', 'description', 'year', 'month', 'create_time', 'order_id','room.room_name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
             [['invoice_amount'], 'number'],
         ];
     }
@@ -58,7 +58,7 @@ class UserInvoiceSearch extends UserInvoice
 		}
 		
 		$query->joinWith('community');
-		$query->joinWith('building');
+		//$query->joinWith('building');
 		$query->joinWith('room');
         
         // add conditions that should always apply here->batch(10);
@@ -92,7 +92,6 @@ class UserInvoiceSearch extends UserInvoice
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
             'user_invoice.community_id' => $this->community_id,
-            'user_invoice.building_id' => $this->building_id,
             'realestate_id' => $this->realestate_id,
             'invoice_amount' => $this->invoice_amount,
             'invoice_status' => $this->invoice_status,
@@ -107,7 +106,9 @@ class UserInvoiceSearch extends UserInvoice
             //->andFilterWhere(['like', 'payment_time', $this->payment_time])
             ->andFilterWhere(['like', 'update_time', $this->update_time]);
 		
-		$query->andFilterWhere(['room_name' => $this->getAttribute('room.room_name')]);
+		$query->join('inner join','community_building','community_building.building_id=user_invoice.building_id')
+			->andFilterWhere(['community_building.building_name' => $this->building_id])
+			->andFilterWhere(['room_name' => $this->getAttribute('room.room_name')]);
 		
 		$dataProvider -> sort->attributes['room.room_name']=
 			[

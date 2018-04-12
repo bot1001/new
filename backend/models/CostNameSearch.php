@@ -43,6 +43,7 @@ class CostNameSearch extends CostName
     public function search($params)
     {
         $query = CostName::find();
+		$query->joinWith('sys');
 
         // add conditions that should always apply here
 

@@ -111,6 +111,7 @@ $this->title = '缴费管理';
 	}
 		
 	?>
+	<?php // echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm]); ?>
 	<?php //Pjax::begin(); ?>
 	<?php
 	
@@ -144,7 +145,7 @@ $this->title = '缴费管理';
 		 'value' => 'building.building_name',
 		 'filterType' => GridView::FILTER_SELECT2,
 		 'filter' => $build,
-		 'filterInputOptions' => ['placeholder' => '请选择'],
+		 'filterInputOptions' => ['placeholder' => '…'],
 		 'filterWidgetOptions' => [
 	     	'pluginOptions' => ['allowClear' => true],
 	     ],
@@ -175,7 +176,7 @@ $this->title = '缴费管理';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $y,
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
+			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -188,7 +189,7 @@ $this->title = '缴费管理';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $m,
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
+			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -310,7 +311,7 @@ $this->title = '缴费管理';
 			//'refreshGrid' => 'true',
 			'filterType' => GridView::FILTER_SELECT2,
 			'filter' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
-			'filterInputOptions' => [ 'placeholder' => '' ],
+			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],

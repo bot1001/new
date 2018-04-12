@@ -49,6 +49,7 @@ class CommunityBasicSearch extends CommunityBasic
 		}else{
 			$query = CommunityBasic::find();
 		}
+		$query->joinWith('c');
 
         // add conditions that should always apply here
 

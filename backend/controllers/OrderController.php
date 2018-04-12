@@ -334,7 +334,7 @@ class OrderController extends Controller
 		$b = $a['building']['building_name']; //楼宇
 		$number = $a['room']['room_number']; //单元
 		$name = $a['room']['room_name']; //房号
-		$address = $c.' '.$b.' '.$name; //拼接地址
+		$address = $c.'-'.$b.'-'.$name; //拼接地址
 		
 		return $this->render('add', [
 			    'invoic' => $invoice,
@@ -358,7 +358,7 @@ class OrderController extends Controller
 		$des = '物业相关费用'; //订单描述
 		$phone = $_SESSION['user']['phone'];
 		$name = $_SESSION['user']['name'];
-		
+				
 		if(!empty($user_id)){
 			$transaction = Yii::$app->db->beginTransaction();
 			try{

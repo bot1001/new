@@ -48,6 +48,7 @@ class InformationSearch extends Information
 		}else{
 			$query = Information::find();
 		}
+		$query->joinWith('c');
 
         // add conditions that should always apply here
 

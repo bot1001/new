@@ -41,7 +41,7 @@ class UserAccountSearch extends UserAccount
      */
     public function search($params)
     {
-        $query = UserAccount::find()->where(['property' =>1]);
+        $query = UserAccount::find()->where(['account_role' =>'1']);
 
         // add conditions that should always apply here
 

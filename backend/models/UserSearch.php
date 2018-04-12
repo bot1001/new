@@ -94,7 +94,6 @@ class UserSearch extends UserAccount
         			'real_name',
         			'name',
         			'account_role',
-        			/* 'ticket_id'*/
         		],
         		'defaultOrder' => [
         			'reg_time' => SORT_DESC,

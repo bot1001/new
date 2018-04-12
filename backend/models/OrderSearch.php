@@ -53,6 +53,9 @@ class OrderSearch extends OrderBasic
 		}else{
 			$query = OrderBasic::find();
 		}
+		
+		$query->joinWith('status0');
+		$query->joinWith('order0');
         
         // add conditions that should always apply here
 
@@ -104,12 +107,11 @@ class OrderSearch extends OrderBasic
             ->andFilterWhere(['like', 'order_basic.order_id', $this->getAttribute('order_id')])
             ->andFilterWhere(['like', 'payment_gateway', $this->payment_gateway])
             ->andFilterWhere(['like', 'payment_number', $this->payment_number])
-            ->andFilterWhere(['like', 'description', $this->description]);
-		//关联查询
-		$query->join('join','order_relationship_address','order_relationship_address.order_id=order_basic.order_id');
-		$query->andFilterWhere(['like','name',$this->getAttribute('order0.name')])
-		      ->andFilterWhere(['like','mobile_phone',$this->getAttribute('order0.mobile_phone')])
-			  ->andFilterWhere(['like','address',$this->getAttribute('order0.address')]);
+            ->andFilterWhere(['like', 'description', $this->description])
+			->andFilterWhere(['like','order_relationship_address.name',$this->getAttribute('order0.name')])
+		    ->andFilterWhere(['like','mobile_phone',$this->getAttribute('order0.mobile_phone')])
+			->andFilterWhere(['like','address',$this->getAttribute('order0.address')]);
+		
 		//排序
 		$dataProvider -> sort->attributes['order0.address']=
 			[

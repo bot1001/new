@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'hAlign' => 'center'],
 		['attribute' => 'mobile_phone',
 		'hAlign' => 'center'], 
+		'user_name'
 		/*['class' => 'yii\grid\ActionColumn',
 		'header' => '操作'],*/
 	];

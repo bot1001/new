@@ -74,44 +74,7 @@ $this->title = '订单管理';
 
 		//'id',
 		//'account_id',
-		[ 'attribute' => 'order0.address',
-			'format' => 'raw',
-			'value' => function ( $model ) {
-				$l = strlen( $model[ 'account_id' ] );
-				if ( $l <= 3 ) {
-					$i_id = OrderProducts::find()->select( 'product_id as id' )->where( [ 'order_id' => $model[ 'order_id' ] ] )->asArray()->one();
-					$invoice = UserInvoice::find()->select( 'realestate_id as r_id' )->where( [ 'invoice_id' => $i_id[ 'id' ] ] )->asArray()->one();
-					$r = CommunityRealestate::find()->select( 'community_id as community, building_id as building, room_number as number, room_name as name' )->where( [ 'realestate_id' => $invoice[ 'r_id' ] ] )->asArray()->one();
-					$c = CommunityBasic::find()->select( 'community_name as c_name' )->where( [ 'community_id' => $r[ 'community' ] ] )->asArray()->one();
-					$b = CommunityBuilding::find()->select( 'building_name as b_name' )->where( [ 'building_id' => $r[ 'building' ] ] )->asArray()->one();
-					return $c[ 'c_name' ] . '-' . $b[ 'b_name' ] . '-' . $r[ 'name' ];
-				} else {
-					$add = OrderRelationshipAddress::find()->select( 'address' )->where( [ 'order_id' => $model[ 'order_id' ] ] )->asArray()->one();
-					if(strlen($add['address']) > 12){
-						return $add[ 'address' ];
-					}else{
-						$r_info = CommunityRealestate::find()
-							->select('community_id as c,building_id as b,room_number as num, room_name as nam')
-							->where(['realestate_id' => $add[ 'address' ]])
-							->asArray()
-							->one();
-						$c = CommunityBasic::find()
-							->select('community_name as c_name')
-							->where(['community_id' => $r_info['c']])
-							->asArray()
-							->one();
-						$b = CommunityBuilding::find()
-							->select('building_name as b_name')
-							->where(['building_id' => $r_info['b']])
-							->asArray()
-							->one();
-						return $c['c_name'].'-'.$b['b_name'].'-'.$r_info['nam'];
-					}
-					
-				}
-
-			},
-		],
+		[ 'attribute' => 'order0.address'],
 		[ 'attribute' => 'order0.name',
 			'format' => 'raw',
 			'value' => function ( $model ) {
