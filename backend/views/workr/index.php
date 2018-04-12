@@ -19,22 +19,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Work R', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+    <?php
+	$gridview = [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'account_id',
             'work_number',
-            'community_id',
+            ['attribute'=> 'community_id',
+			'value' => 'c.community_name'],
+	        'data.real_name',
             'account_superior',
-            //'work_status',
-            //'account_role',
-            //'account_status',
+            'work_status',
+            'account_role',
+            'account_status',
 
             ['class' => 'yii\grid\ActionColumn'],
-        ],
+        ];
+	echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => $gridview,
     ]); ?>
 </div>
