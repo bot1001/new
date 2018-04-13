@@ -12,6 +12,12 @@ use app\models\WorkR;
  */
 class WorkRSearch extends WorkR
 {
+	
+	public function attributes()
+	{
+		return array_merge(parent::attributes(),['community', 'name', 'phone']);
+	}
+	
     /**
      * {@inheritdoc}
      */
@@ -19,7 +25,7 @@ class WorkRSearch extends WorkR
     {
         return [
             [['id', 'work_number', 'community_id', 'account_superior'], 'integer'],
-            [['account_id', 'work_status', 'account_role', 'account_status'], 'safe'],
+            [['account_id', 'work_status', 'account_role', 'account_status', 'community', 'name', 'phone'], 'safe'],
         ];
     }
 
@@ -42,6 +48,8 @@ class WorkRSearch extends WorkR
     public function search($params)
     {
         $query = WorkR::find();
+		$query->joinWith('c');
+		$query->joinWith('account');
 
         // add conditions that should always apply here
 
@@ -61,12 +69,16 @@ class WorkRSearch extends WorkR
         $query->andFilterWhere([
             'id' => $this->id,
             'work_number' => $this->work_number,
+            'community_basic.community_id' => $this->community,
+            //'user_account.user_name' => $this->name,
             'community_id' => $this->community_id,
             'account_superior' => $this->account_superior,
         ]);
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'work_status', $this->work_status])
+            ->andFilterWhere(['like', 'user_account.user_name', $this->name])
+            ->andFilterWhere(['like', 'user_account.mobile_phone', $this->phone])
             ->andFilterWhere(['like', 'account_role', $this->account_role])
             ->andFilterWhere(['like', 'account_status', $this->account_status]);
 

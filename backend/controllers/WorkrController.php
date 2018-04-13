@@ -8,6 +8,10 @@ use app\models\WorkRSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\user_account;
+use app\models\Company;
+use app\models\UserAccount;
+use app\models\CommunityBasic;
 
 /**
  * WorkRController implements the CRUD actions for WorkR model.
@@ -37,10 +41,17 @@ class WorkrController extends Controller
     {
         $searchModel = new WorkRSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		//获取小区
+		$community = CommunityBasic::find()
+			->select('community_name, community_id')
+			->orderBy('community_name')
+			->indexBy('community_id')
+			->column();
+		
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'community' => $community
         ]);
     }
 
@@ -65,13 +76,25 @@ class WorkrController extends Controller
     public function actionCreate()
     {
         $model = new WorkR();
+		//获取小区
+		$company = Company::find()->select('name, id')->orderBy('name')->indexBy('id')->column();
+		//获取用户
+		$user = UserAccount::find()
+			->select('user_name, account_id')
+			->where(['account_role' => '1'])
+			->orderBy('user_name DESC')
+			->indexBy('account_id')
+			->column();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+		{
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+			'company' => $company,
+			'user' => $user
         ]);
     }
 
@@ -104,9 +127,25 @@ class WorkrController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+		$this->findModel($id)->delete();
+		
+		return $this->redirect( Yii::$app->request->referrer );//返回请求页面
+    }
+	
+	//批量删除
+	public function actionDel()
+    {
+		foreach ( $_POST['ids'] as $id ) 
+		{
+			if($id == ''){
+				$session = Yii::$app->session;
+				$session->setFlash('fail','1');
+			}else{
+				$this->findModel( $id )->delete();
+			}
+		}
+		
+		return $this->redirect( Yii::$app->request->referrer );//返回请求页面
     }
 
     /**

@@ -35,7 +35,7 @@ class WorkR extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_id', 'work_number', 'community_id', 'account_superior', 'account_role', 'account_status'], 'required'],
+            [['work_number', 'community_id', 'account_id'], 'required'],
             [['work_number', 'community_id', 'account_superior'], 'integer'],
             [['account_id'], 'string', 'max' => 32],
             [['work_status', 'account_role', 'account_status'], 'string', 'max' => 64],
@@ -58,8 +58,26 @@ class WorkR extends \yii\db\ActiveRecord
             'account_superior' => '上级',
             'work_status' => '工作状态',
             'account_role' => '操作权限',
-            'account_status' => '状态',
+            'account_status' => '使用状态',
         ];
+    }
+	
+	//自动操作
+	public function beforeSave($insert)
+    {
+       if(parent::beforeSave($insert))
+       {
+           if($insert)
+           {
+               $this->account_role = '1001,1002,1003,1004,1005,2001,2002,2003,2004,2005,3000';
+			   $this->work_status = '1';
+			   $this->account_superior = '0';
+			   $this->account_status = '1';
+           }
+           return true;
+       }else{
+       return false;
+       }
     }
 
     /**

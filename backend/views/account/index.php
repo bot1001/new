@@ -11,27 +11,48 @@ $this->title = '用户列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-account-index">
-
-    <h1><?php // Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('New', ['create','account_id' => $k], ['class' => 'btn btn-info']) ?>
-    </p>
+   
     <?php
 	$gridColumn = [
-		['class' => 'yii\grid\SerialColumn',
-		'header' => '序号'],
-		['attribute' => 'password',
-		'hAlign' => 'center'],
+		['class' => 'kartik\grid\SerialColumn',
+		'header' => '序<br />号'],
+		
+		['attribute' => 'number',
+		'value' => 'work.work_number',
+		'label' => '工号'],
+		
+		'user_name',
+		
 		['attribute' => 'mobile_phone',
 		'hAlign' => 'center'], 
-		'user_name'
-		/*['class' => 'yii\grid\ActionColumn',
-		'header' => '操作'],*/
+		
+		['attribute' => 'status',
+		 'filterType' => GridView::FILTER_SELECT2,
+		 'filter' => [1 => '正常', 2 => '删除', 3 => '锁定'],
+		 'filterInputOptions' => ['placeholder' => '请选择……'],
+		 'filterWidgetOptions' => [
+	     	'pluginOptions' => ['allowClear' => true],
+	     ],
+		],
+		
+		['attribute' => 'more',
+		 'mergeHeader' => true,
+		'format' => 'raw',
+		'value' => function($model){
+	    	$url = Yii::$app->urlManager->createUrl( [ '#'] );
+	    	return Html::a('more', $url);
+	    },
+		'hAlign' => 'center'],
+		
+		['class' => 'kartik\grid\ActionColumn',
+		 'template' => '{view}{update}',
+		'header' => '操<br />作'],
 	];
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'panel' => ['type' => 'primary', 'heading' => '内部员工',
+				   'before' => Html::a('New', ['create','account_id' => $k], ['class' => 'btn btn-info'])],
         'columns' => $gridColumn,
     ]); ?>
 </div>

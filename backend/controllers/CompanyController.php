@@ -8,6 +8,8 @@ use app\models\CompanySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use app\models\CommunityBasic;
 
 /**
  * CompanyController implements the CRUD actions for Company model.
@@ -57,6 +59,32 @@ class CompanyController extends Controller
         ]);
     }
 
+	//三级联动小区
+	public function actionC( $selected = null ) 
+	{
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
+			$id = $_POST[ 'depdrop_parents' ];
+			$list = CommunityBasic::find()->where( [ 'company' => $id ] )->all();
+			$isSelectedIn = false;
+			if ( $id != null && count( $list ) > 0 ) {
+				foreach ( $list as $i => $account ) {
+					$out[] = [ 'id' => $account[ 'community_id' ], 'name' => $account[ 'community_name' ] ];
+					if ( $i == 0 ) {
+						$first = $account[ 'community_id' ];
+					}
+					if ( $account[ 'community_id' ] == $selected ) {
+						$isSelectedIn = true;
+					}
+				}
+				if ( !$isSelectedIn ) {
+					$selected = $first;
+				}
+				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+				return;
+			}
+		}
+		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
     /**
      * Creates a new Company model.
      * If creation is successful, the browser will be redirected to the 'view' page.

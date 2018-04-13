@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\WorkR */
 
-$this->title = 'Create Work R';
+$this->title = '创建';
 $this->params['breadcrumbs'][] = ['label' => 'Work Rs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+	    'company' => $company,
+	    'user' => $user
     ]) ?>
 
 </div>
