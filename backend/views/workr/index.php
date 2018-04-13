@@ -72,8 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	         ],
 			'label' => '状态'],
 
-<<<<<<< HEAD
-<<<<<<< HEAD
             ['class' => 'kartik\grid\ActionColumn',
 			'template' => '{delete}',
 			'header' => '操<br />作'],
@@ -92,31 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		],
 		'hover' => true,
         'columns' => $grid,
-=======
-=======
->>>>>>> master
-    <?php
-	$gridview = [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'work_number',
-            ['attribute'=> 'community_id',
-			'value' => 'c.community_name'],
-	        'data.real_name',
-            'account_superior',
-            'work_status',
-            'account_role',
-            'account_status',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ];
-	echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => $gridview,
-<<<<<<< HEAD
->>>>>>> 16188838b6ee44d883587d5c326216c461491d06
-=======
->>>>>>> master
     ]); ?>
 </div>
