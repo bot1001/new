@@ -33,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		 'filterWidgetOptions' => [
 	     	'pluginOptions' => ['allowClear' => true],
 	     ],
+		 'value' => function($model){
+		    $d = [1 => '正常', 2 => '删除', 3 => '锁定'];
+	     	return $d[$model->status];
+	     },
+		 'hAlign' => 'center'
 		],
 		
 		['attribute' => 'more',
@@ -52,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'primary', 'heading' => '内部员工',
-				   'before' => Html::a('New', ['create','account_id' => $k], ['class' => 'btn btn-info'])],
+				   'before' => Html::a('New', ['create','a' => $k], ['class' => 'btn btn-info'])],
         'columns' => $gridColumn,
     ]); ?>
 </div>

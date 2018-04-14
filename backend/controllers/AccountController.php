@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\WorkR;
+use app\models\UserData;
 
 /**
  * AccountController implements the CRUD actions for UserAccount model.
@@ -89,18 +90,46 @@ class AccountController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($account_id)
+    public function actionCreate($a)
     {
 		$this ->layout = "m2";
         $model = new UserAccount();
-		$a = mb_substr($account_id,0,32);
-		$model->account_id = $a;
+		$userdata = new UserData();
+		$a = mb_substr($a,0,32);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->user_id]);
+        if (isset($_POST['UserAccount'])) 
+		{
+			$account = $_POST['UserAccount']; //接收用户数据
+			$user = $_POST['UserData']; //接收用户数据
+			
+			//模型块赋值
+			$a = $_GET['a'];
+			$name = $account['user_name'];
+			$password = md5($account['password']);
+			$mobile_phone = $account['mobile_phone'];
+			$sql = "insert ignore into user_account(account_id, user_name, password, mobile_phone, account_role)
+			    values ('$a', '$name', '$password','$mobile_phone', '1')";
+			
+			$transaction = Yii::$app->db->beginTransaction();   //开始事务
+			try{
+  		        $m = Yii::$app->db->createCommand( $sql )->execute();
+				$id = Yii::$app->db->getLastInsertID();
+			    if($m){
+			    	$userdata->account_id = $_GET['a'];
+			    	$userdata->gender = $user['gender'];
+			    	$userdata->real_name = $account['user_name'];
+			    	$userdata->save();
+			    }
+				$transaction->commit();
+			}catch(Exception $e){
+				$transaction->rollBack();
+			}
+            return $this->redirect(['/account/view', 'id' => $id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+				'a' => $a,
+				'userdata' => $userdata
             ]);
         }
     }

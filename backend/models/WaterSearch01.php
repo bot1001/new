@@ -54,6 +54,8 @@ class WaterSearch01 extends WaterMeter
 			$query = WaterMeter::find()->where(['community' => "$comm"]);
 		}
         
+		$query->joinWith('b');
+		$query->joinWith('r');
 
         // add conditions that should always apply here
 
@@ -89,11 +91,8 @@ class WaterSearch01 extends WaterMeter
             'property' => $this->property,
         ]);
 		
-		$query->join('INNER JOIN','community_building','community_building.building_id = water_meter.building')
-			->join('INNER JOIN','community_realestate','community_realestate.realestate_id = water_meter.realestate_id')
-			->andFilterWhere(['like', 'room_name' , $this->name])
-			->andFilterWhere(['like', 'building_name', $this->build])
-			;
+		$query->andFilterWhere(['like', 'room_name' , $this->name])
+			->andFilterWhere(['like', 'building_name', $this->build]);
 		
 		$dataProvider -> sort->attributes['build']=
 			[

@@ -26,7 +26,7 @@ use mdm\admin\components\MenuHelper;
         <!-- 搜索框起 -->
         <form action="/order/index" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="order_id" class="form-control" placeholder="请输入……"/>
+              <input type="text" name="order_id" class="form-control" placeholder="请输入……"/>
               <span class="input-group-btn">
                 <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -119,7 +119,7 @@ use mdm\admin\components\MenuHelper;
 		{
 			$ticket = TicketBasic::find()->select('ticket_id, ticket_number as number, community_id as community, create_time, remind')
 	            ->andwhere(['ticket_status'=> '1'])
-	            ->andwhere(['or not like', 'ticket_number', ''])
+	            ->andwhere(['>', 'ticket_number', '128'])
 	            ->andwhere(['<', 'remind', 10])
 				->andwhere(['community_id'=> "$c"])
 	            ->asArray()
@@ -142,7 +142,7 @@ use mdm\admin\components\MenuHelper;
 				if($information)
 				{
 					$now = date(time()); //获取当前时间
-					$time = $information['remind_time']; //提醒信息中的时间
+					$time = $information['remind_time']; //提醒信息中的最后一次提醒时间
 					$second = $now-$time; //计算时间差
 					
 					if($second >= 1800)

@@ -49,7 +49,9 @@ class CommunityRealestatenSearch extends CommunityRealestate
 		}else{
 			$query = CommunityRealestate::find();
 		}
-        
+		
+        $query->joinWith('community0');
+		
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

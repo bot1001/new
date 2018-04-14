@@ -78,17 +78,13 @@ class UserAccount extends \yii\db\ActiveRecord
     {
        if(parent::beforeSave($insert))
        {
+		   //保存 之前自动插入
            if($insert)
            {
                $this->new_message = 0;
-               $this->account_role = 0;
+               $this->account_role = 1;
                $this->status = 1;
 			   $this->property = 1;
-           }else{
-               $this->new_message = 0;
-               $this->account_role = 0;
-               $this->status = 1;
-			   $this->property =1;
            }
            return true;
        }else{
