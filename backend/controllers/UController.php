@@ -18,7 +18,8 @@ use yii\web\NotFoundHttpException;
 use yii\base\UserException;
 use yii\mail\BaseMailer;
 use app\models\SysRole;
-use app\ models\ CommunityBasic;
+use app\models\CommunityBasic;
+use app\models\Company;
 
 /**
  * User controller
@@ -90,12 +91,18 @@ class UController extends Controller
 			->orderBy( 'community_name' )
 			->indexBy( 'community_id' )
 			->column();
+		$company = Company::find()
+			->select('name, id')
+			->orderBy('name')
+			->indexBy('id')
+			->column();
 
         return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
 			    'date' => $date,
-			    'community' => $community
+			    'community' => $community,
+			    'company' => $company
         ]);
     }
 

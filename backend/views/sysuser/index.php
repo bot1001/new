@@ -15,9 +15,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="sys-user-index">
 
-	<h1>
-		<?php // Html::encode($this->title) ?>
-	</h1>
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 	<?php
@@ -30,11 +27,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		//'id',
 		/*[ 'attribute' => 'real_name',
 			'width' => '150px'
-		],
+		],*/
 
 		[ 'attribute' => 'company',
-			'width' => '100px'
-		],*/
+		  'width' => '100px'
+		],
 
 		[ 'attribute' => 'community',
 			'value' => function ( $model ) {
@@ -171,7 +168,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '后台用户列表',
+		'panel' => [ 'type' => 'info', 'heading' => '后台用户列表',
 			'before' => Html::a( 'New', [ 'create' ], [ 'class' => 'btn btn-success' ] )
 		],
 		'hover' => true,

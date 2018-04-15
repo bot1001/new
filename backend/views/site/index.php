@@ -67,7 +67,9 @@ $this->title = '裕达物业';
     	echo date('Y-m-d H:i:s').'</g>';
     	Pjax::end(); 
     	
-	//echo (round(1/3,4)*100).'%'; php字符串相除并保留两个小数点
+	    //echo (round(1/3,4)*100).'%'; php字符串相除并保留两个小数点
+	    
+	    print_r($_SESSION['community']);
     	?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>

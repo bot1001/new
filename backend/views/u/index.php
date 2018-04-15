@@ -74,6 +74,27 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		[ 'class' => 'kartik\grid\SerialColumn',
 			'header' => '序 <br />号'
 		],
+		
+		[ 'attribute' => 'company',
+		  'value' => 'com.name',
+		  'filterType' => GridView::FILTER_SELECT2,
+		  'filter' => $company,
+		  'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		  'filterWidgetOptions' => [
+		  	'pluginOptions' => [ 'allowClear' => true ],
+		  ],
+		  /*'readonly' => function ( $model, $key, $index, $widget ) {
+		  	return ( $model->role == 1 ); // 判断活动列是否可编辑
+		  },*/
+		  'class' => 'kartik\grid\EditableColumn',
+			'editableOptions' => [
+				'header' => '关联小区',
+				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
+				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'data' => $company,
+			],
+		  'width' => '100px'
+		],
 
 		[ 'attribute' => 'community',
 			'value' => 'c.community_name',
@@ -88,7 +109,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			},
 			'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
-				'header' => '详情',
+				'header' => '关联小区',
 				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => $community,
@@ -124,7 +145,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			},
 			'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
-				'header' => '详情',
+				'header' => '状态',
 				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => [ 1 => '正常', 0 => '禁用', 2 => '其他' ],
@@ -146,7 +167,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			],
 			'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
-				'header' => '详情',
+				'header' => '角色',
 				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => $date,
@@ -159,7 +180,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		[ 'attribute' => 'phone',
 			'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
-				'header' => '详情',
+				'header' => '手机号码',
 				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],

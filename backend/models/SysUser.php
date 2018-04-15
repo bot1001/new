@@ -47,6 +47,9 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['name'], 'unique'],
 			[['name', 'status'], 'required', 'message' => '确认密码不能为空'],
             ['n', 'compare', 'compareAttribute' => 'name', 'message' => '两次密码输入不一致'],
+			
+            [['community'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community' => 'community_id']],
+            [['company'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company' => 'id']],
         ];
     }
 	
@@ -80,6 +83,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
+			'company' => '隶属公司',
             'real_name' => '真实姓名',
             'name' => '名字',
 			'role' => '角色',
@@ -248,4 +252,10 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	 {
 	     return $this->hasOne(CommunityBasic::className(), ['community_id' => 'community']);
 	 }
+	
+	//关联公司
+	public function getCom()
+	{
+	    return $this->hasOne(Company::className(), ['id' => 'company']);
+	}
 }

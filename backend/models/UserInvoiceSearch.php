@@ -49,10 +49,10 @@ class UserInvoiceSearch extends UserInvoice
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+		$c = $_SESSION['community'];
 		
 		if($c){
-			$query = UserInvoice::find()->where(['user_invoice.community_id' => "$c"]);
+			$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
 		}else{
 			$query = UserInvoice::find();
 		}

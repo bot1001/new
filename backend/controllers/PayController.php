@@ -109,12 +109,11 @@ class PayController extends Controller
 	    $REMARK2="";				                            //说明2  千万不能有中文
 	    $RETURNTYPE="2";										//$_POST["RETURNTYPE"] ;  
 	    $TIMEOUT="";											//请求有限时间 
-	    $PUB32TR2="106b77d5d88cfd3300a95113020111";						//$_POST["PUB32TR2"] ;  
+	    $PUB32TR2="106b77d5d88cfd3300a95113020111";				//$_POST["PUB32TR2"] ;  
 	    $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6" ;	//请求网址
      
 	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
 		
-	    print_r($f);exit;
 		return $this->redirect(['/order/jh','f' => $f]);
 		
 	}

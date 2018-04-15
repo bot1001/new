@@ -49,33 +49,21 @@ class UserInvoiceController extends Controller {
 		$get = $_GET;
 		$searchModel = new UserInvoiceSearch();
 		
-		$c = $_SESSION['user']['community'];
-	    if(empty($c)){
-	    	$comm = CommunityBasic::find()
-	    		->select('community_name, community_id')
-	    		->indexBy('community_id')
-	    		->column();
-			
-	    	$build = CommunityBuilding::find()
-	    		->select('building_name')
-	    		->distinct()
-	    		->indexBy('building_name')
-	    		->column();
-	    }else{
-	    	$comm = CommunityBasic::find()
-	    		->select(' community_name')
-	    		->where(['community_id' => "$c"])
-				->orderBy('community_name DESC')
-	    		->indexBy('community_id')
-	    		->column();
-			
-			$build = CommunityBuilding::find()
-	    		->select('building_name')
-				->where(['community_id' => "$c"])
-	    		->distinct()
-	    		->indexBy('building_name')
-	    		->column();
-	    }
+		$c = $_SESSION['community'];
+	    
+	    $comm = CommunityBasic::find()
+	    	->select(' community_name')
+	    	->where(['in', 'community_id', $_SESSION['community']])
+			->orderBy('community_name DESC')
+	    	->indexBy('community_id')
+	    	->column();
+		
+		$build = CommunityBuilding::find()
+	    	->select('building_name')
+			->where(['in', 'community_id', $_SESSION['community']])
+	    	->distinct()
+	    	->indexBy('building_name')
+	    	->column();
 		
 		$w = date('Y');
 	    $y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];

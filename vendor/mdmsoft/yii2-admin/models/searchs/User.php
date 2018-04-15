@@ -19,7 +19,7 @@ class User extends SysUser
     {
         return [
             [['id', 'role', 'status', 'create_id', 'update_id'], 'integer'],
-            [['community', 'real_name', 'name', 'phone', 'password', 'comment', 'salt', 'create_time', 'update_time', 'new_pd'], 'safe'],
+            [['community', 'company', 'real_name', 'name', 'phone', 'password', 'comment', 'salt', 'create_time', 'update_time', 'new_pd'], 'safe'],
         ];
     }
 
@@ -58,6 +58,7 @@ class User extends SysUser
             //'company' => $this->company,
             'role' => $this->role,
             'status' => $this->status,
+            'company' => $this->company,
             'create_id' => $this->create_id,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
