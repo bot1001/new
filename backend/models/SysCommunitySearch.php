@@ -12,6 +12,10 @@ use app\models\SysCommunity;
  */
 class SysCommunitySearch extends SysCommunity
 {
+	public function attributes()
+	{
+		return array_merge(parent::attributes(),['company', 'name']);
+	}
     /**
      * {@inheritdoc}
      */
@@ -19,7 +23,7 @@ class SysCommunitySearch extends SysCommunity
     {
         return [
             [['id', 'sys_user_id', 'own_add', 'own_delete', 'own_update', 'own_select'], 'integer'],
-            [['community_id'], 'safe'],
+            [['community_id', 'company', 'name'], 'safe'],
         ];
     }
 

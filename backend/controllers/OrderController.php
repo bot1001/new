@@ -175,6 +175,12 @@ class OrderController extends Controller
 		}
 	}
 	
+	//建行支付成功后转跳到此地址
+	public function actionJianh()
+	{
+		return $this->render('jianh');
+	}
+	
     /**
      * Displays a single OrderBasic model.
      * @param integer $id

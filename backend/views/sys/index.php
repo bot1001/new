@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'kartik\grid\SerialColumn','header' => '序<br />号'],
 
             ['attribute'=> 'company',
-			'value' => 'sysUser.company',
-			//'label' => '公司'
+			 'value' => 'com.name',
+			 'label' => '公司'
 			],
 		
             ['attribute'=> 'name',

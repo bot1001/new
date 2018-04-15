@@ -106,16 +106,76 @@ class PayController extends Controller
 	    $CURCODE="01";											//币种 
 	    $TXCODE="530550";										//交易类型 
 	    $REMARK1="strata fee";									//说明1  千万不能有中文
-	    $REMARK2="";				                            //说明2  千万不能有中文
+		
+		//备注信息中包含支付公钥前面60位数
+	    $REMARK2="30819d300d0609";				                            //说明2  千万不能有中文
 	    $RETURNTYPE="2";										//$_POST["RETURNTYPE"] ;  
 	    $TIMEOUT="";											//请求有限时间 
-	    $PUB32TR2="106b77d5d88cfd3300a95113020111";				//$_POST["PUB32TR2"] ;  
+	    $PUB32TR2="42375f6a3517265797d7f877020113";				//$_POST["PUB32TR2"] ;  
 	    $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6" ;	//请求网址
      
 	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
 		
 		return $this->redirect(['/order/jh','f' => $f]);
+	}
+	
+	public function actionJian()
+	{
+		//验签秘钥
+		$key = '30819d300d0609';	
 		
+		if($_GET['REMARK2'] == $key && $_GET['SUCCESS'] == 'Y')
+		{
+			$post = $_GET;
+			$order_id = $post['ORDERID']; //订单编号
+			$order_amount = $post['PAYMENT']; //交易金额
+			$payment_time = date(time());
+			
+			//查找订单编号是否存在
+		    $ord = OrderBasic::find()
+				->select('order_id,order_amount')
+				->andwhere(['order_id' => $order_id])
+				->andwhere(['order_amount' => $order_amount])
+				->asArray()
+				->one();
+		print_r($ord);exit;
+		if($ord){
+				$transaction = Yii::$app->db->beginTransaction();
+				try{
+					foreach($ord as $order){
+					    OrderBasic::updateAll(['status' => 2, //变更状态
+					    					   'payment_gateway' => 7, //变更支付方式
+					    					   'payment_number' => $order_id, // 支付编码
+					    					   'payment_time' => $payment_time // 支付时间
+					    					   ],
+					    					   'order_id = :oid', [':oid' => $order_id]
+					    				 );
+					
+					
+					$p_id = OrderProducts::find()
+						->select('product_id')
+						->where(['order_id' => $order_id])
+						->asArray()
+						->all();
+					
+						foreach($p_id as $pid){
+							UserInvoice::updateAll(['invoice_status' => 2,
+											    'payment_time' => strtotime($payment_time),
+											    'update_time' => strtotime($payment_time),
+												'order_id' => $order_id],
+									            'invoice_id = :oid', [':oid' => $pid['product_id']]
+										);
+						}
+					}
+					$transaction->commit();
+				}catch(\Exception $e) {
+					print_r($e);
+                    $transaction->rollback();
+                }
+			}
+			
+		}
+		return 'text';
 	}
 	
 	//现金支付变更费项状态

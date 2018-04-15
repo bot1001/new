@@ -305,12 +305,12 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
-				$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+				$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', 7 => '建行' ];
 				return $data[ $model[ 'invoice_status' ] ];
 			},
 			//'refreshGrid' => 'true',
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
+			'filter' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', 7 => '建行' ],
 			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
@@ -322,7 +322,7 @@ $this->title = '缴费管理';
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
+				'data' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', 7 => '建行' ],
 			],
 			'hAlign' => 'center',
 			'width' => ''

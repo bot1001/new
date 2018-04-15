@@ -201,13 +201,13 @@ $this->title = '订单管理';
 		[ 'attribute' => 'payment_gateway',
 			//'group' => true,
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金' ],
+			'filter' => [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'value' => function ( $model ) {
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金' ];
+				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
 				if ( empty( $model[ 'payment_gateway' ] ) ) {
 					return '';
 				} else {

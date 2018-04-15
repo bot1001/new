@@ -68,6 +68,6 @@ class SysCommunity extends \yii\db\ActiveRecord
 	//建立公司关系
 	public function getCom()
     {
-        return $this->hasMany(Company::className(), ['id' => 'company'])->viaTable('sys_user', ['id' => 'sys_user_id']);
+        return $this->hasOne(Company::className(), ['id' => 'company'])->viaTable('sys_user', ['id' => 'sys_user_id']);
     }
 }
