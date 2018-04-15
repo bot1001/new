@@ -18,6 +18,39 @@ $this->registerJs($script);
 
 $this->title = '裕达物业';
 ?>
+ <button id="button">请求纯文本</button>
+ <br />
+ <br />
+ 
+ <div id="test" style="text-align: center"></div>
+ 
+ <script>
+	 document.getElementById('button').addEventListener("click", loadText);
+	 
+	 function loadText(){
+		 
+		 var xhr = new XMLHttpRequest();
+		 //xml请求参数
+		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang']); ?>", true);
+		 xhr.onload = function(){
+			 if(this.responseText == 'test'){
+				 document.getElementById('test').innerHTML = '测试';
+			 }
+			 
+//			 console.log("READYSTATE: ",xhr.readyState);
+//			 console.log(this.responseText);
+		 }
+//		 xhr.onreadystatechange = function(){
+//			 console.log("READYSTATE: ",xhr.readyState);
+//			 if(this.status == 200 && this.readyState == 4){
+//				 console.log(this.responseText);
+//			 }
+//		 }
+		 //发送请求
+		 xhr.send();
+	 }
+</script>
+ 
   <style>
 	  h1{
 		  text-align:center;
@@ -68,10 +101,8 @@ $this->title = '裕达物业';
     	Pjax::end(); 
     	
 	    //echo (round(1/3,4)*100).'%'; php字符串相除并保留两个小数点
-	    
-	    print_r($_SESSION['community']);
-    	?>
+	    ?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>
-		
+	
 </div>

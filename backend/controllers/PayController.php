@@ -116,7 +116,14 @@ class PayController extends Controller
      
 	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
 		
-		return $this->redirect(['/order/jh','f' => $f]);
+		return $this->redirect(['/order/jh','f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
+	}
+	
+	//建行主动查询
+	public function actionJhang()
+	{
+		$test = 'test';
+		return $test;
 	}
 	
 	public function actionJian()
@@ -138,7 +145,7 @@ class PayController extends Controller
 				->andwhere(['order_amount' => $order_amount])
 				->asArray()
 				->one();
-		print_r($ord);exit;
+		
 		if($ord){
 				$transaction = Yii::$app->db->beginTransaction();
 				try{
@@ -160,8 +167,8 @@ class PayController extends Controller
 					
 						foreach($p_id as $pid){
 							UserInvoice::updateAll(['invoice_status' => 2,
-											    'payment_time' => strtotime($payment_time),
-											    'update_time' => strtotime($payment_time),
+											    'payment_time' => $payment_time,
+											    'update_time' => $payment_time,
 												'order_id' => $order_id],
 									            'invoice_id = :oid', [':oid' => $pid['product_id']]
 										);
@@ -175,7 +182,7 @@ class PayController extends Controller
 			}
 			
 		}
-		return 'text';
+		return 'success';
 	}
 	
 	//现金支付变更费项状态

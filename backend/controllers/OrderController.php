@@ -252,8 +252,13 @@ class OrderController extends Controller
 	public function actionJh()
 	{
 		$f = $_GET['f'];
+		$order_id = $_GET['order_id'];
+		$order_amount = $_GET['order_amount'];
+		
 		return $this->render('jh',[
-			'f' => $f
+			'f' => $f,
+			'order_amount' => $order_amount,
+			'order_id' => $order_id
 		]);
 	}
 
