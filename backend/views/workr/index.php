@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
             ['class' => 'kartik\grid\SerialColumn', 'header' => '序<br />号'],
 
+		'account_id',
             ['attribute' => 'community',
 			 'value' => 'c.community_name',
 			 'filterType' => GridView::FILTER_SELECT2,

@@ -79,7 +79,7 @@ unset($rules[RouteRule::RULE_NAME]);
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'primary', 'heading' => '角色列表',
+		'panel' => ['type' => 'info', 'heading' => '角色列表',
 				   'before' => Html::a(Yii::t('rbac-admin', 'New'), '#', [ 'class' => 'btn btn-info create',
 													  'data-toggle' => 'modal',
 													  'data-target' => '#update-modal',

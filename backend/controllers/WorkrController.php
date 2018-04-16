@@ -41,6 +41,11 @@ class WorkrController extends Controller
     {
         $searchModel = new WorkRSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+			$searchModel->account_id = $id;
+		}
 		//获取小区
 		$community = CommunityBasic::find()
 			->select('community_name, community_id')
@@ -76,15 +81,28 @@ class WorkrController extends Controller
     public function actionCreate()
     {
         $model = new WorkR();
+		
 		//获取小区
 		$company = Company::find()->select('name, id')->orderBy('name')->indexBy('id')->column();
+		
 		//获取用户
-		$user = UserAccount::find()
-			->select('user_name, account_id')
-			->where(['account_role' => '1'])
-			->orderBy('user_name DESC')
-			->indexBy('account_id')
-			->column();
+		if(isset($_GET['user_id']))
+		{
+			$id = $_GET['user_id'];
+			$user = UserAccount::find()
+		    	->select('user_name, account_id')
+		    	->andwhere(['account_role' => '1', 'user_id' => "$id"])
+		    	->orderBy('user_name DESC')
+		    	->indexBy('account_id')
+		    	->column();
+		}else{
+		    $user = UserAccount::find()
+		    	->select('user_name, account_id')
+		    	->where(['account_role' => '1'])
+		    	->orderBy('user_name DESC')
+		    	->indexBy('account_id')
+		    	->column();
+		}
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
 		{

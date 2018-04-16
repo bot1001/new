@@ -55,7 +55,6 @@ class User extends SysUser
 
         $query->andFilterWhere([
             'id' => $this->id,
-            //'company' => $this->company,
             'role' => $this->role,
             'status' => $this->status,
             'company' => $this->company,

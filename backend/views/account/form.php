@@ -10,9 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="user-account-form">
 
-    <?php $form = ActiveForm::begin([
-	     'action' => ['/account/create', 'a' => $a]
-    ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
     

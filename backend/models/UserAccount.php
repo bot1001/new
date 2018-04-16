@@ -43,7 +43,6 @@ class UserAccount extends \yii\db\ActiveRecord
             [['account_id','mobile_phone'], 'required'],
 			['password', 'default', 'value' => 'e10adc3949ba59abbe56e057f20f883e'],
 			[['account_id'], 'unique', 'targetAttribute' => ['account_id'], 'message' => '用户重复'],
-			[['mobile_phone, user_name'], 'unique', 'targetAttribute' => ['mobile_phone, user_name'], 'message' => '用户重复'],
             [['account_role', 'new_message', 'status'], 'integer'],
             [['account_id', 'user_name', 'password', 'qq_openid', 'weixin_openid', 'weibo_openid'], 'string', 'max' => 64],
             [['mobile_phone'], 'string', 'max' => 11],

@@ -10,13 +10,14 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\WorkR;
 use app\models\UserData;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * AccountController implements the CRUD actions for UserAccount model.
  */
 class AccountController extends Controller
 {
-	public $layout = "m2";
     /**
      * @inheritdoc
      */
@@ -32,15 +33,19 @@ class AccountController extends Controller
         ];
     }
 	
-	//检查用户是否登录
-	public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }
+	//GridView 页面直接编辑代码
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'account' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => UserAccount::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Lists all UserAccount models.
@@ -92,7 +97,6 @@ class AccountController extends Controller
      */
     public function actionCreate($a)
     {
-		$this ->layout = "m2";
         $model = new UserAccount();
 		$userdata = new UserData();
 		$a = mb_substr($a,0,32);
@@ -107,26 +111,38 @@ class AccountController extends Controller
 			$name = $account['user_name'];
 			$password = md5($account['password']);
 			$mobile_phone = $account['mobile_phone'];
-			$sql = "insert ignore into user_account(account_id, user_name, password, mobile_phone, account_role)
-			    values ('$a', '$name', '$password','$mobile_phone', '1')";
 			
-			$transaction = Yii::$app->db->beginTransaction();   //开始事务
-			try{
-  		        $m = Yii::$app->db->createCommand( $sql )->execute();
-				$id = Yii::$app->db->getLastInsertID();
-			    if($m){
-			    	$userdata->account_id = $_GET['a'];
-			    	$userdata->gender = $user['gender'];
-			    	$userdata->real_name = $account['user_name'];
-			    	$userdata->save();
+			//查找是否存在此用户 标志信息为手机号码和用户姓名
+			$useraccount = UserAccount::find()
+				->andwhere(['user_name' => $name, 'mobile_phone' => $mobile_phone])
+				->asArray()
+				->all();
+			
+			//如果不存在
+			if(empty($useraccount)){
+				$sql = "insert ignore into user_account(account_id, user_name, password, mobile_phone, account_role)
+			    values ('$a', '$name', '$password','$mobile_phone', '1')";
+			    
+			    $transaction = Yii::$app->db->beginTransaction();   //开始事务
+			    try{
+  		            $m = Yii::$app->db->createCommand( $sql )->execute();
+			    	$id = Yii::$app->db->getLastInsertID();
+			        if($m){
+			        	$userdata->account_id = $_GET['a'];
+			        	$userdata->gender = $user['gender'];
+			        	$userdata->real_name = $account['user_name'];
+			        	$d = $userdata->save();
+			        }
+			    	$transaction->commit(); //提交事务
+			    }catch(Exception $e){
+			    	$transaction->rollBack(); //数据库回滚
 			    }
-				$transaction->commit();
-			}catch(Exception $e){
-				$transaction->rollBack();
+			    return $this->redirect(['index']);
+			}else{
+				return $this->redirect( Yii::$app->request->referrer);
 			}
-            return $this->redirect(['/account/view', 'id' => $id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
 				'a' => $a,
 				'userdata' => $userdata
@@ -158,12 +174,14 @@ class AccountController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$userdata = new UserData();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->user_id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
+				'userdata' => $userdata
             ]);
         }
     }

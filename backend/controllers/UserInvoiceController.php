@@ -24,7 +24,8 @@ use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
 /**
  * UserInvoiceController implements the CRUD actions for UserInvoice model.
  */
-class UserInvoiceController extends Controller {
+class UserInvoiceController extends Controller 
+{
 	/**
 	 * @inheritdoc
 	 */
@@ -48,6 +49,24 @@ class UserInvoiceController extends Controller {
 	{
 		$get = $_GET;
 		$searchModel = new UserInvoiceSearch();
+		
+		if(isset($get['order'])){ //判断来自订单列表的查询
+			if(isset($get['order_id'])){ //判断订单编号是否存在
+				$order_id = $get['order_id']; //接收订单编号
+		        $searchModel->order_id = $order_id; //为搜索模型赋值
+				//查找对应订单编号的费项是否存在
+				$s = UserInvoice::find()->select('order_id')->where(['order_id' => $order_id])->asArray()->one();
+				if ( empty( $s ) ) { //如果为空则……
+    	    	    $session = Yii::$app->session;
+    	    	    $session->setFlash( 'm_order', '2' );
+    	    	    return $this->redirect( Yii::$app->request->referrer );
+		    	}
+			}else{ //否则返回
+				$session = Yii::$app->session;
+    	    	$session->setFlash( 'm_order', '2' );
+    	    	return $this->redirect( Yii::$app->request->referrer );
+			}
+		}
 		
 		$c = $_SESSION['community'];
 	    
@@ -92,16 +111,6 @@ class UserInvoiceController extends Controller {
 			'm' => $m
 		] );
 	}
-	
-	//检查用户是否登录
-	/*public function beforeAction( $action ) 
-	{
-		if ( Yii::$app->user->isGuest ) {
-			$this->redirect( [ '/login' ] );
-			return false;
-		}
-		return true;
-	}*/
 
 	//下载业主资料模板
 	public function actionDownload()
@@ -471,27 +480,6 @@ class UserInvoiceController extends Controller {
 			'c' => $c
 		] );
 	}
-
-	//有费项ID查询缴费详情
-	public function actionIndex1( $order_id ) 
-    {
-    	$searchModel = new UserInvoiceSearch();
-    	$searchModel->order_id = $order_id;
-    	$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
-		//查询费项列表中订单是否存在
-    	$s = UserInvoice::find()->select('order_id')->where(['order_id' => $order_id])->asArray()->one();
-		
-    	if ( empty( $s ) ) {
-    		$session = Yii::$app->session;
-    		$session->setFlash( 'm_order', '2' );
-    		return $this->redirect( Yii::$app->request->referrer ); //request->referrer
-    	} else {
-    		return $this->render( 'index', [
-    			'searchModel' => $searchModel,
-    			'dataProvider' => $dataProvider,
-    		] );
-    	}
-    }
 
 	//批量生产费项预览
 	public function actionNew() 

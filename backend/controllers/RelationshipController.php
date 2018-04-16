@@ -15,7 +15,6 @@ use yii\filters\VerbFilter;
  */
 class RelationshipController extends Controller
 {
-	public $layout = "m2";
     /**
      * @inheritdoc
      */

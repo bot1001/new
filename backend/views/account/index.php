@@ -2,6 +2,41 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+
+
+Modal::begin( [
+	'id' => 'update-modal',
+	'header' => '<h4 class="modal-title">权限指配</h4>',
+    ] );
+$u_Url = Url::toRoute( '/account/update' );
+$n_Url = Url::toRoute(['/account/create', 'a' => $k]);
+
+$uJs = <<<JS
+   $('.update').on('click',function(){
+   $('.modal-title').html('更新');
+      $.get('{$u_Url}',{id:$(this).closest('tr').data('key')},
+         function (data) {
+            $('.modal-body').html(data);
+      });
+   });
+JS;
+$this->registerJs( $uJs );
+
+$uJs = <<<JS
+    $('.new').on('click', function () {
+	    $('.modal-title').html('创建');
+        $.get('{$n_Url}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs ($uJs);
+
+Modal::end();
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AccountSearch */
@@ -21,9 +56,19 @@ $this->params['breadcrumbs'][] = $this->title;
 		'value' => 'work.work_number',
 		'label' => '工号'],
 		
-		'user_name',
+		['attribute' => 'user_name',
+		'class' => 'kartik\grid\EditableColumn',
+		 'editableOptions' => [
+		 	'formOptions' => [ 'action' => [ '/account/account' ] ],
+		 	'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+		 ],],
 		
 		['attribute' => 'mobile_phone',
+		 'format' => 'raw',
+		 'value' => function($model){
+	     	$url = Yii::$app->urlManager->createUrl(['/workr/create', 'user_id' => $model->user_id]);
+	     	return Html::a($model->mobile_phone, $url);
+	     },
 		'hAlign' => 'center'], 
 		
 		['attribute' => 'status',
@@ -37,6 +82,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		    $d = [1 => '正常', 2 => '删除', 3 => '锁定'];
 	     	return $d[$model->status];
 	     },
+		 'class' => 'kartik\grid\EditableColumn',
+		 'editableOptions' => [
+		 	'formOptions' => [ 'action' => [ '/account/account' ] ],
+		 	'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+		        'data' => [1 => '正常', 2 => '删除', 3 => '锁定'],
+		 ],
 		 'hAlign' => 'center'
 		],
 		
@@ -44,20 +95,34 @@ $this->params['breadcrumbs'][] = $this->title;
 		 'mergeHeader' => true,
 		'format' => 'raw',
 		'value' => function($model){
-	    	$url = Yii::$app->urlManager->createUrl( [ '#'] );
+	    	$url = Yii::$app->urlManager->createUrl( [ '/workr/index', 'id' => $model->account_id] );
 	    	return Html::a('more', $url);
 	    },
 		'hAlign' => 'center'],
 		
 		['class' => 'kartik\grid\ActionColumn',
-		 'template' => '{view}{update}',
+		 'template' => '{view}{update}{delete}',
+		 'buttons' => [
+				'update' => function ( $url, $model, $key ) {
+					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
+						'data-toggle' => 'modal',
+						'data-target' => '#update-modal',
+						'class' => 'update',
+						'data-id' => $key,
+					] );
+				}
+			],
 		'header' => '操<br />作'],
 	];
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'primary', 'heading' => '内部员工',
-				   'before' => Html::a('New', ['create','a' => $k], ['class' => 'btn btn-info'])],
+		'panel' => ['type' => 'info', 'heading' => '内部员工',
+				   'before' => Html::a( 'New', '#', [
+				'data-toggle' => 'modal',
+				'data-target' => '#update-modal', 
+		        'class' => 'btn btn-success new',
+			] )],
         'columns' => $gridColumn,
     ]); ?>
 </div>

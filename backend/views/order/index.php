@@ -113,7 +113,7 @@ $this->title = '订单管理';
 			//'mergeHeader' => true,
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				$url = Yii::$app->urlManager->createUrl( [ 'user-invoice/index1', 'order_id' => $model->order_id ] );
+				$url = Yii::$app->urlManager->createUrl( [ 'user-invoice/index', 'order_id' => $model->order_id, 'order' => 'order' ] );
 				return Html::a( $model->order_id, $url );
 			},
 			'hAlign' => 'center',

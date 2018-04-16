@@ -69,18 +69,36 @@ class WorkRSearch extends WorkR
         $query->andFilterWhere([
             'id' => $this->id,
             'work_number' => $this->work_number,
+            'work_relationship_account.account_id' => $this->account_id,
             'community_basic.community_id' => $this->community,
             //'user_account.user_name' => $this->name,
             'community_id' => $this->community_id,
             'account_superior' => $this->account_superior,
         ]);
 
-        $query->andFilterWhere(['like', 'account_id', $this->account_id])
-            ->andFilterWhere(['like', 'work_status', $this->work_status])
+        $query->andFilterWhere(['like', 'work_status', $this->work_status])
             ->andFilterWhere(['like', 'user_account.user_name', $this->name])
             ->andFilterWhere(['like', 'user_account.mobile_phone', $this->phone])
             ->andFilterWhere(['like', 'account_role', $this->account_role])
             ->andFilterWhere(['like', 'account_status', $this->account_status]);
+		
+		$dataProvider -> sort->attributes['community']=
+			[
+				'asc' => ['community_basic.community_id'=>SORT_ASC],
+				'desc' => ['community_basic.community_id'=>SORT_DESC],
+			];
+		
+		$dataProvider -> sort->attributes['name']=
+			[
+				'asc' => ['user_name'=>SORT_ASC],
+				'desc' => ['user_name'=>SORT_DESC],
+			];
+		
+		$dataProvider -> sort->attributes['phone']=
+			[
+				'asc' => ['mobile_phone'=>SORT_ASC],
+				'desc' => ['mobile_phone'=>SORT_DESC],
+			];
 
         return $dataProvider;
     }

@@ -47,7 +47,7 @@ $this->registerJs( $updateJs );
 
 $updateJs = <<<JS
     $('.create').on('click', function () {
-	    $('.modal-title').html('编辑');
+	    $('.modal-title').html('创建');
         $.get('{$create}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
@@ -210,7 +210,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '账户列表',
+		'panel' => [ 'type' => 'info', 'heading' => '账户列表',
 				   'before' => Html::a( 'New', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 
