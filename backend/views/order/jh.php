@@ -9,7 +9,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 $script = <<< JS
 $(document).ready(function() {
-    setInterval(function(){ $("#refreshButton").click(); }, 5);
+    setInterval(function(){ $("#button").click(); }, 10000);
 });
 JS;
 $this->registerJs($script);
@@ -35,7 +35,6 @@ $this->registerJs($script);
 	   #div2{
 		   height: 50px;
 		   width: 500px;
-		   #background: #9A2729;
 		   font-size: 20px;
 		   text-align: center;
 		   position:absolute;top:74%;left: 40%;
@@ -46,7 +45,38 @@ $this->registerJs($script);
 		   font-size: 25px
 	   }
 	   
+	   button{
+		   display:none;
+	   }
 </style>
+  
+  <button id="button">查询</button>
+ 
+ <script>
+	 document.getElementById('button').addEventListener("click", loadText);
+	 
+	 function loadText()
+	{ 
+		 var xhr = new XMLHttpRequest();
+		 //xml请求参数
+		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id, 'order_amount' => $order_amount]); ?>", true);
+		 xhr.onload = function(){
+			 if(this.responseText == '1'){
+				 document.getElementById('div2').innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id]); ?>">支付成功！</a>';
+			 }
+			 
+			 if(this.responseText == '2' ){
+				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
+			 }
+			 
+			 if(this.responseText == '0' ){
+				 document.getElementById('div2').innerHTML = '<l>支付失败，请重新支付！</l>';
+			 }
+		 }
+		 //发送请求
+		 xhr.send();
+	 }
+</script>
    
 <div>
     <div id="div1">
@@ -60,8 +90,3 @@ $this->registerJs($script);
 		?>
 	</div>
 </div>
-<?php Pjax::begin(); ?>
-   <?php
-       //echo '<g>'.Html::a("北京时间：", ['/pay/jhang'], ['id' => 'refreshButton']);
-   ?>
-<?php Pjax::end() ?>

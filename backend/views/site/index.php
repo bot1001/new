@@ -33,8 +33,10 @@ $this->title = '裕达物业';
 		 //xml请求参数
 		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang']); ?>", true);
 		 xhr.onload = function(){
-			 if(this.responseText == 'test'){
-				 document.getElementById('test').innerHTML = '测试';
+			 if(this.responseText == true){
+				 document.getElementById('test').innerHTML = '支付成功！';
+			 }else{
+				 document.getElementById('test').innerHTML = '等待支付';
 			 }
 			 
 //			 console.log("READYSTATE: ",xhr.readyState);
