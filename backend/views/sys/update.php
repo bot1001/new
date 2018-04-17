@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\SysCommunity */
 
-$this->title = 'Update Sys Community: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sys Communities', 'url' => ['index']];
+$this->title = '更新: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => '关联小区', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

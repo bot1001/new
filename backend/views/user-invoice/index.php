@@ -43,6 +43,7 @@ $this->registerJs( $updateJs );
 
 $updateJs = <<<JS
     $('.new').on('click', function () {
+	    $('.modal-title').html('生成费项');
         $.get('{$newUrl}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);

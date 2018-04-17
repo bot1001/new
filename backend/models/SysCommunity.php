@@ -36,8 +36,8 @@ class SysCommunity extends \yii\db\ActiveRecord
             [['sys_user_id', 'community_id', 'own_add', 'own_delete', 'own_update', 'own_select'], 'required'],
             [['sys_user_id', 'own_add', 'own_delete', 'own_update', 'own_select'], 'integer'],
             [['community_id'], 'string', 'max' => 128],
-            [['sys_user_id', 'community_id'], 'unique', 'targetAttribute' => ['sys_user_id', 'community_id']],
-            [['sys_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => SysUser::className(), 'targetAttribute' => ['sys_user_id' => 'id']],
+            [['sys_user_id'], 'unique', 'targetAttribute' => ['sys_user_id', 'community_id']],
+            //[['sys_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => SysUser::className(), 'targetAttribute' => ['sys_user_id' => 'id']],
         ];
     }
 
@@ -48,7 +48,7 @@ class SysCommunity extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sys_user_id' => '序号',
+            'sys_user_id' => '用户',
             'community_id' => '关联小区编码',
             'own_add' => '添加',
             'own_delete' => '删除',

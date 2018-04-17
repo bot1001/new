@@ -67,13 +67,15 @@ class SysCommunitySearch extends SysCommunity
         $query->andFilterWhere([
             'id' => $this->id,
             'sys_user_id' => $this->sys_user_id,
+            'company.id' => $this->company,
             'own_add' => $this->own_add,
             'own_delete' => $this->own_delete,
             'own_update' => $this->own_update,
             'own_select' => $this->own_select,
         ]);
 
-        $query->andFilterWhere(['like', 'community_id', $this->community_id]);
+        $query->andFilterWhere(['like', 'sys_user.name', $this->name])
+			  ->andFilterWhere(['like', 'community_id', $this->community_id]);
 
         return $dataProvider;
     }

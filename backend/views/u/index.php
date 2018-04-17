@@ -97,24 +97,13 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		],
 
 		[ 'attribute' => 'community',
-			'value' => 'c.community_name',
-			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => $community,
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
-			'filterWidgetOptions' => [
-				'pluginOptions' => [ 'allowClear' => true ],
-			],
-			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( $model->name == 'admin' ); // 判断活动列是否可编辑
-			},
-			'class' => 'kartik\grid\EditableColumn',
-			'editableOptions' => [
-				'header' => '关联小区',
-				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => $community,
-			],
-			'width' => '200px'
+		 'format' => 'raw',
+		 'value' => function($models){
+	          $url = Yii::$app->urlManager->createUrl(['#']);
+	      	  return Html::a('点击设置', $url);
+	      },
+		 'hAlign' => 'center',
+		 'width' => '200px'
 		],
 
 		[ 'attribute' => 'name',

@@ -150,6 +150,7 @@ class PayController extends Controller
         curl_setopt($u,CURLOPT_HEADER,0);
         // 执行并获取HTML文档内容
         $date = curl_exec($u);
+		curl_close($u);
 		print_r($date);
 		
 		/*if($date['STATUS'] == '1')

@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\SysCommunitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sys Communities';
+$this->title = '用户关联小区';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sys-community-index">
@@ -20,6 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['attribute'=> 'company',
 			 'value' => 'com.name',
+			 'filterType' => GridView::FILTER_SELECT2,
+		    'filter' => $company,
+		    'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		    'filterWidgetOptions' => [
+		    	'pluginOptions' => [ 'allowClear' => true ],
+		    ],
 			 'label' => '公司'
 			],
 		
