@@ -12,15 +12,25 @@ use app\models\CommunityBasic;
 
 <div class="sys-community-form">
 
-   <?php 
-	//获取楼宇
+   <?php
+	if($id >= '0'){
+		//获取用户
 		$sys = SysUser::find()
 			->select('name, id')
+			->where(['id' => "$id", 'status' => '1'])
 			->orderBy('name')
 			->asArray()
 			->indexBy('id')
 			->column();
-		
+		}else{
+		$sys = SysUser::find()
+			->select('name, id')
+			->where(['status' => '1'])
+			->orderBy('name')
+			->asArray()
+			->indexBy('id')
+			->column();
+	}
 		//关联小区
 		$comm = CommunityBasic::find()
 			->select('community_name, community_id')

@@ -98,8 +98,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 		[ 'attribute' => 'community',
 		 'format' => 'raw',
-		 'value' => function($models){
-	          $url = Yii::$app->urlManager->createUrl(['#']);
+		 'value' => function($model){
+	          $url = Yii::$app->urlManager->createUrl(['/sys/create', 'id' => $model->id]);
 	      	  return Html::a('点击设置', $url);
 	      },
 		 'hAlign' => 'center',

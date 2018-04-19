@@ -106,5 +106,4 @@ $this->title = '裕达物业';
 	    ?>
 	<a href="<?php echo Url::to(['/user-invoice/search']); ?>"> <h5>缴费统计</h5></a>
 	<a href="<?php echo Url::to(['/user-invoice/sum']); ?>"> <h5>新缴费统计</h5></a>
-	
 </div>

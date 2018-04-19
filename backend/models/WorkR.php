@@ -52,7 +52,7 @@ class WorkR extends \yii\db\ActiveRecord
     {
         return [
             'id' => '序号',
-            'account_id' => '用户',
+            'account_id' => '用户串号',
             'work_number' => '工号',
             'community_id' => '小区',
             'account_superior' => '上级',

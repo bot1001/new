@@ -104,9 +104,16 @@ class SysController extends Controller
 				return $this->redirect(Yii::$app->request->referrer);
 			}
         }
+		
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+		}else{
+			$id = 0;
+		}
 
         return $this->render('create', [
             'model' => $model,
+			'id' => $id
         ]);
     }
 

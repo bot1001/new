@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\SysCommunity */
 
-$this->title = '创建绑定';
+$this->title = '创建绑定小区';
 $this->params['breadcrumbs'][] = ['label' => 'Sys Communities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+	    'id' => $id
     ]) ?>
 
 </div>

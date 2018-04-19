@@ -108,4 +108,10 @@ class CommunityBasic extends \yii\db\ActiveRecord
     {
         return $this->hasMany(WaterMeter::className(), ['community' => 'community_id']);
     }
+	
+	//获取关联小区
+	public function getR()
+    {
+        return $this->hasOne(CommunityRealestate::className(), ['community_id' => 'community_id']);
+    }
 }

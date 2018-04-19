@@ -45,7 +45,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
 		$c = $_SESSION['user']['community'];
 		
 		if($c){
-			$query = CommunityRealestate::find()->where(['community_id' => "$c"]);
+			$query = CommunityRealestate::find()->where(['community_realestate.community_id' => "$c"]);
 		}else{
 			$query = CommunityRealestate::find();
 		}
@@ -74,7 +74,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
         // grid filtering conditions
         $query->andFilterWhere([
             'realestate_id' => $this->realestate_id,
-            'community_id' => $this->community_id,
+            'community_realestate.community_id' => $this->community_id,
             'building_id' => $this->building_id,
             'acreage' => $this->acreage,
         ]);

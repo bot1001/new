@@ -43,7 +43,7 @@ class BuildingSearch extends CommunityBuilding
     {
         if($_SESSION['user']['community'])
 		       {
-		           $query = CommunityBuilding::find()->where(['community_id' => $_SESSION['user']['community']]);
+		           $query = CommunityBuilding::find()->where(['community_building.community_id' => $_SESSION['user']['community']]);
 		       }else{
 		           $query = CommunityBuilding::find();
 		       }

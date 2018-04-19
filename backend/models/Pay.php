@@ -61,5 +61,59 @@ class Pay extends \yii\db\ActiveRecord
 			return unll ;
 		}
 		return $tmpStr;
-	}		
+	}
+	
+	public static function Jh($order_id)
+	{
+		//变量赋值
+	    $MERCHANTID ="105635000000321";  						//$_GET["MERCHANTID"] ;  
+	    $POSID="011945623";             						//$_GET["POSID"] ;  
+	    $BRANCHID="450000000"; 									//$_GET["BRANCHID"] ;  
+	    $ORDERID= $order_id;             			            //查询订单号 
+	    $PASSWORD="Yudawuye";							        //商户对应的管理员密码 从银行处获取
+	    $TXCODE="410408";										//$_GET["TXCODE"] ;  
+	    $TYPE="0";												//0 支付流水 1 退款流水
+	    $KIND="0";												//0 未结算流水 1 已结算流水
+	    $STATUS="3";											//0失败 1成功 2不确定 3全部（已结算流水查询不支持全部）
+	    $PAGE="1";												//想要取第几页流水 总共多少页必须从第一页的响应包中获取
+	    $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain";				//$_GET["bankURL"] ; 
+    
+	    $param0 = "MERCHANTID=".$MERCHANTID."&BRANCHID=".$BRANCHID."&POSID=".$POSID."&ORDERDATE=".date("Ymd").
+	          "&BEGORDERTIME=00:00:00&ENDORDERTIME=23:59:59&ORDERID=".$ORDERID."&QUPWD=&TXCODE=".$TXCODE."&TYPE=".$TYPE."&KIND=".$KIND."&STATUS=".$STATUS.
+	          "&SEL_TYPE=3&PAGE=".$PAGE."&OPERATOR=&CHANNEL=";
+	    $param1 = "MERCHANTID=".$MERCHANTID."&BRANCHID=".$BRANCHID."&POSID=".$POSID."&ORDERDATE=".date("Ymd").
+        	   "&BEGORDERTIME=00:00:00&ENDORDERTIME=23:59:59&BEGORDERID=&ENDORDERID=&QUPWD=".$PASSWORD.
+	    	   "&TXCODE=".$TXCODE."&TYPE=".$TYPE."&KIND=".$KIND."&STATUS=".$STATUS."&ORDERID=".$ORDERID."&PAGE=".$PAGE."&CHANNEL=&SEL_TYPE=3&OPERATOR=&MAC=".md5($param0);        
+	    $URL = $bankURL."?".$param1;
+				
+		$u = curl_init(); //开启会话
+        // 设置选项，包括URL
+        curl_setopt($u,CURLOPT_URL, $URL);
+        curl_setopt($u,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($u,CURLOPT_HEADER,0);
+		
+		curl_setopt($u, CURLOPT_SSL_VERIFYPEER, false); //不验证证书下同
+        curl_setopt($u, CURLOPT_SSL_VERIFYHOST, false); //
+		
+		$error = curl_error($u); //获取返回的数据包
+        // 执行并获取HTML文档内容
+        $date = curl_exec($u);
+        curl_close($u);
+		
+		$d = explode(' ', $date);
+		$end = end($d);
+		
+		return $end;
+	}
+	
+	public static function Xml($arr)
+	{    	
+		$xml= "<xml>print_r($arr)</appid></xml>";//XML文件
+		
+		$objectxml = (array) simplexml_load_string($xml);//将文件转换成 对象  
+        $xmljson= json_encode($objectxml );//将对象转换个JSON  
+        $xmlarray=json_decode($xmljson,true);//将json转换成数组
+		
+        return $xmlarray; 
+    }
 }

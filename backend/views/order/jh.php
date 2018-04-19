@@ -9,7 +9,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 $script = <<< JS
 $(document).ready(function() {
-    setInterval(function(){ $("#button").click(); }, 10000);
+    setInterval(function(){ $("#button").click(); }, 5000);
 });
 JS;
 $this->registerJs($script);
@@ -65,12 +65,12 @@ $this->registerJs($script);
 				 document.getElementById('div2').innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id]); ?>">支付成功！</a>';
 			 }
 			 
-			 if(this.responseText == '2' ){
-				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
-			 }
-			 
+//			 if(this.responseText == '2' ){
+//				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
+//			 }
+
 			 if(this.responseText == '0' ){
-				 document.getElementById('div2').innerHTML = '<l>支付失败，请重新支付！</l>';
+				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
 			 }
 		 }
 		 //发送请求

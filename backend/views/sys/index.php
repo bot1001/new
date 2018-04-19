@@ -35,7 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		
             ['attribute'=> 'community_id',],
 
-            ['class' => 'kartik\grid\ActionColumn','header' => '操<br />作'],
+            ['class' => 'kartik\grid\ActionColumn',
+			 'template' => '{update}{delete}',
+			 'header' => '操<br />作'],
         ];
 		
 	echo GridView::widget([
