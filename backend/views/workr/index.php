@@ -71,6 +71,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'filterWidgetOptions' => [
 	         	'pluginOptions' => ['allowClear' => true],
 	         ],
+			 'class' => 'kartik\grid\EditableColumn',
+		     'editableOptions' => [
+		         'formOptions' => [ 'action' => [ '/workr/workr' ] ],
+		         'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+		         'data' => [1 => '正常', 2 => '删除', 3 => '锁定'],
+		     ],
 			'label' => '状态'],
 
             ['class' => 'kartik\grid\ActionColumn',

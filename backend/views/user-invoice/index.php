@@ -131,15 +131,15 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'community_id',
 		  'value' => 'community.community_name',
-			'pageSummary' => '合计：',
-			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => $comm,
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
-			'filterWidgetOptions' => [
-				'pluginOptions' => [ 'allowClear' => true ],
-			],
-			'hAlign' => 'center',
-			'width' => '150px'
+	      'pageSummary' => '合计：',
+	      'filterType' => GridView::FILTER_SELECT2,
+	      'filter' => $comm,
+	      'filterInputOptions' => [ 'placeholder' => '请选择' ],
+	      'filterWidgetOptions' => [
+	      	'pluginOptions' => [ 'allowClear' => true ],
+	      ],
+	      'hAlign' => 'center',
+	      'width' => '150px'
 		],
 
 		[ 'attribute' => 'building_id',

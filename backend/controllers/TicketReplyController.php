@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 use app\models\TicketReply;
 use app\models\TicketReplySearch;
 use yii\web\Controller;
@@ -15,7 +17,7 @@ use yii\filters\VerbFilter;
 class TicketReplyController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -44,24 +46,29 @@ class TicketReplyController extends Controller
         ]);
     }
 	
-	//检查用户是否登录
-	public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }
+	//GridView 页面直接编辑代码
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'reply' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => TicketReply::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Displays a single TicketReply model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -77,11 +84,11 @@ class TicketReplyController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->reply_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -89,6 +96,7 @@ class TicketReplyController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -96,11 +104,11 @@ class TicketReplyController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->reply_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -108,6 +116,7 @@ class TicketReplyController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -127,8 +136,8 @@ class TicketReplyController extends Controller
     {
         if (($model = TicketReply::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

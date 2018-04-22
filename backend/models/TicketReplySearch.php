@@ -8,23 +8,28 @@ use yii\data\ActiveDataProvider;
 use app\models\TicketReply;
 
 /**
- * TicketReplySearch represents the model behind the search form about `app\models\TicketReply`.
+ * TicketReplySearch represents the model behind the search form of `app\models\TicketReply`.
  */
 class TicketReplySearch extends TicketReply
 {
+	//搜索键
+	public function attributes()
+	{
+		return array_merge(parent::attributes(),['name']);
+	}
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['reply_id', 'ticket_id', 'is_attachment', 'reply_time', 'reply_status'], 'integer'],
-            [['account_id', 'content'], 'safe'],
+            [['reply_id', 'ticket_id', 'is_attachment', 'reply_status'], 'integer'],
+            [['account_id', 'content', 'name', 'reply_time'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -42,11 +47,17 @@ class TicketReplySearch extends TicketReply
     public function search($params)
     {
         $query = TicketReply::find();
+		$query->joinWith('d');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'sort'=> [
+		    	'defaultOrder' =>[
+		        	'reply_id' => SORT_DESC
+		        ]
+		    ]
         ]);
 
         $this->load($params);
@@ -56,19 +67,34 @@ class TicketReplySearch extends TicketReply
             // $query->where('0=1');
             return $dataProvider;
         }
+		
+		if($this->reply_time != '')
+		{
+			$time = explode(' to ',$this->reply_time);
+			$one = reset($time);
+			$two = end($time);
+            $query->andFilterWhere(['between', 'reply_time', strtotime($one),strtotime($two)]);
+		}
 
         // grid filtering conditions
         $query->andFilterWhere([
             'reply_id' => $this->reply_id,
             'ticket_id' => $this->ticket_id,
             'is_attachment' => $this->is_attachment,
-            'reply_time' => $this->reply_time,
+            //'reply_time' => $this->reply_time,
             'reply_status' => $this->reply_status,
         ]);
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
-            ->andFilterWhere(['like', 'content', $this->content]);
+            ->andFilterWhere(['like', 'content', $this->content])
+			->andFilterWhere(['like', 'user_data.real_name', $this->name]);
 
+		$dataProvider -> sort->attributes['name']=
+			[
+				'asc' => ['real_name'=>SORT_ASC],
+				'desc' => ['real_name'=>SORT_DESC],
+			];
+		
         return $dataProvider;
     }
 }

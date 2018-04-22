@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'hAlign' => 'center'],
 		
 		['class' => 'kartik\grid\ActionColumn',
-		 'template' => '{view}{update}{delete}',
+		 'template' => '{view}{update}',
 		 'buttons' => [
 				'update' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [

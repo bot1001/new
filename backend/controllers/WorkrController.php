@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 use app\models\WorkR;
 use app\models\WorkRSearch;
 use yii\web\Controller;
@@ -59,6 +61,20 @@ class WorkrController extends Controller
 			'community' => $community
         ]);
     }
+	
+	//GridView 页面直接编辑代码
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'workr' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => Workr::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Displays a single WorkR model.

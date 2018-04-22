@@ -13,7 +13,7 @@ use app\models\CommunityBasic;
 <div class="sys-community-form">
 
    <?php
-	if($id >= '0'){
+	if($id != '0'){
 		//获取用户
 		$sys = SysUser::find()
 			->select('name, id')
