@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= DetailView::widget([
+    <?php
+	echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'ticket_id',
@@ -24,13 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
 			'label' => '小区'],
 	
             'b.building_name',
+		
             'r.room_name',
-            'ac.real_name',
+		
+            'contact_person',
+		
+	        'contact_phone',
+		
              ['attribute' => 'tickets_taxonomy',
-			 'value' => function($model){
-	        	$date = [1 => '建议', 2 => '投诉'];
-	        	return $date[$model->tickets_taxonomy];
-	        },],
+			  'value' => function($model){
+	            	$date = [1 => '建议', 2 => '投诉'];
+	            	return $date[$model->tickets_taxonomy];
+	            },
+			 ],
+		
             'explain1',
             'create_time:datetime',
             'contact_person',
@@ -40,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             	$d = [0=>'无', 1=> '无'];
             	return $d[$model->is_attachment];
             }],
-            'assignee_id',
+            //'assignee_id',
             'reply_total',
             ['attribute' => 'ticket_status',
 			 'value' => function($model){
@@ -49,6 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	        },],
             'remind',
         ],
-    ]) ?>
-
+    ]);
+	?>
 </div>

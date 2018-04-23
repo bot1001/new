@@ -122,7 +122,7 @@ $this->title = '楼宇列表';
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'info', 'heading' => '房屋列表',
+		'panel' => ['type' => 'info', 'heading' => '楼宇列表',
 				   'before' => Html::a( 'New', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 

@@ -211,6 +211,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			        	'data-target' => '#update-modal', 
 		                'class' => 'btn btn-success new',
 			        ] )],
+		'hover' => true,
         'columns' => $gridview,
     ]); ?>
 </div>

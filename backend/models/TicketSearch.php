@@ -45,9 +45,9 @@ class TicketSearch extends TicketBasic
      */
     public function search($params)
     {
-		$community = $_SESSION['user']['community'];
+		$community = $_SESSION['community'];
 		if($community){
-			$query = TicketBasic::find()->where(['ticket_basic.community_id' => "$community"]);
+			$query = TicketBasic::find()->where(['in', 'ticket_basic.community_id', $community]);
 		}else{
 			$query = TicketBasic::find();
 		}

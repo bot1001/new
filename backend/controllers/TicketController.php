@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\CommunityBasic;
 use app\models\WorkR;
+use app\models\TicketReply;
 use app\models\CommunityBuilding;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
@@ -87,8 +88,18 @@ class TicketController extends Controller
      */
     public function actionView($id)
     {
+		/*$reply = (new \yii\db\Query())->select('ticket_reply.content as content, user_data.real_name as name')
+			->from('ticket_basic')
+			->join('inner join', ' /*', 'ticket_reply.ticket_id = ticket_basic.ticket_id')
+			->join('inner join', 'user_data', 'user_data.account_id = ticket_reply.account_id')
+			->join('inner join', 'user_account', 'user_account.account_id = ticket_reply.assignee_id')
+			->where(['ticket_basic.ticket_id' => "$id"])
+			->orderBy('reply_time DESC')
+			->all();*/
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
+			//'reply' => $reply
         ]);
     }
 	
