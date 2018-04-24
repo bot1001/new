@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Url;
+
 $this->title = '物业缴费';
 
 ?>
@@ -10,7 +12,7 @@ $this->title = '物业缴费';
 		font-size: 20px;
 		border-radius: 5px;
 		background: #E9E9E9;
-		color: #000000
+		color: black;
 	}
 	
 	#div6 {
@@ -71,7 +73,7 @@ $this->title = '物业缴费';
 	<tr>
 		<td style=" width: 33%; background: #AADBBD; text-align: right">合计：</td>
 		<td style="background: #AADBBD"><?php echo $amount ?></td>
-		<td width="35%" style="color: red; background: #FDC6C6"><a href="">立即缴费</a></td>
+		<td width="35%" style="color: red; background: #FDC6C6"><a href="<?php echo Url::to(['/order/index','id' => $id]) ?>">立即缴费</a></td>
 	</tr>
 </table>
 </div>

@@ -53,18 +53,19 @@ class LoginController extends Controller
 				if($relationship)
 				{
 					$r_id = array_column($relationship,'realestate_id');*/
+		$r_id = 5286;
 					$reale = (new \yii\db\Query())->select('
 					community_basic.community_name, community_building.building_name,community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.realestate_id as id
 					')
 						->from('community_realestate')
 						->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
 						->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-						//->where(['in', 'community_realestate.realestate_id', $r_id])
-						->limit(3)
+						->where(['in', 'community_realestate.realestate_id', $r_id])
+						//->limit(1)
 						->all();
 					
 					//进入房屋选择界面
-				    return $this->render('choice',['reale' => $reale]);
+				    return $this->render('choice',['reale' => $reale, 'id' => $r_id]);
 				/*}else{
 					//否则进入房屋管理页面
 					return $this->render('#');
