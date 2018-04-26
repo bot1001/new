@@ -59,16 +59,12 @@ $this->registerJs($script);
 	{ 
 		 var xhr = new XMLHttpRequest();
 		 //xml请求参数
-		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id, 'order_amount' => $order_amount]); ?>", true);
+		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true);
 		 xhr.onload = function(){
 			 if(this.responseText == '1'){
 				 document.getElementById('div2').innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id]); ?>">支付成功！</a>';
 			 }
 			 
-//			 if(this.responseText == '2' ){
-//				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
-//			 }
-
 			 if(this.responseText == '0' ){
 				 document.getElementById('div2').innerHTML = '<l>等待支付中,请稍后……</l>';
 			 }

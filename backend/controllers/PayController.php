@@ -120,12 +120,18 @@ class PayController extends Controller
 	}
 	
 	//建行主动查询
-	public function actionJhang($order_id,$order_amount)
+	public function actionJhang($order_id)
 	{
-		$arr = Pay::Jh($order_id);
+		$order = OrderBasic::find()
+			->select('payment_number')
+			->where(['order_id' => $order_id])
+			->asArray()
+			->one();
 		
-		if(strLen($arr) >128){
-			return '1';
+		$o = $order['payment_number'];
+		
+		if($o != ''){ //如果支付编号不为空
+			return '1'; 
 		}else{
 			return '0';
 		}
@@ -179,6 +185,15 @@ class PayController extends Controller
 										);
 						}
 					}
+					
+					//支付完成后自动删除二维码
+					$files = glob('images/*');
+                    foreach ($files as $file) {
+                        if (is_file($file)) {
+                            unlink($file);
+                        }
+                    }
+
 					$transaction->commit();
 				}catch(\Exception $e) {
 					print_r($e);

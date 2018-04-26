@@ -152,7 +152,7 @@ class OrderController extends Controller
 					->asArray()
 					->one();
 				
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金' ];
+				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
 				return $this->render('print',[
 			                      'dc' => $dc,
 			                      'comm' => $comm,
