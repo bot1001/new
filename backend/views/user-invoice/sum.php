@@ -220,6 +220,7 @@ $form = ActiveForm::begin( [
 			            //输出
 			    	    echo '<td align=right>';
 			    	        echo $s2;
+						    $s2 = ''; //初始化数组
 			    	    echo '</td>';
 					}
 			    }

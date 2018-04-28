@@ -68,7 +68,7 @@ use app\models\CommunityBasic;
     		<?= $form->field($model, 'stick_top')->dropDownList(['不置顶', '置顶']) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'status')->dropDownList(['1'=> '未使用', '2' => '使用中', '3' => '已过期']) ?>
+    		<?= $form->field($model, 'status')->dropDownList([ '1'=> '正常', '2' => '预发布', '3' => '过期']) ?>
     	</div>
     </div>
 

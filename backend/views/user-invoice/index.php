@@ -146,7 +146,7 @@ $this->title = '缴费管理';
 		 'value' => 'building.building_name',
 		 'filterType' => GridView::FILTER_SELECT2,
 		 'filter' => $build,
-		 'filterInputOptions' => ['placeholder' => '…'],
+		 'filterInputOptions' => ['placeholder' => ''],
 		 'filterWidgetOptions' => [
 	     	'pluginOptions' => ['allowClear' => true],
 	     ],
@@ -177,7 +177,7 @@ $this->title = '缴费管理';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $y,
-			'filterInputOptions' => [ 'placeholder' => '…' ],
+			'filterInputOptions' => [ 'placeholder' => '' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -190,7 +190,7 @@ $this->title = '缴费管理';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $m,
-			'filterInputOptions' => [ 'placeholder' => '…' ],
+			'filterInputOptions' => [ 'placeholder' => '' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -255,11 +255,18 @@ $this->title = '缴费管理';
 			'width' => '115px'
 		],
 		['attribute' => 'invoice_notes',
-			'class'=>'kartik\grid\EditableColumn',
-			 'editableOptions'=>[
-              'formOptions'=>['action' => ['/user-invoice/invoice']], // point to the new action        
-              'inputType'=>\kartik\editable\Editable::INPUT_TEXT,
-			 ],
+		 'value' => function($model){
+	    	if($model->invoice_notes == ''){
+	    		return '空';
+	    	}else{
+				return $model->invoice_notes;
+			}	
+	    },
+		'class'=>'kartik\grid\EditableColumn',
+		'editableOptions'=>[
+            'formOptions'=>['action' => ['/user-invoice/invoice']], // point to the new action        
+            'inputType'=>\kartik\editable\Editable::INPUT_TEXT,
+		    ],
 		],
 		
 		[ 'attribute' => 'payment_time',
@@ -297,12 +304,10 @@ $this->title = '缴费管理';
                 ],
                 'options' => [
                     'placeholder' => '请选择...',
-                    'style'=>'width:200px',
+                    //'style'=>'width:200px',
                 ],
 		    ],
-			'hAlign' => 'center',
-			'width' => '10px'
-		
+			'hAlign' => 'center',		
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
@@ -339,13 +344,10 @@ $this->title = '缴费管理';
 			'width' => '170px'
 			],*/
 
-		//'year',
-		//'month',
-
 		['class' => 'kartik\grid\ActionColumn',
-			'header' => '操作',
+			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
-			'width' => '5%'
+			//'width' => '5%'
 			],
 	];
 	echo GridView::widget( [

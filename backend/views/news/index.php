@@ -150,14 +150,14 @@ $this->title = '公告栏';
 		
             ['attribute'=> 'status',
 			 'value' => function($model){
-	        	$s = [ '1'=> '正常', '3' => '过期'];
+	        	$s = [ '1'=> '正常', '2' => '预发布', '3' => '过期'];
 	        	return $s[$model['status']];
 	        },
 			 'class' => 'kartik\grid\EditableColumn',
 			 'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/news/news' ] ], // point to the new action        
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-				'data' => [ '1'=> '正常', '3' => '过期'],
+				'data' => [ '1'=> '正常', '2' => '预发布', '3' => '过期'],
 			],
 			'hAlign' => 'center',
 			'width' => '20px'],

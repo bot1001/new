@@ -20,7 +20,7 @@ $this->title = '用户登录';
 		height:auto; 
 		background: url(image/th.png);
 		border-radius:20px;
-		margin-top:25%;
+		margin-top:15%;
 	}
 	
 	img{
