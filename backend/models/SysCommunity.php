@@ -33,10 +33,10 @@ class SysCommunity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sys_user_id', 'community_id', 'own_add', 'own_delete', 'own_update', 'own_select'], 'required'],
+            [['sys_user_id', 'community_id'/*, 'own_add', 'own_delete', 'own_update', 'own_select'*/], 'required'],
             [['sys_user_id', 'own_add', 'own_delete', 'own_update', 'own_select'], 'integer'],
-            [['community_id'], 'string', 'max' => 128],
-            [['sys_user_id'], 'unique', 'targetAttribute' => ['sys_user_id', 'community_id']],
+            //[['community_id'], 'string', 'max' => 128],
+           [['sys_user_id'], 'unique', 'targetAttribute' => ['sys_user_id']],
             //[['sys_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => SysUser::className(), 'targetAttribute' => ['sys_user_id' => 'id']],
         ];
     }

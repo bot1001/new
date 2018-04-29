@@ -138,6 +138,7 @@ $form = ActiveForm::begin( [
 				{
 					if ( empty($value[ 'order_id' ])) 
 					{
+						unset($sum["$k"]);
 						continue;
 					} else {
 						if($value['community_id'] === $c_id)
@@ -176,7 +177,6 @@ $form = ActiveForm::begin( [
 				$m = '';
 				$c = '';
 				$s = '';
-				//$ = '';
 			}
 			echo '<tr>';
 			    echo '<td align = center>';
@@ -234,12 +234,6 @@ $form = ActiveForm::begin( [
 			    echo '</td>';
 			echo '</tr>';
 
-			/*echo '<tr>';
-			    echo '<td colspan = 3 align = center>';
-			    //echo '合计：'.$in;
-			    echo '</td>';
-    
-			echo '</tr>';*/
 			unset( $su ); //释放数组
 		}
 		?>

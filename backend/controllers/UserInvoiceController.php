@@ -305,54 +305,46 @@ class UserInvoiceController extends Controller
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
 		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
 				
-		$c = $_SESSION['user']['community'];
-	    if(empty($c)){
-	    	$community = CommunityBasic::find()
-	    		->select('community_id, community_name')
-	    		->asArray()
-	    		->all();
-	    }else{
-	    	$community = CommunityBasic::find()
-	    		->select('community_id, community_name')
-	    		->where(['community_id' => $c])
-	    		->asArray()
-	    		->all();
-	    }
-		$comm = ArrayHelper::map($community,'community_id', 'community_name');
+		$c = $_SESSION['community'];
 		
-		if($_GET){
-			if($_GET ['InvoiceSumSearch']['from'])
-			{
-				$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
-			    $l = "'\d{4}'is"; //时间提前格式
-			    
-			    $from02 = reset($time); //起始年月 str_pad($m,2,"0",STR_PAD_LEFT)
-			    $to02 = end($time); //截止年月
-			    
-			    $f = explode('-', $from02); //拆分起始年月
-			    $t = explode('-', $to02); //拆分截止年月
-			    
-                $year01 = reset($f); //提取起始年
-                $year02 = reset($t); //提取截止年
-			    
-                $month01 = str_pad(end($f),2, '0', STR_PAD_LEFT); //提取起始月并自动补“0”
-			    $month02 = str_pad(end($t), 2, '0', STR_PAD_LEFT); //提取截止月并自动补“0”
-			    $day = date("t",strtotime("$year02-$month02")); //获取截止日期天数
-			    
-			    $from = $year01.'-'.$month01.'-'.'01'; //拼接起始日期
-			    $to = $year02.'-'.$month02.'-'.$day; //拼接截止日期
-			}else{
-				$from = date('Y-m-d', time() );
-			    $to = date('Y-m-d', time() );
-			}
+		//获取小区
+	    if(empty($c)){
+	    	$comm = CommunityBasic::find()
+	    		->select('community_name, community_id')
+				->orderBy('community_name')
+	    		->indexBy('community_id')
+	    		->column();
+	    }else{
+	    	$comm = CommunityBasic::find()
+	    		->select('community_name, community_id')
+	    		->where(['in', 'community_id', $c])
+	    		->orderBy('community_name')
+				->indexBy('community_id')
+	    		->column();
+	    }
+				
+		if($_GET)
+		{
+			$get = $_GET;
+			$d = UserInvoice::Sum($get);
+			$from = $d['from'];
+			$to = $d['to'];
 		}else{
 			$from = date('Y-m-d', time() );
-			$to = date('Y-m-d', time() );
+		    $to = date('Y-m-d', time() );
 		}
-		//print_r($month01);exit;
 		
-		$cost_name = CostName::find()->select('cost_name')->asArray()->all();
-		$c_name = array_unique(ArrayHelper::map($cost_name,'cost_name','cost_name'));
+		//获取费项名称并去重复
+		$c_name = CostName::find()
+			->select('cost_name')
+			->distinct()
+			->indexBy('cost_name')
+			->asArray()
+			->column();
+		
+		$filter = UserInvoice::Filter($data,$c_name, $comm);
+		echo '<pre />';
+		print_r($filter);exit;
 		
 		return $this->render('test',['data' => $data,
 									 'searchModel' => $searchModel,

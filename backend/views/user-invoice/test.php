@@ -50,17 +50,18 @@ $this->title = '缴费统计';
 
 <?php
 
-echo '<hr />';
 foreach ($data as $key=>$value)
         {
             $d[] = $value->attributes;
-			
         }
-
+echo '<pre />';
+print_r($d);
+$i = 0;
 //print_r($data);echo '<br />';
-foreach($comm as $key => $community) //遍历小区
+/*foreach($comm as $key => $community) //遍历小区
 {
 	if($data){ //判断是否存在缴费数据
+		
 		foreach($d as $keys => $ds) //遍历缴费信息
 	    {
 	    	//截取数据
@@ -70,6 +71,8 @@ foreach($comm as $key => $community) //遍历小区
 	    	}else{
 	    		continue;
 	    	}
+			$i ++;
+			echo $i;
 	    	print_r($y);echo '<hr />';
 			unset($d[$keys]);
 	    	unset($y);
@@ -78,7 +81,7 @@ foreach($comm as $key => $community) //遍历小区
 	}
 	
 	//print_r($d);echo '<hr />';
-}
+}*/
 
 ?>
 

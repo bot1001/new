@@ -5,10 +5,12 @@ namespace backend\controllers;
 use Yii;
 use app\models\SysCommunity;
 use app\models\Company;
+use app\models\SysUser;
 use app\models\SysCommunitySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * SysController implements the CRUD actions for SysCommunity model.
@@ -71,21 +73,20 @@ class SysController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id )
     {
         $model = new SysCommunity();
 		
         if ($model->load(Yii::$app->request->post())) 
 		{
-			//获取用户ID
-			$id = $_POST['SysCommunity']['sys_user_id']; //print_r($id);exit;
+			$id = $_POST['SysCommunity']['sys_user_id']; //获取用户ID
 			$community_id = $_POST['SysCommunity']['community_id']; //接收小区ID
 			$c_id = implode(',', $community_id);  //提取小区ID
 			$s_c = SysCommunity::find() //对应关联是否存在
-				->where(['community_id' => "$id"])
+				->where(['sys_user_id' => "$id"])
 				->asArray()
 				->all();
-			
+
 			if($s_c){
 				$e = SysCommunity::UpdateAll(['community_id' => $c_id],'sys_user_id = :id',[':id' => $id]);
 			}else{
@@ -105,15 +106,16 @@ class SysController extends Controller
 			}
         }
 		
-		if(isset($_GET['id'])){
-			$id = $_GET['id'];
-		}else{
-			$id = 0;
-		}
+		$sys = SysUser::find()
+		     ->select('name, id')
+		     ->where(['id' => "$id", 'status' => '1'])
+		     ->orderBy('name')
+		     ->indexBy('id')
+		     ->column();
 
         return $this->render('create', [
             'model' => $model,
-			'id' => $id
+			'sys' => $sys 
         ]);
     }
 
@@ -127,13 +129,35 @@ class SysController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		//获取用户信息
+		$sy = (new yii\db\Query)
+			->select('sys_user.id as id, sys_user.name as name')
+			->from('sys_user_community')
+			->join('inner join', 'sys_user', 'sys_user.id = sys_user_community.sys_user_id')
+			->where(['sys_user_community.id' => "$id"])
+			->indexBy('sys_user.id')
+			->all();
+		$sys = ArrayHelper::map($sy, 'id', 'name');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) 
+		{
+			$community_id = $_POST['SysCommunity']['community_id']; //接收小区ID
+			$c_id = implode(',', $community_id);  //提取小区ID
+			
+			//执行修改操作
+			$e = SysCommunity::UpdateAll(['community_id' => $c_id],'sys_user_id = :id',[':id' => $_POST['SysCommunity']['sys_user_id']]);
+			
+            if($e){
+				return $this->redirect(['index']);
+			}else{
+				return $this->redirect(Yii::$app->request->referrer);
+			}
         }
 
         return $this->render('update', [
             'model' => $model,
+			'sys' => $sys
         ]);
     }
 

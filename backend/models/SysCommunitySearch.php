@@ -76,6 +76,18 @@ class SysCommunitySearch extends SysCommunity
 
         $query->andFilterWhere(['like', 'sys_user.name', $this->name])
 			  ->andFilterWhere(['like', 'community_id', $this->community_id]);
+		
+		$dataProvider->sort->attributes['company'] =
+			[
+				'asc' => ['company' => SORT_ASC],
+				'desc' => ['company' => SORT_DESC],
+			];
+		
+		$dataProvider->sort->attributes['name'] =
+			[
+				'asc' => ['sys_user.name' => SORT_ASC],
+				'desc' => ['sys_user.name' => SORT_DESC],
+			];
 
         return $dataProvider;
     }
