@@ -153,10 +153,10 @@ class UserInvoice extends \yii\db\ActiveRecord
 			$amount = 0; //合计金额
 			$d_amount = 0; //单个费项合计金额
 			
-			//遍历数据
+			//遍历缴费数据
 			foreach($d as $key => $da)
 			{
-				if($da['community_id'] == "28")
+				if($da['community_id'] == "$key")
 				{
 					$invoice[] = $da;
 					$amount += $da['invoice_amount'];
@@ -167,27 +167,31 @@ class UserInvoice extends \yii\db\ActiveRecord
 			
 			//遍历缴费项目
 			if($invoice){
-				foreach($invoice as $in)
-			    {
-			    	if($in['description' == $in])
-			    	{
-			    		$de[] = $in;
-			    		$d_amount += $in['invoice_amount'];
-			    	}else{
-			    		continue;
-			    	}
-			    }
+				foreach($c_name as $keys => $n) //遍历费项名称
+				{
+					foreach($invoice as $in)
+			        {
+			        	if($in['description'] == $n)
+			        	{
+			        		$de[] = $in;
+			        		$d_amount += $in['invoice_amount'];
+							//unset($c_name["$keys"]);
+			        	}else{
+			        		continue;
+			        	}
+			        }
+					$test[] = [$n => $d_amount];
+				}
 			}else{
 				$de = '';
 			}
-			
-			
-			$filter[] = [$name, $amount, $d_amount];
+			$filter[] = [$name, $amount, $test];
 			
 			unset($invoice);
 			unset($amount);
+			unset($de);
 		}
-		return $invoice;
+		return $filter;
 	}
 	
     /**
