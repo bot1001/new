@@ -147,50 +147,61 @@ class UserInvoice extends \yii\db\ActiveRecord
             $d[] = $value->attributes;
 			
         }
-		//遍历小区
-		foreach($comm as $k => $name)
-		{
-			$amount = 0; //合计金额
-			$d_amount = 0; //单个费项合计金额
-			
-			//遍历缴费数据
-			foreach($d as $key => $da)
-			{
-				if($da['community_id'] == "$key")
+		
+		if(isset($d)){
+			//遍历小区
+		    foreach($comm as $k => $name)
+		    {
+		    	$amount = 0; //合计金额
+		    	$d_amount = 0; //单个费项合计金额
+		    	
+		    	//遍历缴费数据
+		    	foreach($d as $key => $da)
+		    	{
+				    if($da['community_id'] == "$key")
+				    {
+				    	$invoice[] = $da;
+				    	$amount += $da['invoice_amount'];
+				    }else{
+				    	continue;
+				    }
+			    }
+						    	
+				if(isset($invoice))
 				{
-					$invoice[] = $da;
-					$amount += $da['invoice_amount'];
+					//遍历缴费项目
+				    foreach($c_name as $keys => $n) //遍历费项名称
+				    {
+				    	foreach($invoice as $in)
+			            {
+			            	if($in['description'] == $n)
+			            	{
+			            		$de[] = $in;
+			            		$d_amount += $in['invoice_amount'];
+				    			//unset($c_name["$keys"]);
+			            	}else{
+			            		continue;
+			            	}
+			            }
+				    	$test[] = [$n => $d_amount];
+				    }
+
+		    	    $filter[] = [$name, $amount, $test];
+		    	    
+		    	    unset($invoice);
+		    	    unset($amount);
+		    	    unset($de);
 				}else{
 					continue;
 				}
-			}
-			
-			//遍历缴费项目
-			if($invoice){
-				foreach($c_name as $keys => $n) //遍历费项名称
-				{
-					foreach($invoice as $in)
-			        {
-			        	if($in['description'] == $n)
-			        	{
-			        		$de[] = $in;
-			        		$d_amount += $in['invoice_amount'];
-							//unset($c_name["$keys"]);
-			        	}else{
-			        		continue;
-			        	}
-			        }
-					$test[] = [$n => $d_amount];
-				}
-			}else{
-				$de = '';
-			}
-			$filter[] = [$name, $amount, $test];
-			
-			unset($invoice);
-			unset($amount);
-			unset($de);
+		    }
 		}
+		
+		if(!isset($filter)){
+			$name = $amount = $test = '';
+			$filter[] = [$name, $amount, $test];
+		}
+		
 		return $filter;
 	}
 	

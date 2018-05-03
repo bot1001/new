@@ -360,9 +360,9 @@ class UserInvoiceController extends Controller
 			->asArray()
 			->column();
 		
-		$filter = UserInvoice::Filter($data,$c_name, $comm);
-		echo '<pre />';
-		print_r($filter);exit;
+//		$filter = UserInvoice::Filter($data,$c_name, $comm);
+//		echo '<pre />';
+//		print_r($filter);exit;
 		
 		return $this->render('test',['data' => $data,
 									 'searchModel' => $searchModel,

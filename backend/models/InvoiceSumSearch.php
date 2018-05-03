@@ -42,10 +42,10 @@ class InvoiceSumSearch extends UserInvoice
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+		$c = $_SESSION['community'];
 		
         if($c){
-			$query = UserInvoice::find()->where(['user_invoice.community_id' => "$c"]);
+			$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
 		}else{
 			$query = UserInvoice::find();
 		}
@@ -65,7 +65,7 @@ class InvoiceSumSearch extends UserInvoice
             return $dataProvider;
         }
 		
-		if(!empty($this->from)) //如果查找费项名称时间不为空，执行以下代码
+		if($this->from !== '') //如果费项月份不为空，执行以下代码
 		{
 			$time = explode(' to ',$this->from);
 			
@@ -101,14 +101,11 @@ class InvoiceSumSearch extends UserInvoice
 			$one = (reset($time01));
 			$two = end($time01);
             $query->andFilterWhere(['between', 'payment_time', strtotime($one),strtotime($two)]);
-		}elseif($this->from !== ''){
-			//如果费项日期为空，执行以下代码
-			$query ->andFilterWhere(['between', 'payment_time', strtotime($from), strtotime($to)]);
-		}elseif($this->invoice_status !== ''){
-			//以上两个条件不成成立，执行以下代码
+		}
+		
+		if($this->invoice_status !== '')
+		{
 			$query->andFilterWhere(['like', 'payment_time', $this->payment_time]);
-		}else{
-			$query->andFilterWhere(['between', 'payment_time', strtotime(date('Y-m-d')), date(time()) ]);
 		}
 		
         // grid filtering conditions

@@ -40,28 +40,20 @@ $this->title = '缴费统计';
 
 ?>
   <?php echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm,'c_name' => $c_name]); ?>
-   	<div class="row" style="position: relative;left: 85%">
-         <div class=""> 
-			<?php echo '起：'.$from; ?>
-		
-			<?php echo '止：'.$to; ?>
-		</div>
-	</div>
+  <?php echo '起：'.$from; ?>
+  <?php echo '止：'.$to; ?>
 
 <?php
 
+echo '<hr />';
 foreach ($data as $key=>$value)
         {
             $d[] = $value->attributes;
         }
-echo '<pre />';
-print_r($d);
-$i = 0;
-//print_r($data);echo '<br />';
-/*foreach($comm as $key => $community) //遍历小区
+
+foreach($comm as $key => $community) //遍历小区
 {
 	if($data){ //判断是否存在缴费数据
-		
 		foreach($d as $keys => $ds) //遍历缴费信息
 	    {
 	    	//截取数据
@@ -71,17 +63,12 @@ $i = 0;
 	    	}else{
 	    		continue;
 	    	}
-			$i ++;
-			echo $i;
 	    	print_r($y);echo '<hr />';
 			unset($d[$keys]);
 	    	unset($y);
 	    }
-		
 	}
-	
-	//print_r($d);echo '<hr />';
-}*/
+}
 
 ?>
 
