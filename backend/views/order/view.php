@@ -83,7 +83,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             ['attribute' => 'payment_gateway',
 			 'label' => '支付方式',
 			 'value'=> function($model){
-	            $e = [1 => '支付宝',2 => '微信', 3=> '刷卡' ,4 => '银行', '5'=>'政府', 6 => '现金', 7 => '政府'];
+	            $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
 	            if(empty($model['payment_gateway'])){
 	            	return '';
 	            }else{

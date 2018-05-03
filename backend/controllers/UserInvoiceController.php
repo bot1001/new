@@ -138,7 +138,6 @@ class UserInvoiceController extends Controller
 		
 		$t = 0; // 插入条数
 		$a = 0; // 失败条数
-		$h = 0; //重复条数		
 		
 		if ( Yii::$app->request->isPost ) {
 			$model->file = UploadedFile::getInstance( $model, 'file' );
@@ -172,89 +171,108 @@ class UserInvoiceController extends Controller
 					unset( $sheetData[ '1' ] ); //去掉表头
 					$i = count($sheetData);
 				}
-
+				//费项状态
+				$status = [ '欠费' => '0', '银行' => '1', '线上' => '2', '刷卡' => '3', '优惠' => '4', '政府' => '5', '现金' => '6', '建行' => '7' ];
+				
+				//账户关联小区
+				$c_r = $_SESSION['community'];
+				
+				//判断是否存在关联小区
+				if(reset($c_r) == ''){
+					$session->setFlash('fail', '5');
+					return $this->redirect(Yii::$app->request->referrer);
+				}
+				
+				//获取费项
+				$cost_name = CostName::find()
+					->select( 'cost_name' )
+					->where( [ 'level' => '0' ] )
+					->indexBy('cost_name')
+					->column();
+				
 				//查找费项信息
 				if ( $sheetData ) {
-					foreach ( $sheetData as $sheet ) {
+					foreach ( $sheetData as $sheet ) 
+					{
 						sleep(0.01);
 						if(count($sheet) != 9){
 							$session->setFlash('fail','3');
 							unlink($inputFileName);
 							return $this->redirect( Yii::$app->request->referrer );
 						}
-						//获取小区
-						$c_id = CommunityBasic::find()->select( 'community_id' )->where( [ 'community_name' => $sheet[ 'A' ] ] )->asArray()->one();
-						if ( $c_id ) {
-							//获取楼宇
-							$b_id = CommunityBuilding::find()->select( [ 'building_id' ] )
-								->andwhere(['community_id' => $c_id['community_id']])
-								->andwhere( [ 'community_building.building_name' => $sheet[ 'B' ] ] )			
-								->asArray()
-								->one();
+						//验证房号是否存在
+						$r_id = (new \yii\db\Query())
+							->select( 'community_basic.community_id as community, 
+							           community_building.building_id as building, 
+							           community_realestate.realestate_id as id' )
+							->from('community_realestate')
+							->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic.community_id')
+							->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+							->andwhere( [ 'community_basic.community_name' => $sheet[ 'A' ] ] )
+							->andwhere(['community_building.building_name' => $sheet[ 'B' ]])
+							->andwhere(['community_realestate.room_name' => $sheet[ 'C' ]])
+							->andwhere(['in', 'community_realestate.community_id', $c_r])
+							->one();
+						
+						//获取费项
+						if ($r_id) 
+						{
+							$y = (int)$sheet[ 'D' ];  //将年份转换为整数型，保证数据的单一性
+							$m = (int)$sheet[ 'E' ]; //将月份转换为整数型，保证数据的单一性
+							$m=str_pad($m,2,"0",STR_PAD_LEFT); //月份自动补0
 							
-							if ( $b_id ) {
-								//获取房号
-								$r_id = CommunityRealestate::find()->select( [ 'realestate_id' ] )
-									->andwhere(['community_id' => $c_id['community_id']])
-									->andwhere( [ 'building_id' => $b_id[ 'building_id' ] ] )
-									->andwhere( [ 'community_realestate.room_name' => $sheet[ 'C' ]] )
-									->asArray()
-									->one();
-				
-								//获取费项
-								if ( isset($r_id) ) {
-									//获取费项
-									$cost_id = CostName::find()->select( 'cost_id,cost_name' )->where( [ 'cost_name' => $sheet[ 'F' ] ] )->asArray()->one();
-									if ( $cost_id ) {
-										$y = (int)$sheet[ 'D' ];  //将年份转换为整数型，保证数据的单一性
-									    $m = (int)$sheet[ 'E' ]; //将月份转换为整数型，保证数据的单一性
-										$m=str_pad($m,2,"0",STR_PAD_LEFT); //月份自动补0
-										
-									    $d = $cost_id[ 'cost_name' ];
-									    $price = (float)$sheet[ 'G' ]; //将金额数据进行处理，除了保证数据的单一性外只保留两位数
-									    $f = date( time() );
-									    $c = $c_id[ 'community_id' ];
-									    $b = $b_id[ 'building_id' ];
-									    $r = $r_id[ 'realestate_id' ];
-														
-										$model = new UserInvoice(); //实例化模型
-										//赋值给模型
-										$model->community_id = $c;
-										$model->building_id = $b;
-										$model->realestate_id = $r;
-										$model->description = $d;
-										$model->year = $y;
-										$model->month = $m;
-										$model->invoice_amount = $price;
-										$model->create_time = $f;
-										$model->invoice_status = '0';
-											
-										$e = $model->save(); //保存
-										
-										if($e){
-											$t <= $i;
-											$t += 1;
-										}else{
-											$h <= $i;
-											$h += 1;
-										}
-											
-									} else {
-										$a += 1;
-										continue;
-									}
-								} else {
-									$a += 1;
-									continue;
-								}
-							} else {
+							//判断费项是否存在							
+							if($cost_name[ $sheet[ 'F' ] ]){
+								$d = $cost_name[ $sheet[ 'F' ] ];
+							}else{
+								$a <= $i;
 								$a += 1;
 								continue;
+							}
+														
+							$price = (float)$sheet[ 'G' ]; //将金额数据进行处理，除了保证数据的单一性外只保留两位数
+							$f = date( time() );
+							$c = $r_id[ 'community' ];
+							$b = $r_id[ 'building' ];
+							$r = $r_id[ 'id' ];
+							$s = $sheet['I'];
+							
+							//验证提交的费项状态
+							if(isset($status[$s]))
+							{
+								$i_s = $status["$s"];
+							}else{
+								$a <= $i;
+								$a += 1;
+								continue;
+							}
+								
+							$model = new UserInvoice(); //实例化模型
+							//赋值给模型
+							$model->community_id = $c;
+							$model->building_id = $b;
+							$model->realestate_id = $r;
+							$model->description = $d;
+							$model->year = $y;
+							$model->month = $m;
+							$model->invoice_amount = $price;
+							$model->create_time = $f;
+							$model->invoice_status = $i_s;
+								
+							$e = $model->save(); //保存
+							
+							if($e){
+								$t <= $i;
+								$t += 1;
+							}else{
+								$a <= $i;
+								$a += 1;
 							}
 						} else {
 							$a += 1;
 							continue;
 						}
+						
 					}
 				} else {
 					unlink($inputFileName);
@@ -268,7 +286,7 @@ class UserInvoiceController extends Controller
 		if(isset($inputFileName)){
 			unlink($inputFileName);
 		}
-		$con = "成功导入：". $t . "条！ - 失败：". $a . "条！ - 重复". $h. "条 - 合计：" . $i . "条";
+		$con = "成功导入：". $t . "条！ - 失败：". $a . "条 - 合计：" . $i . "条";
 		echo "<script> alert('$con');parent.location.href='./'; </script>";
 	}
 
