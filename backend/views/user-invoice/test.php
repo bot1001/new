@@ -39,7 +39,7 @@ use kartik\select2\Select2;
 $this->title = '缴费统计';
 
 ?>
-  <?php echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm,'c_name' => $c_name]); ?>
+  <?php echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm,'c_name' => $c_name, 'building' => $building]); ?>
   <?php echo '起：'.$from; ?>
   <?php echo '止：'.$to; ?>
 

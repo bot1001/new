@@ -19,13 +19,13 @@ use kartik\ daterange\ DateRangePicker;
     ]); ?>
     <div class="row">
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'community_id')->dropDownList($comm, ['multiple'=>'multiple']) ?>
+    		<?= $form->field($model, 'community_id')->dropDownList($comm, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'building_id')?>
+    		<?= $form->field($model, 'building_id')->dropDownList($building, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'description')->dropDownList($c_name, ['multiple'=>'multiple']) ?>
+    		<?= $form->field($model, 'description')->dropDownList($c_name, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
     </div>
     

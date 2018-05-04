@@ -326,20 +326,25 @@ class UserInvoiceController extends Controller
 		$c = $_SESSION['community'];
 		
 		//获取小区
-	    if(empty($c)){
-	    	$comm = CommunityBasic::find()
-	    		->select('community_name, community_id')
-				->orderBy('community_name')
-	    		->indexBy('community_id')
-	    		->column();
-	    }else{
+	    if($c)
+		{
 	    	$comm = CommunityBasic::find()
 	    		->select('community_name, community_id')
 	    		->where(['in', 'community_id', $c])
 	    		->orderBy('community_name')
 				->indexBy('community_id')
 	    		->column();
-	    }
+			$building = CommunityBuilding::find()
+				->select('building_name')
+				->distinct()
+				->where(['in', 'community_id', $c])							
+				->orderBy('building_name')
+				->indexBy('building_name')
+				->column();
+	    }else{
+			$comm = '';
+			$building = '';
+		}
 				
 		if($_GET)
 		{
@@ -360,13 +365,10 @@ class UserInvoiceController extends Controller
 			->asArray()
 			->column();
 		
-//		$filter = UserInvoice::Filter($data,$c_name, $comm);
-//		echo '<pre />';
-//		print_r($filter);exit;
-		
 		return $this->render('test',['data' => $data,
 									 'searchModel' => $searchModel,
 									 'comm' => $comm,
+									 'building' => $building,
 									 'from' => $from,
 									 'c_name' => $c_name,
 									 'to' => $to]);

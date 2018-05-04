@@ -55,7 +55,7 @@ use kartik\daterange\DateRangePicker;
 	                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                         'pluginOptions'=>[
                             'depends'=>['costrelation-parent'],
-                            'placeholder'=>'请选择...',
+                            'placeholder'=>'请选择...','multiple'=>'multiple',
                             'url'=>Url::to(['/costrelation/p'])
                         ]
                     ])->label('单价') ?>

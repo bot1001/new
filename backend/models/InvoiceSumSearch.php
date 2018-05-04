@@ -18,7 +18,7 @@ class InvoiceSumSearch extends UserInvoice
     public function rules()
     {
         return [
-            [['invoice_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
+            [['invoice_id', 'realestate_id', 'invoice_status'], 'integer'],
             [['year', 'month', 'description', 'payment_time', 'from', 'community_id', 'create_time', 'order_id', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
             [['invoice_amount'], 'number'],
         ];
@@ -44,11 +44,9 @@ class InvoiceSumSearch extends UserInvoice
     {
 		$c = $_SESSION['community'];
 		
-        if($c){
-			$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
-		}else{
-			$query = UserInvoice::find();
-		}
+
+		$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
+		$query->joinWith('building');
 
         // add conditions that should always apply here
 
@@ -111,14 +109,15 @@ class InvoiceSumSearch extends UserInvoice
         // grid filtering conditions
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
-            'building_id' => $this->building_id,
+            //'building_id' => $this->building_id,
             'realestate_id' => $this->realestate_id,
             'invoice_amount' => $this->invoice_amount,
             'invoice_status' => $this->invoice_status,
         ]);
 
       $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['in', 'community_id', $this->community_id])
+            ->andFilterWhere(['in', 'user_invoice.community_id', $this->community_id])
+            ->andFilterWhere(['in', 'community_building.building_name', $this->building_id])
             ->andFilterWhere(['like', 'create_time', $this->create_time])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])

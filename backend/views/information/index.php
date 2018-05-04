@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
 use app\models\CommunityBasic;
 
@@ -16,20 +15,14 @@ $this->title = '消息';
 
     <?php 
 	
-	$c = $_SESSION['user']['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_name', 'community_name');
+	$c = $_SESSION['community'];
+	
+	$comm = CommunityBasic::find()
+		->select('community_name, community_id')
+		->where(['in', 'community_id', $c])
+		->orderBy('community_name DESC')
+		->indexBy('community_id')
+		->column();
 	
 	$gridview = [
             ['class' => 'kartik\grid\SerialColumn',
@@ -40,7 +33,7 @@ $this->title = '消息';
 			 'value' => 'c.community_name',
 			 'filterType' => GridView::FILTER_SELECT2,
 			 'filter' => $comm,
-			 'filterInputOptions' => ['placeholder' => ''],
+			 'filterInputOptions' => ['placeholder' => '请选择…'],
 			 'filterWidgetOptions' => [
 		         'pluginOptions' =>  ['allowClear' => true],
 	         ],

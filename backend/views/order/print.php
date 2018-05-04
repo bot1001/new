@@ -29,7 +29,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         	h3{
         		text-align: center;
 				font-family: 仿宋;
-				font-weight: 700;
+				font-weight: 820;
         	}
            th{
            		text-align:center;
@@ -41,7 +41,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         	table{
         		text-align: center;
         		margin:auto;
-        		width: 800px;
+        		width: 820px;
 				font-family: 仿宋;
         	}
 			img{
