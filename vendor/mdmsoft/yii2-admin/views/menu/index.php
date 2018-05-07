@@ -16,9 +16,9 @@ Modal::begin( [
     ],*/
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
-$view = Url::toRoute( '/menu/view' );
-$update = Url::toRoute( '/menu/update' );
-$create = Url::toRoute( '/menu/create' );
+$view = Url::toRoute( '/admin/menu/view' );
+$update = Url::toRoute( '/admin/menu/update' );
+$create = Url::toRoute( '/admin/menu/create' );
 
 $updateJs = <<<JS
     $('.view').on('click', function () {

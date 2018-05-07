@@ -36,14 +36,14 @@ $this->registerJs($js);
             <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule_name']) ?>
+            <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule_name', 'placeholder' => '请输入路由（可忽略）']) ?>
 
-            <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'data')->textarea(['rows' => 6, 'placeholder' => '请输入标签']) ?>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" align="center">
         <?php
-        echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), [
+        echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', '创建') : Yii::t('rbac-admin', '更新'), [
             'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
             'name' => 'submit-button'])
         ?>

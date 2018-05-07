@@ -13,10 +13,9 @@ use dmstr\widgets\Alert;
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 2.0
+        <b>版本号：</b> 2.6.0.0
     </div>
-    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>专利保护 &copy; 2016-<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong> 版权所有
 </footer>
 
 <!-- Control Sidebar -->
@@ -24,22 +23,23 @@ use dmstr\widgets\Alert;
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
         <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <!-- <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li> -->
         <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
         <!-- Home tab content -->
         <div class="tab-pane" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Recent Activity</h3>
+            <h3 class="control-sidebar-heading">新闻要事</h3>
             <ul class='control-sidebar-menu'>
                 <li>
                     <a href='javascript::;'>
                         <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                         <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                            <h4 class="control-sidebar-subheading">年度任务</h4>
 
-                            <p>Will be 23 on April 24th</p>
+                            <p>点击查看详情</p>
                         </div>
                     </a>
                 </li>
@@ -48,9 +48,9 @@ use dmstr\widgets\Alert;
                         <i class="menu-icon fa fa-user bg-yellow"></i>
 
                         <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                            <h4 class="control-sidebar-subheading">月度任务</h4>
 
-                            <p>New phone +1(800)555-1234</p>
+                            <p>点击查看详情</p>
                         </div>
                     </a>
                 </li>
@@ -59,9 +59,9 @@ use dmstr\widgets\Alert;
                         <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
                         <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                            <h4 class="control-sidebar-subheading">本周任务</h4>
 
-                            <p>nora@example.com</p>
+                            <p>点击查看详情</p>
                         </div>
                     </a>
                 </li>
@@ -70,21 +70,21 @@ use dmstr\widgets\Alert;
                         <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
                         <div class="menu-info">
-                            <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                            <h4 class="control-sidebar-subheading">当日任务</h4>
 
-                            <p>Execution time 5 seconds</p>
+                            <p>点击查看详情</p>
                         </div>
                     </a>
                 </li>
             </ul>
             <!-- /.control-sidebar-menu -->
 
-            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <h3 class="control-sidebar-heading">年度责任目标完成情况</h3>
             <ul class='control-sidebar-menu'>
                 <li>
                     <a href='javascript::;'>
                         <h4 class="control-sidebar-subheading">
-                            Custom Template Design
+                            物业费
                             <span class="label label-danger pull-right">70%</span>
                         </h4>
 
@@ -96,7 +96,7 @@ use dmstr\widgets\Alert;
                 <li>
                     <a href='javascript::;'>
                         <h4 class="control-sidebar-subheading">
-                            Update Resume
+                            停车费
                             <span class="label label-success pull-right">95%</span>
                         </h4>
 
@@ -108,7 +108,7 @@ use dmstr\widgets\Alert;
                 <li>
                     <a href='javascript::;'>
                         <h4 class="control-sidebar-subheading">
-                            Laravel Integration
+                            多种经营
                             <span class="label label-waring pull-right">50%</span>
                         </h4>
 
@@ -120,12 +120,24 @@ use dmstr\widgets\Alert;
                 <li>
                     <a href='javascript::;'>
                         <h4 class="control-sidebar-subheading">
-                            Back End Framework
+                            电梯维护费
                             <span class="label label-primary pull-right">68%</span>
                         </h4>
 
                         <div class="progress progress-xxs">
                             <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href='javascript::;'>
+                        <h4 class="control-sidebar-subheading">
+                            APP注册量
+                            <span class="label label-info pull-right">68%</span>
+                        </h4>
+
+                        <div class="progress progress-xxs">
+                            <div class="progress-bar progress-bar-info" style="width: 68%"></div>
                         </div>
                     </a>
                 </li>
@@ -138,40 +150,40 @@ use dmstr\widgets\Alert;
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <form method="post">
-                <h3 class="control-sidebar-heading">General Settings</h3>
+                <h3 class="control-sidebar-heading">通用设置</h3>
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Report panel usage
+                        报告面板的使用
                         <input type="checkbox" class="pull-right" checked/>
                     </label>
 
                     <p>
-                        Some information about this general settings option
+                        关于这个通用设置选项的一些信息
                     </p>
                 </div>
                 <!-- /.form-group -->
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Allow mail redirect
+                        允许邮件重定向
                         <input type="checkbox" class="pull-right" checked/>
                     </label>
 
                     <p>
-                        Other sets of options are available
+                        还有其他的选项可供选择
                     </p>
                 </div>
                 <!-- /.form-group -->
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Expose author name in posts
+                        在文章中公开作者姓名
                         <input type="checkbox" class="pull-right" checked/>
                     </label>
 
                     <p>
-                        Allow the user to show his name in blog posts
+                        允许用户在博客文章中显示他的名字
                     </p>
                 </div>
                 <!-- /.form-group -->
@@ -180,7 +192,7 @@ use dmstr\widgets\Alert;
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Show me as online
+                        显示在线
                         <input type="checkbox" class="pull-right" checked/>
                     </label>
                 </div>
@@ -188,7 +200,7 @@ use dmstr\widgets\Alert;
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Turn off notifications
+                        关闭提醒
                         <input type="checkbox" class="pull-right"/>
                     </label>
                 </div>
@@ -196,7 +208,7 @@ use dmstr\widgets\Alert;
 
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
-                        Delete chat history
+                        删除聊天记录
                         <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
                     </label>
                 </div>

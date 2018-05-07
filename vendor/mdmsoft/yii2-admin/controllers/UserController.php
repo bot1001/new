@@ -17,6 +17,9 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\base\UserException;
 use yii\mail\BaseMailer;
+use app\models\SysRole;
+use app\models\CommunityBasic;
+use app\models\Company;
 
 /**
  * User controller
@@ -77,10 +80,29 @@ class UserController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$date = SysRole::find()
+			->select('name,id')
+			->where(['or not like', 'name', ['admin']])
+			->indexBy('id')
+			->column();
+		
+		$community = CommunityBasic::find()
+			->select( [ 'community_name', 'community_id' ] )
+			->orderBy( 'community_name' )
+			->indexBy( 'community_id' )
+			->column();
+		$company = Company::find()
+			->select('name, id')
+			->orderBy('name')
+			->indexBy('id')
+			->column();
 
         return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+			    'date' => $date,
+			    'community' => $community,
+			    'company' => $company
         ]);
     }
 
@@ -228,10 +250,9 @@ class UserController extends Controller
      */
     public function actionActivate($id)
     {
-        /* @var $user User */
         $user = $this->findModel($id);
-        if ($user->status == User::STATUS_INACTIVE) {
-            $user->status = User::STATUS_ACTIVE;
+        if ($user->status == SysUser::STATUS_INACTIVE) {
+            $user->status = SysUser::STATUS_ACTIVE;
             if ($user->save()) {
                 return $this->goHome();
             } else {
@@ -240,6 +261,19 @@ class UserController extends Controller
             }
         }
         return $this->goHome();
+    }
+	
+	public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
@@ -251,7 +285,7 @@ class UserController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = SysUser::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

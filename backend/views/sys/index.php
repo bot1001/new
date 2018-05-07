@@ -43,8 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'info', 'heading' => '关联小区列表',
-				   'before' => Html::a('NEW', ['/sys/create'], ['class' => 'btn btn-primary'])],
+		'panel' => ['type' => 'info', 'heading' => '关联小区列表'/*,
+				   'before' => Html::a('NEW', ['/sys/create'], ['class' => 'btn btn-primary'])*/],
         'columns' => $grid,
 		'hover' => true,
     ]); ?>

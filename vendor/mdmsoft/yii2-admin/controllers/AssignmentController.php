@@ -87,7 +87,7 @@ class AssignmentController extends Controller
     {
         $model = $this->findModel($id);
 
-        return $this->render('view', [
+        return $this->renderAjax('view', [
                 'model' => $model,
                 'idField' => $this->idField,
                 'usernameField' => $this->usernameField,
