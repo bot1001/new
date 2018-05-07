@@ -1,8 +1,62 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+use mdm\admin\components\Helper;
+
+Modal::begin( [
+	'id' => 'update-modal',
+	'header' => '<h4 class="modal-title">权限指配</h4>',
+	/*'options'=>[
+        'data-backdrop'=>'static',//点击空白处不关闭弹窗
+        'data-keyboard'=>false,
+    ],*/
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+] );
+$view = Url::toRoute( '/menu/view' );
+$update = Url::toRoute( '/menu/update' );
+$create = Url::toRoute( '/menu/create' );
+
+$updateJs = <<<JS
+    $('.view').on('click', function () {
+	$('.modal-title').html('菜单预览');
+        $.get('{$view}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+$updateJs = <<<JS
+    $('.update').on('click', function () {
+	    $('.modal-title').html('更新');
+        $.get('{$update}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+$updateJs = <<<JS
+    $('.create').on('click', function () {
+	    $('.modal-title').html('创建');
+        $.get('{$create}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $updateJs );
+
+Modal::end();
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -13,20 +67,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
-
-    <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+		'panel' => ['type' => 'info', 'heading' => '菜单列表',
+				   'before' => Html::a(Yii::t('rbac-admin', 'New'), ['create'], ['class' => 'btn btn-info'])],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
             'name',
             [
                 'attribute' => 'menuParent.name',
@@ -37,7 +86,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'route',
             'order',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn',
+			 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
+			 'buttons' => [
+				'update' => function ( $url, $model, $key ) {
+				    return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
+				    	'data-toggle' => 'modal',
+				    	'data-target' => '#update-modal',
+				    	'class' => 'update',
+				    	'data-id' => $key,
+				    ] );
+	            },
+		      'view' => function ( $url, $model, $key ) {
+				    return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [
+				    	'data-toggle' => 'modal',
+				    	'data-target' => '#update-modal',
+				    	'class' => 'view',
+				    	'data-id' => $key,
+				    ] );
+	            },
+			],
+			 'header' => '操<br />作'],
         ],
     ]);
     ?>

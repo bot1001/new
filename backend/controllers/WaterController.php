@@ -115,9 +115,7 @@ class WaterController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-		}
-		
-        
+		}  
     }
 
     /**
@@ -153,7 +151,7 @@ class WaterController extends Controller
 			$r_count = $r->count(); //计算房号总数
     		$count = WaterMeter::find()->andwhere( [ 'year' => date( 'Y' ),'month' => date( 'm' ), 'type' => $type ] )->count(); //查询水表读数数量
 			
-    		if($count != $r_count){
+    		if($count !== $r_count){
 				foreach ( $r_id as $id ) {
 				    $community = $id['community_id'];
 				    $building = $id['building_id'];
@@ -174,7 +172,7 @@ class WaterController extends Controller
     			    $p = date( time() );
     			    
     			    set_time_limit( 60 );
-    			    ini_set( 'memory_limit', '512M' ); // 调整PHP由默认占用内存为1024M(1GB)
+    			    ini_set( 'memory_limit', '1024M' ); // 调整PHP由默认占用内存为1024M(1GB)
 				    
 				    $model = new WaterMeter;// 实例化模型
 				    
@@ -193,30 +191,29 @@ class WaterController extends Controller
 				return $this->redirect(Yii::$app->request->referrer );
 			}
     	}
-    	return $this->redirect( Yii::$app->request->referrer );//Yii::$app->request->referrer
+    	return $this->redirect( Yii::$app->request->referrer );
     }
 		
 	//生成费用
 	public function actionFee($type, $name)
 	{
 		$session = Yii::$app->session;
-		$comm = $_SESSION[ 'user' ][ 'community' ]; //获取session中的绑定小区编号
+		$comm = $_SESSION[ 'community' ]; //获取session中的绑定小区编号
 		
 		//检查是否生成水费
 		$realestate = CommunityRealestate::find()
 			->select('realestate_id, community_id as community, building_id as building')
-			->where( [ 'community_id' => $comm ] );
+			->where( ['in', 'community_id', $comm ] );
 		
-		$reale = $realestate->count(); // 获取绑定房号数量
-		$realestate_id = $realestate->asArray()->all();// 获取绑定小区房屋
+		$realestate_id = $realestate->asArray()->all();// 获取生成水费的房屋
 		$reale_id = array_column($realestate_id,'realestate_id'); // 提取房屋编号
 		
-		$m = date( 'm' );
+		$m = date("m");
 		$Y = date('Y');
 		$su = 0; //成功生成水费数量
 		$fa = 0; //失败数量
 
-		//计算当前当前当月存在的水费数量
+		//计算当前当前当月存在的读数数量
 		$water = UserInvoice::find()
 			->andwhere( [ 'year' => $Y, 'month' => $m, 'community_id' => $comm, ] )
 			->andwhere(['in', 'description', $name])
@@ -230,30 +227,19 @@ class WaterController extends Controller
 		if(empty($comm)){
 			$session->setFlash( 'm', '1' );// 提示权限不足，返回请教界面
 			return $this->redirect( Yii::$app->request->referrer );
-		}elseif( $reale == $water ) {
+		}/*elseif( $reale == $water ) {
 			$session->setFlash( 'm', '3' ); // 提示已生成当月水费，不需要再次生成
 			return $this->redirect( Yii::$app->request->referrer );
-		}elseif($w_meter == 0){
+		}*/elseif($w_meter == 0){
 			$session->setFlash( 'm', '4' ); // 提示当月读数为空，需要录入最新读数
 			return $this->redirect( Yii::$app->request->referrer );
-		}else {
-			//获取所有水表表号（默认以房屋编号为水表表号）
-			/*$r_id = WaterMeter::find()
-				->select( 'community, building, realestate_id' )
-				->distinct()
-				->andwhere(['in', 'realestate_id',  ])
-				->andwhere(['type' => $type])
-				->limit(4000)
-				->orderBy( 'property' )
-				->asArray()
-				->all();*/
-			
+		}else {			
 			foreach ( $realestate_id as $id ) {
 				//获取近两个月的费表读数
 				$water = WaterMeter::find()
 					->select( 'year,month,readout' )
-					->where( [ 'realestate_id' => $id ] )
-					->limit( 2 ) //->limit(1)
+					->andwhere( [ 'realestate_id' => $id, 'type' => $type ] )
+					->limit( 2 )
 					->orderBy( 'property DESC' )
 					->asArray()
 					->all();
@@ -261,22 +247,23 @@ class WaterController extends Controller
 				$i = array_column( $water, 'readout' );//提取近两个月的费表读数
 
 				//计算差额
-				$c = end( $i ) - reset( $i );
+				$c = reset( $i ) - end( $i );
 				if ( $c < 0 ) {
-					$c = 0;
+					$c == 0;
+				}			
+				
+				if($c == 0){ //如果读数等于零则终止本次循环
+					continue;
 				}
 				
 				//查找水费费项
 				$cost = (new \yii\db\Query())->select('cost_name.price, cost_name.cost_name')
 					->from('cost_relation')
 					->join('inner join','cost_name','cost_relation.cost_id = cost_name.cost_id')
-					->andwhere(['cost_relation.realestate_id' => $id['realestate_id'], 'cost_name.cost_name' => $name])
+					->andwhere(['cost_relation.realestate_id' => $id['realestate_id'], 'cost_name.cost_name' => "$name"])
 					->one();
-								
+				
 				$mount = $c * $cost[ 'price' ];//计算金额
-				if($mount == 0){
-					continue;
-				}
 
 				$community = $id[ 'community' ]; //小区
 				$building = $id[ 'building' ]; //楼宇

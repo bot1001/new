@@ -29,6 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		}elseif($c == 4){
 			echo "<script>alert('当月水表读数未更新，请先更新后生成水费！')</script>";
 		}
+	
+	    $s = Yii::$app->session->getFlash('s');
+	    if($s){
+	    	echo "<script>alert('$s')</script>";
+	    }
 	?>
    
     <?php
@@ -98,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
-		'panel' => [ 'type' => 'primary', 'heading' => '录入电表读数',
+		'panel' => [ 'type' => 'info', 'heading' => '录入电表读数',
 				   'before' => Html::a( '更新', [ 'create', 'type' => 1, 'name' => '电费' ], [ 'class' => 'btn btn-info' ] )],
 		'toolbar' => [
 	    		'centent' => Html::a( '提交', [ 'fee', 'type' => 1, 'name' => '电费' ], [ 'class' => 'btn btn-success' ] ),

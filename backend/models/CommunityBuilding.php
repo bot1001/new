@@ -39,7 +39,7 @@ class CommunityBuilding extends \yii\db\ActiveRecord
     {
         return [
             [['company', 'community_id', 'creater', 'create_time'], 'integer'],
-            [['community_id', 'building_name', 'creater', 'create_time'], 'required'],
+            [['community_id', 'building_name'], 'required'],
             [['building_name', 'building_parent'], 'string', 'max' => 64],
             [['company', 'community_id', 'building_name'], 'unique', 'targetAttribute' => ['company', 'community_id', 'building_name']],
             [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
@@ -76,7 +76,6 @@ class CommunityBuilding extends \yii\db\ActiveRecord
 			}else{
 				//修改时自动更新以下记录
 				$this->creater = $_SESSION['user']['id'];
-				$this->create_time = date(time());
 			}
 			return true;
 		}

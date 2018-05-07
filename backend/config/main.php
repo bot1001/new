@@ -19,7 +19,7 @@ return [
             ],
 	       'admin' => [
                    'class' => 'mdm\admin\Module',
-                    'layout' => 'left-menu',//yii2-admin的导航菜单
+                    //'layout' => 'left-menu',//yii2-admin的导航菜单
                ]
 	],
     'components' => [
@@ -51,14 +51,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'view' => [
+         'theme' => [
+             'pathMap' => [
+                '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
+                 ],
+             ],
         ],
-        */
 	    'urlManager'=>[
 	        'enablePrettyUrl' => true,
 	        'showScriptName' => false,

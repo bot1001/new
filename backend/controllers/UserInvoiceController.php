@@ -496,8 +496,7 @@ class UserInvoiceController extends Controller
 	//批量生产费项预览
 	public function actionNew() 
 	{
-		if($_SESSION[ 'user' ][ 'name' ] == 'admin'){
-			$query = ( new\ yii\ db\ Query() )->select( [
+		$query = ( new\ yii\ db\ Query() )->select( [
 			'community_realestate.community_id',
 			'community_basic.community_name',
 			'community_realestate.building_id',
@@ -515,36 +514,10 @@ class UserInvoiceController extends Controller
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->where(['or not like','cost_name.cost_name',['水费']]) // 去除水费
-			//->where( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
+			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'community' ] ] )
 			->andwhere(['cost_name.inv' =>1])
 		    ->limit( 20 )
 		    ->all();
-		}else{
-			$query = ( new\ yii\ db\ Query() )->select( [
-			'community_realestate.community_id',
-			'community_basic.community_name',
-			'community_realestate.building_id',
-			'community_building.building_name',
-			'community_realestate.acreage',
-			'community_realestate.room_name',
-			'community_realestate.room_number',
-			'cost_relation.realestate_id',
-			'cost_relation.cost_id',
-			'cost_name.cost_name',
-			'cost_name.parent',
-			'cost_name.price',
-		] )->from( 'cost_relation' )
-			->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
-			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
-			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
-			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
-			->andwhere(['or not like','cost_name.cost_name',['水费']])
-			->andwhere(['cost_name.inv' =>1])
-		    ->limit( 20 )
-		    ->all();
-		}
 
 		return $this->renderAjax( 'new', [
 			'query' => $query,
@@ -557,8 +530,7 @@ class UserInvoiceController extends Controller
 		ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为2048M(2GB)
 		set_time_limit(900); //等待时间是10分钟
 		
-		if($_SESSION[ 'user' ][ 'name' ] == 'admin'){
-			$query = ( new\ yii\ db\ Query() )->select( [
+		$query = ( new\ yii\ db\ Query() )->select( [
 			'community_realestate.community_id',
 			'community_realestate.building_id',
 			'cost_relation.realestate_id',
@@ -573,34 +545,12 @@ class UserInvoiceController extends Controller
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->andwhere(['or not like','cost_name.cost_name',['水费']]) // 去除水费
+			->andwhere( ['in', 'community_realestate.community_id', $_SESSION[ 'community' ] ] )
 			->andwhere(['cost_name.inv' =>1])
 			->all();
-		}else{
-			$query = ( new\ yii\ db\ Query() )->select( [
-			'community_realestate.community_id',
-			'community_realestate.building_id',
-			'cost_relation.realestate_id',
-			'community_realestate.acreage',
-			'cost_relation.cost_id',
-			'cost_name.cost_name',
-			'cost_name.parent',
-			'cost_name.price',
-		] )
-			->from( 'cost_relation' )
-			->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
-			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
-			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
-			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'user' ][ 'community' ] ] )
-			->andwhere(['or not like','cost_name.cost_name',['水费']]) // 去除水费
-			->andwhere(['cost_name.inv' =>1])
-			->all();
-		}
 		
 		$y = date( 'Y' );
 		$m = date( 'm' );
-		//$m += 0;
 		$f = date( time() );
 		$a = 0;
 		$b = 0;
