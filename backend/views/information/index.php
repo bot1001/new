@@ -74,7 +74,7 @@ $this->title = '消息';
 		
             ['attribute' => 'remind_time',
 			 'value' => function($model){
-	         	return date('Y-m-d H:i;s', $model->remind_time);
+	         	return date('Y-m-d H:i:s', $model->remind_time);
 	         },
 			 'mergeHeader' => true,
 			'hAlign' => 'center'],

@@ -159,13 +159,7 @@ $this->title = '房屋管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index1', 'realestate_id' => $model->realestate_id ] );
-				$name = explode( '-', $model->room_number );
-				$count = count( $name );
-				if ( $count == 1 ) {
-					return Html::a( '1' . '单元', $url );
-				} else {
-					return Html::a( reset( $name ) . '单元', $url );
-				}
+				return Html::a( $model->room_number . '单元', $url );
 			},
 			'hAlign' => 'center',
 			'width' => '80px',
@@ -175,8 +169,7 @@ $this->title = '房屋管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				//$url = Yii::$app->urlManager->createUrl( [ 'user-invoice/c', 'id' => $model->realestate_id ] );
-				$number = explode( '-', $model->room_name );
-				return Html::a( end( $number ), '#', [
+				return Html::a( $model->room_name, '#', [
 					'data-toggle' => 'modal',
 					'data-target' => '#view-modal',
 					'class' => 'c',

@@ -74,7 +74,7 @@ class MenuController extends Controller
             Helper::invalidate();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderAjax('create', [
+            return $this->render('create', [
                   'model' => $model,
             ]);
         }
@@ -94,7 +94,7 @@ class MenuController extends Controller
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Helper::invalidate();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->renderAjax('update', [
                     'model' => $model,

@@ -68,8 +68,8 @@ class BuildingSearch extends CommunityBuilding
         // grid filtering conditions
         $query->andFilterWhere([
             'building_id' => $this->building_id,
-            'company' => $this->company,
-            'community_id' => $this->community_id,
+            'community_building.company' => $this->company,
+            'community_building.community_id' => $this->community_id,
             'creater' => $this->creater,
             'create_time' => $this->create_time,
         ]);

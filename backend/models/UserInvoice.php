@@ -53,7 +53,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             [['create_time', 'invoice_notes', 'update_time'], 'string'],
             [['description'], 'string', 'max' => 20],
             [['order_id'], 'string', 'max' => 64],
-            ['month', 'in', 'range' => [1,2,3,4,5,6,7,8,9,10,11,12]], 
+            ['month', 'in', 'range' => [1,2,3,4,5,6,7,8,9,10,11,12], 'on' => ['up']], 
             [['payment_time'], 'string', 'max' => 22],
             [['community_id', 'building_id', 'realestate_id', 'year', 'month', 'description'], 'unique', 'targetAttribute' => ['community_id', 'building_id', 'realestate_id', 'year', 'month', 'description'], 'message' => '费项已存在，请勿重复提交'],
         ];
@@ -100,8 +100,9 @@ class UserInvoice extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['update'] = ['community_id', 'building_id' , 'realestate_id', 'description', 'invoice_amount' ];
+        $scenarios['update'] = ['community_id', 'building_id' , 'realestate_id', 'description', 'invoice_amount', 'month', 'year' ];
         $scenarios['c'] =  ['from', 'year', 'month', 'cost'];
+        $scenarios['up'] =  ['community_id', 'building_id' , 'realestate_id', 'description', 'invoice_amount', 'month', 'year' ];
         return $scenarios;
     }
 	

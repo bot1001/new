@@ -105,7 +105,7 @@ $this->title = '楼宇列表';
 		
 
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => '{update}',
+			 'template' => '{update}{view}',
 			 'buttons' => [
 				'update' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [

@@ -248,6 +248,8 @@ class UserInvoiceController extends Controller
 							}
 								
 							$model = new UserInvoice(); //实例化模型
+							
+							$model->setScenario('up'); //设置场景
 							//赋值给模型
 							$model->community_id = $c;
 							$model->building_id = $b;
