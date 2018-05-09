@@ -89,21 +89,20 @@ class TicketSearch extends TicketBasic
             'ticket_basic.community_id' => $this->community_id,
             'realestate_id' => $this->realestate_id,
             'tickets_taxonomy' => $this->tickets_taxonomy,
-            //'create_time' => $this->create_time,
             'is_attachment' => $this->is_attachment,
             'remind' => $this->remind,
+			'ticket_status' => $this->ticket_status
         ]);
 
         $query->andFilterWhere(['like', 'ticket_number', $this->ticket_number])
             ->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'explain1', $this->explain1])
-            ->andFilterWhere(['like', 'community_building.building_name', $this->building])
+            ->andFilterWhere(['in', 'building_name', $this->getAttribute('building')])
             ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])
             ->andFilterWhere(['like', 'contact_person', $this->contact_person])
             ->andFilterWhere(['like', 'contact_phone', $this->contact_phone])
             ->andFilterWhere(['like', 'assignee_id', $this->assignee_id])
-            ->andFilterWhere(['like', 'reply_total', $this->reply_total])
-            ->andFilterWhere(['like', 'ticket_status', $this->ticket_status]);
+            ->andFilterWhere(['like', 'reply_total', $this->reply_total]);
 		
 		$dataProvider -> sort->attributes['name']=
 			[
@@ -113,8 +112,8 @@ class TicketSearch extends TicketBasic
 		
 		$dataProvider-> sort->attributes['building']=
 			[
-				'asc' => ['community_building.building_name'=>SORT_ASC],
-				'desc' => ['community_building.building_name'=>SORT_DESC],
+				'asc' => ['building_name'=>SORT_ASC],
+				'desc' => ['building_name'=>SORT_DESC],
 			];
 
         return $dataProvider;

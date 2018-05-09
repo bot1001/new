@@ -72,6 +72,16 @@ class TicketController extends Controller
 	    		->column();
 	    }
 		
+		if(isset($_GET['community'])){
+			$searchModel->community_id = $_GET['community']; 
+			$searchModel->building = $_GET['building']; 
+		}
+		
+		if(isset($_GET['name'])){
+			$searchModel->ticket_status = $_GET['name']; 
+		}
+		
+		
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

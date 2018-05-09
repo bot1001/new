@@ -97,7 +97,6 @@ class OrderSearch extends OrderBasic
             'order_parent' => $this->order_parent,
             'create_time' => $this->create_time,
             'order_type' => $this->order_type,
-           // 'payment_time' => $this->payment_time,
             'order_amount' => $this->order_amount,
             'invoice_id' => $this->invoice_id,
             'status' => $this->status,

@@ -140,7 +140,7 @@ $r_id = $session['role']; //用户角色编号
                         <span class="label label-success"><?php echo count($ticket); ?></span>
                     </a>
                     <ul class="dropdown-menu">
-						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>"><l><?php echo count($ticket); ?> </l>例</a></h4></li>
+						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>"><l><?php echo count($ticket); ?></l>例</a></h4></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
@@ -162,7 +162,7 @@ $r_id = $session['role']; //用户角色编号
 								       	echo '';
 								       }else{
 								       	echo Url::to(['/ticket/index',
-								       							'community' => $community[$c_id],
+								       							'community' => $c_id,
 								       							'building' => $building[$b_id],
 													            'c' => $a
 								       							]);
@@ -180,15 +180,29 @@ $r_id = $session['role']; //用户角色编号
 								        	$building[$b_id].' '.
 								        	$t['r']['room_name'].' '.
 								        	date('Y-m-d H',$t['create_time']);
+											
+											$_community[] = $community[$c_id];
+											$_building[] = $building[$b_id];
+											$_realestate[] = $t['r']['room_name'];
+											$_time[] = $t['create_time'];
 								        }
+										$_ticket[] = [$_community, $_building, $_realestate, $_time];
+										unset($_community);
+										unset($_building);
+										unset($_realestate);
+										unset($_time);
                                     }
+									$t = count($ticket);
+									//$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
+									unset($t);
+									unset($_ticket);
 								        ?>
                                       </a>
                                 </li>
                                 <!-- 提醒信息结束 -->                                                                                            
                             </ul>
                         </li>
-                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>">查看全部</a></li>
+                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','name' => '1', 'c' => $a]) ?>">查看全部</a></li>
                     </ul>
                 </li>
                 <li class="dropdown notifications-menu">

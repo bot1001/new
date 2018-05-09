@@ -95,20 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 			'width' => 'px',
 			'hAlign' => 'center'],
-		    
-            /*['attribute' => 'account_id',
-			 'value' => 'ac.real_name',
-			'width' => 'px',
-			'hAlign' => 'center'],*/
-		
-		    /*['attribute' => 'r.building_id',
-			'width' => 'px',
-			'hAlign' => 'center'],
-		
-		    ['attribute' => 'r.building_id',
-			'width' => 'px',
-			'hAlign' => 'center'],*/
-		    
+		   		    
             ['attribute' => 'tickets_taxonomy',
 			 'value' => function($model){
 	        	$date = [1 => '建议', 2 => '投诉'];
@@ -166,10 +153,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
 		    ]],
 		
-            /*['attribute' => 'is_attachment',
-			'width' => 'px',
-			'hAlign' => 'center'],*/
-		    		   		    
             ['attribute' => 'ticket_status',
 			 'value' => function($model){
 	        	$d = [1=> '待接单',2 => '已接单',3 => '已完成',4 => '返修',5 => '关闭',6 => '处理中'];
