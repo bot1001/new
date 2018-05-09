@@ -348,17 +348,17 @@ class UserInvoiceController extends Controller
 			$building = '';
 		}
 				
-		if($_GET)
+		if(isset($_GET['InvoiceSumSearch']['from'])) //判断并处理支付时间
 		{
-			$get = $_GET;
-			$d = UserInvoice::Sum($get);
-			$from = $d['from'];
-			$to = $d['to'];
+			$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
+		    
+		    $from = reset($time); //起始年月
+		    $to = end($time); //截止年月
 		}else{
 			$from = date('Y-m-d', time() );
 		    $to = date('Y-m-d', time() );
 		}
-		
+				
 		//获取费项名称并去重复
 		$c_name = CostName::find()
 			->select('cost_name')
@@ -367,7 +367,7 @@ class UserInvoiceController extends Controller
 			->asArray()
 			->column();
 		
-		return $this->render('test',['data' => $data,
+		return $this->render('summ',['data' => $data,
 									 'searchModel' => $searchModel,
 									 'comm' => $comm,
 									 'building' => $building,

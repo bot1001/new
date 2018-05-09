@@ -18,41 +18,7 @@ $this->registerJs($script);
 
 $this->title = '裕达物业';
 ?>
- <button id="button">请求纯文本</button>
- <br />
- <br />
- 
- <div id="test" style="text-align: center"></div>
- 
- <script>
-	 document.getElementById('button').addEventListener("click", loadText);
-	 
-	 function loadText(){
-		 
-		 var xhr = new XMLHttpRequest();
-		 //xml请求参数
-		 xhr.open('GET', "<?php echo Url::to(['/pay/jhang']); ?>", true);
-		 xhr.onload = function(){
-			 if(this.responseText == true){
-				 document.getElementById('test').innerHTML = '支付成功！';
-			 }else{
-				 document.getElementById('test').innerHTML = '等待支付';
-			 }
-			 
-//			 console.log("READYSTATE: ",xhr.readyState);
-//			 console.log(this.responseText);
-		 }
-//		 xhr.onreadystatechange = function(){
-//			 console.log("READYSTATE: ",xhr.readyState);
-//			 if(this.status == 200 && this.readyState == 4){
-//				 console.log(this.responseText);
-//			 }
-//		 }
-		 //发送请求
-		 xhr.send();
-	 }
-</script>
- 
+
   <style>
 	  h1{
 		  text-align:center;

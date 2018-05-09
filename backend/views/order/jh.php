@@ -14,9 +14,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		width: 500px;
 		height: 500px;
 		text-align: center;
-		position: absolute;
-		top: 20%;
-		left: 40%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
 		border-radius: 20px;
 		background: url(/image/jh.png);
 		background-color: aqua;
@@ -33,9 +36,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		width: 500px;
 		font-size: 20px;
 		text-align: center;
-		position: absolute;
-		top: 74%;
-		left: 40%;
+		position: fixed;
+		top: 550px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
 	}
 	
 	k {
@@ -69,10 +75,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		xhr.send();
 	}
 	
-	//定时器
+	//定时器 2秒
 	intervalId = setInterval( function () {
 		loadText();
-	}, 1000 );
+	}, 2000 );
 </script>
 
 <div>

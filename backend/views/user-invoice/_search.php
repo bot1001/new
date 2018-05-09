@@ -1,13 +1,21 @@
 <?php
 
-use yii\ helpers\ Html;
-use kartik\ form\ ActiveForm;
-use kartik\ daterange\ DateRangePicker;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use kartik\form\ActiveForm;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserInvoiceSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
+<style type="text/css">
+	#div2{
+		margin-top: 25px;
+		line-height:25px;
+	}
+</style>
 
 <div class="user-invoice-search">
 
@@ -17,19 +25,23 @@ use kartik\ daterange\ DateRangePicker;
 	    //'options' => ['class' => 'form-horizontal'],
         'method' => 'get',
     ]); ?>
+    
+    <?php 
+	$status = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+	?>
+    
+	<div>
     <div class="row">
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
     		<?= $form->field($model, 'community_id')->dropDownList($comm, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-1">
     		<?= $form->field($model, 'building_id')->dropDownList($building, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
     		<?= $form->field($model, 'description')->dropDownList($c_name, ['multiple'=>'multiple'])->label(false) ?>
     	</div>
-    </div>
     
-    <div class="row">
     	<div class="col-lg-2">
     	    <?= $form->field($model, 'from',['addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                                                  'options'=>['class'=>'drp-container form-group']])
@@ -43,11 +55,9 @@ use kartik\ daterange\ DateRangePicker;
                                                         //'singleDatePicker'=>true,
                                                         'showDropdowns'=>true,
                                                         ]
-                                                   ]);
+                                                   ])->textInput(['placeHolder' => '请选择费项区间'])->label(false);
                                                ?>
-		</div>
-   	
-   	    <div class="col-lg-2">
+		
     	    <?= $form->field($model, 'payment_time',['addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                                                  'options'=>['class'=>'drp-container form-group']])
 	                                             ->widget(DateRangePicker::classname(), [
@@ -60,20 +70,23 @@ use kartik\ daterange\ DateRangePicker;
                                                         //'singleDatePicker'=>true,
                                                         'showDropdowns'=>true,
                                                         ]
-                                                   ]);
+                                                   ])->textInput(['placeHolder' => '请选择支付时间'])->label(false);
                                                ?>
 		</div>
-   	    <div class="col-lg-2">
-			<?= $form->field($model, 'invoice_status')->dropDownList([ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],['prompt'=>'请选择']) ?>
-		</div>
-	
-		<div class="col-lg-1">
-			<div class="form-groups" style="bottom: 0px">
-				<?= Html::submitButton('搜索', ['class' => 'btn btn-info']) ?>
-			</div>
-		</div>
+   	    <div class="col-lg-1">
+			<?= $form->field($model, 'invoice_status')->dropDownList($status, ['multiple'=>'multiple'],['prompt'=>'请选择'])->label(false) ?>
+	    </div>
+	    
+	    <div id='div2' class="col-lg-1">
+	    	<div class="form-groups">
+	    		<?= Html::submitButton('搜索', ['class' => 'btn btn-info']) ?>
+				<a href="<?php echo Url::to(['/user-invoice/sum']) ?>" class="glyphicon glyphicon-repeat btn btn-default"></a>
+	    	</div>
+	    </div>	
 	</div>				
-
+    
+			
+		</div>
 	<?php ActiveForm::end(); ?>
 
 </div>

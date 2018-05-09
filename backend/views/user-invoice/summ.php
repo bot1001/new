@@ -39,13 +39,17 @@ use kartik\select2\Select2;
 $this->title = '缴费统计';
 
 ?>
-  <?php echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm,'c_name' => $c_name, 'building' => $building]); ?>
-  <?php echo '起：'.$from; ?>
-  <?php echo '止：'.$to; ?>
-
+  <?php echo $this->render('_search', ['model' => $searchModel, 
+									   'comm' => $comm,
+									   'c_name' => $c_name, 
+									   'building' => $building,
+									  ]); ?>
+<div align="right">
+	<?php echo '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to;; ?>
+</div>
+	    	
 <?php
 
-echo '<hr />';
 foreach ($data as $key=>$value)
         {
             $d[] = $value->attributes;

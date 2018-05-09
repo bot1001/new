@@ -18,8 +18,8 @@ class InvoiceSumSearch extends UserInvoice
     public function rules()
     {
         return [
-            [['invoice_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['year', 'month', 'description', 'payment_time', 'from', 'community_id', 'create_time', 'order_id', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
+            [['invoice_id', 'realestate_id'], 'integer'],
+            [['year', 'month', 'description', 'payment_time', 'from', 'community_id', 'building_id', 'create_time', 'order_id', 'invoice_notes', 'payment_time', 'update_time', 'invoice_status'], 'safe'],
             [['invoice_amount'], 'number'],
         ];
     }
@@ -88,10 +88,7 @@ class InvoiceSumSearch extends UserInvoice
 				$query->andFilterWhere(['between', 'month', $month01, $month02]);
 			}
 			$query->andFilterWhere(['between', 'year', $year01, $year02]);
-		}/*else{
-			$query->andFilterWhere(['like', 'year', date('Y')])
-				->andFilterWhere(['in', 'month', date('m')]);
-		}*/	
+		}	
 		
 		if($this->payment_time !== '') //如果支付时间为空 执行以下代码
 		{ 
@@ -101,25 +98,20 @@ class InvoiceSumSearch extends UserInvoice
             $query->andFilterWhere(['between', 'payment_time', strtotime($one),strtotime($two)]);
 		}
 		
-		if($this->invoice_status !== '')
-		{
-			$query->andFilterWhere(['like', 'payment_time', $this->payment_time]);
-		}
-		
         // grid filtering conditions
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
-            //'building_id' => $this->building_id,
             'realestate_id' => $this->realestate_id,
             'invoice_amount' => $this->invoice_amount,
             'invoice_status' => $this->invoice_status,
         ]);
 
-      $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['in', 'user_invoice.community_id', $this->community_id])
+      $query->andFilterWhere(['in', 'description', $this->description])
+            ->andFilterWhere(['in', 'community_building.community_id', $this->community_id])
             ->andFilterWhere(['in', 'community_building.building_name', $this->building_id])
             ->andFilterWhere(['like', 'create_time', $this->create_time])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
+		    ->andFilterWhere(['in','invoice_status', $this->invoice_status])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])
             ->andFilterWhere(['like', 'update_time', $this->update_time]);
 

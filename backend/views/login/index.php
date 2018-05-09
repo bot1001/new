@@ -14,13 +14,18 @@ $this->title = '用户登录';
 ?>
 
 <style type="text/css">
-	#div1{
-		width:350px; 
-		margin: auto;
+	table{
+		width:400px;
+		height: auto;
 		height:auto; 
 		background: url(image/th.png);
 		border-radius:20px;
-		margin-top:15%;
+		font-size: 15px; /*字体*/
+        text-align: center;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -175px 0 0 -175px;
 	}
 	
 	img{
@@ -31,17 +36,12 @@ $this->title = '用户登录';
 	
 	th{
 		text-align: center;
-		font-size: 36px;
 		font-family: 仿宋;
 	}
 
-   #table_wrap > table {
-            font-size: 15px; /*字体*/
-            text-align: center;
-        }
 </style>
 
-<div id="div1" class="site-login">
+<div class="site-login">
 
     <?php
     $form = ActiveForm::begin( [
@@ -49,14 +49,15 @@ $this->title = '用户登录';
         'type' => ActiveForm::TYPE_INLINE
     ] );
     ?>
-<div id="table_wrap">
-	<table class="table">
+	<table>
 		<thead>
-		  <tr>
-			  <th width="30%"><img src="/image/logo01.png"></th>
-			  <th style="text-align: left">裕家人</th>
-		 </tr>
-		 
+		    <tr>
+			     <th colspan = "2"><br />
+		    <tr>
+			     <th width="30%"><img src="/image/logo01.png"></th>
+			     <th style="text-align: left; font-size: 36px;">裕家人</th>
+		    </tr>
+		     
 		</thead>
 
 		<tr>
@@ -76,9 +77,10 @@ $this->title = '用户登录';
 			    <br>
 				<?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
            </td>
+			<tr>
+				<td colspan="2"><br /></td>
+			</tr>
 		</tr>
 	</table>
-</div>
-    <?php ActiveForm::end(); ?>
-    
+    <?php ActiveForm::end(); ?>   
 </div>
