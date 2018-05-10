@@ -90,6 +90,20 @@ class UserAccount extends \yii\db\ActiveRecord
        return false;
        }
     }
+	
+	public static function getUser($one, $two, $a)
+	{
+		$query = (new \yii\db\Query())->select([
+			    'user_data.reg_time',
+			    'community_realestate.community_id'])
+			->from ('user_data')
+			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_data.account_id')
+			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
+			->andwhere(['between', 'user_data.reg_time', $one, $two])
+		    ->andwhere(['in', 'community_realestate.community_id', $a]);
+		
+		return $query;
+	}
 
     /**
      * @return \yii\db\ActiveQuery

@@ -10,39 +10,24 @@ use yii\helpers\ArrayHelper;
 use app\models\OrderBasic;
 use app\models\SysRole;
 
-$session= $_SESSION['user'];
-$a = $session['community']; //获取小区
-$t = TicketBasic::getTicket(); //调用获取投诉数据方法
-$o = OrderBasic::getOr(); //调用获取订单数据方法
-
-$one = strtotime(date('Y-m-d')); // 本日时间戳
-$two = date(time()); //当前时间戳
-$r_id = $session['role']; //用户角色编号
+    $session= $_SESSION['user'];
+    $a = $_SESSION['community']; //获取小区
+    $t = TicketBasic::getTicket(); //调用获取投诉数据方法
+    $o = OrderBasic::getOr(); //调用获取订单数据方法
     
-    if(empty($a))
-	{
-		//获取订单
-		$or = $o ->andwhere(['between', 'payment_time', $one, $two])->limit(8);
-			
-		//获取小区投诉
-		$ticket = $t->andwhere(['ticket_status' => 1])
-	        ->asArray()
-			->all();
-		
-		//计算当日注册量
-		$query = (new \yii\db\Query())->select([
-			    'user_data.reg_time',
-			    'community_realestate.community_id'])
-			->from ('user_data')
-			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_data.account_id')
-			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
-			->where(['between', 'user_data.reg_time', $one, $two]);
-    }else{
-		//获取关联小区名字
-		$community_name = CommunityBasic::find()->select('community_name')
+    $one = strtotime(date('Y-m-d')); // 本日时间戳
+    $two = date(time()); //当前时间戳
+    $r_id = $session['role']; //用户角色编号
+    
+    	//获取关联小区名字
+		$c_name = CommunityBasic::find()
+			->select('community_name, community_id')
 			->where(['in', 'community_id', $a])
 			->asArray()
-			->one();
+			->all();
+
+        $name = array_column($c_name, 'community_name');
+
 		//获取小区投诉
 		$ticket = $t->andwhere(['ticket_basic.community_id' => $a])
 			->andwhere(['ticket_status' => 1])
@@ -51,23 +36,18 @@ $r_id = $session['role']; //用户角色编号
 		
 	    //获取订单
 		$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
-			->andwhere(['like', 'order_relationship_address.address', $community_name['community_name']]);
+			->andwhere(['like', 'order_relationship_address.address', ['地源', '金座']]);
 		
 		//计算当日注册量
-		$query = (new \yii\db\Query())->select([
-			    'user_data.reg_time',
-			    'community_realestate.community_id'])
-			->from ('user_data')
-			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_data.account_id')
-			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
-			->andwhere(['between', 'user_data.reg_time', $one, $two])
-		    ->andwhere(['community_realestate.community_id' => $a]);
-    }
+		$query = \app\models\UserAccount::getUser($one, $two, $a);
 
 	$user = $query->all(); //获取注册数据
     $today = $query->count(); //计算注册量总数
     $o_count = $or->count(); //订单总量
     $order = $or->orderBy('payment_time DESC')->all(); // 当日订单数据
+
+echo '<pre />';
+print_r($name);exit;
 
     $o_c = array_column($order, 'community_id'); //订单中的小区编号
     $u_c = array_column($user, 'community_id'); //注册中的小区编号
@@ -75,11 +55,6 @@ $r_id = $session['role']; //用户角色编号
     $t_c = array_column(array_column($ticket, 'r'), 'community_id'); //投诉列表总的小区编号
     $t_b = array_column(array_column($ticket, 'r'), 'building_id'); //投诉列表总的楼宇编号
     
-    $b = [$a];
-    $comm_id = array_merge($o_c,$t_c); //合并小区编号
-    $comm_id = array_merge($comm_id,$b); //合小区编号
-    $comm_id = array_merge($comm_id,$u_c); //合并和去重复小区编号
-
     $build_id = array_unique(array_merge($o_b,$t_b)); //合并和去重复小区编号
 
     //获取楼宇
@@ -88,13 +63,6 @@ $r_id = $session['role']; //用户角色编号
     	->where(['in', 'building_id', $build_id])
     	->asArray()
     	->all();
-
-    //获取小区名称
-    $c_name = CommunityBasic::find()
-       ->select('community_id, community_name')
-	   ->where(['in', 'community_id',$comm_id])
-       ->asArray()
-       ->all();
 
     //角色
     $role = SysRole::find()->select('id, name')->asArray()->all();
@@ -172,7 +140,6 @@ $r_id = $session['role']; //用户角色编号
 								   <?php 
 								        if(empty($t['r']))
 								        {
-									    	
 								        	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
 								        	date('Y-m-d H',$t['create_time']);
 								        }else{
@@ -181,19 +148,25 @@ $r_id = $session['role']; //用户角色编号
 								        	$t['r']['room_name'].' '.
 								        	date('Y-m-d H',$t['create_time']);
 											
+											$_community_id[] = $c_id;
 											$_community[] = $community[$c_id];
 											$_building[] = $building[$b_id];
 											$_realestate[] = $t['r']['room_name'];
 											$_time[] = $t['create_time'];
 								        }
-										$_ticket[] = [$_community, $_building, $_realestate, $_time];
+										$_ticket[] = [$_community, $_building, $_realestate, $_time,$_community_id];
+										unset($_community_id);
 										unset($_community);
 										unset($_building);
 										unset($_realestate);
 										unset($_time);
                                     }
 									$t = count($ticket);
-									//$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
+									
+									//判断是否有未处理投诉
+									if(isset($_ticket)){
+										$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
+									}
 									unset($t);
 									unset($_ticket);
 								        ?>
@@ -250,7 +223,10 @@ $r_id = $session['role']; //用户角色编号
 										      if($c_c > 0){
 										    	  echo '<i class="fa fa-users text-aqua"></i>'.$community[$comm].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
 										      }
-											 
+											 $user_account_name[] = $community[$comm];
+											 $user_count[] = $c_c;
+											 $user02 = [$user_account_name, $user_count];
+											 $_SESSION['_user'] = $user02;
 	                                      }
 									  }
 									?>
@@ -325,15 +301,16 @@ $r_id = $session['role']; //用户角色编号
                                  alt="User Image"/>
 
                             <p>
-								辖区：<l><?php if($a){
-                                                       	echo $community[$a];
-                                                       }else{
-                                                       	echo '全部';
-                                                       } ?></l>
+								辖区：<l><?php if(count($a) == 1)
+                                        {
+	                                    	print_r($community[$a['0']]);
+                                        }else{
+                                        	echo '点击查看';
+                                        } ?></l>
                                 <small>角色：<?php if(isset($r_name[$r_id]))
-                                                  {
-													  echo ($r_name[$r_id]);
-                                                   } ?></small>
+                                            {
+							                     echo ($r_name[$r_id]);
+                                            } ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

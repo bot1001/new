@@ -58,11 +58,11 @@ use kartik\daterange\DateRangePicker;
                         'separator'=>' to ',
                     ],
                 ]
-            ])->label('起始日期'); ?>
+            ])->textInput(['placeHolder' => '请输入预交起始月份'])->label('起始日期'); ?>
 		</div>
 		
 		<div class="col-lg-3">
-			<?= $form->field($model, 'month')->input('number')->label('月数'); ?>
+			<?= $form->field($model, 'month')->input('number')->textInput(['placeHolder' => '预交月数'])->label('月数'); ?>
 		</div>
 	</div>		
 			
