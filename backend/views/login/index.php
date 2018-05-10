@@ -18,7 +18,9 @@ $this->title = '用户登录';
 		width:400px;
 		height: auto;
 		height:auto; 
-		background: url(image/th.png);
+		padding: 250px;
+  background-color: rgba(255,250,240,0.7);
+		#opacity: 0.8;
 		border-radius:20px;
 		font-size: 15px; /*字体*/
         text-align: center;
@@ -71,7 +73,7 @@ $this->title = '用户登录';
 					<?= $form->field($model, 'password')->passwordInput() ?>
 				</div>
 				
-				<div style="color: aliceblue">
+				<div style="color: black">
 					<?= $form->field($model, 'rememberMe')->checkbox() ?>
 				</div>
 			    <br>

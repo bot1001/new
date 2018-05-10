@@ -84,3 +84,506 @@ $_SESSION = [
         0 => '32'
     ]
 ]
+2018-05-11 03:24:21 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:24:21 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:24:21 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:24:21 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:24:21 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:24:34 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:24:34 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:24:34 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:24:34 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:24:34 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:24:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:24:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:24:47 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:24:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:24:47 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:01 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:25:01 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:25:01 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:01 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:25:01 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:12 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:25:12 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:25:12 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:12 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:25:12 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:25:24 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:25:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:25:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:25:42 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:25:42 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:25:42 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:25:42 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:25:42 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:26:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:22 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:22 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:22 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:23 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:23 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:24 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:24 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:25 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:25 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:26:25 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:26:25 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:26:25 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:27:53 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:27:53 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:27:53 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:27:54 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:27:54 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:27:55 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:27:55 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:27:55 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:27:55 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:27:55 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:03 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:28:03 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:28:03 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:03 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:28:03 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:21 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:28:21 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:28:20 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:21 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:28:21 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:21 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:28:21 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:28:21 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:28:22 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:28:22 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:28:22 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:28:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:28:22 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:14 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:29:14 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:29:14 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:15 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:29:15 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:39 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:29:39 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:29:39 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:39 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:29:39 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:29:40 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:29:40 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:29:40 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:40 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:29:40 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:29:56 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:29:56 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:29:56 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:29:56 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:29:56 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:30:26 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:30:26 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:30:26 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:30:26 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:30:26 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:30:27 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:30:27 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:30:27 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:30:27 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:30:27 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:30:37 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:30:37 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:30:37 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:30:38 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:30:38 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:06 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:06 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:06 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:07 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:07 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:07 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:07 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:07 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:07 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:07 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:28 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:28 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:28 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:28 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:28 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:28 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:28 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:28 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:29 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:29 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:43 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:43 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:43 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:43 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:43 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:46 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:46 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:46 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:46 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:46 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:46 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:47 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:48 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:47 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:57 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:31:57 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:31:57 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:31:57 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:31:57 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:33:44 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:33:44 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:33:44 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:33:45 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:33:45 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:33:58 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:33:58 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:33:58 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:33:58 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:33:58 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:34:10 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:34:10 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:34:10 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:34:10 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:34:10 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:35:01 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:35:01 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:35:01 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:35:01 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:35:01 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:35:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:35:22 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:35:22 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:35:22 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:35:22 [127.0.0.1][-][-][info][application] $_POST = []
+
+$_SESSION = [
+    '__flash' => []
+]
+2018-05-11 03:36:04 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: login/index
+2018-05-11 03:36:04 [127.0.0.1][-][-][trace][yii\base\InlineAction::runWithParams] Running action: backend\controllers\LoginController::actionIndex()
+2018-05-11 03:36:04 [127.0.0.1][-][-][info][application] $_POST = []
+2018-05-11 03:36:05 [127.0.0.1][-][-][trace][yii\base\Controller::runAction] Route to run: debug/default/toolbar
+2018-05-11 03:36:04 [127.0.0.1][-][-][info][application] $_POST = []

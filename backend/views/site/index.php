@@ -304,7 +304,9 @@ $this->title = '裕达物业';
 		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.$add['2'].'单元'.' '.end($add);
 		                	    	}elseif( count($add) == 3){
 		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.'1 单元'.' '.end($add);
-		                	    	}
+		                	    	}else{
+										echo '<i class="fa fa-flag-o"></i>'.' '.$or->address;
+									}
 		                	   ?>
 		                </div>
 			       </a>
