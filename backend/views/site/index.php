@@ -38,6 +38,10 @@ $this->title = '裕达物业';
 		  background: #E5F5F3
 	  }
 	  
+	  g{
+		  color: #000000;
+	  }
+	  
 	  #box1{
 		  height: 300px;
 		  width: 400px;
@@ -50,7 +54,7 @@ $this->title = '裕达物业';
 	  #box2{
 		  height: 300px;
 		  width: 400px;
-		  background: #0EEB5E;
+		  background: #9BE1B0;
 		  border-radius: 20px;
 		  position: relative;
 		  margin-top: 1%;
@@ -59,7 +63,17 @@ $this->title = '裕达物业';
 	  #box3{
 		  height: 300px;
 		  width: 400px;
-		  background: #0EEB5E;
+		  background: #89FDBE;
+		  border-radius: 18px;
+		  position: relative;
+		  margin-top: 1%;
+		  margin-left: 1%;
+	  }
+	  
+	  #box4{
+		  height: 300px;
+		  width: 400px;
+		  background: #81D2EB;
 		  border-radius: 18px;
 		  position: relative;
 		  margin-top: 1%;
@@ -85,16 +99,31 @@ $this->title = '裕达物业';
 	  }
 	  
 	  #div6{
-		  height: 30px;
-		  font-size: 18px;
+		  height: auto;
+		  font-size: 19px;
 		  background-color: #E5F5F3;
 		  border-radius: 5px;
 		  margin-bottom:5px; #div 之间的距离
 	  }
 	  
+	  #div10{
+		  height: auto;
+		  font-size: 19px;
+		  text-align: center;
+		  background-color: #E5F5F3;
+		  border-radius: 5px;
+		  margin-bottom:5px; #div 之间的距离
+	  }
+	  #div7{
+		  color: red;
+		  position: relative;
+		  margin-left: 200px;
+		  margin-top: -25px; 
+	  }
+	  
 </style>
   
-<div style="background-color: #E5F5F3;border-radius: 20px;">
+   <div style="background-color: #E5F5F3;border-radius: 20px;">
     
     	<div id="box1" class="col-lg-3">
     		<?php 
@@ -118,8 +147,12 @@ $this->title = '裕达物业';
 				$community_id = array_column($_t, 'community_id');
 			?>
 
-		<h4 style="color: #000000"><a href="<?php echo Url::to(['/ticket/index','name' => '1', 'community_id' => $community_id]) ?>">
-			未处理投诉量：<l><?php echo count($_t); ?></l>例</a></h4>
+		    <h4 style="color: #000000">
+    	        <a href="<?php echo Url::to(['/ticket/index','name' => '1', 'community_id' => $community_id]) ?>">
+		        	未处理投诉量：<l><?php echo count($_t); ?></l>例
+  		        </a>
+   		    </h4>
+  		    
    		    <div id="div5">
    		    	<?php
 		    	if(isset($_t))
@@ -139,9 +172,13 @@ $this->title = '裕达物业';
 		    					    							]);
 		    					    }
 		    					?>">
-							<div id="div6">
+							<div id="div10">
 		        		        <?php
-	                    	    	echo $ti['community'].' '.$ti['building'].' '.$ti['room'].' '.date('Y-m-d H:i:d', $ti['time']);
+	                    	    	echo '<i class="fa fa-users"></i>'.' '.
+										$ti['community'].' '.
+										$ti['building'].' '.
+										$ti['room'];
+							        echo '<br />'.' '.date('Y-m-d H:i:d', $ti['time']);
 		    				    ?>
     	                    </div>
 		    	        </a>
@@ -154,29 +191,159 @@ $this->title = '裕达物业';
             </div>
             
     	    	<?php
+					unset($_t);
 		    		}else{
-		    			echo '<h>'.'坐等业主投诉……'.'</h>';
+					?>
+	    	<h4 style="color: #000000">
+    	        <a href="<?php echo Url::to(['/ticket/index']) ?>">
+		        	未处理投情况汇报：
+  		        </a>
+   		    </h4>
+	    			<?php
+		    			echo '<h>'.'心情极好'.'</h>';
 		    		}
 		    		?>
 			</div>
 	    </div>
 	    
     	<div id="box2" class="col-lg-3">
-    		<?php
-			    print_r($a = $_SESSION['community']);
-			echo '<pre />';
-			  print_r(date(time()));
+    		<?php			
+			if(isset($_SESSION['_user']))
+			{
+				$i = 0;
+				$user = $_SESSION['_user'];
+				foreach($user['user'] as $u)
+			    {
+			    	$_u[$i]['community'] = $u[0];
+			    	$_u[$i]['count'] = $u['1'];
+			    	$i ++;
+			    }
 			?>
+			
+			<h4 style="color: #000000">
+    	        <a href="<?php echo Url::to(['/user/index', 
+											              'one' => strtotime(date('Y-m-d')), 
+											              'two' => time()
+											              ]); ?>">
+		        	今日注册量：<l><?php echo $user['today']; ?></l>&nbsp;例
+  		        </a>
+   		    </h4>
+			<div id="div5">
+			
+			    <?php
+			    	foreach($_u as $us)
+			    	{
+						?>
+				<a href="<?php 
+				    echo Url::to(['/user/index',
+				  					  'name' => $us['community'],
+				  					  'one' => strtotime(date('Y-m-d')),
+				  					  'two' => time()
+				  				 ]);
+										   ?>">
+	    		<div id="div6" style="margin-left: 30px; margin-right: 30px;">
+		    		<?php
+						echo '<div>';
+			    		    echo '<i class="fa fa-user text-aqua"></i>'.' '.$us['community'];
+						echo '</div>';
+						echo "<div id ='div7'>";
+						    echo $us['count'].'<g>'.' '.'例'.'</g>';
+						echo "</div>";
+			    	?>
+			    </div>
+				</a>
+               <?php } ?>
+               
+            <div id = "div4">
+                <a href="<?php echo Url::to(['/user/index', 
+											              'one' => strtotime(date('Y-m-d')), 
+											              'two' => time()
+											              ]); ?>" style="color: #000000">查看全部</a>
+            </div>
+            </div>
+			<?php
+			}else{
+				?>
+			
+			<h4 style="color: #000000">
+    	        <a href="<?php echo Url::to(['/user-invoice/index']) ?>">
+		        	当日注册汇报：空空如也！
+  		        </a>
+   		    </h4>
+			
+			<?php 
+					echo '<h>'.'空空如也！'.'</h>';	
+			    }
+			?>
+   	        
     	</div>
     	
-    	<div id="box2" class="col-lg-3">
-    		
+    	<div id="box3" class="col-lg-3">
+    		<?php
+			if(isset($_SESSION['order']))
+			{
+				$order = $_SESSION['order'];
+				$one = strtotime(date('Y-m-d'));
+				$two = time();
+				?>
+				
+				<h4 style="color: #000000">
+    	            <a href="<?php echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]) ?>">
+		            	今日订单量：<l><?php echo $order['count']; ?></l>&nbsp;条
+  		            </a>
+   		        </h4>
+   		    <div id="div5">
+				<?php foreach($order['order'] as $or):$or = (object)$or; ?>
+				
+			       <a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $or->order_id]) ?>">
+		                <div id="div6">
+		                	<?php
+		                	    	$add = explode('-', $or->address);
+		                	    	if(count($add) == 4) 
+		                	    	{
+		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.$add['2'].'单元'.' '.end($add);
+		                	    	}elseif( count($add) == 3){
+		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.'1 单元'.' '.end($add);
+		                	    	}
+		                	   ?>
+		                </div>
+			       </a>
+		       <?php endforeach;?>
+		   </div>	   
+		   
+		   <div id = "div4">
+                <a href="<?php 
+							 if(empty($a)){
+								 echo Url::to(['/order/index', 'one' => $one, 'two' => $two]);
+							 }else{
+								 echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]);
+							 }
+							 ?>" style="color: #000000">查看全部</a>
+            </div>
+            
+            <?php
+			   }else{
+				?>
+		   	<h4 style="color: #000000">
+    	            <a href="#">
+		            	当日缴费情况
+  		            </a>
+   		        </h4>
+   		        
+			 <?php 
+				echo '<h>'.'仍需努力！'.'</h>';
+			} 
+			?>
+		    
     	</div>
-       
-       <div class="jumbotron">
-    
-       </div>
+      <div id="box4" class="col-lg-3">
+      	  <h4 style="color: #000000">
+    	            <a href="#">
+		            	<?php echo 'information'; ?>
+  		            </a>
+   		        </h4>
+      </div>
 
 	<a href="<?php //echo Url::to(['/user-invoice/search']); ?>"> <h5><!-- 缴费统计 --></h5></a>
 	<a href="<?php //echo Url::to(['/user-invoice/sum']); ?>"> <h5><!-- 新缴费统计 --></h5></a>
-</div>
+ </div>

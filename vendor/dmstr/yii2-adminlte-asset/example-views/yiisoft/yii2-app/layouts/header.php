@@ -19,35 +19,32 @@ use app\models\SysRole;
     $two = date(time()); //当前时间戳
     $r_id = $session['role']; //用户角色编号
     
-    	//获取关联小区名字
-		$c_name = CommunityBasic::find()
-			->select('community_name, community_id')
-			->where(['in', 'community_id', $a])
-			->asArray()
-			->all();
+    //获取关联小区名字
+	$c_name = CommunityBasic::find()
+		->select('community_name, community_id')
+		->where(['in', 'community_id', $a])
+		->asArray()
+		->all();
 
-        $name = array_column($c_name, 'community_name');
+    $name = array_column($c_name, 'community_name');
 
-		//获取小区投诉
-		$ticket = $t->andwhere(['ticket_basic.community_id' => $a])
-			->andwhere(['ticket_status' => 1])
-	        ->asArray()
-			->all();
-		
-	    //获取订单
-		$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
-			->andwhere(['like', 'order_relationship_address.address', ['地源', '金座']]);
-		
-		//计算当日注册量
-		$query = \app\models\UserAccount::getUser($one, $two, $a);
+	//获取小区投诉
+	$ticket = $t->andwhere(['ticket_basic.community_id' => $a])
+		->andwhere(['ticket_status' => 1])
+	    ->asArray()
+		->all();
+	
+	//获取订单
+	$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
+		->andwhere(['or like', 'order_relationship_address.address', $name]);
+	
+	//计算当日注册量
+	$query = \app\models\UserAccount::getUser($one, $two, $a);
 
 	$user = $query->all(); //获取注册数据
     $today = $query->count(); //计算注册量总数
-    $o_count = $or->count(); //订单总量
     $order = $or->orderBy('payment_time DESC')->all(); // 当日订单数据
-
-echo '<pre />';
-print_r($name);exit;
+    $o_count = count($order); //订单总量
 
     $o_c = array_column($order, 'community_id'); //订单中的小区编号
     $u_c = array_column($user, 'community_id'); //注册中的小区编号
@@ -155,18 +152,18 @@ print_r($name);exit;
 											$_time[] = $t['create_time'];
 								        }
 										$_ticket[] = [$_community, $_building, $_realestate, $_time,$_community_id];
+										$t = count($ticket);
+										//将投诉信息添加到session
+										$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
+										
+										//释放数组
 										unset($_community_id);
 										unset($_community);
 										unset($_building);
 										unset($_realestate);
 										unset($_time);
                                     }
-									$t = count($ticket);
-									
-									//判断是否有未处理投诉
-									if(isset($_ticket)){
-										$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
-									}
+									//释放数组
 									unset($t);
 									unset($_ticket);
 								        ?>
@@ -207,6 +204,7 @@ print_r($name);exit;
 	                                     			continue;
 	                                     		}
 												$c_c = count($k); //统计数量
+												
 											}	
 											unset($k); //释放数组
 	                                     	?>
@@ -220,15 +218,16 @@ print_r($name);exit;
 										  }
 										   ?>">
 	                                 <?php
-										      if($c_c > 0){
-										    	  echo '<i class="fa fa-users text-aqua"></i>'.$community[$comm].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
-										      }
-											 $user_account_name[] = $community[$comm];
-											 $user_count[] = $c_c;
-											 $user02 = [$user_account_name, $user_count];
-											 $_SESSION['_user'] = $user02;
-	                                      }
-									  }
+										if($c_c > 0){
+										    echo '<i class="fa fa-users text-aqua"></i>'.$community[$comm].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
+										    $user02[] = [$community[$comm], $c_c];
+										    }
+	                                    }
+										$user03 = ['today' => $today, 'user' => $user02];
+										$_SESSION['_user'] = $user03;
+										unset($user02);
+									}
+									
 									?>
                                     </a>
                                 </li>
@@ -253,11 +252,28 @@ print_r($name);exit;
                             <ul class="menu">
                                 <li>
                                    <?php foreach($order as $o){?>
-									<a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $o['order_id']]) ?>">	
-								   <?php echo $o['address'].' '.'时间：'.date('H:i', $o['payment_time']).' '.'<l>'.$o['order_amount'].'</l>'; ?>
+									    <a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $o['order_id']]) ?>">
+							        
+								        <?php 
+                                             echo '<i class="fa fa-users text-aqua"></i>'.' '.
+	                                             $o['address'].' '.'时间：'.
+	                                             date('H:i', $o['payment_time']).' '.
+	                                             '<l>'.$o['order_amount'].'</l>';
+										     $address = $o['address'];
+											 $time = $o['payment_time'];
+											 $order_amount = $o['order_amount'];
+											 $order_id = $o['order_id'];
+											 $ord[] = ['address' => $address, 'time' => $time, 'order_amount' => $order_amount, 'order_id' => $order_id];
+											?>
 									
 									</a>
-                                  <?php } ?>
+                                  <?php 					 
+															  }
+									if(isset($ord)){
+										$_SESSION['order'] = ['order' =>$ord, 'count' => $o_count];
+									}
+									    unset($order);									
+									?>
                                   
                                    <!-- Task item 
                                     <a href="#">

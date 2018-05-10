@@ -55,7 +55,7 @@ class PayController extends Controller
 		     	return $this->redirect(Yii::$app->request->referrer);
 		     }else{
 		     	 //判断订单有效期，两分钟内有效
-		         if($t >= 12000){
+		         if($t >= 120){
 		         	OrderBasic::updateAll(['status' => 3], 'order_id = :oid', [':oid' => $order_id]);
 		     		$session->setFlash('can', '1');
 		         	return $this->redirect(Yii::$app->request->referrer);
@@ -307,7 +307,7 @@ class PayController extends Controller
 										  'status' => 2],
 										 'order_id = :o_id', [':o_id' => $order_id]
 										 );
-				return $this->redirect(['user-invoice/index1','order_id' => $order_id]);
+				return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -343,7 +343,7 @@ class PayController extends Controller
 										  'status' => 2],
 										 'order_id = :o_id', [':o_id' => $order_id]
 										 );
-				return $this->redirect(['user-invoice/index1','order_id' => $order_id]);
+				return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}

@@ -50,8 +50,10 @@ class UserInvoiceController extends Controller
 		$get = $_GET;
 		$searchModel = new UserInvoiceSearch();
 		
-		if(isset($get['order'])){ //判断来自订单列表的查询
-			if(isset($get['order_id'])){ //判断订单编号是否存在
+		if(isset($get['order'])) //判断来自订单列表的查询
+		{ 
+			if(isset($get['order_id']))
+			{ //判断订单编号是否存在
 				$order_id = $get['order_id']; //接收订单编号
 		        $searchModel->order_id = $order_id; //为搜索模型赋值
 				//查找对应订单编号的费项是否存在
