@@ -47,9 +47,15 @@ class OrderSearch extends OrderBasic
      */
     public function search($params)
     {
-		$comm = $_SESSION['community'];
-		$query = OrderBasic::find()->where(['in', 'account_id', $comm]);
+		$comm = $_SESSION['community']; //获取关联小区
+		$Role = $_SESSION['user']['0']['Role']; //获取用户角色
 		
+		if($Role == '收银'){
+			$query = OrderBasic::find()->where(['in', 'account_id', $comm]);
+		}else{
+			$query = OrderBasic::find();
+		}
+				
 		$query->joinWith('status0');
 		$query->joinWith('order0');
         

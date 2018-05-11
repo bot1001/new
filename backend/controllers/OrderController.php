@@ -102,7 +102,7 @@ class OrderController extends Controller
 	public function actionPrint($order_id)
 	{
 		$session = Yii::$app->session;
-		$user_name = $_SESSION['user']['name']; //收款用户名
+		$user_name = $_SESSION['user']['0']['name']; //收款用户名
 		
 		//获取订单信息
 		$order = OrderBasic::find()
@@ -229,7 +229,11 @@ class OrderController extends Controller
 			    ->where(['community_id' => $c_id])
 				->asArray()
 			    ->one();
-		
+//		print_r($c_id);
+//		echo '<br />';
+//		print_r($ad);
+//		
+//		exit;
 		$model = array_merge($model,$ad);
 
 		return $this->render('view', [
@@ -262,7 +266,7 @@ class OrderController extends Controller
 		]);
 	}
 
-	//缴费成功后转到这里
+	//支付宝缴费成功后转到这里
 	public function actionV($out_trade_no)
 	{
 		$model = OrderBasic::find()
@@ -308,97 +312,94 @@ class OrderController extends Controller
 			}
 			
 			//获取缴费项目
-		    $invoice = UserInvoice::find()
-				->select('user_invoice.realestate_id, 
-			           community_basic.community_name as community,
-			           community_basic.community_id, 
-			           user_invoice.building_id, 
+		    $invoice = (new \yii\db\Query())
+				->select('user_invoice.community_id as c_id,
+				       community_basic.community_name as community,
 			           community_building.building_name as building,
-					   community_realestate.realestate_id,
-					   community_realestate.room_number,
-					   community_realestate.room_name,
-					   invoice_id,
-			           year,
-			           month,
-			           invoice_amount,
-			           description')
-				->joinWith('community')
-				->joinWith('building')
-				->joinWith('room')
-		       	->andwhere(['in', 'invoice_id', $ids])
-		       	->andwhere(['invoice_status' => '0'])
+					   community_realestate.room_number as number,
+					   community_realestate.room_name as name,
+			           user_invoice.invoice_id as id,
+			           user_invoice.year as year,
+			           user_invoice.month as month,
+			           user_invoice.invoice_amount as amount,
+			           user_invoice.description as description')
+				->from('user_invoice')
+				->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
+				->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
+				->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
+		       	->andwhere(['in', 'user_invoice.invoice_id', $ids])
+		       	->andwhere(['user_invoice.invoice_status' => '0'])
 		    	->limit(100)
-		       	->asArray()
 		       	->all();
 	    }
+		
 		if(empty($invoice)){
 			$session = Yii::$app->session;
 			$session->setFlash('fail','1');
 			return $this->redirect( Yii::$app->request->referrer );
 		}
-		$in = array_column($invoice, 'invoice_amount'); //提取金额
-		$id = array_column($invoice, 'invoice_id'); //提取金额
-		$m = array_sum($in); //求和
-		$n = count($in); //计算
+		$in = array_column($invoice, 'amount'); //提取金额
+		$id = array_column($invoice, 'id'); //提取费项ID
+		$m = array_sum($in); //求和金额
+		$n = count($in); //合计金额
+		
 		$a = reset($invoice);
-		$c = $a['community']['community_name']; //小区
-		$b = $a['building']['building_name']; //楼宇
-		$number = $a['room']['room_number']; //单元
-		$name = $a['room']['room_name']; //房号
+		
+		$c_id = $a['c_id']; //小区编号
+		$c = $a['community']; //小区
+		$b = $a['building']; //楼宇
+		$number = $a['number']; //单元
+		$name = $a['name']; //房号
+		
 		$address = $c.'-'.$b.'-'.$name; //拼接地址
 		
 		return $this->render('add', [
-			    'invoic' => $invoice,
+			    'invoice' => $invoice,
 			    'n' => $n,
 			    'm' => $m,
 			    'id' => $id,
+			    'c_id' => $c_id,
 			    'address' => $address
             ]);
     }
 
-	public function actionAdd($c,$address)
-	{
-		$a = Yii::$app->request->get();
-		$user_id = $_SESSION['user']['community']; //获取账号绑定小区
-		
+	public function actionAdd($c,$address, $c_id)
+	{		
 		$id = $_GET['id'];
 								
 		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
 		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
-		$time = date(time());//订单类型
+		$time = date(time());//生成时间
 		$des = '物业相关费用'; //订单描述
-		$phone = $_SESSION['user']['phone'];
-		$name = $_SESSION['user']['name'];
-				
-		if(!empty($user_id)){
-			$transaction = Yii::$app->db->beginTransaction();
-			try{
-				//插入订单
-				$sql = "insert into order_basic(account_id,order_id,create_time,order_type,description, order_amount)
-				values ('$user_id','$order_id','$time','1','$des','$c')";
-				$result = Yii::$app->db->createCommand($sql)->execute();
-				if($result){
-					foreach($id as $d){
-						$sql1 = "insert into order_products(order_id,product_id,product_quantity)value('$order_id','$d','1')";
-						$result1 = Yii::$app->db->createCommand($sql1)->execute();
-					}
-					if($result1){
-						$sql2 = "insert into order_relationship_address(order_id,address,mobile_phone,name)
-						value('$order_id','$address', '$phone','$name')";
-						$result2 = Yii::$app->db->createCommand($sql2)->execute();
-					}
+		$phone = $_SESSION['user']['0']['phone']; //用户联系方式
+		$name = $_SESSION['user']['0']['name']; //用户姓名
+		$user_id = $c_id; //小区编号
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try{
+			//插入订单
+			$sql = "insert into order_basic(account_id,order_id,create_time,order_type,description, order_amount)
+			values ('$user_id','$order_id','$time','1','$des','$c')";
+			$result = Yii::$app->db->createCommand($sql)->execute();
+			if($result){
+				foreach($id as $d){
+					$sql1 = "insert into order_products(order_id,product_id,product_quantity)value('$order_id','$d','1')";
+					$result1 = Yii::$app->db->createCommand($sql1)->execute();
 				}
-				$transaction->commit();
-			}catch(\Exception $e) {
-			print_r($e);die;
+				if($result1){
+					$sql2 = "insert into order_relationship_address(order_id,address,mobile_phone,name)
+					value('$order_id','$address', '$phone','$name')";
+					$result2 = Yii::$app->db->createCommand($sql2)->execute();
+				}
+			}
+			$transaction->commit();
+		}catch(\Exception $e) {
+		    print_r($e);die;
             $transaction->rollback();
             return $this->redirect(Yii::$app->request->referrer);
         }
 			
         return $this->redirect(['view1', 'order_id'=>$order_id]); //跳到支付通道选择页面
-		}
-		$m ='非收银员没有收费权限，请返回！';
-		echo "<script> alert('$m');parent.location.href='/user-invoice'; </script>";
 	}
 		
     /**

@@ -107,6 +107,7 @@ $this->title = '裕达物业';
 	  #div5{
 		  height: 210px;
 		  overflow: auto;
+		  
 	  }
 	  
 	  #div6{
@@ -114,7 +115,7 @@ $this->title = '裕达物业';
 		  font-size: 19px;
 		  background-color: #E5F5F3;
 		  border-radius: 5px;
-		  margin-bottom:5px; #div 之间的距离
+		  margin-bottom: 5px; #div 上下之间的距离
 	  }
 	  
 	  #div10{
@@ -125,6 +126,7 @@ $this->title = '裕达物业';
 		  border-radius: 5px;
 		  margin-bottom:5px; #div 之间的距离
 	  }
+	  
 	  #div7{
 		  color: red;
 		  position: relative;
@@ -132,6 +134,87 @@ $this->title = '裕达物业';
 		  margin-top: -28px; 
 	  }
 	  
+	  #div8{
+		  height: 250px;
+		  width: 385px;
+		  overflow: auto; 
+		  border-radius:10px;
+		  position: relative;
+		  left: 2%;;
+	  }
+	  
+	  #in01{
+		  background: #7ABD77;
+		  width: 100%;;
+		  border-radius: 3px;
+		  text-align: left;
+		  text-align-last:justify;
+		  font-size: 16px;
+	  }
+	  
+	  #in02{
+		  width: 100%;
+		  height: 100%;
+		  text-align-last:justify;
+		  border-radius: 3px;
+		  text-align: left;
+		  font-size: 16px;
+		  background: #A9E0D3;
+	  }
+	  
+	  #divin{
+		  position: relative; width: 40%;
+	  }
+	  #in03{
+		  position: relative;
+		  width: 75%;
+		  background: #76DF9F;
+	  }
+	  #in04{
+		  height: 98px;
+		  width: auto;
+		  background: #B44143;
+		  border-radius: 10px;
+		  position: relative;
+			  background: url('/image/logo.png');
+	  }
+	  
+	  #in05{
+		  text-align: center;
+		  background: #7ABD77;
+		  border-radius: 5px;
+		  height: 100%;
+		  width: 100%;
+	  }
+	  
+	  table{
+		  background: #88DCDB;
+		  width: 100%;		  
+	  }
+	  
+	  #in06{
+		  width: 180px;
+		  display: inline;
+		  background: #A9E0D3;
+		  border-radius: 5px;
+		  margin-bottom: 2px; #div 上下之间的距离
+	  }	 
+	  
+	  #in08{
+		  display: inline;
+		  background: #A9E0D3;
+		  border-radius: 5px;
+		  margin-bottom: 2px; #div 上下之间的距离
+	  }	 
+	  
+	  #in07{
+		  width: 200px;
+		  background: #7ABD77;
+		  border-radius: 5px;
+		  margin-bottom: 5px; #div 上下之间的距离
+		  text-align: center;
+		  margin: auto;
+	  }	  
 </style>
   
    <div style="background-color: #E5F5F3;border-radius: 20px;">
@@ -207,7 +290,7 @@ $this->title = '裕达物业';
 					?>
 	    	<h4 style="color: #000000">
     	        <a href="<?php echo Url::to(['/ticket/index']) ?>">
-		        	未处理投情况汇报：
+		        	业主投诉情况汇报：
   		        </a>
    		    </h4>
 	    			<?php
@@ -350,15 +433,103 @@ $this->title = '裕达物业';
     	       <a href="#">
 		       	    <?php echo '账户信息'; ?>
   		       </a>
-			   <div id="div5">
-				   <div id="information1">
-				   	<?php 
-					   echo '<pre />';
-					   print_r($_SESSION['user']);
-					   ?>
-				   </div>
+  		   </h4>
+  		   
+  		   <?php
+		       if(isset($_SESSION['user']))
+		       {
+			       $session = $_SESSION['user'];
+			       $name = array_unique(array_column($session, 'name'));
+		           $Role = array_unique(array_column($session, 'Role'));
+				   $comment = array_unique(array_column($session,'comment'));
+		       }else{
+			       $name = $Role = '';
+		       }
+		       
+		       if(isset($_SESSION['community_name']))
+			   {
+			       $community_name = $_SESSION['community_name'];
+		       }else{
+			       $community_name = '';
+		       }
+		   ?>
+			   <div id="div8"  class="row">
+	                <table border="0">
+	                    <tr>
+	                    	<td width = "23%"><div id="in01" class="col-lg-1">用户名:</div></td>
+	                    	<td width = "50%"><div id="in02" class="col-lg-1">
+	                    	<?php 
+								foreach($name as $n) {
+									echo $n;
+								}
+								?>
+	                    	</div></td>
+	                    	<td width = "27%" rowspan=3><div id="in04"></div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td><div id="in01" class="col-lg-1">职位:</div></td>
+	                    	<td><div id="in02" class="col-lg-1">
+	                             	<?php
+								        $count = count($Role);
+								        foreach($Role as $key => $r)
+								        {
+								        	if($count == '1'){
+								        		echo $r;
+								        	}else{
+								        		if($key+1 === $count){
+								        			echo $r;
+								        		}else{
+								        			echo $r.'<l>'.'兼'.'</l>';
+								        		}
+								        	}
+								        	unset($r);
+								        }
+					          			?>
+                                 </div>
+                             </td>
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="2"><div id="in05">关联小区</div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="3">
+	                    		<?php 
+								foreach($community_name as $name)
+								{
+									?>
+										<div id="in06" class="col-lg-1">
+										     <?php
+								                  echo $name['community_name'];
+								              ?>
+								         </div>
+									<?php }
+								                ?>
+	                    	</td>
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="3">
+	                    		<div id="in07" style="text-align: center">账户说明</div>
+	                    	</td>
+	                    </tr>
+	                    
+	                    <tr>
+	                    	<td colspan="3" id="in06">
+	                    		<?php 
+								if(isset($comment))
+								{
+									foreach($comment as $key => $_comment)
+									{
+										$key += 1;
+										echo $key.'、'.$_comment;
+									}
+								}
+								?>
+	                    	</td>
+	                    </tr>
+	                </table>
+		          
 			   </div>
-   		   </h4>
+   		   
        </div>
       
 	   <div id="box5" class="col-lg-3">
@@ -366,12 +537,10 @@ $this->title = '裕达物业';
     	       <a href="#">
 		       	    <?php echo 'Message'; ?>
   		       </a>
+  		      		<?php echo '<pre />';
+			   print_r($_SESSION['user']);?>
    		   </h4>	   	
 	   </div>
-	   <?php 
-					   echo '<pre />';
-					   print_r($_SESSION['user']);
-					   ?>
 
 	<a href="<?php //echo Url::to(['/user-invoice/search']); ?>"> <h5><!-- 缴费统计 --></h5></a>
 	<a href="<?php //echo Url::to(['/user-invoice/sum']); ?>"> <h5><!-- 新缴费统计 --></h5></a>

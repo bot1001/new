@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\UserAccount;
+use app\models\CommunityBasic;
 use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,6 +39,14 @@ class UserController extends Controller
 		$searchModel = new UserSearch();
 		$get = $_GET;
 		
+		$c = $_SESSION['community'];
+	
+		$comm = CommunityBasic::find()
+			->select('community_name')
+			->where(['in', 'community_id', $c])
+			->indexBy('community_name')
+			->column();
+		
         if(isset($get['one']))
 		{
 			$one = date('Y-m-d', time($get['one']));
@@ -55,6 +64,7 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'comm' => $comm
         ]);
     }
 	

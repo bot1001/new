@@ -8,6 +8,7 @@ use yii\web\Controller;
 use app\models\LoginForm;
 use app\models\SysCommunity;
 use app\models\SysUser;
+use app\models\CommunityBasic;
 
 class LoginController extends Controller
 {
@@ -45,9 +46,6 @@ class LoginController extends Controller
 				->where(['sys_user.id' => $id])
 				->all();
 			
-//			echo '<pre>';
-//			print_r($user);exit;
-			
 			$session['user'] = $user; //将用户信息添加到session
 			
 			//获取用户绑定小区
@@ -58,7 +56,15 @@ class LoginController extends Controller
 	            	->one();
 			//拆分用户关联小区
 	        $s = explode(',',$syscommuntiy['community_id']);
+			
+			//获取关联小区名称
+			$community_name = CommunityBasic::find()
+				->select('community_name')
+				->where(['in', 'community_id', $s])
+				->asArray()
+				->all();
 
+			$session['community_name'] = $community_name;
 			$session['community'] = $s; //将用户关联的小区添加到session
 			
             return $this->goBack();

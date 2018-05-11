@@ -2,9 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\helpers\ArrayHelper;
-use app\models\UserAccount;
-use app\models\CommunityBasic;
 use app\models\Status;
 use yii\widgets\Pjax;
 
@@ -20,21 +17,7 @@ $this->title = '用户管理';
     <?php Pjax::begin() ?>
 
        <?php
-	$c = $_SESSION['user']['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_name', 'community_name');
-	
+		
 	     $gridColumn = [     
             ['class' => 'kartik\grid\SerialColumn',
 			'header' =>'序<br />号'],

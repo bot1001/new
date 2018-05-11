@@ -17,17 +17,32 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		th{
 			text-align:center;
 		}
-		
-		h3{
-			text-align:center;
-		}
-		
+						
 		table{
 			text-align:center;
 			margin:auto;
 		}
+		
+		#div0{
+			text-align: center;
+			font-size: 24px;
+			color: #FFFFFF;
+			background: url(/image/timg.jpg);
+			width: 116px;
+			height: 54px;
+			background-size: 116px 54px;
+			border-radius: 30px;
+			position: relative;
+			top: 25px;
+			margin: auto;
+		}
+		
+		h{
+			position: relative;
+			top: 12px;
+		}
 		</style>
-				
+							
 		<table width="768" border="1" cellspacing="0" cellpadding="0">
 			<tbody>
 				<tr>
@@ -36,21 +51,21 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					<th>应收</th>
 					<th>实收</th>
 				</tr>
-				<?php foreach($invoic as $k =>$i): $i = (object) $i?>
+				<?php foreach($invoice as $k =>$i): $i = (object) $i?>
 				<tr>
 					<td width="7%"><?php echo $k+1; ?></td>
 					<td width=""><?php
 						$comm = $i->community;
-				        echo $comm['community_name'];
+				        echo $comm;
 						?></td>
 					<td width="8%"><?php 
 						$building = $i->building;
-						echo $building['building_name']; ?></td>
+						echo $building; ?></td>
 					<td width="9%"><?php echo $i->year; ?>年</td>
 					<td width="8%"><?php echo $i->month; ?>月</td>
 					<td width="" align="left"><?php echo $i->description; ?></td>
-					<td width="9%"><?php echo $i->invoice_amount; ?></td>
-					<td width="9%"><?php echo $i->invoice_amount; ?></td>
+					<td width="9%"><?php echo $i->amount; ?></td>
+					<td width="9%"><?php echo $i->amount; ?></td>
 				</tr>
 				<?php endforeach; ?>
 				<tr>
@@ -62,11 +77,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</tbody>
 		</table>
 		
-	<table width="768" border="0">
-		<tr>
-			<td colspan="3"><a href="<?=Url::to(['/order/add','c' => $c,'id' => $id,'address' => $address
-															    ]); ?>"><h2>GOing...</h2></a>
-			</td>
-		</tr>
+		<a href="<?=Url::to(['/order/add','c' => $c,'id' => $id,'address' => $address, 'c_id' => $c_id ]); ?>">
+		    <div id="div0"><h>GOing...</h></div>
+		</a>
 	</table>
 </div>

@@ -50,7 +50,7 @@ class PayController extends Controller
 			return $this->redirect(Yii::$app->request->referrer);
 		}else{
 		     //判断用户权限
-		     if(empty($_SESSION['user']['community'])){
+		     if(empty($_SESSION['community'])){
 				$session->setFlash('cancel', '权限不足，无法发起支付请求！');
 		     	return $this->redirect(Yii::$app->request->referrer);
 		     }else{
