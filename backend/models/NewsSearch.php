@@ -41,13 +41,10 @@ class NewsSearch extends CommunityNews
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+		$c = $_SESSION['community'];
 		
-		if(!empty($c)){
-			$query = CommunityNews::find()->where(['community_id' => "$c"]);
-		}else{
-			$query = CommunityNews::find();
-		}
+		$query = CommunityNews::find()->where(['in', 'community_id', $c]);
+		
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

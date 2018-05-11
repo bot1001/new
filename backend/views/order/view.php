@@ -104,10 +104,16 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	        ['attribute' => 'description',
 			 'label' => '详情',
 			 'format' => 'raw',
-			 'value' => function($model){
-				 $url = Yii::$app->urlManager->createUrl(['/user-invoice/index1','order_id' => $model['order_id']]);
+			 'value' => function($model)
+			 {
+				 $url = Yii::$app->urlManager->createUrl(['/user-invoice/index','order_id' => $model['order_id']]);
 	             $l = explode(',',$model['description'],2);
-	             return Html::a($l['0'],$url).'等';
+
+	             if($model['payment_gateway']){
+	             	return Html::a($l['0'],$url).'等';
+	             }else{
+	             	return '';
+	             }
             }],
 	
 	       /*['attribute' => 'order.product_name',

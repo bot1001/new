@@ -125,7 +125,8 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     }
 
     //批量操作
-	public function batchHandle($ids = [],$status = 3){
+	public function batchHandle($ids = [],$status = 3)
+	{
         foreach ($ids as $k=>$v){
             $model = $this->has(['id'=>$v]);
             $model->status = $status;
@@ -136,7 +137,8 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     }
      
     //其中has方法如下：
-    public function has($where=[], $field='*') {
+    public function has($where=[], $field='*') 
+	{
         $result = $this->_query
             ->select($field)
             ->where($where)

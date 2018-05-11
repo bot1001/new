@@ -82,11 +82,12 @@ class TicketSearch extends TicketBasic
 			$two = end($time);
 			$query->andFilterWhere(['between', 'ticket_basic.create_time', strtotime($one), strtotime($two)]);
 		}
-
+		
         // grid filtering conditions
         $query->andFilterWhere([
             'ticket_id' => $this->ticket_id,
             'ticket_basic.community_id' => $this->community_id,
+			'building_name' => $this->building,
             'realestate_id' => $this->realestate_id,
             'tickets_taxonomy' => $this->tickets_taxonomy,
             'is_attachment' => $this->is_attachment,
@@ -97,7 +98,7 @@ class TicketSearch extends TicketBasic
         $query->andFilterWhere(['like', 'ticket_number', $this->ticket_number])
             ->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'explain1', $this->explain1])
-            ->andFilterWhere(['in', 'building_name', $this->getAttribute('building')])
+            
             ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])
             ->andFilterWhere(['like', 'contact_person', $this->contact_person])
             ->andFilterWhere(['like', 'contact_phone', $this->contact_phone])

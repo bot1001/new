@@ -62,7 +62,7 @@ use kartik\daterange\DateRangePicker;
 		</div>
 		
 		<div class="col-lg-3">
-			<?= $form->field($model, 'month')->input('number')->textInput(['placeHolder' => '预交月数'])->label('月数'); ?>
+			<?= $form->field($model, 'month')->input('number',['placeHolder' => '预交月数'])->label('月数'); ?>
 		</div>
 	</div>		
 			

@@ -77,7 +77,7 @@ class HouseInfo extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->creater = $_SESSION['user']['id'];
+				$this->creater = $_SESSION['user']['0']['id'];
 				$this->create = date(time());
 				$this->update = date(time());
 			}else{

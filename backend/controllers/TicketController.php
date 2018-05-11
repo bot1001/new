@@ -44,43 +44,21 @@ class TicketController extends Controller
         $searchModel = new TicketSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
-	    $c = $_SESSION['user']['community'];
-	    if(empty($c)){
-	    	$comm = CommunityBasic::find()
-	    		->select('community_name, community_id')
-	    		->indexBy('community_id')
-	    		->column();
-			
-	    	$build = CommunityBuilding::find()
-	    		->select('building_name')
-	    		->distinct()
-	    		->indexBy('building_name')
-	    		->column();
-	    }else{
-	    	$comm = CommunityBasic::find()
-	    		->select(' community_name')
-	    		->where(['community_id' => $c])
-				->orderBy('community_name DESC')
-	    		->indexBy('community_id')
-	    		->column();
-			
-	    	$build = CommunityBuilding::find()
-	    		->select('building_name')
-	    		->where(['community_id' => $c])
-	    		->distinct()
-	    		->indexBy('building_name')
-	    		->column();
-	    }
+	    $c = $_SESSION['community'];
+	   
+	    $comm = CommunityBasic::find()
+	    	->select(' community_name')
+	    	->where(['community_id' => $c])
+			->orderBy('community_name DESC')
+	    	->indexBy('community_id')
+	    	->column();
 		
-		if(isset($_GET['community'])){
-			$searchModel->community_id = $_GET['community']; 
-			$searchModel->building = $_GET['building']; 
-		}
-		
-		if(isset($_GET['name'])){
-			$searchModel->ticket_status = $_GET['name']; 
-		}
-		
+	    $build = CommunityBuilding::find()
+	    	->select('building_name')
+	    	->where(['community_id' => $c])
+	    	->distinct()
+	    	->indexBy('building_name')
+	    	->column();		
 		
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -135,37 +113,20 @@ class TicketController extends Controller
         $model = new TicketBasic();
 		
 		//获取用户绑定的小区
-		$c = $_SESSION['user']['community'];
-		if($c){
-			//获取数组小区
-			$community = CommunityBasic::find()
+		$c = $_SESSION['community'];
+		
+		$community = CommunityBasic::find()
 			->select('community_name, community_id')
-			->where(['community_id' => "$c"])
 			->orderBy('community_name')
 			->indexBy('community_id')
 			->column();
-			
-		    //获取处理人数据
-		    $assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
-		    	->joinWith('data')
-		    	->where(['community_id' => "$c", 'account_superior' => '0'/*, 'account_status' => '3'*/])
-		        ->indexBy('account_id')
-		    	->orderBy('community_id')
-		    	->column();
-		}else{
-		    $community = CommunityBasic::find()
-		    	->select('community_name, community_id')
-		    	->orderBy('community_name')
-		    	->indexBy('community_id')
-		    	->column();
-			
-			$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
-				->joinWith('data')
-				->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
-			    ->indexBy('account_id')
-				->orderBy('community_id')
-				->column();
-		}
+		
+		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
+			->joinWith('data')
+			->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
+		    ->indexBy('account_id')
+			->orderBy('community_id')
+			->column();
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -188,6 +149,22 @@ class TicketController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		//获取用户绑定的小区
+		$c = $_SESSION['community'];
+		
+		$community = CommunityBasic::find()
+			->select('community_name, community_id')
+			->orderBy('community_name')
+			->indexBy('community_id')
+			->column();
+		
+		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
+			->joinWith('data')
+			->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
+		    ->indexBy('account_id')
+			->orderBy('community_id')
+			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ticket_id]);
@@ -195,6 +172,8 @@ class TicketController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+			'community' => $community,
+			'assignee' => $assignee
         ]);
     }
 

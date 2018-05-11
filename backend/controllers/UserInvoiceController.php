@@ -383,7 +383,7 @@ class UserInvoiceController extends Controller
 	{
 		$model = new UserInvoice;
 		
-		$comm = $_SESSION['user']['community']; //从session中获取小区代号
+		$comm = $_SESSION['community']; //从session中获取小区代号
 		if($_POST)
 		{
 		    $fr = Yii::$app->request->post();//接受传过来的时间
@@ -819,7 +819,7 @@ class UserInvoiceController extends Controller
 	public function actionDelete( $id ) {
 		$this->findModel( $id )->delete();
 
-		return $this->redirect( [ 'index' ] );
+		return $this->redirect( Yii::$app->request->referrer );
 	}
 
 	/**

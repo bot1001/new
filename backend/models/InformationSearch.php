@@ -41,13 +41,10 @@ class InformationSearch extends Information
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
+		$c = $_SESSION['community'];
 		
-		if($c){
-			$query = Information::find()->where(['community' => "$c"]);
-		}else{
-			$query = Information::find();
-		}
+        $query = Information::find()->where(['in', 'community', $c]);
+
 		$query->joinWith('c');
 
         // add conditions that should always apply here

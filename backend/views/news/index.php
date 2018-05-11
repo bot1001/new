@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
@@ -62,20 +61,14 @@ $this->title = '公告栏';
 <div class="community-news-index">
 
     <?php
-	$c = $_SESSION['user']['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_id', 'community_name');
+	$c = $_SESSION['community'];
+	
+		$comm = CommunityBasic::find()
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $c])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
 	
 	$gridview =[
             ['class' => 'kartik\grid\SerialColumn',

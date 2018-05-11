@@ -60,7 +60,7 @@ class Company extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->creator = $_SESSION['user']['id'];
+				$this->creator = $_SESSION['user']['0']['id'];
 				$this->create_time = date(time());
 			}
 			return true;

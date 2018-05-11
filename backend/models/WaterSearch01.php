@@ -46,13 +46,9 @@ class WaterSearch01 extends WaterMeter
      */
     public function search($params)
     {
-		$comm = $_SESSION['user']['community'];
+		$comm = $_SESSION['community'];
 		
-		if(empty($comm)){
-			$query = WaterMeter::find();
-		}else{
-			$query = WaterMeter::find()->where(['community' => "$comm"]);
-		}
+		$query = WaterMeter::find()->where(['in', 'community', $comm]);
         
 		$query->joinWith('b');
 		$query->joinWith('r');

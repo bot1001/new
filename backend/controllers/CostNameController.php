@@ -73,7 +73,8 @@ class CostNameController extends Controller
      */
     public function actionCreate()
     {
-		$role = $_SESSION[ 'user' ][ 'role' ];
+		$role = $_SESSION[ 'user' ]['0'][ 'role' ]; //获取数据库角色
+		
     	if ( $role == 1 || $role == 14 || $role == 10 || $role == 7) {
 
     		$model = new CostName();
@@ -83,6 +84,7 @@ class CostNameController extends Controller
     		} else {
     			return $this->renderAjax( 'create', [
     				'model' => $model,
+					'role' => $role
     			] );
     		}
     	} else {
@@ -100,7 +102,8 @@ class CostNameController extends Controller
      */
     public function actionUpdate($id)
     {
-		$role = $_SESSION[ 'user' ][ 'role' ];
+		$role = $_SESSION[ 'user' ]['0'][ 'role' ]; //获取数据库角色
+		
     	if ( $role == 1 || $role == 14 || $role == 10 || $role == 7) 
 		{
     		$model = $this->findModel( $id );
@@ -109,6 +112,7 @@ class CostNameController extends Controller
     		} else {
     			return $this->renderAjax( 'update', [
     				'model' => $model,
+					'role' => $role
     			] );
     		}
     	} else {

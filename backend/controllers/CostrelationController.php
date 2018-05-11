@@ -47,10 +47,20 @@ class CostrelationController extends Controller {
 	{
 		$searchModel = new CostRelationSearch();
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
-
+		
+		$c = $_SESSION['community'];
+		
+		$comm = CommunityBasic::find()
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $c])
+			->orderBy('community_name')
+			->indexBy('community_id')
+			->column();
+	
 		return $this->render( 'index', [
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
+			'comm' => $comm
 		] );
 	}
 	
@@ -219,7 +229,8 @@ class CostrelationController extends Controller {
 	}
 
 	//三级联动之 房号（二）
-	public function actionRe( $selected = null ) {
+	public function actionRe( $selected = null ) 
+	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = CommunityRealestate::find()
@@ -281,38 +292,50 @@ class CostrelationController extends Controller {
 	{
 		$model = new CostRelation();
 		
-		$c = $_SESSION['user']['community'];
 	    $array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')->queryAll();
 	    $cost = ArrayHelper::map($array,'cost_id','cost_name');
  
 		//获取小区和楼宇编号
-		$r_info = CommunityRealestate::find()
-			->select('community_id,building_id')
+		$r_info = (new \yii\db\Query())
+			->select('community_realestate.community_id as community_id, community_basic.community_name as community_name,
+			community_realestate.building_id as building_id, community_building.building_name as building_name,
+			community_realestate.realestate_id as realestate_id, community_realestate.room_name as room_name')
+			->from('community_realestate')
+			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 			->where(['realestate_id' => $id])
-			->asArray()
-			->one();
-		//获取小区名称
-		$c_info = CommunityBasic::find()
+			->orderBy('')
+			->indexBy('')
+			->all();
+				
+		/*//获取小区名称
+		$community = CommunityBasic::find()
 			->select('community_name,community_id')
 			->where(['community_id' => $r_info['community_id']])
-			->asArray()
+			->orderBy('community_name')
+			->indexBy('community_id')
 			->all();
+		
 		//获取楼宇名称
-		$b_info = CommunityBuilding::find()
+		$building = CommunityBuilding::find()
 			->select('building_name,building_id')
 			->where(['building_id' => $r_info['building_id']])
-			->asArray()
+			->orderBy('building_name')
+			->indexBy('building_id')
 			->all();
+		
 	    //获取房号信息
 	    $array1 = CommunityRealestate::find()
 	       ->select('realestate_id,room_name')
 	       ->where(['realestate_id' => $id])
-	       ->All();
+		   ->orderBy('room_name')
+		   ->indexBy('realestate_id')
+	       ->All();*/
 	    	   
-	   $community = ArrayHelper::map($c_info,'community_id','community_name');//提取房号信息
-	   $building = ArrayHelper::map($b_info,'building_id','building_name');//提取房号信息
-	   $num = ArrayHelper::map($array1,'realestate_id','room_name');//提取房号信息
-		
+	   $community = ArrayHelper::map($r_info,'community_id','community_name');//提取房号信息
+	   $building = ArrayHelper::map($r_info,'building_id','building_name');//提取房号信息
+	   $num = ArrayHelper::map($r_info,'realestate_id','room_name');//提取房号信息
+				
 		if ( $model->load( Yii::$app->request->post() ) && $model->save() ) {
 			return $this->redirect( Yii::$app->request->referrer );
 		} else {

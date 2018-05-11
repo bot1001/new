@@ -137,7 +137,7 @@ class WaterController extends Controller
     public function actionCreate($type, $name)
     {
 		$session = Yii::$app->session;
-    	$comm = $_SESSION[ 'user' ][ 'community' ];
+    	$comm = $_SESSION[ 'community' ];
 		
     	if ( empty( $comm ) ) {
     		$session->setFlash( 'm', '1' ); //设置权限
@@ -145,47 +145,51 @@ class WaterController extends Controller
     	} else {
     		$r = CommunityRealestate::find()
 				->select( 'community_id, building_id,realestate_id' )
-				->where( [ 'community_id' => $comm] );
-			$r_id = $r->asArray()->all();
+				->where( ['in', 'community_id', $comm] );
+			$r_id = $r->asArray();
 			
 			$r_count = $r->count(); //计算房号总数
-    		$count = WaterMeter::find()->andwhere( [ 'year' => date( 'Y' ),'month' => date( 'm' ), 'type' => $type ] )->count(); //查询水表读数数量
 			
-    		if($count !== $r_count){
-				foreach ( $r_id as $id ) {
-				    $community = $id['community_id'];
-				    $building = $id['building_id'];
-    			    $realestate_id = $id[ 'realestate_id' ];
-    			    $readout = WaterMeter::find()
-						->where( [ 'realestate_id' => $realestate_id ] )
-						->select( 'readout' )
-						->orderBy( 'property DESC' )
-						->asArray()
-						->one();
-    
-    			    $read = $readout[ 'readout' ];
-    			    if ( empty( $read ) ) {
-    			    	$read = 0;
-    			    }
-    			    $y = date( 'Y' );
-    			    $m = date( 'm' );
-    			    $p = date( time() );
-    			    
-    			    set_time_limit( 60 );
-    			    ini_set( 'memory_limit', '1024M' ); // 调整PHP由默认占用内存为1024M(1GB)
-				    
-				    $model = new WaterMeter;// 实例化模型
-				    
-				    $model->community = $community;
-				    $model->building = $building;
-				    $model->realestate_id = $realestate_id;
-				    $model->year = $y;
-				    $model->month = $m;
-				    $model->type = $type;
-				    $model->readout = $read;
+    		$count = WaterMeter::find()
+				->andwhere( [ 'year' => date( 'Y' ),'month' => date( 'm' ), 'type' => $type ])
+				->andwhere(['in', 'community', $comm])
+				->count(); //查询水表读数数量
+			
+    		if($count !== $r_count){ 
+				foreach($r_id ->batch(50) as $d)
+				{
+				    foreach ( $d as $key => $id ) 
+				    {
+				        $community = $id['community_id'];
+				        $building = $id['building_id'];
+    			        $realestate_id = $id[ 'realestate_id' ];
+    			        $readout = WaterMeter::find()
+				    		->where( [ 'realestate_id' => $realestate_id ] )
+				    		->select( 'readout' )
+				    		->orderBy( 'property DESC' )
+				    		->asArray()
+				    		->one();
+        
+    			        $read = $readout[ 'readout' ];
+    			        if ( empty( $read ) ) //判断读数是否为空
+				    	{
+    			        	$read = 0;
+    			        }
+    			        $y = date( 'Y' );
+    			        $m = date( 'm' );
+    			        $p = date( time() );
+    			        
+    			        set_time_limit( 600 );
+    			        ini_set( 'memory_limit', '1024M' ); // 调整PHP由默认占用内存为1024M(1GB)
+						
 
-					$model->save(); //保存
-    		    }
+						$sql = "insert into water_meter(community, building, realestate_id, year, month, readout, type)
+						values('$community', '$building', '$realestate_id', '$y', '$m', '$read', '$type')";
+						$sql = Yii::$app->db->createCommand($sql)->execute();
+
+				    	unset($d[$key]);
+    		        }
+				}
 			}else{
 				$session->setFlash( 'm', '2' ); //提示重复
 				return $this->redirect(Yii::$app->request->referrer );

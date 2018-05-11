@@ -71,7 +71,7 @@ class CommunityBuilding extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->creater = $_SESSION['user']['id'];
+				$this->creater = $_SESSION['user']['0']['id'];
 				$this->create_time = date(time());
 			}else{
 				//修改时自动更新以下记录

@@ -47,13 +47,10 @@ class CostRelationSearch extends CostRelation
     public function search($params)
     {
 		
-		$c = $_SESSION['user']['community'];
+		$c = $_SESSION['community'];
 		
-        if($c){
-			$query = Costrelation::find()->where(['cost_relation.community'=> "$c" ]);
-		}else{
-			$query = Costrelation::find();
-		}
+		$query = Costrelation::find()->where(['in', 'cost_relation.community', $c ]);
+		
 		$query->joinWith('c');
 		$query->joinWith('b');
 		$query->joinWith('r');

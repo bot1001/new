@@ -43,8 +43,6 @@ class InvoiceSumSearch extends UserInvoice
     public function search($params)
     {
 		$c = $_SESSION['community'];
-		
-
 		$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
 		$query->joinWith('building');
 

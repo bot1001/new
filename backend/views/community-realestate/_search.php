@@ -3,7 +3,7 @@
 use yii\ helpers\ Html;
 use yii\ helpers\ Url;
 use kartik\ form\ ActiveForm;
-use yii\ helpers\ ArrayHelper;
+use app\models\CommunityBasic;
 use kartik\ depdrop\ DepDrop;
 use kartik\ select2\ Select2;
 
@@ -15,14 +15,14 @@ use kartik\ select2\ Select2;
 <div class="community-realestate-search">
 
 	<?php
-	$c = $_SESSION[ 'user' ][ 'community' ];
-	if ( $c ) {
-		$array1 = Yii::$app->db->createCommand( "select community_id,community_name from community_basic where community_id = '$c'" )->queryAll();
-	} else {
-		$array1 = Yii::$app->db->createCommand( 'select community_id,community_name from community_basic' )->queryAll();
-	}
+	$c = $_SESSION[ 'community' ];
 
-	$comm = ArrayHelper::map( $array1, 'community_id', 'community_name' );
+	$comm = CommunityBasic::find()
+		->select('community_name, community_id')
+		->where(['in', 'community_id', $c])
+		->orderBy('community_name')
+		->indexBy('community_id')
+		->column();
 	?>
 	<?php $form = ActiveForm::begin([
 	    'type' => ActiveForm::TYPE_INLINE,

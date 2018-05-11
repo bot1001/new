@@ -42,13 +42,10 @@ class CommunityBasicSearch extends CommunityBasic
      */
     public function search($params)
     {
-		$c = $_SESSION['user']['community'];
-		
-		if(!empty($c)){
-			$query = CommunityBasic::find()->where(['community_id' => "$c"]);
-		}else{
-			$query = CommunityBasic::find();
-		}
+		$c = $_SESSION['community'];
+
+	    $query = CommunityBasic::find()->where(['in', 'community_id', $c]);
+				
 		$query->joinWith('c');
 
         // add conditions that should always apply here

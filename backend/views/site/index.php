@@ -79,6 +79,17 @@ $this->title = '裕达物业';
 		  margin-top: 1%;
 		  margin-left: 1%;
 	  }
+	  
+	  #box5{
+		  height: 300px;
+		  width: 400px;
+		  background: #81EBDF;
+		  border-radius: 18px;
+		  position: relative;
+		  margin-top: 1%;
+		  margin-left: 1%;
+	  }
+	  
 	  #div4{
 		 color: aqua;
 		  background: #DBDADA;
@@ -117,8 +128,8 @@ $this->title = '裕达物业';
 	  #div7{
 		  color: red;
 		  position: relative;
-		  margin-left: 200px;
-		  margin-top: -25px; 
+		  margin-left: 250px;
+		  margin-top: -28px; 
 	  }
 	  
 </style>
@@ -298,15 +309,10 @@ $this->title = '裕达物业';
 			       <a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $or->order_id]) ?>">
 		                <div id="div6">
 		                	<?php
-		                	    	$add = explode('-', $or->address);
-		                	    	if(count($add) == 4) 
-		                	    	{
-		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.$add['2'].'单元'.' '.end($add);
-		                	    	}elseif( count($add) == 3){
-		                	    		echo '<i class="fa fa-flag-o"></i>'.' '.$add['0'].' '.$add['1'].' '.'1 单元'.' '.end($add);
-		                	    	}else{
-										echo '<i class="fa fa-flag-o"></i>'.' '.$or->address;
-									}
+								echo '<i class="fa fa-flag-o"></i>'.' '.$or->address;
+				                echo "<div id ='div7'>";
+						           echo $or->order_amount.'<g>'.' '.'元'.'</g>';
+						        echo "</div>";
 		                	   ?>
 		                </div>
 			       </a>
@@ -338,13 +344,34 @@ $this->title = '裕达物业';
 			?>
 		    
     	</div>
-      <div id="box4" class="col-lg-3">
-      	  <h4 style="color: #000000">
-    	            <a href="#">
-		            	<?php echo 'information'; ?>
-  		            </a>
-   		        </h4>
-      </div>
+    	
+       <div id="box4" class="col-lg-3">
+       	   <h4 style="color: #000000">
+    	       <a href="#">
+		       	    <?php echo '账户信息'; ?>
+  		       </a>
+			   <div id="div5">
+				   <div id="information1">
+				   	<?php 
+					   echo '<pre />';
+					   print_r($_SESSION['user']);
+					   ?>
+				   </div>
+			   </div>
+   		   </h4>
+       </div>
+      
+	   <div id="box5" class="col-lg-3">
+	       <h4 style="color: #000000">
+    	       <a href="#">
+		       	    <?php echo 'Message'; ?>
+  		       </a>
+   		   </h4>	   	
+	   </div>
+	   <?php 
+					   echo '<pre />';
+					   print_r($_SESSION['user']);
+					   ?>
 
 	<a href="<?php //echo Url::to(['/user-invoice/search']); ?>"> <h5><!-- 缴费统计 --></h5></a>
 	<a href="<?php //echo Url::to(['/user-invoice/sum']); ?>"> <h5><!-- 新缴费统计 --></h5></a>

@@ -1,7 +1,6 @@
 <?php
 
 use yii\ helpers\ Html;
-use yii\ helpers\ArrayHelper;
 use kartik\ grid\ GridView;
 use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
@@ -50,21 +49,7 @@ $this->title = '费项列表';
 <div class="cost-relation-index">
 
 	<?php
-	$c = $_SESSION['user']['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_id', 'community_name');
-	
+			
 	$gridColumn = [
 		[ 'class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'

@@ -36,7 +36,6 @@ use yii\helpers\ArrayHelper;
 						<div class="col-lg-4">
 							<?php
 							
-							$role = $_SESSION[ 'user' ][ 'role' ]; 
 			                if ( $role == 7 && (empty($model['cost_name']) || $model['level'] == 0) ) {
 			                	//父级费项编辑框  财务经理专用
 			                	echo $form->field( $model, 'cost_name' )->textInput();

@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 use app\models\OrderBasic;
 use app\models\SysRole;
 
-    $session= $_SESSION['user'];
+    $session= $_SESSION['user']['0'];
     $a = $_SESSION['community']; //获取小区
     $t = TicketBasic::getTicket(); //调用获取投诉数据方法
     $o = OrderBasic::getOr(); //调用获取订单数据方法

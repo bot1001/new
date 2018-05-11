@@ -46,38 +46,22 @@ class UserSearch extends UserAccount
     public function search($params)
     {
         //$query = UserAccount::find();
-		if(empty($_SESSION['user']['community'])){
-			$query = (new \yii\db\Query())->select([
-			    'user_data.real_name','user_data.reg_time',
-			    'user_account.mobile_phone','user_account.account_role',
-			    'community_basic.community_name',
-			    'community_building.building_name',
-			    'community_realestate.room_name','community_realestate.room_number',
-		        'status.name'])
-			->from ('user_account')
-			->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_account.account_id')
-			->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
-			->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
-			->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
-			->join('inner join','user_data','user_data.account_id = user_account.account_id')
-			->join('inner join','status','status.user_status = user_account.status');
-		}else{
-			$query = (new \yii\db\Query())->select([
-			    'user_data.real_name','user_data.reg_time',
-			    'user_account.mobile_phone','user_account.account_role',
-			    'community_basic.community_name',
-			    'community_building.building_name',
-			    'community_realestate.room_name','community_realestate.room_number',
-		        'status.name'])
-			    ->from ('user_account')
-			    ->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_account.account_id')
-			    ->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
-			    ->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
-			    ->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
-			    ->join('inner join','user_data','user_data.account_id = user_account.account_id')
-			    ->join('inner join','status','status.user_status = user_account.status')
-			    ->where(['community_basic.community_id' => $_SESSION['user']['community']]);
-		}
+		
+		$query = (new \yii\db\Query())->select([
+		    'user_data.real_name','user_data.reg_time',
+		    'user_account.mobile_phone','user_account.account_role',
+		    'community_basic.community_name',
+		    'community_building.building_name',
+		    'community_realestate.room_name','community_realestate.room_number',
+		    'status.name'])
+		    ->from ('user_account')
+		    ->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_account.account_id')
+		    ->join('inner join','community_realestate','community_realestate.realestate_id =user_relationship_realestate.realestate_id')
+		    ->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
+		    ->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
+		    ->join('inner join','user_data','user_data.account_id = user_account.account_id')
+		    ->join('inner join','status','status.user_status = user_account.status')
+		    ->where(['in', 'community_basic.community_id', $_SESSION['community']]);
 		
         // add conditions that should always apply here
 
