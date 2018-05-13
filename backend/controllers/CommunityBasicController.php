@@ -45,17 +45,7 @@ class CommunityBasicController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-	
-	//检查用户是否登录
-	/*public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }*/
-	
+		
 	//GridView页面直接编辑
 	public function actions()
    {

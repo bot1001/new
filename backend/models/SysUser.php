@@ -38,15 +38,15 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'status', 'password'], 'required'],
+            [['status', 'phone', 'name', 'community', 'password', 'role', 'new_pd', 'n'], 'required', 'on' => 'create'],
             [['status', 'create_id', 'update_id', 'role'], 'integer'],
             [['create_time', 'update_time'], 'safe'],
             [['real_name', 'name', 'password', 'comment', 'salt'], 'string', 'max' => 100],
             [['new_pd'], 'string', 'max' => 128],
             [['phone'], 'string', 'max' => 12],
             [['name'], 'unique'],
-			[['name', 'status'], 'required', 'message' => '确认密码不能为空'],
-            ['n', 'compare', 'compareAttribute' => 'name', 'message' => '两次密码输入不一致'],
+			[['name'], 'required', 'message' => '确认密码不能为空'],
+            ['n', 'compare', 'compareAttribute' => 'new_pd', 'message' => '两次密码输入不一致'],
 			
             [['community'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community' => 'community_id']],
             [['company'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company' => 'id']],
@@ -55,7 +55,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	
 	public $n;
 	
-	public function beforeSave($insert)
+	/*public function beforeSave($insert)
 	{
 		if(parent::beforeSave($insert))
 		{
@@ -74,7 +74,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		else{
 			return false;
 		}
-	}
+	}*/
 	
     /**
      * @inheritdoc
@@ -86,10 +86,10 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			'company' => '隶属公司',
             'real_name' => '真实姓名',
             'name' => '名字',
-			'role' => '角色',
+			'role' => '数据库角色',
 			'community' => '关联小区',
-			'n' => '新密码',
-            'password' => '旧密码',
+			'n' => '密码',
+            'password' => '公司',
             'status' => '状态',
             'comment' => '备注',
             'salt' => '密码盐',
@@ -97,10 +97,42 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'create_time' => '创建时间',
             'update_time' => '更新时间',
             'update_id' => '操作人',
-            'new_pd' => '新密码',
+            'new_pd' => '密码',
             'phone' => '联系方式',
         ];
     }
+	
+	//保存数据前自动插入数据
+	public function beforeSave($insert) //public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				//创建数据前自动插入以下字段
+				$this->create_id = $_SESSION['user']['0']['id'];
+				$this->create_time = date('Y-m-d h:i:s');
+				$this->password = 'e10adc3949ba59abbe56e057f20f883e';
+				$this->salt = 'e10adc3949ba59abbe56e057f20f883e';
+				$this->update_id = $_SESSION['user']['0']['id'];
+				$this->update_time = date('Y-m-d h:i:s');
+			}else{
+				$this->update_time = time();
+				$this->update_id = $_SESSION['user']['0']['id'];
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//设置场景
+	public function scenarios() //public function scenarios()
+	{
+		$scenarios = parent::scenarios();
+		$scenarios['create'] = ['status', 'phone', 'name', 'community', 'password', 'role', 'new_pd', 'n'];
+		return $scenarios;
+	}
 	
 	 public static function findIdentity($id)
     {

@@ -50,7 +50,7 @@ $this->title = '修改密码';
 	<tr>
 		<td align="center">
 			<div>
-				<?= $form->field($model, 'name',['template' => '{label} <div class="row"><div class="col-sm-7">{input}{error}{hint}</div></div>'])->passwordInput(['maxlength' => true,'placeHolder' =>'请输入新密码'])->label('新密码') ?>
+				<?= $form->field($model, 'new_pd',['template' => '{label} <div class="row"><div class="col-sm-7">{input}{error}{hint}</div></div>'])->passwordInput(['maxlength' => true,'placeHolder' =>'请输入新密码'])->label('新密码') ?>
 			</div>
 		</td>
 	</tr>

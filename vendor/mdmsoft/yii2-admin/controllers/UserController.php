@@ -79,7 +79,7 @@ class UserController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
 		$date = SysRole::find()
 			->select('name,id')
 			->where(['or not like', 'name', ['admin']])
@@ -96,6 +96,14 @@ class UserController extends Controller
 			->orderBy('name')
 			->indexBy('id')
 			->column();
+		
+		//判断并接收来自添加用功能模块的数据
+		if(isset($_GET['name']))
+		{
+			$searchModel->name = $_GET['name'];
+		}
+		
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
                 'searchModel' => $searchModel,

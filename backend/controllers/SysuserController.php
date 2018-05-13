@@ -4,6 +4,9 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\SysUser;
+use app\models\Company;
+use app\models\SysRole;
+use app\models\SysCommunity;
 use app\models\SysuserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -89,12 +92,66 @@ class SysuserController extends Controller
     public function actionCreate()
     {
         $model = new SysUser();
+		$model->setScenario('create'); //设置场景$model->setScenario('up');
+	
+		$company = Company::find()
+			->select('name, id')
+			->orderBy('name')
+			->indexBy('id')
+			->column();
+		
+		$role = SysRole::find()
+			->select('name, id')
+			->where(['not like', 'name', 'admin'])
+			->orderBy('name')
+			->indexBy('id')
+			->column();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())/* && $model->save()*/) 
+		{
+			$post = $_POST['SysUser']; // 接收传递过来的数据
+			
+//			echo '<pre />';
+//			print_r($post);exit;
+			
+            $transaction=$model->db->beginTransaction();
+            try{
+				$model = new SysUser(); //实例化用户模型
+				
+				//模型块赋值
+                $model->company = $post['company'];
+			    $model->community = $post['community'];
+			    $model->role = $post['role'];
+			    $model->real_name = $model->name = $post['name'];
+			    $model->phone = $post['phone'];
+			    $model->new_pd = md5($post['new_pd']);
+			    $model->status = $post['status'];
+			    $model->comment = $post['comment'];
+			
+                $m = $model->save(); //保存数据
+				
+				if($m){					
+				    $user = new SysCommunity(); //实例化关联小区模型
+				    
+				    $id = Yii::$app->db->getLastInsertId(); //获取最新插入的记录ID
+			        $user->sys_user_id = $id;
+			        $user->community_id = $post['community'];
+			        $user->own_update = '0';
+			
+				    $e = $user->save(); //保存数据
+				}				
+				$transaction->commit(); //结束事务
+            }catch(Exception $e){
+				print_r($e);
+                $transaction->rollBack();
+            }
+			
+            return $this->redirect(['/admin/user/index', 'name' => $post['name']]);
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
+				'company' => $company,
+				'role' => $role
             ]);
         }
     }
@@ -113,7 +170,7 @@ class SysuserController extends Controller
 	public function actionP()
 	{
 		$session = Yii::$app->session;
-		$id = $_SESSION['user']['id'];
+		$id = $_SESSION['user']['0']['id'];
 		//获取数据中的密码
 		$pd = SysUser::find()->select('new_pd')->where(['id'=> $id])->asArray()->one();
 		

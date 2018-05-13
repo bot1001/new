@@ -42,7 +42,6 @@ class TicketController extends Controller
     public function actionIndex()
     {
         $searchModel = new TicketSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
 	    $c = $_SESSION['community'];
 	   
@@ -58,7 +57,16 @@ class TicketController extends Controller
 	    	->where(['community_id' => $c])
 	    	->distinct()
 	    	->indexBy('building_name')
-	    	->column();		
+	    	->column();
+		
+		if($_GET){
+			$get = $_GET;
+			$searchModel->ticket_status = $get['ticket_status'];
+			//$searchModel->community_id =  $get['c'];
+		}
+		
+		//配置数据提供器
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
         return $this->render('index', [
             'searchModel' => $searchModel,

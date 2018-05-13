@@ -56,6 +56,24 @@ class SysCommunity extends \yii\db\ActiveRecord
             'own_select' => '查找',
         ];
     }
+	
+	//插入数据前保存数据
+	public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				$this->own_add = 0;
+				$this->own_delete = 0;
+				$this->own_update = 0;
+				$this->own_select = 0;
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
 
     /**
      * @return \yii\db\ActiveQuery

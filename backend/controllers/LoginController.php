@@ -31,20 +31,24 @@ class LoginController extends Controller
 			$id = $post['id']; //获取用户序号
 			
 			$user = (new \yii\db\Query())->select('
-			sys_user.id as id, 
-			company.name as company,
-			sys_user.name as name, 
-			sys_user.role as role, 
-			sys_user.phone as phone, 
-			sys_user.comment as comment, 
-			sys_user.create_id as create, 
-			sys_user.create_time as create_time,
-			auth_assignment.item_name as Role')
-			->from('sys_user')
-			->join('inner join', 'company', 'company.id = sys_user.company')
-			->join('inner join', 'auth_assignment', 'auth_assignment.user_id = sys_user.id')
+			         sys_user.id as id, 
+			         company.name as company,
+			         sys_user.name as name, 
+			         sys_user.role as role, 
+			         sys_user.phone as phone, 
+			         sys_user.comment as comment, 
+			         sys_user.create_id as create, 
+			         sys_user.create_time as create_time,
+			         auth_assignment.item_name as Role')
+			    ->from('sys_user')
+			    ->join('inner join', 'company', 'company.id = sys_user.company')
+			    ->join('inner join', 'auth_assignment', 'auth_assignment.user_id = sys_user.id')
 				->where(['sys_user.id' => $id])
 				->all();
+			
+			if(empty($user)){
+				return $this redirect(['site/logout']);
+			}
 			
 			$session['user'] = $user; //将用户信息添加到session
 			

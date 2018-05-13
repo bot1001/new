@@ -176,7 +176,8 @@ $this->title = '裕达物业';
 		  background: #B44143;
 		  border-radius: 10px;
 		  position: relative;
-			  background: url('/image/logo.png');
+		  background: url('/image/logo.png');
+		  background-size: 98px 100px;
 	  }
 	  
 	  #in05{
@@ -194,7 +195,6 @@ $this->title = '裕达物业';
 	  
 	  #in06{
 		  width: 180px;
-		  display: inline;
 		  background: #A9E0D3;
 		  border-radius: 5px;
 		  margin-bottom: 2px; #div 上下之间的距离
@@ -537,8 +537,6 @@ $this->title = '裕达物业';
     	       <a href="#">
 		       	    <?php echo 'Message'; ?>
   		       </a>
-  		      		<?php echo '<pre />';
-			   print_r($_SESSION['user']);?>
    		   </h4>	   	
 	   </div>
 

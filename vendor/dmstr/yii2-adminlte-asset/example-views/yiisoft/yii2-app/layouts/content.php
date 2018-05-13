@@ -15,7 +15,7 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>版本号：</b> 2.6.0.0
     </div>
-    <strong>专利保护 &copy; 2016-<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong> 版权所有
+    <strong>&copy; 2016-<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong>
 </footer>
 
 <!-- Control Sidebar -->

@@ -19,7 +19,7 @@ Modal::begin( [
 ] );
 $assignment = Url::toRoute( '/admin/assignment/view' );
 $update = Url::toRoute( '/admin/user/update' );
-$create = Url::toRoute( '/admin/sysuser/create' );
+$create = Url::toRoute( '/sysuser/create' );
 
 $updateJs = <<<JS
     $('.order').on('click', function () {

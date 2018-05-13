@@ -108,7 +108,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->account_id = $_SESSION['user']['community'];
+				$this->account_id = $_SESSION['user']['0']['community'];
 				$this->create_time = date(time());
 				$this->ticket_status = '1';
 				$this->reply_total = '0';

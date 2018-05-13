@@ -116,7 +116,7 @@ unset($rules[RouteRule::RULE_NAME]);
 				    }
 	            },
 		      'view' => function ( $url, $model, $key ) {
-		            if($_SESSION['user']['name'] !== 'admin' & $model->name === 'admin'){
+		            if($_SESSION['user']['0']['name'] !== 'admin' & $model->name === 'admin'){
 		                        	return '';
 		                        }else{
 				    	return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [

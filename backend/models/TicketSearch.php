@@ -78,7 +78,7 @@ class TicketSearch extends TicketBasic
 		if($this->create_time != '')
 		{
 			$time = explode(' to ', $this->create_time);
-			$one = reset($time); //2018-08-13 to 2018-08-23
+			$one = reset($time); //2018-08-13 to 2018-08-23 ticket_status
 			$two = end($time);
 			$query->andFilterWhere(['between', 'ticket_basic.create_time', strtotime($one), strtotime($two)]);
 		}

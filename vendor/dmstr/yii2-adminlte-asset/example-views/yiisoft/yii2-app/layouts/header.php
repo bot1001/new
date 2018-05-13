@@ -81,12 +81,16 @@ use app\models\SysRole;
 		font-weight: bold;
 		font-size: 20px;
 	}
+	
+	img{
+		border-radius: 10px;
+		width:40px;
+	}
 </style>
 
 <header class="main-header">
 	
-    <?= Html::a('<span class="logo-mini"><img src="/image/logo.png" class="img-circle" style="width:40px"></span><span class="logo-lg">' . /*Yii::$app->name*/
-				'<img src="/image/logo.png" class="img-circle" style="width:40px">&nbsp'.'&nbsp裕家人' . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<img src="/image/logo.png">&nbsp'.'&nbsp裕家人' . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -129,7 +133,8 @@ use app\models\SysRole;
 								       	echo Url::to(['/ticket/index',
 								       							'community' => $c_id,
 								       							'building' => $building[$b_id],
-													            'c' => $a
+													            'c' => $a,
+													            'ticket_status' => '1'
 								       							]);
 								       }
 								   ?>">
@@ -172,7 +177,7 @@ use app\models\SysRole;
                                 <!-- 提醒信息结束 -->                                                                                            
                             </ul>
                         </li>
-                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','name' => '1', 'c' => $a]) ?>">查看全部</a></li>
+                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','ticket_status' => '1', 'c' => $a]) ?>">查看全部</a></li>
                     </ul>
                 </li>
                 <li class="dropdown notifications-menu">
