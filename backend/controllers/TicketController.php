@@ -46,7 +46,7 @@ class TicketController extends Controller
 	    $c = $_SESSION['community'];
 	   
 	    $comm = CommunityBasic::find()
-	    	->select(' community_name')
+	    	->select(' community_name, community_id')
 	    	->where(['community_id' => $c])
 			->orderBy('community_name DESC')
 	    	->indexBy('community_id')
@@ -59,10 +59,19 @@ class TicketController extends Controller
 	    	->indexBy('building_name')
 	    	->column();
 		
-		if($_GET){
+		//判断是否存在状态参数
+		if(isset($_GET['ticket_status'])){
 			$get = $_GET;
 			$searchModel->ticket_status = $get['ticket_status'];
-			//$searchModel->community_id =  $get['c'];
+		}
+		
+		//判断是否存在小区和楼宇参数
+		if(isset($_GET['building'])&& isset($_GET['c']))
+		{
+			$c = $_GET['community'];
+			$building = $_GET['building'];;
+			$searchModel->community_id = $c;
+			$searchModel->building = $building;
 		}
 		
 		//配置数据提供器

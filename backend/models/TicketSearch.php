@@ -86,7 +86,6 @@ class TicketSearch extends TicketBasic
         // grid filtering conditions
         $query->andFilterWhere([
             'ticket_id' => $this->ticket_id,
-            'ticket_basic.community_id' => $this->community_id,
 			'building_name' => $this->building,
             'realestate_id' => $this->realestate_id,
             'tickets_taxonomy' => $this->tickets_taxonomy,
@@ -98,9 +97,9 @@ class TicketSearch extends TicketBasic
         $query->andFilterWhere(['like', 'ticket_number', $this->ticket_number])
             ->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'explain1', $this->explain1])
-            
             ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])
             ->andFilterWhere(['like', 'contact_person', $this->contact_person])
+            ->andFilterWhere(['in', 'ticket_basic.community_id', $this->community_id])
             ->andFilterWhere(['like', 'contact_phone', $this->contact_phone])
             ->andFilterWhere(['like', 'assignee_id', $this->assignee_id])
             ->andFilterWhere(['like', 'reply_total', $this->reply_total]);

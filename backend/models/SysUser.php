@@ -54,28 +54,10 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 	
 	public $n;
-	
-	/*public function beforeSave($insert)
-	{
-		if(parent::beforeSave($insert))
-		{
-			if($insert)
-			{
-				//插入新纪录时自动添加以下字段
-				$this->update_id = $_SESSION['user']['id'];
-				$this->create_time = date('Y-m-d h:i:s');
-				$this->update_time = date('Y-m-d h:i:s');
-			}else{
-				//修改时自动更新以下记录
-				$this->update_time = date('Y-m-d h:i:s');
-			}
-			return true;
-		}
-		else{
-			return false;
-		}
-	}*/
-	
+	public $created_at;
+	public $item_name;
+	public $user_id;
+		
     /**
      * @inheritdoc
      */
@@ -127,7 +109,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	}
 	
 	//设置场景
-	public function scenarios() //public function scenarios()
+	public function scenarios()
 	{
 		$scenarios = parent::scenarios();
 		$scenarios['create'] = ['status', 'phone', 'name', 'community', 'password', 'role', 'new_pd', 'n'];
@@ -155,10 +137,12 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-          $user = SysUser::find()
-            ->where(['name' => $username, 'status' => '1'])
-            ->asArray()
-            ->one();
+		//查寻登录用户
+		$user = (new \yii\db\Query())
+			->from('sys_user')
+			->join('inner join', 'auth_assignment', 'auth_assignment.user_id = sys_user.id')
+			->where(['sys_user.name' => $username, 'sys_user.status' => '1'])
+			->one();
 
             if($user){
             return new static($user);
