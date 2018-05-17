@@ -65,7 +65,7 @@ class TicketBasic extends \yii\db\ActiveRecord
             [['account_id', 'assignee_id', 'reply_total', 'ticket_status'], 'string', 'max' => 64],
             [['explain1'], 'string', 'max' => 50],
             [['contact_person'], 'string', 'max' => 20],
-            [['contact_phone'], 'integer', 'max' => 12],
+            [['contact_phone'],  'string', 'length' => [11, 12]],
             [['account_id', 'community_id', 'realestate_id', 'explain1'], 'unique', 'targetAttribute' => ['account_id', 'community_id', 'realestate_id', 'explain1']],
             [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
             [['realestate_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate_id' => 'realestate_id']],

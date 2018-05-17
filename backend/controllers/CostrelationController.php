@@ -136,6 +136,18 @@ class CostrelationController extends Controller {
 	//三级联动之 楼宇
 	public function actionB( $selected = null ) 
 	{
+		$community_id = $_POST['depdrop_parents']['0']; //接收小区编号
+		
+		//获取楼宇ID
+		$building_id = CommunityBuilding::find()
+			->select('building_id')
+			->where(['in', 'community_Id', $community_id])
+			->asArray()
+			->one();
+
+		//将楼宇编号添加到session中，以备由单元获取房号时使用
+		$_SESSION['building_id'] = $building_id;
+		
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = CommunityBuilding::find()->where( [ 'community_id' => $id ] )->all();
@@ -163,7 +175,6 @@ class CostrelationController extends Controller {
 	//三级联动之 楼宇2
 	public function actionB2( $selected = null ) 
 	{
-		print_r($_POST[ 'depdrop_parents' ]);exit;
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
 			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
@@ -243,6 +254,65 @@ class CostrelationController extends Controller {
 				if ( !$isSelectedIn ) {
 					$selected = $first;
 				}
+				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+				return;
+			}
+		}
+		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
+	
+	//三级联动之 房号（三） 由单元自动获取
+	public function actionName( $selected = null ) 
+	{
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
+			$id = $_POST[ 'depdrop_parents' ];
+			$list = CommunityRealestate::find()
+				->andwhere( [ 'building_id' => '61'] )
+				->andwhere( [ 'room_number' => '1'] )
+				->all();
+print_r($list);exit;
+			$isSelectedIn = false;
+			if ( $id != null && count( $list ) > 0 ) {
+				foreach ( $list as $i => $account ) {
+					$out[] = [ 'id' => $account[ 'realestate_id' ], 'name' => $account[ 'room_name' ] ];
+					if ( $i == 0 ) {
+						$first = $account[ 'room_number' ];
+					}
+					if ( $account[ 'realestate_id' ] == $selected ) {
+						$isSelectedIn = true;
+					}
+				}
+				if ( !$isSelectedIn ) {
+					$selected = $first;
+				}
+				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+				return;
+			}
+		}
+		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
+	
+	//三级联动之 单元
+	public function actionNumber( $selected = null ) 
+	{
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
+			$id = $_POST[ 'depdrop_parents' ];
+			$list = ['1' => '1单元', '2' => '2单元', '3' => '3单元', '4' => '4单元', '5' => '5单元', '6' => '6单元', '7' => '7单元', '8' => '8单元', '9' => '9单元', '10' => '10单元', '10' => '10单元'];
+
+			$isSelectedIn = false;
+			if ( $id != null && count( $list ) > 0 ) {
+				foreach ( $list as $i => $account ) {
+					$out[] = [ 'id' => $i, 'name' => $account ];
+					if ( $i == 0 ) {
+						$first = $account;
+					}
+					if ( $account == $selected ) {
+						$isSelectedIn = true;
+					}
+				}
+//				if ( !$isSelectedIn ) {
+//					$selected = $first;
+//				}
 				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
 				return;
 			}

@@ -70,6 +70,12 @@ class HouseInfo extends \yii\db\ActiveRecord
         ];
     }
 	
+	//自定义变量
+	public $community;
+	public $building;
+	public $number;
+	public $room_name;
+	
 	public function beforeSave($insert)
 	{
 		if(parent::beforeSave($insert))

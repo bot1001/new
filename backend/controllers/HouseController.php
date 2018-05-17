@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\HouseInfo;
+use app\models\CommunityBuilding;
+use app\models\CommunityBasic;
 use app\models\houseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,10 +39,28 @@ class HouseController extends Controller
     {
         $searchModel = new houseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find() //查询和账户相关联的小区名称
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $comm])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
+		
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $comm])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'community' => $community,
+			'building' => $building
         ]);
     }
 
@@ -74,6 +94,22 @@ class HouseController extends Controller
     public function actionCreate()
     {
         $model = new HouseInfo();
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find() //查询和账户相关联的小区名称
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $comm])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
+		
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $comm])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->house_id]);
@@ -81,6 +117,8 @@ class HouseController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+			'community' => $community,
+			'building' => $building
         ]);
     }
 

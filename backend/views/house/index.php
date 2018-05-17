@@ -23,25 +23,36 @@ $this->title = '房屋信息';
 			'width' => ''],*/
 		
             ['attribute'=> 'community',
-			 'value' => 'c.community_name',
+			 'filterType' => GridView::FILTER_SELECT2,
+			 'filter' => $community,
+			 'filterInputOptions' => ['placeholder' => '请选择'],
+			 'filterWidgetOptions' => [
+		         'pluginOptions' => ['allowClear' => true],
+	         ],
 			 'label' => '小区',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		    ['attribute'=> 'building',
-			 'value' => 'b.building_name',
+			 'filterType' => GridView::FILTER_SELECT2,
+			 'filter' => $building,
+			 'filterInputOptions' => ['placeholder' => '请选择'],
+			 'filterWidgetOptions' => [
+		         'pluginOptions' => ['allowClear' => true],
+	         ],
 			 'label' => '楼宇',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		    ['attribute'=> 'number',
-			 'value' => 're.room_number',
+			 'value' => function($model){
+	        	return $model->number.'单元';
+	        },
 			 'label' => '单元',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		   ['attribute'=> 'room_name',
-			 'value' => 're.room_name',
 			 'label' => '房号',
 			'hAlign' => 'center',
 			'width' => 'px'],
@@ -71,6 +82,16 @@ $this->title = '房屋信息';
 			'width' => 'px'],*/
 		
             ['attribute'=> 'status',
+			 'value' => function($model){
+	         	$date = ['0' => '停用', '1' => '在用'];
+	         	return $date[$model->status];
+	         },
+			 'filterType' => GridView::FILTER_SELECT2,
+			 'filter' => ['0' => '停用', '1' => '在用'],
+			 'filterInputOptions' => ['placeholder' => '请选择'],
+			 'filterWidgetOptions' => [
+		         'pluginOptions' => ['allowClear' => true],
+	         ],
 			'hAlign' => 'center',
 			'width' => 'px'],
 		

@@ -31,7 +31,7 @@ $this->registerJs ($nJs);
 
 $nJs = <<<JS
    $('.view').on('click',function(){
-      $('.modal-title').html('查看回复');
+      $('.modal-title').html('处理结果');
       $.get('{$view}',{id:$(this).closest('tr').data('key')},
          function (data) {
             $('.modal-body').html(data);

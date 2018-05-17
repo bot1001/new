@@ -41,6 +41,9 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $searchModel = new MenuSearch;
+		if(isset($_GET['id'])){
+			$searchModel->id = $_GET['id'];
+		}
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
@@ -72,7 +75,7 @@ class MenuController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Helper::invalidate();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                   'model' => $model,
