@@ -22,19 +22,27 @@ $this->title = '房屋信息';
 			'hAlign' => 'center',
 			'width' => ''],*/
 		
-            ['attribute'=> 're.community_id',
+            ['attribute'=> 'community',
+			 'value' => 'c.community_name',
+			 'label' => '小区',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
-		    ['attribute'=> 're.building_id',
+		    ['attribute'=> 'building',
+			 'value' => 'b.building_name',
+			 'label' => '楼宇',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
-		    ['attribute'=> 're.room_number',
+		    ['attribute'=> 'number',
+			 'value' => 're.room_number',
+			 'label' => '单元',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
-		    ['attribute'=> 'realestate',
+		   ['attribute'=> 'room_name',
+			 'value' => 're.room_name',
+			 'label' => '房号',
 			'hAlign' => 'center',
 			'width' => 'px'],
 		

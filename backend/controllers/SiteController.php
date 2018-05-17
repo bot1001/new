@@ -66,9 +66,6 @@ class SiteController extends Controller
     {
 		$model = new Site;
 		
-//		echo '<pre />';
-//		print_r($_SESSION['user']['0']);exit;
-
 		$name = $_SESSION['user']['0']['name']; // 用户名
 		$a = Yii::$app->request->userIP; //用户IP地址
 		

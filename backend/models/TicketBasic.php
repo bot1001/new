@@ -65,12 +65,12 @@ class TicketBasic extends \yii\db\ActiveRecord
             [['account_id', 'assignee_id', 'reply_total', 'ticket_status'], 'string', 'max' => 64],
             [['explain1'], 'string', 'max' => 50],
             [['contact_person'], 'string', 'max' => 20],
-            [['contact_phone'], 'string', 'max' => 25],
+            [['contact_phone'], 'integer', 'max' => 12],
             [['account_id', 'community_id', 'realestate_id', 'explain1'], 'unique', 'targetAttribute' => ['account_id', 'community_id', 'realestate_id', 'explain1']],
             [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
             [['realestate_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate_id' => 'realestate_id']],
-            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
-            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserData::className(), 'targetAttribute' => ['account_id' => 'account_id']],
+//            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
+//            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserData::className(), 'targetAttribute' => ['account_id' => 'account_id']],
         ];
     }
 	
@@ -100,6 +100,8 @@ class TicketBasic extends \yii\db\ActiveRecord
         ];
     }
 	
+	public $replay;
+	
 	//数据保存之前自动插入字段
 	public function beforeSave($insert)
 	{
@@ -108,7 +110,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->account_id = $_SESSION['user']['0']['community'];
+				$this->account_id = $_SESSION['user']['0']['id'];
 				$this->create_time = date(time());
 				$this->ticket_status = '1';
 				$this->reply_total = '0';
@@ -141,12 +143,8 @@ class TicketBasic extends \yii\db\ActiveRecord
 	
 	public static function getPengdingCommentCount()
 	{
-	    $c = $_SESSION['user']['community'];
-	    if(empty($c)){
-	        return TicketBasic::find()->where(['ticket_status' =>1])->count();
-	    }else{
-	        return TicketBasic::find()->andwhere(['ticket_status' => 1])->andwhere(['community_id' => $c])->count();
-	    }
+	    $c = $_SESSION['community'];
+	    return TicketBasic::find()->andwhere(['ticket_status' => 1])->andwhere(['in', 'community_id', $c])->count();
 	}
 	
 	public static function getTicket()
@@ -186,7 +184,7 @@ class TicketBasic extends \yii\db\ActiveRecord
      */
     public function getA()
     {
-        return $this->hasOne(UserAccount::className(), ['account_id' => 'account_id']);
+        return $this->hasOne(UserAccount::className(), ['account_id' => 'assignee_id']);
     }
 
     /**

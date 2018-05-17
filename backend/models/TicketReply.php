@@ -34,7 +34,7 @@ class TicketReply extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ticket_id', 'account_id', 'content', 'is_attachment', 'reply_time'], 'required'],
+            [['ticket_id', 'account_id', 'content'], 'required'],
             [['ticket_id', 'is_attachment', 'reply_status'], 'integer'],
             [['account_id'], 'string', 'max' => 64],
             [['content'], 'string', 'max' => 128],
@@ -59,6 +59,23 @@ class TicketReply extends \yii\db\ActiveRecord
             'reply_status' => '回复状态',
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if(parent::beforeSave($insert))
+		{
+			if($insert)
+			{
+				$this->is_attachment = '0';
+				$this->reply_time = time();
+				$this->reply_status = 1;
+			}
+			return true;
+		}else{
+			return false;
+		}
+			
+	}
 	
 	//截取字符串
 	public function getE()

@@ -17,7 +17,7 @@ use kartik\daterange\DateRangePicker;
 <div class="community-realestate-form">
 
 	<?php 
-	$c = $_SESSION['user']['community'];
+	$c = $_SESSION['community'];
 	if($c){
 		$Array = CommunityBasic::find()->select( 'community_id,community_name')->where(['community_id' => $c])->All();;
 	}else{

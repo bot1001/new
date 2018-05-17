@@ -349,7 +349,6 @@ $this->title = '缴费管理';
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
-			//'width' => '5%'
 			],
 	];
 	echo GridView::widget( [

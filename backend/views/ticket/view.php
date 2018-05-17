@@ -41,8 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		
             'explain1',
             'create_time:datetime',
-            'contact_person',
-            'contact_phone',
             ['attribute' => 'is_attachment',
 			'value' => function($model){
             	$d = [0=>'无', 1=> '无'];

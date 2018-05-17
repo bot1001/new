@@ -46,6 +46,12 @@ class CostrelationController extends Controller {
 	public function actionIndex() 
 	{
 		$searchModel = new CostRelationSearch();
+		
+		//来自房屋列表的绑定费用查询
+		if(isset($_GET['realestate_id']))
+		{
+			$searchModel->realestate_id = $_GET['realestate_id'];
+		}
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 		
 		$c = $_SESSION['community'];
@@ -73,20 +79,6 @@ class CostrelationController extends Controller {
         }
         return true;
     }
-
-	//来自房屋列表的绑定费用查询
-	public function actionIndex1( $realestate_id ) 
-	{
-		$searchModel = new CostRelationSearch();
-		
-		$searchModel->realestate_id = $realestate_id;
-		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
-
-		return $this->render( 'index', [
-			'searchModel' => $searchModel,
-			'dataProvider' => $dataProvider,
-		] );
-	}
 
 	public function actionAdd() 
 	{

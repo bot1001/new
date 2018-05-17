@@ -2,28 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\helpers\Url;
-use yii\bootstrap\Modal;
-
-Modal::begin( [
-	'id' => 'view-modal',
-	'header' => '<h4 class="modal-title">服务回复</h4>',
-	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
-] );
-$v_Url = Url::toRoute( ['/ticket-reply/view'] );
-
-$cJs = <<<JS
-    $('.cr').on('click', function () {
-        $.get('{$v_Url}', { id: $(this).closest('tr').data('key') },
-           function(data){
-              $('.modal-body').html(data);
-           }
-        );
-    });
-JS;
-$this->registerJs( $cJs );
-
-Modal::end();
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TicketReplySearch */
@@ -56,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		
             ['attribute' => 'is_attachment',
 			'value' => function($model){
-	        	$d = [0 => '无', 1 => '有'];
+	        	$d = [0 => '无', 1 => '有', 2 => '其他'];
 	        	return $d[$model->is_attachment];
 	        },
 			 'filterType' => GridView::FILTER_SELECT2,
-	         'filter' => [0 => '无', 1 => '有'],
+	         'filter' => [0 => '无', 1 => '有', 2 => '其他'],
 	         'filterInputOptions' => [ 'placeholder' => '请选择' ],
 	         'filterWidgetOptions' => [
 	         	'pluginOptions' => [ 'allowClear' => true ],
@@ -119,22 +97,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		         'data' => [1 => '正常', 2 => '删除'],
 		     ],
 			 'hAlign' => 'center'],
-		
-		    ['attribute' => 'ticket_id',
-		    	 'format' => 'raw',
-		    	 'value' => function($model){
-	            	return Html::a('More', '#', [
-	            				'data-toggle' => 'modal',
-	            				'data-target' => '#view-modal',
-	            				'class' => 'cr',
-	            			] );
-	            },
-		    	 'mergeHeader' => true,
-		    	 'label' => '更多', 
-		    	 'hAlign' => 'center'],
-		    
-            /*['class' => 'kartik\grid\ActionColumn',
-			'header' => '操<br />作'],*/
+		    	    
+            ['class' => 'kartik\grid\ActionColumn',
+			'header' => '操<br />作'],
         ];
 		
 	echo GridView::widget([

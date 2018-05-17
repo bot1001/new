@@ -46,12 +46,10 @@ class LoginController extends Controller
 				->where(['sys_user.id' => $id])
 				->all();
 			
-			if(empty($user)){
-				return $this redirect(['site/logout']);
-			}
-			
 			$session['user'] = $user; //将用户信息添加到session
-			
+			if(empty($user)){
+				return $this->redirect(['/site/logout']); 
+			}
 			//获取用户绑定小区
 			$syscommuntiy = SysCommunity::find()
 	            	->select('community_id')

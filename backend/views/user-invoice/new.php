@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = '费项预览';
          <th scope="col"><?php echo $a->cost_name; ?></th>
 		   <th scope="col" align="right"><?php $price = $a->price;
 			   $acreage = $a->acreage;
-			   if($a->cost_name == "物业费"){
+			   if($a->cost_name == "物业费" || $a->cost_name == "空调运作费" || $a->cost_name == "水电周转金" ){
 				   $p = $price*$acreage;
 				   $price = number_format($p, 1);
 				   echo $price;

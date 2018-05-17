@@ -84,7 +84,7 @@ class CommunityRealestateController extends Controller
 		$b = 0; // 插入条数
 		$c = 0; // 失败条数
 		$h = 0; //重复条数
-		$comm = $_SESSION['user']['community'];
+		$comm = $_SESSION['user']['0']['id'];
 		
 		if ( Yii::$app->request->isPost ) {
 			$model->file = UploadedFile::getInstance( $model, 'file' );
@@ -145,7 +145,7 @@ class CommunityRealestateController extends Controller
 					    ->where( [ 'community_basic.community_name' => $sheet[ 'A' ], 'community_building.building_name' => $sheet['B'], 'community_realestate.room_name' => $sheet[ 'D' ]] )
 					    ->one();
 					
-					if(empty($comm))//判断管理员账号操作
+					if($comm == '64')//判断管理员账号操作
 					{						
 						 if(!empty($r_id))
 						{
@@ -179,7 +179,7 @@ class CommunityRealestateController extends Controller
                                  $transaction->rollback();
                              }
 
-						 	if ( isset($t) || isset($d) ) {
+						 	if ( isset($t) && isset($d) ) {
 			                 	$a <= $i;
 			                 	$a += 1;
 			                 }else {
@@ -214,7 +214,7 @@ class CommunityRealestateController extends Controller
 									$model->property = $sheet['N'];
 						    	    
 						    		$e = $model->save(); //保存
-									if($e){
+									if($e == 1){
 										$house = New HouseInfo(); //实例化模型
 									    $new_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
 									    
@@ -222,14 +222,18 @@ class CommunityRealestateController extends Controller
 									    $house->name = $sheet['E'];
 									    $house->phone = $sheet['F'];
 									    $house->IDcard = $sheet['K'];
-									    $house->address = $sheet['L'];
-									    
+									    $house->address = $sheet['L']; $house->status = '0';$house->politics = 0;
+									   // echo $sheet['E'].' '.$sheet['F'].' '.$sheet['K'].' '.$sheet['L'];exit;
 									    $h = $house->save(); //保存
 									}
-								$transaction->commit();
+                                    if($h == 1){
+                                    $transaction->commit();
+                                    }else{
+                                    $transaction->rollback();
+                                    }
+								
 							}catch(\Exception $e){
 								print_r($e);
-								$transaction->rollback();
 							}
 									
 						    		if( $h ){
@@ -242,7 +246,7 @@ class CommunityRealestateController extends Controller
 						    	}
 					}else{
 						//前台账户操作
-					    if($r_id['community_id'] == $comm)
+					    if($comm !== '64')
 						{
 							//更新数据库记录
 							$transaction = Yii::$app->db->beginTransaction();
@@ -274,7 +278,7 @@ class CommunityRealestateController extends Controller
 								$transaction->rollback();
 							}
 						
-						  	if ( isset($h) || isset($d) ) {
+						  	if ( isset($h) && isset($d) ) {
 			                	$a <= $i;
 			                	$a += 1;
 			                }else {

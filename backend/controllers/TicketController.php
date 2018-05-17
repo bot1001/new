@@ -46,7 +46,7 @@ class TicketController extends Controller
 	    $c = $_SESSION['community'];
 	   
 	    $comm = CommunityBasic::find()
-	    	->select(' community_name')
+	    	->select(' community_name, community_id')
 	    	->where(['community_id' => $c])
 			->orderBy('community_name DESC')
 	    	->indexBy('community_id')
@@ -59,10 +59,19 @@ class TicketController extends Controller
 	    	->indexBy('building_name')
 	    	->column();
 		
-		if($_GET){
+		//判断是否存在状态参数
+		if(isset($_GET['ticket_status'])){
 			$get = $_GET;
 			$searchModel->ticket_status = $get['ticket_status'];
-			//$searchModel->community_id =  $get['c'];
+		}
+		
+		//判断是否存在小区和楼宇参数
+		if(isset($_GET['building'])&& isset($_GET['c']))
+		{
+			$c = $_GET['community'];
+			$building = $_GET['building'];;
+			$searchModel->community_id = $c;
+			$searchModel->building = $building;
 		}
 		
 		//配置数据提供器
@@ -125,16 +134,23 @@ class TicketController extends Controller
 		
 		$community = CommunityBasic::find()
 			->select('community_name, community_id')
+			->where(['in', 'community_id', $c])
 			->orderBy('community_name')
 			->indexBy('community_id')
 			->column();
-		
+				
 		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
 			->joinWith('data')
-			->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
+			->andwhere(['account_superior' => '0'])
+			->andwhere(['in', 'community_id', $c])
 		    ->indexBy('account_id')
 			->orderBy('community_id')
 			->column();
+		
+		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
+		$number = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		
+		$model->ticket_number = $number;
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -143,7 +159,8 @@ class TicketController extends Controller
         return $this->renderAjax('create', [
             'model' => $model,
 			'community' => $community,
-			'assignee' => $assignee
+			'assignee' => $assignee,
+			'number' => $number
         ]);
     }
 

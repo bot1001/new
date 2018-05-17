@@ -12,6 +12,10 @@ use app\models\HouseInfo;
  */
 class houseSearch extends HouseInfo
 {
+	public function attributes()
+	{
+		return array_merge(parent::attributes(), ['community', 'building', 'number', 'room_name']);
+	}
     /**
      * {@inheritdoc}
      */
@@ -19,7 +23,7 @@ class houseSearch extends HouseInfo
     {
         return [
             [['house_id', 'realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
-            [['name', 'phone', 'IDcard', 'address', 'property'], 'safe'],
+            [['name', 'phone', 'IDcard', 'address', 'property', 'community', 'building', 'number', 'room_name'], 'safe'],
         ];
     }
 
@@ -42,6 +46,8 @@ class houseSearch extends HouseInfo
     public function search($params)
     {
         $query = HouseInfo::find();
+		$query->joinWith('c');
+		$query->joinWith('b');
 
         // add conditions that should always apply here
 
@@ -70,6 +76,8 @@ class houseSearch extends HouseInfo
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'phone', $this->phone])
+			->andFilterWhere(['like', 'community_basic.community_name', $this->community])
+			->andFilterWhere(['like', 'community_building.building_name', $this->building])
             ->andFilterWhere(['like', 'IDcard', $this->IDcard])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'property', $this->property]);

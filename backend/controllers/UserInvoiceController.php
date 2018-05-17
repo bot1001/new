@@ -571,9 +571,9 @@ class UserInvoiceController extends Controller
 			$price = $q[ 'price' ];
 			$acreage = $q[ 'acreage' ];
 						
-			if ( $description == "物业费" ) {
+			if ( $description == "物业费" || $description == "空调运作费" || $description == "水电周转金" ) {
 				$p = $price*$acreage;
-				$price = number_format($p, 1);
+				$price = round($p,1); //保留一位小数点
 				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
 				values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0')";
 				$result = Yii::$app->db->createCommand( $sql )->execute();
@@ -716,17 +716,19 @@ class UserInvoiceController extends Controller
 				$y = reset($time); //年
 				$ms = end($time); //月
 				
-				$price = $qs[ 'price' ]; //费项价格
+				$pr = $qs[ 'price' ]; //费项价格
 				
-				if ( $description == "物业费" ) {
-					//判定物业费
-					$p = $price*$acreage;
-				    $price = number_format($p, 1);
+				//判定物业费
+				if ( $description == "物业费" || $description == "空调运作费" || $description == "水电周转金" ) {
+					$p = $pr*$acreage;
+				    $price = round($p,1); //保留一位小数点
+				}else{
+					$price = $pr;
 				}
 				
 				//MySQL插入语句
 				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
-						values ('$community','$building', '$id','$description', '$y', '$ms', '$price','$f','0')";
+						values ('$community','$building', '$id','$description', '$y', '$ms', '$price', '$f','0')";
 				$e = Yii::$app->db->createCommand( $sql )->execute();
 				
 				

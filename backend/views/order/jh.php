@@ -62,8 +62,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
-					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to([' / order / print ', 
-																								 'order_id ' => $order_id]); ?>">支付成功！</a>';
+					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
+																								 'order_id' => $order_id]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 

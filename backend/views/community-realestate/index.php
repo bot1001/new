@@ -158,7 +158,7 @@ $this->title = '房屋管理';
 		[ 'attribute' => 'room_number',
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index1', 'realestate_id' => $model->realestate_id ] );
+				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index', 'realestate_id' => $model->realestate_id ] );
 				return Html::a( $model->room_number . '单元', $url );
 			},
 			'hAlign' => 'center',

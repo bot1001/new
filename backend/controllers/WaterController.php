@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 use app\models\CommunityRealestate;
 use app\models\CostRelation;
 use app\models\CostName;
+use app\models\CommunityBuilding;
 use app\models\UserInvoice;
 
 /**
@@ -71,10 +72,22 @@ class WaterController extends Controller
 		$this->layout = 'main1';
         $searchModel = new WaterSearch01();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		$c = $_SESSION['community'];
+	
+		$building = CommunityBuilding::find()
+			->select('building_name')
+			->where(['in','community_id', $c])
+			->orderBy('building_name DESC')
+			->indexBy('building_name')
+			->distinct()
+			->asArray()
+			->column();
 
         return $this->render('phone', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'building' => $building
         ]);
     }
 	
