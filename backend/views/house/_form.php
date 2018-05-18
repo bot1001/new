@@ -16,10 +16,10 @@ use kartik\depdrop\DepDrop;
     <?php $form = ActiveForm::begin(); ?>
     
     <div class="row">
-    	<div class="col-lg-3">
+    	<div class="col-lg-4">
     		<?= $form->field($model, 'community')->dropDownList($community, ['prompt' => '请选择', 'id'=> 'community'])->label('小区') ?>
     	</div>
-    	<div class="col-lg-2">
+    	<div class="col-lg-3">
     		<?= $form->field($model, 'building')->widget(DepDrop::classname(), [
                             'type' => DepDrop::TYPE_SELECT2,
                             'options'=>['id'=>'building'],
@@ -31,8 +31,8 @@ use kartik\depdrop\DepDrop;
                             ]
                         ])->label('楼宇'); ?>
     	</div>
-    	<div class="col-lg-2">
-    		<?= $form->field($model, 'room_name')->widget(DepDrop::classname(), [
+    	<div class="col-lg-3">
+    		<?= $form->field($model, 'realestate')->widget(DepDrop::classname(), [
                             'type' => DepDrop::TYPE_SELECT2,
                             'options'=>['id'=>'room_name'],
 	                        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
@@ -46,33 +46,33 @@ use kartik\depdrop\DepDrop;
     </div>
 
     <div class="row">
-    	<div class="col-lg-1">
+    	<div class="col-lg-3">
     		<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     	</div>
-    	<div class="col-lg-2">
+    	<div class="col-lg-4">
     		<?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
     	</div>
-    	<div class="col-lg-1">
-    		<?= $form->field($model, 'status')->textInput() ?>
-    	</div>
-    	<div class="col-lg-1">
-    		<?= $form->field($model, 'politics')->textInput() ?>
+    	
+    	<div class="col-lg-3">
+    		<?= $form->field($model, 'politics')->dropDownList(['0' => '群众', '1'=> '团员', '2'=> '党员']) ?>
     	</div>
     </div>
     
     <div class="row">
-    	<div class="col-lg-4">
-    		<?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-    	</div>
-    	
-    	<div class="col-lg-4">
-    		<?= $form->field($model, 'IDcard')->textInput(['maxlength' => true]) ?>
+    	<div class="col-lg-7">
+    		<?= $form->field($model, 'IDcard')->textInput(['length' => [15, 20]]) ?>
     	</div>
     </div>
-
+    
     <div class="row">
-    	<div class="col-lg-12">
-    		<?= $form->field($model, 'property')->textInput(['maxlength' => true]) ?>
+    	<div class="col-lg-8">
+    		<?= $form->field($model, 'address')->textArea(['maxlength' => true]) ?>
+    	</div>
+	</div>
+  	
+    <div class="row">
+    	<div class="col-lg-10">
+    		<?= $form->field($model, 'property')->textArea(['maxlength' => true]) ?>
     	</div>
     </div>
 

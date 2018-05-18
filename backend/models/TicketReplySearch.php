@@ -48,6 +48,7 @@ class TicketReplySearch extends TicketReply
     {
         $query = TicketReply::find();
 		$query->joinWith('d');
+		$query->joinWith('t');
 
         // add conditions that should always apply here
 

@@ -238,11 +238,10 @@ $this->title = '裕达物业';
 			    		$k ++;
 			    	}	
 			    }
-				$community_id = array_column($_t, 'community_id');
 			?>
 
 		    <h4 style="color: #000000">
-    	        <a href="<?php echo Url::to(['/ticket/index','name' => '1', 'community_id' => $community_id]) ?>">
+    	        <a href="<?php echo Url::to(['/ticket/index','ticket_status' => '1']) ?>">
 		        	未处理投诉量：<l><?php echo count($_t); ?></l>例
   		        </a>
    		    </h4>
@@ -281,7 +280,7 @@ $this->title = '裕达物业';
 	                }
                } ?>
             <div id = "div4">
-                <a href="<?php echo Url::to(['/ticket/index','name' => '1', 'community_id' => $community_id]) ?>" style="color: #000000">查看全部</a>
+                <a href="<?php echo Url::to(['/ticket/index','ticket_status' => '1']) ?>" style="color: #000000">查看全部</a>
             </div>
             
     	    	<?php

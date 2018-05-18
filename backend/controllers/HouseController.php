@@ -10,6 +10,8 @@ use app\models\houseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * HouseController implements the CRUD actions for HouseInfo model.
@@ -63,6 +65,20 @@ class HouseController extends Controller
 			'building' => $building
         ]);
     }
+	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'house' => [
+               'class' => EditableColumnAction::className(),     
+               'modelClass' => HouseInfo::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Displays a single HouseInfo model.
@@ -112,10 +128,10 @@ class HouseController extends Controller
 			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->house_id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
 			'community' => $community,
 			'building' => $building
@@ -132,13 +148,31 @@ class HouseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find() //查询和账户相关联的小区名称
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $comm])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
+		
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $comm])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->house_id]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
+			'community' => $community,
+			'building' => $building
         ]);
     }
 

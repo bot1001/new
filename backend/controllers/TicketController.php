@@ -59,18 +59,29 @@ class TicketController extends Controller
 	    	->indexBy('building_name')
 	    	->column();
 		
-		//判断是否存在状态参数
+		//判断是有是来自处理结果页面的查询
+		if(isset($_GET['ticket_id']))
+		{
+			$id = $_GET['ticket_id'];
+			$searchModel->ticket_id = $id;
+		}
+		
+		//判断是否存在状态传值
 		if(isset($_GET['ticket_status'])){
 			$get = $_GET;
 			$searchModel->ticket_status = $get['ticket_status'];
 		}
 		
-		//判断是否存在小区和楼宇参数
+		//判断是否存在小区传值
+		if(isset($_GET['community'])){
+			$get = $_GET;
+			$searchModel->community_id = $get['community'];
+		}
+		
+		//判断是否存在小区和楼宇传值
 		if(isset($_GET['building'])&& isset($_GET['c']))
 		{
-			$c = $_GET['community'];
 			$building = $_GET['building'];;
-			$searchModel->community_id = $c;
 			$searchModel->building = $building;
 		}
 		

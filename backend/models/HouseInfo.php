@@ -42,8 +42,8 @@ class HouseInfo extends \yii\db\ActiveRecord
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
             [['name'], 'string', 'max' => 16],
             //[['phone'], 'string', 'max' => 16],
-              [['IDcard'], 'string', 'max' => 18],
-              [['address', 'property'], 'string', 'max' => 50],
+            [['IDcard'], 'string', 'max' => 18],
+            [['address', 'property'], 'string', 'max' => 50],
             [['realestate', 'name', 'IDcard'], 'unique', 'targetAttribute' => ['realestate', 'name', 'IDcard']],
             [['realestate'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate' => 'realestate_id']],
         ];
@@ -86,6 +86,7 @@ class HouseInfo extends \yii\db\ActiveRecord
 				$this->creater = $_SESSION['user']['0']['id'];
 				$this->create = date(time());
 				$this->update = date(time());
+				$this->status = '1';
 			}else{
 				//修改时自动更新以下记录
 				$this->update = date(time());

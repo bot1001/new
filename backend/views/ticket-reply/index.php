@@ -23,13 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'],
 
+		    ['attribute' => 'ticket_id',
+			 'format' => 'raw',
+			 'value' => function($model){
+	        	$url = Yii::$app->urlManager->createUrl(['/ticket/index', 'ticket_id' => $model->ticket_id]);
+	        	return Html::a($model->ticket_id, $url);
+	        },
+			 'hAlign' => 'center'],
+		
             ['attribute' => 'name',
 			'value' => 'd.real_name',
 			'label' => '回复人',
-			'hAlign' => 'center'],
-		
-            //'account_id',
-            ['attribute' => 'content',
+			'hAlign' => 'center'],            ['attribute' => 'content',
 			'value' => 'E'],
 		
             ['attribute' => 'is_attachment',

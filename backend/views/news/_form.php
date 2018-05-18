@@ -13,7 +13,7 @@ use app\models\CommunityBasic;
 <div class="community-news-form">
 
    <?php
-	$c = $_SESSION['user']['community'];
+	$c = $_SESSION['community'];
 	if(empty($c)){
 		$community = CommunityBasic::find()
 			->select('community_id, community_name')
