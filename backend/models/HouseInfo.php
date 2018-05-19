@@ -42,7 +42,7 @@ class HouseInfo extends \yii\db\ActiveRecord
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
             [['name'], 'string', 'max' => 16],
             //[['phone'], 'string', 'max' => 16],
-            [['IDcard'], 'string', 'max' => 18],
+            [['IDcard'], 'string', 'length' => 18],
             [['address', 'property'], 'string', 'max' => 50],
             [['realestate', 'name', 'IDcard'], 'unique', 'targetAttribute' => ['realestate', 'name', 'IDcard']],
             [['realestate'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate' => 'realestate_id']],

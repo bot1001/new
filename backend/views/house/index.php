@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'view-modal',
@@ -153,7 +154,7 @@ $this->title = '房屋信息';
 			'width' => 'px'],
 		
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => '{update}{delete}',
+			 'template' => Helper::filterActionColumn('{update}{delete}'),
 			 'buttons' => [
 				'update' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [

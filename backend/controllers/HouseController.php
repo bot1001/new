@@ -95,7 +95,18 @@ class HouseController extends Controller
 
 	public function actionView01($id)
     {
-		$model = HouseInfo::find()->where(['realestate' => $id])->asArray()->all();
+		$model = (new \yii\db\Query())
+			->select('house_info.*, 
+			community_basic.community_name as community, 
+			community_building.building_name as building,
+			community_realestate.room_number as number,
+			community_realestate.room_name as room_name')
+			->from('house_info')
+			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = house_info.realestate')
+			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+			->where(['house_info.realestate' => $id])
+			->all();
 		
         return $this->render('view', [
             'model' => $model,

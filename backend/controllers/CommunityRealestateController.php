@@ -207,11 +207,11 @@ class CommunityRealestateController extends Controller
 						    		$model->owners_name = $sheet['E']; //业主姓名
 						    		$model->owners_cellphone = (int)$sheet['F']; //手机号码
 						    		$model->acreage = (float)$sheet['G']; //面积
-									$model->finish = $sheet['H'];
-									$model->delivery = $sheet['I'];
-									$model->decoration = $sheet['J'];
-									$model->orientation = $sheet['M'];
-									$model->property = $sheet['N'];
+									$model->finish = $sheet['H']; //交付时间
+									$model->delivery = $sheet['I']; //交房时间
+									$model->decoration = $sheet['J']; //装修时间
+									$model->orientation = $sheet['M']; //房屋朝向
+									$model->property = $sheet['N']; //备注
 						    	    
 						    		$e = $model->save(); //保存
 									if($e == 1){
@@ -223,7 +223,7 @@ class CommunityRealestateController extends Controller
 									    $house->phone = $sheet['F'];
 									    $house->IDcard = $sheet['K'];
 									    $house->address = $sheet['L']; $house->status = '0';$house->politics = 0;
-									   // echo $sheet['E'].' '.$sheet['F'].' '.$sheet['K'].' '.$sheet['L'];exit;
+									    
 									    $h = $house->save(); //保存
 									}
                                     if($h == 1){
@@ -417,13 +417,55 @@ class CommunityRealestateController extends Controller
     public function actionCreate()
     {
         $model = new CommunityRealestate();
+		$house = new HouseInfo();
 		$model->setScenario('create');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) 
+		{
+			$h = $_POST['HouseInfo'];
+			$post = $_POST['CommunityRealestate'];
+			
+			$model->community_id = (int)$post['community_id']; //小区
+			$model->building_id = (int)$post['building_id']; //楼宇
+			$model->room_number = (int)$post['room_number']; //单元
+			$model->room_name = $post['room_name']; //房号
+			$model->owners_name = $post['owners_name']; //业主姓名
+			$model->owners_cellphone = (int)$post['owners_cellphone']; //手机号码
+			$model->acreage = (float)$post['acreage']; //面积
+			$model->finish = $post['finish']; //交付时间
+			$model->delivery = $post['delivery']; //交房时间
+			$model->decoration = $post['decoration']; //装修时间
+			$model->orientation = $post['orientation']; //房屋朝向
+			$model->property = $post['property']; //备注
+			
+			$transaction = Yii::$app->db->beginTransaction();
+			try{
+				$m = $model->save();
+				if($m == '1')
+				{
+					$new_id = Yii::$app->db->getLastInsertID(); //获取最新插入的数据ID
+					
+					$house->realestate = $new_id;
+					$house->name = $post['owners_name']; //业主姓名
+					$house->phone = (int)$post['owners_cellphone']; //手机号码
+					$house->IDcard = $h['IDcard'];
+					$house->address = $h['address'];
+					
+					$ho = $house->save();
+				}
+				if($ho == '1'){
+					$transaction->commit();
+				}else{
+					$transaction->rollback();
+				}
+			}catch(\Exception $e){
+				print_r($e);exit;
+			}
             return $this->redirect( Yii::$app->request->referrer );
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
+				'house' => $house,
             ]);
         }
     }
