@@ -330,30 +330,23 @@ class UserInvoiceController extends Controller
 		$c = $_SESSION['community'];
 		
 		//获取小区
-	    if($c)
-		{
-	    	$comm = CommunityBasic::find()
-	    		->select('community_name, community_id')
-	    		->where(['in', 'community_id', $c])
-	    		->orderBy('community_name')
-				->indexBy('community_id')
-	    		->column();
-			$building = CommunityBuilding::find()
-				->select('building_name')
-				->distinct()
-				->where(['in', 'community_id', $c])							
-				->orderBy('building_name')
-				->indexBy('building_name')
-				->column();
-	    }else{
-			$comm = '';
-			$building = '';
-		}
+	    $comm = CommunityBasic::find()
+	    	->select('community_name, community_id')
+	    	->where(['in', 'community_id', $c])
+	    	->orderBy('community_name')
+			->indexBy('community_id')
+	    	->column();
+		$building = CommunityBuilding::find()
+			->select('building_name')
+			->distinct()
+			->where(['in', 'community_id', $c])							
+			->orderBy('building_name')
+			->indexBy('building_name')
+			->column();
 				
-		if(isset($_GET['InvoiceSumSearch']['from'])) //判断并处理支付时间
+		if(!empty($_GET['InvoiceSumSearch']['from'])) //判断并处理支付时间
 		{
 			$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
-		    
 		    $from = reset($time); //起始年月
 		    $to = end($time); //截止年月
 		}else{
