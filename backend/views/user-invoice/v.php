@@ -92,8 +92,8 @@ $this->params['breadcrumbs'][] = '费项预览';
                 <td><?php $count ++; echo $count; ?></td>
                 <td><?php echo $a->community_name?></td>
 	      	    <td><?php echo $a->building_name; ?></td>
-	      	    <td><?php echo $a->room_name ?></td>
-	      	    <td><?php echo $a->room_number; ?></td>
+	      	    <td><?php echo $a->room_number ?></td>
+	      	    <td><?php echo $a->room_name; ?></td>
 	      	  
                 <td> <?php 
 	      	  $time = explode('-', $date);
