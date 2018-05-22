@@ -37,6 +37,27 @@ use kartik\select2\Select2;
 	table tbody td{
 		text-align: center;
 	}
+	
+	#div1{
+		font-size: 20px;
+		font-weight: 1000;
+		background: #FFFFFF;
+		text-align: right;
+		border-radius: 5px;
+		position: relative;
+		top: 5px;
+	}
+	
+	#div12{
+		font-size: 15px;
+		font-weight: 1000;
+		color:rgba(0,0,0,0.7);;
+		background: #FFFFFF;
+		text-align: right;
+		border-radius: 5px;
+		position: relative;
+		top: -5px;
+	}
 </style>
 
 <?php
@@ -49,8 +70,8 @@ $this->title = '缴费统计';
 									   'c_name' => $c_name, 
 									   'building' => $building,
 									  ]); ?>
-<div align="right">
-	<?php echo '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to;; ?>
+<div id="div12">
+	<?php echo '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?>
 </div>
 	    	
 <?php
@@ -61,12 +82,12 @@ if($data)//判断是否存在缴费数据
         $d[] = $value->attributes;
     }
 	
-//	    echo '<pre >';
-//		print_r($d);exit;
 	
-	//提取缴费名称
-	$cost_name = array_column($d, 'description');
-	$cost_name = array_unique($cost_name);
+	$cost_name = array_column($d, 'description'); //提取缴费名称
+	$cost_name = array_unique($cost_name); //费项名称去重复
+	
+	$a_sum = array_column($d, 'invoice_amount'); //提取总金额
+	$all_sum = array_sum($a_sum); //总金额求和
 	?>
 <table border="1">
 	<thead>
@@ -123,20 +144,25 @@ if($data)//判断是否存在缴费数据
 			
 		    echo '<td>';
 			?>
-			<a href="<?php //echo Url::to(['/user-invoice/index', 'community_id' => $key,]); ?>">
+			<a href="<?php echo Url::to(['/user-invoice/index', 'community' => $key,]); ?>">
 	            <?php
 		            echo $community; //小区
 		        ?>
 			</a>
-	    <?php	
-		    echo '</td>';
+	    <?php echo '</td>';	
+			  echo '<td>';?>
 			
-			echo '<td>';
-			    if($order_count !== 0){//订单数量
+			<a href="<?= Url::to(['/order/index', 'community' => $key]); ?>">
+			  <?php  
+			if($order_count !== 0){//订单数量
 			    	echo $order_count;
 			    }else{
 			    	echo '';
-			    }		        
+			    }
+			?>
+			</a>
+    
+	    <?php
 		    echo '</td>';
 			
 			foreach($cost_name as $cost){
@@ -157,7 +183,11 @@ if($data)//判断是否存在缴费数据
 				    $amount02 = array_column($in, 'invoice_amount');
 				    $sum02 = array_sum($amount02);
 				    echo '<td>';
-			           echo $sum02;
+					?>
+					<a href="<?= Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key]); ?>">
+		           <?php echo $sum02; ?>
+			</a>
+		        <?php
 			        echo '</td>';
 				    unset($in);
 				}else{
@@ -167,8 +197,14 @@ if($data)//判断是否存在缴费数据
 			}
 			
 			//输出费项条数
-			echo '<td>';			
-			    echo $in_count;
+			echo '<td>';
+			?>
+    
+	    <a href="<?= Url::to(['/user-invoice/index', 'community' => $key]); ?>">
+		    <?php echo $in_count; ?>
+			</a>
+				
+			<?php
 			echo '</td>';
 			
 			//输出合计金额
@@ -176,6 +212,7 @@ if($data)//判断是否存在缴费数据
 			    echo $sum;
 			echo '</td>';
 			
+			//释放数组
 			unset($y);
 			unset($in_count);
 			unset($sum);
@@ -185,7 +222,14 @@ if($data)//判断是否存在缴费数据
 		    </tr>			
 		<?php
 	}
-} ?>
+ ?>
         </tr>
     </tbody>
 </table>
+<div id="div1">
+	<?php 
+		echo '总计：'.number_format($all_sum, 2);
+	 ?>
+</div>
+
+<?php } ?>

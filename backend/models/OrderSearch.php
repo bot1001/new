@@ -48,7 +48,7 @@ class OrderSearch extends OrderBasic
     public function search($params)
     {
 		$comm = $_SESSION['community']; //获取关联小区ID
-                $name = $_SESSION['community_name']; //获取关联小区名称
+        $name = $_SESSION['community_name']; //获取关联小区名称
 		$Role = $_SESSION['user']['0']['Role']; //获取用户角色
 		
 		if($Role == "收银员"){

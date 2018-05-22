@@ -57,6 +57,13 @@ class OrderController extends Controller
 		if(isset($_GET['order_id'])){
 			$searchModel->order_id = $_GET['order_id'];
 		};
+		
+		//判断来自统计功能模块的参数
+		if(isset($_GET['community'])){
+			$searchModel->account_id = $_GET['community'];
+		};
+		
+		//判断是否存在时间 one为起始时间，two为截止时间
 		if(isset($_GET['one']) && isset($_GET['two']))
 		{ 
 			$one = date('Y-m-d', time($_GET['one']));
@@ -98,7 +105,7 @@ class OrderController extends Controller
        ]);
    }
 	
-	//打印信息
+	//打印订单
 	public function actionPrint($order_id)
 	{
 		$session = Yii::$app->session;
@@ -114,11 +121,11 @@ class OrderController extends Controller
 		if($order['payment_time'] || $order['payment_gateway']){
 			//查询缴费费项信息
 			$i = UserInvoice::find()
-				->select('community_id,building_id,realestate_id,year,month,description,invoice_amount')
+				->select('community_id,building_id,realestate_id,year,month,description,invoice_amount, invoice_notes as note')
 				->where(['order_id'=>$order_id])
 				->orderBy('year,month ASC');
 						
-			foreach ($i->asArray()->batch(200) as $invoice);//print_r($invoice);exit;
+			foreach ($i->asArray()->batch(200) as $invoice);//单次获取200条费项
 			if(empty($invoice)){
 				$session->setFlash('m','1');
 				return $this->redirect(Yii::$app->request->referrer);
@@ -131,39 +138,26 @@ class OrderController extends Controller
 									
 			if($invoice){
 				$inv = reset($invoice);
-				//查询小区
-				$comm = CommunityBasic::find()
-					->select('community_name')
-					->where(['community_id' => $inv['community_id']])
-					->asArray()
-					->one();
 				
-				//查询楼宇名称
-				$building = CommunityBuilding::find()
-					->select('building_name')
-					->where(['building_id' => $inv['building_id']])
-					->asArray()
-					->one();
-				
-				//查询房屋单元及房号
-				$r_name = CommunityRealestate::find()
-					->select('room_name as name, realestate_id as id, room_number as number, owners_name as n')
-					->where(['realestate_id' => $inv['realestate_id']])
-					->asArray()
+				//缴费信息
+				$comm = (new \yii\db\Query())
+					->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.owners_name as n, community_realestate.realestate_id as id')
+					->from('community_realestate')
+					->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+					->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+					->where(['community_realestate.realestate_id' => $inv['realestate_id']])
 					->one();
 				
 				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
 				return $this->render('print',[
 			                      'dc' => $dc,
 			                      'comm' => $comm,
-			                      'building' => $building,
-			                      'r_name' => $r_name,
 					              'order_id' => $order_id,
 			                      'i_a'=> $i_a,
 					              'e' => $e,
 					              'order' => $order,
 			                      'user_name' => $user_name,
-					'invoice' => $invoice,
+					              'invoice' => $invoice,
 				                ]);
 			}else{
 				$session->setFlash('m','1');

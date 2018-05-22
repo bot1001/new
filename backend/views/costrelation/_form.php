@@ -25,7 +25,7 @@ use kartik\daterange\DateRangePicker;
 	   $array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where parent=0')->queryAll();
 	   $cost = ArrayHelper::map($array,'cost_id','cost_name');
 	
-	   $c = $_SESSION['user']['community'];
+	   $c = $_SESSION['community'];
 	$a = CommunityBasic::find()->select( 'community_id,community_name');
 	if($c){
 		$array1 = $a->where(['community_id' => $c])->asArray()->All();;

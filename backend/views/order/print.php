@@ -2,7 +2,6 @@
 
 use yii\ helpers\ Html;
 use yii\ helpers\ Url;
-use app\models\UserInvoice;
 use app\models\CostName;
 use app\models\CostRelation;
 use app\models\WaterMeter;
@@ -50,14 +49,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	        }
         </style>
         
-		<h3><?php echo $comm['community_name'];  ?></h3>
+		<h3><?php echo $comm['community'];  ?></h3>
 			<br>
 		<table border="0">
 			<tr>
 				<td align="left"><strong>房号:</strong>
-					<?php echo $building['building_name'].'&nbsp'. $r_name['number']. '&nbsp'. $r_name['name']; ?>
+					<?php echo $comm['building'].'&nbsp'. $comm['number']. '&nbsp'. $comm['name']; ?>
 				</td>
-				<td align="center"><?php echo '业主姓名：'.$r_name['n']?></td>
+				<td align="center"><?php echo '业主姓名：'.$comm['n']?></td>
 				<td align="center"><?php echo '订单号：'.$order_id ?></td>
 				<td align="right"><?php echo '收款方式：'.$e[$order['payment_gateway']]; ?></td>
 			</tr>
@@ -78,11 +77,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					<th>金额</th>
 					<th>备注</th>
 				</tr>
-				<?php
 				
+				<?php
 				$k = 0;
-				foreach($dc as $key => $c){
-									
+				foreach($dc as $key => $c)
+				{					
 					foreach ($invoice as $key => $value)
                     {
                         if ($value['description'] !== $c)
@@ -93,20 +92,26 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         }
                     }
 					
+					$one = end($des); //第一条缴费订单
+					
 					//获取绑定水费编码
-					$c_id = CostRelation::find()->select('cost_id')->where(['realestate_id' => $r_name['id']])->limit(20)->asArray()->all();
+					$price = (new \yii\db\Query())
+						->select('cost_name.price')
+						->from('cost_relation')
+						->join('inner join', 'cost_name', 'cost_name.cost_id = cost_relation.cost_id')
+						->andwhere(['cost_relation.realestate_id' => $comm['id']])
+						->andwhere(['in', 'cost_name.cost_name', $one['description'] ])
+						->limit(20)
+						->one();
+					
 	                //获取绑定费项价格
-					if(!empty($c_id)){
-						$cost = CostName::find()->select('price')->andwhere(['cost_name' => $c])->andwhere(['cost_id' => $c_id])->asArray()->one();
-						if(empty($cost)){
-							$name = $cost['price'];
-						}else{
-							$name = '';
-						}
+					if(!empty($price))
+					{
+						$name = $price['price'];
 					}else{
 						$name = '';
 					}
-										
+						
 	                $k ++;//记录遍历次数
 					
 					$m = reset($des); // 第一条
@@ -117,51 +122,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					$H = $M['month']; //最大月
 					$count = count($des); //统计数量
 					$day = date("t",strtotime("$Y-$H"));
-					
-					//预交信息
-					$ys = date('Y',$order['payment_time']);
-					$ms = date('m',$order['payment_time']);
-					
-					foreach ($invoice as $key => $value)
-                    {
-                        if ($value['description'] === $c)
-                        {
-							if($value['year'] <= $ys)
-							{
-								if($value['year'] === $ys)
-								{
-									if($value['month'] > $ms)
-								    {
-								    	$yj[] = $value;
-								    }else{
-								    	continue;
-								    }
-								}else{
-									continue;
-								}
-							}else{
-								$yj[] = $value;
-							}
-                        }else{
-                            continue;
-                        }
-                    }
-					
-					if(isset($yj)){
-						$f = reset($yj); //第一条
-					    $l = end($yj); //后一条
-					    
-					    $yy = $f['year']; //预交起始年
-					    $ym = $f['month']; //预交起始月
-					    
-					    $YS = $l['year']; //预交末年
-					    $YM = $l['month']; //预交末月
-						$yc = count($yj); //预交数量统计
-					}else{
-						$yc = $yj = $yy = $ym = $YS = $YM = '';
-						
-					}
-						
+								
 					$amount = array_sum(array_column($des,'invoice_amount')); //费项金额
 					
 					echo ("<tr height=10>
@@ -226,11 +187,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	                        <td width = 10%>$Y/$H/$day</td>
 	                        <td width = 7% align = right>$amount</td>
 						  ");
-					if($yj && $c !== '水费'){
-						echo ("<td>预收:$yy/$ym/-$YS/$YM 共:$yc 条</td></tr>");
-					}else{
-						echo ("<td></td></tr>");
-					}
+					
+					echo "<td>".$m['note']."</td></tr>";
 					
 					unset($des);// 释放数组
 					unset($yj);// 释放数组

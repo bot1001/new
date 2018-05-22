@@ -374,7 +374,7 @@ $this->title = '缴费管理';
 		'toolbar' => [
 			[ 'content' =>
 				Html::a( '删除', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] ) . ' ' .
-				Html::a( '统计', [ 'search' ], [ 'class' => 'btn btn-success' ] )
+				Html::a( '统计', [ 'sum' ], [ 'class' => 'btn btn-success' ] )
 			],
 			'{toggleData}',
 			'{export}'
