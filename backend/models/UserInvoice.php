@@ -124,7 +124,15 @@ class UserInvoice extends \yii\db\ActiveRecord
 		 
 		foreach($d as $k => $dd)
 		{
-			if($dd['year'] == $year01)
+			if($dd['year'] == $year01 && $dd['year'] == $year02)
+			{
+				if($dd['month'] < $month01 || $dd['month'] > $month02)
+				{
+					unset($d[$k]);
+				}else{
+					continue;
+				}
+			}elseif($dd['year'] == $year01 && $dd['year'] < $year02)
 			{
 				if($dd['month'] < $month01)
 				{
@@ -132,7 +140,7 @@ class UserInvoice extends \yii\db\ActiveRecord
 				}else{
 					continue;
 				}
-			}elseif($dd['year'] == $year02)
+			}elseif($dd['year'] > $year01 && $dd['year'] <= $year02)
 			{
 				if($dd['month'] > $month02)
 				{

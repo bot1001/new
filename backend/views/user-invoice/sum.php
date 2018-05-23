@@ -10,9 +10,6 @@ use kartik\select2\Select2;
 ?>
 
 <style type="text/css">
-	div {
-		margin: auto
-	}
 	td, th {
 		height: 30px;
 		text-align: center;
@@ -55,6 +52,9 @@ use kartik\select2\Select2;
 		position: relative;
 		top: -5px;
 	}
+	#sum{
+		height: 640px;
+	}
 		
 </style>
 
@@ -62,11 +62,12 @@ use kartik\select2\Select2;
 
 <div id="div12">
 	<div class="row">
-		<div class="col-lg-1"><?php echo '总计：'.$sum; ?></div>
-	    <div class="col-lg-11"><?= '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?></div>
+		<div class="col-lg-3" align="left"><?= '总计：'.'<l>'.$sum.'</l>'.'元；'.' '.'共：'.'<l>'.$count.'</l>'.'条'; ?></div>
+	    <div class="col-lg-9"><?= '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?></div>
 	</div>
 </div>
-	    	
+<div id="sum">
+	
 <?php
 if($data)//判断是否存在缴费数据
 {
@@ -75,6 +76,7 @@ if($data)//判断是否存在缴费数据
 	?>
 	<table border="1">
 		<thead>
+			<th><input type = "checkbox" name="checkbox[]"></th>
 			<th>序号</th>
 			<th>小区</th>
 			<th>楼宇</th>
@@ -83,6 +85,7 @@ if($data)//判断是否存在缴费数据
 			<th>年份</th>
 			<th>月份</th>
 			<th>详情</th>
+			<th>金额</th>
 			<th>订单编号</th>
 			<th>支付时间</th>
 			<th>状态</th>
@@ -91,6 +94,7 @@ if($data)//判断是否存在缴费数据
 		<tbody>
 		<?php foreach($data as $d): $d = (object)$d ?>
 			<tr>
+				<td><input type = "checkbox" name="checkbox[]"></td>
 				<td><?php $i +=1; echo $i; ?></td>
 				<td><?= $d->community; ?></td>
 				<td><?= $d->building; ?></td>
@@ -99,17 +103,19 @@ if($data)//判断是否存在缴费数据
 				<td><?= $d->year; ?></td>
 				<td><?= $d->month; ?></td>
 				<td><?= $d->description; ?></td>
+				<td><?= $d->amount; ?></td>
 				<td><?= $d->order; ?></td>
-				<td><?= $d->payment_time; ?></td>
+				<td><?= date('Y-m-d H:i:s', $d->payment_time); ?></td>
 				<td><?= $status[$d->status]; ?></td>
 			</tr>
-			<?php endforeach; ?>
+		<?php endforeach; ?>
 		</tbody>
 	<br />
 	
 </table>
-	<?php 
-?>
+
+</div>
+
 <div id="div10" class="footer">
 	<div>
 		<div id="page">

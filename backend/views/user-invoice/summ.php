@@ -60,12 +60,15 @@ use kartik\select2\Select2;
 	}
 </style>
 
-<?php
+<?php $this->title = '缴费统计'; 
 
-$this->title = '缴费统计';
-
+    $message = Yii::$app->getSession()->getFlash('fail');
+	if($message == '0'){
+		echo "<script>alert('选择小区不能为空或月份超过13个月，请重新选择！')</script>";
+	}
 ?>
-  <?php echo $this->render('_search', ['model' => $searchModel, 
+
+<?php echo $this->render('_search', ['model' => $searchModel, 
 									   'comm' => $comm,
 									   'c_name' => $c_name, 
 									   'building' => $building,
@@ -154,7 +157,14 @@ if($data)//判断是否存在缴费数据
 			
 		    echo '<td>';
 			?>
-			<a href="<?php echo Url::to(['/user-invoice/summ', 'key' => $key, 'f' => $f, 't' => $t, 'sum' => $sum]); ?>">
+			<a href="<?php echo Url::to(['/user-invoice/summ', 
+										 'key' => $key, 
+										 'f' => $f, 
+										 't' => $t, 
+										 'sum' => $sum,
+									     'description' => $description,
+									     'status' => $status,
+									     'b' => $b]); ?>">
 	            <?php
 		            echo $community; //小区
 		        ?>

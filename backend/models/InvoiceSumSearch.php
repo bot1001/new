@@ -46,13 +46,20 @@ class InvoiceSumSearch extends UserInvoice
 		$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
 		$query->joinWith('building');
 		
-		ini_set( 'memory_limit', '2048M' ); // 调整PHP由默认占用内存为2048M(2GB)
+		ini_set( 'memory_limit', '3048M' ); // 调整PHP由默认占用内存为2048M(2GB)
+		set_time_limit(0);
 		
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'pagination' => false,
+			'sort' =>[
+		    	'defaultOrder' => [
+			        'year' => SORT_DESC,
+		        	'month' => SORT_DESC,
+		        ]
+		    ]
         ]);
 
         $this->load($params);
