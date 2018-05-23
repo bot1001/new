@@ -82,6 +82,15 @@ if($data)//判断是否存在缴费数据
         $d[] = $value->attributes;
     }
 	
+	//拆分时间
+	$f = explode('-', $from);
+	$t = explode('-', $to);
+	
+	//初步过滤数组
+	if(reset($f) != reset($t))
+	{
+		$d = UserInvoice::Summ($d, $f, $t);
+	}
 	
 	$cost_name = array_column($d, 'description'); //提取缴费名称
 	$cost_name = array_unique($cost_name); //费项名称去重复
@@ -89,6 +98,7 @@ if($data)//判断是否存在缴费数据
 	$a_sum = array_column($d, 'invoice_amount'); //提取总金额
 	$all_sum = array_sum($a_sum); //总金额求和
 	?>
+	
 <table border="1">
 	<thead>
 		<tr>
@@ -114,7 +124,7 @@ if($data)//判断是否存在缴费数据
     {
 		foreach($d as $keys => $ds) //遍历缴费信息
 	    {
-	    	//截取数据
+	    	//筛选数据
 	    	if($ds['community_id'] == $key)
 	    	{
 	    		$y[] = $ds; //过滤收费信息
@@ -144,7 +154,7 @@ if($data)//判断是否存在缴费数据
 			
 		    echo '<td>';
 			?>
-			<a href="<?php echo Url::to(['/user-invoice/index', 'community' => $key,]); ?>">
+			<a href="<?php echo Url::to(['/user-invoice/summ', 'key' => $key, 'f' => $f, 't' => $t, 'sum' => $sum]); ?>">
 	            <?php
 		            echo $community; //小区
 		        ?>
@@ -165,7 +175,8 @@ if($data)//判断是否存在缴费数据
 	    <?php
 		    echo '</td>';
 			
-			foreach($cost_name as $cost){
+			foreach($cost_name as $cost)
+			{
 			    //循环遍历缴费数据
 			    foreach($y as $keys => $ys)
 			    {
@@ -220,12 +231,11 @@ if($data)//判断是否存在缴费数据
 		}
 		?>
 		    </tr>			
-		<?php
-	}
- ?>
+<?php } ?>
         </tr>
     </tbody>
 </table>
+
 <div id="div1">
 	<?php 
 		echo '总计：'.number_format($all_sum, 2);

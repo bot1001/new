@@ -106,6 +106,46 @@ class UserInvoice extends \yii\db\ActiveRecord
         return $scenarios;
     }
 	
+	//统计页面过滤数组
+	public static function Summ($d, $f, $t)
+	{
+		$year01 = reset($f); //起始年
+		$year02 = reset($t); //截止年
+		
+		//判断月份
+		if(count($f) == 3 && count($t) == 3)
+		{
+			$month01 = $f['1'];
+			$month02 = $t['1'];
+		}else{
+			$month01 = end($f);
+			$month02 = end($t);
+		}
+		 
+		foreach($d as $k => $dd)
+		{
+			if($dd['year'] == $year01)
+			{
+				if($dd['month'] < $month01)
+				{
+					unset($d[$k]);
+				}else{
+					continue;
+				}
+			}elseif($dd['year'] == $year02)
+			{
+				if($dd['month'] > $month02)
+				{
+					unset($d[$k]);
+				}else{
+					continue;
+				}
+			}
+	    }
+		
+		return $d;
+	}
+	
 	//过滤数组
 	public static function Filter($data,$c_name, $comm)
 	{

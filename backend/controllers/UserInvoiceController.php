@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
+use yii\data\Pagination;
 
 /**
  * UserInvoiceController implements the CRUD actions for UserInvoice model.
@@ -347,7 +348,7 @@ class UserInvoiceController extends Controller
 		$searchModel = new \app\models\InvoiceSumSearch(); //实例化搜索模型
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
 		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
-				
+		
 		$c = $_SESSION['community'];
 				
 		//获取小区
@@ -375,8 +376,8 @@ class UserInvoiceController extends Controller
 		    $from = reset($time); //起始年月
 		    $to = end($time); //截止年月
 		}else{
-			$from = date('Y-m-d', time() );
-		    $to = date('Y-m-d', time() );
+			$from = date('Y-m', time() );
+		    $to = date('Y-m', time() );
 		}
 				
 		//获取费项名称并去重复
@@ -394,6 +395,72 @@ class UserInvoiceController extends Controller
 									 'from' => $from,
 									 'c_name' => $c_name,
 									 'to' => $to]);
+	}
+	
+	//数据统计第二页面
+	public function actionSumm()
+	{		
+		$community_id = $_GET['key'];
+		$f = $_GET['f']; //获取起始日期
+		$first = reset($f);
+		$from = implode('-', $f);
+		
+		$t = $_GET['t']; //获取截止日期
+		$secend = reset($t);
+		$to = implode('-', $t);
+		
+		$sum = $_GET['sum']; //获取总金额
+		
+		$ds = (new \yii\db\Query())
+			->select('user_invoice.invoice_id, community_basic.community_name as community, community_building.building_name as building,
+			community_realestate.room_number as number, community_realestate.room_name as name, user_invoice.description as description,
+			user_invoice.invoice_amount as amount, user_invoice.payment_time as payment_time,
+			user_invoice.year as year, user_invoice.month as month,
+			user_invoice.order_id as order, user_invoice.invoice_status as status')
+			->from('user_invoice')
+			->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
+			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
+			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
+			->andwhere(['user_invoice.community_id' => "$community_id"])
+			->andwhere(['between', 'user_invoice.year', $first, $secend]);
+		
+		// 得到文章的总数（但是还没有从数据库取数据）
+       $count = $ds->count();
+       
+       // 使用总数来创建一个分页对象
+       $pagination = new Pagination(['totalCount' => $count]);
+       
+       // 使用分页对象来填充 limit 子句并取得文章数据
+       $d = $ds->offset($pagination->offset)
+                   ->limit($pagination->limit)
+                   ->all();
+		//过滤多余数组
+		$data = UserInvoice::Summ($d, $f, $t);
+		
+		$c = $_SESSION['community'];
+		
+		//获取小区
+	    $comm = CommunityBasic::find()
+	    	->select('community_name, community_id')
+	    	->where(['in', 'community_id', $community_id])
+	    	->orderBy('community_name')
+			->indexBy('community_id')
+	    	->column();
+		$building = CommunityBuilding::find()
+			->select('building_name')
+			->distinct()
+			->where(['in', 'community_id', $community_id])							
+			->orderBy('building_name')
+			->indexBy('building_name')
+			->column();
+		
+		return $this->render('sum',['data' => $data,
+									'pagination' => $pagination,
+									'comm' => $comm,
+									'building' => $building,
+								   'from' => $from,
+								   'to' => $to,
+								   'sum' => $sum]);
 	}
 
 	//批量生产费项预览
