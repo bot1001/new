@@ -108,6 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 			 'header' => '操<br />作'],
         ],
+		'hover' => true
     ]);
     ?>
 <?php Pjax::end(); ?>

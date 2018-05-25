@@ -123,7 +123,7 @@ $this->title = '楼宇列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '楼宇列表',
-				   'before' => Html::a( 'New', '#', [
+				   'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 
 		        'class' => 'btn btn-success new',

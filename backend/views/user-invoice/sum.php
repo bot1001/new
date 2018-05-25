@@ -105,7 +105,13 @@ if($data)//判断是否存在缴费数据
 				<td><?= $d->description; ?></td>
 				<td><?= $d->amount; ?></td>
 				<td><?= $d->order; ?></td>
-				<td><?= date('Y-m-d H:i:s', $d->payment_time); ?></td>
+				<td><?php
+	                    if($d->payment_time == ''){
+	                    	echo '';
+	                    }else{
+	                    	echo date('Y-m-d H:i:s', $d->payment_time);
+	                    }
+	                ?></td>
 				<td><?= $status[$d->status]; ?></td>
 			</tr>
 		<?php endforeach; ?>

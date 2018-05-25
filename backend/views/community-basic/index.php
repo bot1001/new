@@ -85,7 +85,7 @@ $this->title = '小区';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' =>'info', 'heading' => '小区列表',
-				   'before' => Html::a('New', ['create'],['class' => 'btn btn-info'])],
+				   'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create'],['class' => 'btn btn-info'])],
 		'hover' => true,
         'columns' => $gridview,
     ]); ?>

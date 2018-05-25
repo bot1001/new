@@ -115,6 +115,15 @@ class UserInvoiceController extends Controller
 			$description = $_GET['description'];
 			$searchModel->description = $description;
 		}
+		
+		//判断是否存在时间
+		if(isset($_GET['from']) && isset($_GET['to']))
+		{
+			$from = $_GET['from']; //接收起始时间
+			$to = $_GET['to']; //接收截止时间
+			$t = $from.' to '.$to; //拼接时间
+			$searchModel->payment_time = $t;
+		}
 		//判断来自统计页面费项查询止
 		
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
@@ -364,7 +373,11 @@ class UserInvoiceController extends Controller
 			->indexBy('building_name')
 			->column();
 				
-		if(!empty($_GET['InvoiceSumSearch']['from'])) //判断并筛选支付时间
+		if(!empty($_GET['InvoiceSumSearch']['payment_time'])){
+			$time = explode(' to ',$_GET ['InvoiceSumSearch']['payment_time']); //分割支付时间
+		    $from = reset($time); //起始年月
+		    $to = end($time); //截止年月
+		}elseif(!empty($_GET['InvoiceSumSearch']['from'])) //判断并筛选支付时间
 		{
 			$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
 		    $from = reset($time); //起始年月
@@ -384,10 +397,6 @@ class UserInvoiceController extends Controller
 				return $this->redirect(Yii::$app->request->referrer);
 			}
 			
-		}elseif(!empty($_GET['InvoiceSumSearch']['payment_time'])){
-			$time = explode(' to ',$_GET ['InvoiceSumSearch']['payment_time']); //分割支付时间
-		    $from = reset($time); //起始年月
-		    $to = end($time); //截止年月
 		}else{
 			$from = date('Y-m', time() );
 		    $to = date('Y-m', time() );
@@ -486,7 +495,7 @@ class UserInvoiceController extends Controller
 		$status = $_GET['status']; //获取状态
 		if($status !== '')
 		{
-			$ds = $ds->andwhere(['in', 'user_invoice.invoice_status', 4]);
+			$ds = $ds->andwhere(['in', 'user_invoice.invoice_status', $_GET['status']]);
 			
 		}
 		
@@ -501,7 +510,7 @@ class UserInvoiceController extends Controller
 		
 		//第一次获取数据
 		$d = $ds->orderBy('user_invoice.year DESC, user_invoice.month DESC')->all();
-//		print_r($d);exit;
+
 		//过滤多余数组
 		$date = UserInvoice::Summ($d, $f, $t);
 		

@@ -205,7 +205,13 @@ if($data)//判断是否存在缴费数据
 				    $sum02 = array_sum($amount02);
 				    echo '<td>';
 					?>
-					<a href="<?= Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key]); ?>">
+					<a href="<?php					
+					if(strlen($from) == 10 && strlen($to) == 10 ){
+						echo Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key, 'from' => $from, 'to' => $to]);
+					}else{
+						echo Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key]);
+					}
+					 ?>">
 		           <?php echo $sum02; ?>
 			</a>
 		        <?php

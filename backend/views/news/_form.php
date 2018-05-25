@@ -73,7 +73,7 @@ use app\models\CommunityBasic;
     </div>
 
     <div class="form-group" align="center">
-        <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('保存<span class="glyphicon glyphicon-save"></span>', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

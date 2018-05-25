@@ -342,7 +342,7 @@ $this->title = '房屋管理';
 		//'showFooter' => true,
 		'options' => [ 'id' => 'grid' ],
 		'panel' => [ 'type' => 'info', 'heading' => '房屋列表',
-			'before' => Html::a( 'New', //[ 'create' ], [ 'class' => 'btn btn-primary' ] )
+			'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>',
 								'#', [ 
 		                'data-toggle' => 'modal',
 						'data-target' => '#view-modal',

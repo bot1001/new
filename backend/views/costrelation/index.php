@@ -113,7 +113,7 @@ $this->title = '费项列表';
 			'template' => '{update}',
 				'buttons' => [
 					'update' => function ( $url, $model, $key ) {
-						return Html::a( '更新', '#', [
+						return Html::a( '<span class = "glyphicon glyphicon-pencil"></span>', '#', [
 							'data-toggle' => 'modal',
 							'data-target' => '#update-modal', //modal 名字
 							'class' => 'update', //操作名

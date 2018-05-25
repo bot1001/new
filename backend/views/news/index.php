@@ -163,7 +163,7 @@ $this->title = '公告栏';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '公告列表',
-				   'before' => Html::a('New', '#', [
+				   'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#view-modal',
 				'class' => 'btn btn-info c',
