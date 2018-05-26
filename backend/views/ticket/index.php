@@ -190,7 +190,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			 'class' => 'kartik\grid\EditableColumn',
-			'readonly' => function ( $model, $key, $index, $widget ) {
+			 'readonly' => function ( $model, $key, $index, $widget ) {
 				return ( strlen($model->account_id) > 16 || $model->ticket_status !== '1'); // 判断活动列是否可编辑
 			},
 			'editableOptions' => [
@@ -213,9 +213,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		              ->select('user_name as name')
 		              ->where(['account_id' => "$model->assignee_id"])
 		              ->asArray()
-		              ->all();
-		    	
-		    	return Html::a($account['0']['name'], '#', [
+		              ->one();
+				
+		    	return Html::a($account['name'], '#', [
 	            		        	'data-toggle' => 'modal',
 	            		        	'data-target' => '#update-modal', 
 	            	                'class' => 'view',
@@ -233,23 +233,23 @@ $this->params['breadcrumbs'][] = $this->title;
 		     'hAlign' => 'center',
 		     'label' => '结果',
 		     'value' => function($model){
-		    $len = strlen($model->account_id);
-		    if($len <= 10){
-		    	return Html::a('结果', '#', [
-	            		        	'data-toggle' => 'modal',
-	            		        	'data-target' => '#update-modal', 
-	            	                'class' => 'reply',
-	            		        ] );
-		    }else{
-		    	return '';
-		    }
+		         $len = strlen($model->account_id);
+		         if($len <= 10){
+		         	return Html::a('结果', '#', [
+	                 		        	'data-toggle' => 'modal',
+	                 		        	'data-target' => '#update-modal', 
+	                 	                'class' => 'reply',
+	                 		        ] );
+		         }else{
+		         	return '';
+		         }
 	            	
 	         },
 	        'mergeHeader' => true],
     
-                ['class' => 'kartik\grid\ActionColumn',
-	    		 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
-	    		 'width' => '80px']
+            ['class' => 'kartik\grid\ActionColumn',
+	    	 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
+	    	 'width' => '80px']
 	    ];
 		
 	echo GridView::widget([

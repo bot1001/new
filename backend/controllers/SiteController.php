@@ -78,7 +78,15 @@ class SiteController extends Controller
 	//切换小区
 	public function actionChange()
 	{
-		echo '你好！';
+		if($_POST['community_id'] !== '')
+		{
+			$_SESSION['community'] = [$_POST['community_id']];
+		}else{
+			$community = array_column($_SESSION['community_name'], 'community_id');
+			$_SESSION['community'] = $community;
+		}		
+		
+		return true;
 	}
     public function actionLogin()
     {

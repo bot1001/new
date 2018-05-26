@@ -9,6 +9,7 @@ use app\models\UserData;
 use yii\helpers\ArrayHelper;
 use app\models\OrderBasic;
 use app\models\SysRole;
+use mdm\admin\components\Helper;
 
     $session= $_SESSION['user']['0'];
     $a = $_SESSION['community']; //获取小区
@@ -29,7 +30,7 @@ use app\models\SysRole;
     $name = array_column($c_name, 'community_name');
 
 	//获取小区投诉
-	$ticket = $t->andwhere(['ticket_basic.community_id' => $a])
+	$ticket = $t->andwhere(['in', 'ticket_basic.community_id', $a])
 		->andwhere(['ticket_status' => 1])
 	    ->asArray()
 		->all();
@@ -102,269 +103,35 @@ use app\models\SysRole;
 
             <ul class="nav navbar-nav">
 
-                <!-- Messages: style can be found in dropdown.less-->
+                <!-- Messages: 投诉信息 -->
                 <li class="dropdown messages-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success"><?php echo count($ticket); ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-						<li class="header"><h4>未处理投诉量：<a href="<?php echo Url::to(['/ticket/index','name' => '待接单', 'c' => $a]) ?>"><l><?php echo count($ticket); ?></l>例</a></h4></li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <!-- 提醒信息开始 -->
-								<li>
-                                     <?php
-                                     foreach($ticket as $t)
-								    {
-								    	if(isset($t['r'])){
-								    	$c_id = $t['r']['community_id'];
-                                             $b_id = $t['r']['building_id'];
-								    }else{
-								    	$c_id = $b_id = '';
-								    }
-                                         ?>
-                                        
-								   <a href="<?php 
-								       if(empty($t['r'])){
-								       	echo '';
-								       }else{
-								       	echo Url::to(['/ticket/index',
-								       							'community' => $c_id,
-								       							'building' => $building[$b_id],
-													            'c' => $a,
-													            'ticket_status' => '1'
-								       							]);
-								       }
-								   ?>">
-								   
-								   <?php 
-								        if(empty($t['r']))
-								        {
-								        	echo '房屋有误，请核查'.$t['r']['room_name'].' '.
-								        	date('Y-m-d H',$t['create_time']);
-								        }else{
-								        	echo $community[$c_id].' '.
-								        	$building[$b_id].' '.
-								        	$t['r']['room_name'].' '.
-								        	date('Y-m-d H',$t['create_time']);
-											
-											$_community_id[] = $c_id;
-											$_community[] = $community[$c_id];
-											$_building[] = $building[$b_id];
-											$_realestate[] = $t['r']['room_name'];
-											$_time[] = $t['create_time'];
-								        }
-										$_ticket[] = [$_community, $_building, $_realestate, $_time,$_community_id];
-										$t = count($ticket);
-										//将投诉信息添加到session
-										$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
-										
-										//释放数组
-										unset($_community_id);
-										unset($_community);
-										unset($_building);
-										unset($_realestate);
-										unset($_time);
-                                    }
-									//释放数组
-									unset($t);
-									unset($_ticket);
-								        ?>
-                                      </a>
-                                </li>
-                                <!-- 提醒信息结束 -->                                                                                            
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="<?php echo Url::to(['/ticket/index','ticket_status' => '1', 'c' => $a]) ?>">查看全部</a></li>
-                    </ul>
+                   <?php
+	                   if (Helper::checkRoute('/ticket/index')) {
+                               echo $this->render('ticket', ['ticket' => $ticket, 'a' => $a, 'community' => $community, 'building' => $building]);
+                           }
+	                    ?>
                 </li>
+                
+                <!-- 注册信息 -->
                 <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning"><?php echo $today ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header"><h4>本日注册量：<a href="<?php echo Url::to(['/user/index', 
-																		'one' => $one, 
-																		'two' => $two
-																				 ]); ?>"><l><?php echo $today ?></l>个</a></h4></li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <li>
-                                      <?php
-                                      if($user){
-										  //遍历小区
-										  foreach(array_unique($u_c) as $key => $comm)
-										 {
-											 //遍历注册信息
-	                                     	foreach($user as $keys => $u)
-	                                     	{
-												$community_id = $u['community_id'];
-	                                     		if($comm == $community_id){
-	                                     			$k[] = $u;
-	                                     		}else{
-	                                     			continue;
-	                                     		}
-												$c_c = count($k); //统计数量
-												
-											}	
-											unset($k); //释放数组
-	                                     	?>
-	                                 <a href="<?php 
-										  if($c_c > 0){
-											  echo Url::to(['/user/index',
-																  'name' => $community[$comm],
-																  'one' => $one,
-																  'two' => $two
-																 ]);
-										  }
-										   ?>">
-	                                 <?php
-										if($c_c > 0){
-										    echo '<i class="fa fa-users text-aqua"></i>'.$community[$comm].'：'.'<l>'.$c_c.'个'.'</l>'; echo '<br />';
-										    $user02[] = [$community[$comm], $c_c];
-										    }
-	                                    }
-										$user03 = ['today' => $today, 'user' => $user02];
-										$_SESSION['_user'] = $user03;
-										unset($user02);
-									}
-									
-									?>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="<?php echo Url::to(['/user/index', 
-																		'one' => $one, 
-																		'two' => $two
-																	   ]); ?>">查看全部</a></li>
-                    </ul>
+                   <?php
+	                   if (Helper::checkRoute('/user/index')) {
+                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user]);
+                           }
+	                    ?>
                 </li>
-                <!-- Tasks: style can be found in dropdown.less -->
+                <!-- 订单信息 -->
                 <li class="dropdown tasks-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger"><?php echo $o_count; ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-						<li class="header"><h4>当日订单数量：<a href="<?php echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]) ?>"><l><?php echo $o_count; ?> </l>条</a></h4></li>
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <li>
-                                   <?php foreach($order as $o){?>
-									    <a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $o['order_id']]) ?>">
-							        
-								        <?php 
-                                             echo '<i class="fa fa-users text-aqua"></i>'.' '.
-	                                             $o['address'].' '.'时间：'.
-	                                             date('H:i', $o['payment_time']).' '.
-	                                             '<l>'.$o['order_amount'].'</l>';
-										     $address = $o['address'];
-											 $time = $o['payment_time'];
-											 $order_amount = $o['order_amount'];
-											 $order_id = $o['order_id'];
-											 $ord[] = ['address' => $address, 'time' => $time, 'order_amount' => $order_amount, 'order_id' => $order_id];
-											?>
-									
-									</a>
-                                  <?php 					 
-															  }
-									if(isset($ord)){
-										$_SESSION['order'] = ['order' =>$ord, 'count' => $o_count];
-									}
-									    unset($order);									
-									?>
-                                  
-                                   <!-- Task item 
-                                    <a href="#">
-                                        <h3>
-                                            Design some buttons
-                                            <small class="pull-right">50%</small>
-                                        </h3>
-                                        <div class="progress xs">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 50%"
-                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                 aria-valuemax="100">
-                                                <span class="sr-only">20% Complete</span>
-                                            </div>
-                                        </div>
-                                    </a>-->
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="<?php 
-									 if(empty($a)){
-										 echo Url::to(['/order/index', 'one' => $one, 'two' => $two]);
-									 }else{
-										 echo Url::to(['/user-invoice/index','one' => $one, 'two' => $two]);
-									 }
-									  ?>">查看全部</a>
-                        </li>
-                    </ul>
+                   <?php
+	                   if (Helper::checkRoute('/order/index')) {
+                               echo $this->render('order', ['o_count' => $o_count, 'one' => $one, 'two' => $two, 'o' => $o, 'order' => $order]);
+                           }
+	                    ?>
                 </li>
-                <!-- User Account: style can be found in dropdown.less -->
-
+                
+                <!-- 用户信息 -->
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs"><?php echo $session['name'] ?></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
-                                 alt="User Image"/>
-
-                            <p>
-								辖区：<l><?php if(count($a) == 1)
-                                        {
-	                                    	print_r($community[$a['0']]);
-                                        }else{
-                                        	echo '点击查看';
-                                        } ?></l>
-                                <small>角色：<?php if(isset($r_name[$r_id]))
-                                            {
-							                     echo ($r_name[$r_id]);
-                                            } ?></small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">粉丝</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">点击率</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">朋友</a>
-                            </div>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                               <?= Html::a(
-                                    '修改密码',
-                                    ['/sysuser/change'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
-                                ) ?>
-                                
-                            </div>
-                            <div class="pull-right">
-                                <?= Html::a(
-                                    '退出',
-                                    ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
-                                ) ?>
-                            </div>
-                        </li>
-                    </ul>
+                   <?= $this->render('user', ['directoryAsset' => $directoryAsset, 'session' => $session, 'community' => $community, 'a' => $a, 'r_name' => $r_name, 'r_id' => $r_id]); ?>                    
                 </li>
 
                 <!-- User Account: style can be found in dropdown.less -->

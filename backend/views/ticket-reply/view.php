@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\TicketReply */
@@ -17,13 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     
     <p align="right">
-        <?= Html::a('删除', ['delete', 'id' => $model->reply_id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '您确定要删除么?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php		
+		if (Helper::checkRoute('delete')) {
+            echo Html::a('删除', ['delete', 'id' => $model->reply_id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => '您确定要删除么?',
+                        'method' => 'post',
+                    ],
+                ]);
+        } ?>
     </p>
    
     <?= DetailView::widget([

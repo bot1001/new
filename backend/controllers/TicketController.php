@@ -150,12 +150,14 @@ class TicketController extends Controller
 			->indexBy('community_id')
 			->column();
 				
-		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
-			->joinWith('data')
-			->andwhere(['account_superior' => '0'])
-			->andwhere(['in', 'community_id', $c])
-		    ->indexBy('account_id')
+		$assignee = (new \yii\db\Query())
+			->select('user_account.user_name, user_account.account_id')
+			->from('user_account')
+			->join('inner join', 'work_relationship_account', 'work_relationship_account.account_id = user_account.account_id')
+			->andwhere(['user_account.status' => '1'])
+			->andwhere(['in', 'work_relationship_account.community_id', $c])
 			->orderBy('community_id')
+		    ->indexBy('account_id')
 			->column();
 		
 		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数

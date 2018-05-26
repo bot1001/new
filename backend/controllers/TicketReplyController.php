@@ -114,12 +114,14 @@ class TicketReplyController extends Controller
 		//获取用户绑定的小区
 		$c = $_SESSION['community'];
 				
-		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
-			->joinWith('data')
-			->andwhere(['account_superior' => '0'])
-			->andwhere(['in', 'community_id', $c])
-		    ->indexBy('account_id')
+		$assignee = (new \yii\db\Query())
+			->select('user_account.user_name, user_account.account_id')
+			->from('user_account')
+			->join('inner join', 'work_relationship_account', 'work_relationship_account.account_id = user_account.account_id')
+			->andwhere(['user_account.status' => '1'])
+			->andwhere(['in', 'work_relationship_account.community_id', $c])
 			->orderBy('community_id')
+		    ->indexBy('account_id')
 			->column();
 		
         if ($model->load(Yii::$app->request->post()))

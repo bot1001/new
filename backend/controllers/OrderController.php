@@ -223,11 +223,7 @@ class OrderController extends Controller
 			    ->where(['community_id' => $c_id])
 				->asArray()
 			    ->one();
-//		print_r($c_id);
-//		echo '<br />';
-//		print_r($ad);
-//		
-//		exit;
+
 		$model = array_merge($model,$ad);
 
 		return $this->render('view', [

@@ -150,7 +150,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 	public static function getTicket()
 	{
 	    $ticket = TicketBasic::find()
-	        ->select('ticket_basic.create_time,   ticket_basic.realestate_id')
+	        ->select('ticket_basic.create_time, ticket_basic.realestate_id')
 	        ->joinWith('r');
 	    return $ticket;
 	}

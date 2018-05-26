@@ -1,18 +1,51 @@
 <aside class="main-sidebar">
-
+	
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        function change() {
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/site/change" ,//url
+                data: $('#form1').serialize(),
+                success: function (result) {
+                    if (result == 1) {
+                        alert("切换成功！");
+                    };
+                },
+                error : function() {
+                    alert("服务器异常，请联系管理员！");
+                }
+            });
+        }
+    </script>
+    
 	<section class="sidebar">
 
-		<!-- 搜索框起 -->
-        <form action="/order/index" method="get" class="sidebar-form">
+		<!-- 切换小区起 -->
+       <form id="form1" onsubmit="return false" action="##" method="post" class="sidebar-form">
             <div class="input-group">
-              <input type="text" name="order_id" class="form-control" placeholder="请输入……"/>
+              
+            <select class="form-control" name="community_id"  placeholder="请输入……" />
+            
+                <option value="">请选择</option>
+            <?php
+				$community_id = $_SESSION['community_id'];
+				foreach($community_id as $k_left => $community_left)
+				{
+				?>
+					
+		      	<option value="<?= $k_left ?>"><?= $community_left ?></option>
+		      	<?php }	?>
+			</select>
+             
               <span class="input-group-btn">
-                <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
+                <button type='submit' id='search-btn' class="btn btn-flat" onclick="change()"><i class="fa fa-search"></i></button>
               </span>
             </div>
         </form>
-        <!-- 搜索框止 -->
+       
+        <!-- 切换小区止 -->
 
 		<?php
 		use mdm\ admin\ components\ MenuHelper;
