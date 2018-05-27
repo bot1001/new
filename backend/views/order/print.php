@@ -141,7 +141,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 						//获取第一条费表读数				
 						$readout = WaterMeter::find()
 					    	->select('readout')
-					    	->andwhere(['realestate_id' => $r_name['id']])
+					    	->andwhere(['realestate_id' => $comm['id']])
 							->andwhere(['<=', 'year', $wy])
 							->andwhere(['<=', 'month', $wm])
 					    	->orderBy('year DESC')
@@ -150,7 +150,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 						//获取最后一条水表读数
 						$read2 = WaterMeter::find()
 					    	->select('readout')
-					    	->andwhere(['realestate_id' => $r_name['id']])
+					    	->andwhere(['realestate_id' => $comm['id']])
 							->andwhere(['year' => $Y])
 							->andwhere(['month' => $H])
 							->orderBy('year DESC')

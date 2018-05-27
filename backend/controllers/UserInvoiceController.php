@@ -398,8 +398,8 @@ class UserInvoiceController extends Controller
 			}
 			
 		}else{
-			$from = date('Y-m', time() );
-		    $to = date('Y-m', time() );
+			$from = date('Y-m', time());
+		    $to = date('Y-m', time());
 		}
 				
 		//判断并赋值楼宇
@@ -418,7 +418,7 @@ class UserInvoiceController extends Controller
 			$description = '';
 		}
 		
-		//判断并赋值缴费项目
+		//判断并赋值缴费状态
 		if(!empty($_GET['InvoiceSumSearch']['invoice_status']))
 		{
 			$status = $_GET['InvoiceSumSearch']['invoice_status'];
@@ -436,8 +436,8 @@ class UserInvoiceController extends Controller
 		
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
 		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
-		
-		return $this->render('summ',['data' => $data,
+	
+		return $this->render('sum',['data' => $data,
 									 'searchModel' => $searchModel,
 									 'comm' => $comm,
 									 'building' => $building,
@@ -458,13 +458,13 @@ class UserInvoiceController extends Controller
 		$community_id = $_GET['key'];
 		$f = $_GET['f']; //获取起始日期
 		$first = reset($f); //获取起始年
-		$month = $f['1']; //获取起始月
-		$from = implode('-', $f);
+		$month01 = $f['1']; //获取起始月
+		$from = implode('-', $f); //拼接起始时间
 		
 		$t = $_GET['t']; //获取截止日期
 		$secend = reset($t); // 获取截止月
-		$month = $t['1']; //获取截止月
-		$to = implode('-', $t);
+		$month02 = $t['1']; //获取截止月
+		$to = implode('-', $t); //拼接截止时间
 		
 		$sum = $_GET['sum']; //获取总金额
 		$ds = (new \yii\db\Query())
@@ -477,8 +477,7 @@ class UserInvoiceController extends Controller
 			->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
 			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
 			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
-			->andwhere(['user_invoice.community_id' => "$community_id"])
-			->andwhere(['between', 'user_invoice.year', $first, $secend]);
+			->andwhere(['user_invoice.community_id' => "$community_id"]);
 		
 		$description = $_GET['description']; //获取费项详情
 		if($description !== '')
@@ -506,25 +505,23 @@ class UserInvoiceController extends Controller
 			$to02 = strtotime($to);
 			
 			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', $from02, $to02]);
+			$dss = $ds;
+		}elseif(count($f) == '2' && count($t) == '2'){
+			$ds = $ds->andwhere(['between', 'user_invoice.year', $first, $secend]);
+			if($first == $secend){
+				$ds = $ds->andwhere(['between', 'user_invoice.month', $month01, $month02]);
+				$dss = $ds;
+			}else{
+				$d = $ds->orderBy('user_invoice.year DESC, user_invoice.month DESC')->all();//第一次获取数据
+			    $date = UserInvoice::Summ($d, $f, $t);//过滤多余数组
+			    $id = array_column($date, 'id');//提取过滤之后的数据ID
+	            $dss = $ds->andwhere(['in', 'user_invoice.invoice_id', $id]);
+			}
 		}
 		
-		//第一次获取数据
-		$d = $ds->orderBy('user_invoice.year DESC, user_invoice.month DESC')->all();
-
-		//过滤多余数组
-		$date = UserInvoice::Summ($d, $f, $t);
+        $count = $dss->count();// 计算总数
 		
-		//提取过滤之后的数据ID
-		$id = array_column($date, 'id');
-		
-	    //为查询语句增加限制
-		$dss = $ds->andwhere(['in', 'user_invoice.invoice_id', $id]);
-				
-		// 得到文章的总数（但是还没有从数据库取数据）
-       $count = $dss->count();
-       
-       // 使用总数来创建一个分页对象
-       $pagination = new Pagination(['totalCount' => $count]);
+       $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
        
        // 使用分页对象来填充 limit 子句并取得文章数据
        $data = $ds->offset($pagination->offset)
@@ -548,7 +545,7 @@ class UserInvoiceController extends Controller
 			->indexBy('building_name')
 			->column();
 		
-		return $this->render('sum',['data' => $data,
+		return $this->render('summ',['data' => $data,
 									'pagination' => $pagination,
 									'comm' => $comm,
 									'building' => $building,

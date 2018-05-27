@@ -116,7 +116,7 @@ use mdm\admin\components\Helper;
                 <li class="dropdown notifications-menu">
                    <?php
 	                   if (Helper::checkRoute('/user/index')) {
-                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user]);
+                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user, 'u_c' => $u_c, 'community' => $community,]);
                            }
 	                    ?>
                 </li>

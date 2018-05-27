@@ -95,7 +95,7 @@ class InvoiceSumSearch extends UserInvoice
 				$query->andFilterWhere(['between', 'month', $month01, $month02]);
 			}
 			$query->andFilterWhere(['between', 'year', $year01, $year02]);
-		}else{
+		}elseif($this->payment_time == ''){
 			$query->andFilterWhere(['in', 'year', date('Y')])
 				  ->andFilterWhere(['in', 'month', date('m')]);
 		}	

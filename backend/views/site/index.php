@@ -48,4 +48,6 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 	   <div id="box5" class="col-lg-3">
 	       <?= $this->render('box5') ?>   	
 	   </div>
+	   
+	   <?php //echo $_SERVER['HTTP_HOST']; ?>
  </div>

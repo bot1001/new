@@ -10,11 +10,9 @@ use kartik\select2\Select2;
 ?>
 
 <style type="text/css">
-	div {
-		margin: auto
-	}
-	td {
+	td, th {
 		height: 30px;
+		text-align: center;
 	}
 	 table tr:hover{background-color: #dafdf3;}
 	 table tr:nth-child(odd){  
@@ -24,238 +22,116 @@ use kartik\select2\Select2;
     table{
 		width: 100%;
         border-collapse:collapse;
+		position: relative;     
+        bottom: 15px;
     }
 	thead {
 		font-weight: bold;
 		font-size: 15px;
 		text-align: center;
 	}
-	j {
-		font-weight: bold;
-		font-size: 15px;
-	}
-	table tbody td{
-		text-align: center;
-	}
-	
-	#div1{
+	#div10{
 		font-size: 20px;
 		font-weight: 1000;
 		background: #FFFFFF;
-		text-align: right;
 		border-radius: 5px;
 		position: relative;
 		top: 5px;
+		height: auto;
+		width: auto;
 	}
+	
 	
 	#div12{
 		font-size: 15px;
 		font-weight: 1000;
 		color:rgba(0,0,0,0.7);;
 		background: #FFFFFF;
-		text-align: right;
+		text-align:right;
 		border-radius: 5px;
 		position: relative;
 		top: -5px;
 	}
+	#sum{
+		height: 640px;
+	}
+		
 </style>
 
-<?php $this->title = '缴费统计'; 
+<?php $this->title = '按小区'; ?>
 
-    $message = Yii::$app->getSession()->getFlash('fail');
-	if($message == '0'){
-		echo "<script>alert('选择小区不能为空或月份超过13个月，请重新选择！')</script>";
-	}
-?>
-
-<?php echo $this->render('_search', ['model' => $searchModel, 
-									   'comm' => $comm,
-									   'c_name' => $c_name, 
-									   'building' => $building,
-									  ]); ?>
 <div id="div12">
-	<?php echo '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?>
+	<div class="row">
+		<div class="col-lg-3" align="left"><?= '总计：'.'<l>'.$sum.'</l>'.'元；'.' '.'共：'.'<l>'.$count.'</l>'.'条'; ?></div>
+	    <div class="col-lg-9"><?= '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?></div>
+	</div>
 </div>
-	    	
+<div id="sum">
+	
 <?php
 if($data)//判断是否存在缴费数据
-{ 
-    foreach ($data as $key=>$value)
-    {
-        $d[] = $value->attributes;
-    }
-	
-	//拆分时间
-	$f = explode('-', $from);
-	$t = explode('-', $to);
-	
-	//初步过滤数组
-	if(reset($f) != reset($t))
-	{
-		$d = UserInvoice::Summ($d, $f, $t);
-	}
-	
-	$cost_name = array_column($d, 'description'); //提取缴费名称
-	$cost_name = array_unique($cost_name); //费项名称去重复
-	
-	$a_sum = array_column($d, 'invoice_amount'); //提取总金额
-	$all_sum = array_sum($a_sum); //总金额求和
-	?>
-	
-<table border="1">
-	<thead>
-		<tr>
-			<td>序号</td>
-			<td>小区</td>
-			<td>订单/条</td>
-			<?php
-			foreach($cost_name as $cost){
-				echo '<td>';
-				    echo $cost;			
-			    echo '</td>';
-			}			   
-			?>
-			<td>费项/条</td>
-			<td>合计</td>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-    <?php
+{
 	$i = 0;
-    foreach($comm as $key => $community) //遍历小区
-    {
-		foreach($d as $keys => $ds) //遍历缴费信息
-	    {
-	    	//筛选数据
-	    	if($ds['community_id'] == $key)
-	    	{
-	    		$y[] = $ds; //过滤收费信息
-				unset($d[$keys]);
-	    	}else{
-	    		continue;
-	    	}
-		}
-
-		//判断是否存在缴费数据
-		if(isset($y))
-		{
-			$i++;
-			$order = array_column($y, 'order_id'); //提取订单
-			$order_unique = array_unique($order); //订单去重复
-			$order_count = count($order_unique)-1; //订单条数计数
-			
-			$amount = array_column($y, 'invoice_amount'); //提取缴费金额
-		    $sum = array_sum($amount); //计算合计金额
-			$in_count = count($y);
-			
-		    echo '<tr>';
-		    	   		
-		    echo '<td>';
-		        echo $i; //序号
-		    echo '</td>';
-			
-		    echo '<td>';
-			?>
-			<a href="<?php echo Url::to(['/user-invoice/summ', 
-										 'key' => $key, 
-										 'f' => $f, 
-										 't' => $t, 
-										 'sum' => $sum,
-									     'description' => $description,
-									     'status' => $status,
-									     'b' => $b]); ?>">
-	            <?php
-		            echo $community; //小区
-		        ?>
-			</a>
-	    <?php echo '</td>';	
-			  echo '<td>';?>
-			
-			<a href="<?= Url::to(['/order/index', 'community' => $key]); ?>">
-			  <?php  
-			if($order_count !== 0){//订单数量
-			    	echo $order_count;
-			    }else{
-			    	echo '';
-			    }
-			?>
-			</a>
-    
-	    <?php
-		    echo '</td>';
-			
-			foreach($cost_name as $cost)
-			{
-			    //循环遍历缴费数据
-			    foreach($y as $keys => $ys)
-			    {
-			    	if($ys['description'] == "$cost")
-			    	{
-			    		$in[] = $ys;
-			    		unset($y[$keys]);
-			    	}else{
-			    		continue;
-			    	}
-			    }
-				
-				if(isset($in)){
-					//提取缴费金额列
-				    $amount02 = array_column($in, 'invoice_amount');
-				    $sum02 = array_sum($amount02);
-				    echo '<td>';
-					?>
-					<a href="<?php					
-					if(strlen($from) == 10 && strlen($to) == 10 ){
-						echo Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key, 'from' => $from, 'to' => $to]);
-					}else{
-						echo Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key]);
-					}
-					 ?>">
-		           <?php echo $sum02; ?>
-			</a>
-		        <?php
-			        echo '</td>';
-				    unset($in);
-				}else{
-					echo '<td>';
-			        echo '</td>';
-				}
-			}
-			
-			//输出费项条数
-			echo '<td>';
-			?>
-    
-	    <a href="<?= Url::to(['/user-invoice/index', 'community' => $key]); ?>">
-		    <?php echo $in_count; ?>
-			</a>
-				
-			<?php
-			echo '</td>';
-			
-			//输出合计金额
-			echo '<td>';			
-			    echo $sum;
-			echo '</td>';
-			
-			//释放数组
-			unset($y);
-			unset($in_count);
-			unset($sum);
-			unset($order_count);
-		}
-		?>
-		    </tr>			
-<?php } ?>
-        </tr>
-    </tbody>
+	$status = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', '7' => '建行' ];
+	?>
+	<table border="1">
+		<thead>
+			<th><input type = "checkbox" name="checkbox[]"></th>
+			<th>序号</th>
+			<th>小区</th>
+			<th>楼宇</th>
+			<th>单元</th>
+			<th>房号</th>
+			<th>年份</th>
+			<th>月份</th>
+			<th>详情</th>
+			<th>金额</th>
+			<th>订单编号</th>
+			<th>支付时间</th>
+			<th>状态</th>
+		</thead>
+	
+		<tbody>
+		<?php foreach($data as $d): $d = (object)$d ?>
+			<tr>
+				<td><input type = "checkbox" name="checkbox[]"></td>
+				<td><?php $i +=1; echo $i; ?></td>
+				<td><?= $d->community; ?></td>
+				<td><?= $d->building; ?></td>
+				<td><?= $d->number; ?></td>
+				<td><?= $d->name; ?></td>
+				<td><?= $d->year; ?></td>
+				<td><?= $d->month; ?></td>
+				<td><?= $d->description; ?></td>
+				<td><?= $d->amount; ?></td>
+				<td><?= $d->order; ?></td>
+				<td><?php
+	                    if($d->payment_time == ''){
+	                    	echo '';
+	                    }else{
+	                    	echo date('Y-m-d H:i:s', $d->payment_time);
+	                    }
+	                ?></td>
+				<td><?= $status[$d->status]; ?></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	<br />
+	
 </table>
 
-<div id="div1">
-	<?php 
-		echo '总计：'.number_format($all_sum, 2);
-	 ?>
+</div>
+
+<div id="div10" class="footer">
+	<div>
+		<div id="page">
+			<?php
+	            echo yii\widgets\LinkPager::widget([
+                    'pagination' => $pagination,
+                ]);
+	        ?>
+	    </div>
+	</div>
 </div>
 
 <?php } ?>
