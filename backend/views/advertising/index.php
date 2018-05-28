@@ -58,6 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		     'filterWidgetOptions' => [
 		     	'pluginOptions' => [ 'allowClear' => true ],
 		     ],
+			 'contentOptions' => function ( $model ) {
+		    	return ( $model->ad_location == 1 ) ? [ 'class' => 'bg-info' ] : [];
+		    },
 			 'value' => function($model){
 		        $d = ['1' => '顶部', '2' => '底部'];
 			    return $d[$model->ad_location];
@@ -68,6 +71,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute'=> 'ad_created_time',
 			 'value' => function($model){
 	        	return date('Y-m-d H:i:s', $model->ad_created_time);
+	        },
+			'hAlign' => 'center',
+			'width' => 'px'],
+		
+		   ['attribute'=> 'ad_end_time',
+			 'value' => function($model){
+	        	return date('Y-m-d H:i:s', $model->ad_end_time);
 	        },
 			'hAlign' => 'center',
 			'width' => 'px'],
@@ -83,6 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		     'filterWidgetOptions' => [
 		     	'pluginOptions' => [ 'allowClear' => true ],
 		     ],
+			 'contentOptions' => function ( $model ) {
+		    	return ( $model->ad_status == 1 ) ? [ ] : [ 'class' => 'bg-warning'];
+		    },
 			 'value' => function($model){
 		        $d = ['1' => '正常', '2' => '删除'];
 			    return $d[$model->ad_status];

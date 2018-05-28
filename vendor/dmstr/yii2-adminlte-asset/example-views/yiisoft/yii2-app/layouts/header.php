@@ -82,16 +82,11 @@ use mdm\admin\components\Helper;
 		font-weight: bold;
 		font-size: 20px;
 	}
-	
-	img{
-		border-radius: 10px;
-		width:40px;
-	}
 </style>
 
 <header class="main-header">
 	
-    <?= Html::a('<img src="/image/logo.png">&nbsp'.'&nbsp裕家人' . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<img src="/image/logo.png" style="border-radius: 10px;width:35px;">&nbsp'.'&nbsp裕家人' . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 

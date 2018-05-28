@@ -28,7 +28,7 @@
               
             <select class="form-control" name="community_id"  placeholder="请输入……" />
             
-                <option value="">请选择</option>
+                <option value="">请选择切换小区</option>
             <?php
 				$community_id = $_SESSION['community_id'];
 				foreach($community_id as $k_left => $community_left)
@@ -40,7 +40,7 @@
 			</select>
              
               <span class="input-group-btn">
-                <button type='submit' id='search-btn' class="btn btn-flat" onclick="change()"><i class="fa fa-search"></i></button>
+                <button type='submit' id='search-btn' class="btn btn-flat" onclick="change()"><i class="fa fa-check"></i></button>
               </span>
             </div>
         </form>

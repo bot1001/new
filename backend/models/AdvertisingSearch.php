@@ -18,7 +18,7 @@ class AdvertisingSearch extends Advertising
     public function rules()
     {
         return [
-            [['ad_id', 'ad_location', 'ad_created_time', 'ad_sort', 'ad_status'], 'integer'],
+            [['ad_id', 'ad_location', 'ad_created_time', 'ad_end_time', 'ad_sort', 'ad_status'], 'integer'],
             [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_publish_community', 'ad_type', 'ad_target_value', 'property'], 'safe'],
         ];
     }
@@ -68,6 +68,7 @@ class AdvertisingSearch extends Advertising
             'ad_id' => $this->ad_id,
             'ad_location' => $this->ad_location,
             'ad_created_time' => $this->ad_created_time,
+            'ad_end_time' => $this->ad_end_time,
             'ad_sort' => $this->ad_sort,
             'ad_status' => $this->ad_status,
         ]);

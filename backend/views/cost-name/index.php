@@ -74,14 +74,14 @@ $this->title = '费项管理';
 	     },
 		 'filterType' => GridView::FILTER_SELECT2,
 		 'filter' => ['父级','子级'],
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
-			'filterWidgetOptions' => [
-				'pluginOptions' => [ 'allowClear' => true ],
-			],
-			'contentOptions' => function ( $model ) {
-				return ( $model->level == 0 ) ? [ 'class' => 'bg-info' ] : [];
-			},
-			'hAlign' => 'center' ],
+		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		 'filterWidgetOptions' => [
+		 	'pluginOptions' => [ 'allowClear' => true ],
+		 ],
+		 'contentOptions' => function ( $model ) {
+		 	return ( $model->level == 0 ) ? [ 'class' => 'bg-info' ] : [];
+		 },
+		 'hAlign' => 'center' ],
 		
 		/*[ 'attribute' => 'parent',
 			'value' => function ( $model ) {
