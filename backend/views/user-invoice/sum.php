@@ -212,7 +212,7 @@ if($data)//判断是否存在缴费数据
 						echo Url::to(['/user-invoice/index', 'description' => $cost, 'community' => $key]);
 					}
 					 ?>">
-		           <?php echo $sum02; ?>
+		           <?= number_format($sum02, 2, '.', ''); ?> 
 			</a>
 		        <?php
 			        echo '</td>';

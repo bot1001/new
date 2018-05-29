@@ -47,7 +47,7 @@ class InvoiceSumSearch extends UserInvoice
 		$query->joinWith('building');
 		
 		ini_set( 'memory_limit', '3048M' ); // 调整PHP由默认占用内存为2048M(2GB)
-		set_time_limit(0);
+		set_time_limit(0); //设置时间无限
 		
         // add conditions that should always apply here
 
