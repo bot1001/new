@@ -14,14 +14,10 @@ use yii\ widgets\ ActiveForm;
 		min-height: 500px; 
 		background: #FFFFF0
 	}
+	p{
+		font-size: 25px;
+	}
 </style>
-
-<script>  
-function test()  
-{  
-    document.getElementById( 'ad_title' ).innerHTML = "data: $('test').serialize()";  
-}  
-</script>
 
 <div class="advertising-form">
 
@@ -30,23 +26,23 @@ function test()
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="row">
-				<div id="test" class="col-lg-12">
-					<?= $form->field($model, 'ad_title')->textInput(['maxlength' => true,'onkeydown'=>'test()'])   ?>
+				<div class="col-lg-12">
+					<?= $form->field($model, 'ad_title')->textInput(['maxlength' => true, 'id' => 'btn'])   ?>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-12">
-					<?= $form->field($model, 'ad_excerpt')->widget('kucha\ueditor\UEditor',[])//->textarea(['rows' => 6, 'placeholder' => '在此编辑内容……'])  ?>
+					<?= $form->field($model, 'ad_excerpt')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300', 'id' => 'test']])  ?>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-6">
-					<?= $form->field($model, 'ad_poster')->textInput(['maxlength' => true]) ?>
-					<?= $form->field($model, 'ad_type')->dropDownList(['1' => '文章', '2' => '链接'], ['prompt' => '请选择'])->label(false) ?>
+				<div class="col-lg-4">
+					<?= $form->field($model, 'ad_poster')->fileInput() ?>
+					
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-3">
 					<?= $form->field($model, 'ad_publish_community')->dropDownList($_SESSION['community_id'], ['multiple'=>'multiple'], ['prompt' => '请选择']) ?>
 				</div>
 			</div>
@@ -59,16 +55,19 @@ function test()
 
 			<div class="row">
 				<div class="col-lg-2">
+					<?= $form->field($model, 'ad_type')->dropDownList(['1' => '文章', '2' => '链接'], ['prompt' => '请选择']) ?>
+				</div>
+				<div class="col-lg-2">
 					<?= $form->field($model, 'ad_location')->dropDownList(['1' => '顶部', '2' => '底部'], ['prompt' => '请选择']) ?>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-1">
 					<?= $form->field($model, 'ad_sort')->input('number') ?>
 				</div>
 				<div class="col-lg-2">
 					<?= $form->field($model, 'ad_status')->dropDownList(['1' => '正常', '2' => '删除'], ['prompt' => '请选择']) ?>
 				</div>
 
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<?= $form->field($model, 'ad_end_time')->textInput() ?>
 				</div>
 			</div>
@@ -86,7 +85,7 @@ function test()
 
 		<div id="ad_form" class="col-lg-4">
 			<div>
-				标题：<div id="ad_title"></div>
+				<p id="title">标题</p>
 			</div>
 			<div>
 				你好，世界！<div id="ad_detail"></div>
@@ -94,5 +93,17 @@ function test()
 		</div>
 	</div>
 	<?php ActiveForm::end(); ?>
-
+    <script>
+		
+        var oBtn = document.getElementById('btn');
+        var oTi = document.getElementById('title');
+        if('oninput' in oBtn){ 
+                oBtn.addEventListener("input",getWord,false); 
+            }else{ 
+                oBtn.onpropertychange = getWord; 
+            }
+        function getWord(){
+            oTi.innerHTML = oBtn.value;
+        }
+    </script>
 </div>

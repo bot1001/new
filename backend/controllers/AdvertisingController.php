@@ -36,7 +36,7 @@ class AdvertisingController extends Controller
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
-                    "imagePathFormat" => "/images/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+                    "imagePathFormat" => "/img/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
                 ],
             ]
         ];
@@ -152,7 +152,7 @@ class AdvertisingController extends Controller
         if ($model->load(Yii::$app->request->post()))
 		{
 			$post = $_POST['Advertising']; //接收传过来的数据
-			
+						
 			$model->ad_title  = $post['ad_title'];
 			$model->ad_excerpt  = $post['ad_excerpt'];
 			$model->ad_poster  = $post['ad_poster'];
