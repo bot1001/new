@@ -76,9 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
 			'width' => 'px'],
 		
 		   ['attribute'=> 'ad_end_time',
-			 'value' => function($model){
-	        	return date('Y-m-d H:i:s', $model->ad_end_time);
-	        },
 			'hAlign' => 'center',
 			'width' => 'px'],
 	

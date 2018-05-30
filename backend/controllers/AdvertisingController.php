@@ -152,10 +152,10 @@ class AdvertisingController extends Controller
         if ($model->load(Yii::$app->request->post()))
 		{
 			$post = $_POST['Advertising']; //接收传过来的数据
-						
+			
 			$model->ad_title  = $post['ad_title'];
 			$model->ad_excerpt  = $post['ad_excerpt'];
-			$model->ad_poster  = $post['ad_poster'];
+			$model->ad_poster  = $post['label_img'];
 			$model->ad_type  = $post['ad_type'];
 			$model->ad_target_value  = $post['ad_target_value'];
 			$model->ad_location  = $post['ad_location'];

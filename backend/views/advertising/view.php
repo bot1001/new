@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</p>
 	    </div>
 	
-		<div id="ad01" class="col-lg-8">
+		<div class="col-lg-8">
 	    	<?= $model['excerpt'] ?>
 	    </div>
 	</div>

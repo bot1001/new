@@ -19,7 +19,7 @@ $this->title = '用户登录';
 		height: auto;
 		height:auto; 
 		padding: 250px;
-  background-color: rgba(255,250,240,0.7);
+        background-color: rgba(255,250,240,0.7);
 		#opacity: 0.8;
 		border-radius:20px;
 		font-size: 15px; /*字体*/

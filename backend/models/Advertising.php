@@ -39,13 +39,37 @@ class Advertising extends \yii\db\ActiveRecord
         return [
             [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_publish_community', 'ad_type', 'ad_target_value', 'ad_location', 'ad_created_time', 'ad_end_time', 'ad_status'], 'required'],
             [['ad_excerpt', 'ad_target_value'], 'string'],
-            [['ad_location', 'ad_created_time', 'ad_end_time', 'ad_sort', 'ad_status'], 'integer'],
+            [['ad_location', 'ad_created_time', 'ad_sort', 'ad_status'], 'integer'],
             [['ad_title'], 'string', 'max' => 64],
             [['ad_poster'], 'string', 'max' => 300],
+			[['ad_end_time'], function($attr, $params) {
+                if ($this->hasErrors()) return false;
+
+                $datetime = $this->{$attr};
+                
+                $time = strtotime($datetime);
+                // 验证时间格式是否正确
+                if ($time === false) {
+                    $this->addError($attr, '时间格式错误.');
+                    return false;
+                }
+                // 将转换为时间戳后的时间赋值给time属性
+                $this->{$attr} = $time;
+                return true;
+            }],
 //            [['ad_publish_community'], 'string', 'max' => 225],
             [['ad_type'], 'string', 'max' => 20],
             [['property'], 'string', 'max' => 50],
         ];
+    }
+	
+	public $label_img;
+	
+	//将时间戳转换成时间然后在activeform输出
+	public function afterFind()
+    {
+        parent::afterFind();
+        $this->ad_end_time = date('Y-m-d', $this->ad_end_time);
     }
 
     /**

@@ -1,7 +1,10 @@
 <?php
 
 use yii\ helpers\ Html;
-use yii\ widgets\ ActiveForm;
+use kartik\form\ActiveForm;
+use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Advertising */
@@ -14,8 +17,12 @@ use yii\ widgets\ ActiveForm;
 		min-height: 500px; 
 		background: #FFFFF0
 	}
-	p{
+
+	#title{
 		font-size: 25px;
+		text-align: center;
+		height: 30px;
+		font-size: 30px;
 	}
 </style>
 
@@ -38,18 +45,15 @@ use yii\ widgets\ ActiveForm;
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4">
-					<?= $form->field($model, 'ad_poster')->fileInput() ?>
-					
+				<div class="col-lg-3">
+					<?= $form->field($model, 'label_img')->widget('common\widgets\upload\FileUpload')->label(false) ?>
 				</div>
 				<div class="col-lg-3">
-					<?= $form->field($model, 'ad_publish_community')->dropDownList($_SESSION['community_id'], ['multiple'=>'multiple'], ['prompt' => '请选择']) ?>
+					<?= $form->field($model, 'ad_target_value')->textInput(['rows' => 3, 'placeHolder' => '请输入']) ?>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12">
-					<?= $form->field($model, 'ad_target_value')->textarea(['rows' => 3]) ?>
+			
+				<div class="col-lg-3">
+					<?= $form->field($model, 'ad_publish_community')->dropDownList($_SESSION['community_id'], ['multiple'=>'multiple'], ['prompt' => '请选择']) ?>
 				</div>
 			</div>
 
@@ -68,7 +72,17 @@ use yii\ widgets\ ActiveForm;
 				</div>
 
 				<div class="col-lg-3">
-					<?= $form->field($model, 'ad_end_time')->textInput() ?>
+					<?= $form->field($model, 'ad_end_time', [
+                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                        'options'=>['class'=>'drp-container']])
+	                             ->widget(DateRangePicker::classname(), [
+                            'useWithAddon'=>true,
+			            	'pluginOptions'=>[
+                                'singleDatePicker'=>true,
+                                'showDropdowns'=>true,
+							    'useWithAddon'=>true,
+                            ]
+                        ])->textInput(['value' => date('Y-m-d')]) ?>
 				</div>
 			</div>
 
@@ -84,8 +98,8 @@ use yii\ widgets\ ActiveForm;
 		</div>
 
 		<div id="ad_form" class="col-lg-4">
-			<div>
-				<p id="title">标题</p>
+			<div id="title">
+				标题
 			</div>
 			<div>
 				你好，世界！<div id="ad_detail"></div>
@@ -94,16 +108,17 @@ use yii\ widgets\ ActiveForm;
 	</div>
 	<?php ActiveForm::end(); ?>
     <script>
-		
-        var oBtn = document.getElementById('btn');
+		var oBtn = document.getElementById('btn');
         var oTi = document.getElementById('title');
-        if('oninput' in oBtn){ 
+		
+		if('oninput' in oBtn){ 
                 oBtn.addEventListener("input",getWord,false); 
             }else{ 
                 oBtn.onpropertychange = getWord; 
             }
         function getWord(){
-            oTi.innerHTML = oBtn.value;
+			oTi.innerHTML = oBtn.value;
         }
+
     </script>
 </div>
