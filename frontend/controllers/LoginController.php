@@ -23,7 +23,7 @@ class LoginController extends Controller
 	//微信登录或注册
 	public function actionWx()
 	{
-		/*$code = $_GET['code'];
+		$code = $_GET['code'];
 		$appid = 'wx6a6b40dfed3cf871';
 		
 		$output = Login::Wx($code,$appid); //返回数据
@@ -52,7 +52,7 @@ class LoginController extends Controller
 			
 				if($relationship)
 				{
-					$r_id = array_column($relationship,'realestate_id');*/
+					$r_id = array_column($relationship,'realestate_id');
 		$r_id = 5286;
 					$reale = (new \yii\db\Query())->select('
 					community_basic.community_name, community_building.building_name,community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.realestate_id as id
@@ -66,7 +66,7 @@ class LoginController extends Controller
 					
 					//进入房屋选择界面
 				    return $this->render('choice',['reale' => $reale, 'id' => $r_id]);
-				/*}else{
+				}else{
 					//否则进入房屋管理页面
 					return $this->render('#');
 				}
@@ -87,7 +87,7 @@ class LoginController extends Controller
 				'comm' => $comm,
 				'w_info' => $w_info
 		    ]);
-		}*/
+		}
 	}
 	
 	public function actionNew()
@@ -143,8 +143,15 @@ class LoginController extends Controller
 	}
 	
 	//裕家人开放平台授权回调地址
-	public function actionYjr()
+	public function actionIndex()
 	{
-		echo '测试';
+		return $this->render('index');
+	}
+	
+	//裕家人开放平台授权回调测试
+	public function actionTest()
+	{
+		echo '<pre >';
+		print_r($_GET);
 	}
 }
