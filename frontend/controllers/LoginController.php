@@ -158,18 +158,19 @@ class LoginController extends Controller
 	//用户登录
 	 public function actionLogin()
     {
-        $this->layout = 'main'; 
+        $this->layout = 'main';
 
         $model = new User();
-        if ($model->load(Yii::$app->request->post())&& $model->login()) 
-		{			
-			print_r($_POST);
-//            return $this->goBack();
-			Yii::$app->end();
-        } else {
-            return $this->render('l', [
-                'model' => $model,
-            ]);
+		
+        if (Yii::$app->request->isPost) 
+		{
+			$post = Yii::$app->request->post();
+			if($model->login($post))
+			{
+				return $this->redirect(['qq']);
+			}
         }
+		
+        return $this->render('l', ['model' => $model]);
     }
 }

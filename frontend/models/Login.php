@@ -43,7 +43,5 @@ class Login extends Model
         curl_close($u);
 				
 		return $user;
-	}
-	
-    
+	}    
 }

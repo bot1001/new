@@ -8,6 +8,7 @@ class User extends ActiveRecord
 { 
 	
 	public $rememberMe = true;
+	public $userpass;
 	
     public static function tableName(){  
         return 'user_account';  
@@ -38,22 +39,37 @@ class User extends ActiveRecord
 	
 	public function validatePass()
 	{
-		if($this->hassErrors()){
-			$data = self::find()->where(['mobile_phone = :phone and password = :password', [":phone" => $this->mobile_phone, ':password' => md5($this->password)]])->one();
-			if(is_null($data)){
+		if(!$this->hasErrors()){
+			$data = self::find()
+				->where(['mobile_phone' => $this->mobile_phone, 'password' => md5($this->password), 'status' => '1'])
+				->asArray()
+				->one();
+
+			if($data == ''){
 				$this->addError("userpass", "用户名或者密码错误");
+				return false;
+			}else{
+				$session = Yii::$app->session;
+			    $session['info'] = $data;
+				return true;
 			}
 		}
 	}
 	
-	public function login()
+	public function login($data)
 	{
-		if($this->load($data) && $this->validate())
+		if($this->load($data) && $this->validatePass())
 		{
 			//执行登录
-			 
+			
+			$lifetime = $this->rememberMe ? 24*3600:0;
+			$session = Yii::$app->session;
+			session_set_cookie_params($lifetime);
+			$session['user'] = ['isLogin' => 1];
+			return (bool)$session['user']['isLogin'];
+		}else{
+			return false;
 		}
-		return false;
 	}
 }
 ?>  

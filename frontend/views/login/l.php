@@ -16,9 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin([
-	'id' => 'login-form',
-	'enableAjaxValidation' => true,
-]); ?>
+//	'action' => '/login/login',
+//	'method' => 'POST',
+            	'id' => 'login-form',
+            	'fieldConfig' => [
+            	'template' => '{input}{error}'],
+            ]); ?>
 
                 <?= $form->field($model, 'mobile_phone')->textInput(['autofocus' => true]) ?>
 
@@ -37,4 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+    <?php 
+	if(isset($_SESSION)){
+		echo '<pre>'; print_r($_SESSION);
+	}	
+	 ?>
 </div>
