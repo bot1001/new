@@ -139,12 +139,3 @@ $this->title = '裕家人';
 		&copy;<?= date('Y') ?> 裕达物业 桂ICP备14007933号-2
 	</div>
 </div>
-
-<!--<img id="qq_login" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/image/bt_92X120.png" alt="" style="height:120px;width:92px;vertical-align:middle;" /> 
-<script>
-	var qqbtn = document.getElementById('qq_login');
-	qqbtn.onclick = function()
-	{
-		window.location.href="<?php //echo Url::to(['login/qq']) ?>";
-	}
-</script>-->

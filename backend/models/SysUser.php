@@ -99,7 +99,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 				$this->update_id = $_SESSION['user']['0']['id'];
 				$this->update_time = date('Y-m-d h:i:s');
 			}else{
-				$this->update_time = time();
+				$this->update_time = date('Y-m-d h:i:s');
 				$this->update_id = $_SESSION['user']['0']['id'];
 			}
 			return true;

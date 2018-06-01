@@ -7,7 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use frontend\models\Login;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -64,6 +64,16 @@ class SiteController extends Controller
             ],
         ];
     }
+	
+	//检查用户是否登录
+	/*public function  beforeAction($action)
+    {
+        if(Yii::$app->user->isGuest){
+            $this->redirect(['/site/login']);
+            return false;
+        }
+        return true;
+    }*/
 
     /**
      * Displays homepage.
@@ -72,8 +82,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-		$this->layout = 'home';
         return $this->render('index');
+    }
+	
+	public function actionLoad()
+    {
+		$this->layout = 'home';
+        return $this->render('load');
     }
 	
 	//安卓版下载
@@ -99,8 +114,10 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new Login();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+			$post = Yii::$app->user->identity; //获取用户信息
+			$_SESSION['post'] = $post;
             return $this->goBack();
         } else {
             $model->password = '';
