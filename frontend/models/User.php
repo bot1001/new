@@ -2,16 +2,13 @@
 namespace frontend\models;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface; 
   
-class User extends ActiveRecord implements IdentityInterface 
+class User extends ActiveRecord 
 { 
-	const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 1;
-  
+	
+	public $rememberMe = true;
+	
     public static function tableName(){  
         return 'user_account';  
     }  
@@ -22,141 +19,41 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['mobile_phone'], 'required', 'message' => '账户不能为空'],
+            [['password'], 'required', 'message' => '密码不能为空'],
+            [['rememberMe'], 'boolean'],
+			['userpass', 'validatePass']
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($user_id)
+	
+	
+	public function attributeLabels()
     {
-        return static::findOne($user_id);
+        return [
+            'mobile_phone' => '登录号码',
+            'password' => '登录密码',
+            'rememberMe' => '记住我',
+        ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($mobile_phone)
-    {
-        return static::findOne(['mobile_phone' => $mobile_phone, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-	public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-		return $this->password === md5($password);
-    }
-
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password === md5($password);
-    }
-
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->user_name = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Generates new password reset token
-     */
-    public function generatePasswordResetToken()
-    {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
-
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
-    }
+	
+	public function validatePass()
+	{
+		if($this->hassErrors()){
+			$data = self::find()->where(['mobile_phone = :phone and password = :password', [":phone" => $this->mobile_phone, ':password' => md5($this->password)]])->one();
+			if(is_null($data)){
+				$this->addError("userpass", "用户名或者密码错误");
+			}
+		}
+	}
+	
+	public function login()
+	{
+		if($this->load($data) && $this->validate())
+		{
+			//执行登录
+			 
+		}
+		return false;
+	}
 }
-
 ?>  

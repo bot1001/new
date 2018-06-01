@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
-use frontend\models\Login;
+use frontend\models\User;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\Realestate;
@@ -154,4 +154,22 @@ class LoginController extends Controller
 		echo '<pre >';
 		print_r($_GET);
 	}
+	
+	//用户登录
+	 public function actionLogin()
+    {
+        $this->layout = 'main'; 
+
+        $model = new User();
+        if ($model->load(Yii::$app->request->post())&& $model->login()) 
+		{			
+			print_r($_POST);
+//            return $this->goBack();
+			Yii::$app->end();
+        } else {
+            return $this->render('l', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

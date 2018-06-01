@@ -102,31 +102,6 @@ class SiteController extends Controller
 	{
 		return \Yii::$app->response->sendFile('./files/wyd.apk');
 	}
-	
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new Login();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			$post = Yii::$app->user->identity; //获取用户信息
-			$_SESSION['post'] = $post;
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Logs out the current user.
