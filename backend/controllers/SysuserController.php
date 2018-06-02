@@ -111,9 +111,6 @@ class SysuserController extends Controller
 		{
 			$post = $_POST['SysUser']; // 接收传递过来的数据
 			
-//			echo '<pre />';
-//			print_r($post);exit;
-			
             $transaction=$model->db->beginTransaction();
             try{
 				$model = new SysUser(); //实例化用户模型

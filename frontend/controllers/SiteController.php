@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use commen\models\UserAccount;
 
 /**
  * Site controller
@@ -69,7 +70,7 @@ class SiteController extends Controller
 	/*public function  beforeAction($action)
     {
         if(Yii::$app->user->isGuest){
-            $this->redirect(['/site/login']);
+            $this->redirect(['/login/login']);
             return false;
         }
         return true;
@@ -82,7 +83,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+		$get = $_GET;
+		$code = $get['code']; //获取登录返回的code
+		$appid = 'wx61eec3717a800533';  //开发平台应用 APPID
+		$secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
+		$output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
+		$arr = json_decode($output, true); //将json数组转换成普通数组
+		
+		$token = $arr['access_token']; //提取access_token
+		$openid = $arr['openid']; //提取openID
+		
+		$info = Login::Info($token, $openid); //查询登录用户信息
+		$info = json_decode($info, true);
+			echo '<pre>';
+		print_r($info); 
     }
 	
 	public function actionLoad()
@@ -102,18 +116,6 @@ class SiteController extends Controller
 	{
 		return \Yii::$app->response->sendFile('./files/wyd.apk');
 	}
-
-    /**
-     * Logs out the current user.
-     *
-     * @return mixed
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 
     /**
      * Displays contact page.

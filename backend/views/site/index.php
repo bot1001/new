@@ -21,7 +21,7 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
    <?php
 		if (Helper::checkRoute('/ticket/index')){ ?>
     	<div id="box1" class="col-lg-3">
-    	<?= $this->render('box1'); ?>
+    	    <?= $this->render('box1'); ?>
 	    </div>
 	<?php } ?>
    	
@@ -49,5 +49,5 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 	       <?= $this->render('box5') ?>   	
 	   </div>
 	   
-	   <?php //echo $_SERVER['HTTP_HOST']; ?>
+	   <?php // echo '<pre>'; print_r($_SESSION); ?>
  </div>

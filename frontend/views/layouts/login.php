@@ -26,26 +26,31 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
-
+	<style>
+		l{
+			font-family: 仿宋;
+			font-size:30px;
+			font-weight: 600;
+		}
+	</style>
 <div class="wrap">
     <?php
     NavBar::begin([
-		'brandLabel' => "<image class='header-logo' src='/image/logo01.png' width = '30' height = '34' />",
+		'brandLabel' => '<l>'."广西裕达物业服务有限公司欢迎您！".'</l>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top navbar',
         ],
     ]);
-    $menuItems = [
+    /*$menuItems = [
         ['label' => '首页', 'url' => ['/site/index']],
         ['label' => '互动	', 'url' => ['/site/about']],
         ['label' => '我的', 'url' => ['/site/contact']],
-        ['label' => '退出', 'url' => ['/login/logout']],
     ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
-    ]);
+    ]);*/
     NavBar::end();
     ?>
 

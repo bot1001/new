@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
-use frontend\models\User;
+use frontend\models\LoginForm;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\Realestate;
@@ -25,8 +25,9 @@ class LoginController extends Controller
 	{
 		$code = $_GET['code'];
 		$appid = 'wx6a6b40dfed3cf871';
+		$secret = 'dedd7bad5b2b3c43a8e23597dfa27698';
 		
-		$output = Login::Wx($code,$appid); //返回数据
+		$output = Login::Wx($code,$appid, $secret); //返回数据
 		$arr = json_decode($output, true); //数据转换
 		
 		$token = $arr['access_token'];
@@ -156,21 +157,31 @@ class LoginController extends Controller
 	}
 	
 	//用户登录
-	 public function actionLogin()
+	public function actionLogin()
     {
-        $this->layout = 'main';
-
-        $model = new User();
+		$this->layout = 'login';
 		
-        if (Yii::$app->request->isPost) 
-		{
-			$post = Yii::$app->request->post();
-			if($model->login($post))
-			{
-				return $this->redirect(['qq']);
-			}
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
         }
-		
-        return $this->render('l', ['model' => $model]);
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            $model->password = '';
+
+            return $this->render('l', [
+                'model' => $model,
+            ]);
+        }
+    }
+	
+	//用户退出
+	public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }
