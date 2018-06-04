@@ -37,7 +37,7 @@ class UserData extends \yii\db\ActiveRecord
     {
         return [
             [['reg_time'], 'unique'],
-            [['account_id','real_name'], 'required'],
+            [['account_id','real_name', 'province_id', 'city_id', 'area_id',], 'required'],
             [['gender', 'province_id', 'city_id', 'area_id', 'reg_time'], 'integer'],
             [['account_id', 'real_name', 'nickname'], 'string', 'max' => 32],
             [['face_path'], 'string', 'max' => 300],

@@ -41,7 +41,7 @@ class UserAccount extends \yii\db\ActiveRecord
 			[['mobile_phone'],'string','min' => 11],
 			[['account_id'],'string','min' => 28],
 			//[['account_id'],'string','max' => 32],
-            [['new_pd','password','mobile_phone'], 'required'],
+            [['password','mobile_phone'], 'required'],
 			['new_pd', 'compare', 'compareAttribute' => 'password', 'message' => '两次密码输入不一致'],
 			[['account_id'], 'unique', 'targetAttribute' => ['account_id'], 'message' => '用户重复'],
 			[['mobile_phone'], 'unique', 'targetAttribute' => ['mobile_phone'], 'message' => '手机号码重复'],
@@ -84,15 +84,10 @@ class UserAccount extends \yii\db\ActiveRecord
        {
            if($insert)
            {
-               $this->new_message = 0;
                $this->account_role = 0;
+               $this->new_message = 0;
                $this->status = 1;
 			   $this->property = 1;
-           }else{
-               $this->new_message = 0;
-               $this->account_role = 0;
-               $this->status = 1;
-			   $this->property =1;
            }
            return true;
        }else{

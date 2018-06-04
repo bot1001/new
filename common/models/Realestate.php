@@ -77,7 +77,7 @@ class Realestate extends \yii\db\ActiveRecord
             'commencement' => 'Commencement',
         ];
     }
-
+	
     /**
      * @return \yii\db\ActiveQuery
      */

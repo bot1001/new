@@ -109,54 +109,92 @@ class LoginController extends Controller
 	public function actionNew()
 	{
 		$post = $_POST;
-		$info = $_GET['w_info'];
-		echo '<pre >';
-		print_r($post);exit;
-		$account_id = $info['openid']; //接收微信用户的openID
+		$info = $_GET['w_info']; //接收微信账号信息
+		
+		$data = $post['UserData'];
+		$realestate = $post['Realestate'];
+		$account = $post['UserAccount'];
+		
+		$province = $data['province_id']; //接收省份ID
+		$city = $data['city_id']; //接收城市ID
+		$area = $data['area_id']; //接收县区ID
+		$gender = $data['gender']; //接收性别
+		$face = $data['face_path']; //接收图像地址
+		
+		$community = $realestate['community_id']; //接收小区ID
+		$building = $realestate['building_id']; //接收楼宇ID
+		$number = $realestate['room_number']; //接收单元
+		$name = $realestate['room_name']; //接收房号
+		$phone = $realestate['phone']; //接收验证手机号码
+		$nick = $realestate['owners_name']; //接收用户昵称
+		
+		$user_name = $account['user_name']; //接收用户昵称
+		$mobile = $account['mobile_phone']; //接收登录手机号码
+		$password = md5($account['password']); //接收并加密密码
+		$weixin_openid = $account['weixin_openid']; //接收微信用户的openID
+		$account_id = $account['account_id']; //接收用户ID（程序随机生成）
+		$unionid = $account['wx_unionid']; //接收微信唯一编码（暂时存着）
+		
 		$nickname = $info['nickname'] ; //用户昵称
-		$r_id = $post['Realestate']['room_number'];	//房屋编号	
-		$phone = $post['UserAccount']['mobile_phone']; //接收手机号码
-		$password = $post['UserAccount']['password']; //接收密码（明文)
-		$password = md5($password); //md5加密明文密码
-				
-		$r_p = Realestate::find()
-			->select('owners_cellphone')
-			->where(['realestate_id' => $r_id])
-			->asArray()
-			->one();
 		
-		if($phone === $r_p['owners_cellphone'])
-		{
-			$account = new UserAccount(); //实例化模型
-	
-		    
-		    //模型块赋值
-		    $account->account_id = $account_id;
-		    $account->mobile_phone = $phone;
-		    $account->password = $password;
-		    $account->user_name = $nickname;
-		    $account->account_role = '0';
-		    $account->new_message = '0';
-		    $account->status = '1';
-		    
-		    $e = $account->save(); // 保存
-    
-		    if($e){
-		    	$ship = new UserRealestate();
-		    	
-		    	$ship->account_id =  $account_id;
-		    	$ship->realestate_id = $r_id;
-		    	$r = $ship->save();
-		    }
-		    
-		    return $this->render('#', ['id' => $r_id]);
-		}else{
-			echo '<script>alert("信息校验失败，请检查数据！")</script>';
-			//echo "<script>alert('打印数据为空，请确认订单信息！')</script>";
-			//return $this->redirect(Yii::$app->request->referrer);
+		if(empty($nick)){
+			$nick == $nickname;
 		}
-	
+				
+//		echo '<pre >';
+//		print_r($r_p);
+		exit;
 		
+		$account = new UserAccount(); //实例化模型
+		
+		//模型块赋值
+		$account->account_id = $account_id;
+		$account->user_name = $nick;
+		$account->password = $password;
+		$account->mobile_phone = $phone;
+		$account->weixin_openid = $weixin_openid;
+		$account->wx_unionid = $unionid;
+		$account->new_message = '0';
+		$account->status = '1';
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try{
+		    $yes = $account->save(); // 保存
+            
+		    if($yes){
+		    	$ship = new UserRealestate();
+		    	$ship->account_id =  $account_id;
+		    	$ship->realestate_id = $name;
+		    	$r = $ship->save();
+				
+				if($r){
+					$userdata = new UserData();
+					
+					$userdata->account_id = $account_id;
+					$userdata->real_name = $nick;
+					$userdata->gender = $gender;
+					$userdata->face_path = $face;
+					$userdata->province_id = $province;
+					$userdata->city_id = $city;
+					$userdata->area_id = $area;
+					$userdata->nickname = $nick;
+					
+					$u = $userdata->save();
+					if($u){
+						$transaction->commit();
+					}
+				}else{
+					$transaction->rollback();
+				}
+		    }else{
+				$transaction->rollback();
+			}
+		    $transaction->commit();
+		}catch(\Exception $e){
+			echo '<pre>';
+			print_r($e);
+		}
+		return $this->redirect('/site/index');
 	}
 	
 	//裕家人开放平台授权回调地址

@@ -22,7 +22,7 @@ $this->title = '用户注册';
 	
 	.login-form{
 		width: 50%;
-		font-size: 20px;
+		font-size: 18px;
 		border-radius: 5px;
 		margin: auto;
 	}
@@ -36,7 +36,7 @@ $this->title = '用户注册';
     		<tr>
     			<td>
 					<?php $form = ActiveForm::begin([
-                    	'action' => ['/login/new','w_info' => $w_info],
+                    	'action' => ['/login/new','w_info' => $w_info]
                     ]); ?>
 
 					<div class="row">
@@ -126,13 +126,13 @@ $this->title = '用户注册';
 
 					</div>
 
-					<div class="row">
+					<div id="test" class="row">
 						<div class="col-lg-4">
-							<?= $form->field($realestate, 'phone')->textInput(['maxlength' => true, 'placeholder' => '验证手机号码'])->label(false) ?>
+							<?= $form->field($realestate, 'phone')->textInput(['maxlength' => true, 'placeholder' => '验证手机号码', 'id' => 'phone'])->label(false) ?>
 						</div>
 
 						<div class="col-lg-4">
-							<?= $form->field($realestate, 'room_name')->textInput(['maxlength' => true, 'placeholder' => '验证业主姓名'])->label(false) ?>
+							<?= $form->field($realestate, 'owners_name')->textInput(['maxlength' => true, 'placeholder' => '验证业主姓名', 'id' => 'owners'])->label(false) ?>
 						</div>
 					</div>
 
@@ -151,11 +151,11 @@ $this->title = '用户注册';
 					</div>
 					<div class="row">
 						<div class="col-lg-5">
-							<?= $form->field($account, 'password')->textInput(['maxlength' => true, 'placeholder' => '请输入登录密码'])->label(false) ?>
+							<?= $form->field($account, 'password')->input('password',['maxlength' => true, 'placeholder' => '请输入登录密码'])->label(false) ?>
 						</div>
 
 						<div class="col-lg-5">
-							<?= $form->field($account, 'new_pd')->textInput(['maxlength' => true, 'placeholder' => '请再次输入密码'])->label(false) ?>
+							<?= $form->field($account, 'new_pd')->input('password',['maxlength' => true, 'placeholder' => '请再次输入密码'])->label(false) ?>
 						</div>
 
 						<!--	隐藏内容起	-->
@@ -177,8 +177,8 @@ $this->title = '用户注册';
 						<!--	隐藏内容止	-->
 					</div>
 
-					<div align="center">
-						<?= Html::submitButton('确定' , ['class' =>  'btn btn-success']) ?>
+					<div id="submit" align="center">
+						<input type="submit" value="确定" disabled class="btn info"></nput>
 					</div>
 
 					<?php ActiveForm::end(); ?>
@@ -186,4 +186,36 @@ $this->title = '用户注册';
     		</tr>
     	</tbody>
     </table>
+    
+    <script>
+		var oBtn = document.getElementById('phone');
+		
+		if('onkeydown' in oBtn){ 
+                oBtn.addEventListener("change",getWord,false); 
+            }
+		
+		function change() {
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
+                url: "/site/phone" ,//url
+                data: oBtn.value,
+                success: function (result) {
+                    if (result == 1) {
+//                        alert("手机号码验证成功！");
+						document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info"></nput>';
+                    };
+                },
+                error : function() {
+                    alert("手机号码验证失败！");
+                }
+            });
+        }
+		
+        function getWord(){
+			change();
+        }
+
+    </script>
+    
 </div>

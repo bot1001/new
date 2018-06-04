@@ -121,23 +121,10 @@ class SiteController extends Controller
 				->asArray()
 				->one();			
 			
-			if($user){
+			if(!$user){
 				return $this->render('index');
 			}else{
-				define("CAPTCHA_LEN", 36); // 随机数长度
-                $Source = "0123456789abcdefghijklmnopqrstuvwxyz"; // 随机数字符源
-        
-                $k = ""; // 随机数返回值
-                for($i=0;$i<CAPTCHA_LEN;$i++){
-                    $n = rand(0, strlen($Source));
-                    if($n >= 36){
-                        $n = 36 + ceil(($n - 36) / 3) * 3;
-                        $k .= substr($Source, $n, 3);
-                    }else{
-                        $k .= substr($Source, $n, 1);
-                    }
-                }
-				
+				$k = \frontend\models\Site::getK(); //获取程序生成account_id
 				$comm = Community::find() //获取小区
 		    	           ->select('community_name, community_id')
 		    	           ->indexBy('community_id')
@@ -170,19 +157,19 @@ class SiteController extends Controller
         return $this->render('load');
     }
 	
-	public function actionSite($pid, $typeid = 0)
+	public function actionPhone()
     {
-        $model = new \common\models\UserData();
-        $model = $model->getProvince($pid); //\common\models\UserData::getProvince();
-
-        if($typeid == 1){$aa="--请选择市--";}else if($typeid == 2 && $model){$aa="--请选择区--";}
-
-        echo Html::tag('option',$aa, ['value'=>'empty']) ;
-
-        foreach($model as $value=>$name)
-        {
-            echo Html::tag('option',Html::encode($name),array('value'=>$value));
-        }
+		foreach($_POST as $key => $p);
+	
+		$r =  Realestate::find()
+			->where(['owners_cellphone' => $key])
+			->asArray()
+			->one();
+		if($r){
+			return true;
+		}else{
+			return false;
+		}
     }
 	
 	//安卓版下载
