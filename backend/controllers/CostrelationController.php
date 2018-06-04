@@ -141,7 +141,7 @@ class CostrelationController extends Controller {
 		//获取楼宇ID
 		$building_id = CommunityBuilding::find()
 			->select('building_id')
-			->where(['in', 'community_Id', $community_id])
+			->where(['in', 'community_id', $community_id])
 			->asArray()
 			->one();
 

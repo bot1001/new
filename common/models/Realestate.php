@@ -28,6 +28,7 @@ use Yii;
  */
 class Realestate extends \yii\db\ActiveRecord
 {
+	public $phone;
     /**
      * {@inheritdoc}
      */
@@ -42,7 +43,7 @@ class Realestate extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['community_id', 'building_id', 'room_number', 'room_name', 'owners_name', 'owners_cellphone'], 'required'],
+            [['community_id', 'building_id', 'room_number', 'room_name', 'owners_name', 'phone', 'owners_cellphone'], 'required'],
             [['community_id', 'building_id', 'finish', 'decoration', 'delivery', 'inherit', 'commencement'], 'integer'],
             [['acreage'], 'number'],
             [['room_number', 'room_name', 'owners_name'], 'string', 'max' => 64],
@@ -65,6 +66,7 @@ class Realestate extends \yii\db\ActiveRecord
             'room_name' => '房号',
             'owners_name' => '姓名',
             'owners_cellphone' => '手机号码',
+            'phone' => '验证手机号码',
             'acreage' => '面积',
             'finish' => '交付时间',
             'decoration' => '装修时间',

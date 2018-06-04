@@ -20,6 +20,21 @@ $this->title = '用户注册';
 	'action' => ['/login/new','w_info' => $w_info],
 ]); ?>
 	<div class="row">
+	
+	    <div class="col-lg-3">
+			<?= $form->field($data, 'province_id')->textInput(['maxlength' => true]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($data, 'city_id')->textInput(['maxlength' => true]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($data, 'area_id')->textInput(['maxlength' => true]) ?>
+		</div>
+	</div>
+	
+	<div class="row">
 		
 		<div class="col-lg-3">
 			<?= $form->field($realestate, 'community_id')->dropDownList($comm,['prompt' => '请选择','id'=>'community']) ?>
@@ -39,7 +54,7 @@ $this->title = '用户注册';
 		</div>
 		
 		<div class="col-lg-1">
-			<?= $form->field($realestate, 'room_number')->widget(DepDrop::classname(), [
+			<?= $form->field($realestate, 'room_name')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
                 'options'=>['id'=>'number'],
 	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
@@ -61,6 +76,22 @@ $this->title = '用户注册';
 		
 		<div class="col-lg-3">
 			<?= $form->field($account, 'password')->textInput(['maxlength' => true]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($account, 'weixin_openid')->textInput(['maxlength' => true, 'value' => $w_info['openid']]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($account, 'wx_unionid')->textInput(['maxlength' => true, 'value' => $w_info['unionid']]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($data, 'face_path')->textInput(['maxlength' => true, 'value' => $w_info['headimgurl']]) ?>
+		</div>
+		
+		<div class="col-lg-3">
+			<?= $form->field($data, 'gender')->textInput(['maxlength' => true]) ?>
 		</div>
 		
 		<div class="col-lg-3">

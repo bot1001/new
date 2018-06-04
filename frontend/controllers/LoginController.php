@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use frontend\models\LoginForm;
 use common\models\UserAccount;
@@ -54,7 +53,7 @@ class LoginController extends Controller
 				if($relationship)
 				{
 					$r_id = array_column($relationship,'realestate_id');
-		$r_id = 5286;
+		            $r_id = 5286;
 					$reale = (new \yii\db\Query())->select('
 					community_basic.community_name, community_building.building_name,community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.realestate_id as id
 					')
@@ -75,16 +74,32 @@ class LoginController extends Controller
 		}else{
 			$account = new UserAccount();
 		    $realestate = new Realestate();
-		    $community = Community::find()
+			$data = new UserData();
+			
+		    $comm = Community::find()
 		    	->select('community_id, community_name')
-		    	->asArray()
-		    	->all();
-		    
-		    $comm = ArrayHelper::map($community, 'community_id', 'community_name');
+		    	->indexBy('community_id')
+		    	->column();
+			
+			define("CAPTCHA_LEN", 36); // 随机数长度
+            $Source = "0123456789abcdefghijklmnopqrstuvwxyz"; // 随机数字符源
+			        
+            $k = ""; // 随机数返回值
+            for($i=0;$i<CAPTCHA_LEN;$i++){
+                $n = rand(0, strlen($Source));
+                if($n >= 36){
+                    $n = 36 + ceil(($n - 36) / 3) * 3;
+                    $k .= substr($Source, $n, 3);
+                }else{
+                    $k .= substr($Source, $n, 1);
+                }
+            }
 		
-		    return $this->render('/login/login', [
+		    return $this->render('/login/register', [
 		    	'account' => $account, 
 				'realestate' => $realestate,
+				'k' => $k,
+				'data' => $data,
 				'comm' => $comm,
 				'w_info' => $w_info
 		    ]);
@@ -95,7 +110,8 @@ class LoginController extends Controller
 	{
 		$post = $_POST;
 		$info = $_GET['w_info'];
-		
+		echo '<pre >';
+		print_r($post);exit;
 		$account_id = $info['openid']; //接收微信用户的openID
 		$nickname = $info['nickname'] ; //用户昵称
 		$r_id = $post['Realestate']['room_number'];	//房屋编号	

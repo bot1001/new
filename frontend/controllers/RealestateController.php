@@ -38,18 +38,18 @@ class RealestateController extends Controller
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
 	}
 	
-	//三级联动之 楼宇2
+	//三级联动之 单元
 	public function actionB2( $selected = null ) 
 	{
-		print_r($_POST[ 'depdrop_parents' ]);exit;
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
-			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
-			$list = Building::find()->where( ['in', 'community_id', $id ] )->all();
+			$id = $_POST[ 'depdrop_parents' ];
+			
+			$list = Realestate::find()->select('room_number, building_id')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'building_name' ] ];
+					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'room_number' ] ];
 					if ( $i == 0 ) {
 						$first = $account[ 'building_id' ];
 					}
@@ -99,7 +99,8 @@ class RealestateController extends Controller
 	}
 
 	//三级联动之 房号（二）
-	public function actionRe( $selected = null ) {
+	public function actionRe( $selected = null ) 
+	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = Realestate::find()

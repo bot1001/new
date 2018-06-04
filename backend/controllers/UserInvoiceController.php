@@ -248,7 +248,7 @@ class UserInvoiceController extends Controller
 							$m=str_pad($m,2,"0",STR_PAD_LEFT); //月份自动补0
 							
 							//判断费项是否存在							
-							if($cost_name[ $sheet[ 'F' ] ]){
+							if(isset($cost_name[ $sheet[ 'F' ] ])){
 								$d = $cost_name[ $sheet[ 'F' ] ];
 							}else{
 								$a <= $i;

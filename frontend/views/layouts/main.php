@@ -40,8 +40,21 @@ AppAsset::register($this);
         ['label' => '首页', 'url' => ['/site/index']],
         ['label' => '互动	', 'url' => ['/site/about']],
         ['label' => '我的', 'url' => ['/site/contact']],
-        ['label' => '退出', 'url' => ['/login/logout']],
     ];
+
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => '登录', 'url' => ['/login/login']];
+    } else {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/login/logout'], 'post')
+            . Html::submitButton(
+                '退出 (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

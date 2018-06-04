@@ -73,16 +73,7 @@ class UserData extends \yii\db\ActiveRecord
             if($insert)
             {
                 $this->reg_time = date(time());
-                $this->gender = 1;
-                $this->province_id = 45;
 				$this->property = 1;
-                }else{
-                    $this->reg_time = date(time());
-                    $this->gender = 1;
-                    $this->province_id = 45;
-                    $this->city_id = 451300;
-                    $this->area_id = 451302;
-				    $this->property = 1;
                 }
                 return true;
             }else{

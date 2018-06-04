@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Html;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -12,7 +13,10 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use commen\models\UserAccount;
+use common\models\UserAccount;
+use common\models\Community;
+use common\models\Realestate;
+use common\models\UserData;
 
 /**
  * Site controller
@@ -83,26 +87,102 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-		$get = $_GET;
-		$code = $get['code']; //获取登录返回的code
-		$appid = 'wx61eec3717a800533';  //开发平台应用 APPID
-		$secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
-		$output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
-		$arr = json_decode($output, true); //将json数组转换成普通数组
-		
-		$token = $arr['access_token']; //提取access_token
-		$openid = $arr['openid']; //提取openID
-		
-		$info = Login::Info($token, $openid); //查询登录用户信息
-		$info = json_decode($info, true);
-			echo '<pre>';
-		print_r($info); 
+//		$province = \common\models\Area::getProvince();
+//		print_r($province);exit;
+//		$get = $_GET;
+//		if(isset($get['code'])){
+//			$code = $get['code']; //获取登录返回的code
+//		    $appid = 'wx61eec3717a800533';  //开发平台应用 APPID
+//		    $secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
+//		    $output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
+//		    $arr = json_decode($output, true); //将json数组转换成普通数组
+//		    
+//		    $token = $arr['access_token']; //提取access_token
+//		    $openid = $arr['openid']; //提取openID
+//		    
+//		    $info = Login::Info($token, $openid); //查询登录用户信息
+//			$w_info = json_decode($info, true); //将json数据转换普通数组
+			
+			$w_info = array('openid' => 'oRJDt0vfa8Sq4XdAJu7paZ-ZfeZQ',
+                            'nickname' => '裕达物业管理号',
+                            'sex' => 0,
+                            'language' => 'zh_CN',
+                            'city' => '',
+                            'province' => '',
+                            'country' => '',
+                            'headimgurl' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJicudxYLPZkb7gCk8xYsrElU6cAeKWlGKyTWAl7rrVfkm4pW2PoHMGYl0YJ10H1epW66oIv8bSUSw/132',
+                            'privilege' => Array(),
+                            'unionid' => 'oHq83uCJG5IVZQzV4e-cZi3uBk28');
+			
+			$openid = $w_info['openid']; //提取openID
+			
+			$user = UserAccount::find() //查询用户是否存在
+				->where(['in', 'weixin_openid', $openid])
+				->asArray()
+				->one();			
+			
+			if($user){
+				return $this->render('index');
+			}else{
+				define("CAPTCHA_LEN", 36); // 随机数长度
+                $Source = "0123456789abcdefghijklmnopqrstuvwxyz"; // 随机数字符源
+        
+                $k = ""; // 随机数返回值
+                for($i=0;$i<CAPTCHA_LEN;$i++){
+                    $n = rand(0, strlen($Source));
+                    if($n >= 36){
+                        $n = 36 + ceil(($n - 36) / 3) * 3;
+                        $k .= substr($Source, $n, 3);
+                    }else{
+                        $k .= substr($Source, $n, 1);
+                    }
+                }
+				
+				$comm = Community::find() //获取小区
+		    	           ->select('community_name, community_id')
+		    	           ->indexBy('community_id')
+		    	           ->column();
+				
+				$province = \common\models\Area::getProvince();
+				
+				$account = new UserAccount();
+		        $realestate = new Realestate();
+		        $data = new UserData();
+				
+				return $this->render('register', [
+		        	'account' => $account, 
+			    	'realestate' => $realestate,
+			    	'k' => $k,
+			    	'data' => $data,
+					'province' => $province,
+			    	'comm' => $comm,
+			    	'w_info' => $w_info
+		        ]);
+//			}  
+		}/*else{
+			return $this->render('index');
+		}*/		 
     }
 	
 	public function actionLoad()
     {
 		$this->layout = 'home';
         return $this->render('load');
+    }
+	
+	public function actionSite($pid, $typeid = 0)
+    {
+        $model = new \common\models\UserData();
+        $model = $model->getProvince($pid); //\common\models\UserData::getProvince();
+
+        if($typeid == 1){$aa="--请选择市--";}else if($typeid == 2 && $model){$aa="--请选择区--";}
+
+        echo Html::tag('option',$aa, ['value'=>'empty']) ;
+
+        foreach($model as $value=>$name)
+        {
+            echo Html::tag('option',Html::encode($name),array('value'=>$value));
+        }
     }
 	
 	//安卓版下载

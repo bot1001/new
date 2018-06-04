@@ -195,7 +195,7 @@
         "version_normalized": "1.35.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nakupanda/bootstrap3-dialog.git",
+            "url": "git@github.com:nakupanda/bootstrap3-dialog.git",
             "reference": "3dd11d586f78de75356af418907ec6e3b347377c"
         },
         "dist": {
