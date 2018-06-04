@@ -60,7 +60,7 @@ class UserData extends \yii\db\ActiveRecord
             'face_path' => '图像路径',
             'province_id' => '省份',
             'city_id' => '城市',
-            'area_id' => '市',
+            'area_id' => '县/区',
             'reg_time' => '注册时间',
             'nickname' => '昵称',
         ];
