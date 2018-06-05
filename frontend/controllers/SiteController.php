@@ -109,11 +109,10 @@ class SiteController extends Controller
 				->one();
 						
 			if($user){
-				$model = new \frontend\models\LoginForm();
-				$phone = $user['mobile_phone'];
-				$p = $user['password'];
+				$info = \frontend\models\User::find()->where(['in', 'user_id', $user['user_id']])->one();
+		        Yii::$app->user->login($info);
 				
-				return $this->render('/login/index', ['model' => $model, 'phone' => $phone, 'password' => $p]);
+				return $this->render('/site/index');
 			}else{
 				$k = \frontend\models\Site::getK(); //获取程序生成account_id
 				$comm = Community::find() //获取小区
@@ -150,7 +149,7 @@ class SiteController extends Controller
 	
 	public function actionPhone()
     {
-		
+		//验证用户注册时资料
 		foreach($_POST as $key => $post);
 	    $info = explode(',', $key);
 		
@@ -239,7 +238,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionRequestPasswordReset()
+    public function actionPr()
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {

@@ -138,8 +138,8 @@ class LoginController extends Controller
 		
 		$nickname = $info['nickname'] ; //用户昵称
 		
-		if(empty($nick)){
-			$nick == $nickname;
+		if(empty($user_name)){
+			$user_name == $nickname;
 		}
 		
 		$account = new UserAccount(); //实例化模型
@@ -157,7 +157,9 @@ class LoginController extends Controller
 		$transaction = Yii::$app->db->beginTransaction();
 		try{
 		    $yes = $account->save(); // 保存
-            
+			
+            $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+			
 		    $ship = new UserRealestate();
 		    $ship->account_id =  $account_id;
 		    $ship->realestate_id = $name;
@@ -177,6 +179,8 @@ class LoginController extends Controller
 			
 			$u = $userdata->save(); //保存用户资料
 			if($yes && $r && $u){
+				$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
+		        Yii::$app->user->login($user);
 				$transaction->commit();
 			}else{
 				$transaction->rollback();
@@ -185,9 +189,11 @@ class LoginController extends Controller
 			print_r($e);
 		}
 		
-		$model = new LoginForm();
-		
-		return $this->render('/login/index', ['model' => $model, 'phone' => $phone, 'password' => $p]);
+		if($user){
+			return $this->render('/site/index');
+		}else{
+			return $this->redirect('/login/login');
+		}		
 	}
 	
 	//裕家人开放平台授权回调地址

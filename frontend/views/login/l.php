@@ -85,7 +85,7 @@ $this->title = '用户登录';
 			<div id="remember"><?= $form->field($model, 'rememberMe')->checkbox() ?></div>
 			
             <div id="forget">
-				<a href="<?= Url::to(['/register/register']) ?>">忘记密码</a>
+				<a href="<?= Url::to(['/site/pr']) ?>">忘记密码</a>
             </div>
 
             <div id="login" style="width: 80%; margin: auto">
