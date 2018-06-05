@@ -87,42 +87,33 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//		$province = \common\models\Area::getProvince();
-//		print_r($province);exit;
-//		$get = $_GET;
-//		if(isset($get['code'])){
-//			$code = $get['code']; //获取登录返回的code
-//		    $appid = 'wx61eec3717a800533';  //开发平台应用 APPID
-//		    $secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
-//		    $output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
-//		    $arr = json_decode($output, true); //将json数组转换成普通数组
-//		    
-//		    $token = $arr['access_token']; //提取access_token
-//		    $openid = $arr['openid']; //提取openID
-//		    
-//		    $info = Login::Info($token, $openid); //查询登录用户信息
-//			$w_info = json_decode($info, true); //将json数据转换普通数组
-			
-			$w_info = array('openid' => 'oRJDt0vfa8Sq4XdAJu7paZ-ZfeZQ',
-                            'nickname' => '裕达物业管理号',
-                            'sex' => 0,
-                            'language' => 'zh_CN',
-                            'city' => '',
-                            'province' => '',
-                            'country' => '',
-                            'headimgurl' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJicudxYLPZkb7gCk8xYsrElU6cAeKWlGKyTWAl7rrVfkm4pW2PoHMGYl0YJ10H1epW66oIv8bSUSw/132',
-                            'privilege' => Array(),
-                            'unionid' => 'oHq83uCJG5IVZQzV4e-cZi3uBk28');
-			
+		$get = $_GET;
+		if(isset($get['code'])){
+			$code = $get['code']; //获取登录返回的code
+		    $appid = 'wx61eec3717a800533';  //开发平台应用 APPID
+		    $secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
+		    $output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
+		    $arr = json_decode($output, true); //将json数组转换成普通数组
+		    
+		    $token = $arr['access_token']; //提取access_token
+		    $openid = $arr['openid']; //提取openID
+		    
+		    $info = Login::Info($token, $openid); //查询登录用户信息
+			$w_info = json_decode($info, true); //将json数据转换普通数组
+						
 			$openid = $w_info['openid']; //提取openID
 			
 			$user = UserAccount::find() //查询用户是否存在
 				->where(['in', 'weixin_openid', $openid])
 				->asArray()
-				->one();			
-			
-			if(!$user){
-				return $this->render('index');
+				->one();
+						
+			if($user){
+				$model = new \frontend\models\LoginForm();
+				$phone = $user['mobile_phone'];
+				$p = $user['password'];
+				
+				return $this->render('/login/index', ['model' => $model, 'phone' => $phone, 'password' => $p]);
 			}else{
 				$k = \frontend\models\Site::getK(); //获取程序生成account_id
 				$comm = Community::find() //获取小区
@@ -145,10 +136,10 @@ class SiteController extends Controller
 			    	'comm' => $comm,
 			    	'w_info' => $w_info
 		        ]);
-//			}  
-		}/*else{
+			}  
+		}else{
 			return $this->render('index');
-		}*/		 
+		}	 
     }
 	
 	public function actionLoad()
@@ -159,13 +150,18 @@ class SiteController extends Controller
 	
 	public function actionPhone()
     {
-		foreach($_POST as $key => $p);
-	
-		$r =  Realestate::find()
-			->where(['owners_cellphone' => $key])
-			->asArray()
-			->one();
-		if($r){
+		
+		foreach($_POST as $key => $post);
+	    $info = explode(',', $key);
+		
+		$p =  Realestate::find()
+		    ->andwhere(['owners_cellphone' => reset($info)])
+			->andwhere(['in', 'realestate_id', $info['1']])
+		    ->andwhere(['owners_name' => end($info)])
+		    ->asArray()
+		    ->one();
+		
+		if($p){
 			return true;
 		}else{
 			return false;

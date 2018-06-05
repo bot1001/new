@@ -57,7 +57,7 @@ $this->title = '用户注册';
                             ]); ?>
 						</div>
 
-						<div class="col-lg-4">
+						<div id="test" class="col-lg-4">
 							<?= $form->field($data, 'area_id')->widget(DepDrop::classname(), [
                                 'type' => DepDrop::TYPE_SELECT2,
                                 'options'=>['id'=>'area'],
@@ -178,7 +178,7 @@ $this->title = '用户注册';
 					</div>
 
 					<div id="submit" align="center">
-						<input type="submit" value="确定" disabled class="btn info"></nput>
+						<input type="submit" value="确定" disabled class="btn info" ></input>
 					</div>
 
 					<?php ActiveForm::end(); ?>
@@ -189,33 +189,40 @@ $this->title = '用户注册';
     
     <script>
 		var oBtn = document.getElementById('phone');
+		var oBt = document.getElementById('name');
+		var oB = document.getElementById('owners');
 		
-		if('onkeydown' in oBtn){ 
-                oBtn.addEventListener("change",getWord,false); 
+		if('onkeydown' in oBtn){ //监听器
+                oBtn.addEventListener("change", phone, false); 
+                oBt.addEventListener("change", phone, false); 
+                oB.addEventListener("change", phone, false); 
+            }else{ 
+                oBtn.onpropertychange = getWord; 
+                oB.onpropertychange = getWord; 
             }
 		
-		function change() {
+		function phone() {
+			o = oBtn.value+','+oBt.value+','+oB.value;
             $.ajax({
                 type: "POST",//方法类型
-                dataType: "json",//预期服务器返回的数据类型document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
-                url: "/site/phone" ,//url
-                data: oBtn.value,
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/site/phone" ,//验证地址
+                data: o,
                 success: function (result) {
                     if (result == 1) {
-//                        alert("手机号码验证成功！");
-						document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info"></nput>';
+						document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info"></input>';
+						alert("信息验证成功！");
                     };
                 },
                 error : function() {
-                    alert("手机号码验证失败！");
+					document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info"></input>';
+                    alert("手机号码或姓名验证失败！");
                 }
             });
         }
 		
-        function getWord(){
-			change();
-        }
-
     </script>
+    
+
     
 </div>

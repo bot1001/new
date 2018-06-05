@@ -46,9 +46,9 @@ AppAsset::register($this);
         $menuItems[] = ['label' => '登录', 'url' => ['/login/login']];
     } else {
         $menuItems[] = '<li>'
-            . Html::beginForm(['/login/logout'], 'post')
+            . Html::beginForm(['/pay/logout'], 'post')
             . Html::submitButton(
-                '退出 (' . Yii::$app->user->identity->username . ')',
+                '退出 (' . Yii::$app->user->identity->user_name . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()

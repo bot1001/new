@@ -130,7 +130,8 @@ class LoginController extends Controller
 		
 		$user_name = $account['user_name']; //接收用户昵称
 		$mobile = $account['mobile_phone']; //接收登录手机号码
-		$password = md5($account['password']); //接收并加密密码
+		$p = $account['password'];
+		$password = md5($p); //接收并加密密码
 		$weixin_openid = $account['weixin_openid']; //接收微信用户的openID
 		$account_id = $account['account_id']; //接收用户ID（程序随机生成）
 		$unionid = $account['wx_unionid']; //接收微信唯一编码（暂时存着）
@@ -140,10 +141,6 @@ class LoginController extends Controller
 		if(empty($nick)){
 			$nick == $nickname;
 		}
-				
-//		echo '<pre >';
-//		print_r($r_p);
-		exit;
 		
 		$account = new UserAccount(); //实例化模型
 		
@@ -161,40 +158,36 @@ class LoginController extends Controller
 		try{
 		    $yes = $account->save(); // 保存
             
-		    if($yes){
-		    	$ship = new UserRealestate();
-		    	$ship->account_id =  $account_id;
-		    	$ship->realestate_id = $name;
-		    	$r = $ship->save();
+		    $ship = new UserRealestate();
+		    $ship->account_id =  $account_id;
+		    $ship->realestate_id = $name;
+			
+		    $r = $ship->save(); //保存用户关联信息
 				
-				if($r){
-					$userdata = new UserData();
-					
-					$userdata->account_id = $account_id;
-					$userdata->real_name = $nick;
-					$userdata->gender = $gender;
-					$userdata->face_path = $face;
-					$userdata->province_id = $province;
-					$userdata->city_id = $city;
-					$userdata->area_id = $area;
-					$userdata->nickname = $nick;
-					
-					$u = $userdata->save();
-					if($u){
-						$transaction->commit();
-					}
-				}else{
-					$transaction->rollback();
-				}
-		    }else{
+			$userdata = new UserData();
+			
+			$userdata->account_id = $account_id;
+			$userdata->real_name = $nick;
+			$userdata->gender = $gender;
+			$userdata->face_path = $face;
+			$userdata->province_id = $province;
+			$userdata->city_id = $city;
+			$userdata->area_id = $area;
+			$userdata->nickname = $nick;
+			
+			$u = $userdata->save(); //保存用户资料
+			if($yes && $r && $u){
+				$transaction->commit();
+			}else{
 				$transaction->rollback();
-			}
-		    $transaction->commit();
+			}		    
 		}catch(\Exception $e){
-			echo '<pre>';
 			print_r($e);
 		}
-		return $this->redirect('/site/index');
+		
+		$model = new LoginForm();
+		
+		return $this->render('/login/index', ['model' => $model, 'phone' => $phone, 'password' => $p]);
 	}
 	
 	//裕家人开放平台授权回调地址
@@ -202,14 +195,7 @@ class LoginController extends Controller
 	{
 		return $this->render('index');
 	}
-	
-	//裕家人开放平台授权回调测试
-	public function actionTest()
-	{
-		echo '<pre >';
-		print_r($_GET);
-	}
-	
+		
 	//用户登录
 	public function actionLogin()
     {
@@ -220,22 +206,13 @@ class LoginController extends Controller
         }
 
         $model = new LoginForm();
+		
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
-            $model->password = '';
-
             return $this->render('l', [
                 'model' => $model,
             ]);
         }
-    }
-	
-	//用户退出
-	public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
     }
 }

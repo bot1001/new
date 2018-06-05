@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\helpers\Url;
 use yii\base\Model;
 
 
@@ -46,5 +47,5 @@ class Login extends Model
         curl_close($u);
 				
 		return $user;
-	}    
+	}	
 }
