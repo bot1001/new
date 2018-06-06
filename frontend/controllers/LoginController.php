@@ -213,7 +213,13 @@ class LoginController extends Controller
 
         $model = new LoginForm();
 		
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+		{
+			$post = $_POST['LoginForm'];
+			$phone = $post['mobile_phone'];
+			
+			\frontend\models\Site::saveLogin($phone);
+//			print_r($post);exit;
             return $this->goBack();
         } else {
             return $this->render('l', [

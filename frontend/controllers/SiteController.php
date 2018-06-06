@@ -8,7 +8,6 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use frontend\models\Login;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -88,19 +87,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
 		$get = $_GET;
-		if(isset($get['code'])){
-			$code = $get['code']; //获取登录返回的code
-		    $appid = 'wx61eec3717a800533';  //开发平台应用 APPID
-		    $secret = '1cb3e3afab132b9d1d4777e9f27cdbf2'; //开放平台应用秘钥
-		    $output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
-		    $arr = json_decode($output, true); //将json数组转换成普通数组
-		    
-		    $token = $arr['access_token']; //提取access_token
-		    $openid = $arr['openid']; //提取openID
-		    
-		    $info = Login::Info($token, $openid); //查询登录用户信息
-			$w_info = json_decode($info, true); //将json数据转换普通数组
-						
+		if(isset($get['code']))
+		{
+			$w_info = \frontend\models\Site::getMessage($get);
+				
 			$openid = $w_info['openid']; //提取openID
 			
 			$user = UserAccount::find() //查询用户是否存在
@@ -109,18 +99,11 @@ class SiteController extends Controller
 				->one();
 						
 			if($user){
-				$info = \frontend\models\User::find()->where(['in', 'user_id', $user['user_id']])->one();
-		        Yii::$app->user->login($info);
-				
-				$user = Yii::$app->user->identity; //获取用户信息
+				\frontend\models\Site::saveMessage($user, $w_info);
 				
 				return $this->redirect('/site/index');
 			}else{
 				$k = \frontend\models\Site::getK(); //获取程序生成account_id
-				$comm = Community::find() //获取小区
-		    	           ->select('community_name, community_id')
-		    	           ->indexBy('community_id')
-		    	           ->column();
 				
 				$province = \common\models\Area::getProvince();
 				
@@ -134,7 +117,6 @@ class SiteController extends Controller
 			    	'k' => $k,
 			    	'data' => $data,
 					'province' => $province,
-			    	'comm' => $comm,
 			    	'w_info' => $w_info
 		        ]);
 			}  

@@ -65,7 +65,11 @@ if(confirm('您确定要删除吗？')){
             url: '/user-invoice/del',
             data: {ids:keys},
             type: 'post',
-                   })
+			success: function(is){
+			    alert("成功删除："+is+"条！");
+				location.reload();
+			}
+        })
     }
 });
 
