@@ -28,43 +28,14 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-		'brandLabel' => "<image class='header-logo' src='/image/logo01.png' width = '30' height = '34' />",
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-default navbar-fixed-top navbar',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => '首页', 'url' => ['/site/index']],
-        ['label' => '互动	', 'url' => ['/site/about']],
-        ['label' => '我的', 'url' => ['/site/contact']],
-    ];
-
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => '登录', 'url' => ['/login/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/pay/logout'], 'post')
-            . Html::submitButton(
-                '退出 (' . Yii::$app->user->identity->user_name . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= $content ?>
-    </div>
+    <?= $this->render( 'header.php' ) ?>
+    <table width="1190" border="0" cellspacing="0" cellpadding="0" align="center">
+       <tbody>
+         <tr>
+           <td><?= $content ?></td>
+         </tr>
+       </tbody>
+     </table>    
 </div>
 
 <?php $this->endBody() ?>

@@ -112,7 +112,9 @@ class SiteController extends Controller
 				$info = \frontend\models\User::find()->where(['in', 'user_id', $user['user_id']])->one();
 		        Yii::$app->user->login($info);
 				
-				return $this->render('/site/index');
+				$user = Yii::$app->user->identity; //获取用户信息
+				
+				return $this->redirect('/site/index');
 			}else{
 				$k = \frontend\models\Site::getK(); //获取程序生成account_id
 				$comm = Community::find() //获取小区

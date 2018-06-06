@@ -88,6 +88,7 @@ class SiteController extends Controller
 		
 		return true;
 	}
+	
     public function actionLogin()
     {
 		$this->layout = 'main1';

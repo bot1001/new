@@ -28,8 +28,6 @@ AppAsset::register($this);
     </div>
 </div>
 
-
-
 <?php $this->endBody() ?>
 </html>
 <?php $this->endPage() ?>

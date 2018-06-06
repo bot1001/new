@@ -26,21 +26,38 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
-	<style>
-		l{
-			font-family: 仿宋;
-			font-size:30px;
-			font-weight: 600;
-		}
-	</style>
+
 <div class="wrap">
     <?php
     NavBar::begin([
-		'brandLabel' => '<l>'."广西裕达物业服务有限公司欢迎您！".'</l>',
+		'brandLabel' => "<image class='header-logo' src='/image/logo01.png' width = '30' height = '34' />",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top navbar',
         ],
+    ]);
+    $menuItems = [
+        ['label' => '首页', 'url' => ['/site/index']],
+        ['label' => '互动	', 'url' => ['/site/about']],
+        ['label' => '我的', 'url' => ['/site/contact']],
+    ];
+
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => '登录', 'url' => ['/login/login']];
+    } else {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/pay/logout'], 'post')
+            . Html::submitButton(
+                '退出 (' . Yii::$app->user->identity->user_name . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $menuItems,
     ]);
     NavBar::end();
     ?>
