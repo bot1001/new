@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'payment_time',
 			 'value' => function($model){
              	$time = $model->payment_time;
-             	if($time == '1970-01-01'){
+             	if($time == '1970-01-01 00:00:00'){
              		return '';
              	}else{
              		return $time;

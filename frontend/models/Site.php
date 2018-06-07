@@ -48,7 +48,7 @@ class Site extends ActiveRecord
 		
 		//获取关联房屋信息
 		$house = (new \yii\db\Query)
-			->select('community_realestate.room_number as number,community_realestate.room_name as room, 
+			->select('community_realestate.room_number as number, community_realestate.room_name as room, 
 			community_realestate.owners_name as name, community_realestate.owners_cellphone as phone,
 			community_realestate.acreage as acreage, community_realestate.finish as finish,
 			community_realestate.inherit as inherit, community_realestate.decoration as decoration,
@@ -56,7 +56,7 @@ class Site extends ActiveRecord
 			community_realestate.orientation as orientation, community_realestate.property as property,
 			community_basic.community_name as community,community_basic.community_id as community_id, 
 			community_building.building_id as building_id,community_building.building_name as building,
-			user_relationship_realestate.realestate_id as id')
+			user_relationship_realestate.realestate_id as id, community_realestate.acreage as acreage')
 			->from('community_realestate')
 			->join('inner join', 'user_relationship_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
@@ -108,7 +108,7 @@ class Site extends ActiveRecord
 			community_realestate.orientation as orientation, community_realestate.property as property,
 			community_basic.community_name as community,community_basic.community_id as community_id, 
 			community_building.building_id as building_id,community_building.building_name as building,
-			user_relationship_realestate.realestate_id as id')
+			user_relationship_realestate.realestate_id as id, community_realestate.acreage as acreage')
 			->from('community_realestate')
 			->join('inner join', 'user_relationship_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')

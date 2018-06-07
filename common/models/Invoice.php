@@ -38,12 +38,12 @@ class Invoice extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'create_time', 'invoice_status'], 'required'],
+            [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'month', 'invoice_status'], 'required'],
             [['community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
             [['invoice_amount'], 'number'],
-            [['create_time', 'order_id', 'invoice_notes', 'update_time'], 'string'],
-            [['year'], 'string', 'max' => 4],
-            [['month'], 'integer', 'min' => 1,'max' => 4],
+            [['order_id', 'invoice_notes', 'update_time'], 'string'],
+            [['year', 'month'], 'string', 'max' => 4],
+            [['month'], 'integer', 'min' => 1,'max' => 40],
             [['description'], 'string', 'max' => 200],
             [['payment_time'], 'string', 'max' => 22],
             [['community_id', 'building_id', 'realestate_id', 'description', 'year', 'month'], 'unique', 'targetAttribute' => ['community_id', 'building_id', 'realestate_id', 'description', 'year', 'month']],
@@ -84,26 +84,52 @@ class Invoice extends \yii\db\ActiveRecord
 	public static function prepay($cost, $month, $id)
 	{
 		$house = $_SESSION['house']['0']; //获取房号
-		$d = date('Y-m'); //当前月
+		$date = date('Y-m'); //当前月
 		
-		$i = 0;
+		$i = 1;
+		$sale = 0; //优惠计算
 		for($i; $i <= $month; $i++)
 		{
-		    $date = date('Y-m', strtotime("+1 month", strtotime($d))); //获取次月时间
+		    $date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
 		    
 		    $time = explode('-', $date); //拆分年月
+			$sale ++;
 		    
 		    //遍历并重组费项
 		    foreach($cost as $c){
 		    	$invoice['id'] = reset($id);
-		    	$invoice['community'] = $house['community_id'];
-		    	$invoice['building'] = $house['building_id'];
-		    	$invoice['description'] = $c['cost'];
-		    	$invoice['notes'] = $c['property'];
-		    	$invoice['amount'] = $c['price'];
+				$invoice['community_id'] = $house['community_id'];
+		    	$invoice['community'] = $house['community'];
+		    	$invoice['building_id'] = $house['building_id'];
+		    	$invoice['building'] = $house['building'];
+		    	$invoice['year'] = reset($time);
+		    	$invoice['month'] = end($time);
+				$invoice['description'] = $c['cost'];
+				
+				//判断物业费
+				if($c['formula'] == '1'){
+					$amount = $c['price']*$house['acreage'];
+					$invoice['amount'] = number_format($amount, 2);
+				}else{
+					$amount = $c['price'];
+					$invoice['amount'] = number_format($price, 2);
+				}
+				
+				//判断优惠
+				if($sale%13 == 0){
+					$invoice['sale'] = '1';
+					$invoice['notes'] = '缴费优惠';
+				}else{
+					$invoice['sale'] = '0';
+					$invoice['notes'] = $c['property'];
+				}
+		    	
 		    }
-			
-			$prepay[] = $invoice;
+			if(isset($invoice)){
+				$prepay[] = $invoice;
+			}else{
+				$prepay = '';
+			}
 		}
 		return $prepay;
 	}

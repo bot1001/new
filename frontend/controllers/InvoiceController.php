@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Invoice;
+use common\models\OrderProducts as Order;
 use frontend\models\InvoiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,7 +96,8 @@ class InvoiceController extends Controller
 		$id = array_column($_SESSION['house'], 'id'); //提取关联房屋id
 		
 		$cost = (new \yii\db\Query()) //查找房屋绑定的固定费用
-			->select('cost_name.cost_name as cost, cost_name.price as price, cost_name.property as property')
+			->select('cost_name.cost_name as cost, cost_name.price as price, 
+			cost_name.property as property, cost_name.formula as formula')
 			->from('cost_name')
 			->join('inner join', 'cost_relation', 'cost_relation.cost_id = cost_name.cost_id')
 			->andwhere(['in', 'cost_relation.realestate_id', $id])
@@ -110,16 +112,61 @@ class InvoiceController extends Controller
 			//计算预交费项
 			$prepay = Invoice::prepay($cost, $month, $id);
 			
-			echo '<pre />';
-			print_r($prepay);exit;
-            return $this->redirect(['index']);
+			
+            return $this->render('prepay', ['prepay' => $prepay, 'cost' => $cost, 'month' => $month, 'id' => $id]);
         }
-
-        return $this->render('create', [
+		
+		return $this->render('create', [
             'model' => $model,
 			'cost' => $cost,
         ]);
     }
+	
+	//用户预交保存操作
+	public function actionNew()
+	{
+		$get = $_GET; //接收传过来的数据
+		
+		$id = $get['id']; // 接收房号
+		$month = $get['month']; //接收预交费月数
+		$cost = $get['cost']; //接收预交费项
+		$amount = $get['amount']; //接收需要支付的金额
+		
+		$prepay = Invoice::prepay($cost, $month, $id); //组合缴费项目
+		
+		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
+		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		$des = '物业相关费用'; //订单描述
+		
+		foreach($prepay as $key => $pre)
+		{$model = new Invoice(); //实例化费项模型
+			$model->community_id = $pre['community_id'];
+		    $model->building_id = $pre['building_id'];
+		    $model->realestate_id = $pre['id'];
+		    $model->year = $pre['year'];
+			$model->month = $pre['month'];
+			$model->description = $pre['description'];
+		    $model->create_time = time();
+		    $model->invoice_amount = $pre['amount'];
+		    $model->invoice_notes = $pre['notes'];
+		    $model->invoice_status = '0';
+			
+		    $e = $model->save(); //保存
+			$p_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+			
+			if($e){
+				$order = new Order(); //实例化订单产品ID
+				$order->order_id = $order_id;
+				$order->product_id = $p_id;
+				$order->product_quantity = '1';
+				$order->sale = $pre['sale'];
+				
+				$order->save(); //保存
+			}
+		}
+		
+		return $this->redirect(['/order/create', 'order_id' => $order_id, 'amount' => $amount]);
+	}
 
     /**
      * Updates an existing Invoice model.
