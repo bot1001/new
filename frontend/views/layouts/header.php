@@ -69,7 +69,7 @@ use yii\helpers\Url;
 				
 				<td id="td"><a href='#'>房屋资料</a></td>
 				
-				<td id="td"><a href='#'>房屋缴费</a></td>
+				<td id="td"><a href='<?= Url::to('/invoice/index')?>'>房屋缴费</a></td>
 				
 				<td id="td"><a href='#'>客户服务</a></td>
 				

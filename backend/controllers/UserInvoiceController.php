@@ -330,14 +330,14 @@ class UserInvoiceController extends Controller
 	{
 		$ids = Yii::$app->request->post();
 
-		$is = 0;
+		$is = 0; //删除条数
 		//删除代码
 		foreach ( $ids as $id );
 		foreach ( $id as $i ) {
 			$this->findModel( $id )->delete();
 			$is ++;
 		}
-		return $is;//返回请求页面
+		return $is;
 	}
 
 	//缴费

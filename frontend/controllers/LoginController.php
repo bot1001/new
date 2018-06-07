@@ -178,9 +178,13 @@ class LoginController extends Controller
 			$userdata->nickname = $nick;
 			
 			$u = $userdata->save(); //保存用户资料
+			
 			if($yes && $r && $u){
 				$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
-		        Yii::$app->user->login($user);
+								
+				$w_info = $info;
+				\frontend\models\User::saveMessage($user, $w_info);
+				
 				$transaction->commit();
 			}else{
 				$transaction->rollback();
@@ -219,7 +223,7 @@ class LoginController extends Controller
 			$phone = $post['mobile_phone'];
 			
 			\frontend\models\Site::saveLogin($phone);
-//			print_r($post);exit;
+			
             return $this->goBack();
         } else {
             return $this->render('l', [

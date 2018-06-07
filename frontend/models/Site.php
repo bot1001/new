@@ -54,7 +54,9 @@ class Site extends ActiveRecord
 			community_realestate.inherit as inherit, community_realestate.decoration as decoration,
 			community_realestate.commencement as commencement, community_realestate.delivery as delivery,
 			community_realestate.orientation as orientation, community_realestate.property as property,
-			community_basic.community_name as community, community_building.building_name as building')
+			community_basic.community_name as community,community_basic.community_id as community_id, 
+			community_building.building_id as building_id,community_building.building_name as building,
+			user_relationship_realestate.realestate_id as id')
 			->from('community_realestate')
 			->join('inner join', 'user_relationship_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
@@ -104,7 +106,9 @@ class Site extends ActiveRecord
 			community_realestate.inherit as inherit, community_realestate.decoration as decoration,
 			community_realestate.commencement as commencement, community_realestate.delivery as delivery,
 			community_realestate.orientation as orientation, community_realestate.property as property,
-			community_basic.community_name as community, community_building.building_name as building')
+			community_basic.community_name as community,community_basic.community_id as community_id, 
+			community_building.building_id as building_id,community_building.building_name as building,
+			user_relationship_realestate.realestate_id as id')
 			->from('community_realestate')
 			->join('inner join', 'user_relationship_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
