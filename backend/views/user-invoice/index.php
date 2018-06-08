@@ -226,7 +226,7 @@ $this->title = '缴费管理';
 			'width' => ''
 		],
 		[ 'attribute' => 'invoice_amount',
-			'refreshGrid' => 'true',
+//			'refreshGrid' => 'true',
 			'pageSummary' => true,
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
@@ -367,7 +367,7 @@ $this->title = '缴费管理';
 				'data-target' => '#update-modal', 
 		        'class' => 'btn btn-success new',
 			] ) . ' ' .
-			Html::a( '导入', 'import', [
+			Html::a( '<span class="glyphicon glyphicon-cloud-upload"></span>', 'import', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info import',

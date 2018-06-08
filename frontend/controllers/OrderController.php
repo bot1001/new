@@ -50,12 +50,10 @@ class OrderController extends Controller
 			->all();
 		
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$status = [ '1' => '支付宝', '2' => '微信'];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'data' => $data,
-			'status' => $status
         ]);
     }
 
@@ -171,6 +169,20 @@ class OrderController extends Controller
             'model' => $model,
         ]);
     }
+	
+	//拉起支付
+	public function actionPay($id)
+	{
+		$order = Order::find()->where(['in', 'id', $id])->asArray()->one();
+		
+		return $this->render('pay', ['order' => $order]);
+	}
+	
+	//打印订单
+	public function actionPrint()
+	{
+		echo 'test';
+	}
 
     /**
      * Deletes an existing Order model.

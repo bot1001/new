@@ -2,7 +2,6 @@
 
 use yii\ helpers\ Html;
 use yii\ helpers\ Url;
-use kartik\ grid\ GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\OrderSearch */
@@ -50,6 +49,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			height: 60px;
 		}
 	</style>
+	<?php //echo '<pre />'; print_r($data); exit; ?>
 	<table id="order" border="0" cellspacing="0" cellpadding="0">
 		<?php foreach($data as $d): $d = (object)$d ?>
 		<tr id="tbody">
@@ -62,18 +62,19 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         
         <tr id="img">
         	<td id="center"><img id="order_img" src="/image/logo.png" /></td>
-        	<td id="center"><?= $d->address; ?></td>
+        	<td id="center"><a href="<?= Url::to(['view', 'id' => $d->id]) ?>"><?= $d->address; ?></a></td>
         	<td id="center"><?= $d->name; ?></td>
         	<td id="center"><?= $d->description; ?></td>
         	<td id="right"><?= $d->amount; ?></td>
         	<td id="center" width="100px">
         	<?php
-				if(!empty($d->gateway)){
-					echo Html::a($status[$d->gateway], ['view', 'id' => $d->id], ['class' => 'btn btn-success']);
-				}else{
-					echo Html::a('<span class="glyphicon glyphicon-credit-card"></span>', ['view', 'id' => $d->id], ['class' => 'btn btn-success']); 
+				if($d->status == '1'){
+					echo Html::a('<span class="glyphicon glyphicon-credit-card"></span>', ['pay', 'id' => $d->id], ['class' => 'btn btn-success']);
+				}elseif($d->status == '2'){
+					 echo Html::a('<span class="glyphicon glyphicon-print"></span>', ['print', 'id' => $d->id], ['class' => 'btn btn-success']);
+				}elseif($d->status == '3'){
+					 echo Html::a('<span class="glyphicon glyphicon-remove"></span>', '#', ['class' => 'btn btn-warning']);
 				}
-				 
 				?></td>
         </tr>
         

@@ -41,7 +41,7 @@ $this->title = '费用预交';
 </style>
 
 <div>
-	<table width="500" border="1" align="center" style="position: relative; margin-top: 20px;">
+	<table width="800" border="1" align="center" style="position: relative; margin-top: 20px;">
 		<thead>
 			<tr>
 				<th id="prepay">序号</th>
@@ -53,41 +53,48 @@ $this->title = '费用预交';
 			</tr>
 		</thead>
 		<tbody>
-			<?php $sum = 0; $sale = 0;$i = 0; ?>
+			<?php $sum = 0; $sale = 0;$i = 0; $sale_sum = 0;?>
 			<?php foreach($invoice as $p): $p= (object)$p; ?>
 			<tr>
 				<td id="center">
 					<?php $i ++; 
 					echo $i;
 					if($p->description == '物业费'){
-		    	    	if($p->year >= date('Y'))
+		    	    	if($p->year > date('Y'))
 		    	    	{
-		    	    		if($p->month > date('m'))
+		    	    		$sale ++; //判断预交优惠信息
+		    	    	}elseif($p->year == date('Y')){
+							if($p->month > date('m'))
 		    	    		{
 		    	    			$sale ++; //判断预交信息
 		    	    		}
-		    	    	}
+						}
 		    	    }
 					?>
 				</td>
+				
 				<td id="center">
 					<?= $p->year; ?>
 				</td>
+				
 				<td id="center">
 					<?= $p->month; ?>
 				</td>
+				
 				<td id="center">
 					<?= $p->description; ?>
 				</td>
+				
 				<td id="center">
 					<?php 
 					echo $p->amount;
 					
 					$sum += $p->amount; //计算合计金额
 					if($sale%13 == '0'){
-                    	$sale += $p->amount; //统计优惠金额
+                    	$sale_sum += $p->amount; //统计优惠金额
                     } ?>
 				</td>
+				
 				<td id="center">
 					<?= $p->notes; ?>
 				</td>
@@ -98,16 +105,16 @@ $this->title = '费用预交';
 				<td id='right'>共:&nbsp;&nbsp;&nbsp;</td>
 				<td id='center'><?= $i.'条' ?></td>
 				<td id='right'>优惠</td>
-				<td id='center'><?= number_format($sale, 2) ?></td>
+				<td id='center'><?= number_format($sale_sum, 2) ?></td>
 				<td id='right'>合计:&nbsp;&nbsp;&nbsp;</td>
 				<td id="left">&nbsp;&nbsp;&nbsp;
-					<?= number_format($sum, 2).'元' ?>
+					<?= number_format($sum-$sale_sum, 2).'元' ?>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<div id="pp">
-		<a href="<?= Url::to(['/invoice/pay', 'amount' => $sum-$sale]); ?>">Going…</a>
+		<a href="<?= Url::to(['/invoice/pay', 'amount' => $sum-$sale_sum]); ?>">Going…</a>
 	</div>
 </div>

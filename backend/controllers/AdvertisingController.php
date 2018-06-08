@@ -36,7 +36,7 @@ class AdvertisingController extends Controller
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
-                    "imagePathFormat" => "/images/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+                    "imagePathFormat" => "/img/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
                 ],
             ]
         ];

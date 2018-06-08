@@ -85,9 +85,11 @@ class InvoiceController extends Controller
      */
     public function actionView()
     {
+		$id = $_SESSION['home']['id'];
 		$invoice = Invoice::find()
 			->select('invoice_id, year, month, description, invoice_amount as amount, invoice_notes as notes')
-			->where(['in', 'invoice_status', '0'])
+			->andwhere(['in', 'invoice_status', '0'])
+			->andwhere(['in', 'realestate_id', $id])
 			->asArray()
 			->all();
 		
@@ -202,33 +204,38 @@ class InvoiceController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionPay()
+    public function actionPay($amount)
     {
         $id = $_SESSION['home']['id'];
 		$invoice_id = Invoice::find()
 			->select('invoice_id, year, month, description, invoice_amount')
-			->where(['in', 'invoice_status', '0'])
+			->andwhere(['in', 'invoice_status', '0'])
+			->andwhere(['in', 'realestate_id', $id])
 			->asArray()
 			->all();
 		
 		$order_id = \common\models\Order::getOrder(); //获取订单编号
 		
-		$i = 0;
-		$sale = 0;
-		$amount = 0;
+		$i = 0; //循环次数
+		$sale = 0; //优惠标记
+		$count = count($invoice_id); //总条数
 		
 		$transaction = Yii::$app->db->beginTransaction();
 		try{
 			foreach($invoice_id as $invoice)
 		    {
-		    	if($invoice['description'] == '物业费'){
-		    		if($invoice['year'] >= date('Y'))
+				$i ++;
+		    	if($invoice['description'] == '物业费')
+				{
+		    		if($invoice['year'] > date('Y'))
 		    		{
-		    			if($invoice['month'] > date('m'))
+		    			$sale ++; //标记预交物业费信息
+		    		}elseif($invoice['year'] == date('Y')){
+						if($invoice['month'] > date('m'))
 		    			{
-		    				$sale ++; //判断预交信息
+		    				$sale ++; //标记预交物业费信息
 		    			}
-		    		}
+					}
 		    	}
 		    	
 		    	$order = new Order(); //实例化订单产品ID
@@ -237,17 +244,16 @@ class InvoiceController extends Controller
 		        $order->product_id = $invoice['invoice_id'];
 		        $order->product_quantity = '1';
 		    	
-		    	if($sale%13 == 0){
+		    	if($sale%13 == 0){ //判断是否满足优惠条件
 		    		$order->sale = '1';
 		    	}else{
 					$order->sale = '0';
-					$amount += $invoice['invoice_amount']; //合计金额
 				}
 		    	
 		        $E = $order->save(); //保存数据
 		    }
 			
-			if($E == count($invoice_id)){
+			if($i === $count){
 				$transaction->commit(); //提交事务
 			}else{
 				$transaction->rollback(); //事务回滚

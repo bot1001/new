@@ -116,7 +116,7 @@ class PayController extends Controller
      
 	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
 		
-		return $this->redirect(['/order/jh','f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
+		return $this->render('/order/jh',['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
 	}
 	
 	//建行主动查询
@@ -145,62 +145,22 @@ class PayController extends Controller
 		if($_GET['REMARK2'] == $key && $_GET['SUCCESS'] == 'Y')
 		{
 			$post = $_GET;
-			$order_id = $post['ORDERID']; //订单编号
-			$order_amount = $post['PAYMENT']; //交易金额
-			$payment_time = date(time());
+			$out_trade_no = $post['ORDERID']; //订单编号
+			$trade_no = $out_trade_no; //赋值交易流水号
+			$total_amount = $post['PAYMENT']; //交易金额 
+			$p_time = date(time());
 			
-			//查找订单编号是否存在
-		    $ord = OrderBasic::find()
-				->select('order_id,order_amount')
-				->andwhere(['order_id' => $order_id])
-				->andwhere(['order_amount' => $order_amount])
-				->asArray()
-				->one();
-		
-		if($ord){
-				$transaction = Yii::$app->db->beginTransaction();
-				try{
-					foreach($ord as $order){
-					    OrderBasic::updateAll(['status' => 2, //变更状态
-					    					   'payment_gateway' => 7, //变更支付方式
-					    					   'payment_number' => $order_id, // 支付编码
-					    					   'payment_time' => $payment_time // 支付时间
-					    					   ],
-					    					   'order_id = :oid', [':oid' => $order_id]
-					    				 );
-					
-					
-					$p_id = OrderProducts::find()
-						->select('product_id')
-						->where(['order_id' => $order_id])
-						->asArray()
-						->all();
-					
-						foreach($p_id as $pid){
-							UserInvoice::updateAll(['invoice_status' => 2,
-											    'payment_time' => $payment_time,
-											    'update_time' => $payment_time,
-												'order_id' => $order_id],
-									            'invoice_id = :oid', [':oid' => $pid['product_id']]
-										);
-						}
-					}
-					
-					//支付完成后自动删除二维码
-					$files = glob('images/*');
-                    foreach ($files as $file) {
-                        if (is_file($file)) {
-                            unlink($file);
-                        }
+			$pay = Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no); //修改订单相关状态函数
+			
+			if($pay == '1'){
+				//支付完成后自动删除二维码
+				$files = glob('images/*');
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
                     }
-
-					$transaction->commit();
-				}catch(\Exception $e) {
-					print_r($e);
-                    $transaction->rollback();
                 }
-			}
-			
+			}			
 		}
 		return 'success';
 	}
@@ -208,106 +168,34 @@ class PayController extends Controller
 	//现金支付变更费项状态
 	public function actionXj($order_id)
 	{
-		//获取订单费项ID
-		$i_id = OrderProducts::find()
-			->select('product_id')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->all();
+		$change = Pay::change($order_id);
 		
-		$p_time = date(time());
-		
-		    if($i_id){
-		    	foreach($i_id as $i){
-		    		
-					//变更费项状态
-		    		UserInvoice::updateAll(['payment_time' => $p_time,
-		    								'update_time' => $p_time,
-		    								'invoice_status' => '6', 
-		    								'order_id' => $order_id],
-		    							    'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							  );
-		            }
-				    //变更订单状态
-					OrderBasic::updateAll(['payment_time' => $p_time,
-										  'payment_gateway' => '6',
-										  'payment_number' => $order_id,
-										  'status' => 2],
-										  'order_id = :o_id', [':o_id' => $order_id]
-										 );
-				return $this->redirect(['/order/print','order_id' => $order_id]);
+		if($change == 1){
+			return $this->redirect(['/order/print','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
-				}
+		}
 	}
 	
 	//刷卡支付变更费项状态
 	public function actionUp($order_id)
 	{
-		//获取订单费项ID
-		$i_id = OrderProducts::find()
-			->select('product_id')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->all();
+		$change = Pay::change($order_id);
 		
-		$p_time = date(time());
-		
-		    if($i_id){
-		    	foreach($i_id as $i){
-					//变更费项状态
-		    		UserInvoice::updateAll(['payment_time' => $p_time,
-		    								'update_time' => $p_time,
-		    								'invoice_status' => '3', 
-		    								'order_id' => $order_id],
-		    							    'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							  );
-					
-		            }
-				    //变更订单状态
-					OrderBasic::updateAll(['payment_time' => $p_time,
-										  'payment_gateway' => '3',
-										  'payment_number' => $order_id,
-										  'status' => 2],
-										 'order_id = :o_id', [':o_id' => $order_id]
-										 );
-				return $this->redirect(['/order/print','order_id' => $order_id]);
+		if($change == 1){
+			return $this->redirect(['/order/print','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
-		//echo '这是刷卡支付通道'; // 费项代码 3
 	}
 	
 	//银行代缴支付变更费项状态
 	public function actionYh($order_id)
 	{
-		//获取订单费项ID
-		$i_id = OrderProducts::find()
-			->select('product_id')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->all();
+		$change = Pay::change($order_id);
 		
-		$p_time = date(time()); // 更新时间
-		
-		    if($i_id){
-		    	foreach($i_id as $i){
-					//变更费项状态
-		    		UserInvoice::updateAll(['payment_time' => $p_time,
-		    								'update_time' => $p_time,
-		    								'invoice_status' => '1', 
-		    								'order_id' => $order_id],
-		    							    'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							  );
-		           }
-				   //变更订单状态
-					OrderBasic::updateAll(['payment_time' => $p_time,
-										  'payment_gateway' => '4',
-										  'payment_number' => $order_id,
-										  'status' => 2],
-										 'order_id = :o_id', [':o_id' => $order_id]
-										 );
-				return $this->redirect(['user-invoice/index','order_id' => $order_id]);
+		if($change == 1){
+			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -316,34 +204,10 @@ class PayController extends Controller
 	//政府代缴支付变更费项状态
 	public function actionZf($order_id)
 	{
-		//获取订单费项ID
-		$i_id = OrderProducts::find()
-			->select('product_id')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->all();
+		$change = Pay::change($order_id);
 		
-		$p_time = date(time());
-		
-		    if($i_id){
-		    	foreach($i_id as $i){
-					//变更费项状态
-		    		UserInvoice::updateAll(['payment_time' => $p_time,
-		    								'update_time' => $p_time,
-		    								'invoice_status' => '5', 
-		    								'order_id' => $order_id],
-		    							    'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							  );
-					
-		            }
-				    //变更订单状态
-					OrderBasic::updateAll(['payment_time' => $p_time,
-										  'payment_gateway' => '5',
-										  'payment_number' => $order_id,
-										  'status' => 2],
-										 'order_id = :o_id', [':o_id' => $order_id]
-										 );
-				return $this->redirect(['user-invoice/index','order_id' => $order_id]);
+		if($change == 1){
+			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -408,12 +272,6 @@ class PayController extends Controller
 		$result = $serviceObj->check($arr);
 		
 		if($result) {//验证成功
-	    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    //请在这里加上商户的业务逻辑程序代
-    
-	    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-	    
-        //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
 	    
 	    //商户订单号
 	    $out_trade_no = $_POST['out_trade_no'];
@@ -425,7 +283,8 @@ class PayController extends Controller
 	    $trade_status = $_POST['trade_status'];
     
 		//支付时间
-		$p_time = $_POST['gmt_payment'];
+		$time = $_POST['gmt_payment'];
+		$p_time = strtotime($time); //转换时间戳
 		
 		//返回金额
 		$total_amount = $_POST['total_amount'];
@@ -440,49 +299,8 @@ class PayController extends Controller
 		//注意：
 		//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 			
-         }else if ($_POST['trade_status'] == 'TRADE_SUCCESS'){			 
-	    //查询order_id 和金额order_amount
-		$ord = OrderBasic::find()
-				->select('order_id,order_amount')
-				->andwhere(['order_id' => $out_trade_no])
-				->andwhere(['order_amount' => $total_amount])
-				->asArray()
-				->one();
-		
-		if($ord){
-				$transaction = Yii::$app->db->beginTransaction();
-				try{
-					foreach($ord as $order){
-					    OrderBasic::updateAll(['status' => 2, //变更状态
-					    					   'payment_gateway' => 1, //变更支付方式
-					    					   'payment_number' => $trade_no, // 支付编码
-					    					   'payment_time' => $p_time // 支付时间
-					    					   ],
-					    					   'order_id = :oid', [':oid' => $out_trade_no]
-					    				 );
-					
-					
-					$p_id = OrderProducts::find()
-						->select('product_id')
-						->where(['order_id' => $out_trade_no])
-						->asArray()
-						->all();
-					
-						foreach($p_id as $pid){
-							UserInvoice::updateAll(['invoice_status' => 2,
-											    'payment_time' => strtotime($p_time),
-											    'update_time' => strtotime($p_time),
-												'order_id' => $out_trade_no],
-									            'invoice_id = :oid', [':oid' => $pid['product_id']]
-										);
-						}
-					}
-					$transaction->commit();
-				}catch(\Exception $e) {
-					print_r($e);
-                    $transaction->rollback();
-                }
-			}
+         }else if ($_POST['trade_status'] == 'TRADE_SUCCESS'){
+			Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no);
          }
 	     //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 	     echo "success";	//请不要修改或删除
@@ -507,7 +325,6 @@ class PayController extends Controller
     
     	//商户订单号
     	$out_trade_no = htmlspecialchars($_GET['out_trade_no']);
-		$order_id = $out_trade_no;
     
     	//支付宝交易号
     	$trade_no = htmlspecialchars($_GET['trade_no']);
@@ -564,7 +381,7 @@ class PayController extends Controller
     		    	
 		//echo "验证成功<br />支付宝交易号：".$trade_no;
 		return $this->redirect(['/order/print', 
-                'order_id' => $order_id,
+                'order_id' => $out_trade_no,
             ]);
 
         }else {

@@ -89,7 +89,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 	</div>
 	<div id="div2">
-		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'&nbsp&nbsp&nbsp'.'合计金额：'.'<k>'.$order_amount.'</k>';
+		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'<br />'.'合计：'.'<k>'.$order_amount.'</k>';
 		?>
 	</div>
 </div>

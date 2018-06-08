@@ -169,12 +169,6 @@ class OrderController extends Controller
 		}
 	}
 	
-	//建行支付成功后转跳到此地址
-	public function actionJianh()
-	{
-		return $this->render('jianh');
-	}
-	
     /**
      * Displays a single OrderBasic model.
      * @param integer $id
@@ -242,28 +236,14 @@ class OrderController extends Controller
 		]);
 	}
 	
-	//接收建行二维码
-	public function actionJh()
-	{
-		$f = $_GET['f'];
-		$order_id = $_GET['order_id'];
-		$order_amount = $_GET['order_amount'];
-		
-		return $this->render('jh',[
-			'f' => $f,
-			'order_amount' => $order_amount,
-			'order_id' => $order_id
-		]);
-	}
-
 	//支付宝缴费成功后转到这里
 	public function actionV($out_trade_no)
 	{
 		$model = OrderBasic::find()
-			//->select('id,account_id')
 			->where(['order_id' => $out_trade_no])
 			->asArray()
 			->one();
+		
 		return $this->render('view', [
             'model' =>$model,
         ]);
