@@ -66,6 +66,7 @@ class Site extends ActiveRecord
 		
 		$_SESSION['w_info'] = $w_info; //保存微信信息到session
 		$_SESSION['user'] = $info_m; //保存用户信息到session
+		$_SESSION['home'] = reset($house); //默认进入第一套房子
 		$_SESSION['house'] = $house; //保存关联房屋到session
 	}
 	
@@ -117,6 +118,7 @@ class Site extends ActiveRecord
 			->all();
 		
 		$_SESSION['house'] = $house; //保存关联房屋到session
+		$_SESSION['home'] = reset($house); //默认进入第一套房子
 		$_SESSION['user'] = $user; //保存用户信息到session
 	}
 }

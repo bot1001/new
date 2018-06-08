@@ -43,6 +43,9 @@ class OrderSearch extends Order
     public function search($params)
     {
         $query = Order::find();
+		$query->joinWith('data');
+		$query->joinWith('address');
+		$query->select('order_basic.*,user_data.real_name as name, order_relationship_address.address as address');
 
         // add conditions that should always apply here
 

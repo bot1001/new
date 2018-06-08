@@ -59,4 +59,9 @@ class OrderAddress extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+	
+	public function getOrder() 
+	{ 
+	    return $this->hasOne(OrderBasic::className(), ['order_id' => 'order_id']); 
+	} 
 }

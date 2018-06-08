@@ -48,6 +48,12 @@ class InvoiceController extends Controller
     public function actionIndex()
     {
         $searchModel = new InvoiceSearch();
+		
+		if(isset($_GET['order_id'])){
+			$order_id = $_GET['order_id'];
+			$searchModel->order_id = $order_id;
+		}
+		
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
 
@@ -77,11 +83,15 @@ class InvoiceController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+		$invoice = Invoice::find()
+			->select('invoice_id, year, month, description, invoice_amount as amount, invoice_notes as notes')
+			->where(['in', 'invoice_status', '0'])
+			->asArray()
+			->all();
+		
+		return $this->render('view', ['invoice' => $invoice]);
     }
 
     /**
@@ -134,36 +144,53 @@ class InvoiceController extends Controller
 		
 		$prepay = Invoice::prepay($cost, $month, $id); //组合缴费项目
 		
-		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
-		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		$order_id = \common\models\Order::getOrder(); //获取订单编号
+		
 		$des = '物业相关费用'; //订单描述
 		
-		foreach($prepay as $key => $pre)
-		{$model = new Invoice(); //实例化费项模型
-			$model->community_id = $pre['community_id'];
-		    $model->building_id = $pre['building_id'];
-		    $model->realestate_id = $pre['id'];
-		    $model->year = $pre['year'];
-			$model->month = $pre['month'];
-			$model->description = $pre['description'];
-		    $model->create_time = time();
-		    $model->invoice_amount = $pre['amount'];
-		    $model->invoice_notes = $pre['notes'];
-		    $model->invoice_status = '0';
-			
-		    $e = $model->save(); //保存
-			$p_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
-			
-			if($e){
-				$order = new Order(); //实例化订单产品ID
-				$order->order_id = $order_id;
-				$order->product_id = $p_id;
-				$order->product_quantity = '1';
-				$order->sale = $pre['sale'];
+		$transaction = Yii::$app->db->beginTransaction();
+		try{
+			$m = 1;
+			$o = 1;
+			foreach($prepay as $key => $pre)
+		    {
+			    $model = new Invoice(); //实例化费项模型
+				$m ++;
 				
-				$order->save(); //保存
+			    $model->community_id = $pre['community_id'];
+		        $model->building_id = $pre['building_id'];
+		        $model->realestate_id = $pre['id'];
+		        $model->year = $pre['year'];
+			    $model->month = $pre['month'];
+			    $model->description = $pre['description'];
+		        $model->create_time = time();
+		        $model->invoice_amount = $pre['amount'];
+		        $model->invoice_notes = $pre['notes'];
+		        $model->invoice_status = '0';
+			    
+		        $e = $model->save(); //保存
+			    $p_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+			    
+			    if($e){
+					$o ++;
+			    	$order = new Order(); //实例化订单产品ID
+			    	$order->order_id = $order_id;
+			    	$order->product_id = $p_id;
+			    	$order->product_quantity = '1';
+			    	$order->sale = $pre['sale'];
+			    	
+			    	$order->save(); //保存
+			    }
 			}
-		}
+			if($m == $o){
+				$transaction->commit();
+			}else{
+				$transaction->rollback();
+			}
+		}catch(\Exception $e) {
+			print($e);
+		    $transaction->rollback();exit; //滚回事务
+        }
 		
 		return $this->redirect(['/order/create', 'order_id' => $order_id, 'amount' => $amount]);
 	}
@@ -175,17 +202,62 @@ class InvoiceController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionPay()
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->invoice_id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        $id = $_SESSION['home']['id'];
+		$invoice_id = Invoice::find()
+			->select('invoice_id, year, month, description, invoice_amount')
+			->where(['in', 'invoice_status', '0'])
+			->asArray()
+			->all();
+		
+		$order_id = \common\models\Order::getOrder(); //获取订单编号
+		
+		$i = 0;
+		$sale = 0;
+		$amount = 0;
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try{
+			foreach($invoice_id as $invoice)
+		    {
+		    	if($invoice['description'] == '物业费'){
+		    		if($invoice['year'] >= date('Y'))
+		    		{
+		    			if($invoice['month'] > date('m'))
+		    			{
+		    				$sale ++; //判断预交信息
+		    			}
+		    		}
+		    	}
+		    	
+		    	$order = new Order(); //实例化订单产品ID
+		    	
+		        $order->order_id = $order_id;
+		        $order->product_id = $invoice['invoice_id'];
+		        $order->product_quantity = '1';
+		    	
+		    	if($sale%13 == 0){
+		    		$order->sale = '1';
+		    	}else{
+					$order->sale = '0';
+					$amount += $invoice['invoice_amount']; //合计金额
+				}
+		    	
+		        $E = $order->save(); //保存数据
+		    }
+			
+			if($E == count($invoice_id)){
+				$transaction->commit(); //提交事务
+			}else{
+				$transaction->rollback(); //事务回滚
+			}
+		}catch(\Exception $e){
+			print_r($e);
+			$transaction->rollback();exit; //事务回滚
+		}
+		
+		return $this->redirect(['/order/create', 'order_id' => $order_id, 'amount' => $amount]);
     }
 
     /**

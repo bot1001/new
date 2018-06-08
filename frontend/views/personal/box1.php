@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use common\models\Area;
 
 ?>
@@ -78,7 +79,9 @@ use common\models\Area;
     <tr>
       <td id="right">房号：</td>
          <td id="center" colspan="4">
-            <?= $h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room.' 号'; ?>
+			 <a href="<?= Url::to(['/realestate/change', 'id' => $h->id]); ?>">
+                 <?= $h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room.' 号'; ?>
+             </a>
          </td>
     </tr>
    	<tr>
@@ -108,7 +111,5 @@ use common\models\Area;
     <?php }else{ }?>
     <?php endforeach; ?>
   </tbody>
-</table>
-
-   
+</table>   
 </div>

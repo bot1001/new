@@ -42,7 +42,7 @@ class InvoiceSearch extends Invoice
      */
     public function search($params)
     {
-		$id = array_column($_SESSION['house'], 'id'); //提取关联房屋id
+		$id = $_SESSION['home']['id']; //提取关联房屋id
         $query = Invoice::find()->where(['in', 'realestate_id', $id]);
 
         // add conditions that should always apply here

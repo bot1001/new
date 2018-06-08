@@ -183,7 +183,7 @@ class LoginController extends Controller
 				$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
 								
 				$w_info = $info;
-				\frontend\models\User::saveMessage($user, $w_info);
+				\frontend\models\Site::saveMessage($user, $w_info);
 				
 				$transaction->commit();
 			}else{

@@ -112,7 +112,7 @@ class Invoice extends \yii\db\ActiveRecord
 					$invoice['amount'] = number_format($amount, 2);
 				}else{
 					$amount = $c['price'];
-					$invoice['amount'] = number_format($price, 2);
+					$invoice['amount'] = number_format($amount, 2);
 				}
 				
 				//判断优惠

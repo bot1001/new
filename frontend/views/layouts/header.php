@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 ?>
 
-<style>
+     <style>
 		#home {
 			margin: auto;
 			width: 1190px;
@@ -27,18 +27,18 @@ use yii\helpers\Url;
 			width: 90px;
 			text-align: center;
 		}
-	</style>
-
-<style>
 	
-	#header{
-		background: #46F0FF;
-		height: 80px;
-	}
-	#advertising{
-		background: #46F0FF;
-	}
-</style>
+    	#header{
+    		background: #46F0FF;
+    		height: 80px;
+    	}
+    	#advertising{
+    		background: #46F0FF;
+    	}
+		 l{
+			 color: red;
+		 }
+    </style>
 
 <div id="header">
 	<div id="advertising" align="center">

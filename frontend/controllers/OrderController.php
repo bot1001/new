@@ -25,7 +25,7 @@ class OrderController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['GET'],
                 ],
             ],
         ];
@@ -38,11 +38,24 @@ class OrderController extends Controller
     public function actionIndex()
     {
         $searchModel = new OrderSearch();
+		$data = (new \yii\db\Query)
+			->select('order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
+			order_basic.order_type as type, order_basic.payment_time as payment_time,
+			order_basic.payment_gateway as gateway, order_basic.description as description,
+			order_basic.order_amount as amount, order_basic.status as status,
+			order_relationship_address.address as address, user_data.real_name as name')
+			->from('order_basic')
+			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
+			->all();
+		
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$status = [ '1' => '支付宝', '2' => '微信'];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'data' => $data,
+			'status' => $status
         ]);
     }
 
@@ -54,8 +67,16 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
+		$model = (new \yii\db\query())
+			->select('order_basic.*, order_relationship_address.address as address, user_data.real_name as name')
+			->from('order_basic')
+			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
+			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+			->where(['order_basic.id' => "$id"])
+			->one();
+		
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -71,12 +92,10 @@ class OrderController extends Controller
 			->where(['in', 'order_id', $order_id])
 			->where(['in', 'sale', '0'])
 			->asArray()
-			->all();
-		
-		
+			->all();		
 		
 		$user = $_SESSION['user']; //用户信息
-		$house = $_SESSION['house']['0']; //用户下单房屋信息
+		$house = $_SESSION['home']; //用户下单房屋信息
 		
 		$account_id = $user['account_id'];
 		$type = '1'; //物业订单
@@ -84,7 +103,7 @@ class OrderController extends Controller
 		
 		$name = $user['user_name']; //下单人
 		$phone = $user['mobile_phone']; //手机号码
-		$address = $house['community'].'-'.$house['building'].'-'.$house['number'].'-'.$house['room'].'号'; //订单地址
+		$address = $house['community'].' '.$house['building'].' '.$house['number'].'单元'.' '.$house['room'].'号'; //订单地址
 		$province = $user['province_id'];
 		$city = $user['city_id'];
 		$area = $user['area_id'];
@@ -162,7 +181,7 @@ class OrderController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+//        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

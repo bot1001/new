@@ -127,4 +127,10 @@ class RealestateController extends Controller
 		}
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
 	}
+	
+	//修改当前进入的房号
+	public function actionChange()
+	{
+		print_r($_GET);
+	}
 }

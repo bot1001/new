@@ -30,6 +30,9 @@ class Order extends \yii\db\ActiveRecord
     {
         return 'order_basic';
     }
+	
+	public $name;
+	public $address;
 
     /**
      * {@inheritdoc}
@@ -54,17 +57,51 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'account_id' => 'Account ID',
-            'order_id' => 'Order ID',
-            'order_parent' => 'Order Parent',
-            'create_time' => 'Create Time',
-            'order_type' => 'Order Type',
-            'payment_time' => 'Payment Time',
-            'payment_gateway' => 'Payment Gateway',
-            'payment_number' => 'Payment Number',
-            'description' => 'Description',
-            'order_amount' => 'Order Amount',
-            'invoice_id' => 'Invoice ID',
-            'status' => 'Status',
+            'order_id' => '缴费单号',
+            'order_parent' => '父级订单',
+            'create_time' => '创建时间',
+            'order_type' => '订单类型',
+            'payment_time' => '支付时间',
+            'payment_gateway' => '支付方式',
+            'payment_number' => '支付单号',
+            'description' => '详情',
+            'order_amount' => '合计',
+            'invoice_id' => '订单类型', //多余字段
+            'status' => '状态',
         ];
     }
+	
+	public function getProducts() 
+	{ 
+	    return $this->hasMany(OrderProducts::className(), ['order_id' => 'order_id']); 
+	} 
+	
+	/** 
+	 * @return \yii\db\ActiveQuery 
+	 */ 
+	public function getAddress() 
+	{ 
+	    return $this->hasOne(OrderAddress::className(), ['order_id' => 'order_id']); 
+	}
+	
+	/** 
+	 * @return \yii\db\ActiveQuery 
+	 */ 
+	public function getAccount() 
+	{ 
+	    return $this->hasOne(UserAccount::className(), ['account_id' => 'account_id']); 
+	}
+	
+	public function getData() 
+	{ 
+	    return $this->hasOne(UserData::className(), ['account_id' => 'account_id']); 
+	}
+	
+	//生成订单
+	public static function getOrder()
+	{
+		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
+		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		return $order_id;
+	}
 }

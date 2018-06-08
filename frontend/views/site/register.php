@@ -220,9 +220,5 @@ $this->title = '用户注册';
                 }
             });
         }
-		
-    </script>
-    
-
-    
+    </script>  
 </div>

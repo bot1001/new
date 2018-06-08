@@ -73,13 +73,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ];
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
+        'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '费用列表',
 				   'before' => Html::a('预交', 'create', ['class' => 'btn btn-info'])],
         'columns' => $gridview,
 		'toolbar' => [
 		    [ 'content' =>
-				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'create', [ 'class' => 'btn btn-success gridviewdelete ' ] )
+				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success gridviewdelete ' ] )
 			],
 	    	'{toggleData}'
 	    ],

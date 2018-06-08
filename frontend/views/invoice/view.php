@@ -54,10 +54,21 @@ $this->title = '费用预交';
 		</thead>
 		<tbody>
 			<?php $sum = 0; $sale = 0;$i = 0; ?>
-			<?php foreach($prepay as $p): $p= (object)$p; ?>
+			<?php foreach($invoice as $p): $p= (object)$p; ?>
 			<tr>
 				<td id="center">
-					<?php $i ++; echo $i; ?>
+					<?php $i ++; 
+					echo $i;
+					if($p->description == '物业费'){
+		    	    	if($p->year >= date('Y'))
+		    	    	{
+		    	    		if($p->month > date('m'))
+		    	    		{
+		    	    			$sale ++; //判断预交信息
+		    	    		}
+		    	    	}
+		    	    }
+					?>
 				</td>
 				<td id="center">
 					<?= $p->year; ?>
@@ -69,9 +80,11 @@ $this->title = '费用预交';
 					<?= $p->description; ?>
 				</td>
 				<td id="center">
-					<?php echo $p->amount; 
+					<?php 
+					echo $p->amount;
+					
 					$sum += $p->amount; //计算合计金额
-					if($p->sale == '1'){
+					if($sale%13 == '0'){
                     	$sale += $p->amount; //统计优惠金额
                     } ?>
 				</td>
@@ -95,6 +108,6 @@ $this->title = '费用预交';
 	</table>
 
 	<div id="pp">
-		<a href="<?= Url::to(['/invoice/new', 'cost' => $cost, 'month' => $month, 'id' => $id, 'amount' => $sum-$sale]); ?>">Going…</a>
+		<a href="<?= Url::to(['/invoice/pay', 'amount' => $sum-$sale]); ?>">Going…</a>
 	</div>
 </div>
