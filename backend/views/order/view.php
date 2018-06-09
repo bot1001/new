@@ -51,15 +51,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
     </style>
     <script type="text/javascript" language="javascript" >
         function display(){
-        document.getElementById("box").style.display="block"; 
-
+            document.getElementById("box").style.display="block"; 
         }
 		function f(){
-        document.getElementById("z").style.display="block"; 
+            document.getElementById("z").style.display="block"; 
         }
         function disappear(){
-        document.getElementById("box").style.display="none"; 
-        document.getElementById("z").style.display="none"; 
+            document.getElementById("box").style.display="none"; 
+            document.getElementById("z").style.display="none"; 
         }
     </script>
 
@@ -143,7 +142,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		exit;
 	};
 	
-	
 	$pay = ['order_id'=> $model['order_id'],
 				  'description'=> $model['description'],
 				  'order_amount'=>$model['order_amount'],
@@ -186,12 +184,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	    		<img src="/image/zf.png" onmouseover="f()" onmouseout="disappear()">
 	    	</a>
 	    </div>
-        <div id="box" onmouseover="display()" onmouseout="disappear()">
-        银行代付
-        </div>
+       
+        <div id="box" onmouseover="display()" onmouseout="disappear()">银行代付</div>
         
-        <div id="z" onmouseover="f()" onmouseout="disappear()">
-        政府代付
-        </div>
+        <div id="z" onmouseover="f()" onmouseout="disappear()">政府代付</div>
 	</div>
 </div>

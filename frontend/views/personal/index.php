@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = '个人中心';
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div>
 	<style>

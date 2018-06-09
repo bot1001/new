@@ -1,7 +1,8 @@
 <?php
 
-use yii\ helpers\ Html;
-use yii\ helpers\ Url;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\OrderSearch */
@@ -9,6 +10,26 @@ use yii\ helpers\ Url;
 
 $this->title = '缴费记录';
 $this->params[ 'breadcrumbs' ][] = $this->title;
+
+Modal::begin( [
+	'id' => 'view-modal',
+	'header' => '<h4 class="modal-title">支付方式</h4>',
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>', ['pay', 'id' => $model['id']]
+] );
+$V_Url = Url::toRoute('pay');
+
+$vJs = <<<JS
+    $('.view').on('click', function () {
+        $.get('{$V_Url}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $vJs );
+
+Modal::end();
 ?>
 <div class="order-index">
 
@@ -49,7 +70,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			height: 60px;
 		}
 	</style>
-	<?php //echo '<pre />'; print_r($data); exit; ?>
+	
 	<table id="order" border="0" cellspacing="0" cellpadding="0">
 		<?php foreach($data as $d): $d = (object)$d ?>
 		<tr id="tbody">
@@ -69,7 +90,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         	<td id="center" width="100px">
         	<?php
 				if($d->status == '1'){
-					echo Html::a('<span class="glyphicon glyphicon-credit-card"></span>', ['pay', 'id' => $d->id], ['class' => 'btn btn-success']);
+					echo Html::a('<span class="glyphicon glyphicon-credit-card"></span>', '#', [
+						'data-toggle' => 'modal',
+						'data-target' => '#view-modal', //modal 名字
+						'class' => 'btn btn-success view', //操作名
+						'data-id' => $d->id,
+					]);
 				}elseif($d->status == '2'){
 					 echo Html::a('<span class="glyphicon glyphicon-print"></span>', ['print', 'id' => $d->id], ['class' => 'btn btn-success']);
 				}elseif($d->status == '3'){
@@ -83,5 +109,4 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         </tr>
 		<?php endforeach; ?>
 	</table>
-	
 </div>

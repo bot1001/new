@@ -12,6 +12,7 @@ return [
     'bootstrap' => ['log'],
 	'defaultRoute' => '/site/index',
 	'language' => 'zh-CN',
+	'timeZone' => 'Asia/Shanghai',
     'controllerNamespace' => 'frontend\controllers',
 	'modules' => [
 	       'gridview' =>  [

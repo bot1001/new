@@ -36,7 +36,6 @@ $this->title = '费用预交';
 		background-size: 116px 54px;
 		border-radius: 30px;
 		margin-top: 10px;
-/*		margin-left: 400px;*/
 	}
 </style>
 

@@ -141,7 +141,6 @@ class OrderController extends Controller
 		}catch(\Exception $e) {
 		    $transaction->rollback(); //滚回事务
         }
-		
 
         if (isset($a)) {
             return $this->redirect(['view', 'id' => $o_id]);
@@ -173,9 +172,12 @@ class OrderController extends Controller
 	//拉起支付
 	public function actionPay($id)
 	{
-		$order = Order::find()->where(['in', 'id', $id])->asArray()->one();
+		$order = Order::find()
+			->where(['in', 'id', $id])
+			->asArray()
+			->one();
 		
-		return $this->render('pay', ['order' => $order]);
+		return $this->renderAjax('pay', ['order' => $order]);
 	}
 	
 	//打印订单
@@ -193,8 +195,40 @@ class OrderController extends Controller
      */
     public function actionDelete($id)
     {
-//        $this->findModel($id)->delete();
-
+		$order = Order::find()->where(['id' => "$id"])->asArray()->one();
+		$order_id = $order['order_id'];
+		
+		$transaction = Yii::$app->db->beginTransaction(); //标记事务
+		try{
+			$or = Order::findOne(['order_id' => "$order_id"])->delete();
+			if($or){
+				$address = Address::findOne(['order_id' => "$order_id"])->delete();
+			}
+			
+			if($address && $or){
+				//查找要删除的数据
+				$pro = Products::find()
+					->select('id')
+					->where(['order_id' => "$order_id"])
+					->asArray()
+					->all();
+				
+				//删除数据
+				foreach($pro as $p){
+					$products = Products::findOne($p['id'])->delete();
+				}
+			}
+			
+			if($or && $products && $address)
+			{
+				$transaction->commit();
+			}else{
+				$transaction->rollback();
+			}
+		}catch(\Exception $e){
+			print_r($e);exit;
+			$transaction->rollback();
+		}
         return $this->redirect(['index']);
     }
 

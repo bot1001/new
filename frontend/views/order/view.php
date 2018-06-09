@@ -2,25 +2,46 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\ bootstrap\ Modal;
+use yii\ helpers\ Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Order */
 
-$this->title = $model['id'];
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->title = '缴费详情：'.$model['id'];
+$this->params['breadcrumbs'][] = ['label' => '缴费记录', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+Modal::begin( [
+	'id' => 'view-modal',
+	'header' => '<h4 class="modal-title">支付方式</h4>',
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>', ['pay', 'id' => $model['id']]
+] );
+$V_Url = Url::toRoute( ['pay', 'id' => $model['id']] );
+
+$vJs = <<<JS
+    $('.view').on('click', function () {
+        $.get('{$V_Url}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $vJs );
+
+Modal::end();
 ?>
 <div class="order-view">
-<br />
-    <p>
-        <?= Html::a('删除', ['delete', 'id' => $model['id']], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '此操作将不可恢复，您确定要删除吗？',
-            ],
-        ]) ?>
-    </p>
-
+	<style>
+		.glyphicon{
+			height: 50px;
+			font-size: 50px;
+			width: 70px;
+			display:inline-block;
+		}
+	</style>
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -76,5 +97,20 @@ $this->params['breadcrumbs'][] = $this->title;
 			'label' => '状态'],
         ],
     ]) ?>
+    
+    <p align="center">
+        <?= Html::a('<span class="glyphicon glyphicon-credit-card"></span>', '#', [
+						'data-toggle' => 'modal',
+						'data-target' => '#view-modal', //modal 名字
+						'class' => 'btn btn-success view', //操作名
+					]) ?>
+           
+           <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '此操作将不可恢复，您确定要删除吗？',
+            ],
+        ]) ?>
+    </p>   
 
 </div>

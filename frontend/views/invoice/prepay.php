@@ -95,6 +95,6 @@ $this->title = '费用预交';
 	</table>
 
 	<div id="pp">
-		<a href="<?= Url::to(['/invoice/new', 'cost' => $cost, 'month' => $month, 'id' => $id, 'amount' => $sum-$sale]); ?>">Going…</a>
+		<a href="<?= Url::to(['/invoice/new', 'cost' => $cost, 'year' => $year, 'month' => $month, 'id' => $id, 'amount' => $sum-$sale]); ?>">Going…</a>
 	</div>
 </div>

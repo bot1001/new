@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use common\models\Invoice;
 
 /**
  * This is the model class for table "user_invoice".
@@ -42,8 +43,8 @@ class Invoice extends \yii\db\ActiveRecord
             [['community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
             [['invoice_amount'], 'number'],
             [['order_id', 'invoice_notes', 'update_time'], 'string'],
-            [['year', 'month'], 'string', 'max' => 4],
-            [['month'], 'integer', 'min' => 1,'max' => 40],
+//            [['year', 'month'], 'string', 'max' => 4],
+            [['month'], 'integer', 'min' => 1,'max' => 39],
             [['description'], 'string', 'max' => 200],
             [['payment_time'], 'string', 'max' => 22],
             [['community_id', 'building_id', 'realestate_id', 'description', 'year', 'month'], 'unique', 'targetAttribute' => ['community_id', 'building_id', 'realestate_id', 'description', 'year', 'month']],
@@ -81,33 +82,51 @@ class Invoice extends \yii\db\ActiveRecord
     }
 	
 	//计算预交费用
-	public static function prepay($cost, $month, $id)
+	public static function prepay($cost, $year, $month, $id)
 	{
 		$house = $_SESSION['house']['0']; //获取房号
-		$date = date('Y-m'); //当前月
+		$date = date('Y-m', strtotime("-1 month", strtotime($year))); //预交时间退格一个月
 		
 		$i = 1;
 		$sale = 0; //优惠计算
+		
 		for($i; $i <= $month; $i++)
 		{
 		    $date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
 		    
 		    $time = explode('-', $date); //拆分年月
-			$sale ++;
 		    
 		    //遍历并重组费项
 		    foreach($cost as $c){
-		    	$invoice['id'] = reset($id);
-				$invoice['community_id'] = $house['community_id'];
-		    	$invoice['community'] = $house['community'];
-		    	$invoice['building_id'] = $house['building_id'];
-		    	$invoice['building'] = $house['building'];
-		    	$invoice['year'] = reset($time);
-		    	$invoice['month'] = end($time);
-				$invoice['description'] = $c['cost'];
+				
+				$check = Invoice::find() //验证费项是否存在
+					->andwhere(['in', 'realestate_id', reset($id)])
+					->andwhere(['in', 'year', reset($time)])
+					->andwhere(['in', 'month', end($time)])
+					->andwhere(['in', 'description', $c['cost']])
+					->asArray()
+					->one();				
+				
+				if($check){
+					continue; 
+				}
+				
+		    	$invoice['id'] = reset($id); //房号ID
+				$invoice['community_id'] = $house['community_id']; //小区ID
+		    	$invoice['community'] = $house['community']; //小区名称
+		    	$invoice['building_id'] = $house['building_id']; //楼宇ID
+		    	$invoice['building'] = $house['building']; //楼宇名称
+		    	$invoice['year'] = reset($time); //年份
+		    	$invoice['month'] = end($time); //月份
+				$invoice['description'] = $c['cost']; //详情
 				
 				//判断物业费
 				if($c['formula'] == '1'){
+					if(strtotime($date) > strtotime(date('Y-m')))
+					{
+						$sale ++;
+					}
+					
 					$amount = $c['price']*$house['acreage'];
 					$invoice['amount'] = number_format($amount, 2);
 				}else{
@@ -116,21 +135,23 @@ class Invoice extends \yii\db\ActiveRecord
 				}
 				
 				//判断优惠
-				if($sale%13 == 0){
+				if($sale%13 == 0 && $sale !== 0){
 					$invoice['sale'] = '1';
 					$invoice['notes'] = '缴费优惠';
 				}else{
 					$invoice['sale'] = '0';
 					$invoice['notes'] = $c['property'];
 				}
-		    	
+				
+				$prepay[] = $invoice; //收集数据
 		    }
-			if(isset($invoice)){
-				$prepay[] = $invoice;
-			}else{
-				$prepay = '';
-			}
 		}
+		
+		if(empty($prepay))
+		{
+			$prepay = '';
+		}
+		
 		return $prepay;
 	}
 }

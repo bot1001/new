@@ -109,7 +109,7 @@ class InvoiceController extends Controller
 		
 		$cost = (new \yii\db\Query()) //查找房屋绑定的固定费用
 			->select('cost_name.cost_name as cost, cost_name.price as price, 
-			cost_name.property as property, cost_name.formula as formula')
+			          cost_name.property as property, cost_name.formula as formula')
 			->from('cost_name')
 			->join('inner join', 'cost_relation', 'cost_relation.cost_id = cost_name.cost_id')
 			->andwhere(['in', 'cost_relation.realestate_id', $id])
@@ -120,12 +120,16 @@ class InvoiceController extends Controller
 		{
 			$post = $_POST['Invoice']; //接收预交数据
 			$month = $post['month']; //获取预交月数
+			$year = $post['year']; //获取预交起始月份
 			
 			//计算预交费项
-			$prepay = Invoice::prepay($cost, $month, $id);
+			$prepay = Invoice::prepay($cost, $year, $month, $id);
 			
+			if($prepay == ''){
+		     	return $this->redirect(Yii::$app->request->referrer);
+		     }     
 			
-            return $this->render('prepay', ['prepay' => $prepay, 'cost' => $cost, 'month' => $month, 'id' => $id]);
+            return $this->render('prepay', ['prepay' => $prepay, 'cost' => $cost, 'year' => $year, 'month' => $month, 'id' => $id]);
         }
 		
 		return $this->render('create', [
@@ -134,21 +138,23 @@ class InvoiceController extends Controller
         ]);
     }
 	
-	//用户预交保存操作
-	public function actionNew()
+	//保存用户预交数据
+	public function actionNew($year, $month, $amount)
 	{
 		$get = $_GET; //接收传过来的数据
 		
 		$id = $get['id']; // 接收房号
-		$month = $get['month']; //接收预交费月数
 		$cost = $get['cost']; //接收预交费项
-		$amount = $get['amount']; //接收需要支付的金额
 		
-		$prepay = Invoice::prepay($cost, $month, $id); //组合缴费项目
+		$prepay = Invoice::prepay($cost, $year, $month, $id); //组合缴费项目
+		
+		if($prepay == ''){
+			echo '费项重复';exit;
+		}
 		
 		$order_id = \common\models\Order::getOrder(); //获取订单编号
 		
-		$des = '物业相关费用'; //订单描述
+		$des = '物业缴费'; //订单描述
 		
 		$transaction = Yii::$app->db->beginTransaction();
 		try{
@@ -206,8 +212,9 @@ class InvoiceController extends Controller
      */
     public function actionPay($amount)
     {
-        $id = $_SESSION['home']['id'];
-		$invoice_id = Invoice::find()
+        $id = $_SESSION['home']['id']; //获取当前房号
+		
+		$invoice_id = Invoice::find() //查询所有未交费费项
 			->select('invoice_id, year, month, description, invoice_amount')
 			->andwhere(['in', 'invoice_status', '0'])
 			->andwhere(['in', 'realestate_id', $id])
