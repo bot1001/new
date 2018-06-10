@@ -103,14 +103,16 @@ Modal::end();
 						'data-toggle' => 'modal',
 						'data-target' => '#view-modal', //modal 名字
 						'class' => 'btn btn-success view', //操作名
+	                    'title' => '立即支付'
 					]) ?>
            
-           <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '此操作将不可恢复，您确定要删除吗？',
-            ],
-        ]) ?>
-    </p>   
+	   <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
+		    'class' => 'btn btn-danger',
+		    'data' => [
+		    	'confirm' => '此操作将不可恢复，您确定要删除吗？',
+		    ], 
+		    'title' => '删除'
+	]) ?>
+</p>   
 
 </div>

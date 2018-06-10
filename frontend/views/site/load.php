@@ -3,7 +3,8 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 
-$this->title = '裕家人';
+$this->title = '下载';
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 
 <style type="text/css">

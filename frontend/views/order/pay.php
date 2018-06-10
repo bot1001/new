@@ -23,16 +23,33 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		margin: auto;
 	}
 	
-	#box, #z{
-		display: none;
-		position:absolute
-	}
+/*	鼠标滑过主题样式*/
+	.dropdown {
+          position: relative;
+          display: inline-block;
+    }
+	
+/*	鼠标滑过显示内容样式*/
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+	    font-size: 20px;
+	    border-radius: 10px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+        padding: 12px 16px;
+	    z-index: 1;
+    }
+	
+/*	显示内容样式*/
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+	
 </style>
 
 <div class="order-index">
-
-    <div id="box">微信</div>
-    <div id="z">建设银行</div>
     
 	<?php
 	$pay = [ 'order_id' => $order[ 'order_id' ],
@@ -49,14 +66,30 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</td>
 
 			<td>
-				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">									  
-	            	<img id="pay" src="/image/wx.png" />
+				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
+					<div class="dropdown">
+						<span>
+							<img id="pay" src="/image/wx.png" />
+						</span>
+						<div class="dropdown-content">
+							微信支付
+						</div>
+					</div>				  
+	            	
 	            </a>			
 			</td>
 
 			<td>
-				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'jh','pay'=> $pay ]) ?>" title="龙支付">									  
-	            	<img id="pay" src="/image/j.png" />
+				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'jh','pay'=> $pay ]) ?>" title="龙支付">
+            	    <div class="dropdown">
+						<span>
+							<img id="pay" src="/image/j.png" />
+						</span>
+						<div class="dropdown-content">
+							建行龙支付
+						</div>
+					</div>									  
+	            	
 	            </a>			
 			</td>
 		</tr>

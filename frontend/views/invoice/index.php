@@ -79,7 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => $gridview,
 		'toolbar' => [
 		    [ 'content' =>
-				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success gridviewdelete ' ] )
+				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success',  'title' => '立即缴费'] ),
+			
 			],
 	    	'{toggleData}'
 	    ],

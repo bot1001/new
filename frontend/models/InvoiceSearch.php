@@ -49,6 +49,17 @@ class InvoiceSearch extends Invoice
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'pagination' => [
+			'pageSize' => 15,
+		    ],
+			'sort' => [
+			     'defaultOrder' =>[
+			           'invoice_status' => SORT_ASC,
+			           'year' => SORT_DESC,
+			           'month' => SORT_DESC,
+			           'description' => SORT_DESC,
+		              ]
+		         ]
         ]);
 
         $this->load($params);

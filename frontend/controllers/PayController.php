@@ -207,8 +207,12 @@ class PayController extends Controller
 	//用户退出
 	public function actionLogout()
     {
-        Yii::$app->user->logout();
+        $logout = Yii::$app->user->logout();
+		
+		if($logout){
+			return true;
+		}
 
-        return $this->goHome();
+        return false;
     }
 }

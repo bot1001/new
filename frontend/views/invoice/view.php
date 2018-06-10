@@ -2,7 +2,9 @@
 
 use yii\helpers\Url;
 
-$this->title = '费用预交';
+$this->title = '缴费预览';
+$this->params['breadcrumbs'][] = ['label' => '房屋缴费', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>

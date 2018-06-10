@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Invoice */
 
 $this->title = '预交';
-$this->params['breadcrumbs'][] = ['label' => 'Invoices', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '房屋缴费', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="invoice-create">

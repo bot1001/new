@@ -29,16 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 	</style>
 	
-		<?php
-	        $message = Yii::$app->getSession()->getFlash('success');
-	        
-	        if($message == '0'){
-	        	echo "<script>alert('切换失败！')</script>";
-	        }elseif($message == '1'){
-	        	echo "<script>alert('切换成功！')</script>";
-	        }
-	   ?>
-	
 	<div id="box" class="row">
 	<?php if(isset($_SESSION['user'])) { ?>
 		<div id="box1" class="col-lg-3">

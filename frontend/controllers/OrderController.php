@@ -222,6 +222,7 @@ class OrderController extends Controller
 			if($or && $products && $address)
 			{
 				$transaction->commit();
+				return true;
 			}else{
 				$transaction->rollback();
 			}
@@ -229,7 +230,7 @@ class OrderController extends Controller
 			print_r($e);exit;
 			$transaction->rollback();
 		}
-        return $this->redirect(['index']);
+        return false;
     }
 
     /**
