@@ -102,7 +102,7 @@ Modal::end();
 	
 	<script>
 		function d(){
-		    if(confirm('您确定要退出吗？')){
+		    if(confirm('您确定要删除吗？')){
 		    	$.ajax({
                     type: "GET",//方法类型
                     dataType: "json",//预期服务器返回的数据类型

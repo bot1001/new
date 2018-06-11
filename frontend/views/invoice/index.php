@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\InvoiceSearch */
@@ -9,11 +11,30 @@ use kartik\grid\GridView;
 
 $this->title = '房屋缴费';
 $this->params['breadcrumbs'][] = $this->title;
+
+Modal::begin( [
+	'id' => 'view-modal',
+	'header' => '<h4 class="modal-title">预交</h4>',
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+] );
+$V_Url = Url::toRoute( [ 'create' ] );
+
+$vJs = <<<JS
+    $('.view').on('click', function () {
+        $.get('{$V_Url}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $vJs );
+
+Modal::end();
+
 ?>
 <div class="invoice-index">
     
-    <p align="right"></p>
-
     <?php
 	$gridview = [
             ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
@@ -53,29 +74,41 @@ $this->params['breadcrumbs'][] = $this->title;
              	
              },],
             ['attribute' => 'payment_time',
+			 'mergeHeader' => true,
 			 'value' => function($model){
-             	$time = $model->payment_time;
-             	if($time == '1970-01-01 00:00:00'){
+             	$time = strtotime($model->payment_time);
+             	if($time == '0'){
              		return '';
              	}else{
              		return $time;
              	}
-             	
              },
-			 'hAlign' => 'center'
+			 'hAlign' => 'center',
+			 'width' => '150px'
 			],
             ['attribute' => 'invoice_status',
 			'value' => function($model){
             	$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
             	return $data[$model->invoice_status];
             },
+			 'filterType'=> GridView::FILTER_SELECT2,
+		     'filter'=> [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
+		     'filterInputOptions'=>['placeholder'=>'请选择'],
+			 'filterWidgetOptions'=>[
+                             'pluginOptions'=>['allowClear'=>true],
+		                 ],
 			 'hAlign' => 'center'],
         ];
+	
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '费用列表',
-				   'before' => Html::a('预交', 'create', ['class' => 'btn btn-info'])],
+				   'before' => Html::a( '预交',
+								'#', [ 
+		                'data-toggle' => 'modal',
+						'data-target' => '#view-modal',
+						'class' => 'btn btn-primary view' ] )],
         'columns' => $gridview,
 		'toolbar' => [
 		    [ 'content' =>

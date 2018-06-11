@@ -39,7 +39,8 @@ class Invoice extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'year', 'month', 'invoice_status'], 'required'],
+            [['community_id', 'building_id', 'realestate_id', 'description', 'invoice_amount', 'year', 'invoice_status'], 'required'],
+			[['month'], 'required', 'message' => '月数不能为空'],
             [['community_id', 'building_id', 'realestate_id', 'invoice_status'], 'integer'],
             [['invoice_amount'], 'number'],
             [['order_id', 'invoice_notes', 'update_time'], 'string'],

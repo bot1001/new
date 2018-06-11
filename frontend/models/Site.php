@@ -117,8 +117,13 @@ class Site extends ActiveRecord
 			->where(['in', 'user_relationship_realestate.account_id', $user['account_id']])
 			->all();
 		
+		
+		if(!isset($_SESSION['user'])){
+			$_SESSION['user'] = $user; //保存用户信息到session
+		}
+		
 		$_SESSION['house'] = $house; //保存关联房屋到session
 		$_SESSION['home'] = reset($house); //默认进入第一套房子
-		$_SESSION['user'] = $user; //保存用户信息到session
+		
 	}
 }

@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use Yii;
+
 class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
@@ -43,6 +45,16 @@ class User extends /*\yii\base\Object*/ \yii\db\ActiveRecord implements \yii\web
     public function getAuthKey()
     {
         return $this->authKey;
+    }
+	
+	public function setPassword($password)
+    {
+        return $this->new_pd === md5($password);
+    }
+	
+	public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**

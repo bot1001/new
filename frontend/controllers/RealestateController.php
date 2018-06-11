@@ -129,16 +129,15 @@ class RealestateController extends Controller
 	}
 	
 	//修改当前进入的房号
-	public function actionChange($id)
+	public function actionChange($k)
 	{
 		$house = $_SESSION['house'];
-		foreach($house as $key => $h){
-			if($h['id'] == $id){
-				$_SESSION['home'] = $house[$key];
-				return true;
-				}
-		}
-		return false;
+		$_SESSION['home'] = $house[$k];
+		
+		$session = Yii::$app->session;
+		$session->setFlash( 'success', '1' );
+		
+		return $this->redirect(Yii::$app->request->referrer);
 	}
 	
 	function actionHome()

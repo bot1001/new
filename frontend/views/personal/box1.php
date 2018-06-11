@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 use common\models\Area;
 
 ?>
@@ -24,30 +25,38 @@ use common\models\Area;
 		text-align: right;
 	}
 	
-	#center{
+	#box1-1 td{
 		text-align: center;
+	}
+	
+	#new{
+		margin: auto;
+		text-align: center;
+		position: relative;
+		margin-top: 8px;
 	}
 </style>
 
 <script>
-	function change()
+	function change([[k]])
 	{
-		if(confirm("您确定要切换房号么？")){
-			$.ajax({
-				type: "GET",
-				dataType: "json",
-				url: "/realestate/change",
-				data: $('#change').serialize(),
-				success : function (result){
-					if(result == 1){
-						alert("切换成功！");
-					}
-			    },
-				Error : function(){
-				    alert("切换失败，请联系管理员");
-			    }
-			})
-		}
+		alert(k);
+//		if(confirm("您确定要切换房号么？")){
+//			$.ajax({
+//				type: "GET",
+//				dataType: "json",
+//				url: "/realestate/change",
+//				data: $('#change').serialize(),
+//				success : function (result){
+//					if(result == 1){
+//						alert("切换成功！");
+//					}
+//			    },
+//				Error : function(){
+//				    alert("切换失败，请联系管理员");
+//			    }
+//			})
+//		}
 	}
 </script>
 
@@ -94,45 +103,76 @@ use common\models\Area;
     </tr>    
     
     <tr>
-    	<td id="center" colspan="5">房屋信息：</td>
+    	<td colspan="5">
+    	    房屋信息：
+    	</td>
     </tr>
-    <?php foreach($house as $h): $h = (object)$h; ?>
+    <?php foreach($house as $k => $h): $h = (object)$h; ?>
     <?php if($h){ ?>
     <tr>
       <td id="right">房号：</td>
-         <td id="center" colspan="4">
-			 <a href="#" onclick = "change()">
-                 <input id="change" type="hidden" name="id" value="<?= $h->id ?>" />
+         <td colspan="4">
+			 <a href="<?= Url::to(['/realestate/change', 'k' => $k]) ?>">
                  <?= $h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room.' 号'; ?>
              </a>
          </td>
     </tr>
    	<tr>
-    	<td id="center" colspan="2">封顶时间：</td>
-    	<td id="center" colspan="3"><?= date('Y-m-d H:i:s', $h->finish); ?></td>   	
+    	<td colspan="2">封顶时间：</td>
+    	<td colspan="3"><?php
+				 $date= date('Y', $h->finish);
+				  if($date <1980){
+					  echo '未设置';
+				  }else{
+					  echo date('Y-m-d', $h->finish);
+				  }
+			?></td>   	
     </tr>
     
     <tr>
-    	<td id="center" colspan="2">交房时间：</td>
-    	<td id="center" colspan="3"><?= date('Y-m-d H:i:s', $h->delivery); ?></td>   	
+    	<td colspan="2">交房时间：</td>
+    	<td colspan="3"><?php
+				 $date= date('Y', $h->finish);
+				  if($date <1980){
+					  echo '未设置';
+				  }else{
+					  echo date('Y-m-d', $h->delivery);
+				  }
+			?></td>   	
     </tr>
     
     <tr>
-    	<td id="center" colspan="2">装修时间：</td>
-    	<td id="center" colspan="3"><?= date('Y-m-d H:i:s', $h->decoration); ?></td>   	
+    	<td colspan="2">装修时间：</td>
+    	<td colspan="3"><?php
+				 $date= date('Y', $h->decoration);
+				  if($date <1980){
+					  echo '未设置';
+				  }else{
+					  echo date('Y-m-d', $h->delivery);
+				  }
+			?></td>   	
     </tr>
     
     <tr>
-    	<td id="center" colspan="2">房屋朝向：</td>
-    	<td id="center" colspan="3"><?= $h->orientation; ?></td>   	
+    	<td colspan="2">房屋朝向：</td>
+    	<td colspan="3"><?= $h->orientation; ?></td>   	
     </tr>
     
     <tr>
-    	<td id="center" colspan="2">备注：</td>
-    	<td id="center" colspan="3"><?= $h->property; ?></td>   	
+    	<td colspan="2">备注：</td>
+    	<td colspan="3"><?= $h->property; ?></td>   	
     </tr>
-    <?php }else{ }?>
+    <?php }else{
+    	echo "<tr>";
+        	echo "<td>";
+            	echo '您暂无绑定的房屋';
+        	echo "</td>";
+    	echo "</tr>";
+    }?>
     <?php endforeach; ?>
   </tbody>
-</table>   
+</table>
+<div id="new">
+	<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加新房屋']) ?>
+</div>
 </div>

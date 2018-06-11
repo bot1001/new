@@ -41,11 +41,32 @@ Modal::end();
 			display:inline-block;
 		}
 	</style>
+   
+	<script>
+		function d(){
+		    if(confirm('您确定要删除吗？')){
+		    	$.ajax({
+                    type: "GET",//方法类型
+                    dataType: "json",//预期服务器返回的数据类型
+                    url: "/order/delete" ,//url
+                    data: {'id': <?= $model['id'] ?>}, //创建并组合数组
+                    success: function (result) {
+                        if (result == 1) {
+                            alert("删除成功！");
+							parent.location.href='./'; //删除成功后返回上一级目录
+                        };
+                    },
+                    error : function() {
+                        alert("删除失败，请联系管理员！");
+                    }
+                });
+            }
+		}
+	</script>
     
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-
             ['attribute' => 'address',
 			'label' => '地址'],
             ['attribute' => 'order_id',
@@ -106,11 +127,9 @@ Modal::end();
 	                    'title' => '立即支付'
 					]) ?>
            
-	   <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
+	   <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', [
 		    'class' => 'btn btn-danger',
-		    'data' => [
-		    	'confirm' => '此操作将不可恢复，您确定要删除吗？',
-		    ], 
+		    'onclick' => 'd()', 
 		    'title' => '删除'
 	]) ?>
 </p>   

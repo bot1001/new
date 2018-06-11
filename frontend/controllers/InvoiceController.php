@@ -132,7 +132,7 @@ class InvoiceController extends Controller
             return $this->render('prepay', ['prepay' => $prepay, 'cost' => $cost, 'year' => $year, 'month' => $month, 'id' => $id]);
         }
 		
-		return $this->render('create', [
+		return $this->renderAjax('create', [
             'model' => $model,
 			'cost' => $cost,
         ]);

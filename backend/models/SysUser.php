@@ -42,7 +42,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['status', 'create_id', 'update_id', 'role'], 'integer'],
             [['create_time', 'update_time'], 'safe'],
             [['real_name', 'name', 'password', 'comment', 'salt'], 'string', 'max' => 100],
-            [['new_pd'], 'string', 'max' => 128],
+            [['new_pd'], 'string', 'min' => 6,'max' => 128],
             [['phone'], 'string', 'max' => 12],
             [['name'], 'unique'],
 			[['name'], 'required', 'message' => '确认密码不能为空'],

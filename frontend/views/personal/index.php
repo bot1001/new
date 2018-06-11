@@ -13,11 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 		
 		#box1,#box2,#box3,#box4,#box5{
-			width: 370px;
-			height: 300px;
+			width: 400px;
+		    height: 300px;
 			margin-right: 15px;
 			margin-bottom: 20px;
 			border-radius: 20px;
+			overflow: auto;
 		}
 		
 		#box1{
@@ -52,4 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>-->
 	<?php } ?>
 	</div>
+	
+	<?php 
+	$message = Yii::$app->getSession()->getFlash('success');
+	if($message == 1){
+		echo "<script>alert('切换成功！')</script>";
+	} ?>
 </div>

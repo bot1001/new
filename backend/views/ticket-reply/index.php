@@ -12,12 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ticket-reply-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php // Html::a('Create Ticket Reply', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php
 	$grid = [
             ['class' => 'kartik\grid\SerialColumn',

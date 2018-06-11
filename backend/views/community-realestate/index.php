@@ -142,9 +142,6 @@ $this->title = '房屋管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				$building = CommunityBuilding::find()->select( 'building_name' )->where( [ 'building_id' => $model->building_id ] )->asArray()->one();
-				/*$url = Yii::$app->urlManager->createUrl( [ 'costrelation/create',
-					'realestate_id' => $model->realestate_id,
-				] );*/
 				return Html::a( $building[ 'building_name' ], '#', [
 					'data-toggle' => 'modal',
 					'data-target' => '#view-modal',

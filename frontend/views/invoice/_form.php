@@ -10,10 +10,16 @@ use kartik\daterange\DateRangePicker;
 ?>
     <style>
 		#cost{
-			width: 300px;
-		}
-		#center{
+			width: 500px;
 			text-align:center;
+		}
+		
+		thead tr td{
+			font-weight: 700;
+		}
+		
+		tr td{
+			height: 30px;
 		}
 		
 		#right{
@@ -21,7 +27,7 @@ use kartik\daterange\DateRangePicker;
 		}
 	</style>
 
-<div class="invoice-form col-lg-5">
+<div class="invoice-form">
 
    <br/>
     <?php $form = ActiveForm::begin(); ?>
@@ -47,34 +53,34 @@ use kartik\daterange\DateRangePicker;
     </div>   
     
     <div class="form-group" align="center">
-        <?= Html::submitButton('确定', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('确定', ['class' => 'btn btn-success', 'disable']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
     
 	<div>
-		<p>备注：只能预交房屋固定费用，具体如下：
+		<p>说明：您只能预交房屋固定费用，具体如下：
 		
 		<table id="cost" border="1">
 			<thead>
 				<tr>
-					<td id="center">序号</td>
-					<td id="center">费项名称</td>
-					<td id="center">单价</td>
-					<td id="center">备注</td>
+					<td>序号</td>
+					<td>预交费项</td>
+					<td>单价</td>
+					<td>备注</td>
 				</tr>
 			</thead>
 		    <?php $i = 0; foreach($cost as $name): $name = (object)$name ?>
 			<tr>
-				<td id='center'><?php $i++; echo $i; ?></td>
-				<td id='center'><?= $name->cost ?></td>
-				<td id='center'><?php if($name->cost == "物业费"){
-                    	echo $name->price.'平米/月';
+				<td><?php $i++; echo $i; ?></td>
+				<td><?= $name->cost ?></td>
+				<td><?php if($name->cost == "物业费"){
+                    	echo $name->price.'元/平米/月';
                     }else{
                     	echo $name->price.'/月';
                     } ?>
                 </td>
-				<td id="center"><?= $name->property ?></td>
+				<td><?= $name->property ?></td>
 			</tr>
 			<?php endforeach ?>
 		</table>

@@ -13,8 +13,6 @@ use kartik\ select2\ Select2;
 $this->title = '用户注册';
 ?>
 
-
-
 <style>
 	#wx {
 		display: none;
