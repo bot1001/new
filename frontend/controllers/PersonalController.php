@@ -77,4 +77,10 @@ class PersonalController extends Controller
 		
 		return $this->render('create', ['province' => $province, 'data' => $data, 'realestate'=> $realestate,'community' => $company]);
 	}
+	
+	//解绑房屋
+	function actionDelete()
+	{
+		echo 'test';
+	}
 }

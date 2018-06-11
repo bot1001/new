@@ -15,7 +15,6 @@ use yii\filters\VerbFilter;
  */
 class InvoiceController extends Controller
 {
-	
 	//检查用户是否登录
 	public function  beforeAction($action)
     {

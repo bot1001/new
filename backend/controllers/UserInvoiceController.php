@@ -523,10 +523,10 @@ class UserInvoiceController extends Controller
 		
         $count = $dss->count();// 计算总数
 		
-       $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
-       
-       // 使用分页对象来填充 limit 子句并取得文章数据
-       $data = $ds->offset($pagination->offset)
+        $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
+        
+        // 使用分页对象来填充 limit 子句并取得文章数据
+        $data = $ds->offset($pagination->offset)
                    ->limit($pagination->limit)
                    ->all();
 		

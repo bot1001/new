@@ -144,9 +144,9 @@ Modal::end();
         
         <tr id="img">
         	<td id="center"><img id="order_img" src="/image/logo.png" /></td>
-        	<td id="center"><a href="<?= Url::to(['view', 'id' => $d->id]) ?>"><?= $d->address; ?></a></td>
+        	<td><a href="<?= Url::to(['view', 'id' => $d->id]) ?>"><?= $d->address; ?></a></td>
         	<td id="center"><?= $d->name; ?></td>
-        	<td id="center"><?= $d->description; ?></td>
+        	<td id="center"><?= mb_substr($d->description, 0, 15); ?></td>
         	<td id="right"><?= $d->amount; ?></td>
         	<td id="center" width="100px">
         	<?php $key = $d->id; ?>
@@ -181,6 +181,17 @@ Modal::end();
         </tr>
 		<?php endforeach; ?>
 	</table>
+	
+	<div>
+		<div id="page">
+			<?php
+	            echo yii\widgets\LinkPager::widget([
+                    'pagination' => $pagination,
+                ]);
+	        ?>
+	    </div>
+	</div>
+	
 </div>
 
 

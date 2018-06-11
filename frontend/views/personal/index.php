@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		#box1,#box2,#box3,#box4,#box5{
 			width: 400px;
-		    height: 300px;
+		    height: 350px;
 			margin-right: 15px;
 			margin-bottom: 20px;
 			border-radius: 20px;

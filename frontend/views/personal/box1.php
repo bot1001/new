@@ -37,29 +37,6 @@ use common\models\Area;
 	}
 </style>
 
-<script>
-	function change([[k]])
-	{
-		alert(k);
-//		if(confirm("您确定要切换房号么？")){
-//			$.ajax({
-//				type: "GET",
-//				dataType: "json",
-//				url: "/realestate/change",
-//				data: $('#change').serialize(),
-//				success : function (result){
-//					if(result == 1){
-//						alert("切换成功！");
-//					}
-//			    },
-//				Error : function(){
-//				    alert("切换失败，请联系管理员");
-//			    }
-//			})
-//		}
-	}
-</script>
-
 <div id="b_1">
 	<h3>
        <a href="#">
@@ -77,6 +54,9 @@ use common\models\Area;
 	    	->orwhere(['like', 'area_parent_id', $user['city_id']])
 	    	->indexBy('id')
 	    	->column();
+	
+//	echo '<pre />';
+//	print_r($area);exit;
 	?>
   <table id="box1-1" border="1">
   <tbody>
@@ -98,7 +78,7 @@ use common\models\Area;
     <tr>
     	<td id="right">地址：</td>
     	<td id="center" colspan="3">
-    	    <?php echo $area[$user['province_id']].'-'.$area[$user['city_id']].'-'.$area[$user['area_id']] ; ?>
+    	    <?php echo $area[$user['province_id'].'0000'].'-'.$area[$user['city_id']].'-'.$area[$user['area_id']] ; ?>
     	</td>
     </tr>    
     
@@ -173,6 +153,7 @@ use common\models\Area;
   </tbody>
 </table>
 <div id="new">
-	<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加新房屋']) ?>
+	<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加房屋']) ?>
+	<?= Html::a('<span class="glyphicon glyphicon-minus"></span>','#', ['class' => 'btn btn-warning', 'title' => '解绑房屋']) ?>
 </div>
 </div>

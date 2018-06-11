@@ -128,7 +128,7 @@ use yii\ widgets\ Breadcrumbs;
 <p></p>
 
 <div class="header">
-	<div id="breader" class="col-lg-3">
+	<div id="breader" class="col-lg-4">
 		<?= Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
@@ -142,7 +142,7 @@ use yii\ widgets\ Breadcrumbs;
                       echo Html::a('登录', $url);
                   } else {
 //	           	$url = Url::to('/pay/logout');
-	           	echo Html::a(Yii::$app->user->identity->user_name, '#', ['onclick' => "logout()"]);
+	           	echo Html::a($_SESSION['user']['real_name'], '#', ['onclick' => "logout()"]);
 	           } ?>
        	   </li>
 	       			    

@@ -1,12 +1,5 @@
 <?php
 
-use app\ models\ UserInvoice;
-use kartik\ form\ ActiveForm;
-use yii\ helpers\ Html;
-use yii\helpers\Url;
-use kartik\depdrop\DepDrop;
-use kartik\select2\Select2;
-
 ?>
 
 <style type="text/css">

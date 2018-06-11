@@ -45,15 +45,15 @@ class RealestateController extends Controller
 		{
 			$id = $_POST[ 'depdrop_parents' ];
 			
-			$list = Realestate::find()->select('room_number, building_id')->where( ['in', 'building_id', $id ] )->distinct()->all();
+			$list = Realestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'room_number' ] ];
+					$out[] = [ 'id' => $account[ 'room_number' ], 'name' => $account[ 'room_number' ] ];
 					if ( $i == 0 ) {
-						$first = $account[ 'building_id' ];
+						$first = $account[ 'room_number' ];
 					}
-					if ( $account[ 'building_id' ] == $selected ) {
+					if ( $account[ 'room_number' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -101,10 +101,13 @@ class RealestateController extends Controller
 	//三级联动之 房号（二）
 	public function actionRe( $selected = null ) 
 	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = Realestate::find()
-				->where( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
 
 			$isSelectedIn = false;

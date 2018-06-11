@@ -106,6 +106,7 @@ class LoginController extends Controller
 		}
 	}
 	
+	// 微信扫码注册后转跳到这里
 	public function actionNew()
 	{
 		$post = $_POST;
@@ -125,11 +126,11 @@ class LoginController extends Controller
 		$building = $realestate['building_id']; //接收楼宇ID
 		$number = $realestate['room_number']; //接收单元
 		$name = $realestate['room_name']; //接收房号
-		$phone = $realestate['phone']; //接收验证手机号码
+		$mobile = $realestate['phone']; //接收验证手机号码
 		$nick = $realestate['owners_name']; //接收用户昵称
 		
 		$user_name = $account['user_name']; //接收用户昵称
-		$mobile = $account['mobile_phone']; //接收登录手机号码
+		$phone = $account['mobile_phone']; //接收登录手机号码
 		$p = $account['password'];
 		$password = md5($p); //接收并加密密码
 		$weixin_openid = $account['weixin_openid']; //接收微信用户的openID
@@ -138,65 +139,84 @@ class LoginController extends Controller
 		
 		$nickname = $info['nickname'] ; //用户昵称
 		
-		if(empty($user_name)){
-			$user_name == $nickname;
-		}
+		//验证注册手机号码是否存在
+		$u_account = UserAccount::find()
+			->where(['mobile_phone' => "$phone", 'account_role' => '0', 'status' => '1'])
+			->asArray()
+			->one();
+//		print_r($u_account);exit;
 		
-		$account = new UserAccount(); //实例化模型
-		
-		//模型块赋值
-		$account->account_id = $account_id;
-		$account->user_name = $nick;
-		$account->password = $password;
-		$account->mobile_phone = $phone;
-		$account->weixin_openid = $weixin_openid;
-		$account->wx_unionid = $unionid;
-		$account->new_message = '0';
-		$account->status = '1';
-		
-		$transaction = Yii::$app->db->beginTransaction();
-		try{
-		    $yes = $account->save(); // 保存
+		if($u_account){ //如果存在则绑定微信账号
+			$result = UserAccount::updateAll(['weixin_openid' => $weixin_openid, 'wx_unionid' => $unionid],
+											  'account_id = :a_id', [':a_id' => $u_account['account_id']]);
+			$u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $u_account['account_id']]);
 			
-            $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
-			
-		    $ship = new UserRealestate();
-		    $ship->account_id =  $account_id;
-		    $ship->realestate_id = $name;
-			
-		    $r = $ship->save(); //保存用户关联信息
-				
-			$userdata = new UserData();
-			
-			$userdata->account_id = $account_id;
-			$userdata->real_name = $nick;
-			$userdata->gender = $gender;
-			$userdata->face_path = $face;
-			$userdata->province_id = $province;
-			$userdata->city_id = $city;
-			$userdata->area_id = $area;
-			$userdata->nickname = $nick;
-			
-			$u = $userdata->save(); //保存用户资料
-			
-			if($yes && $r && $u){
-				$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
-								
-				$w_info = $info;
-				\frontend\models\Site::saveMessage($user, $w_info);
-				
-				$transaction->commit();
-			}else{
-				$transaction->rollback();
-			}		    
-		}catch(\Exception $e){
-			print_r($e);
-		}
-		
-		if($user){
-			return $this->render('/site/index');
+			//如果修改成功则自动登录
+			if($result){
+				\frontend\models\Site::saveLogin($phone);
+				return $this->render('/site/index');
+			}
 		}else{
-			return $this->redirect('/login/login');
+		    if(empty($user_name)){
+		    	$user_name == $nickname;
+		    }
+		    
+		    $account = new UserAccount(); //实例化模型
+		    
+		    //模型块赋值
+		    $account->account_id = $account_id;
+		    $account->user_name = $nick;
+		    $account->password = $password;
+		    $account->mobile_phone = $phone;
+		    $account->weixin_openid = $weixin_openid;
+		    $account->wx_unionid = $unionid;
+		    $account->new_message = '0';
+		    $account->status = '1';
+		    
+		    $transaction = Yii::$app->db->beginTransaction();
+		    try{
+		        $yes = $account->save(); // 保存
+		    	
+                $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+		    	
+		        $ship = new UserRealestate();
+		        $ship->account_id =  $account_id;
+		        $ship->realestate_id = $name;
+		    	
+		        $r = $ship->save(); //保存用户关联信息
+		    		
+		    	$userdata = new UserData();
+		    	
+		    	$userdata->account_id = $account_id;
+		    	$userdata->real_name = $nick;
+		    	$userdata->gender = $gender;
+		    	$userdata->face_path = $face;
+		    	$userdata->province_id = $province;
+		    	$userdata->city_id = $city;
+		    	$userdata->area_id = $area;
+		    	$userdata->nickname = $nick;
+		    	
+		    	$u = $userdata->save(); //保存用户资料
+		    	
+		    	if($yes && $r && $u){
+		    		$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
+		    						
+		    		$w_info = $info;
+		    		\frontend\models\Site::saveMessage($user, $w_info);
+		    		
+		    		$transaction->commit();
+		    	}else{
+		    		$transaction->rollback();
+		    	}		    
+		    }catch(\Exception $e){
+		    	print_r($e);
+		    }
+		    
+		    if(isset($user)){
+		    	return $this->render('/site/index');
+		    }else{
+		    	return $this->redirect('/login/login');
+		    }
 		}		
 	}
 	

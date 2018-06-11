@@ -11,6 +11,8 @@ use kartik\ select2\ Select2;
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = '用户注册';
+$this->params[ 'breadcrumbs' ][] = [ 'label' => '个人中心', 'url' => [ 'index' ] ];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 
 <style>
@@ -117,7 +119,8 @@ $this->title = '用户注册';
                                 'pluginOptions'=>[
                                     'depends'=>['number'],
                                     'placeholder'=>'请选择...',
-                                    'url'=>Url::to(['/realestate/re'])
+                                    'url'=>Url::to(['/realestate/re']),
+	                                'params'=>['building'], //另一个上级目录ID
                                 ]
                             ]); ?>
 						</div>

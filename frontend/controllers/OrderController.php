@@ -10,12 +10,22 @@ use frontend\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * OrderController implements the CRUD actions for Order model.
  */
 class OrderController extends Controller
 {
+	//检查用户是否登录
+	public function  beforeAction($action)
+    {
+        if(Yii::$app->user->isGuest){
+            $this->redirect(['/login/login']);
+            return false;
+        }
+        return true;
+    }
     /**
      * {@inheritdoc}
      */
@@ -37,8 +47,7 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OrderSearch();
-		$data = (new \yii\db\Query)
+		$date = (new \yii\db\Query)
 			->select('order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
 			order_basic.order_type as type, order_basic.payment_time as payment_time,
 			order_basic.payment_gateway as gateway, order_basic.description as description,
@@ -47,12 +56,20 @@ class OrderController extends Controller
 			->from('order_basic')
 			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
 			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
-			->all();
+			->where([ 'in', 'order_basic.account_id', $_SESSION['user']['account_id']])
+			->orderBy('payment_time DESC');
 		
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		$count = $date->count();// 计算总数
+		
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => '6']);// 创建分页对象
+		
+		// 使用分页对象来填充 limit 子句并取得文章数据
+        $data = $date->offset($pagination->offset)
+                   ->limit($pagination->limit)
+                   ->all();
+		
         return $this->render('index', [
-            'searchModel' => $searchModel,
+			'pagination' => $pagination,
             'data' => $data,
         ]);
     }

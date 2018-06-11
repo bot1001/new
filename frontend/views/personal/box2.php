@@ -6,12 +6,18 @@ use yii\helpers\Url;
 
 <style type="text/css">
 	#box2-1{
-		height: auto;
-		width: 340px;
-		position:relative;
-		border-radius: 5px;
-		margin-top:10px;
-		background: #F0F0F0;
+		height: 260px;
+		  width: 370px;
+		  overflow: auto; 
+		  border-radius:10px;
+		  position: relative;
+		  left: 2%;
+	}
+	
+	table tr{
+		height: 25px;
+	}
+	#box2-2{
 	}
 </style>
 
@@ -34,24 +40,29 @@ use yii\helpers\Url;
 			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
 			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
 			->where(['=', 'order_basic.status', '2'])
+			->orderBy('payment_time DESC')
+			->limit(20)
 			->all();
 	?>
 	
 	<div id="box2-1">
-        <?php foreach($order as $or){ ?>
-		<div class="row">
-			<div id = "center" class="col-lg-3"><l><?= $or['order_id']; ?></l></div>
-			<div id = "center" class="col-lg-6"><?= date('Y-m-d H:i:s', $or['payment_time']); ?></div>
-			<div class="col-lg-3"><?php if(!empty($or['gateway'])){
-              	echo $data[$or['gateway']];
-              }?></div>
-		</div>
-		<div class="row">
-			<div id="center" class="col-lg-9"><a href="<?= Url::to(['/order/view', 'id' => $or['id']]) ?>"><?= $or['address']; ?></a></div>
-			<div class="col-lg-3"><?= $or['amount']; ?></div>
-		</div>
-
-	  <?php } ?>
+       <table id="box2-2" border="1px" height="300px">
+       <?php foreach($order as $or): $or = (object)$or ?>
+       	<tr>
+       		<td align="center" width="35%"><l><?= $or->order_id; ?></l></td>
+       		<td align="center" width="120"><?= date('Y-m-d H:i:s', $or->payment_time); ?></td>
+       		<td align="center" width="10%"><?php if(!empty($or->gateway)){
+              	echo $data[$or->gateway];
+              }?></td>
+       	</tr>
+       	
+       	<tr>
+       		<td colspan="2" align="center"><a href="<?= Url::to(['/order/view', 'id' => $or->id]) ?>"><?= $or->address; ?></a></td>
+       		<td align="right"><?= $or->amount; ?></td>
+       	</tr>
+       	<?php endforeach; ?>
+       </table>
+	  
 
    </div>
 </div>

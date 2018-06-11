@@ -115,7 +115,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($mobile_phone)
     {
-        return static::findOne(['mobile_phone' => $mobile_phone, 'status' => '1']);
+        return static::findOne(['mobile_phone' => $mobile_phone, 'status' => '1', 'account_role' => '0']); //查找用户
     }
 
     /**

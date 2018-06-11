@@ -77,8 +77,7 @@ use yii\helpers\Url;
    				                  echo $name['community_name'];
    				              ?>
    				         </div>
-   					<?php }
-   				                ?>
+   					<?php } ?>
             	</td>
             </tr>
             <tr>
@@ -89,7 +88,7 @@ use yii\helpers\Url;
             
             <tr>
             	<td colspan="3" id="in06">
-            		<?php 
+            	<?php 
    				if(isset($comment))
    				{
    					foreach($comment as $key => $_comment)

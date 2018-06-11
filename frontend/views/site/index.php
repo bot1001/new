@@ -9,5 +9,5 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 ?>
 <div id="index">
-    
+    <?php //echo '<pre />'; print_r($_SESSION); ?>
 </div>

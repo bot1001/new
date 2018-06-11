@@ -109,7 +109,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                     'pluginOptions'=>[
                         'depends'=>['number'],
                         'placeholder'=>'请选择...',
-                        'url'=>Url::to(['/realestate/re'])
+                        'url'=>Url::to(['/realestate/re']),
+	                    'params'=>['building'], //另一个上级目录ID
                     ]
                 ]); ?>
 			</div>

@@ -8,59 +8,61 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>
-	
-	#center,#prepay, #right, #left {
+	#center, th, #right, #left {
 		height: 25px;
 		font-size: 20px;
-	}
-	
-	th {
 		text-align: center;
 	}
-	
-	#center {
+	th, td{
 		text-align: center;
-	}
-	
-	#right {
-		text-align: right;
-		position: relative;
+		font-size: 20px;
 	}
 	
 	#pp {
 		margin: auto;
 		font-size: 25px;
-		text-align: center;
 		line-height: 60px;
 		width: 116px;
 		height: 54px;
 		background: url(/image/timg.jpg);
 		background-size: 116px 54px;
-		border-radius: 30px;
+		border-radius: 300px;
 		margin-top: 10px;
 	}
+	
+	#view{
+		height: 600px;
+		width: 800px;
+		overflow-y: auto;
+		margin: auto;border-radius: 10px;
+	} 
 </style>
 
-<div>
-	<table width="800" border="1" align="center" style="position: relative; margin-top: 20px;">
+<div id="view">
+	<table border="1" width=780px;>
 		<thead>
 			<tr>
-				<th id="prepay">序号</th>
-				<th id="prepay">年份</th>
-				<th id="prepay">月份</th>
-				<th id="prepay">名称</th>
-				<th id="prepay">合计</th>
-				<th id="prepay">备注</th>
+				<th>序号</th>
+				<th>年份</th>
+				<th>月份</th>
+				<th>名称</th>
+				<th>合计</th>
+				<th>备注</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php $sum = 0; $sale = 0;$i = 0; $sale_sum = 0;?>
+			<?php
+			$sum = 0; //缴费综合
+			$sale = 0; //优惠标记
+			$i = 0; //序号
+			$sale_sum = 0; //优惠金额
+			?>
 			<?php foreach($invoice as $p): $p= (object)$p; ?>
 			<tr>
-				<td id="center">
+				<td>
 					<?php $i ++; 
 					echo $i;
-					if($p->description == '物业费'){
+					if($p->description == "物业费"){
 		    	    	if($p->year > date('Y'))
 		    	    	{
 		    	    		$sale ++; //判断预交优惠信息
@@ -74,48 +76,39 @@ $this->params['breadcrumbs'][] = $this->title;
 					?>
 				</td>
 				
-				<td id="center">
-					<?= $p->year; ?>
-				</td>
+				<td><?= $p->year; ?></td>
 				
-				<td id="center">
-					<?= $p->month; ?>
-				</td>
+				<td><?= $p->month; ?></td>
 				
-				<td id="center">
-					<?= $p->description; ?>
-				</td>
+				<td><?= $p->description; ?></td>
 				
-				<td id="center">
+				<td>
 					<?php 
 					echo $p->amount;
 					
 					$sum += $p->amount; //计算合计金额
-					if($sale%13 == '0'){
-                    	$sale_sum += $p->amount; //统计优惠金额
-                    } ?>
+					if( $sale > 0 && $sale%13 == '0'){
+                    	 $sale_sum += $p->amount; //统计优惠金额
+						echo ','.$sale_sum;
+                    };
+					?>
 				</td>
 				
-				<td id="center">
-					<?= $p->notes; ?>
-				</td>
+				<td><?= $p->notes; ?></td>
 			</tr>
 			<?php endforeach; ?>
-
 			<tr>
-				<td id='right'>共:&nbsp;&nbsp;&nbsp;</td>
-				<td id='center'><?= $i.'条' ?></td>
-				<td id='right'>优惠</td>
-				<td id='center'><?= number_format($sale_sum, 2) ?></td>
-				<td id='right'>合计:&nbsp;&nbsp;&nbsp;</td>
-				<td id="left">&nbsp;&nbsp;&nbsp;
+				<td colspan="2">共：<?= $i.'条' ?></td>
+				<td>优惠</td>
+				<td><?= number_format($sale_sum, 2).'元'; ?></td>
+				<td id="left" colspan="2">&nbsp;&nbsp;&nbsp;
 					<?= number_format($sum-$sale_sum, 2).'元' ?>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
 
-	<div id="pp">
-		<a href="<?= Url::to(['/invoice/pay', 'amount' => $sum-$sale_sum]); ?>">Going…</a>
-	</div>
+<div id="pp">
+	<a href="<?= Url::to(['/invoice/pay', 'amount' => $sum-$sale_sum]); ?>"><l style="color: white">Going…</l></a>
 </div>
