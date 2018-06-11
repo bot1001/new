@@ -22,7 +22,6 @@
         "kartik-v/yii2-grid": "^3.1@dev",
         "kartik-v/yii2-widget-activeform": "^1.5@dev",
         "yiisoft/yii2-jui": "^2.0@dev",
-        "kartik-v/yii2-mpdf": "^1.0@dev",
         "phpoffice/phpspreadsheet": "dev-master",
         "kartik-v/yii2-widget-depdrop": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.1@dev",

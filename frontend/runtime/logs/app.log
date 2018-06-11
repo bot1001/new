@@ -38490,3 +38490,2493 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1528701428.298
     'REQUEST_TIME' => 1528701428
 ]
+2018-06-12 03:38:24 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: formula in C:\Apache24\htdocs\new\common\models\Invoice.php:125
+Stack trace:
+#0 C:\Apache24\htdocs\new\common\models\Invoice.php(125): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 125, Array)
+#1 C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php(148): common\models\Invoice::prepay(Array, '2018-6', '3', Array)
+#2 [internal function]: frontend\controllers\InvoiceController->actionNew('2018-6', '3', '1.5')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('new', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/new', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2018-06-12 03:38:24 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][info][application] $_GET = [
+    'cost' => [
+        0 => [
+            'cost' => '物业费'
+            'price' => '0.5'
+            'property' => ''
+        ]
+    ]
+    'year' => '2018-6'
+    'month' => '3'
+    'id' => [
+        0 => '1043'
+        1 => '3762'
+        2 => '5904'
+        3 => '80703'
+    ]
+    'amount' => '1.5'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'u496ldgjqlept7qa6alqtt2o4h'
+    '_csrf-frontend' => '16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '02'
+        'room' => '2-803'
+        'name' => '韦玉夸'
+        'phone' => '13597224096'
+        'acreage' => '0'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '金座小区'
+        'community_id' => '22'
+        'building_id' => '44'
+        'building' => '1栋'
+        'id' => '3762'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=u496ldgjqlept7qa6alqtt2o4h; _csrf-frontend=16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54461'
+    'REDIRECT_URL' => '/invoice/new'
+    'REDIRECT_QUERY_STRING' => 'cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'REQUEST_URI' => '/invoice/new?cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528745904.326
+    'REQUEST_TIME' => 1528745904
+]
+2018-06-12 03:39:05 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: formula in C:\Apache24\htdocs\new\common\models\Invoice.php:125
+Stack trace:
+#0 C:\Apache24\htdocs\new\common\models\Invoice.php(125): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 125, Array)
+#1 C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php(148): common\models\Invoice::prepay(Array, '2018-6', '3', Array)
+#2 [internal function]: frontend\controllers\InvoiceController->actionNew('2018-6', '3', '1.5')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('new', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/new', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2018-06-12 03:39:05 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][info][application] $_GET = [
+    'cost' => [
+        0 => [
+            'cost' => '物业费'
+            'price' => '0.5'
+            'property' => ''
+        ]
+    ]
+    'year' => '2018-6'
+    'month' => '3'
+    'id' => [
+        0 => '1043'
+        1 => '3762'
+        2 => '5904'
+        3 => '80703'
+    ]
+    'amount' => '1.5'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'u496ldgjqlept7qa6alqtt2o4h'
+    '_csrf-frontend' => '16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '02'
+        'room' => '2-803'
+        'name' => '韦玉夸'
+        'phone' => '13597224096'
+        'acreage' => '0'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '金座小区'
+        'community_id' => '22'
+        'building_id' => '44'
+        'building' => '1栋'
+        'id' => '3762'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=u496ldgjqlept7qa6alqtt2o4h; _csrf-frontend=16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54488'
+    'REDIRECT_URL' => '/invoice/new'
+    'REDIRECT_QUERY_STRING' => 'cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'REQUEST_URI' => '/invoice/new?cost%5B0%5D%5Bcost%5D=%E7%89%A9%E4%B8%9A%E8%B4%B9&cost%5B0%5D%5Bprice%5D=0.5&cost%5B0%5D%5Bproperty%5D=&year=2018-6&month=3&id%5B0%5D=1043&id%5B1%5D=3762&id%5B2%5D=5904&id%5B3%5D=80703&amount=1.5'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528745945.186
+    'REQUEST_TIME' => 1528745945
+]
+2018-06-12 03:39:16 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\views\order\view.php:116
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\order\view.php(116): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 116, Array)
+#1 [internal function]: yii\base\View->{closure}(false, Object(yii\widgets\DetailView))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(245): call_user_func(Object(Closure), false, Object(yii\widgets\DetailView))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(143): yii\widgets\DetailView->normalizeAttributes()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\BaseObject.php(109): yii\widgets\DetailView->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(383): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\widgets\\Det...', Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\widgets\\Det...', Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Widget.php(137): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\new\frontend\views\order\view.php(118): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#14 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\OrderController))
+#15 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(94): yii\base\Controller->render('view', Array)
+#16 [internal function]: frontend\controllers\OrderController->actionView('1')
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#20 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/view', Array)
+#21 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2018-06-12 03:39:16 [127.0.0.1][1081][u496ldgjqlept7qa6alqtt2o4h][info][application] $_GET = [
+    'id' => '1'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'u496ldgjqlept7qa6alqtt2o4h'
+    '_csrf-frontend' => '16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '02'
+        'room' => '2-803'
+        'name' => '韦玉夸'
+        'phone' => '13597224096'
+        'acreage' => '0'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '金座小区'
+        'community_id' => '22'
+        'building_id' => '44'
+        'building' => '1栋'
+        'id' => '3762'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/create'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=u496ldgjqlept7qa6alqtt2o4h; _csrf-frontend=16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54489'
+    'REDIRECT_URL' => '/order/view'
+    'REDIRECT_QUERY_STRING' => 'id=1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=1'
+    'REQUEST_URI' => '/order/view?id=1'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528745956.298
+    'REQUEST_TIME' => 1528745956
+]
+2018-06-12 03:41:19 [127.0.0.1][-][rj6heflusjcouo7j5j2lcin9o7][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: user in C:\Apache24\htdocs\new\frontend\views\site\index.php:12
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\site\index.php(12): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 12, Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SiteController))
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('index', Array, Object(frontend\controllers\SiteController))
+#5 C:\Apache24\htdocs\new\frontend\controllers\SiteController.php(124): yii\base\Controller->render('index')
+#6 [internal function]: frontend\controllers\SiteController->actionIndex()
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('index', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+2018-06-12 03:41:19 [127.0.0.1][-][rj6heflusjcouo7j5j2lcin9o7][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => '16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm\";}'
+    'advanced-frontend' => 'rj6heflusjcouo7j5j2lcin9o7'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => '_csrf-frontend=16e4c1c679fbbc7c28935fb092d29af7b4488a5081788d7da2ef742e85b057f0a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22lbDvz4WgsV37cpW6fr-Y_I7pZBETzMZm%22%3B%7D; advanced-frontend=rj6heflusjcouo7j5j2lcin9o7'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54638'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746079.205
+    'REQUEST_TIME' => 1528746079
+]
+2018-06-12 03:43:16 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\views\order\view.php:116
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\order\view.php(116): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 116, Array)
+#1 [internal function]: yii\base\View->{closure}(false, Object(yii\widgets\DetailView))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(245): call_user_func(Object(Closure), false, Object(yii\widgets\DetailView))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(143): yii\widgets\DetailView->normalizeAttributes()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\BaseObject.php(109): yii\widgets\DetailView->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(383): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\widgets\\Det...', Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\widgets\\Det...', Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Widget.php(137): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\new\frontend\views\order\view.php(118): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#14 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\OrderController))
+#15 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(94): yii\base\Controller->render('view', Array)
+#16 [internal function]: frontend\controllers\OrderController->actionView('2')
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#20 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/view', Array)
+#21 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2018-06-12 03:43:16 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'id' => '2'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54734'
+    'REDIRECT_URL' => '/order/view'
+    'REDIRECT_QUERY_STRING' => 'id=2'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=2'
+    'REQUEST_URI' => '/order/view?id=2'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746196.011
+    'REQUEST_TIME' => 1528746196
+]
+2018-06-12 03:45:03 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\views\order\view.php:116
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\order\view.php(116): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 116, Array)
+#1 [internal function]: yii\base\View->{closure}(false, Object(yii\widgets\DetailView))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(245): call_user_func(Object(Closure), false, Object(yii\widgets\DetailView))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(143): yii\widgets\DetailView->normalizeAttributes()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\BaseObject.php(109): yii\widgets\DetailView->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(383): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\widgets\\Det...', Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\widgets\\Det...', Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Widget.php(137): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\new\frontend\views\order\view.php(118): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#14 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\OrderController))
+#15 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(94): yii\base\Controller->render('view', Array)
+#16 [internal function]: frontend\controllers\OrderController->actionView('3')
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#20 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/view', Array)
+#21 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2018-06-12 03:45:02 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'id' => '3'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54800'
+    'REDIRECT_URL' => '/order/view'
+    'REDIRECT_QUERY_STRING' => 'id=3'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=3'
+    'REQUEST_URI' => '/order/view?id=3'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746302.951
+    'REQUEST_TIME' => 1528746302
+]
+2018-06-12 03:46:19 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][ParseError] ParseError: syntax error, unexpected '/' in C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php:224
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('invoice')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('pay')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/pay', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-12 03:46:18 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'amount' => '100'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/pay'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54866'
+    'REDIRECT_URL' => '/invoice/pay'
+    'REDIRECT_QUERY_STRING' => 'amount=100'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'amount=100'
+    'REQUEST_URI' => '/invoice/pay?amount=100'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746378.962
+    'REQUEST_TIME' => 1528746378
+]
+2018-06-12 03:46:38 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][Error] Error: Class 'frontend\controllers\on\models\Order' not found in C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php:222
+Stack trace:
+#0 [internal function]: frontend\controllers\InvoiceController->actionPay('100')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('pay', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/pay', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2018-06-12 03:46:38 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'amount' => '100'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/pay'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54877'
+    'REDIRECT_URL' => '/invoice/pay'
+    'REDIRECT_QUERY_STRING' => 'amount=100'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'amount=100'
+    'REQUEST_URI' => '/invoice/pay?amount=100'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746398.121
+    'REQUEST_TIME' => 1528746398
+]
+2018-06-12 03:49:19 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\views\order\view.php:116
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\order\view.php(116): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 116, Array)
+#1 [internal function]: yii\base\View->{closure}(false, Object(yii\widgets\DetailView))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(245): call_user_func(Object(Closure), false, Object(yii\widgets\DetailView))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(143): yii\widgets\DetailView->normalizeAttributes()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\BaseObject.php(109): yii\widgets\DetailView->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(383): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\widgets\\Det...', Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\widgets\\Det...', Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Widget.php(137): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\new\frontend\views\order\view.php(118): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#14 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\OrderController))
+#15 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(94): yii\base\Controller->render('view', Array)
+#16 [internal function]: frontend\controllers\OrderController->actionView('4')
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#20 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/view', Array)
+#21 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2018-06-12 03:49:18 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'id' => '4'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54987'
+    'REDIRECT_URL' => '/order/view'
+    'REDIRECT_QUERY_STRING' => 'id=4'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=4'
+    'REQUEST_URI' => '/order/view?id=4'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746558.982
+    'REQUEST_TIME' => 1528746558
+]
+2018-06-12 03:49:54 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\views\order\view.php:116
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\views\order\view.php(116): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 116, Array)
+#1 [internal function]: yii\base\View->{closure}(false, Object(yii\widgets\DetailView))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(245): call_user_func(Object(Closure), false, Object(yii\widgets\DetailView))
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\widgets\DetailView.php(143): yii\widgets\DetailView->normalizeAttributes()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\BaseObject.php(109): yii\widgets\DetailView->init()
+#5 [internal function]: yii\base\BaseObject->__construct(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(383): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\di\Container.php(156): yii\di\Container->build('yii\\widgets\\Det...', Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\BaseYii.php(349): yii\di\Container->get('yii\\widgets\\Det...', Array, Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Widget.php(137): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\new\frontend\views\order\view.php(118): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(336): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#14 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\OrderController))
+#15 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(94): yii\base\Controller->render('view', Array)
+#16 [internal function]: frontend\controllers\OrderController->actionView('4')
+#17 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#20 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/view', Array)
+#21 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2018-06-12 03:49:54 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'id' => '4'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '55005'
+    'REDIRECT_URL' => '/order/view'
+    'REDIRECT_QUERY_STRING' => 'id=4'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=4'
+    'REQUEST_URI' => '/order/view?id=4'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746594.014
+    'REQUEST_TIME' => 1528746594
+]
+2018-06-12 03:52:05 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][ParseError] ParseError: syntax error, unexpected 'public' (T_PUBLIC) in C:\Apache24\htdocs\new\frontend\controllers\OrderController.php:176
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('order')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('create')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/create', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-12 03:52:05 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'order_id' => '180612392771'
+    'amount' => '100'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/create'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '55094'
+    'REDIRECT_URL' => '/order/create'
+    'REDIRECT_QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'REQUEST_URI' => '/order/create?order_id=180612392771&amount=100'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746725.322
+    'REQUEST_TIME' => 1528746725
+]
+2018-06-12 03:53:04 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][ParseError] ParseError: syntax error, unexpected 'public' (T_PUBLIC) in C:\Apache24\htdocs\new\frontend\controllers\OrderController.php:176
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('order')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('create')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/create', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-12 03:53:04 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'order_id' => '180612392771'
+    'amount' => '100'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/create'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '55122'
+    'REDIRECT_URL' => '/order/create'
+    'REDIRECT_QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'REQUEST_URI' => '/order/create?order_id=180612392771&amount=100'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746784.482
+    'REQUEST_TIME' => 1528746784
+]
+2018-06-12 03:54:14 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: a in C:\Apache24\htdocs\new\frontend\controllers\OrderController.php:152
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(152): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 152, Array)
+#1 [internal function]: frontend\controllers\OrderController->actionCreate('180612392771', '100')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('create', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/create', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-12 03:54:13 [127.0.0.1][1081][l1kh41trfri59565ecv86hf3a2][info][application] $_GET = [
+    'order_id' => '180612392771'
+    'amount' => '100'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'l1kh41trfri59565ecv86hf3a2'
+    '_csrf-frontend' => '09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"9XRhYFRAIAbMvb89OePKQwiZMY2GHxy3\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1081
+    'user' => [
+        'user_id' => '1081'
+        'account_id' => 'a588f77f2546da16bfc3673713de62b9'
+        'user_name' => null
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '15296500211'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '0'
+        'id' => '1057'
+        'real_name' => '覃祖殿'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '45'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1476512923'
+        'nickname' => '中国人'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '物业'
+            'name' => '莫'
+            'phone' => '1507826'
+            'acreage' => '100'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '裕达华庭'
+            'community_id' => '15'
+            'building_id' => '18'
+            'building' => '物业'
+            'id' => '1043'
+        ]
+        1 => [
+            'number' => '02'
+            'room' => '2-803'
+            'name' => '韦玉夸'
+            'phone' => '13597224096'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金座小区'
+            'community_id' => '22'
+            'building_id' => '44'
+            'building' => '1栋'
+            'id' => '3762'
+        ]
+        2 => [
+            'number' => '01'
+            'room' => '506'
+            'name' => '彭文昌'
+            'phone' => '13620157787'
+            'acreage' => '136.66'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '建材家居广场'
+            'community_id' => '23'
+            'building_id' => '64'
+            'building' => '9栋'
+            'id' => '5904'
+        ]
+        3 => [
+            'number' => '01'
+            'room' => '13-116'
+            'name' => '黄艳芳'
+            'phone' => '15224628525'
+            'acreage' => '0'
+            'finish' => '0'
+            'inherit' => '0'
+            'decoration' => '0'
+            'commencement' => '0'
+            'delivery' => '0'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '金湖城A区'
+            'community_id' => '50'
+            'building_id' => '232'
+            'building' => '13栋'
+            'id' => '80703'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '物业'
+        'name' => '莫'
+        'phone' => '1507826'
+        'acreage' => '100'
+        'finish' => '0'
+        'inherit' => '0'
+        'decoration' => '0'
+        'commencement' => '0'
+        'delivery' => '0'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '裕达华庭'
+        'community_id' => '15'
+        'building_id' => '18'
+        'building' => '物业'
+        'id' => '1043'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/create'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/view'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=l1kh41trfri59565ecv86hf3a2; _csrf-frontend=09d53b1bb1ad1b9348f74dc3219069dcea0ca3df023be6ab4033db30041b835ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%229XRhYFRAIAbMvb89OePKQwiZMY2GHxy3%22%3B%7D'
+    'PATH' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '55177'
+    'REDIRECT_URL' => '/order/create'
+    'REDIRECT_QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'order_id=180612392771&amount=100'
+    'REQUEST_URI' => '/order/create?order_id=180612392771&amount=100'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528746853.916
+    'REQUEST_TIME' => 1528746853
+]

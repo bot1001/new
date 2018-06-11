@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	}
 	
 	#view{
-		height: 600px;
+		max-height: 600px;
 		width: 800px;
 		overflow-y: auto;
 		margin: auto;border-radius: 10px;
@@ -89,7 +89,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					$sum += $p->amount; //计算合计金额
 					if( $sale > 0 && $sale%13 == '0'){
                     	 $sale_sum += $p->amount; //统计优惠金额
-						echo ','.$sale_sum;
                     };
 					?>
 				</td>

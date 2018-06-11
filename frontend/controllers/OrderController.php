@@ -104,8 +104,8 @@ class OrderController extends Controller
     {
 		$order = Products::find()
 			->select('product_id as p_id, sale')
-			->where(['in', 'order_id', $order_id])
-			->where(['in', 'sale', '0'])
+			->andwhere(['in', 'order_id', $order_id])
+			->andwhere(['in', 'sale', '0'])
 			->asArray()
 			->all();		
 		
@@ -116,7 +116,7 @@ class OrderController extends Controller
 		$type = '1'; //物业订单
 		$description = '物业缴费';
 		
-		$name = $user['user_name']; //下单人
+		$name = $user['real_name']; //下单人
 		$phone = $user['mobile_phone']; //手机号码
 		$address = $house['community'].' '.$house['building'].' '.$house['number'].'单元'.' '.$house['room'].'号'; //订单地址
 		$province = $user['province_id'];
