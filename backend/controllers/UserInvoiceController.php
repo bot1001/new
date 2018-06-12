@@ -592,68 +592,10 @@ class UserInvoiceController extends Controller
 	public function actionAdd() 
 	{
 		ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为2048M(2GB)
-		set_time_limit(900); //等待时间是10分钟
+		set_time_limit(0); //等待时间是10分钟
 		
-		$query = ( new\ yii\ db\ Query() )->select( [
-			'community_realestate.community_id',
-			'community_realestate.building_id',
-			'cost_relation.realestate_id',
-			'community_realestate.acreage',
-			'cost_relation.cost_id',
-			'cost_name.cost_name',
-			'cost_name.parent',
-			'cost_name.price',
-			'cost_name.property',
-		] )
-			->from( 'cost_relation' )
-			->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
-			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
-			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
-			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->andwhere( ['in', 'community_realestate.community_id', $_SESSION[ 'community' ] ] )
-			->andwhere(['cost_name.inv' =>1])
-			->all();
-		
-		$y = date( 'Y' );
-		$m = date( 'm' );
-		$f = date( time() );
-		$a = 0;
-		$b = 0;
-		$i = count( $query );
-		
-		foreach ( $query as $q ) {
-			sleep(0.01);
-			$community = $q[ 'community_id' ];
-			$building = $q[ 'building_id' ];
-			$realestate = $q[ 'realestate_id' ];
-			$cost = $q[ 'cost_id' ];
-			$description = $q[ 'cost_name' ];
-			$d = $y . "年" . $m . "月份" . $description;
-			$price = $q[ 'price' ];
-			$acreage = $q[ 'acreage' ];
-			$notes = $q['property'];
-						
-			if ( $description == "物业费" || $description == "空调运作费" || $description == "水电周转金" ) {
-				$p = $price*$acreage;
-				$price = round($p,1); //保留一位小数点
-			}
-			
-			//出入语句
-			$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status, invoice_notes)
-			values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0','$notes')";
-			$result = Yii::$app->db->createCommand( $sql )->execute();
-
-			if ( $result ) {
-				$a <= $i;
-				$a += 1;
-			} else {
-				$b <= $i;
-				$b += 1;
-			}
-		}
-		$con = "成功生成费项" . $a . "条！-  失败：" . $b . "条 - 合计：" . $i . "条";
-		echo "<script> alert('$con');parent.location.href='./'; </script>";
-
+		$result = UserInvoice::Add();//调用数据
+		echo (time()-$date);
 	}
 
 	//单个房号生成费项条件筛选

@@ -13,19 +13,19 @@ use app\models\CostName;
 class CostNameSearch extends CostName
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['cost_id', 'level', 'inv', 'parent', 'builder'], 'integer'],
-            [['cost_name', 'property', 'create_time', 'update_time'], 'safe'],
+            [['cost_id', 'level', 'inv', 'parent', 'builder', 'formula', 'sale'], 'integer'],
+            [['cost_name', 'create_time', 'update_time', 'property'], 'safe'],
             [['price'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -43,18 +43,18 @@ class CostNameSearch extends CostName
     public function search($params)
     {
         $query = CostName::find();
-		$query->joinWith('sys');
-
+		
+        $query->joinWith('sys');
+		
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-			'sort' => [
-		    	'defaultOrder' => [
-		        	'level' => SORT_ASC,
-			        'cost_id' => SORT_DESC,
-		        ]
-		    ]
+            'sort' => [ 
+                'defaultOrder' => [ 
+                    'level' => SORT_ASC, 
+                    'cost_id' => SORT_DESC, 
+                ] 
+            ] 
         ]);
 
         $this->load($params);
@@ -73,6 +73,8 @@ class CostNameSearch extends CostName
             'inv' => $this->inv,
             'parent' => $this->parent,
             'builder' => $this->builder,
+            'formula' => $this->formula,
+            'sale' => $this->sale,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
         ]);

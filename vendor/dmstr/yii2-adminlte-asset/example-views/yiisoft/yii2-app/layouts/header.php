@@ -44,8 +44,8 @@ use mdm\admin\components\Helper;
 
 	$user = $query->all(); //获取注册数据
     $today = $query->count(); //计算注册量总数
-    $order = $or->orderBy('payment_time DESC')->all(); // 当日订单数据
-    $o_count = count($order); //订单总量
+    $order = $or->orderBy('payment_time DESC')->limit('20')->all(); // 当日订单数据
+    $o_count = $or->count(); //订单总量
 
     $o_c = array_column($order, 'community_id'); //订单中的小区编号
     $u_c = array_column($user, 'community_id'); //注册中的小区编号

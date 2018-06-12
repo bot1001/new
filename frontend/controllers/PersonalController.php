@@ -62,7 +62,7 @@ class PersonalController extends Controller
 			$phone = $_SESSION['user']['mobile_phone'];
 			
 			$ship = new UserRealestate(); //实例化用户关联模型
-		    $ship->account_id =  $account_id; //获取用户ID
+		    $ship->account_id = $account_id; //赋值用户ID
 		    $ship->realestate_id = $realestate_id; //赋值关联房屋ID
 			
 			$r = $ship->save(); //保存用户关联信息
@@ -79,8 +79,16 @@ class PersonalController extends Controller
 	}
 	
 	//解绑房屋
-	function actionDelete()
+	function actionDelete($id,$k)
 	{
-		echo 'test';
+		$account_id = $_SESSION['user']['account_id']; //获取用户ID
+		
+		$ship = UserRealestate::findOne(['realestate_id' => "$id"])->delete(); //删除
+		
+		if($ship){
+			unset($_SESSION['house'][$k]);
+		}
+		
+		return $this->redirect( Yii::$app->request->referrer);
 	}
 }

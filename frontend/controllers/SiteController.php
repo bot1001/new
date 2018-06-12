@@ -127,7 +127,7 @@ class SiteController extends Controller
 	
 	public function actionLoad()
     {
-//		$this->layout = 'home';
+		$this->layout = 'home';
         return $this->render('load');
     }
 	

@@ -107,7 +107,8 @@ class InvoiceController extends Controller
 		$id = array_column($_SESSION['house'], 'id'); //提取关联房屋id
 		
 		$cost = (new \yii\db\Query()) //查找房屋绑定的固定费用
-			->select('cost_name.cost_name as cost, cost_name.price as price, 
+			->select('cost_name.cost_name as cost, cost_name.price as price,
+			          cost_name.sale as sale, 
 			          cost_name.property as property, cost_name.formula as formula')
 			->from('cost_name')
 			->join('inner join', 'cost_relation', 'cost_relation.cost_id = cost_name.cost_id')

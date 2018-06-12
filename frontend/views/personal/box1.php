@@ -35,6 +35,13 @@ use common\models\Area;
 		position: relative;
 		margin-top: 8px;
 	}
+	
+	.delete{
+			height: auto;
+			font-size: 15px;
+			width: auto;
+			display:inline-block;
+		}
 </style>
 
 <div id="b_1">
@@ -54,9 +61,7 @@ use common\models\Area;
 	    	->orwhere(['like', 'area_parent_id', $user['city_id']])
 	    	->indexBy('id')
 	    	->column();
-	
-//	echo '<pre />';
-//	print_r($area);exit;
+
 	?>
   <table id="box1-1" border="1">
   <tbody>
@@ -78,7 +83,11 @@ use common\models\Area;
     <tr>
     	<td id="right">地址：</td>
     	<td id="center" colspan="3">
-    	    <?php echo $area[$user['province_id'].'0000'].'-'.$area[$user['city_id']].'-'.$area[$user['area_id']] ; ?>
+    	    <?php if(strlen($user['province_id']) < 4){
+            	echo $area[$user['province_id'].'0000'].'-'.$area[$user['city_id']].'-'.$area[$user['area_id']];
+            }else{
+            	echo $area[$user['province_id']].'-'.$area[$user['city_id']].'-'.$area[$user['area_id']];
+            } ?>
     	</td>
     </tr>    
     
@@ -91,15 +100,23 @@ use common\models\Area;
     <?php if($h){ ?>
     <tr>
       <td id="right">房号：</td>
-         <td colspan="4">
+         <td colspan="3">
 			 <a href="<?= Url::to(['/realestate/change', 'k' => $k]) ?>">
                  <?= $h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room.' 号'; ?>
              </a>
          </td>
+         
+         <td rowspan="2">
+    	    <?php if($k > '0') {
+	            Html::a('<span class="glyphicon glyphicon-minus delete"></span>',['delete', 'id' => $h->id, 'k' => $k], ['class' => 'btn btn-warning', 'title' => '解绑房屋']);
+            }
+	        ?>
+    	</td>
     </tr>
+    
    	<tr>
     	<td colspan="2">封顶时间：</td>
-    	<td colspan="3"><?php
+    	<td colspan="2"><?php
 				 $date= date('Y', $h->finish);
 				  if($date <1980){
 					  echo '未设置';
@@ -154,6 +171,5 @@ use common\models\Area;
 </table>
 <div id="new">
 	<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加房屋']) ?>
-	<?= Html::a('<span class="glyphicon glyphicon-minus"></span>','#', ['class' => 'btn btn-warning', 'title' => '解绑房屋']) ?>
 </div>
 </div>

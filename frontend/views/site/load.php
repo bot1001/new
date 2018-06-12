@@ -12,7 +12,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		background: #57D1CF;
 		color: aliceblue;
 		text-align: center;
-		height: 900px;
+		height: auto;
 		border-radius: 20px;
 	}
 	
@@ -25,11 +25,20 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	.qr{
 		width:160px;
 		border-radius:10px;
+		position: relative;
+		margin-top: -40px;
 	}
 	
-	#div1, #div2, #div3, #div4{
-		position:relative;top:45px;
+	#div1, #div2, #div3{
+		position:relative;
+		top:45px;
 		margin-bottom: 5px;
+	}
+	
+	#div4{
+		position:relative;
+		margin-top:45px;
+		bottom: 5px;
 	}
 	
 	copy{
@@ -43,7 +52,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	}
 	.row{
 		position: relative;
-		top: 35px;
+		margin-top: 35px;
+		
 	}
 	
 </style>
@@ -79,15 +89,13 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	        </div>
             <div id="div4">
 	        	<img src="/image/QR.png" class="qr" />
-	        	<p>扫描二维码下载裕家人APP</p>
+	        	<p>扫码下载裕家人APP</p>
 	        	<p>适用于：iOS 9.0+ / Android 4.0+ </p>
 	        </div>
        </div>
      </div>
      
 	<div align="center">
-	    <a href="http://www.gxydwy.com">裕家人 2.0</a>
-	    <br />
 		&copy;<?= date('Y') ?> 裕达物业 桂ICP备14007933号-2
 	</div>
 </div>

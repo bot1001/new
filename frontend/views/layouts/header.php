@@ -141,9 +141,14 @@ use yii\ widgets\ Breadcrumbs;
 	           	$url = Url::to('/login/login');
                       echo Html::a('登录', $url);
                   } else {
-//	           	$url = Url::to('/pay/logout');
 	           	echo Html::a($_SESSION['user']['real_name'], '#', ['onclick' => "logout()"]);
 	           } ?>
+	           <ul>
+               	   <li><?php if(isset($_SESSION['home'])){
+	                       $_SESSION['home']['community'].' '.$_SESSION['home']['building'].' '.$_SESSION['home']['room'];
+                       }  ?>
+                   </li>
+               </ul>
        	   </li>
 	       			    
            <li><a href='<?= Url::to('/personal/index ') ?>'>个人中心</a></li>

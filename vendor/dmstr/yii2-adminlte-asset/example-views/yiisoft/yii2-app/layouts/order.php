@@ -13,7 +13,7 @@ use yii\helpers\Url;
         <!-- inner menu: contains the actual data -->
         <ul class="menu">
             <li>
-               <?php foreach($order as $o){?>
+               <?php foreach($order as $key => $o){?>
 				    <a href="<?php echo Url::to(['/user-invoice/index', 'order_id' => $o['order_id']]) ?>">
 		        
 			        <?php 
@@ -29,8 +29,7 @@ use yii\helpers\Url;
 						?>
 				
 				</a>
-              <?php 					 
-										  }
+              <?php }
 				if(isset($ord)){
 					$_SESSION['order'] = ['order' =>$ord, 'count' => $o_count];
 				}

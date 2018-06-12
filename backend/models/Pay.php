@@ -132,42 +132,36 @@ class Pay extends \yii\db\ActiveRecord
 			->all();
 		
 		    if($i_id){
-		    	foreach($i_id as $i){
-					//变更费项状态
-					$transaction = Yii::$app->db->beginTransaction(); //$transaction = Yii::$app->db->beginTransaction();
-					try{
-						$invoice = UserInvoice::updateAll(['payment_time' => time(),
-		    							      'update_time' => time(),
-		    							      'invoice_status' => '6', 
-		    							      'order_id' => $order_id],
-		    							      'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							    );
-		               if($invoice){
-						   //变更订单状态
-					       $order =  OrderBasic::updateAll(['payment_time' => time(),
+				$transaction = Yii::$app->db->beginTransaction(); //$transaction = Yii::$app->db->beginTransaction();
+				try{
+					//变更订单状态
+					$order =  OrderBasic::updateAll(['payment_time' => time(),
 					       					  'payment_gateway' => '6',
 					       					  'payment_number' => $order_id,
 					       					  'status' => 2],
 					       					  'order_id = :o_id', [':o_id' => $order_id]
 					       					 );
+					if($order){						
+		                foreach($i_id as $i){//变更费项状态
+						   $invoice = UserInvoice::updateAll(['payment_time' => time(),
+		    							      'update_time' => time(),
+		    							      'invoice_status' => '6', 
+		    							      'order_id' => $order_id],
+		    							      'invoice_id = :product_id', [':product_id' => $i['product_id']]
+		    							    );
 					   }
 				       
-						if($order){
-							$transaction->commit();
-							return true;
-						}else{
-							$transaction->rollback();
-						}
-						
-					}catch(\exception $e){
-						print_r($e);
-						$transaction->rollback(); 
-						exit;
-					}
-		    	}
-		 }else{
-				return false;
-			}
+					    $transaction->commit();
+					    return true;
+					}	
+				}catch(\exception $e){
+					print_r($e);
+					$transaction->rollback(); 
+					exit;
+				}
+		    	
+		 }
+		return false;
 	}
 	
 	//支付宝异步回调处理订单

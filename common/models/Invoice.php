@@ -122,21 +122,22 @@ class Invoice extends \yii\db\ActiveRecord
 				$invoice['description'] = $c['cost']; //详情
 				
 				//判断物业费
-				if($c['formula'] == '1'){
+				if($c['sale'] == '1'){
 					if(strtotime($date) > strtotime(date('Y-m')))
 					{
 						$sale ++;
 					}
-					
-					$amount = $c['price']*$house['acreage'];
-					$invoice['amount'] = number_format($amount, 2);
-				}else{
-					$amount = $c['price'];
-					$invoice['amount'] = number_format($amount, 2);
 				}
 				
-				//判断优惠
-				if($sale%13 == 0 && $sale !== 0){
+				if($c['formula'] == '1'){ //判断计费方式
+					$amount = $c['price']*$house['acreage'];
+				}else{
+					$amount = $c['price'];
+				}
+				
+				$invoice['amount'] = number_format($amount, 2); //保留两位小区点
+				
+				if($sale%13 == 0 && $sale !== 0){//判断优惠条件，满一年（13个月）
 					$invoice['sale'] = '1';
 					$invoice['notes'] = '缴费优惠';
 				}else{

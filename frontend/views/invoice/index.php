@@ -80,7 +80,7 @@ Modal::end();
              	if($time == '0'){
              		return '';
              	}else{
-             		return $time;
+             		return date('Y-m-d H:i:s', $time);
              	}
              },
 			 'hAlign' => 'center',
