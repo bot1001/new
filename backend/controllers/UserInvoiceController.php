@@ -595,7 +595,7 @@ class UserInvoiceController extends Controller
 		set_time_limit(0); //等待时间是10分钟
 		
 		$result = UserInvoice::Add();//调用数据
-		echo (time()-$date);
+		return true;
 	}
 
 	//单个房号生成费项条件筛选

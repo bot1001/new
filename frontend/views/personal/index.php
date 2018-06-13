@@ -13,12 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 		
 		#box1,#box2,#box3,#box4,#box5{
-			width: 400px;
+			width: 360px;
 		    height: 350px;
 			margin-right: 15px;
 			margin-bottom: 20px;
 			border-radius: 20px;
-			overflow: auto;
 		}
 		
 		#box1{
@@ -40,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?= $this->render('box2') ?>
 		</div>
 		
-		<div id="box3" class="col-lg-4">
+		<div id="box3" class="col-lg-3">
 			<?= $this->render('box3') ?>
 		</div>
 		

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 ?>
 
@@ -8,30 +9,49 @@ use yii\helpers\Url;
 	#box3{
 		background: #DBDFB9;
 	}
-	.row{
-		width: 100%;
-/*		height: 250px;*/
+		
+	#box302{
+		background: #94D3D8;
+		margin-right: 5px;
 		border-radius: 5px;
-		background: #A1E7C5;
+	}
+	#box3table{
+		font-size: 25px;
+		width: 100%;
 	}
 	
-	#tbody tr td{
-		font-size: 20px;
-		height: 30px;
+	#box3table tr{
+		height:40px;
 	}
-	span{
-		display: block inline;
-		width:40%;
+	
+	#box303{
+		position: absolute;
+		background: #E8E8E8;
+		bottom: 20px;
+		font-size: 20px;
+		width:330px;
+		height: 40px;
+		border-radius: 10px;
+		border-color: #DBDFB9;
+	}
+	
+	#c{
+		text-align: center;
+	}
+	
+	#r{
+		text-align: right;
 	}
 
 </style>
 
+  <p>
    <h3>
-       <a href="<?= Url::to(['/ticket/index']) ?>">
+       <a href="<?= Url::to(['/invoice/index']) ?>">
        	当月费用
        </a>
    </h3>
-   
+   </p>
 <div class="box3">
    <?php
 	    $data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
@@ -44,27 +64,41 @@ use yii\helpers\Url;
 			->from('user_invoice')
 			->andwhere(['in', 'community_id', "$community"])
 			->andwhere(['in', 'building_id', "$building"])
-			->andwhere(['in', 'realestate_id', "$id"]);
+			->andwhere(['in', 'realestate_id', "$id"])
+			->andwhere(['in', 'invoice_status', '0']);
 		  
 		$amount = $inv->all(); //总费用
 		  
 		$inv01 = array_column($amount, 'amount'); //获取金额
 		$sum = array_sum($inv01); //求和
-		 $sum01 = 0;
+		$sum01 = 0;
 			  
 		$invoice = $inv->andwhere(['in', 'year', date('Y')])
 			->andwhere(['in', 'month', date('m')])
 			->all();
 	?>
-   <?php foreach($invoice as $key => $in): $in = (object)$in ?>
-    <div>
-        <span width="20px" style="background: #B5B5B5"><?= $in->description ?></span>
-        <span class="col-lg-1"><?php echo $in->amount; $sum01 += $in->amount ?></span>
-        <span class="col-lg-4"><?= $data[$in->status] ?></span>
-    </div>
-    <?php endforeach; ?>
-</div>
-	<div class="col-lg-1"><?= $sum; ?></div>
-	<div class="col-lg-2"><?= $sum01 ?></div>
+    <table id="box3table">
+         <?php foreach($invoice as $key => $in): $in = (object)$in ?>
+            <tr>
+                <td><div id="box302" width= "150px"><?= $in->description ?></div></td>
+                <td align="right"><div id="box302"><?php echo $in->amount; $sum01 += $in->amount ?></div></td>
+                <td align="center"><div id="box302"><?= $data[$in->status] ?></div></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
+<table id="box303" border="1px">
+  <tbody>
+    <tr>
+        <td id="c" width="50px">共:</td>
+        <td width="70px" id="r"><l><?= $sum; ?></l></td>
+        <td id="c" width="60px">往期:</td>
+        <td id="r"><l><?= $sum01-$sum ?></l></td>
+        <td id="c" width="40px">
+             <?= Html::a('<span class="glyphicon glyphicon-credit-card"></span>','/invoice/view', ['class' => 'btn btn-info', 'title' => '立即缴费']) ?>
+        </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
