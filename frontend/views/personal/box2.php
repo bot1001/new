@@ -62,7 +62,5 @@ use yii\helpers\Url;
        	</tr>
        	<?php endforeach; ?>
        </table>
-	  
-
    </div>
 </div>

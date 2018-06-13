@@ -32,23 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div id="box" class="row">
 	<?php if(isset($_SESSION['user'])) { ?>
-		<div id="box1" class="col-lg-3">
+		<div id="box1" class="col-lg-4">
 			<?=  $this->render('box1'); ?>
 		</div>
 		
-		<div id="box2" class="col-lg-3">
+		<div id="box2" class="col-lg-4">
 			<?= $this->render('box2') ?>
 		</div>
 		
-<!--		<div id="box3" class="col-lg-3">
+		<div id="box3" class="col-lg-4">
+			<?= $this->render('box3') ?>
+		</div>
+		
+		<!--<div id="box4" class="col-lg-4">
 			<?php // echo $this->render('box1') ?>
 		</div>
 		
-		<div id="box4" class="col-lg-3">
-			<?php // echo $this->render('box1') ?>
-		</div>
-		
-		<div id="box5" class="col-lg-3">
+		<div id="box5" class="col-lg-4">
 			<?php // echo $this->render('box1') ?>
 		</div>-->
 	<?php } ?>
