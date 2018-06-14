@@ -196,7 +196,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				?>
 								
 				<tr>
-					<td colspan="9" align="right">合计：  &nbsp;&nbsp;&nbsp;<?php echo $i_a; ?></td>
+					<td colspan="9" align="right">合计：  &nbsp;&nbsp;&nbsp;<?= $amount; ?></td>
 					<td colspan="3"></td>
 				</tr>
 			</tbody>

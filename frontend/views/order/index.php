@@ -169,9 +169,9 @@ Modal::end();
               
 				<?php				
 				}elseif($d->status == '2'){
-					 echo Html::a('<span class="glyphicon glyphicon-print"></span>', ['print', 'id' => $d->id], ['class' => 'btn btn-info']);
+					 echo Html::a('<span class="glyphicon glyphicon-print"></span>', ['print', 'id' => $d->order_id, 'amount' => $d->amount], ['class' => 'btn btn-info', 'title' => '打印']);
 				}elseif($d->status == '3'){
-					 echo Html::a('<span class="glyphicon glyphicon-remove"></span>', '#', ['class' => 'btn btn-warning']);
+					 echo Html::a('<span class="glyphicon glyphicon-remove"></span>', '#', ['class' => 'btn btn-warning', 'title' => '已取消']);
 				}
 				?></td>
         </tr>

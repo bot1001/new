@@ -42,6 +42,48 @@ use common\ models\ Area;
 		display: inline-block;
 	}
 </style>
+    
+    <script>
+		function change(str){
+			if(confirm('您确定要切换房屋吗？')){
+				$.ajax({
+				type: "GET",
+				dataType: "json",
+				url:"/realestate/change",
+				data: {'k': str},
+					success:function (result){
+						if(result == '1'){
+						   alert('您已成功切换小区');
+						   location.reload();
+						   };
+					},
+					error: function(){
+						alert("服务器异常，请联系管理员");
+					}
+		        });
+			}
+		}
+		
+		function d(id, k){
+			if(confirm('您确定要解绑房屋吗？')){
+				$.ajax({
+				type: "GET",
+				dataType: "json",
+				url:"/personal/delete",
+				data: {'id': id, 'k':k},
+					success:function (result){
+						if(result == '1'){
+						   alert('您已成功切换小区');
+						   location.reload();
+						   };
+					},
+					error: function(){
+						alert("服务器异常，请联系管理员");
+					}
+		        });
+			}
+		}
+</script>
 
     <p>    
     	<h3>
@@ -108,15 +150,12 @@ use common\ models\ Area;
 	    		<tr>
 	    			<td id="right">房号：</td>
 	    			<td colspan="3">
-	    				<a href="<?= Url::to(['/realestate/change', 'k' => $k]) ?>">
-                     <?= $h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room.' 号'; ?>
-                 </a>
-	    			
+                         <?php echo Html::a($h->community.'-'.$h->building.'-'.$h->number.'单元'.$h->room, '#' , ['onclick' => "change('$k')"]) ?>
 	    			</td>
     
 	    			<td rowspan="2">
 	    				<?php if($k > '0') {
-	                        echo Html::a('<span class="glyphicon glyphicon-minus delete"></span>',['delete', 'id' => $h->id, 'k' => $k], ['class' => 'btn btn-warning', 'title' => '解绑房屋']);
+	                        echo Html::a('<span class="glyphicon glyphicon-minus"></span>', '#' , ['class' => 'btn btn-warning', 'onclick' => "d($h->id, $k)", 'title' => '解绑房屋']);
                                     }else{
 	                        echo Html::a('<span class="glyphicon glyphicon-home"></span>','#', ['class' => 'btn btn-success', 'title' => '我的房屋']);
                         }

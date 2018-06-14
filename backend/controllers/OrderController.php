@@ -106,7 +106,7 @@ class OrderController extends Controller
    }
 	
 	//打印订单
-	public function actionPrint($order_id)
+	public function actionPrint($order_id, $amount)
 	{
 		$session = Yii::$app->session;
 		$user_name = $_SESSION['user']['0']['name']; //收款用户名
@@ -131,9 +131,7 @@ class OrderController extends Controller
 				return $this->redirect(Yii::$app->request->referrer);
 			}
 			
-		    $in = array_column($invoice, 'invoice_amount');// 选择费项金额列
 		    $de = array_column($invoice, 'description');// 选择费详情列
-		    $i_a = array_sum($in);  //费项总和
 			$dc = array_unique($de); //去重复
 									
 			if($invoice){
@@ -153,7 +151,7 @@ class OrderController extends Controller
 			                      'dc' => $dc,
 			                      'comm' => $comm,
 					              'order_id' => $order_id,
-			                      'i_a'=> $i_a,
+			                      'amount'=> $amount,
 					              'e' => $e,
 					              'order' => $order,
 			                      'user_name' => $user_name,

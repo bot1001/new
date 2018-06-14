@@ -147,43 +147,40 @@ class CommunityRealestateController extends Controller
 					
 						 if(!empty($r_id))
 						{
-//							$transaction = Yii::$app->db->beginTransaction();
-//				             try{
-//						 	   //更新数据库记录
-//						     	$d = CommunityRealestate::updateAll([
-//									'owners_cellphone' => $sheet[ 'F' ],
-//						    		'acreage' => (float)$sheet[ 'G' ], 
-//						    		'finish' => strtotime($sheet['H']),
-//						    		'delivery' => strtotime($sheet['I']),
-//						    		'decoration' => strtotime($sheet['J']),
-//						    		'orientation' => $sheet['M'],
-//						    		'property' => $sheet['N']
-//						    	], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
-//    						    	
-//								 if($d){
-//									 $house = New HouseInfo(); //实例化模型
-//						    
-//						    	     $house->realestate = $r_id['realestate_id'];
-//						    	     $house->name = $sheet['E'];
-//						    	     $house->phone = $sheet['F'];
-//						    	     $house->IDcard = $sheet['K'];
-//						    	     $house->address = $sheet['L'];
-//						    	     
-//						    	     $t = $house->save(); //保存
-//								 }
-//				             	$transaction->commit();
-//				             }catch(\Exception $e) {
-//				             	 print_r($e);
-//                                 $transaction->rollback();
-//                             }
-//
-//						 	if ( isset($t) && isset($d) ) {
-//			                 	$a <= $i;
-//			                 	$a += 1;
-//			                 }else {
-//			                 	$h <= $i;
-//			                 	$h += 1;
-//			                 }
+							$transaction = Yii::$app->db->beginTransaction();
+				             try{
+						 	   //更新数据库记录
+						     	$d = CommunityRealestate::updateAll([
+									'owners_cellphone' => $sheet[ 'F' ],
+						    		'acreage' => (float)$sheet[ 'G' ], 
+						    		'finish' => strtotime($sheet['H']),
+						    		'delivery' => strtotime($sheet['I']),
+						    		'decoration' => strtotime($sheet['J']),
+						    		'orientation' => $sheet['M'],
+						    		'property' => $sheet['N']
+						    	], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
+
+								$house = New HouseInfo(); //实例化模型
+						    
+						    	$house->realestate = $r_id['realestate_id'];
+						    	$house->name = $sheet['E'];
+						    	$house->phone = $sheet['F'];
+						    	$house->IDcard = $sheet['K'];
+						    	$house->address = $sheet['L'];
+						    	
+						    	$t = $house->save(); //保存
+								
+				             	$transaction->commit();
+				             }catch(\Exception $e) {
+				             	 print_r($e);
+                                 $transaction->rollback();
+                             }
+
+						 	if ( isset($t) || isset($d) ) {
+			                 	$a += 1;
+			                 }else {
+			                 	$c += 1;
+			                 }
 						 }elseif(empty($r_id)){
 							//获取小区
 							$b_id = CommunityBuilding::find()
@@ -193,69 +190,70 @@ class CommunityRealestateController extends Controller
 								->asArray()
 								->one();
 							
-//							print_r($b_id);exit;
-							
-//							$transaction = Yii::$app->db->beginTransaction();
-//							try{
-						    		//插入新记录
-									
-						    		$community_id = (int)$b_id['community_id']; //小区
-						    		$building_id = (int)$b_id['building_id']; //楼宇
-						    		$room_number = (int)$sheet['C']; //单元
-						    		$room_name = $sheet['D']; //房号
-						    		$owners_name = $sheet['E']; //业主姓名
-						    		$owners_cellphone = (int)$sheet['F']; //手机号码
-						    		$acreage = (float)$sheet['G']; //面积
-									$finish = $sheet['H']; //交付时间
-									$delivery = $sheet['I']; //交房时间
-									$decoration = $sheet['J']; //装修时间
-									$orientation = $sheet['M']; //房屋朝向
-									$property = $sheet['N']; //备注
-						    	    								
-				                    //查入语句
-		    	                    $sql = "insert ignore into community_realestate(community_id,building_id,room_number,
-				                                                                    room_name, owners_name, owners_cellphone, 
-				                                                                    finish,  delivery, decoration,
-				                    												acreage, orientation, property)values (
-				                    												'$community_id','$building_id', '$room_number',
-				                    												'$room_name', '$owners_name', '$owners_cellphone',
-																					'$finish', '$delivery', '$decoration',
-				                    												'$acreage','$orientation','$property')";
-		    	                    $result = Yii::$app->db->createCommand( $sql )->execute();
-				                    $new_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID			
-				                    			
-				                    if($result){
-				                    	$realestate = $new_id;
-				                        $name = $sheet['E'];
-				                        $phone = $sheet['F'];
-				                        $IDcard = $sheet['K'];
-				                    	$creater = $_SESSION['user']['0']['id'];
-				                    	$create = time();
-				                    	$update = time();
-				                    	$status = '0';
-				                        $address = $sheet['L']; 			
-				                    	$politics = 0;
-				                    	
-				                    $sql = "insert ignore into house_info(realestate,name,phone,
-				                                                   IDcard, `creater`, `create`, 
-				                                                   `update`, status, address,
-				                    						       politics)values (
-				                    							'$realestate','$name', '$phone',
-				                    							'$IDcard', '$creater', '$create', 
-				                    							'$update', '$status', '$address', 
-				                    							'$politics')";
-		    	                    $house = Yii::$app->db->createCommand( $sql )->execute();
-									}    
-									
-//                                    if($house == 1){
-//                                    $transaction->commit();
-//                                    }else{
-//                                    $transaction->rollback();
-//                                    }
-//								
-//							}catch(\Exception $e){
-//								print_r($e);
-//						    }
+							$transaction = Yii::$app->db->beginTransaction();
+							try{
+						    	//插入新记录
+								
+						    	$community_id = (int)$b_id['community_id']; //小区
+						    	$building_id = (int)$b_id['building_id']; //楼宇
+						    	$room_number = (int)$sheet['C']; //单元
+						    	$room_name = $sheet['D']; //房号
+						    	$owners_name = $sheet['E']; //业主姓名
+						    	$owners_cellphone = (int)$sheet['F']; //手机号码
+						    	$acreage = (float)$sheet['G']; //面积
+								$finish = $sheet['H']; //交付时间
+								$delivery = $sheet['I']; //交房时间
+								$decoration = $sheet['J']; //装修时间
+								$orientation = $sheet['M']; //房屋朝向
+								$property = $sheet['N']; //备注
+						    									
+				                //查入语句
+		    	                $sql = "insert ignore into community_realestate(community_id,building_id,room_number,
+				                                                                room_name, owners_name, owners_cellphone, 
+				                                                                finish,  delivery, decoration,
+				                												acreage, orientation, property)values (
+				                												'$community_id','$building_id', '$room_number',
+				                												'$room_name', '$owners_name', '$owners_cellphone',
+																	'$finish', '$delivery', '$decoration',
+				                												'$acreage','$orientation','$property')";
+		    	                $result = Yii::$app->db->createCommand( $sql )->execute();
+				                $new_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID			
+				                			
+				                if($result){
+				                	$realestate = $new_id;
+				                    $name = $sheet['E'];
+				                    $phone = $sheet['F'];
+				                    $IDcard = $sheet['K'];
+				                	$creater = $_SESSION['user']['0']['id'];
+				                	$create = time();
+				                	$update = time();
+				                	$status = '1';
+				                    $address = $sheet['L']; 			
+				                	$politics = 0;
+				                	
+				                $sql = "insert ignore into house_info(realestate,name,phone,
+				                                               IDcard, `creater`, `create`, 
+				                                               `update`, status, address,
+				                						       politics)values (
+				                							'$realestate','$name', '$phone',
+				                							'$IDcard', '$creater', '$create', 
+				                							'$update', '$status', '$address', 
+				                							'$politics')";
+		    	                $house = Yii::$app->db->createCommand( $sql )->execute();
+								}
+								
+								if($result && $house)
+								{
+									$b ++;
+								}else{
+									$c++;
+								}
+								
+                                $transaction->commit();
+							}catch(\Exception $e){
+								print_r($e);
+							    $transaction->rollback();
+						    }
 					}
 				}
 			}else{
@@ -266,7 +264,7 @@ class CommunityRealestateController extends Controller
 		if(isset($inputFileName)){
 			unlink($inputFileName);
 		}
-		$con = "成功更新记录：" . $a . "条！-  插入：". $b . "条！ - 失败：". $c . "条！ - 重复". $h. "条 - 合计：" . $i . "条";
+		$con = "成功更新记录：" . $a . "条！-  导入：". $b . "条！ - 失败：". $c . "条！ - 重复". $h. "条 - 合计：" . $i . "条";
 		echo "<script> alert('$con');parent.location.href='./'; </script>";
 	}	
 	

@@ -16,7 +16,7 @@ use yii\helpers\Html;
 		border-radius: 5px;
 	}
 	#box3table{
-		font-size: 25px;
+		font-size: 20px;
 		width: 100%;
 	}
 	
@@ -91,7 +91,7 @@ use yii\helpers\Html;
   <tbody>
     <tr>
         <td id="c" width="50px">共:</td>
-        <td width="70px" id="r"><l><?= $sum; ?></l></td>
+        <td width="70px" id="r"><l><?= '-'.$sum01; ?></l></td>
         <td id="c" width="60px">往期:</td>
         <td id="r"><l><?= $sum01-$sum ?></l></td>
         <td id="c" width="40px">

@@ -61,6 +61,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					<td width="8%"><?php 
 						$building = $i->building;
 						echo $building; ?></td>
+						
+					<td><?= $i->name ?></td>
+						
 					<td width="9%"><?php echo $i->year; ?>年</td>
 					<td width="8%"><?php echo $i->month; ?>月</td>
 					<td width="" align="left"><?php echo $i->description; ?></td>

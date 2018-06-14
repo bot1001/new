@@ -43767,3 +43767,2061 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1528791776.902
     'REQUEST_TIME' => 1528791776
 ]
+2018-06-14 12:37:32 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：k in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/chan...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-06-14 12:37:32 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][info][application] $_GET = [
+    'str' => ''
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f\";}'
+    'advanced-frontend' => '7r1i09j29ae9rkh9t8273emcp7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/personal/index'
+    'HTTP_X_CSRF_TOKEN' => 'HUsgz_aHbvdJkZs4157XJyByWY7BD5uWN_LXvIgDbttFGEv4mtULsB3_0XHgyqBBDRgV_KA7ts8AoruE3ztWvQ=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_COOKIE' => '_csrf-frontend=f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f%22%3B%7D; advanced-frontend=7r1i09j29ae9rkh9t8273emcp7'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '52980'
+    'REDIRECT_URL' => '/realestate/change'
+    'REDIRECT_QUERY_STRING' => 'str'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'str'
+    'REQUEST_URI' => '/realestate/change?str'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528951052.583
+    'REQUEST_TIME' => 1528951052
+]
+2018-06-14 12:37:40 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：k in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/chan...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-06-14 12:37:40 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][info][application] $_GET = [
+    'str' => ''
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f\";}'
+    'advanced-frontend' => '7r1i09j29ae9rkh9t8273emcp7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/personal/index'
+    'HTTP_X_CSRF_TOKEN' => 'HUsgz_aHbvdJkZs4157XJyByWY7BD5uWN_LXvIgDbttFGEv4mtULsB3_0XHgyqBBDRgV_KA7ts8AoruE3ztWvQ=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_COOKIE' => '_csrf-frontend=f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f%22%3B%7D; advanced-frontend=7r1i09j29ae9rkh9t8273emcp7'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '52986'
+    'REDIRECT_URL' => '/realestate/change'
+    'REDIRECT_QUERY_STRING' => 'str'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'str'
+    'REQUEST_URI' => '/realestate/change?str'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528951060.549
+    'REQUEST_TIME' => 1528951060
+]
+2018-06-14 12:38:21 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: k in C:\Apache24\htdocs\new\frontend\controllers\RealestateController.php:138
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\RealestateController.php(138): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 138, Array)
+#1 [internal function]: frontend\controllers\RealestateController->actionChange('')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/chan...', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-14 12:38:21 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][info][application] $_GET = [
+    'str' => ''
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f\";}'
+    'advanced-frontend' => '7r1i09j29ae9rkh9t8273emcp7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/personal/index'
+    'HTTP_X_CSRF_TOKEN' => '1LVDVvbNjKD-VgcMAvTNsQCqQ6_ror-kw-2b_5Vkp3qM5ihhmp_p56o4TUU1oLrXLcAP3YqWkv30vffHwlyfHA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_COOKIE' => '_csrf-frontend=f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f%22%3B%7D; advanced-frontend=7r1i09j29ae9rkh9t8273emcp7'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '52998'
+    'REDIRECT_URL' => '/realestate/change'
+    'REDIRECT_QUERY_STRING' => 'str'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'str'
+    'REQUEST_URI' => '/realestate/change?str'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528951101.042
+    'REQUEST_TIME' => 1528951101
+]
+2018-06-14 12:38:41 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index:  in C:\Apache24\htdocs\new\frontend\controllers\RealestateController.php:138
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\RealestateController.php(138): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 138, Array)
+#1 [internal function]: frontend\controllers\RealestateController->actionChange('')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/chan...', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-14 12:38:41 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][info][application] $_GET = [
+    'str' => ''
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f\";}'
+    'advanced-frontend' => '7r1i09j29ae9rkh9t8273emcp7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/personal/index'
+    'HTTP_X_CSRF_TOKEN' => '1LVDVvbNjKD-VgcMAvTNsQCqQ6_ror-kw-2b_5Vkp3qM5ihhmp_p56o4TUU1oLrXLcAP3YqWkv30vffHwlyfHA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_COOKIE' => '_csrf-frontend=f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f%22%3B%7D; advanced-frontend=7r1i09j29ae9rkh9t8273emcp7'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '53009'
+    'REDIRECT_URL' => '/realestate/change'
+    'REDIRECT_QUERY_STRING' => 'str'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'str'
+    'REQUEST_URI' => '/realestate/change?str'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528951121.24
+    'REQUEST_TIME' => 1528951121
+]
+2018-06-14 12:40:40 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：str in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/chan...', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-06-14 12:40:40 [127.0.0.1][2][7r1i09j29ae9rkh9t8273emcp7][info][application] $_GET = [
+    0 => ''
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f\";}'
+    'advanced-frontend' => '7r1i09j29ae9rkh9t8273emcp7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/personal/index'
+    'HTTP_X_CSRF_TOKEN' => 'IX-lF0Cfajwp6pJOH2jAszFGtO5pDu0v8gCYSJ3xle55LM4gLM0Pe32E2AcoPLfVHCz4nAg6wHbFUPRwysmtiA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_COOKIE' => '_csrf-frontend=f93b3d78d124c7e18fd07ccb82aded16cf9d3832b344340d5dff22f282a2f24fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22XSk7lReGTnJI7Twf-jLra4-Y7Pl8W88f%22%3B%7D; advanced-frontend=7r1i09j29ae9rkh9t8273emcp7'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '53045'
+    'REDIRECT_URL' => '/realestate/change'
+    'REDIRECT_QUERY_STRING' => '0'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => '0'
+    'REQUEST_URI' => '/realestate/change?0'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528951240.843
+    'REQUEST_TIME' => 1528951240
+]
+2018-06-14 14:31:32 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: w_info in C:\Apache24\htdocs\new\frontend\controllers\LoginController.php:113
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\LoginController.php(113): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 113, Array)
+#1 [internal function]: frontend\controllers\LoginController->actionNew()
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('new', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/new', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-14 14:31:32 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54356'
+    'REDIRECT_URL' => '/login/new'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/new'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528957892.82
+    'REQUEST_TIME' => 1528957892
+]
+2018-06-14 14:41:46 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\base\UnknownMethodException] yii\base\UnknownMethodException: Calling unknown method: common\models\Order::asArray() in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Component.php:300
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\base\Component->__call('asArray', Array)
+#1 [internal function]: frontend\controllers\OrderController->actionPrint('180612718090')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-14 14:41:46 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180612718090'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54832'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180612718090'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180612718090'
+    'REQUEST_URI' => '/order/print?id=180612718090'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528958506.799
+    'REQUEST_TIME' => 1528958506
+]
+2018-06-14 14:44:22 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][Error] Error: Class 'frontend\controllers\Invoice' not found in C:\Apache24\htdocs\new\frontend\controllers\OrderController.php:203
+Stack trace:
+#0 [internal function]: frontend\controllers\OrderController->actionPrint('180612718090')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2018-06-14 14:44:22 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180612718090'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '54871'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180612718090'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180612718090'
+    'REQUEST_URI' => '/order/print?id=180612718090'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528958662.61
+    'REQUEST_TIME' => 1528958662
+]
+2018-06-14 15:04:31 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\base\ViewNotFoundException] yii\base\ViewNotFoundException: The view file does not exist: C:\Apache24\htdocs\new\frontend\views\order\print.php in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php:233
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\OrderController))
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('print', Array, Object(frontend\controllers\OrderController))
+#2 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(205): yii\base\Controller->render('print', Array)
+#3 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#10 {main}
+2018-06-14 15:04:31 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180614085430'
+    'amount' => '132.75'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '55614'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'REQUEST_URI' => '/order/print?id=180614085430&amount=132.75'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528959871.456
+    'REQUEST_TIME' => 1528959871
+]
+2018-06-14 15:33:41 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause'
+The SQL being executed was: SELECT * FROM `user_invoice` WHERE `order_id`='180614085430' ORDER BY `0` in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column '0' in 'order clause'
+)
+
+2018-06-14 15:33:40 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180614085430'
+    'amount' => '132.75'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '56371'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'REQUEST_URI' => '/order/print?id=180614085430&amount=132.75'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528961620.889
+    'REQUEST_TIME' => 1528961620
+]
+2018-06-14 15:33:49 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180612788764', '200.50')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause'
+The SQL being executed was: SELECT * FROM `user_invoice` WHERE `order_id`='180612788764' ORDER BY `0` in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180612788764', '200.50')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column '0' in 'order clause'
+)
+
+2018-06-14 15:33:49 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180612788764'
+    'amount' => '200.50'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '56380'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180612788764&amount=200.50'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180612788764&amount=200.50'
+    'REQUEST_URI' => '/order/print?id=180612788764&amount=200.50'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528961629.23
+    'REQUEST_TIME' => 1528961629
+]
+2018-06-14 15:33:58 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column '0' in 'order clause'
+The SQL being executed was: SELECT * FROM `user_invoice` WHERE `order_id`='180614085430' ORDER BY `0` in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(399): yii\db\Command->queryInternal('fetchAll', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(237): yii\db\Command->queryAll()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all(NULL)
+#5 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(203): yii\db\ActiveQuery->all()
+#6 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column '0' in 'order clause'
+)
+
+2018-06-14 15:33:58 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180614085430'
+    'amount' => '132.75'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '56389'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'REQUEST_URI' => '/order/print?id=180614085430&amount=132.75'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528961638.86
+    'REQUEST_TIME' => 1528961638
+]
+2018-06-14 15:37:56 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: order_id in C:\Apache24\htdocs\new\frontend\controllers\OrderController.php:204
+Stack trace:
+#0 C:\Apache24\htdocs\new\frontend\controllers\OrderController.php(204): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 204, Array)
+#1 [internal function]: frontend\controllers\OrderController->actionPrint('180614085430', '132.75')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('print', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('order/print', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-06-14 15:37:56 [127.0.0.1][2][9ajmm2mbspkd5cdo4fpi5qq19t][info][application] $_GET = [
+    'id' => '180614085430'
+    'amount' => '132.75'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => 'df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF\";}'
+    'advanced-frontend' => '9ajmm2mbspkd5cdo4fpi5qq19t'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'order/print'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://www.yuda.com/order/index'
+    'HTTP_COOKIE' => '_csrf-frontend=df33c533c4bff324a82f10f94fe7d3f6b9898c162e8a5079685a3e0e66351e4fa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OclvQ-KHgFJI77LgaeUjJVu5e4DzB4ZF%22%3B%7D; advanced-frontend=9ajmm2mbspkd5cdo4fpi5qq19t'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '56505'
+    'REDIRECT_URL' => '/order/print'
+    'REDIRECT_QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=180614085430&amount=132.75'
+    'REQUEST_URI' => '/order/print?id=180614085430&amount=132.75'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528961876.057
+    'REQUEST_TIME' => 1528961876
+]
+2018-06-14 16:53:48 [127.0.0.1][2][ocouu0mdfl1m8kmru0jl53acna][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined variable: checking in C:\Apache24\htdocs\new\common\models\Invoice.php:104
+Stack trace:
+#0 C:\Apache24\htdocs\new\common\models\Invoice.php(104): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 104, Array)
+#1 C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php(126): common\models\Invoice::prepay(Array, '2018-6', '1', Array)
+#2 [internal function]: frontend\controllers\InvoiceController->actionCreate()
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('create', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/create', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2018-06-14 16:53:48 [127.0.0.1][2][ocouu0mdfl1m8kmru0jl53acna][info][application] $_GET = []
+
+$_POST = [
+    '_csrf-frontend' => '74NshsZQjzaJ7irr2YRFXcbAZB8XQ4lR15vzlkJgewDYzRzKrmjbfvnfSaWctwwTl5g0ViEJ5SniysfGIFRJNw=='
+    'Invoice' => [
+        'year' => '2018-6'
+        'month' => '1'
+    ]
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ocouu0mdfl1m8kmru0jl53acna'
+    '_csrf-frontend' => '6347f6b805be3ece86a225f0b48330dbbf7cc47cb697b6da5adb81342e6fee03a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"7NpLh8THp1cNE3INQXPI6Jlx5Q4Pb427\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/create'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '153'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ORIGIN' => 'http://www.yuda.com'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.7 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=ocouu0mdfl1m8kmru0jl53acna; _csrf-frontend=6347f6b805be3ece86a225f0b48330dbbf7cc47cb697b6da5adb81342e6fee03a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%227NpLh8THp1cNE3INQXPI6Jlx5Q4Pb427%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '62497'
+    'REDIRECT_URL' => '/invoice/create'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/invoice/create'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528966428.66
+    'REQUEST_TIME' => 1528966428
+]
+2018-06-14 17:25:29 [127.0.0.1][2][ocouu0mdfl1m8kmru0jl53acna][error][ParseError] ParseError: syntax error, unexpected 'if' (T_IF) in C:\Apache24\htdocs\new\frontend\views\invoice\view.php:70
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(254): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\InvoiceController))
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(384): yii\base\View->render('view', Array, Object(frontend\controllers\InvoiceController))
+#3 C:\Apache24\htdocs\new\frontend\controllers\InvoiceController.php(95): yii\base\Controller->render('view', Array)
+#4 [internal function]: frontend\controllers\InvoiceController->actionView()
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('view', Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('invoice/view', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 C:\Apache24\htdocs\new\frontend\web\index.php(17): yii\base\Application->run()
+#11 {main}
+2018-06-14 17:25:29 [127.0.0.1][2][ocouu0mdfl1m8kmru0jl53acna][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'ocouu0mdfl1m8kmru0jl53acna'
+    '_csrf-frontend' => '6347f6b805be3ece86a225f0b48330dbbf7cc47cb697b6da5adb81342e6fee03a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"7NpLh8THp1cNE3INQXPI6Jlx5Q4Pb427\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 2
+    'user' => [
+        'user_id' => '2'
+        'account_id' => 'a6nqjqb30rdw5sh8v5lb2kia1oegth9w'
+        'user_name' => '梁耀琪'
+        'password' => 'e10adc3949ba59abbe56e057f20f883e'
+        'mobile_phone' => '13768688658'
+        'qq_openid' => null
+        'weixin_openid' => 'oRJDt0jZkxGhf80-hoQsHd9iLPlo'
+        'wx_unionid' => 'oHq83uLlXxYfbhayNrS2bS_9Kx4I'
+        'weibo_openid' => null
+        'account_role' => '0'
+        'new_message' => '0'
+        'status' => '1'
+        'property' => '1'
+        'id' => '2'
+        'real_name' => '梁耀琪'
+        'gender' => '1'
+        'face_path' => 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI732yMt3JgXuePPTfjNpx1f4CsyGzrQmic7tZC54qKfxqakrt6g34LctgNdWQbqia1icmZBOnkW6wTA/132'
+        'province_id' => '450000'
+        'city_id' => '451300'
+        'area_id' => '451302'
+        'reg_time' => '1528419005'
+        'nickname' => '梁耀琪'
+    ]
+    'house' => [
+        0 => [
+            'number' => '01'
+            'room' => '1003'
+            'name' => '梁耀琪'
+            'phone' => '13768688658'
+            'acreage' => '200.5'
+            'finish' => '-28800'
+            'inherit' => '-28800'
+            'decoration' => '-28800'
+            'commencement' => '-28800'
+            'delivery' => '-28800'
+            'orientation' => '0'
+            'property' => '0'
+            'community' => '水户皇门'
+            'community_id' => '16'
+            'building_id' => '19'
+            'building' => '1栋'
+            'id' => '1104'
+        ]
+    ]
+    'home' => [
+        'number' => '01'
+        'room' => '1003'
+        'name' => '梁耀琪'
+        'phone' => '13768688658'
+        'acreage' => '200.5'
+        'finish' => '-28800'
+        'inherit' => '-28800'
+        'decoration' => '-28800'
+        'commencement' => '-28800'
+        'delivery' => '-28800'
+        'orientation' => '0'
+        'property' => '0'
+        'community' => '水户皇门'
+        'community_id' => '16'
+        'building_id' => '19'
+        'building' => '1栋'
+        'id' => '1104'
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'invoice/view'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'www.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.7 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://www.yuda.com/invoice/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'HTTP_COOKIE' => 'advanced-frontend=ocouu0mdfl1m8kmru0jl53acna; _csrf-frontend=6347f6b805be3ece86a225f0b48330dbbf7cc47cb697b6da5adb81342e6fee03a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%227NpLh8THp1cNE3INQXPI6Jlx5Q4Pb427%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'www.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/frontend/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/frontend/web/index.php'
+    'REMOTE_PORT' => '64219'
+    'REDIRECT_URL' => '/invoice/view'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/invoice/view'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1528968329.226
+    'REQUEST_TIME' => 1528968329
+]

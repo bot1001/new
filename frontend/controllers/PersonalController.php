@@ -89,6 +89,6 @@ class PersonalController extends Controller
 			unset($_SESSION['house'][$k]);
 		}
 		
-		return $this->redirect( Yii::$app->request->referrer);
+		return true;
 	}
 }

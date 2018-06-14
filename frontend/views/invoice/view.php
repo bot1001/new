@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>
-	#center, th, #right, #left {
+	table th, table td{
 		height: 25px;
 		font-size: 20px;
 		text-align: center;
@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		height: 54px;
 		background: url(/image/timg.jpg);
 		background-size: 116px 54px;
-		border-radius: 300px;
 		margin-top: 10px;
 	}
 	
@@ -34,12 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		max-height: 600px;
 		width: 800px;
 		overflow-y: auto;
-		margin: auto;border-radius: 10px;
+		margin: auto;
 	} 
 </style>
 
 <div id="view">
-	<table border="1" width=780px;>
+	<table border="1" width=800px;>
 		<thead>
 			<tr>
 				<th>序号</th>
@@ -80,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				
 				<td><?= $p->month; ?></td>
 				
-				<td><?= $p->description; ?></td>
+				<td style="text-align: left"><?= $p->description; ?></td>
 				
 				<td>
 					<?php 

@@ -137,10 +137,7 @@ class RealestateController extends Controller
 		$house = $_SESSION['house'];
 		$_SESSION['home'] = $house[$k];
 		
-		$session = Yii::$app->session;
-		$session->setFlash( 'success', '1' );
-		
-		return $this->redirect(Yii::$app->request->referrer);
+		return true;
 	}
 	
 	function actionHome()

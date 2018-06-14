@@ -10,7 +10,7 @@ use yii\helpers\Html;
 		font-size: 15px;
 		font-weight: 700;
 		overflow: auto;
-		height: 230px;
+		max-height: 230px;
 		width: 100%;
 	}
 	
@@ -91,6 +91,6 @@ use yii\helpers\Html;
 	</div>
 	
 	<div id="new">
-		<?= Html::a('更多','index', ['class' => 'btn btn-info', 'title' => '更多记录']) ?>
+		<?= Html::a('更多','/order/index', ['class' => 'btn btn-info', 'title' => '更多记录']) ?>
 	</div>
 </div>

@@ -198,9 +198,16 @@ class OrderController extends Controller
 	}
 	
 	//打印订单
-	public function actionPrint()
+	public function actionPrint($id, $amount)
 	{
-		echo 'test';
+		$invoice = \common\models\Invoice::find()->where(['order_id' => $id])->orderBy('year DESC, month DESC')->asArray()->all();
+		$order = Order::find(['order_id' => $id])->asArray()->one();
+		
+		echo '<pre>';
+		print_r($order);
+			exit;
+		
+		return $this->render('print', ['amount' => $amount, 'order' => $order, 'order_id' => $id]);
 	}
 
     /**

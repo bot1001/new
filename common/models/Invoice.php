@@ -96,20 +96,25 @@ class Invoice extends \yii\db\ActiveRecord
 		    $date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
 		    
 		    $time = explode('-', $date); //拆分年月
+			$checking = 0; //费项验证结果
 		    
 		    //遍历并重组费项
 		    foreach($cost as $c){
 				
-				$check = Invoice::find() //验证费项是否存在
+				if($checking == '0'){
+					$check = Invoice::find() //验证费项是否存在
 					->andwhere(['in', 'realestate_id', reset($id)])
 					->andwhere(['in', 'year', reset($time)])
 					->andwhere(['in', 'month', end($time)])
 					->andwhere(['in', 'description', $c['cost']])
 					->asArray()
-					->one();				
+					->one();
+				}								
 				
 				if($check){
 					continue; 
+				}else{
+					$checking = '1';
 				}
 				
 		    	$invoice['id'] = reset($id); //房号ID

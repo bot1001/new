@@ -40,7 +40,7 @@ class HouseInfo extends \yii\db\ActiveRecord
         return [
             [['realestate', 'name',   'phone'], 'required'],
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
-            [['name'], 'string', 'max' => 16],
+            [['name'], 'string', 'max' => 32],
             //[['phone'], 'string', 'max' => 16],
             [['IDcard'], 'string', 'length' => 18],
             [['address', 'property'], 'string', 'max' => 50],

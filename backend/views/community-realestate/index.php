@@ -347,7 +347,7 @@ $this->title = '房屋管理';
 		],
 		'toolbar' => [
 			[ 'content' =>
-				Html::a( '导入','#', [ 
+				Html::a( '<i class="glyphicon glyphicon-cloud-upload"></i>','#', [ 
 		                'data-toggle' => 'modal',
 						'data-target' => '#view-modal',
 						'class' => 'btn btn-info i' ] ).''.
