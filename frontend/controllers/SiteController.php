@@ -101,7 +101,7 @@ class SiteController extends Controller
 			if($user){
 				\frontend\models\Site::saveMessage($user, $w_info);
 				
-				return $this->redirect('/site/index');
+				return $this->render('index');
 			}else{
 				$k = \frontend\models\Site::getK(); //获取程序生成account_id
 				

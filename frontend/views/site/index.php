@@ -9,5 +9,5 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 ?>
 <div id="index">
-    <?php //echo '<pre />'; print_r($_SESSION['home']); ?>
+	<h1><?= "广西裕达物业服务有限公司欢迎您，更多内容敬请期待！"; ?></h1>
 </div>

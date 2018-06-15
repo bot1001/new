@@ -72,11 +72,11 @@ class PayController extends Controller
 		                							   'order_amount' => $order_amount,
 		                							   'order_body' => $order_body]);
 		                }elseif($paymethod == 'xj'){
-		    			    return $this->redirect(['xj', 'order_id' => $order_id]);
+		    			    return $this->redirect(['xj', 'order_id' => $order_id, 'order_amount' => $order_amount]);
 		    		    }elseif($paymethod == 'up'){
-		    		    	return $this->redirect(['up', 'order_id' => $order_id]);
+		    		    	return $this->redirect(['up', 'order_id' => $order_id, 'order_amount' => $order_amount]);
 		    		    }elseif($paymethod == 'yh'){
-		    		    	return $this->redirect(['yh', 'order_id' => $order_id]);
+		    		    	return $this->redirect(['yh', 'order_id' => $order_id, 'order_amount' => $order_amount]);
 		    		    }elseif($paymethod == 'zf'){
 		    		    	return $this->redirect(['zf', 'order_id' => $order_id]);
 		    		    }elseif($paymethod == 'jh'){
@@ -166,36 +166,36 @@ class PayController extends Controller
 	}
 	
 	//现金支付变更费项状态
-	public function actionXj($order_id)
+	public function actionXj($order_id, $order_amount)
 	{
 		$change = Pay::change($order_id);
 		
 		if($change == 1){
-			return $this->redirect(['/order/print','order_id' => $order_id]);
+			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
 	}
 	
 	//刷卡支付变更费项状态
-	public function actionUp($order_id)
+	public function actionUp($order_id, $order_amount)
 	{
 		$change = Pay::change($order_id);
 		
 		if($change == 1){
-			return $this->redirect(['/order/print','order_id' => $order_id]);
+			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
 	}
 	
 	//银行代缴支付变更费项状态
-	public function actionYh($order_id)
+	public function actionYh($order_id, $order_amount)
 	{
 		$change = Pay::change($order_id);
 		
 		if($change == 1){
-			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
+			return $this->redirect(['user-invoice/index','order_id' => $order_id, 'amount' => $order_amount]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}

@@ -91,7 +91,7 @@ use yii\helpers\Html;
   <tbody>
     <tr>
         <td id="c" width="50px">共:</td>
-        <td width="70px" id="r"><l><?= '-'.$sum01; ?></l></td>
+        <td width="70px" id="r"><l><?= 0-$sum01; ?></l></td>
         <td id="c" width="60px">往期:</td>
         <td id="r"><l><?= $sum01-$sum ?></l></td>
         <td id="c" width="40px">

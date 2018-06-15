@@ -36,7 +36,7 @@ class Site extends ActiveRecord
 	//微信扫码登录信息保存函数
 	public static function saveMessage($user, $w_info)
 	{
-		$info = \frontend\models\User::find()->where(['in', 'user_id', $user['user_id']])->one();
+		$info = \frontend\models\User::findOne(['in', 'user_id', $user['user_id']]);
 		Yii::$app->user->login($info);
 
 		$info_m = (new \yii\db\Query)
@@ -121,6 +121,9 @@ class Site extends ActiveRecord
 		if(!isset($_SESSION['user'])){
 			$_SESSION['user'] = $user; //保存用户信息到session
 		}
+		
+		$info = \frontend\models\User::find()->where(['in', 'mobile_phone', $phone])->One(); //查询登录用户信息
+		Yii::$app->user->login($info); //保存用户信息到登录程序
 		
 		$_SESSION['house'] = $house; //保存关联房屋到session
 		$_SESSION['home'] = reset($house); //默认进入第一套房子

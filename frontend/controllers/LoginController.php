@@ -144,7 +144,6 @@ class LoginController extends Controller
 			->where(['mobile_phone' => "$phone", 'account_role' => '0', 'status' => '1'])
 			->asArray()
 			->one();
-//		print_r($u_account);exit;
 		
 		if($u_account){ //如果存在则绑定微信账号
 			$result = UserAccount::updateAll(['weixin_openid' => $weixin_openid, 'wx_unionid' => $unionid],
@@ -152,7 +151,7 @@ class LoginController extends Controller
 			$u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $u_account['account_id']]);
 			
 			//如果修改成功则自动登录
-			if($result){
+			if($result || $u_data){
 				\frontend\models\Site::saveLogin($phone);
 				return $this->render('/site/index');
 			}
@@ -217,7 +216,8 @@ class LoginController extends Controller
 		    }else{
 		    	return $this->redirect('/login/login');
 		    }
-		}		
+		}
+		return $this->redirect(['/login/login']);
 	}
 	
 	//裕家人开放平台授权回调地址

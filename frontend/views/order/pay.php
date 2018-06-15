@@ -49,6 +49,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	
 </style>
 
+<script>
+	function wx(){
+		alert("暂不支持，敬请期待！")
+	}
+</script>
+
 <div class="order-index">
     
 	<?php
@@ -66,16 +72,15 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</td>
 
 			<td>
-				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
+				<a href="#<?php // echo Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
 					<div class="dropdown">
 						<span>
-							<img id="pay" src="/image/wx.png" />
+							<img id="pay" src="/image/wx.png" onClick="wx()" />
 						</span>
 						<div class="dropdown-content">
 							微信支付
 						</div>
 					</div>				  
-	            	
 	            </a>			
 			</td>
 
@@ -89,7 +94,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 							建行龙支付
 						</div>
 					</div>									  
-	            	
 	            </a>			
 			</td>
 		</tr>

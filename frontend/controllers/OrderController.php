@@ -47,6 +47,7 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
+		$account_id = $_SESSION['user']['account_id'];
 		$date = (new \yii\db\Query)
 			->select('order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
 			order_basic.order_type as type, order_basic.payment_time as payment_time,
@@ -56,7 +57,7 @@ class OrderController extends Controller
 			->from('order_basic')
 			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
 			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
-			->where([ 'in', 'order_basic.account_id', $_SESSION['user']['account_id']])
+			->where([ 'in', 'order_basic.account_id', "$account_id"])
 			->orderBy('payment_time DESC');
 		
 		$count = $date->count();// 计算总数
@@ -71,6 +72,7 @@ class OrderController extends Controller
         return $this->render('index', [
 			'pagination' => $pagination,
             'data' => $data,
+			'count' => $count
         ]);
     }
 
