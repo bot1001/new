@@ -53,7 +53,7 @@ use common\ models\ Area;
 				data: {'k': str},
 					success:function (result){
 						if(result == '1'){
-						   alert('您已成功切换小区');
+						   alert('切换成功');
 						   location.reload();
 						   };
 					},
@@ -73,7 +73,7 @@ use common\ models\ Area;
 				data: {'id': id, 'k':k},
 					success:function (result){
 						if(result == '1'){
-						   alert('您已成功切换小区');
+						   alert('解绑成功');
 						   location.reload();
 						   };
 					},
@@ -233,3 +233,6 @@ use common\ models\ Area;
 	<div id="new">
 		<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加房屋']) ?>
 	</div>
+	
+	
+	<?php print_r($_SESSION['home']) ?>

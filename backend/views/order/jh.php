@@ -63,7 +63,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
 					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
-																								 'order_id' => $order_id]); ?>">支付成功！</a>';
+																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 

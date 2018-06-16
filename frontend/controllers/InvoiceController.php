@@ -104,7 +104,7 @@ class InvoiceController extends Controller
     {
         $model = new Invoice();
 		
-		$id = array_column($_SESSION['house'], 'id'); //提取关联房屋id
+		$id = $_SESSION['home']['id']; //提取关联房屋id
 		
 		$cost = (new \yii\db\Query()) //查找房屋绑定的固定费用
 			->select('cost_name.cost_name as cost, cost_name.price as price,
@@ -121,8 +121,9 @@ class InvoiceController extends Controller
 			$post = $_POST['Invoice']; //接收预交数据
 			$month = $post['month']; //获取预交月数
 			$year = $post['year']; //获取预交起始月份
-			
+			$id = $_SESSION['home']['id']; //提取关联房屋id
 			//计算预交费项
+			
 			$prepay = Invoice::prepay($cost, $year, $month, $id);
 			
 			if($prepay == ''){

@@ -135,6 +135,7 @@ class RealestateController extends Controller
 	public function actionChange($k)
 	{
 		$house = $_SESSION['house'];
+		
 		$_SESSION['home'] = $house[$k];
 		
 		return true;

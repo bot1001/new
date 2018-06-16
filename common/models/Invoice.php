@@ -96,16 +96,17 @@ class Invoice extends \yii\db\ActiveRecord
 		    $date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
 		    
 		    $time = explode('-', $date); //拆分年月
-			$checking = 0; //费项验证结果
+			$checking = 0; //费项验证结果=> 不存在
 		    
+			
 		    //遍历并重组费项
 		    foreach($cost as $c){
 				
 				if($checking == '0'){
 					$check = Invoice::find() //验证费项是否存在
-					->andwhere(['in', 'realestate_id', reset($id)])
 					->andwhere(['in', 'year', reset($time)])
 					->andwhere(['in', 'month', end($time)])
+					->andwhere(['in', 'realestate_id', $id])
 					->andwhere(['in', 'description', $c['cost']])
 					->asArray()
 					->one();
@@ -117,7 +118,7 @@ class Invoice extends \yii\db\ActiveRecord
 					$checking = '1';
 				}
 				
-		    	$invoice['id'] = reset($id); //房号ID
+		    	$invoice['id'] = $id; //房号ID
 				$invoice['community_id'] = $house['community_id']; //小区ID
 		    	$invoice['community'] = $house['community']; //小区名称
 		    	$invoice['building_id'] = $house['building_id']; //楼宇ID
@@ -134,6 +135,14 @@ class Invoice extends \yii\db\ActiveRecord
 					}
 				}
 				
+				if($sale%13 == 0 && $sale > 0 && $c['cost'] == '物业费'){//判断优惠条件，满一年（13个月）
+					$invoice['sale'] = '1';
+					$invoice['notes'] = '缴费优惠';
+				}else{
+					$invoice['sale'] = '0';
+					$invoice['notes'] = $c['property'];
+				}
+				
 				if($c['formula'] == '1'){ //判断计费方式
 					$amount = $c['price']*$house['acreage'];
 				}else{
@@ -141,14 +150,6 @@ class Invoice extends \yii\db\ActiveRecord
 				}
 				
 				$invoice['amount'] = number_format($amount, 2); //保留两位小区点
-				
-				if($sale%13 == 0 && $sale !== 0){//判断优惠条件，满一年（13个月）
-					$invoice['sale'] = '1';
-					$invoice['notes'] = '缴费优惠';
-				}else{
-					$invoice['sale'] = '0';
-					$invoice['notes'] = $c['property'];
-				}
 				
 				$prepay[] = $invoice; //收集数据
 		    }

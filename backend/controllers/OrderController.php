@@ -274,7 +274,7 @@ class OrderController extends Controller
 				->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
 		       	->andwhere(['in', 'user_invoice.invoice_id', $ids])
 		       	->andwhere(['user_invoice.invoice_status' => '0'])
-		    	->limit(100)
+		    	->limit(300)
 		       	->all();
 	    }
 		
