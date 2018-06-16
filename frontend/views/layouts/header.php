@@ -141,7 +141,14 @@ use yii\ widgets\ Breadcrumbs;
 	           	$url = Url::to('/login/login');
                       echo Html::a('登录', $url);
                   } else {
-	           	echo Html::a($_SESSION['user']['real_name'], '#', ['onclick' => "logout()"]);
+				   if(isset($_SESSION['user']['real_name'])){
+					   $name = $_SESSION['user']['real_name'];
+				   }elseif($_SESSION['user']['user_name']){
+					   $name = $_SESSION['user']['user_name'];
+				   }else{
+					   $name = '未知用户';
+				   }
+	           	echo Html::a($name, '#', ['onclick' => "logout()"]);
 	           } ?>
 	           <ul>
                	   <li><?php if(isset($_SESSION['home'])){

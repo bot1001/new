@@ -47,19 +47,15 @@ class OrderSearch extends OrderBasic
      */
     public function search($params)
     {
-		$comm = $_SESSION['community']; //获取关联小区ID
-        $name = $_SESSION['community_name']; //获取关联小区名称
-		$Role = $_SESSION['user']['0']['Role']; //获取用户角色
-		
-		if($Role == "收银员"){
-			$query = OrderBasic::find()->where(['in', 'account_id', $comm]);
-		}else{
-			$query = OrderBasic::find();
-		}
+        $name = $_SESSION['community_id']; //获取关联小区名称
+
+		$query = OrderBasic::find();
 				
 		$query->joinWith('status0');
 		$query->joinWith('order0');
-               // $query->andwhere(['like', 'address', $name]);
+		
+		$query->andwhere(['or like', 'order_relationship_address.address', $name]);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

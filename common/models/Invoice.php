@@ -135,7 +135,7 @@ class Invoice extends \yii\db\ActiveRecord
 					}
 				}
 				
-				if($sale%13 == 0 && $sale > 0 && $c['cost'] == '物业费'){//判断优惠条件，满一年（13个月）
+				if($sale%13 == 0 && $sale > 0 && $c['sale'] == '1'){//判断优惠条件，满一年（13个月）
 					$invoice['sale'] = '1';
 					$invoice['notes'] = '缴费优惠';
 				}else{

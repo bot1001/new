@@ -141,7 +141,6 @@ $this->title = '房屋信息';
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['attribute'=> 'property',

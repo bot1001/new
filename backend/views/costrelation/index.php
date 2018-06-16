@@ -9,7 +9,7 @@ use app\ models\ CommunityBuilding;
 
 Modal::begin( [
 	'id' => 'update-modal',
-	'header' => '<h4 class="modal-title">费项关联</h4>',
+	'header' => '<h4 class="modal-title">费项批量关联</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
 $c_Url = Url::toRoute( 'create' );
@@ -49,13 +49,14 @@ $this->title = '费项列表';
 <div class="cost-relation-index">
 
 	<?php
-			
+	
+	$message = Yii::$app->getSession()->getFlash('success'); //获取提示信息
+				
 	$gridColumn = [
 		[ 'class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'
 		],
 
-		//'id',
 		[ 'attribute' => 'community',
 			'value' => 'c.community_name',
 			'filterType' => GridView::FILTER_SELECT2,
@@ -70,6 +71,7 @@ $this->title = '费项列表';
 
 		[ 'attribute' => 'building',
 			'value' => 'b.building_name',
+		    'label' => '楼宇',
 			'hAlign' => 'center',
 			'width' => '50px'
 		],
@@ -128,7 +130,7 @@ $this->title = '费项列表';
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'info', 'heading' => '费项关联',
-			'before' => Html::a( 'New', '#', [
+			'before' => Html::a( '<span class = "glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info create',

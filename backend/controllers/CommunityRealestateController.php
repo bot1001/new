@@ -214,7 +214,7 @@ class CommunityRealestateController extends Controller
 				                												acreage, orientation, property)values (
 				                												'$community_id','$building_id', '$room_number',
 				                												'$room_name', '$owners_name', '$owners_cellphone',
-																	'$finish', '$delivery', '$decoration',
+																	            '$finish', '$delivery', '$decoration',
 				                												'$acreage','$orientation','$property')";
 		    	                $result = Yii::$app->db->createCommand( $sql )->execute();
 				                $new_id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID			
@@ -346,18 +346,19 @@ class CommunityRealestateController extends Controller
 			$transaction = Yii::$app->db->beginTransaction();
 			try{
 				$m = $model->save();
-				if($m == '1')
+				if($m)
 				{
 					$new_id = Yii::$app->db->getLastInsertID(); //获取最新插入的数据ID
 					
 					$house->realestate = $new_id;
 					$house->name = $post['owners_name']; //业主姓名
-					$house->phone = (int)$post['owners_cellphone']; //手机号码
+					$house->phone = $post['owners_cellphone']; //手机号码
 					$house->IDcard = $h['IDcard'];
 					$house->address = $h['address'];
 					
 					$ho = $house->save();
 				}
+
 				if($ho == '1'){
 					$transaction->commit();
 				}else{

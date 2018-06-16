@@ -47,9 +47,9 @@ $this->title = '费项管理';
     <?php
 	
 	    $c = Yii::$app->getSession()->getflash('m');
-	if($c == 1){
-		echo "<script>alert('抱歉，您的权限不足！')</script>";
-	}
+	    if($c == 1){
+	    	echo "<script>alert('抱歉，您的权限不足！')</script>";
+	    }
 	?>
 	<?php
 	$gridview = [
@@ -178,10 +178,11 @@ $this->title = '费项管理';
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'info', 'heading' => '费项列表',
-			'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [ 'class' => 'btn btn-info new',
-													  'data-toggle' => 'modal',
-													  'data-target' => '#update-modal',
-													  ] )
+			'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', 
+								[ 'class' => 'btn btn-info new',
+								  'data-toggle' => 'modal',
+								  'data-target' => '#update-modal',
+								] )
 		],
 		'columns' => $gridview,
 		'hover' => true,

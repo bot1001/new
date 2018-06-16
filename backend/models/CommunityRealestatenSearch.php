@@ -44,11 +44,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
     {
 		$c = $_SESSION['community'];
 		
-		if($c){
-			$query = CommunityRealestate::find()->where(['in', 'community_realestate.community_id', $c]);
-		}else{
-			$query = CommunityRealestate::find();
-		}
+		$query = CommunityRealestate::find()->where(['in', 'community_realestate.community_id', $c]);
 		
         $query->joinWith('community0');
 		

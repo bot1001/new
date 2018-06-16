@@ -165,7 +165,7 @@ class Pay extends \yii\db\ActiveRecord
 	}
 	
 	//支付宝异步回调处理订单
-	public static function alipay($out_trade_no, $total_amount, $p_time, $trade_no)
+	public static function alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway)
 	{
 		//查询order_id 和金额order_amount
 		$ord = OrderBasic::find()
@@ -180,7 +180,7 @@ class Pay extends \yii\db\ActiveRecord
 			try{
 				foreach($ord as $order){
 				$order = OrderBasic::updateAll(['status' => 2, //变更订单状态
-				    					   'payment_gateway' => 1, //变更支付方式
+				    					   'payment_gateway' => $gateway, //变更支付方式
 				    					   'payment_number' => $trade_no, // 支付流水号
 				    					   'payment_time' => $p_time // 支付时间
 				    					   ],

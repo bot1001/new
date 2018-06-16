@@ -17,9 +17,9 @@ use kartik\daterange\DateRangePicker;
 
 <div class="cost-relation-form">
    
-    <?php $form = ActiveForm::begin(['id' => 'form-id',
+    <?php $form = ActiveForm::begin(/*['id' => 'form-id',
 									 'enableAjaxValidation' => true, 
-									]); ?>
+									]*/); ?>
 <table align="center" style="width:550px; background-color:#F3F3F3;border-radius:20px;">
     <tr>
     	<td>

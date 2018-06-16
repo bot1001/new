@@ -100,10 +100,11 @@ use yii\helpers\Html;
 			</tr>
 			<?php endforeach; ?>
 		</table>
+	</div>
 		<div id="new">
 		    <?= Html::a('更多','/order/index', ['class' => 'btn btn-info', 'title' => '更多记录']) ?>
 	    </div>
-	</div>
+	
 	<?php }else{
 	          echo '<h1>'.'暂无缴费记录'.'</h1>';
           } ?>

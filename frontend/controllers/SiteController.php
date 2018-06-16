@@ -90,6 +90,9 @@ class SiteController extends Controller
 		if(isset($get['code']))
 		{
 			$w_info = \frontend\models\Site::getMessage($get);
+			if(empty($w_info)){
+				return $this->redirect(['/login/login']);
+			}
 				
 			$openid = $w_info['openid']; //提取openID
 			

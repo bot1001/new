@@ -38,6 +38,7 @@ class UserAccount extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+			[['new_pd', 'new_pd', 'password'],'required'],
 			[['mobile_phone'],'string','min' => 11],
 			[['account_id'],'string','min' => 28],
 			//[['account_id'],'string','max' => 32],

@@ -118,14 +118,45 @@ class CostrelationController extends Controller {
 	{
 		$model = new CostRelation();
 		
-		$model->load($_POST);
-        /*if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\bootstrap\ActiveForm::validate($model);
-        }*/
-
-		if ( $model->load( Yii::$app->request->post() ) && $model->save() ) {
-			return $this->redirect( [ 'index' ] );
+		if ( $model->load( Yii::$app->request->post() )) {
+			$post = $_POST['CostRelation']; // 接收传递过来的信息
+			
+			$community = $post['community'];
+			$building = $post['building_id'];
+			$realestate_id = $post['realestate_id'];
+			$price = $post['price'];
+			$cost = $post['cost_id'];
+			$from = $post['from'];
+			$property = $post['property'];
+			
+			$i=0; //成功次数
+			$f=0; //失败次数
+			
+			foreach($realestate_id as $realestate)
+			{
+				$model = new CostRelation(); //实例化模型，每次循环必须实例化一次
+				
+				$model->community = $community;
+			    $model->building_id = $building;			    
+			    $model->cost_id = $cost;
+			    $model->from = $from;
+			    $model->property = $property;
+				$model->realestate_id = $realestate;
+				
+			    $e = $model->save(); //保存数据
+				if($e){ //自动计数
+					$i ++;
+				}else{
+					$f ++;
+				}
+			}
+			
+			$count = $i+$f; // 生成条数综合
+			
+			$session = Yii::$app->session; //实例化flash信息
+			$session->setFlash('success', "成功：$i 条，失败： $f 条，合计：$count 条");
+			
+			return $this->redirect( [ 'index', ] );
 		} else {
 			return $this->renderAjax( '_form', [
 				'model' => $model,
@@ -264,21 +295,19 @@ class CostrelationController extends Controller {
 	//三级联动之 房号（三） 由单元自动获取
 	public function actionName( $selected = null ) 
 	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{
 			$id = $_POST[ 'depdrop_parents' ];
-			$list = CommunityRealestate::find()
-				->andwhere( [ 'building_id' => '61'] )
-				->andwhere( [ 'room_number' => '1'] )
-				->all();
-print_r($list);exit;
+			
+			$list = Realestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'realestate_id' ], 'name' => $account[ 'room_name' ] ];
+					$out[] = [ 'id' => $account[ 'room_number' ], 'name' => $account[ 'room_number' ] ];
 					if ( $i == 0 ) {
 						$first = $account[ 'room_number' ];
 					}
-					if ( $account[ 'realestate_id' ] == $selected ) {
+					if ( $account[ 'room_number' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -295,24 +324,25 @@ print_r($list);exit;
 	//三级联动之 单元
 	public function actionNumber( $selected = null ) 
 	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{
 			$id = $_POST[ 'depdrop_parents' ];
-			$list = ['1' => '1单元', '2' => '2单元', '3' => '3单元', '4' => '4单元', '5' => '5单元', '6' => '6单元', '7' => '7单元', '8' => '8单元', '9' => '9单元', '10' => '10单元', '10' => '10单元'];
-
+			
+			$list = CommunityRealestate::find()->select('building_id, room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $i, 'name' => $account ];
+					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'room_number' ] ];
 					if ( $i == 0 ) {
-						$first = $account;
+						$first = $account[ 'building_id' ];
 					}
-					if ( $account == $selected ) {
+					if ( $account[ 'building_id' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
-//				if ( !$isSelectedIn ) {
-//					$selected = $first;
-//				}
+				if ( !$isSelectedIn ) {
+					$selected = $first;
+				}
 				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
 				return;
 			}
@@ -369,30 +399,6 @@ print_r($list);exit;
 			->orderBy('')
 			->indexBy('')
 			->all();
-				
-		/*//获取小区名称
-		$community = CommunityBasic::find()
-			->select('community_name,community_id')
-			->where(['community_id' => $r_info['community_id']])
-			->orderBy('community_name')
-			->indexBy('community_id')
-			->all();
-		
-		//获取楼宇名称
-		$building = CommunityBuilding::find()
-			->select('building_name,building_id')
-			->where(['building_id' => $r_info['building_id']])
-			->orderBy('building_name')
-			->indexBy('building_id')
-			->all();
-		
-	    //获取房号信息
-	    $array1 = CommunityRealestate::find()
-	       ->select('realestate_id,room_name')
-	       ->where(['realestate_id' => $id])
-		   ->orderBy('room_name')
-		   ->indexBy('realestate_id')
-	       ->All();*/
 	    	   
 	   $community = ArrayHelper::map($r_info,'community_id','community_name');//提取房号信息
 	   $building = ArrayHelper::map($r_info,'building_id','building_name');//提取房号信息

@@ -129,11 +129,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 					<div id="test" class="row">
 						<div class="col-lg-4">
-							<?= $form->field($realestate, 'phone')->textInput(['maxlength' => true, 'placeholder' => '验证手机号码', 'id' => 'phone'])->label(false) ?>
+							<?= $form->field($realestate, 'owners_name')->textInput(['maxlength' => true, 'placeholder' => '验证业主姓名', 'id' => 'owners'])->label(false) ?>
 						</div>
 
 						<div class="col-lg-4">
-							<?= $form->field($realestate, 'owners_name')->textInput(['maxlength' => true, 'placeholder' => '验证业主姓名', 'id' => 'owners'])->label(false) ?>
+							<?= $form->field($realestate, 'phone')->textInput(['maxlength' => true, 'placeholder' => '验证手机号码', 'id' => 'phone'])->label(false) ?>
 						</div>
 					</div>
 

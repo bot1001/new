@@ -45,6 +45,8 @@ class houseSearch extends HouseInfo
      */
     public function search($params)
     {
+		$c = $_SESSION['community'];
+		
         $query = HouseInfo::find();
 		$query->joinWith('c');
 		$query->joinWith('b');
@@ -53,7 +55,7 @@ class houseSearch extends HouseInfo
 		house_info.*, 
 		community_building.building_name as building,
 		community_realestate.room_number as number,
-		community_realestate.room_name as room_name');
+		community_realestate.room_name as room_name')->where(['in', 'community_basic.community_id', $c]);
 
         // add conditions that should always apply here
 

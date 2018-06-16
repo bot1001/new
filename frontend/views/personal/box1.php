@@ -233,6 +233,3 @@ use common\ models\ Area;
 	<div id="new">
 		<?= Html::a('<span class="glyphicon glyphicon-plus"></span>','create', ['class' => 'btn btn-info', 'title' => '添加房屋']) ?>
 	</div>
-	
-	
-	<?php print_r($_SESSION['home']) ?>

@@ -37,13 +37,11 @@ class CostRelation extends \yii\db\ActiveRecord
     {
         return [
             [['community', 'building_id', 'realestate_id', 'cost_id', 'from'], 'required'],
-            [['community', 'building_id', 'realestate_id', 'cost_id'], 'integer'],
+            [['community', 'building_id', 'cost_id'], 'integer'],
             [['property'], 'string', 'max' => 50],
 			[['from'], function($attr, $params) {
                 if ($this->hasErrors()) return false;
-
                 $datetime = $this->{$attr};
-                
                 $time = strtotime($datetime);
                 // 验证时间格式是否正确
                 if ($time === false) {
@@ -61,6 +59,10 @@ class CostRelation extends \yii\db\ActiveRecord
             [['cost_id'], 'exist', 'skipOnError' => true, 'targetClass' => CostName::className(), 'targetAttribute' => ['cost_id' => 'cost_id']],
         ];
     }
+	
+	public $price;
+	public $p;
+	public $number;
 
     /**
      * @inheritdoc
@@ -70,7 +72,6 @@ class CostRelation extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'community' => '小区',
-            'building' => '楼宇',
             'building_id' => '楼宇',
             'number' => '单元',
             'realestate_id' => '房号',
@@ -80,9 +81,6 @@ class CostRelation extends \yii\db\ActiveRecord
 			'price' => '单价/元'
         ];
     }
-
-	public $price;
-	public $p;
 	
 	//将时间戳转换成时间然后在activeform输出
 	public function afterFind()

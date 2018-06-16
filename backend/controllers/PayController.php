@@ -149,8 +149,9 @@ class PayController extends Controller
 			$trade_no = $out_trade_no; //赋值交易流水号
 			$total_amount = $post['PAYMENT']; //交易金额 
 			$p_time = date(time());
+			$gateway = '7';
 			
-			$pay = Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no); //修改订单相关状态函数
+			$pay = Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway); //修改订单相关状态函数
 			
 			if($pay == '1'){
 				//支付完成后自动删除二维码
@@ -300,7 +301,8 @@ class PayController extends Controller
 		//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 			
          }else if ($_POST['trade_status'] == 'TRADE_SUCCESS'){
-			Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no);
+			$gateway = '1';
+			Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway);
          }
 	     //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 	     echo "success";	//请不要修改或删除
@@ -381,7 +383,7 @@ class PayController extends Controller
     		    	
 		//echo "验证成功<br />支付宝交易号：".$trade_no;
 		return $this->redirect(['/order/print', 
-                'order_id' => $out_trade_no,
+                'order_id' => $out_trade_no, 'amount' => $arr['total_amount']
             ]);
 
         }else {

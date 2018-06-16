@@ -80,6 +80,9 @@ class Site extends ActiveRecord
 		$output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
 		$arr = json_decode($output, true); //将json数组转换成普通数组
 		
+		if(!isset($arr['access_token'])){
+			return false;
+		}
 		$token = $arr['access_token']; //提取access_token
 		$openid = $arr['openid']; //提取openID
 		
