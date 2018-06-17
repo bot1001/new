@@ -121,6 +121,11 @@ class CommunityRealestateController extends Controller
 				
 				foreach($sheetData as $sheet)
 				{
+					if($sheet[ 'F' ] == '' || $sheet[ 'G' ] == '' || $sheet[ 'E' ] == '')
+					{
+						$c ++;
+						continue;
+					}
 					sleep(0.01);
 					
 					if(count($sheet) != 14){

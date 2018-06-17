@@ -43,16 +43,14 @@ class HouseController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
 		$comm = $_SESSION['community']; //从回话中获取小区编号
-		$community = CommunityBasic::find() //查询和账户相关联的小区名称
-			->select('community_name, community_id')
-			->where(['in', 'community_id', $comm])
-			->orderBy('community_name DESC')
-			->indexBy('community_id')
+		$community = CommunityBasic::find()
+			->select('community_name')
+			->indexBy('community_name')
 			->column();
-		
+				
 		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
 			->select('building_name')
-			->where(['in', 'community_id', $comm])
+			->where(['in', 'community_id', $_SESSION['community']])
 			->distinct()
 			->orderBy('building_name ASC')
 			->indexBy('building_name')
