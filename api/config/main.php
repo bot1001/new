@@ -19,11 +19,11 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'name' => 'advanced-api',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -38,15 +38,15 @@ return [
             'errorAction' => 'site/error',
         ],
         
-        /*'urlManager' => [
-            'enablePrettyUrl' => true,
-	
-	        'enableStrictParsing' => true,
-            'showScriptName' => false,
-            'rules' => [
-//	            ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
-            ],
-        ],*/
+        'urlManager'=>[
+	        'enablePrettyUrl' => true,
+	        'showScriptName' => false,
+	        'rules' => [
+		        '<controller:(post|comment)>/<id:\d+>/<action:(create|update|delete)>' =>'<controller>/<action>',
+	            '<controller:(post|comment)>/<id:\d+>' => '<controller>/read',
+	            '<controller:(post|comment)>s' => '<controller>/list',
+	         ]
+	    ],
         
     ],
     'params' => $params,
