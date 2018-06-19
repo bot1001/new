@@ -13,9 +13,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-		$order = Order::find()->asArray()->one();
-		
-		echo '<pre />';
+		$order = Order::find()->one();
 		print_r($order);
     }
 }

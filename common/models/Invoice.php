@@ -86,22 +86,19 @@ class Invoice extends \yii\db\ActiveRecord
 	public static function prepay($cost, $year, $month, $id)
 	{
 		$house = $_SESSION['house']['0']; //获取房号
-		$date = date('Y-m', strtotime("-1 month", strtotime($year))); //预交时间退格一个月
 		
-		$i = 1;
 		$sale = 0; //优惠计算
 		
-		for($i; $i <= $month; $i++)
+		foreach($cost as $c)
 		{
-		    $date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
-		    
-		    $time = explode('-', $date); //拆分年月
-			$checking = 0; //费项验证结果=> 不存在
-		    
-			
+			$checking = 0; //费项验证结果, 默认不存在
+			$date = date('Y-m', strtotime("-1 month", strtotime($year))); //预交时间退格一个月
 		    //遍历并重组费项
-		    foreach($cost as $c){
-				
+		    for($i = 1; $i <= $month; $i++)
+			{	
+				$date = date('Y-m', strtotime("+1 month", strtotime($date))); //获取次月时间
+		    
+		        $time = explode('-', $date); //拆分年月
 				if($checking == '0'){
 					$check = Invoice::find() //验证费项是否存在
 					->andwhere(['in', 'year', reset($time)])

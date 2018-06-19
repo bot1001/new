@@ -110,7 +110,7 @@ class LoginController extends Controller
 	public function actionNew()
 	{
 		$post = $_POST;
-		$info = $_GET['w_info']; //接收微信账号信息
+		$w_info = $_GET['w_info']; //接收微信账号信息
 		
 		$data = $post['UserData'];
 		$realestate = $post['Realestate'];
@@ -137,7 +137,7 @@ class LoginController extends Controller
 		$account_id = $account['account_id']; //接收用户ID（程序随机生成）
 		$unionid = $account['wx_unionid']; //接收微信唯一编码（暂时存着）
 		
-		$nickname = $info['nickname'] ; //用户昵称
+		$nickname = $w_info['nickname'] ; //用户昵称
 		
 		//验证注册手机号码是否存在
 		$u_account = UserAccount::find()
@@ -159,21 +159,22 @@ class LoginController extends Controller
 		    if(empty($user_name)){
 		    	$user_name == $nickname;
 		    }
-		    
-		    $account = new UserAccount(); //实例化模型
-		    
-		    //模型块赋值
-		    $account->account_id = $account_id;
-		    $account->user_name = $nick;
-		    $account->password = $password;
-		    $account->mobile_phone = $phone;
-		    $account->weixin_openid = $weixin_openid;
-		    $account->wx_unionid = $unionid;
-		    $account->new_message = '0';
-		    $account->status = '1';
-		    
+			
 		    $transaction = Yii::$app->db->beginTransaction();
 		    try{
+		        $account = new UserAccount(); //实例化模型
+		        
+		        //模型块赋值
+		        $account->account_id = $account_id;
+		        $account->user_name = $nick;
+		        $account->password = $password;
+		        $account->new_pd = $password;
+		        $account->mobile_phone = $phone;
+		        $account->weixin_openid = $weixin_openid;
+		        $account->wx_unionid = $unionid;
+		        $account->new_message = '0';
+		        $account->status = '1';
+		    
 		        $yes = $account->save(); // 保存
 		    	
                 $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
@@ -196,11 +197,10 @@ class LoginController extends Controller
 		    	$userdata->nickname = $nick;
 		    	
 		    	$u = $userdata->save(); //保存用户资料
-		    	
+
 		    	if($yes && $r && $u){
-		    		$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->one();
+		    		$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->asArray()->one();
 		    						
-		    		$w_info = $info;
 		    		\frontend\models\Site::saveMessage($user, $w_info);
 		    	}
 				$transaction->commit();

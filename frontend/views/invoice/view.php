@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 
 <div id="view">
-	<table border="1" width=800px;>
+	<table border="1" width=100%;>
 		<thead>
 			<tr>
 				<th>序号</th>
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				
 				<td style="text-align: left"><?= $p->description; ?></td>
 				
-				<td>
+				<td style="text-align: right">
 					<?php 
 					echo $p->amount;
 					
