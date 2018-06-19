@@ -172,7 +172,7 @@ $this->title = '房屋信息';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '业主资料',
-				   'before' => Html::a('New', '#', [ 
+				   'before' => Html::a('<span class = "glyphicon glyphicon-plus"></span>', '#', [ 
 		                'data-toggle' => 'modal',
 						'data-target' => '#view-modal',
 						'class' => 'btn btn-info add' ] )],

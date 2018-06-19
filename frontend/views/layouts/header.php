@@ -141,9 +141,9 @@ use yii\ widgets\ Breadcrumbs;
 	           	$url = Url::to('/login/login');
                       echo Html::a('登录', $url);
                   } else {
-				   if(isset($_SESSION['user']['real_name'])){
+				   if(isset($_SESSION['user'])){
 					   $name = $_SESSION['user']['real_name'];
-				   }elseif($_SESSION['user']['user_name']){
+				   }elseif($_SESSION['user']){
 					   $name = $_SESSION['user']['user_name'];
 				   }else{
 					   $name = '未知用户';

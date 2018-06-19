@@ -171,15 +171,7 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
-				$y = explode( '年', $model->description );
-				$l = strlen( reset( $y ) );
-				if ( $model->year ) {
-					return $model->year . '年';
-				} elseif ( $l != 4 ) {
-					return '';
-				} else {
-					return reset( $y ) . '年';
-				}
+				return $model->year . '年';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $y,
@@ -206,10 +198,6 @@ $this->title = '缴费管理';
 		//'year',
 
 		[ 'attribute' => 'description',
-			'value' => function ( $model ) {
-				$d = explode( '份', $model->description );
-				return end( $d );
-			},
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
 				return ( $model->invoice_status != 0 ); // 判断活动列是否可编辑

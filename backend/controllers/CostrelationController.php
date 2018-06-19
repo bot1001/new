@@ -83,7 +83,7 @@ class CostrelationController extends Controller {
 	public function actionAdd() 
 	{
 		$a = Yii::$app->request->get();
-		//print_r($a);
+		
 		$community = $a[ 'community_id' ];
 		$building_id = $a[ 'building_id' ];
 		$realestate_id = $a[ 'realestate_id' ];
@@ -235,20 +235,22 @@ class CostrelationController extends Controller {
 	public function actionR( $selected = null ) 
 	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
-		{
-			$id = $_POST[ 'depdrop_parents' ];
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = CommunityRealestate::find()
-				->andwhere( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
-			
+
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
 					$out[] = [ 'id' => $account[ 'room_name' ], 'name' => $account[ 'room_name' ] ];
 					if ( $i == 0 ) {
-						$first = $account[ 'room_number' ];
+						$first = $account[ 'room_name' ];
 					}
-					if ( $account[ 'realestate_id' ] == $selected ) {
+					if ( $account[ 'room_name' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -265,10 +267,13 @@ class CostrelationController extends Controller {
 	//三级联动之 房号（二）
 	public function actionRe( $selected = null ) 
 	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = CommunityRealestate::find()
-				->where( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
 
 			$isSelectedIn = false;
@@ -291,15 +296,15 @@ class CostrelationController extends Controller {
 		}
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
 	}
-	
-	//三级联动之 房号（三） 由单元自动获取
-	public function actionName( $selected = null ) 
+		
+	//三级联动之 单元
+	public function actionNumber( $selected = null ) 
 	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
 			$id = $_POST[ 'depdrop_parents' ];
 			
-			$list = Realestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
+			$list = CommunityRealestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
@@ -308,35 +313,6 @@ class CostrelationController extends Controller {
 						$first = $account[ 'room_number' ];
 					}
 					if ( $account[ 'room_number' ] == $selected ) {
-						$isSelectedIn = true;
-					}
-				}
-				if ( !$isSelectedIn ) {
-					$selected = $first;
-				}
-				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
-				return;
-			}
-		}
-		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
-	}
-	
-	//三级联动之 单元
-	public function actionNumber( $selected = null ) 
-	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
-		{
-			$id = $_POST[ 'depdrop_parents' ];
-			
-			$list = CommunityRealestate::find()->select('building_id, room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
-			$isSelectedIn = false;
-			if ( $id != null && count( $list ) > 0 ) {
-				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'room_number' ] ];
-					if ( $i == 0 ) {
-						$first = $account[ 'building_id' ];
-					}
-					if ( $account[ 'building_id' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}

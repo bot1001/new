@@ -23,6 +23,19 @@ use Yii;
  */
 class WaterMeter extends \yii\db\ActiveRecord
 {
+	public $name;
+	public $Jan;
+	public $Feb;
+	public $Mar;
+	public $Apr;
+	public $May;
+	public $Jun;
+	public $Jul;
+	public $Aug;
+	public $Sept;
+	public $Oct;
+	public $Nov;
+	public $D;
     /**
      * {@inheritdoc}
      */

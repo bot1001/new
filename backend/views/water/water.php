@@ -94,7 +94,10 @@ $this->title = '读数一览表';
 			 'label' => '十一月',
 			 'hAlign' => 'center',
 	    	], 
-			[ 'attribute' => 'D', 
+			['attribute' => 'D',     
+			 'value' => function($searchModel){
+		     	return $searchModel['D'].'test';
+		     },
 			 'mergeHeader' => true,
 			 'label' => '十二月',
 			 'hAlign' => 'center',

@@ -68,7 +68,7 @@ use kartik\daterange\DateRangePicker;
                        'depends'=>['number'],
                        'placeholder'=>'请选择...',
                        'url'=>Url::to(['/costrelation/re']),
-	                   'params'=>['b_id'], //另一个上级目录ID
+	                   'params'=>['building'], //另一个上级目录ID
                    ]
                ]); ?>
 			</div>

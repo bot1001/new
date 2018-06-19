@@ -202,22 +202,17 @@ class LoginController extends Controller
 		    						
 		    		$w_info = $info;
 		    		\frontend\models\Site::saveMessage($user, $w_info);
-		    		
-		    		$transaction->commit();
-		    	}else{
-		    		$transaction->rollback();
-		    	}		    
+		    	}
+				$transaction->commit();
 		    }catch(\Exception $e){
-		    	print_r($e);
+		    	$transaction->rollback();
 		    }
 		    
 		    if(isset($user)){
 		    	return $this->render('/site/index');
-		    }else{
-		    	return $this->redirect('/login/login');
 		    }
 		}
-		return $this->redirect(['/login/login']);
+		return $this->redirect(['/login/login']);//如果以上操作失败，则自动转跳到登录页面
 	}
 	
 	//裕家人开放平台授权回调地址

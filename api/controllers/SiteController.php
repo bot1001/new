@@ -13,9 +13,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-		$get = $_GET;
-
-		$order = Order::find()->one();
-		return $get['open_id'];
+		$order = Order::find()->asArray()->one();
+		
+		echo '<pre />';
+		print_r($order);
     }
 }
