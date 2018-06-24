@@ -36,7 +36,7 @@ class CostRelation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['community', 'building_id', 'realestate_id', 'cost_id', 'from'], 'required'],
+            [['community', 'building_id', 'realestate_id', 'cost_id', 'from', 'status'], 'required'],
             [['community', 'building_id', 'cost_id'], 'integer'],
             [['property'], 'string', 'max' => 50],
 			[['from'], function($attr, $params) {
@@ -77,6 +77,7 @@ class CostRelation extends \yii\db\ActiveRecord
             'realestate_id' => '房号',
             'cost_id' => '费项',
             'from' => '启用日期',
+            'status' => '状态',
             'property' => '备注',
 			'price' => '单价/元'
         ];

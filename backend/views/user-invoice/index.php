@@ -17,7 +17,6 @@ Modal::begin( [
 ] );
 $requestUpdateUrl = Url::toRoute( 'view' );
 $importUrl = Url::toRoute( 'import' );
-$newUrl = Url::toRoute( 'new' );
 
 $updateJs = <<<JS
     $('.order').on('click', function () {
@@ -33,18 +32,6 @@ $this->registerJs( $updateJs );
 $updateJs = <<<JS
     $('.import').on('click', function () {
         $.get('{$importUrl}', { id: $(this).closest('tr').data('key') },
-            function (data) {
-                $('.modal-body').html(data);
-            }  
-        );
-    });
-JS;
-$this->registerJs( $updateJs );
-
-$updateJs = <<<JS
-    $('.new').on('click', function () {
-	    $('.modal-title').html('生成费项');
-        $.get('{$newUrl}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
             }  
@@ -350,12 +337,7 @@ $this->title = '缴费管理';
 		//'showFooter' => true,
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '缴费',
-			'before' => Html::a( '新费项', '#', [
-				'data-toggle' => 'modal',
-				'data-target' => '#update-modal', 
-		        'class' => 'btn btn-success new',
-			] ) . ' ' .
-			Html::a( '<span class="glyphicon glyphicon-cloud-upload"></span>', 'import', [
+			'before' => Html::a( '<span class="glyphicon glyphicon-cloud-upload"></span>', 'import', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info import',

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use common\models\Area;
 
 /**
  * This is the model class for table "community_basic".
@@ -40,7 +41,7 @@ class CommunityBasic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company', 'community_name'], 'required'],
+            [['company', 'community_name', 'province_id', 'city_id', 'area_id', 'community_address'], 'required'],
             [['company', 'province_id', 'city_id', 'area_id'], 'integer'],
             [['community_longitude', 'community_latitude'], 'number'],
             [['community_name', 'community_address'], 'string', 'max' => 64],
@@ -60,8 +61,8 @@ class CommunityBasic extends \yii\db\ActiveRecord
             'company' => '公司',
             'community_name' => '名称',
             'community_logo' => 'LOGO',
-            'province_id' => '省',
-            'city_id' => '市',
+            'province_id' => '省份',
+            'city_id' => '市级',
             'area_id' => '地区',
             'community_address' => '地址',
             'community_longitude' => '经度',
@@ -75,6 +76,21 @@ class CommunityBasic extends \yii\db\ActiveRecord
     public function getC()
     {
         return $this->hasOne(Company::className(), ['id' => 'company']);
+    } 
+	
+	public function getProvince()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'province_id']);
+    } 
+	
+	public function getCity()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'city_id']);
+    }
+	
+	public function getArea()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'area_id']);
     }
 
     /**

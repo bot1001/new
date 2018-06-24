@@ -164,12 +164,8 @@ class UserInvoice extends \yii\db\ActiveRecord
 			->asArray()
 			->all();
 		
-		$a = 0;
-		$b = 0;
-		
 		foreach($community as $comm)
 		{
-		    sleep(1); //休眠1秒钟
 		    $query = ( new\ yii\ db\ Query() )->select( [
 		    	'community_realestate.community_id',
 		    	'community_realestate.building_id',
@@ -189,7 +185,8 @@ class UserInvoice extends \yii\db\ActiveRecord
 		    	->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 		    	->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 		    	->andwhere( ['in', 'community_realestate.community_id', $comm ] )
-		    	->andwhere(['cost_name.inv' =>1]);		
+		    	->andwhere( ['<', 'cost_relation.from', time() ] )
+		    	->andwhere(['cost_name.inv' =>1, 'cost_relation.status' => '1']);		
 		    
 		    $y = date( 'Y' );
 		    $m = date( 'm' );
@@ -216,19 +213,10 @@ class UserInvoice extends \yii\db\ActiveRecord
 		    	    $sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status, invoice_notes)
 		    	    values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0','$notes')";
 		    	    $result = Yii::$app->db->createCommand( $sql )->execute();
-        
-		    	    if ( $result ) {
-		    	    	$a += 1;
-		    	    } else {
-		    	    	$b += 1;
-		    	    }
 		    	}
 		    }
-			$i = $a+$b;
-			$result = ['s' => $a, 'f' => $b, 'sum' => $i];
-			return true;
 		}
-		return false;
+		return true;
 	}
 	
     /**

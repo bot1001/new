@@ -108,12 +108,13 @@ class InvoiceController extends Controller
 		
 		$cost = (new \yii\db\Query()) //查找房屋绑定的固定费用
 			->select('cost_name.cost_name as cost, cost_name.price as price,
-			          cost_name.sale as sale, 
+			          cost_name.sale as sale,
 			          cost_name.property as property, cost_name.formula as formula')
 			->from('cost_name')
 			->join('inner join', 'cost_relation', 'cost_relation.cost_id = cost_name.cost_id')
-			->andwhere(['in', 'cost_relation.realestate_id', $id])
+			->andwhere(['cost_relation.realestate_id' => $id, 'cost_relation.status' => '1'])
 			->andwhere(['in', 'cost_name.inv', '1'])
+			->andwhere(['<', 'cost_relation.from', time()])
 			->all();
 
         if ($model->load(Yii::$app->request->post())) 

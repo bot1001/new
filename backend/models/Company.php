@@ -77,4 +77,15 @@ class Company extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SysUser::className(), ['id' => 'creator']);
     }
+	
+	static function getCompany()
+	{
+		$company = self::find()
+			->select('name, id')
+			->orderBy('id')
+			->indexBy('id')
+			->column();
+			
+		return $company;
+	}
 }

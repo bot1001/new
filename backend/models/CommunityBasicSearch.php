@@ -47,6 +47,7 @@ class CommunityBasicSearch extends CommunityBasic
 	    $query = CommunityBasic::find()->where(['in', 'community_id', $c]);
 				
 		$query->joinWith('c');
+		$query->joinWith('province');
 
         // add conditions that should always apply here
 

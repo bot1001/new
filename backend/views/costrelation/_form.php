@@ -90,6 +90,9 @@ use kartik\daterange\DateRangePicker;
                    ]
                ]); ?>
 			</div>
+			<div class="col-lg-4">
+					<?= $form->field($model, 'status')->dropDownList(['禁用', '启用'],['prompt'=>'请选择']) ?>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-6">

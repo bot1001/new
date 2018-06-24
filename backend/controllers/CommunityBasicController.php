@@ -38,6 +38,11 @@ class CommunityBasicController extends Controller
     public function actionIndex()
     {
         $searchModel = new CommunityBasicSearch();
+		
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+			$searchModel->community_id = $id;
+		}
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -67,7 +72,7 @@ class CommunityBasicController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -82,9 +87,9 @@ class CommunityBasicController extends Controller
         $model = new CommunityBasic();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->community_id]);
+            return $this->redirect(['index', 'id' => $model->community_id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -101,9 +106,9 @@ class CommunityBasicController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->community_id]);
+            return $this->redirect(['index', 'id' => $model->community_id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }

@@ -90,6 +90,7 @@ return [
 	        'login/*',
 	        'pay/*',
 	        'test/*',
+	        'user-invoice/add'
         ]
     ],
 	 

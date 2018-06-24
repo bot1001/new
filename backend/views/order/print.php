@@ -123,7 +123,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					$count = count($des); //统计数量
 					$day = date("t",strtotime("$Y-$H"));
 								
-					$amount = array_sum(array_column($des,'invoice_amount')); //费项金额
+					$amount01 = array_sum(array_column($des,'invoice_amount')); //费项金额
 					
 					echo ("<tr height=10>
 	                          <td width = 4%>$k</td>
@@ -185,7 +185,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	                        <td width = 5%>$name</td>
 	                        <td width = 9%>$y/$h/1</td>
 	                        <td width = 10%>$Y/$H/$day</td>
-	                        <td width = 7% align = right>$amount</td>
+	                        <td width = 7% align = right>$amount01</td>
 						  ");
 					
 					echo "<td>".$m['note']."</td></tr>";

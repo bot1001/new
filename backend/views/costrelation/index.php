@@ -108,6 +108,24 @@ $this->title = '费项列表';
 			'hAlign' => 'center',
 			'width' => 'px'
 		],
+		
+		['attribute' => 'status',
+		 'value' => function($model){
+	    	return $model->status== 0 ? '否' : '是';
+	    },
+		 //单元格背景色变换
+		 'contentOptions' => function ( $model ) {
+		 	return ( $model->status == 0 ) ? [ 'class' => 'bg-orange' ] : [];
+		 },
+		 'class' => 'kartik\grid\EditableColumn',
+			 'editableOptions' => [
+				'header' => '详情',
+				'formOptions' => [ 'action' => [ '/costrelation/relation' ] ],
+				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'data' => ['禁用', '启用'],
+		],
+		'hAlign' => 'center',
+		],
 
 		[ 'attribute' => 'property', ],
 

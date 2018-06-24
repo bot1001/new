@@ -36,6 +36,8 @@ Modal::end();
 <div class="invoice-index">
     
     <?php
+	$home = $_SESSION['home'];
+	
 	$gridview = [
             ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
 
@@ -103,7 +105,7 @@ Modal::end();
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-		'panel' => ['type' => 'info', 'heading' => '费用列表',
+		'panel' => ['type' => 'info', 'heading' => $home['community'].' '.$home['building'].' '.$home['number'].'单元 '.$home['room'] ,
 				   'before' => Html::a( '预交',
 								'#', [ 
 		                'data-toggle' => 'modal',

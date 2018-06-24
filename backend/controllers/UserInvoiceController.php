@@ -579,7 +579,8 @@ class UserInvoiceController extends Controller
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'community' ] ] )
-			->andwhere(['cost_name.inv' =>1])
+			->andwhere(['cost_name.inv' => 1, 'cost_relation.status' => '1'])
+			->andwhere(['<', 'cost_relation.from', time()])
 		    ->limit( 20 )
 		    ->all();
 
@@ -621,10 +622,12 @@ class UserInvoiceController extends Controller
 
 		$cost_id = CostRelation::find()
 			->select( 'cost_id' )
-			->where( [ 'realestate_id' => $id ] )
+			->andwhere( [ 'realestate_id' => $id, 'status' => '1' ] )
+			->andwhere(['<', 'from', time()])
 			->asArray()
-			->all(); //获取关联费项序号（二维数组）
+			->all(); 
 		
+		//获取关联费项序号（二维数组）		
 		$c_id = array_column( $cost_id, 'cost_id' ); //提取关联费项序号
 		$cost_info = CostName::find()
 			->select( 'cost_id, cost_name' )
@@ -676,7 +679,8 @@ class UserInvoiceController extends Controller
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->where( [ 'cost_relation.realestate_id' => $b['realestate_id'], 'cost_name.cost_id' => $cost ] )
+			->andwhere( [ 'cost_relation.realestate_id' => $b['realestate_id'], 'cost_name.cost_id' => $cost, 'cost_relation.status' => '1' ] )
+			->andwhere(['<', 'cost_relation.from', time()])
 			->all();
 		
 		return $this->render( 'v', [
@@ -703,7 +707,13 @@ class UserInvoiceController extends Controller
 		$f = date( time() ); //生成时间
 		
 		//查询费项信息
-		$query = CostName::find()->select('cost_id,cost_name,price,inv, property')->where(['in','cost_id',$co])->asArray()->all();
+		$query = CostName::find()
+			->select('cost_id,cost_name,price,inv, property')
+			->andwhere(['status' => '1'])
+			->andwhere(['in','cost_id',$co])
+			->andwhere(['<','from', time()])
+			->asArray()
+			->all();
 		
 		$i = 1;
 	    $d = date('Y-m', strtotime("-1 month", strtotime($q['from'])));

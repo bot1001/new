@@ -3,17 +3,18 @@
 namespace backend\ controllers;
 
 use Yii;
-use app\ models\ CostRelation;
-use app\ models\ CostName;
-use app\ models\ CostRelationSearch;
-use app\ models\ CommunityBasic;
-use app\ models\ CommunityBuilding;
-use app\ models\ CommunityRealestate;
-use yii\ helpers\ Json;
-use yii\ helpers\ ArrayHelper;
-use yii\ web\ Controller;
-use yii\ web\ NotFoundHttpException;
-use yii\ filters\ VerbFilter;
+use app\models\CostRelation;
+use app\models\CostName;
+use app\models\CostRelationSearch;
+use app\models\CommunityBasic;
+use app\models\CommunityBuilding;
+use app\models\CommunityRealestate;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use kartik\grid\EditableColumnAction;
 
 /*use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -69,6 +70,20 @@ class CostrelationController extends Controller {
 			'comm' => $comm
 		] );
 	}
+	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'relation' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => CostRelation::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 	
 	//检查用户是否登录
 	public function  beforeAction($action)
@@ -127,6 +142,7 @@ class CostrelationController extends Controller {
 			$price = $post['price'];
 			$cost = $post['cost_id'];
 			$from = $post['from'];
+			$status = $post['status'];
 			$property = $post['property'];
 			
 			$i=0; //成功次数
@@ -140,6 +156,7 @@ class CostrelationController extends Controller {
 			    $model->building_id = $building;			    
 			    $model->cost_id = $cost;
 			    $model->from = $from;
+			    $model->status = $status;
 			    $model->property = $property;
 				$model->realestate_id = $realestate;
 				
@@ -360,8 +377,24 @@ class CostrelationController extends Controller {
 	{
 		$model = new CostRelation();
 		
-	    $array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')->queryAll();
-	    $cost = ArrayHelper::map($array,'cost_id','cost_name');
+		$relation = (new \yii\db\Query)
+			->select('cost_name.parent, cost_name.cost_name, cost_name.property')
+			->from('cost_name')
+			->join('inner join', 'cost_relation', 'cost_name.cost_id = cost_relation.cost_id')
+			->where(['cost_relation.realestate_id' => "$id"])
+			->all();
+		
+		$r = array_column($relation, 'parent');
+		
+//		print_r($relation);die;
+		
+	    $cost = CostName::find()
+			->select('cost_name, cost_id')
+			->andwhere(['level' => "0"])
+			->andwhere(['not in', 'cost_id', $r])
+			->orderBy('cost_id ASC')
+			->indexBy('cost_id')
+			->column();
  
 		//获取小区和楼宇编号
 		$r_info = (new \yii\db\Query())
@@ -372,8 +405,6 @@ class CostrelationController extends Controller {
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
 			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 			->where(['realestate_id' => $id])
-			->orderBy('')
-			->indexBy('')
 			->all();
 	    	   
 	   $community = ArrayHelper::map($r_info,'community_id','community_name');//提取房号信息
@@ -389,6 +420,7 @@ class CostrelationController extends Controller {
 				'cost' => $cost,
 				'community' => $community,
 				'building' => $building,
+				'relation' => $relation,
 			] );
 		}
 	}
