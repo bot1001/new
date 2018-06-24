@@ -98,21 +98,23 @@ use kartik\daterange\DateRangePicker;
 		}
 	</style>
     
+    <?php if(isset($relation)){ ?>
     <p></p>
     <p>此房屋当前绑定的房号如下：</p>
     <table border="1" width="60%">
-	<tr>
-		<th>序号</th>
-		<th>名称</th>
-		<th>备注</th>
-	</tr>
-	<?php foreach($relation as $key => $r): $r = (object)$r ?>
-	<tr>
-		<td align="center"><?= $key+1 ?></td>
-		<td><?= $r->cost_name; ?></td>
-		<td align="center"><?= $r->property; ?></td>
-	</tr>
-	<?php endforeach; ?>
-</table>
+    	<tr>
+    		<th>序号</th>
+    		<th>名称</th>
+    		<th>备注</th>
+    	</tr>
+    	<?php foreach($relation as $key => $r): $r = (object)$r ?>
+    	<tr>
+    		<td align="center"><?= $key+1 ?></td>
+    		<td><?= $r->cost_name; ?></td>
+    		<td align="center"><?= $r->property; ?></td>
+    	</tr>
+    	<?php endforeach; ?>
+    </table>
+   <?php } ?>
     
 </div>

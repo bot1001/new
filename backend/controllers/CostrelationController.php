@@ -386,8 +386,6 @@ class CostrelationController extends Controller {
 		
 		$r = array_column($relation, 'parent');
 		
-//		print_r($relation);die;
-		
 	    $cost = CostName::find()
 			->select('cost_name, cost_id')
 			->andwhere(['level' => "0"])
@@ -436,17 +434,34 @@ class CostrelationController extends Controller {
 		$model = $this->findModel( $id );
 
 		//获取房屋序号
-		$r_id = Costrelation::find()->select('realestate_id as id,community,building_id,cost_id')->where(['id' => $id])->asArray()->one();
+		$r_id = Costrelation::find()
+			->select('realestate_id as id,community,building_id,cost_id')
+			->where(['id' => $id])
+			->asArray()
+			->one();
 		//获取房屋信息
-		$r_info = CommunityRealestate::find()->select('room_number,room_name')->where(['realestate_id' => $r_id])->asArray()->one();
+		$r_info = CommunityRealestate::find()
+			->select('room_number,room_name')
+			->where(['realestate_id' => $r_id])
+			->asArray()
+			->one();
 		
 		//获取小区
-		$c_info = CommunityBasic::find()->select('community_name,community_id')->where(['community_id' => $r_id['community']])->asArray()->all();
+		$c_info = CommunityBasic::find()
+			->select('community_name,community_id')
+			->where(['community_id' => $r_id['community']])
+			->asArray()
+			->all();
 		
 		//获取楼宇
-		$b_info = CommunityBuilding::find()->select('building_name,building_id')->where(['building_id' => $r_id['building_id']])->asArray()->all();
+		$b_info = CommunityBuilding::find()
+			->select('building_name,building_id')
+			->where(['building_id' => $r_id['building_id']])
+			->asArray()
+			->all();
 		
-		$array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')->queryAll();
+		$array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')
+			->queryAll();
 	    $cost = ArrayHelper::map($array,'cost_id','cost_name');
 		
 		//获取房屋相关信息
