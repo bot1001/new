@@ -73,11 +73,11 @@ class CommunityNews extends \yii\db\ActiveRecord
 			{
 				//插入新纪录时自动添加以下字段
 				$this->view_total = 0;
-				$this->post_time = date('Y-m-d h:i:s');
-				$this->update_time = date('Y-m-d h:i:s');
+				$this->post_time = time();
+				$this->update_time = time();
 			}else{
 				//修改时自动更新以下记录
-				$this->update_time = date('Y-m-d h:i:s');
+				$this->update_time = time();
 			}
 			return true;
 		}

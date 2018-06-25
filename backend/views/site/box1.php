@@ -10,17 +10,7 @@ use yii\helpers\Url;
     //遍历并重组数组
     if(isset($_SESSION['_ticket']['ticket']))
     {
-    	$k = 0;
-    	$ticket = $_SESSION['_ticket']['ticket'];
-    	foreach($ticket as $t)
-    	{
-    		$_t[$k]['community'] = $t[0]['0'];
-    		$_t[$k]['community_id'] = $t['4']['0'];
-    		$_t[$k]['building'] = $t['1']['0'];
-    		$_t[$k]['room'] = $t['2']['0'];
-    		$_t[$k]['time'] = $t['3']['0'];
-    		$k ++;
-    	}	
+    	$_t = $_SESSION['_ticket']['ticket'];
     }
 ?>
 
@@ -35,9 +25,7 @@ use yii\helpers\Url;
    	if(isset($_t))
    	{ 
    	    foreach($_t as $ti)
-   	    	{
-               if(isset($ticket)){
-   				?>
+   	    	{ ?>
    		    
    		    <a href="<?php 
    					    if(!isset($_t)){
@@ -60,7 +48,6 @@ use yii\helpers\Url;
                    </div>
    	        </a>
            <?php
-              	}
            }
       } ?>
    <div id = "div4">

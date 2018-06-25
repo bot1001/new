@@ -8,14 +8,11 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 use common\models\UserAccount;
 use common\models\Community;
 use common\models\Realestate;
 use common\models\UserData;
+use common\models\HouseInfo;
 
 /**
  * Site controller
@@ -150,8 +147,18 @@ class SiteController extends Controller
 		if($p){
 			return true;
 		}else{
-			return false;
+			$house = HouseInfo::find()
+			->andwhere(['phone' => reset($info)])
+			->andwhere(['in', 'realestate', $info['1']])
+		    ->andwhere(['name' => end($info)])
+		    ->asArray()
+		    ->one();
+			
+			if($house){
+				return true;
+			}
 		}
+		return false;
     }
 	
 	//安卓版下载

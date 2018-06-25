@@ -49,13 +49,13 @@ use yii\helpers\Url;
 								        	$t['r']['room_name'].' '.
 								        	date('Y-m-d H',$t['create_time']);
 											
-											$_community_id[] = $c_id;
-											$_community[] = $community[$c_id];
-											$_building[] = $building[$b_id];
-											$_realestate[] = $t['r']['room_name'];
-											$_time[] = $t['create_time'];
+											$_community_id = $c_id;
+											$_community = $community[$c_id];
+											$_building = $building[$b_id];
+											$_realestate = $t['r']['room_name'];
+											$_time = $t['create_time'];
 								        }
-										$_ticket[] = [$_community, $_building, $_realestate, $_time,$_community_id];
+										$_ticket[] = ['community' => $_community, 'building' => $_building, 'room' => $_realestate, 'time' => $_time, 'community_id' => $_community_id];
 										$t = count($ticket);
 										//将投诉信息添加到session
 										$_SESSION['_ticket'] = ['ticket'=> $_ticket, 'account' => $t];
@@ -70,6 +70,7 @@ use yii\helpers\Url;
 									//释放数组
 									unset($t);
 									unset($_ticket);
+
 								        ?>
                                       </a>
                                 </li>
