@@ -9,7 +9,6 @@ use app\models\OrderBasic;
 use app\models\OrderProducts;
 use app\models\UserInvoice;
 use app\models\Pay;
-use dosamigos\qrcode\QrCode;
 
 /**
  * TicketController implements the CRUD actions for TicketBasic model.
@@ -26,11 +25,13 @@ class PayController extends Controller
 	public function actionPay()
 	{
 		$b = $_GET;
+		$pay = $b['pay'];
 
-		$order_id = $b['pay']['order_id'];
-	    $order_amount = $b['pay']['order_amount'];
-	    $description = $b['pay']['description'];
-	    $order_body = '物业相关费用';  // 订单描述
+		$order_id = $pay['order_id'];
+	    $order_amount = $pay['order_amount'];
+	    $description = $pay['description'];
+	    $community = $pay['community'];
+	    $order_body = '物业缴费';  // 订单描述
 		$paymethod = $b['paymethod'];
 		
 		//创建订单信息
@@ -65,11 +66,13 @@ class PayController extends Controller
 		            	    return $this->redirect(['alipay','order_id' => $order_id,
 		            	    						   'description' => $description,
 		            	    						   'order_amount' => $order_amount,
+													   'community' => $community,
 		            	       						   'order_body' => $order_body]);
 		                }elseif($paymethod == 'wx'){
 		                	return $this->redirect(['wx','order_id' => $order_id,
 		                							   'description' => $description,
 		                							   'order_amount' => $order_amount,
+													   'community' => $community,
 		                							   'order_body' => $order_body]);
 		                }elseif($paymethod == 'xj'){
 		    			    return $this->redirect(['xj', 'order_id' => $order_id, 'order_amount' => $order_amount]);
@@ -83,6 +86,7 @@ class PayController extends Controller
 					    	return $this->redirect(['jh','order_id' => $order_id,
 		                							   'description' => $description,
 		                							   'order_amount' => $order_amount,
+													   'community' => $community,
 		                							   'order_body' => $order_body]);
 					    }else{
 		    		    	return $this->redirect(['qt', 'order_id' => $order_id]);
@@ -96,7 +100,7 @@ class PayController extends Controller
 	}
 	
 	//建行接口
-	public function actionJh($order_id,$description,$order_amount,$order_body)
+	public function actionJh($order_id,$description,$order_amount,$community,$order_body)
 	{		
 	    $MERCHANTID ="105635000000321";  						//商户号 
 	    $POSID="011945623";             						//$_POST["POSID"] ;  
@@ -105,7 +109,7 @@ class PayController extends Controller
 	    $PAYMENT=$order_amount;									//金额 
 	    $CURCODE="01";											//币种 
 	    $TXCODE="530550";										//交易类型 
-	    $REMARK1="strata fee";									//说明1  千万不能有中文
+	    $REMARK1=$community;									//说明1  千万不能有中文
 		
 		//备注信息中包含支付公钥前面14位数
 	    $REMARK2="30819d300d0609";				                            //说明2  千万不能有中文
@@ -196,7 +200,7 @@ class PayController extends Controller
 		$change = Pay::change($order_id);
 		
 		if($change == 1){
-			return $this->redirect(['user-invoice/index','order_id' => $order_id, 'amount' => $order_amount]);
+			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -221,7 +225,7 @@ class PayController extends Controller
 	}
 	
 	//调用支付宝
-	public function actionAlipay()
+	public function actionAlipay($community)
 	{	
 		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
         require_once dirname(__FILE__).'/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
@@ -237,7 +241,7 @@ class PayController extends Controller
         $total_amount = trim($_GET['order_amount']);
 
         //商品描述，可空
-        $body = trim($_GET['order_body']);
+        $body = trim($_GET['order_body'].'-'.$community);
 
 	    //构造参数
 	    $payRequestBuilder = new \AlipayTradePagePayContentBuilder();
@@ -393,19 +397,19 @@ class PayController extends Controller
 	}
 	
 	//微信支付
-	public function actionWx()
+	public function actionWx($order_id, $description, $order_amount, $community, $order_body)
 	{
 		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
 		
 		$input = new \WxPayUnifiedOrder();//实例化微信支付
 		
-		$input->SetBody( "test" );//商品标题
+		$input->SetBody( $description.'-'.$community );//商品标题
 		
-		$input->SetOut_trade_no( date( "YmdHis" ) ); //订单编号
+		$input->SetOut_trade_no( $order_id ); //订单编号
 		
-		$input->SetTotal_fee( "1" ); //订单金额
+		$input->SetTotal_fee( $order_amount*100 ); //订单金额
 				
-		$input->SetNotify_url( "http://paysdk.weixin.qq.com/example/notify.php" ); //回调地址
+		$input->SetNotify_url( "http://home.gxydwy.com/pay/weixin" ); //回调地址
 		
 		$input->SetTrade_type( "NATIVE" ); //交易类型
 		
@@ -413,14 +417,42 @@ class PayController extends Controller
 		
 		$result = \WxPayAPI::unifiedOrder($input);
 		
-		print_r($result);exit;
-		
 		//获取支付链接
 		$url = $result['code_url'];
+		
+		//生成支付二维码
+		$img = Pay::wx($order_id, $url);
 				
-		return $this->redirect(['/order/wx', 
-                'url' => $url,
+		return $this->render('/order/wx', 
+                ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount
             ]);		
+	}
+	
+	//微信主动查询
+	function actionWei($order_id)
+	{
+		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
+		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Notify.php'; //微信回调文件
+		
+		$input = new \WxPayOrderQuery();
+		$input->SetOut_trade_no($order_id);
+		$result = \WxPayApi::orderQuery($input);
+		if(array_key_exists("return_code", $result)
+			&& array_key_exists("result_code", $result)
+			&& array_key_exists("trade_state", $result)
+			&& $result["return_code"] == "SUCCESS"
+			&& $result["return_code"] == "SUCCESS"
+			&& $result["trade_state"] == "SUCCESS")
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	//微信回调地址
+	function actionWeixin()
+	{
+		echo 'success';
 	}
 	
 	//通过服务器每隔5五分钟执行的代码

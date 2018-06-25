@@ -200,17 +200,6 @@ class OrderController extends Controller
         ]);
     }
 	
-	//接收微信支付二维码
-	public function actionWx($url)
-	{
-		//生成支付二维码
-		$img = '<img src=http://paysdk.weixin.qq.com/example/qrcode.php?data='.urlencode($url).' style="width:300px;height:300px;"/>';
-		
-		return $this->render('wx',[
-			'img' => $img
-		]);
-	}
-	
 	//支付宝缴费成功后转到这里
 	public function actionV($out_trade_no)
 	{

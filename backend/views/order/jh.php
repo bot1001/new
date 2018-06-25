@@ -59,7 +59,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	function loadText() {
 		var xhr = new XMLHttpRequest();
 		//xml请求参数
-		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
+		xhr.open( 'GET', "<?php echo Url::to(['/pay/wei', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
 					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
