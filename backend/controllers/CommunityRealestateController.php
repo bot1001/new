@@ -54,13 +54,7 @@ class CommunityRealestateController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CommunityRealestatenSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 	
 	//导入业主资料

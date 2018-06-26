@@ -20,7 +20,11 @@ return [
 	       'admin' => [
                    'class' => 'mdm\admin\Module',
                     //'layout' => 'left-menu',//yii2-admin的导航菜单
-               ]
+               ],
+	       'treemanager' =>  [
+               'class' => '\kartik\tree\Module',
+               // other module settings, refer detailed documentation
+           ]
 	],
     'components' => [
         'request' => [

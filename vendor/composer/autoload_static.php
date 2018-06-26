@@ -42,6 +42,7 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
         'k' => 
         array (
             'kucha\\ueditor\\' => 14,
+            'kartik\\tree\\' => 12,
             'kartik\\select2\\' => 15,
             'kartik\\popover\\' => 15,
             'kartik\\plugins\\popover\\' => 23,
@@ -62,6 +63,7 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
         ),
         'c' => 
         array (
+            'creocoder\\nestedsets\\' => 21,
             'cebe\\markdown\\' => 14,
         ),
         'W' => 
@@ -163,6 +165,10 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
         array (
             0 => __DIR__ . '/..' . '/kucha/ueditor',
         ),
+        'kartik\\tree\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-tree-manager/src',
+        ),
         'kartik\\select2\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
@@ -218,6 +224,10 @@ class ComposerStaticInitc12cf1ebee07e88c2c4e7c1f846ee0aa
         'dmstr\\' => 
         array (
             0 => __DIR__ . '/..' . '/dmstr/yii2-adminlte-asset',
+        ),
+        'creocoder\\nestedsets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/creocoder/yii2-nested-sets/src',
         ),
         'cebe\\markdown\\' => 
         array (

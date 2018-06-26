@@ -581,3 +581,76 @@ $_SERVER = [
     ]
     'argc' => 3
 ]
+2018-06-26 14:28:53 [-][-][-][error][yii\base\ErrorException:32] yii\base\ErrorException: PHP Startup: Unable to load dynamic library 'C:\php\ext\php_pdo_firebird.dll' - 找不到指定的模块。
+ in Unknown:0
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2018-06-26 14:28:53 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'APPDATA' => 'C:\\Users\\qinzu\\AppData\\Roaming'
+    'CLASSPATH' => ' .;C:\\Program Files\\Java\\jdk1.8.0_91\\lib;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\dt.jar;C:\\Program Files\\Java\\jdk1.8.0_91\\lib\\tools.jar;'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'COMPUTERNAME' => 'DESKTOP-G1HLEVT'
+    'ComSpec' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'DriverData' => 'C:\\Windows\\System32\\Drivers\\DriverData'
+    'FPS_BROWSER_APP_PROFILE_STRING' => 'Internet Explorer'
+    'FPS_BROWSER_USER_PROFILE_STRING' => 'Default'
+    'GOOGLE_API_KEY' => 'no'
+    'GOOGLE_DEFAULT_CLIENT_ID' => 'no'
+    'GOOGLE_DEFAULT_CLIENT_SECRET' => 'no'
+    'HOMEDRIVE' => 'C:'
+    'HOMEPATH' => '\\Users\\qinzu'
+    'JAVA_HOME' => 'C:\\Program Files\\Java\\jdk1.8.0_91'
+    'LOCALAPPDATA' => 'C:\\Users\\qinzu\\AppData\\Local'
+    'LOGONSERVER' => '\\\\DESKTOP-G1HLEVT'
+    'NUMBER_OF_PROCESSORS' => '4'
+    'OneDrive' => 'C:\\Users\\qinzu\\OneDrive'
+    'OS' => 'Windows_NT'
+    'Path' => '\"C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;\";C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Users\\qinzu\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\qinzu\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\qinzu\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\qinzu\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 94 Stepping 3, GenuineIntel'
+    'PROCESSOR_LEVEL' => '6'
+    'PROCESSOR_REVISION' => '5e03'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramFiles' => 'C:\\Program Files'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'ProgramW6432' => 'C:\\Program Files'
+    'PROMPT' => '$P$G'
+    'PSModulePath' => 'C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'SESSIONNAME' => 'Console'
+    'SystemDrive' => 'C:'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'TEMP' => 'C:\\Users\\qinzu\\AppData\\Local\\Temp'
+    'TMP' => 'C:\\Users\\qinzu\\AppData\\Local\\Temp'
+    'USERDOMAIN' => 'DESKTOP-G1HLEVT'
+    'USERDOMAIN_ROAMINGPROFILE' => 'DESKTOP-G1HLEVT'
+    'USERNAME' => '祖殿'
+    'USERPROFILE' => 'C:\\Users\\qinzu'
+    'windir' => 'C:\\WINDOWS'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1530023333.5811
+    'REQUEST_TIME' => 1530023333
+    'argv' => [
+        0 => 'yii'
+        1 => 'migrate/up'
+        2 => '--migrationPath=@vendor/kartik-v/yii2-tree-manager/migrations'
+    ]
+    'argc' => 3
+]
