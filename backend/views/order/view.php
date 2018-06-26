@@ -111,13 +111,13 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 	<div class="row">
 	    <div id="zfb" class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
 	    		<img src="/image/zfb.png">
 	    	</a>
 	    </div>
 	    
 	    <div id="wx" class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'wx','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'wx','pay'=> $pay ]) ?>">
 	    		<img src="/image/wx.png" title="微信支付">
 	    	</a>
 	    </div>
@@ -129,25 +129,25 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	    </div>
     
 	    <div class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
 	    		<img src="/image/xj.png">
 	    	</a>
 	    </div>
     
 	    <div id="up" class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
 	    		<img src="/image/up.png">
 	    	</a>
 	    </div>
     
 	    <div id="yh" class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
 	    		<img src="/image/yh.png" title="银行代付">
 	    	</a>
 	    </div>
 	    
 	    <div id="zf" class="col-lg-3">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
 	    		<img src="/image/zf.png" title="政府代付">
 	    	</a>
 	    </div>

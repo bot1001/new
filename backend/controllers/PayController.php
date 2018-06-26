@@ -109,7 +109,7 @@ class PayController extends Controller
 	    $PAYMENT=$order_amount;									//金额 
 	    $CURCODE="01";											//币种 
 	    $TXCODE="530550";										//交易类型 
-	    $REMARK1=$community;									//说明1  千万不能有中文
+	    $REMARK1= $community;									//说明1  千万不能有中文
 		
 		//备注信息中包含支付公钥前面14位数
 	    $REMARK2="30819d300d0609";				                            //说明2  千万不能有中文
@@ -334,58 +334,7 @@ class PayController extends Controller
     
     	//支付宝交易号
     	$trade_no = htmlspecialchars($_GET['trade_no']);
-			
-		//查询order_id 和金额order_amount
-		/*$ord = OrderBasic::find()
-				->select('order_id,order_amount')
-				->andwhere(['order_id' => $out_trade_no])
-				->andwhere(['order_amount' => $arr['total_amount']])
-				->asArray()
-				->one();
-			//print_r($ord);die;
-		
-		if($ord){
-				$transaction = Yii::$app->db->beginTransaction();
-				try{
-					foreach($ord as $order){
-					    //OrderBasic::updateAll(['status' => 3,'payment_number' => 3,'payment_time' => 4,'payment_gateway' => 1]);
-					    OrderBasic::updateAll(['status' => 2, //变更状态
-					    					   'payment_gateway' => 1, //变更支付方式
-					    					   'payment_number' => $trade_no, // 支付编码
-					    					   'payment_time' => strtotime($arr['timestamp']) // 支付时间
-					    					   ],
-					    					   'order_id = :oid', [':oid' => $out_trade_no]
-					    				 );
-					//exit;
-					
-					$p_id = OrderProducts::find()
-						->select('product_id')
-						->where(['order_id' => $out_trade_no])
-						->asArray()
-						->all();
-					
-					foreach($p_id as $_id){
-						foreach($p_id as $pid){
-							//print_r($arr['timestamp']);exit;
-							UserInvoice::updateAll(['invoice_status' => 2,
-											    'payment_time' => $arr['timestamp'],
-											    'update_time' => $arr['timestamp'],
-												'order_id' => $out_trade_no],
-									            'invoice_id = :oid', [':oid' => $pid['product_id']]
-										);
-						}
-						
-					}}
-				    
-					$transaction->commit();
-				}catch(\Exception $e) {
-					
-                    $transaction->rollback();
-                    
-                }
-			}*/
-    		    	
-		//echo "验证成功<br />支付宝交易号：".$trade_no;
+
 		return $this->redirect(['/order/print', 
                 'order_id' => $out_trade_no, 'amount' => $arr['total_amount']
             ]);
@@ -452,7 +401,24 @@ class PayController extends Controller
 	//微信回调地址
 	function actionWeixin()
 	{
-		echo 'success';
+		$post = $GLOBALS['HTTP_RAW_POST_DATA']; //接收微信回调信息
+		if($post){
+            $post = (array) simplexml_load_string($post); //xml数组转换
+		    
+		    $out_trade_no = $post['out_trade_no'];
+            $amount = $post['total_fee'];
+		    $total_amount = $amount*0.01;
+		    $p_time = time();
+		    $trade_no = $post['transaction_id'];
+		    $gateway = '2';
+				
+			//处理订单
+		    $result = Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway);
+			if($result){
+				return '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
+			}
+		}
+		return '<xml><return_code><![CDATA[FAIL]]></return_code></xml>';
 	}
 	
 	//通过服务器每隔5五分钟执行的代码

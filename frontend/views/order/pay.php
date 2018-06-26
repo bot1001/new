@@ -60,19 +60,20 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	<?php
 	$pay = [ 'order_id' => $order[ 'order_id' ],
 		'description' => $order[ 'description' ],
-		'order_amount' => $order[ 'order_amount' ]
+		'order_amount' => $order[ 'order_amount' ],
+		'community' => $community
 	];
 	?>
 	<table class="payment">
 		<tr>
 			<td>
-				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'alipay','pay'=> $pay ]) ?>">									  
+				<a href="<?= Url::to(['/pay/pay', 'method' => 'alipay','pay'=> $pay ]) ?>">									  
 	            	<img id="pay" src="/image/zfb.png">
 	            </a>			
 			</td>
 
 			<td>
-				<a href="#<?php // echo Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
+				<a href="#<?= Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
 					<div class="dropdown">
 						<span>
 							<img id="pay" src="/image/wx.png" onClick="wx()" />
@@ -85,7 +86,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</td>
 
 			<td>
-				<a href="<?php echo Url::to(['/pay/pay', 'method' => 'jh','pay'=> $pay ]) ?>" title="龙支付">
+				<a href="<?= Url::to(['/pay/pay', 'method' => 'jh','pay'=> $pay ]) ?>" title="龙支付">
             	    <div class="dropdown">
 						<span>
 							<img id="pay" src="/image/j.png" />

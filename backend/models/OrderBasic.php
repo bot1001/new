@@ -151,7 +151,7 @@ class OrderBasic extends \yii\db\ActiveRecord
 		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
 		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
 		$time = date(time());//生成时间
-		$des = '物业相关费用'; //订单描述
+		$des = '物业缴费'; //订单描述
 		$phone = $_SESSION['user']['0']['phone']; //用户联系方式
 		$name = $_SESSION['user']['0']['name']; //用户姓名
 		$user_id = $c_id; //小区编号

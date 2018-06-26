@@ -21,15 +21,14 @@ class PayController extends Controller
 		return true;
 	}
 	
-	
 	//支付接口
 	public function actionPay()
 	{
 		//接收传参
-		$get = $_GET;
+		$get = $_GET;		
 		$method = $get['method'];
 		$pay = $get['pay'];
-		
+		$community = $pay['community'];		
 		$order_id = $pay['order_id'];
 		$description = $pay['description'];
 		$amount = $pay['order_amount'];
@@ -40,22 +39,25 @@ class PayController extends Controller
 		    return $this->redirect(['alipay','order_id' => $order_id,
 		    						 'description' => $description,
 		    						 'amount' => $amount,
-		       					     'body' => $body]);
+		       					     'body' => $body, 
+									 'community' => $community]);
 		}elseif($method == 'wx'){
 		    return $this->redirect(['wx','order_id' => $order_id,
 		    						 'description' => $description,
 		    						 'amount' => $amount,
-		       					     'body' => $body]);
+		       					     'body' => $body,
+									 'community' => $community]);
 		}else{
 			return $this->redirect(['jh','order_id' => $order_id,
 		    						 'description' => $description,
 		    						 'amount' => $amount,
-		       					     'body' => $body]);
+		       					     'body' => $body,
+									 'community' => $community]);
 		}
 	}
 	
 	//调用支付宝接口
-	public function actionAlipay($order_id,$description,$amount,$body)
+	public function actionAlipay($order_id, $description, $community, $amount, $body)
 	{
 		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
         require_once dirname(__FILE__).'/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
@@ -65,7 +67,7 @@ class PayController extends Controller
         $out_trade_no = trim($order_id);
 
         //订单名称，必填
-        $subject = trim($description);
+        $subject = trim($description.'-'.$community);
 
         //付款金额，必填
         $total_amount = trim($amount);
@@ -95,23 +97,17 @@ class PayController extends Controller
 	    var_dump($response);
 	}
 	
-	//调用微信支付接口
-	public function actionWx($order_id,$description,$amount,$body)
-	{
-		echo 'text';
-	}
-	
 	//调用建行支付接口
-	public function actionJh($order_id,$description,$amount,$body)
+	public function actionJh($order_id, $description, $community, $amount, $body)
 	{		
 	    $MERCHANTID ="105635000000321";  						//商户号 
 	    $POSID="011945623";             						//$_POST["POSID"] ;  
 	    $BRANCHID="450000000"; 									//分行号码 
 	    $ORDERID=$order_id;                                     //订单号
-	    $PAYMENT=$amount;									//金额 
+	    $PAYMENT=$amount;									    //金额 
 	    $CURCODE="01";											//币种 
 	    $TXCODE="530550";										//交易类型 
-	    $REMARK1="strata fee";									//说明1  非中文
+	    $REMARK1= $community;									//说明1  非中文
 		
 		//备注信息中包含支付公钥前面14位数
 	    $REMARK2="30819d300d0609";				                //说明2  非中文
@@ -174,19 +170,19 @@ class PayController extends Controller
 	}
 	
 	//微信支付
-	public function actionW()
+	public function actionWx($order_id, $description, $community, $amount, $body)
 	{
 		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
 		
 		$input = new \WxPayUnifiedOrder();//实例化微信支付
 		
-		$input->SetBody( "test" );//商品标题
+		$input->SetBody( $description.'-'.$community );//商品标题
 		
-		$input->SetOut_trade_no( date( "YmdHis" ) ); //订单编号
+		$input->SetOut_trade_no( $order_id ); //订单编号
 		
-		$input->SetTotal_fee( "1" ); //订单金额
+		$input->SetTotal_fee( $order_amount*100 ); //订单金额
 				
-		$input->SetNotify_url( "http://paysdk.weixin.qq.com/example/notify.php" ); //回调地址
+		$input->SetNotify_url( "http://home.gxydwy.com/pay/weixin" ); //回调地址
 		
 		$input->SetTrade_type( "NATIVE" ); //交易类型
 		
@@ -194,14 +190,36 @@ class PayController extends Controller
 		
 		$result = \WxPayAPI::unifiedOrder($input);
 		
-		print_r($result);exit;
-		
 		//获取支付链接
 		$url = $result['code_url'];
+		
+		//生成支付二维码
+		$img = Pay::wx($order_id, $url);
 				
-		return $this->redirect(['/order/wx', 
-                'url' => $url,
+		return $this->render('/order/wx', 
+                ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount
             ]);		
+	}
+	
+	//微信主动查询
+	function actionWei($order_id)
+	{
+		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
+		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Notify.php'; //微信回调文件
+		
+		$input = new \WxPayOrderQuery();
+		$input->SetOut_trade_no($order_id);
+		$result = \WxPayApi::orderQuery($input);
+		if(array_key_exists("return_code", $result)
+			&& array_key_exists("result_code", $result)
+			&& array_key_exists("trade_state", $result)
+			&& $result["return_code"] == "SUCCESS"
+			&& $result["return_code"] == "SUCCESS"
+			&& $result["trade_state"] == "SUCCESS")
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	//用户退出

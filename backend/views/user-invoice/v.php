@@ -108,14 +108,15 @@ $this->params['breadcrumbs'][] = '费项预览';
 	      	    <?php
 	      	         $price = $a->price;
 	      		        $acreage = $a->acreage;
-	      		        if($a->cost_name == "物业费" || $a->cost_name == "空调运作费" || $a->cost_name == "水电周转金"){
+	      		        if($a->formula == "1"){
 	      		     	   $p = $price*$acreage;
 	      		     	   $price = number_format($p, 1);
 	      		     	   echo $price;
 	      		        }else{
 	      		     	   echo $price;
 	      		        }
-				       if($a->inv == 0)
+				  
+				       if($a->inv == 0) //判断费固定费用
 				       {
 				     	  unset($query[$key]);
 				       }

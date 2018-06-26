@@ -84,6 +84,25 @@ class Pay extends \yii\db\ActiveRecord
 		return $qc;
 	}
 	
+	//微信支付打印日志
+	static function Log($post)
+	{
+		$dir = "log"; //日志保存路径
+		if( !is_dir($dir)) //判断路径是否存在
+		{
+			mkdir($dir); // 如存在则创建
+		}
+		
+		$filename = "./log/".date("Y-m-d").".log";
+		$date = date("Y-m-d H:i:s");
+		foreach($post as $key => $p){
+			$str = $date."\n"."$key"."=>"."$p"."\n";
+            file_put_contents($filename, $str, FILE_APPEND|LOCK_EX);
+		}
+        
+        return null;		
+	}
+	
 	public static function Jh($order_id)
 	{
 		//变量赋值
@@ -187,8 +206,8 @@ class Pay extends \yii\db\ActiveRecord
 		//查询order_id 和金额order_amount
 		$ord = OrderBasic::find()
 				->select('order_id,order_amount')
-				->andwhere(['order_id' => $out_trade_no])
-				->andwhere(['order_amount' => $total_amount])
+				->andwhere(['order_id' => "$out_trade_no"])
+				->andwhere(['order_amount' => "$total_amount"])
 				->asArray()
 				->one();
 		
@@ -207,7 +226,7 @@ class Pay extends \yii\db\ActiveRecord
 				    if($order){
 				    	$p_id = OrderProducts::find()
 				    	    ->select('product_id, sale')
-				    	    ->where(['order_id' => $out_trade_no])
+				    	    ->where(['order_id' => "$out_trade_no"])
 				    	    ->asArray()
 				    	    ->all();
 				    
@@ -235,7 +254,6 @@ class Pay extends \yii\db\ActiveRecord
 					$transaction->rollback();
 				}
 			}catch(\Exception $e) {
-				print_r($e);
                 $transaction->rollback();
             }
 		}else{

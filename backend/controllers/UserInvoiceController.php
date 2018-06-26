@@ -670,6 +670,7 @@ class UserInvoiceController extends Controller
 				'cost_relation.realestate_id',
 				'cost_name.cost_id',
 				'cost_name.cost_name',
+				'cost_name.formula',
 			    'cost_name.inv',
 				'cost_name.parent',
 				'cost_name.price',
@@ -708,10 +709,7 @@ class UserInvoiceController extends Controller
 		
 		//查询费项信息
 		$query = CostName::find()
-			->select('cost_id,cost_name,price,inv, property')
-			->andwhere(['status' => '1'])
 			->andwhere(['in','cost_id',$co])
-			->andwhere(['<','from', time()])
 			->asArray()
 			->all();
 		
@@ -724,6 +722,7 @@ class UserInvoiceController extends Controller
 			foreach ( $query as $key => $qs ) {
 				$c_id = $qs['cost_id']; //费项编码，将来会用到
 				$description = $qs[ 'cost_name' ];//费项名称
+				$formula = $qs[ 'formula' ];//计费方式 
 				
 				$time = explode('-',$date);
 				$y = reset($time); //年
@@ -733,8 +732,12 @@ class UserInvoiceController extends Controller
 				$property = $qs[ 'property' ]; //费项备注
 				
 				//判定物业费
-				if ( $description == "物业费" || $description == "空调运作费" || $description == "水电周转金" ) {
+				if ( $formula == '1' ) {
 					$p = $pr*$acreage;
+					if($p == 0){
+						$h ++;
+						continue;
+					}
 				    $price = round($p,1); //保留一位小数点
 				}else{
 					$price = $pr;

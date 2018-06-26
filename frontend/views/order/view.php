@@ -17,7 +17,7 @@ Modal::begin( [
 	'header' => '<h4 class="modal-title">支付方式</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>', ['pay', 'id' => $model['id']]
 ] );
-$V_Url = Url::toRoute( ['pay', 'id' => $model['id']] );
+$V_Url = Url::toRoute( ['pay', 'id' => $model['id'], 'community' => $community] );
 
 $vJs = <<<JS
     $('.view').on('click', function () {

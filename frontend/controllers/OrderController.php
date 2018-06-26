@@ -82,7 +82,7 @@ class OrderController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id, $community)
     {
 		$model = (new \yii\db\query())
 			->select('order_basic.*, order_relationship_address.address as address, user_data.real_name as name')
@@ -93,7 +93,7 @@ class OrderController extends Controller
 			->one();
 		
         return $this->render('view', [
-            'model' => $model,
+            'model' => $model, 'community' => $community
         ]);
     }
 
@@ -117,6 +117,7 @@ class OrderController extends Controller
 		$account_id = $user['account_id'];
 		$type = '1'; //物业订单
 		$description = '物业缴费';
+		$community = $house['community_id']; //小区编码
 		
 		$name = $user['real_name']; //下单人
 		$phone = $user['mobile_phone']; //手机号码
@@ -162,7 +163,7 @@ class OrderController extends Controller
         }
 
         if (isset($a)) {
-            return $this->redirect(['view', 'id' => $o_id]);
+            return $this->redirect(['view', 'id' => $o_id, 'community' => $community]);
         }else{
 			return $this->redirect(Yii::$app->request->referrer);
 		}
@@ -189,14 +190,14 @@ class OrderController extends Controller
     }
 	
 	//拉起支付
-	public function actionPay($id)
+	public function actionPay($id, $community)
 	{
 		$order = Order::find()
 			->where(['in', 'id', $id])
 			->asArray()
 			->one();
 		
-		return $this->renderAjax('pay', ['order' => $order]);
+		return $this->renderAjax('pay', ['order' => $order, 'community' => $community]);
 	}
 	
 	//打印订单
