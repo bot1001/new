@@ -158,7 +158,7 @@ class Pay extends \yii\db\ActiveRecord
     }
 	
 	//后台线下缴费状态变更
-	public static function change($order_id)
+	public static function change($order_id, $gateway)
 	{
 		//获取订单费项ID
 		$i_id = OrderProducts::find()
@@ -172,7 +172,7 @@ class Pay extends \yii\db\ActiveRecord
 				try{
 					//变更订单状态
 					$order =  OrderBasic::updateAll(['payment_time' => time(),
-					       					  'payment_gateway' => '6',
+					       					  'payment_gateway' => $gateway,
 					       					  'payment_number' => $order_id,
 					       					  'status' => 2],
 					       					  'order_id = :o_id', [':o_id' => $order_id]
@@ -181,7 +181,7 @@ class Pay extends \yii\db\ActiveRecord
 		                foreach($i_id as $i){//变更费项状态
 						   $invoice = UserInvoice::updateAll(['payment_time' => time(),
 		    							      'update_time' => time(),
-		    							      'invoice_status' => '6', 
+		    							      'invoice_status' => $gateway, 
 		    							      'order_id' => $order_id],
 		    							      'invoice_id = :product_id', [':product_id' => $i['product_id']]
 		    							    );
@@ -235,7 +235,7 @@ class Pay extends \yii\db\ActiveRecord
 				    		if($pid['sale'] == 1){
 				    			$status = '4';
 				    		}else{
-				    			$status = '2';
+				    			$status = $gateway;
 				    		}
 				    		
 				    		$invoice = UserInvoice::updateAll(['invoice_status' => $status,

@@ -155,6 +155,11 @@ class UserInvoice extends \yii\db\ActiveRecord
 		return $d;
 	}
 	
+	static function F($d)
+	{
+		
+	}
+	
 	//批量生成费项
 	public static function Add()
 	{

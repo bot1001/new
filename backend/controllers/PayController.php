@@ -173,7 +173,8 @@ class PayController extends Controller
 	//现金支付变更费项状态
 	public function actionXj($order_id, $order_amount)
 	{
-		$change = Pay::change($order_id);
+		$gateway = '6';
+		$change = Pay::change($order_id,$gateway);
 		
 		if($change == 1){
 			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
@@ -185,7 +186,8 @@ class PayController extends Controller
 	//刷卡支付变更费项状态
 	public function actionUp($order_id, $order_amount)
 	{
-		$change = Pay::change($order_id);
+		$gateway = '3';
+		$change = Pay::change($order_id, $gateway);
 		
 		if($change == 1){
 			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
@@ -197,7 +199,8 @@ class PayController extends Controller
 	//银行代缴支付变更费项状态
 	public function actionYh($order_id, $order_amount)
 	{
-		$change = Pay::change($order_id);
+		$gateway = '4';
+		$change = Pay::change($order_id, $gateway);
 		
 		if($change == 1){
 			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
@@ -209,7 +212,8 @@ class PayController extends Controller
 	//政府代缴支付变更费项状态
 	public function actionZf($order_id)
 	{
-		$change = Pay::change($order_id);
+		$gateway = '5';
+		$change = Pay::change($order_id, $gateway);
 		
 		if($change == 1){
 			return $this->redirect(['user-invoice/index','order_id' => $order_id]);

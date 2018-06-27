@@ -43,9 +43,13 @@ class InvoiceSumSearch extends UserInvoice
     public function search($params)
     {
 		$c = $_SESSION['community'];
-		$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
-		$query->joinWith('building');
-		
+		$query = (new \yii\db\Query())
+			->select('community_id as community, year, month, description,sum(invoice_amount) as amount, count(invoice_id)')
+			->from('user_invoice')
+			->where(['in', 'community_id', $c])
+			->groupBy('community_id, description')
+			->orderBy('year DESC, month DESC, community DESC');
+			
 		ini_set( 'memory_limit', '3048M' ); // 调整PHP由默认占用内存为2048M(2GB)
 		set_time_limit(0); //设置时间无限
 		
@@ -54,12 +58,6 @@ class InvoiceSumSearch extends UserInvoice
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'pagination' => false,
-			'sort' =>[
-		    	'defaultOrder' => [
-			        'year' => SORT_DESC,
-		        	'month' => SORT_DESC,
-		        ]
-		    ]
         ]);
 
         $this->load($params);
