@@ -360,17 +360,10 @@ class UserInvoiceController extends Controller
 		
 		$c = $_SESSION['community'];
 				
-		//获取小区
-	    $comm = CommunityBasic::find()
-	    	->select('community_name, community_id')
-	    	->where(['in', 'community_id', $c])
-	    	->orderBy('community_name')
-			->indexBy('community_id')
-	    	->column();
 		$building = CommunityBuilding::find()
 			->select('building_name')
-			->distinct()
-			->where(['in', 'community_id', $c])							
+			->where(['in', 'community_id', $c])	
+			->distinct()						
 			->orderBy('building_name')
 			->indexBy('building_name')
 			->column();
@@ -379,15 +372,15 @@ class UserInvoiceController extends Controller
 			$time = explode(' to ',$_GET ['InvoiceSumSearch']['payment_time']); //分割支付时间
 		    $from = reset($time); //起始年月
 		    $to = end($time); //截止年月
-		}elseif(!empty($_GET['InvoiceSumSearch']['from'])) //判断并筛选支付时间
+		}elseif(!empty($this->from)) //判断并筛选支付时间
 		{
-			$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
+			$time = explode(' to ',$this->from);
 		    $from = reset($time); //起始年月
 		    $to = end($time); //截止年月
 			
 			$fr = date('Y-m', strtotime("+13 month", strtotime($from))); //搜索起始时间加上一年
 			
-			$community =$_GET['InvoiceSumSearch']['community_id'];
+			$community = $this->community_id;
 			
 			$c = count($community); //计算小区数量
 			
@@ -403,35 +396,11 @@ class UserInvoiceController extends Controller
 			$from = date('Y-m', time());
 		    $to = date('Y-m', time());
 		}
-				
-		//判断并赋值楼宇
-		if(!empty($_GET['InvoiceSumSearch']['building_id']))
-		{
-			$b = $_GET['InvoiceSumSearch']['building_id'];
-		}else{
-			$b = '';
-		}
-		
-		//判断并赋值缴费项目
-		if(!empty($_GET['InvoiceSumSearch']['description']))
-		{
-			$description = $_GET['InvoiceSumSearch']['description'];
-		}else{
-			$description = '';
-		}
-		
-		//判断并赋值缴费状态
-		if(!empty($_GET['InvoiceSumSearch']['invoice_status']))
-		{
-			$status = $_GET['InvoiceSumSearch']['invoice_status'];
-		}else{
-			$status = '';
-		}
 		
 		//获取费项名称并去重复
 		$c_name = CostName::find()
 			->select('cost_name')
-			->distinct()
+			->where(['level' => "0"])
 			->indexBy('cost_name')
 			->asArray()
 			->column();
@@ -441,13 +410,9 @@ class UserInvoiceController extends Controller
 	
 		return $this->render('sum',['data' => $data,
 									 'searchModel' => $searchModel,
-									 'comm' => $comm,
 									 'building' => $building,
 									 'from' => $from,
 									 'c_name' => $c_name,
-									 'description' => $description,
-									 'status' => $status,
-									 'b' => $b,
 									 'to' => $to]);
 	}
 	

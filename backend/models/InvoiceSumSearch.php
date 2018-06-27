@@ -44,10 +44,11 @@ class InvoiceSumSearch extends UserInvoice
     {
 		$c = $_SESSION['community'];
 		$query = (new \yii\db\Query())
-			->select('community_id as community, year, month, description,sum(invoice_amount) as amount, count(invoice_id)')
+			->select('user_invoice.community_id as community, user_invoice.description,sum(user_invoice.invoice_amount) as amount, count(user_invoice.invoice_id) as invoice')
 			->from('user_invoice')
-			->where(['in', 'community_id', $c])
-			->groupBy('community_id, description')
+			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
+			->where(['in', 'user_invoice.community_id', $c])
+			->groupBy('user_invoice.community_id, description')
 			->orderBy('year DESC, month DESC, community DESC');
 			
 		ini_set( 'memory_limit', '3048M' ); // 调整PHP由默认占用内存为2048M(2GB)
@@ -115,7 +116,7 @@ class InvoiceSumSearch extends UserInvoice
         ]);
 
       $query->andFilterWhere(['in', 'description', $this->description])
-            ->andFilterWhere(['in', 'community_building.community_id', $this->community_id])
+            ->andFilterWhere(['in', 'user_invoice.community_id', $this->community_id])
             ->andFilterWhere(['in', 'community_building.building_name', $this->building_id])
             ->andFilterWhere(['like', 'create_time', $this->create_time])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
