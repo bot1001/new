@@ -57,6 +57,8 @@ use kartik\select2\Select2;
 		text-align: right;
 		border-radius: 5px;
 		font-weight: 700;
+		position: relative;
+		top: 5px;
 	}
 		
 	#div12 {
@@ -70,8 +72,9 @@ use kartik\select2\Select2;
 		top: -5px;
 	}
 	
-	#sum{
-		
+	#last{
+		font-size: 20px;
+		font-weight: 500;
 	}
 </style>
 
@@ -185,17 +188,18 @@ if ( $data ) //判断是否存在缴费数据
 				<td><?= $a ?></td>
 			</tr>
 			<?php } }?>
-			<tr id="div1">
+			<tr id="last">
 			    <td colspan="2">合计：</td>
 			    <?php foreach($des as $des01){ ?>
 			        <td><?= $des01 ?></td>
 			    <?php } ?>
-			    <td><?= $all_count; ?></td>
-			    <td><?= $amount ?></td>
+			    <td colspan="2" style="text-align: center"><?= $all_count.' 条'; ?></td>
 			</tr>
 		</tbody>
 	</table>
+	<div id="div1">
+	    <?= '总计：'.$amount ?>
+    </div>
 	<?php }else{
     	echo '暂无数据';
-    } ?>
-    
+    } ?>    
