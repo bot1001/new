@@ -71,7 +71,6 @@ if($data)//判断是否存在缴费数据
 		<thead>
 			<th><input type = "checkbox" name="checkbox[]"></th>
 			<th>序号</th>
-			<th>小区</th>
 			<th>楼宇</th>
 			<th>单元</th>
 			<th>房号</th>
@@ -89,7 +88,6 @@ if($data)//判断是否存在缴费数据
 			<tr>
 				<td><input type = "checkbox" name="checkbox[]"></td>
 				<td><?php $i +=1; echo $i; ?></td>
-				<td><?= $d->community; ?></td>
 				<td><?= $d->building; ?></td>
 				<td><?= $d->number; ?></td>
 				<td><?= $d->name; ?></td>

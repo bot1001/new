@@ -170,6 +170,36 @@ class UserInvoice extends \yii\db\ActiveRecord
 		}
 		return true;
 	}
+	
+	//统计页面过滤数组
+	public static function Summ($d, $year01, $year02)
+	{
+		$year01 = reset($year01); //起始年
+		$year02 = reset($year02); //截止年
+		
+		$month01 = end($year01); //起始月
+		$month02 = end($year02); //截止月
+		 
+		foreach($d as $k => $dd) //过滤数据
+		{
+			if($dd['year'] == $year01) // 判断年是否等于奇石年
+			{
+				if($dd['month'] < $month01) //如果等于起始年则过滤掉小于起始月的数据
+				{
+					unset($d[$k]);
+				}
+			}elseif($dd['year'] == $year02) //判断当前年是否等于截止年
+			{
+				if($dd['month'] > $month02) //若果是则过滤掉大于截止月的数据
+				{
+					unset($d[$k]);
+				}
+			}else{
+				continue; // 否则继续
+			}
+	    }
+		return $d;
+	}
 		
     /**
      * @return \yii\db\ActiveQuery

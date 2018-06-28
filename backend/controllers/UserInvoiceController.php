@@ -417,23 +417,19 @@ class UserInvoiceController extends Controller
 	}
 	
 	//数据统计第二页面
-	public function actionSumm()
+	public function actionSumm($key, $a)
 	{
-		if(empty($_GET['key'])){
+		$get = $_GET['search']; //接收搜索参数
+		$sum = $a; //接收总金额
+		
+		if(empty($_GET)){
 			echo "<script> alert('参数错误，请返回！');parent.location.href='./sum'; </script>";exit;
 		}
-		$community_id = $_GET['key'];
-		$f = $_GET['f']; //获取起始日期
-		$first = reset($f); //获取起始年
-		$month01 = $f['1']; //获取起始月
-		$from = implode('-', $f); //拼接起始时间
-		
-		$t = $_GET['t']; //获取截止日期
-		$secend = reset($t); // 获取截止月
-		$month02 = $t['1']; //获取截止月
-		$to = implode('-', $t); //拼接截止时间
-		
-		$sum = $_GET['sum']; //获取总金额
+		$community = $key; //提取小区
+		$f = $get['from']; //获取起始日期
+				
+		$p = $get['payment_time']; //获取截止日期
+				
 		$ds = (new \yii\db\Query())
 			->select('user_invoice.invoice_id as id, community_basic.community_name as community, community_building.building_name as building,
 			community_realestate.room_number as number, community_realestate.room_name as name, user_invoice.description as description,
@@ -444,49 +440,75 @@ class UserInvoiceController extends Controller
 			->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
 			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
 			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
-			->andwhere(['user_invoice.community_id' => "$community_id"]);
+			->andwhere(['user_invoice.community_id' => "$community"]);
 		
-		$description = $_GET['description']; //获取费项详情
+		$description = $get['description']; //获取费项详情
 		if($description !== '')
 		{
 			$ds = $ds->andwhere(['in', 'user_invoice.description', $description]);
 		}
 		
-		$b = $_GET['b']; //获取楼宇
+		$b = $get['building_id']; //获取楼宇
 		if($b !== '')
 		{
 			$ds = $ds->andwhere(['in', 'community_building.building_name', $b]);
 		}
 		
-		$status = $_GET['status']; //获取状态
+		$status = $get['invoice_status']; //获取状态
 		if($status !== '')
 		{
-			$ds = $ds->andwhere(['in', 'user_invoice.invoice_status', $_GET['status']]);
+			$ds = $ds->andwhere(['in', 'user_invoice.invoice_status', $get['invoice_status']]);
 			
 		}
 		
-		if(count($f) == '3' && count($t) == '3')
-		{
-			//缴费时间转换成时间戳
-			$from02 = strtotime($from);
-			$to02 = strtotime($to);
+		$from = $to = date('Y-m'); //设置默认统计时间
+		
+		if(!empty($f)){
+			$from = explode(' to ', $f); //拆分区间起始时间
+		    $from01 = reset($from); //获取起始年
+		    $from02 = end($from); //获取起始月
 			
-			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', $from02, $to02]);
-			$dss = $ds;
-		}elseif(count($f) == '2' && count($t) == '2'){
-			$ds = $ds->andwhere(['between', 'user_invoice.year', $first, $secend]);
-			if($first == $secend){
-				$ds = $ds->andwhere(['between', 'user_invoice.month', $month01, $month02]);
-				$dss = $ds;
+			//拆分年月
+			$year01 = explode('-', $from01); //起始时间
+			$year02 = explode('-', $from02); //截止时间
+			
+			$from = $from01;
+			$to = $from02;
+		}
+		
+		if(!empty($p)){
+			$to = explode(' to ', $p); //拆分支付截止时间
+		    $payment01 = reset($to); // 获取截止月
+		    $payment02 = end($to); //获取截止月
+			
+			$from = $payment01;
+			$to = $payment02;
+		}
+		
+		if($p !== '' && empty($f))
+		{
+			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', strtotime($payment01), strtotime($payment02)]);
+		}
+		
+		if($f !== '' && empty($p))
+		{
+			$ds = $ds->andwhere(['between', 'user_invoice.year', reset($year01), reset($year02)]);
+			if($year01 == $year02){
+				$ds = $ds->andwhere(['between', 'user_invoice.month', end($year01), end($year02)]);
 			}else{
 				$d = $ds->orderBy('user_invoice.year DESC, user_invoice.month DESC')->all();//第一次获取数据
-			    $date = UserInvoice::Summ($d, $f, $t);//过滤多余数组
+			    $date = UserInvoice::Summ($d, $year01, $year02);//过滤多余数组
 			    $id = array_column($date, 'id');//提取过滤之后的数据ID
 	            $dss = $ds->andwhere(['in', 'user_invoice.invoice_id', $id]);
 			}
+		}else{
+			$ds = $ds->andwhere(['between', 'user_invoice.year', date('Y'), date('Y')])
+				->andwhere(['between', 'user_invoice.month', date('m'), date('m')]);
 		}
 		
-        $count = $dss->count();// 计算总数
+		
+		
+        $count = $ds->count();// 计算总数
 		
         $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
         
@@ -496,26 +518,9 @@ class UserInvoiceController extends Controller
                    ->all();
 		
 		$c = $_SESSION['community'];
-		
-		//获取小区
-	    $comm = CommunityBasic::find()
-	    	->select('community_name, community_id')
-	    	->where(['in', 'community_id', $community_id])
-	    	->orderBy('community_name')
-			->indexBy('community_id')
-	    	->column();
-		$building = CommunityBuilding::find()
-			->select('building_name')
-			->distinct()
-			->where(['in', 'community_id', $community_id])							
-			->orderBy('building_name')
-			->indexBy('building_name')
-			->column();
-		
+
 		return $this->render('summ',['data' => $data,
 									'pagination' => $pagination,
-									'comm' => $comm,
-									'building' => $building,
 								    'from' => $from,
 								    'to' => $to,
 								    'sum' => $sum,

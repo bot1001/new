@@ -1,11 +1,11 @@
 <?php
 
-use app\ models\ UserInvoice;
-use kartik\ form\ ActiveForm;
-use yii\ helpers\ Html;
-use yii\ helpers\ Url;
-use kartik\ depdrop\ DepDrop;
-use kartik\ select2\ Select2;
+use app\models\UserInvoice;
+use kartik\form\ActiveForm;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
 
 ?>
 
@@ -151,8 +151,13 @@ if ( $data ) //判断是否存在缴费数据
 				$n++; //计数器
 		?>
 			<tr>
-				<td id="center"><?= $n; ?></td>
-				<td id="left"><?= $c ?></td>
+			    <td id="center"><?= $n ?></td>
+				<td id="left">
+				   <a href="<?= Url::to(['summ', 'search' => $_GET['InvoiceSumSearch'], 'a' => $a, 'key' => $key]) ?>">
+				       <?= $c; ?>
+				   </a>
+				</td>
+				
 				<?php foreach($cost_name as $cost_key => $name) //遍历收费名称
 			    { 
 			    	$ins = array_column($invoice, 'description');
@@ -175,7 +180,6 @@ if ( $data ) //判断是否存在缴费数据
 			    }
 				unset($invoice);
 				unset($i);
-				
 				?>
 				<td><?= $count ?></td>
 				<td><?= $a ?></td>
@@ -189,16 +193,9 @@ if ( $data ) //判断是否存在缴费数据
 			    <td><?= $all_count; ?></td>
 			    <td><?= $amount ?></td>
 			</tr>
-
 		</tbody>
 	</table>
-
-	<div id="div1">
-		
-	</div>
-
 	<?php }else{
-//	echo '<pre >';
-//	print_r($_SESSION['community_id']);
-	echo '暂无数据';
-} ?>
+    	echo '暂无数据';
+    } ?>
+    
