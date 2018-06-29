@@ -192,4 +192,13 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui/src',
     ),
   ),
+  'kasoft/yii2-jstree' => 
+  array (
+    'name' => 'kasoft/yii2-jstree',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kasoft/jstree' => $vendorDir . '/kasoft/yii2-jstree',
+    ),
+  ),
 );

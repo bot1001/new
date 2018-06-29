@@ -663,6 +663,50 @@
         "description": "BDD assertion library for PHPUnit"
     },
     {
+        "name": "components/jquery",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/components/jquery.git",
+            "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/components/jquery/zipball/459648cda77875519c5da3ae1dd0ed5d170aa649",
+            "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649",
+            "shasum": ""
+        },
+        "time": "2018-03-04T13:23:48+00:00",
+        "type": "component",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "jquery.js"
+                ],
+                "files": [
+                    "jquery.min.js",
+                    "jquery.min.map",
+                    "jquery.slim.js",
+                    "jquery.slim.min.js",
+                    "jquery.slim.min.map"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "JS Foundation and other contributors"
+            }
+        ],
+        "description": "jQuery JavaScript Library",
+        "homepage": "http://jquery.com"
+    },
+    {
         "name": "composer/installers",
         "version": "v1.5.0",
         "version_normalized": "1.5.0.0",
@@ -1872,6 +1916,55 @@
             "plugin",
             "select2",
             "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kasoft/yii2-jstree",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kasoft/yii2-jstree.git",
+            "reference": "0970f0e8100929d16c3650223193b0a93f67b45e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kasoft/yii2-jstree/zipball/0970f0e8100929d16c3650223193b0a93f67b45e",
+            "reference": "0970f0e8100929d16c3650223193b0a93f67b45e",
+            "shasum": ""
+        },
+        "require": {
+            "vakata/jstree": "3.3.*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2018-03-15T16:31:39+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kasoft\\jstree\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nils Menrad",
+                "email": "nils@menrad.net"
+            }
+        ],
+        "description": "jsTree is jquery plugin, that provides interactive trees",
+        "keywords": [
+            "extension",
             "yii2"
         ]
     },
@@ -4194,6 +4287,65 @@
             }
         ],
         "description": "A small library for converting tokenized PHP source code into XML and potentially other formats"
+    },
+    {
+        "name": "vakata/jstree",
+        "version": "3.3.5",
+        "version_normalized": "3.3.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vakata/jstree.git",
+            "reference": "0097fab41981daf36c234b73b683166daabd5f28"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vakata/jstree/zipball/0097fab41981daf36c234b73b683166daabd5f28",
+            "reference": "0097fab41981daf36c234b73b683166daabd5f28",
+            "shasum": ""
+        },
+        "require": {
+            "components/jquery": ">=1.9.1"
+        },
+        "suggest": {
+            "robloach/component-installer": "Allows installation of Components via Composer"
+        },
+        "time": "2018-01-02T08:13:23+00:00",
+        "type": "component",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "dist/jstree.js"
+                ],
+                "styles": [
+                    "dist/themes/default/style.css"
+                ],
+                "images": [
+                    "dist/themes/default/32px.png",
+                    "dist/themes/default/40px.png",
+                    "dist/themes/default/throbber.gif"
+                ],
+                "files": [
+                    "dist/jstree.min.js",
+                    "dist/themes/default/style.min.css",
+                    "dist/themes/default/32px.png",
+                    "dist/themes/default/40px.png",
+                    "dist/themes/default/throbber.gif"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ivan Bozhanov",
+                "email": "jstree@jstree.com"
+            }
+        ],
+        "description": "jsTree is jquery plugin, that provides interactive trees.",
+        "homepage": "http://jstree.com"
     },
     {
         "name": "webmozart/assert",

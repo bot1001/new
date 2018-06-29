@@ -18,6 +18,7 @@ return array(
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'mdm\\admin\\' => array($vendorDir . '/mdmsoft/yii2-admin'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
+    'kasoft\\jstree\\' => array($vendorDir . '/kasoft/yii2-jstree'),
     'kartik\\select2\\' => array($vendorDir . '/kartik-v/yii2-widget-select2'),
     'kartik\\popover\\' => array($vendorDir . '/kartik-v/yii2-popover-x'),
     'kartik\\plugins\\popover\\' => array($vendorDir . '/kartik-v/bootstrap-popover-x'),

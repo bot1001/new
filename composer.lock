@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3827d3dfe9a0cfe4325a926b38d25c0",
+    "content-hash": "8f6ccd682732d0e9098dee8119b001e6",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -355,6 +355,48 @@
                 "yii"
             ],
             "time": "2013-12-10T17:49:58+00:00"
+        },
+        {
+            "name": "components/jquery",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery.min.map",
+                        "jquery.slim.js",
+                        "jquery.slim.min.js",
+                        "jquery.slim.min.map"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JS Foundation and other contributors"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2018-03-04T13:23:48+00:00"
         },
         {
             "name": "composer/installers",
@@ -1358,6 +1400,53 @@
             "time": "2018-02-24T05:28:25+00:00"
         },
         {
+            "name": "kasoft/yii2-jstree",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kasoft/yii2-jstree.git",
+                "reference": "0970f0e8100929d16c3650223193b0a93f67b45e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kasoft/yii2-jstree/zipball/0970f0e8100929d16c3650223193b0a93f67b45e",
+                "reference": "0970f0e8100929d16c3650223193b0a93f67b45e",
+                "shasum": ""
+            },
+            "require": {
+                "vakata/jstree": "3.3.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kasoft\\jstree\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Menrad",
+                    "email": "nils@menrad.net"
+                }
+            ],
+            "description": "jsTree is jquery plugin, that provides interactive trees",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2018-03-15T16:31:39+00:00"
+        },
+        {
             "name": "kucha/ueditor",
             "version": "dev-master",
             "source": {
@@ -1692,6 +1781,63 @@
                 "mailer"
             ],
             "time": "2018-03-17T22:18:35+00:00"
+        },
+        {
+            "name": "vakata/jstree",
+            "version": "3.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vakata/jstree.git",
+                "reference": "0097fab41981daf36c234b73b683166daabd5f28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vakata/jstree/zipball/0097fab41981daf36c234b73b683166daabd5f28",
+                "reference": "0097fab41981daf36c234b73b683166daabd5f28",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.9.1"
+            },
+            "suggest": {
+                "robloach/component-installer": "Allows installation of Components via Composer"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "dist/jstree.js"
+                    ],
+                    "styles": [
+                        "dist/themes/default/style.css"
+                    ],
+                    "images": [
+                        "dist/themes/default/32px.png",
+                        "dist/themes/default/40px.png",
+                        "dist/themes/default/throbber.gif"
+                    ],
+                    "files": [
+                        "dist/jstree.min.js",
+                        "dist/themes/default/style.min.css",
+                        "dist/themes/default/32px.png",
+                        "dist/themes/default/40px.png",
+                        "dist/themes/default/throbber.gif"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Bozhanov",
+                    "email": "jstree@jstree.com"
+                }
+            ],
+            "description": "jsTree is jquery plugin, that provides interactive trees.",
+            "homepage": "http://jstree.com",
+            "time": "2018-01-02T08:13:23+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -4580,7 +4726,8 @@
         "kartik-v/yii2-date-range": 20,
         "2amigos/yii2-qrcode-helper": 20,
         "mdmsoft/yii2-admin": 20,
-        "kartik-v/yii2-widget-datepicker": 20
+        "kartik-v/yii2-widget-datepicker": 20,
+        "kasoft/yii2-jstree": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
