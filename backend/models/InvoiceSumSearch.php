@@ -85,15 +85,12 @@ class InvoiceSumSearch extends UserInvoice
             $month01 = str_pad(end($f),2, '0', STR_PAD_LEFT); //提取起始月并自动补“0”
 			$month02 = str_pad(end($t), 2, '0', STR_PAD_LEFT); //提取截止月并自动补“0”
 			
-			$day = date("t",strtotime("$year02-$month02")); //获取截止日期天数
-			$from = $year01.'-'.$month01.'-'.'01'; //拼接起始日期
-			$to = $year02.'-'.$month02.'-'.$day; //拼接截止日期
+//			$day = date("t",strtotime("$year02-$month02")); //获取截止日期天数
+//			$from = $year01.'-'.$month01.'-'.'01'; //拼接起始日期
+//			$to = $year02.'-'.$month02.'-'.$day; //拼接截止日期
 			
-			if($year01 == $year02) //如果筛选的起始年份和截止年份相等，执行以下代码
-			{
-				$query->andFilterWhere(['between', 'month', $month01, $month02]);
-			}
-			$query->andFilterWhere(['between', 'year', $year01, $year02]);
+			$query->andFilterWhere(['>=', 'year', $year01],['>=', 'month', $month01]);
+			$query->andFilterWhere(['<=', 'year', $year01],['>=', 'month', $month02]);
 		}elseif($this->payment_time == ''){
 			$query->andFilterWhere(['in', 'year', date('Y')])
 				  ->andFilterWhere(['in', 'month', date('m')]);

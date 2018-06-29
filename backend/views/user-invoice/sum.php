@@ -156,7 +156,7 @@ if ( $data ) //判断是否存在缴费数据
 			<tr>
 			    <td id="center"><?= $n ?></td>
 				<td id="left">
-				   <a href="<?= Url::to(['summ', 'search' => $_GET['InvoiceSumSearch'], 'a' => $a, 'key' => $key]) ?>">
+				   <a href="<?= Url::to(['summ', 'search' => '1', 'a' => $a, 'key' => $key]) ?>">
 				       <?= $c; ?>
 				   </a>
 				</td>
