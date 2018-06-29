@@ -358,7 +358,14 @@ class UserInvoiceController extends Controller
 	{
 		$searchModel = new \app\models\InvoiceSumSearch(); //实例化搜索模型
 		
-		$c = $_SESSION['community'];
+		$c = $_SESSION['community']; //从回话中获取小区ID
+	    
+	    $comm = CommunityBasic::find()
+	    	->select(' community_name')
+	    	->where(['in', 'community_id', $_SESSION['community']])
+			->orderBy('community_name DESC')
+	    	->indexBy('community_id')
+	    	->column();
 				
 		$building = CommunityBuilding::find()
 			->select('building_name')
@@ -413,6 +420,7 @@ class UserInvoiceController extends Controller
 									 'building' => $building,
 									 'from' => $from,
 									 'c_name' => $c_name,
+									'comm' => $comm,
 									 'to' => $to]);
 	}
 	
@@ -422,12 +430,13 @@ class UserInvoiceController extends Controller
 		$get = $_GET['search']; //接收搜索参数
 		$sum = $a; //接收总金额
 		
+		$from = $to = date('Y-m'); //设置默认费项期间
+				
 		if(empty($_GET)){
 			echo "<script> alert('参数错误，请返回！');parent.location.href='./sum'; </script>";exit;
 		}
 		$community = $key; //提取小区
 		$f = $get['from']; //获取起始日期
-				
 		$p = $get['payment_time']; //获取截止日期
 				
 		$ds = (new \yii\db\Query())
@@ -461,8 +470,6 @@ class UserInvoiceController extends Controller
 			
 		}
 		
-		$from = $to = date('Y-m'); //设置默认统计时间
-		
 		if(!empty($f)){
 			$from = explode(' to ', $f); //拆分区间起始时间
 		    $from01 = reset($from); //获取起始年
@@ -474,6 +481,12 @@ class UserInvoiceController extends Controller
 			
 			$from = $from01;
 			$to = $from02;
+			
+			$year_1 = reset($year01);
+			$year_2 = reset($year02);
+			
+			$month01 = end($year01);
+			$month02 = end($year02);
 		}
 		
 		if(!empty($p)){
@@ -485,28 +498,16 @@ class UserInvoiceController extends Controller
 			$to = $payment02;
 		}
 		
-		if($p !== '' && empty($f))
+		if($p !== '')
 		{
 			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', strtotime($payment01), strtotime($payment02)]);
 		}
 		
-		if($f !== '' && empty($p))
+		if($f !== '')
 		{
-			$ds = $ds->andwhere(['between', 'user_invoice.year', reset($year01), reset($year02)]);
-			if($year01 == $year02){
-				$ds = $ds->andwhere(['between', 'user_invoice.month', end($year01), end($year02)]);
-			}else{
-				$d = $ds->orderBy('user_invoice.year DESC, user_invoice.month DESC')->all();//第一次获取数据
-			    $date = UserInvoice::Summ($d, $year01, $year02);//过滤多余数组
-			    $id = array_column($date, 'id');//提取过滤之后的数据ID
-	            $dss = $ds->andwhere(['in', 'user_invoice.invoice_id', $id]);
-			}
-		}else{
-			$ds = $ds->andwhere(['between', 'user_invoice.year', date('Y'), date('Y')])
-				->andwhere(['between', 'user_invoice.month', date('m'), date('m')]);
+			$ds = $ds->andWhere(['and', "year >= $year_1", "month >=$month01"])
+			->andWhere(['and', "year <= $year_2", "month <= $month02"]);
 		}
-		
-		
 		
         $count = $ds->count();// 计算总数
 		
@@ -517,8 +518,6 @@ class UserInvoiceController extends Controller
                    ->limit($pagination->limit)
                    ->all();
 		
-		$c = $_SESSION['community'];
-
 		return $this->render('summ',['data' => $data,
 									'pagination' => $pagination,
 								    'from' => $from,

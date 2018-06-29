@@ -47,7 +47,7 @@ class InvoiceSumSearch extends UserInvoice
 			->select('user_invoice.community_id as community, user_invoice.description,sum(user_invoice.invoice_amount) as amount, count(user_invoice.invoice_id) as invoice')
 			->from('user_invoice')
 			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
-			->where(['in', 'user_invoice.community_id', $c])
+			->andwhere(['in', 'user_invoice.community_id', $c])
 			->groupBy('user_invoice.community_id, description')
 			->orderBy('year DESC, month DESC, community DESC');
 			
@@ -69,7 +69,7 @@ class InvoiceSumSearch extends UserInvoice
             return $dataProvider;
         }
 		
-		if($this->from !== '') //如果费项月份不为空，执行以下代码
+		if(!empty($this->from)) //如果费项月份不为空，执行以下代码
 		{
 			$time = explode(' to ',$this->from);
 			
@@ -84,22 +84,18 @@ class InvoiceSumSearch extends UserInvoice
 			
             $month01 = str_pad(end($f),2, '0', STR_PAD_LEFT); //提取起始月并自动补“0”
 			$month02 = str_pad(end($t), 2, '0', STR_PAD_LEFT); //提取截止月并自动补“0”
-			
-//			$day = date("t",strtotime("$year02-$month02")); //获取截止日期天数
-//			$from = $year01.'-'.$month01.'-'.'01'; //拼接起始日期
-//			$to = $year02.'-'.$month02.'-'.$day; //拼接截止日期
-			
-			$query->andFilterWhere(['>=', 'year', $year01],['>=', 'month', $month01]);
-			$query->andFilterWhere(['<=', 'year', $year01],['>=', 'month', $month02]);
+						
+			$query->andFilterWhere(['and', "year >= $year01", "month >= $month01"]);
+			$query->andFilterWhere(['and', "year <= $year02", "month <= $month02"]);
 		}elseif($this->payment_time == ''){
 			$query->andFilterWhere(['in', 'year', date('Y')])
 				  ->andFilterWhere(['in', 'month', date('m')]);
 		}	
 		
-		if($this->payment_time !== '') //如果支付时间为空 执行以下代码
+		if(!empty($this->payment_time)) //如果支付时间为空 执行以下代码
 		{ 
 			$time01 = explode(' to ',$this->payment_time);
-			$one = (reset($time01));
+			$one = reset($time01);
 			$two = end($time01);
             $query->andFilterWhere(['between', 'payment_time', strtotime($one),strtotime($two)]);
 		}

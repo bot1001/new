@@ -34,7 +34,6 @@
 		width: auto;
 	}
 	
-	
 	#div12{
 		font-size: 15px;
 		font-weight: 1000;
@@ -55,7 +54,7 @@
 
 <div id="div12">
 	<div class="row">
-		<div class="col-lg-3" align="left"><?= '总计：'.'<l>'.$sum.'</l>'.'元；'.' '.'共：'.'<l>'.$count.'</l>'.'条'; ?></div>
+		<div class="col-lg-3" align="left"><?= '总计：'.'<l>'.$sum.'</l>'.'元；'.' '.'共：'.'<l>'.$pagination->totalCount.'</l>'.'条'; ?></div>
 	    <div class="col-lg-9"><?= '起始时间：'.$from.'&nbsp&nbsp&nbsp&nbsp'.'截止时间：'.$to; ?></div>
 	</div>
 </div>
@@ -65,7 +64,7 @@
 if($data)//判断是否存在缴费数据
 {
 	$i = 0;
-	$status = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', '7' => '建行' ];
+	$status = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
 	?>
 	<table border="1">
 		<thead>
@@ -93,7 +92,7 @@ if($data)//判断是否存在缴费数据
 				<td><?= $d->name; ?></td>
 				<td><?= $d->year; ?></td>
 				<td><?= $d->month; ?></td>
-				<td><?= $d->description; ?></td>
+				<td style="text-align: left"><?= $d->description; ?></td>
 				<td><?= $d->amount; ?></td>
 				<td><?= $d->order; ?></td>
 				<td><?php
@@ -114,15 +113,11 @@ if($data)//判断是否存在缴费数据
 </div>
 
 <div id="div10" class="footer">
-	<div>
-		<div id="page">
-			<?php
-	            echo yii\widgets\LinkPager::widget([
-                    'pagination' => $pagination,
-                ]);
-	        ?>
-	    </div>
+	<div id="page">
+		<?= yii\widgets\LinkPager::widget([
+                'pagination' => $pagination,
+            ]);
+	    ?>
 	</div>
 </div>
-
 <?php } ?>

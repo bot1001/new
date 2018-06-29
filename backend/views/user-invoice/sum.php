@@ -88,7 +88,7 @@ if ( $message == '0' ) {
 ?>
 
 <?= $this->render( '_search', [ 'model' => $searchModel,
-	'comm' => $_SESSION['community_id'],
+	'comm' => $comm,
 	'c_name' => $c_name,
 	'building' => $building,
 ] );
@@ -98,8 +98,9 @@ if ( $message == '0' ) {
 </div>
 
 <?php
-if ( $data ) //判断是否存在缴费数据
+if ( !empty($data) ) //判断是否存在缴费数据
 {
+//	print_r($data);exit;
 	//拆分时间
 	$f = explode( '-', $from );
 	$t = explode( '-', $to );
@@ -151,12 +152,24 @@ if ( $data ) //判断是否存在缴费数据
 				$count = array_column($invoice, 'invoice');
 				$count = array_sum($count);
 				$all_count += $count; //费项条数总和
-				$n++; //计数器
+				$n++; //计数器					
 		?>
 			<tr>
 			    <td id="center"><?= $n ?></td>
 				<td id="left">
-				   <a href="<?= Url::to(['summ', 'search' => '1', 'a' => $a, 'key' => $key]) ?>">
+				   <a href="<?php
+			            if(empty($_GET['InvoiceSumSearch'] )){
+			            	$search['community_id'] = '';
+			            	$search['building_id'] = ''; 
+			            	$search['description'] = '';
+			            	$search['from'] = date('Y-m').' to '.date('Y-m');
+			            	$search['payment_time'] = ''; 
+			            	$search['invoice_status'] = ''; 
+			            }else{
+			            	$search =$_GET['InvoiceSumSearch'];
+			            }
+			            
+			            echo Url::to(['summ', 'search' => $search, 'a' => $a, 'key' => $key]) ?>">
 				       <?= $c; ?>
 				   </a>
 				</td>
@@ -169,12 +182,13 @@ if ( $data ) //判断是否存在缴费数据
 			    	    foreach($invoice as $keys =>  $i)
 			    	    {				
 			    	        if($i['description'] == $name) // 判断当前费项是否是当前遍历的收费名称
-			    	        {
-								echo '<td>';
-								   $des[$cost_key] += $i['amount'];
-			    	        	   echo $i['amount'];
-			    	        	echo '</rd>';
-			    	        }
+			    	        { $des[$cost_key] += $i['amount'];?>
+								<td>
+							       <a href="<?php $search['description'] = $name; echo Url::to(['summ', 'search' => $search, 'a' => $i['amount'], 'key' => $key]) ?>">
+							           <?= $i['amount']; ?>
+							       </a>
+			    	        	</rd>
+			    	      <?php }
 			    	    }
 			    	}else{
 			    		echo '<td>';
@@ -200,6 +214,4 @@ if ( $data ) //判断是否存在缴费数据
 	<div id="div1">
 	    <?= '总计：'.$amount ?>
     </div>
-	<?php }else{
-    	echo '暂无数据';
-    } ?>    
+	<?php } ?>    
