@@ -38,11 +38,11 @@ class HouseInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['realestate', 'name'], 'required'],
+            [['realestate', 'name',   'phone'], 'required'],
             [['realestate', 'creater', 'create', 'update', 'status', 'politics'], 'integer'],
-            [['name'], 'string', 'max' => 8],
-            [['phone'], 'string', 'max' => 32],
-            [['IDcard'], 'string', 'max' => 18],
+            [['name'], 'string', 'max' => 32],
+            //[['phone'], 'string', 'max' => 16],
+            [['IDcard'], 'string', 'length' => 18],
             [['address', 'property'], 'string', 'max' => 50],
             [['realestate', 'name', 'IDcard'], 'unique', 'targetAttribute' => ['realestate', 'name', 'IDcard']],
             [['realestate'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityRealestate::className(), 'targetAttribute' => ['realestate' => 'realestate_id']],
@@ -70,6 +70,12 @@ class HouseInfo extends \yii\db\ActiveRecord
         ];
     }
 	
+	//自定义变量
+	public $community;
+	public $building;
+	public $number;
+	public $room_name;
+	
 	public function beforeSave($insert)
 	{
 		if(parent::beforeSave($insert))
@@ -80,6 +86,7 @@ class HouseInfo extends \yii\db\ActiveRecord
 				$this->creater = $_SESSION['user']['0']['id'];
 				$this->create = date(time());
 				$this->update = date(time());
+				$this->status = '1';
 			}else{
 				//修改时自动更新以下记录
 				$this->update = date(time());
@@ -98,4 +105,16 @@ class HouseInfo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CommunityRealestate::className(), ['realestate_id' => 'realestate']);
     }
+	
+	//建立关联小区
+	public function getC()
+    {
+        return $this->hasMany(CommunityBasic::className(), ['community_id' => 'community_id'])->viaTable('community_realestate', ['realestate_id' => 'realestate']);
+    }
+	
+	//建立关联楼宇
+	public function getB()
+	{
+		return $this->hasMany(CommunityBuilding::className(), ['building_id' => 'building_id'])->viaTable('community_realestate', ['realestate_id' => 'realestate']);
+	}
 }

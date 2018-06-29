@@ -22,46 +22,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			height: auto;
 			border-radius: 20px;
 		}
-	
-        #box{
-            display:none;
-			font-size: 17px;
-            width: 100px;
-            height: 65px; 
-            #border:1px solid #333;
-            padding:12px;
-            text-align:center;
-			border-radius: 20px;
-			margin-top: -10%;
-			margin-left: 68%;
-        }
-		
-		#z{
-            display:none;
-			font-size: 17px;
-            width: 100px;
-            height: 65px; 
-            #border:1px solid #333;
-            padding:12px;
-            text-align:center;
-			border-radius: 20px;
-			margin-top: -10%;
-			margin-left: 85%;
-        }
-    </style>
-    <script type="text/javascript" language="javascript" >
-        function display(){
-        document.getElementById("box").style.display="block"; 
-
-        }
-		function f(){
-        document.getElementById("z").style.display="block"; 
-        }
-        function disappear(){
-        document.getElementById("box").style.display="none"; 
-        document.getElementById("z").style.display="none"; 
-        }
-    </script>
+	</style>
 
 	<?= DetailView::widget([
         'model' => $model,
@@ -138,60 +99,57 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
     ]) ?>
 
 	<?php 
-	if($model['status'] != 1)
-	{
-		exit;
-	};
-	
+	if($model['status'] != 1) { exit; };
 	
 	$pay = ['order_id'=> $model['order_id'],
 				  'description'=> $model['description'],
 				  'order_amount'=>$model['order_amount'],
-				  'status' => $model['status']]; 
+				  'status' => $model['status'],
+			      'community' => $model['account_id']
+		   ]; 
 	?>
 
 	<div class="row">
-	    <div id="zfb" class="col-lg-2">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
+	    <div id="zfb" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'alipay','pay'=> $pay ]) ?>">									  
 	    		<img src="/image/zfb.png">
 	    	</a>
 	    </div>
 	    
-	    <div id="jh" class="col-lg-2">
+	    <div id="wx" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'wx','pay'=> $pay ]) ?>">
+	    		<img src="/image/wx.png" title="微信支付">
+	    	</a>
+	    </div>
+	    
+	    <div id="jh" class="col-lg-3">
 	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'jh','pay'=> $pay ]) ?>">
-	    		<img src="/image/j.png">
+	    		<img src="/image/j.png" title="建行龙支付">
 	    	</a>
 	    </div>
     
-	    <div class="col-lg-2">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
+	    <div class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
 	    		<img src="/image/xj.png">
 	    	</a>
 	    </div>
     
-	    <div id="up" class="col-lg-2">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
+	    <div id="up" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
 	    		<img src="/image/up.png">
 	    	</a>
 	    </div>
     
-	    <div id="yh" class="col-lg-2">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
-	    		<img src="/image/yh.png" onmouseover="display()" onmouseout="disappear()">
+	    <div id="yh" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
+	    		<img src="/image/yh.png" title="银行代付">
 	    	</a>
 	    </div>
 	    
-	    <div id="zf" class="col-lg-2">
-	    	<a href="<?php echo Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
-	    		<img src="/image/zf.png" onmouseover="f()" onmouseout="disappear()">
+	    <div id="zf" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
+	    		<img src="/image/zf.png" title="政府代付">
 	    	</a>
 	    </div>
-        <div id="box" onmouseover="display()" onmouseout="disappear()">
-        银行代付
-        </div>
-        
-        <div id="z" onmouseover="f()" onmouseout="disappear()">
-        政府代付
-        </div>
 	</div>
 </div>

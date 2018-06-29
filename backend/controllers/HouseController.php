@@ -4,10 +4,14 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\HouseInfo;
+use app\models\CommunityBuilding;
+use app\models\CommunityBasic;
 use app\models\houseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * HouseController implements the CRUD actions for HouseInfo model.
@@ -37,12 +41,42 @@ class HouseController extends Controller
     {
         $searchModel = new houseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find()
+			->select('community_name')
+			->indexBy('community_name')
+			->column();
+				
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $_SESSION['community']])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'community' => $community,
+			'building' => $building
         ]);
     }
+	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'house' => [
+               'class' => EditableColumnAction::className(),     
+               'modelClass' => HouseInfo::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
 
     /**
      * Displays a single HouseInfo model.
@@ -59,7 +93,18 @@ class HouseController extends Controller
 
 	public function actionView01($id)
     {
-		$model = HouseInfo::find()->where(['realestate' => $id])->asArray()->all();
+		$model = (new \yii\db\Query())
+			->select('house_info.*, 
+			community_basic.community_name as community, 
+			community_building.building_name as building,
+			community_realestate.room_number as number,
+			community_realestate.room_name as room_name')
+			->from('house_info')
+			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = house_info.realestate')
+			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+			->where(['house_info.realestate' => $id])
+			->all();
 		
         return $this->render('view', [
             'model' => $model,
@@ -74,13 +119,31 @@ class HouseController extends Controller
     public function actionCreate()
     {
         $model = new HouseInfo();
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find() //查询和账户相关联的小区名称
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $comm])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
+		
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $comm])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->house_id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
+			'community' => $community,
+			'building' => $building
         ]);
     }
 
@@ -94,13 +157,31 @@ class HouseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		$comm = $_SESSION['community']; //从回话中获取小区编号
+		$community = CommunityBasic::find() //查询和账户相关联的小区名称
+			->select('community_name, community_id')
+			->where(['in', 'community_id', $comm])
+			->orderBy('community_name DESC')
+			->indexBy('community_id')
+			->column();
+		
+		$building =CommunityBuilding::find() //查询和账户向关联的楼宇
+			->select('building_name')
+			->where(['in', 'community_id', $comm])
+			->distinct()
+			->orderBy('building_name ASC')
+			->indexBy('building_name')
+			->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->house_id]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
+			'community' => $community,
+			'building' => $building
         ]);
     }
 

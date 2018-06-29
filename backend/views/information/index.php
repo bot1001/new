@@ -67,7 +67,7 @@ $this->title = '消息';
             ['attribute' => 'ticket_number',
 			 'format' => 'raw',
 			 'value' => function($model){
-	         	$url = Yii::$app->urlManager->createUrl( [ '/ticket/index', 'name' => '待接单', 'c' => $model->community ] );
+	         	$url = Yii::$app->urlManager->createUrl( [ '/ticket/index', 'ticket_status' => '1', 'community' => $model->community ] );
 	         	return Html::a($model->ticket_number, $url);
 	         },
 			'hAlign' => 'center'],

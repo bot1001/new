@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\CommunityBasic;
 
 /**
  * This is the model class for table "user_invoice".
@@ -105,74 +106,101 @@ class UserInvoice extends \yii\db\ActiveRecord
         $scenarios['up'] =  ['community_id', 'building_id' , 'realestate_id', 'description', 'invoice_amount', 'month', 'year' ];
         return $scenarios;
     }
-	
-	//过滤数组
-	public static function Filter($data,$c_name, $comm)
-	{
-		//遍历数据源
-		foreach ($data as $key=>$value)
-        {
-            $d[] = $value->attributes;
-			
-        }
 		
-		if(isset($d)){
-			//遍历小区
-		    foreach($comm as $k => $name)
+	//批量生成费项
+	public static function Add()
+	{
+		$community = CommunityBasic::find()
+			->select('community_id')
+			->orderBy('community_id ASC')
+			->asArray()
+			->all();
+		
+		foreach($community as $comm)
+		{
+		    $query = ( new\ yii\ db\ Query() )->select( [
+		    	'community_realestate.community_id',
+		    	'community_realestate.building_id',
+		    	'cost_relation.realestate_id',
+		    	'community_realestate.acreage',
+		    	'cost_relation.cost_id',
+		    	'cost_name.cost_name',
+		    	'cost_name.parent',
+		    	'cost_name.sale',
+		    	'cost_name.formula',
+		    	'cost_name.price',
+		    	'cost_name.property',
+		    ] )
+		    	->from( 'cost_relation' )
+		    	->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
+		    	->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
+		    	->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
+		    	->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
+		    	->andwhere( ['in', 'community_realestate.community_id', $comm ] )
+		    	->andwhere( ['<', 'cost_relation.from', time() ] )
+		    	->andwhere(['cost_name.inv' =>1, 'cost_relation.status' => '1']);		
+		    
+		    $y = date( 'Y' );
+		    $m = date( 'm' );
+		    $f = date( time() );		    
+		    
+		    foreach ( $query ->batch(50) as $qu ) 
 		    {
-		    	$amount = 0; //合计金额
-		    	$d_amount = 0; //单个费项合计金额
-		    	
-		    	//遍历缴费数据
-		    	foreach($d as $key => $da)
-		    	{
-				    if($da['community_id'] == "$key")
-				    {
-				    	$invoice[] = $da;
-				    	$amount += $da['invoice_amount'];
-				    }else{
-				    	continue;
-				    }
-			    }
-						    	
-				if(isset($invoice))
-				{
-					//遍历缴费项目
-				    foreach($c_name as $keys => $n) //遍历费项名称
-				    {
-				    	foreach($invoice as $in)
-			            {
-			            	if($in['description'] == $n)
-			            	{
-			            		$de[] = $in;
-			            		$d_amount += $in['invoice_amount'];
-				    			//unset($c_name["$keys"]);
-			            	}else{
-			            		continue;
-			            	}
-			            }
-				    	$test[] = [$n => $d_amount];
-				    }
-
-		    	    $filter[] = [$name, $amount, $test];
+		    	foreach($qu as $q){
+		    	    $community = $q[ 'community_id' ];
+		    	    $building = $q[ 'building_id' ];
+		    	    $realestate = $q[ 'realestate_id' ];
+		    	    $cost = $q[ 'cost_id' ];
+		    	    $description = $q[ 'cost_name' ];
+		    	    $price = $q[ 'price' ];
+		    	    $acreage = $q[ 'acreage' ];
+		    	    $notes = $q['property'];
+		    	    			
+		    	    if ( $q['formula'] == "1" ) {
+		    	    	$p = $price*$acreage;
+		    	    	$price = round($p,1); //保留一位小数点
+		    	    }
 		    	    
-		    	    unset($invoice);
-		    	    unset($amount);
-		    	    unset($de);
-				}else{
-					continue;
-				}
+		    	    //查入语句
+		    	    $sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status, invoice_notes)
+		    	    values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0','$notes')";
+		    	    $result = Yii::$app->db->createCommand( $sql )->execute();
+		    	}
 		    }
 		}
-		
-		if(!isset($filter)){
-			$name = $amount = $test = '';
-			$filter[] = [$name, $amount, $test];
-		}
-		
-		return $filter;
+		return true;
 	}
 	
+	//统计页面过滤数组
+	public static function Summ($d, $year01, $year02)
+	{
+		$year01 = reset($year01); //起始年
+		$year02 = reset($year02); //截止年
+		
+		$month01 = end($year01); //起始月
+		$month02 = end($year02); //截止月
+		 
+		foreach($d as $k => $dd) //过滤数据
+		{
+			if($dd['year'] == $year01) // 判断年是否等于奇石年
+			{
+				if($dd['month'] < $month01) //如果等于起始年则过滤掉小于起始月的数据
+				{
+					unset($d[$k]);
+				}
+			}elseif($dd['year'] == $year02) //判断当前年是否等于截止年
+			{
+				if($dd['month'] > $month02) //若果是则过滤掉大于截止月的数据
+				{
+					unset($d[$k]);
+				}
+			}else{
+				continue; // 否则继续
+			}
+	    }
+		return $d;
+	}
+		
     /**
      * @return \yii\db\ActiveQuery
      */

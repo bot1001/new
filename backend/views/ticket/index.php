@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use app\models\UserAccount;
 use mdm\admin\components\Helper;
 
 Modal::begin( [
@@ -14,11 +15,35 @@ Modal::begin( [
     ],
     ] );
 $n_Url = Url::toRoute( '/ticket/create');
+$reply = Url::toRoute( '/ticket-reply/create');
+$view = Url::toRoute( '/ticket-reply/index');
 
 $nJs = <<<JS
    $('.new').on('click',function(){
       $('.modal-title').html('新建');
       $.get('{$n_Url}',{id:$(this).closest('tr').data('key')},
+         function (data) {
+            $('.modal-body').html(data);
+      });
+   });
+JS;
+$this->registerJs ($nJs);
+
+$nJs = <<<JS
+   $('.view').on('click',function(){
+      $('.modal-title').html('处理结果');
+      $.get('{$view}',{id:$(this).closest('tr').data('key')},
+         function (data) {
+            $('.modal-body').html(data);
+      });
+   });
+JS;
+$this->registerJs ($nJs);
+
+$nJs = <<<JS
+   $('.reply').on('click',function(){
+      $('.modal-title').html('回复');
+      $.get('{$reply}',{id:$(this).closest('tr').data('key')},
          function (data) {
             $('.modal-body').html(data);
       });
@@ -59,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'value' => 'b.building_name',
 			 'filterType' => GridView::FILTER_SELECT2,
 			 'filter' => $build,
-			 'filterInputOptions' => [ 'placeholder' => '请选择' ],
+			 'filterInputOptions' => [ 'placeholder' => '…' ],
 			 'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
@@ -76,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		   ['attribute' => 'contact_person',
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( strlen($model->account_id) > 16 ); // 判断活动列是否可编辑
+				return ( strlen($model->account_id) > 16 || $model->ticket_status !== '1'); // 判断活动列是否可编辑
 			},
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
@@ -87,10 +112,10 @@ $this->params['breadcrumbs'][] = $this->title;
            ['attribute' => 'contact_phone',
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( strlen($model->account_id) > 16 ); // 判断活动列是否可编辑
+				return ( strlen($model->account_id) > 16 || $model->ticket_status !== '1'); // 判断活动列是否可编辑
 			},
 			'editableOptions' => [
-				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
+				'formOptions' => [ 'action' => [ '/ticket/ticket' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
 			'width' => 'px',
@@ -113,10 +138,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'explain1',
 			 'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( strlen($model->account_id) > 16 ); // 判断活动列是否可编辑
+				return ( strlen($model->account_id) > 16 || $model->ticket_status !== '1'); // 判断活动列是否可编辑
 			},
 			'editableOptions' => [
-				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
+				'formOptions' => [ 'action' => [ '/ticket/ticket' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXTAREA,
 			],
 			 'value' => 'E',
@@ -165,8 +190,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			 'class' => 'kartik\grid\EditableColumn',
-			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( strlen($model->account_id) > 16 ); // 判断活动列是否可编辑
+			 'readonly' => function ( $model, $key, $index, $widget ) {
+				return ( strlen($model->account_id) > 16 || $model->ticket_status !== '1'); // 判断活动列是否可编辑
 			},
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
@@ -178,12 +203,54 @@ $this->params['breadcrumbs'][] = $this->title;
             /*['attribute' => 'remind',
 			'width' => 'px',
 			'hAlign' => 'center'],*/
+		
+		    ['attribute' => 'user',
+		     'format' => 'raw',
+		     'value' => function($model)
+		     {		
+		        if($model->assignee_id){
+		           $account= UserAccount::find()
+		              ->select('user_name as name')
+		              ->where(['account_id' => "$model->assignee_id"])
+		              ->asArray()
+		              ->one();
+				
+		    	return Html::a($account['name'], '#', [
+	            		        	'data-toggle' => 'modal',
+	            		        	'data-target' => '#update-modal', 
+	            	                'class' => 'view',
+	            		        ] );
+	        	}else{
+	        		return '';
+	        	}
+	        	
+	        },
+		     'label' => '接单人',
+		     'hAlign' => 'center'],
 		    
-
+		    ['attribute' => 'replay',
+		     'format' => 'raw',
+		     'hAlign' => 'center',
+		     'label' => '结果',
+		     'value' => function($model){
+		         $len = strlen($model->account_id);
+		         if($len <= 10){
+		         	return Html::a('结果', '#', [
+	                 		        	'data-toggle' => 'modal',
+	                 		        	'data-target' => '#update-modal', 
+	                 	                'class' => 'reply',
+	                 		        ] );
+		         }else{
+		         	return '';
+		         }
+	            	
+	         },
+	        'mergeHeader' => true],
+    
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
-			 'width' => '80px']
-	];
+	    	 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
+	    	 'width' => '80px']
+	    ];
 		
 	echo GridView::widget([
         'dataProvider' => $dataProvider,

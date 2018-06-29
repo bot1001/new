@@ -145,4 +145,40 @@ class OrderBasic extends \yii\db\ActiveRecord
 		
 		return $order;
 	}
+	
+	static function Order($c, $id, $c_id, $address)
+	{
+		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
+		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		$time = date(time());//生成时间
+		$des = '物业缴费'; //订单描述
+		$phone = $_SESSION['user']['0']['phone']; //用户联系方式
+		$name = $_SESSION['user']['0']['name']; //用户姓名
+		$user_id = $c_id; //小区编号
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try{
+			//插入订单
+			$sql = "insert into order_basic(account_id,order_id,create_time,order_type,description, order_amount)
+			values ('$user_id','$order_id','$time','1','$des','$c')";
+			$result = Yii::$app->db->createCommand($sql)->execute();
+			if($result){
+				foreach($id as $d){
+					$sql1 = "insert into order_products(order_id,product_id,product_quantity)value('$order_id','$d','1')";
+					$result1 = Yii::$app->db->createCommand($sql1)->execute();
+				}
+				if($result1){
+					$sql2 = "insert into order_relationship_address(order_id,address,mobile_phone,name)
+					value('$order_id','$address', '$phone','$name')";
+					$result2 = Yii::$app->db->createCommand($sql2)->execute();
+				}
+			}
+			$transaction->commit();
+		}catch(\Exception $e) {
+		    print_r($e);die;
+            $transaction->rollback();
+        }
+		
+		return $order_id;
+	}
 }

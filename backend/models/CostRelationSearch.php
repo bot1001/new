@@ -14,7 +14,7 @@ class CostRelationSearch extends CostRelation
 {
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['number', 'building', 'name', 'price', 'room_name']);
+		return array_merge(parent::attributes(),['number', 'building', 'name', 'price', 'room_name', 'status']);
 	}
 	
     /**
@@ -24,7 +24,7 @@ class CostRelationSearch extends CostRelation
     {
         return [
             [['id', 'community', 'building_id', 'realestate_id', 'cost_id', 'from'], 'integer'],
-            [['number', 'building', 'property','name','price', 'room_name'], 'safe'],
+            [['number', 'building', 'property','name','price', 'room_name', 'status'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class CostRelationSearch extends CostRelation
         		'defaultOrder' => [
         			'id' => SORT_DESC,
         		],
-        		'attributes' => ['id', 'number', 'building', 'name', 'price', 'community', 'realestate_id', 'from', 'property', 'room_name' ]
+        		'attributes' => ['id', 'number', 'building', 'name', 'price', 'community', 'realestate_id', 'from', 'status', 'property', 'room_name' ]
         	]
         ] );
 
@@ -84,6 +84,7 @@ class CostRelationSearch extends CostRelation
             'cost_relation.realestate_id' => $this->realestate_id,
             'cost_id' => $this->cost_id,
             'from' => $this->from,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'property', $this->property]);

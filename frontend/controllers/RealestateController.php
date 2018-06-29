@@ -38,22 +38,22 @@ class RealestateController extends Controller
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
 	}
 	
-	//三级联动之 楼宇2
+	//三级联动之 单元
 	public function actionB2( $selected = null ) 
 	{
-		print_r($_POST[ 'depdrop_parents' ]);exit;
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
-			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
-			$list = Building::find()->where( ['in', 'community_id', $id ] )->all();
+			$id = $_POST[ 'depdrop_parents' ];
+			
+			$list = Realestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'building_name' ] ];
+					$out[] = [ 'id' => $account[ 'room_number' ], 'name' => $account[ 'room_number' ] ];
 					if ( $i == 0 ) {
-						$first = $account[ 'building_id' ];
+						$first = $account[ 'room_number' ];
 					}
-					if ( $account[ 'building_id' ] == $selected ) {
+					if ( $account[ 'room_number' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -99,11 +99,15 @@ class RealestateController extends Controller
 	}
 
 	//三级联动之 房号（二）
-	public function actionRe( $selected = null ) {
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
+	public function actionRe( $selected = null ) 
+	{
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = Realestate::find()
-				->where( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
 
 			$isSelectedIn = false;
@@ -125,5 +129,20 @@ class RealestateController extends Controller
 			}
 		}
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
+	
+	//修改当前进入的房号
+	public function actionChange($k)
+	{
+		$house = $_SESSION['house'];
+		
+		$_SESSION['home'] = $house[$k];
+		
+		return true;
+	}
+	
+	function actionHome()
+	{
+		return $this->render('index');
 	}
 }

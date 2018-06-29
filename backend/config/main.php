@@ -89,6 +89,8 @@ return [
             'site/index',//允许访问的节点，可自行添加
 	        'login/*',
 	        'pay/*',
+	        'test/*',
+	        'user-invoice/add'
         ]
     ],
 	 

@@ -48,21 +48,34 @@ use kartik\ select2\ Select2;
                 ]
             ]); ?>
 		</div>
+		
 		<div class="col-lg-1">
-			<?= $form->field($model, 'room_number')->textInput(['readonly' => true]) ?>
+			<?= $form->field($model, 'room_number')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'number'],
+	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                'pluginOptions'=>[
+                    'depends'=>['building'],
+                    'placeholder'=>'请选择...',
+                    'url'=>Url::to(['/costrelation/number'])
+                ]
+            ]); ?>
 		</div>
+		
 		<div class="col-lg-1">
 			<?= $form->field($model, 'room_name')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
                 'options'=>['id'=>'reale'],
 	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                 'pluginOptions'=>[
-                    'depends'=>['building'],
+                    'depends'=>['number'],
                     'placeholder'=>'请选择...',
-                    'url'=>Url::to(['/costrelation/r'])
+                    'url'=>Url::to(['/costrelation/r']),
+	                'params'=>['building'], //另一个上级目录ID
                 ]
             ]); ?>
 		</div>
+		
 		<div class="col-lg-2">
 			<?= $form->field($model,'owners_name')->textInput(['placeholder'=>'业主姓名'])->label('姓名') ?>
 		</div>

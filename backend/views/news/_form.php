@@ -13,7 +13,7 @@ use app\models\CommunityBasic;
 <div class="community-news-form">
 
    <?php
-	$c = $_SESSION['user']['community'];
+	$c = $_SESSION['community'];
 	if(empty($c)){
 		$community = CommunityBasic::find()
 			->select('community_id, community_name')
@@ -50,8 +50,8 @@ use app\models\CommunityBasic;
 
     <?php
 	if(empty($model->content)){
-		echo $form->field($model, 'content')->textarea(['rows' => 12, 'value' => "尊敬的业主：
-	    您们好！
+		echo $form->field($model, 'content')->textarea(['rows' => 12, 'value' => "尊敬的业主们：
+	    您好！
 		"]);
 	}else{
 		echo $form->field($model, 'content')->textarea(['rows' => 12]);
@@ -68,12 +68,12 @@ use app\models\CommunityBasic;
     		<?= $form->field($model, 'stick_top')->dropDownList(['不置顶', '置顶']) ?>
     	</div>
     	<div class="col-lg-3">
-    		<?= $form->field($model, 'status')->dropDownList([ '1'=> '正常', '2' => '预发布', '3' => '过期']) ?>
+    		<?= $form->field($model, 'status')->dropDownList([ '1'=> '正常', '2' => '草稿', '3' => '过期']) ?>
     	</div>
     </div>
 
     <div class="form-group" align="center">
-        <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('保存<span class="glyphicon glyphicon-save"></span>', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

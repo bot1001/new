@@ -31,7 +31,7 @@ use kartik\select2\Select2;
     	<div class="col-lg-4">
     		<?= $form->field($model, 'community_id')->dropDownList($community,['prompt' => '请选择', 'id' => 'community']) ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
     		<?= $form->field($model, 'building')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
                 'options'=>['id'=>'building'],
@@ -43,7 +43,7 @@ use kartik\select2\Select2;
                 ]
             ]); ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
     		<?= $form->field($model, 'realestate_id')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
                 'options'=>['id'=>'realestate'],
@@ -54,6 +54,10 @@ use kartik\select2\Select2;
                     'url'=>Url::to(['/costrelation/re'])
                 ]
             ]); ?>
+    	</div>
+    	
+    	<div class="col-lg-3">
+    		<?= $form->field($model, 'ticket_number')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
     	</div>
     </div>
     

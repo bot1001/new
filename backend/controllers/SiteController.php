@@ -66,9 +66,6 @@ class SiteController extends Controller
     {
 		$model = new Site;
 		
-//		echo '<pre />';
-//		print_r($_SESSION['user']['0']);exit;
-
 		$name = $_SESSION['user']['0']['name']; // 用户名
 		$a = Yii::$app->request->userIP; //用户IP地址
 		
@@ -81,8 +78,17 @@ class SiteController extends Controller
 	//切换小区
 	public function actionChange()
 	{
-		echo '你好！';
+		if($_POST['community_id'] !== '')
+		{
+			$_SESSION['community'] = [$_POST['community_id']];
+		}else{
+			$community = array_column($_SESSION['community_name'], 'community_id');
+			$_SESSION['community'] = $community;
+		}		
+		
+		return true;
 	}
+	
     public function actionLogin()
     {
 		$this->layout = 'main1';

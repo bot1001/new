@@ -47,7 +47,13 @@ class LoginController extends Controller
 				->all();
 			
 			$session['user'] = $user; //将用户信息添加到session
+<<<<<<< HEAD
 			
+=======
+			if(empty($user)){
+				return $this->redirect(['/site/logout']); 
+			}
+>>>>>>> master
 			//获取用户绑定小区
 			$syscommuntiy = SysCommunity::find()
 	            	->select('community_id')
@@ -58,12 +64,15 @@ class LoginController extends Controller
 	        $s = explode(',',$syscommuntiy['community_id']);
 			
 			//获取关联小区名称
-			$community_name = CommunityBasic::find()
-				->select('community_name')
-				->where(['in', 'community_id', $s])
-				->asArray()
-				->all();
-
+			$community = CommunityBasic::find()
+				->select('community_name, community_id')
+				->where(['in', 'community_id', $s]);
+			
+			$community_name = $community->asArray()->all();
+			
+			$community_id = $community->orderBy('community_id')->indexBy('community_id')->column();
+			
+			$session['community_id'] = $community_id;
 			$session['community_name'] = $community_name;
 			$session['community'] = $s; //将用户关联的小区添加到session
 			

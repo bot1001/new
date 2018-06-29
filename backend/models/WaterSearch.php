@@ -46,53 +46,30 @@ class WaterSearch extends WaterMeter
      */
     public function search($params)
     {
-		$comm = $_SESSION['community'];
+		$comm = $_SESSION['community'];// 提取房屋编码
 		
-		if(empty($comm)){
-			$query = WaterMeter::find();$query = (new \yii\db\Query())->select([
-			    'community_basic.community_name as community','community_building.building_name as building',
-			    'water_meter.year','water_meter.type','community_realestate.room_number as number','community_realestate.room_name as name',
-			    'MAX(CASE month WHEN 1 THEN readout ELSE 0 END ) Jan',
-                'MAX(CASE month WHEN 2 THEN readout ELSE 0 END ) Feb',
-                'MAX(CASE month WHEN 3 THEN readout ELSE 0 END ) Mar',
-                'MAX(CASE month WHEN 4 THEN readout ELSE 0 END ) Apr',
-                'MAX(CASE month WHEN 5 THEN readout ELSE 0 END ) May',
-                'MAX(CASE month WHEN 6 THEN readout ELSE 0 END ) Jun',
-                'MAX(CASE month WHEN 7 THEN readout ELSE 0 END ) Jul',
-                'MAX(CASE month WHEN 8 THEN readout ELSE 0 END ) Aug',
-                'MAX(CASE month WHEN 9 THEN readout ELSE 0 END ) Sept',
-                'MAX(CASE month WHEN 10 THEN readout ELSE 0 END ) Oct',
-                'MAX(CASE month WHEN 11 THEN readout ELSE 0 END ) Nov',
-                'MAX(CASE month WHEN 12 THEN readout ELSE 0 END ) D'])
-			->from ('water_meter')
-			->join('inner join','community_realestate','community_realestate.realestate_id = water_meter.realestate_id')
-			->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
-			->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
-			->groupBy(['water_meter.realestate_id','year']);
-		}else{
-			// 提取房屋编码
-			$query = WaterMeter::find();$query = (new \yii\db\Query())->select([
-			    'community_basic.community_name as community','community_building.building_name as building',
-			    'water_meter.year','water_meter.type','community_realestate.room_number as number','community_realestate.room_name as name',
-			    'MAX(CASE month WHEN 1 THEN readout ELSE 0 END ) Jan',
-                'MAX(CASE month WHEN 2 THEN readout ELSE 0 END ) Feb',
-                'MAX(CASE month WHEN 3 THEN readout ELSE 0 END ) Mar',
-                'MAX(CASE month WHEN 4 THEN readout ELSE 0 END ) Apr',
-                'MAX(CASE month WHEN 5 THEN readout ELSE 0 END ) May',
-                'MAX(CASE month WHEN 6 THEN readout ELSE 0 END ) Jun',
-                'MAX(CASE month WHEN 7 THEN readout ELSE 0 END ) Jul',
-                'MAX(CASE month WHEN 8 THEN readout ELSE 0 END ) Aug',
-                'MAX(CASE month WHEN 9 THEN readout ELSE 0 END ) Sept',
-                'MAX(CASE month WHEN 10 THEN readout ELSE 0 END ) Oct',
-                'MAX(CASE month WHEN 11 THEN readout ELSE 0 END ) Nov',
-                'MAX(CASE month WHEN 12 THEN readout ELSE 0 END ) D'])
-			->from ('water_meter')
-			->join('inner join','community_realestate','community_realestate.realestate_id = water_meter.realestate_id')
-			->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
-			->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
-			->where(['in', 'water_meter.community', $comm])
-			->groupBy(['water_meter.realestate_id','year']);
-		}
+//		$query = WaterMeter::find();
+		$query = (new \yii\db\Query())->select([
+		    'community_basic.community_name as community','community_building.building_name as building',
+		    'water_meter.year','water_meter.type','community_realestate.room_number as number','community_realestate.room_name as name',
+		    'MAX(CASE month WHEN 1 THEN readout ELSE 0 END ) Jan',
+            'MAX(CASE month WHEN 2 THEN readout ELSE 0 END ) Feb',
+            'MAX(CASE month WHEN 3 THEN readout ELSE 0 END ) Mar',
+            'MAX(CASE month WHEN 4 THEN readout ELSE 0 END ) Apr',
+            'MAX(CASE month WHEN 5 THEN readout ELSE 0 END ) May',
+            'MAX(CASE month WHEN 6 THEN readout ELSE 0 END ) Jun',
+            'MAX(CASE month WHEN 7 THEN readout ELSE 0 END ) Jul',
+            'MAX(CASE month WHEN 8 THEN readout ELSE 0 END ) Aug',
+            'MAX(CASE month WHEN 9 THEN readout ELSE 0 END ) Sept',
+            'MAX(CASE month WHEN 10 THEN readout ELSE 0 END ) Oct',
+            'MAX(CASE month WHEN 11 THEN readout ELSE 0 END ) Nov',
+            'MAX(CASE month WHEN 12 THEN readout ELSE 0 END ) D'])
+		->from ('water_meter')
+		->join('inner join','community_realestate','community_realestate.realestate_id = water_meter.realestate_id')
+		->join('inner join','community_basic','community_basic.community_id = community_realestate.community_id')
+		->join('inner join','community_building','community_building.building_id = community_realestate.building_id')
+		->where(['in', 'water_meter.community', $comm])
+		->groupBy(['water_meter.realestate_id','year']);
         
         // add conditions that should always apply here
 
@@ -100,9 +77,9 @@ class WaterSearch extends WaterMeter
             'query' => $query,
 			//'totalCount' => count($query),
     
-    'pagination' => [
-        'pageSize' => 20,
-    ],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
 			/*'pagination' => ['pageSize' => '10'],//'pagination' => ['pageSize' => '10'],*/
         ]);
 

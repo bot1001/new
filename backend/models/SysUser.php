@@ -42,7 +42,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['status', 'create_id', 'update_id', 'role'], 'integer'],
             [['create_time', 'update_time'], 'safe'],
             [['real_name', 'name', 'password', 'comment', 'salt'], 'string', 'max' => 100],
-            [['new_pd'], 'string', 'max' => 128],
+            [['new_pd'], 'string', 'min' => 6,'max' => 128],
             [['phone'], 'string', 'max' => 12],
             [['name'], 'unique'],
 			[['name'], 'required', 'message' => '确认密码不能为空'],
@@ -99,7 +99,7 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 				$this->update_id = $_SESSION['user']['0']['id'];
 				$this->update_time = date('Y-m-d h:i:s');
 			}else{
-				$this->update_time = time();
+				$this->update_time = date('Y-m-d h:i:s');
 				$this->update_id = $_SESSION['user']['0']['id'];
 			}
 			return true;

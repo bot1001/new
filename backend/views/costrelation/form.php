@@ -17,15 +17,10 @@ use kartik\daterange\DateRangePicker;
 
 <div class="cost-relation-form">
    
-    <?php $form = ActiveForm::begin(['id' => 'form-id',
+    <?php $form = ActiveForm::begin(/*['id' => 'form-id',
 									 'enableAjaxValidation' => true, 
-									]); ?>
+									]*/); ?>
 <table align="center" style="width:550px; background-color:#F3F3F3;border-radius:20px;">
-    <tr>
-    	<td>
-    		<br />
-    	</td>
-    </tr>
 	<tr>
 		<td width="3%">
 
@@ -45,7 +40,7 @@ use kartik\daterange\DateRangePicker;
 			</div>
 
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<?= $form->field($model, 'price')->dropDownList($cost,['prompt'=>'请选择','id'=>'costrelation-parent'])->label('费项') ?>
 				</div>
 				<div class="col-lg-4">
@@ -59,6 +54,10 @@ use kartik\daterange\DateRangePicker;
                             'url'=>Url::to(['/costrelation/p'])
                         ]
                     ])->label('单价') ?>
+				</div>
+				
+				<div class="col-lg-4">
+					<?= $form->field($model, 'status')->dropDownList(['禁用', '启用'],['prompt'=>'请选择']) ?>
 				</div>
 			</div>
 			<div class="row">
@@ -92,5 +91,30 @@ use kartik\daterange\DateRangePicker;
 	</tr>
 </table>
     <?php ActiveForm::end(); ?>
+    
+    <style>
+		th{
+			text-align: center
+		}
+	</style>
+    
+    <?php if(isset($relation)){ ?>
+    <p></p>
+    <p>此房屋当前绑定的房号如下：</p>
+    <table border="1" width="60%">
+    	<tr>
+    		<th>序号</th>
+    		<th>名称</th>
+    		<th>备注</th>
+    	</tr>
+    	<?php foreach($relation as $key => $r): $r = (object)$r ?>
+    	<tr>
+    		<td align="center"><?= $key+1 ?></td>
+    		<td><?= $r->cost_name; ?></td>
+    		<td align="center"><?= $r->property; ?></td>
+    	</tr>
+    	<?php endforeach; ?>
+    </table>
+   <?php } ?>
     
 </div>

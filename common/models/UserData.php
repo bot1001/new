@@ -37,7 +37,7 @@ class UserData extends \yii\db\ActiveRecord
     {
         return [
             [['reg_time'], 'unique'],
-            [['account_id','real_name'], 'required'],
+            [['account_id','real_name', 'province_id', 'city_id', 'area_id',], 'required'],
             [['gender', 'province_id', 'city_id', 'area_id', 'reg_time'], 'integer'],
             [['account_id', 'real_name', 'nickname'], 'string', 'max' => 32],
             [['face_path'], 'string', 'max' => 300],
@@ -60,7 +60,7 @@ class UserData extends \yii\db\ActiveRecord
             'face_path' => '图像路径',
             'province_id' => '省份',
             'city_id' => '城市',
-            'area_id' => '市',
+            'area_id' => '县/区',
             'reg_time' => '注册时间',
             'nickname' => '昵称',
         ];
@@ -73,16 +73,7 @@ class UserData extends \yii\db\ActiveRecord
             if($insert)
             {
                 $this->reg_time = date(time());
-                $this->gender = 1;
-                $this->province_id = 45;
 				$this->property = 1;
-                }else{
-                    $this->reg_time = date(time());
-                    $this->gender = 1;
-                    $this->province_id = 45;
-                    $this->city_id = 451300;
-                    $this->area_id = 451302;
-				    $this->property = 1;
                 }
                 return true;
             }else{

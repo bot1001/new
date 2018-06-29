@@ -1,79 +1,123 @@
 <?php
 
+use yii\helpers\Html;
+use kartik\grid\GridView;
+use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
-$this->title = '物业缴费';
+/* @var $this yii\web\View */
+/* @var $searchModel frontend\models\InvoiceSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = '房屋缴费';
+$this->params['breadcrumbs'][] = $this->title;
+
+Modal::begin( [
+	'id' => 'view-modal',
+	'header' => '<h4 class="modal-title">预交</h4>',
+	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
+] );
+$V_Url = Url::toRoute( [ 'create' ] );
+
+$vJs = <<<JS
+    $('.view').on('click', function () {
+        $.get('{$V_Url}', { id: $(this).closest('tr').data('key') },
+            function (data) {
+                $('.modal-body').html(data);
+            }  
+        );
+    });
+JS;
+$this->registerJs( $vJs );
+
+Modal::end();
 
 ?>
+<div class="invoice-index">
+    
+    <?php
+	$home = $_SESSION['home'];
+	
+	$gridview = [
+            ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
 
-<div style="height: 100%">
-<style type="text/css">
-	#mail {
-		font-size: 20px;
-		border-radius: 5px;
-		background: #E9E9E9;
-		color: black;
-	}
+            ['attribute' => 'year',
+			 'hAlign' => 'center'
+			],
+            ['attribute' => 'month',
+			 'hAlign' => 'center'
+			],
+            ['attribute' => 'description',
+			 'hAlign' => 'center'
+			],
+            ['attribute' => 'invoice_amount',
+			 'hAlign' => 'center'
+			],
+            ['attribute' => 'order_id',
+			 'value' => function($model){
+	            $order = $model->order_id;
+            	if($order == ''){
+            		return '';
+            	}else{
+            		return $model->order_id;
+            	}
+            },
+			 'hAlign' => 'center'
+			],
 	
-	#div6 {
-		color: #ffffff;
-	}
+            ['attribute' => 'invoice_notes',
+			'value' => function($model){
+             	$notes = $model->invoice_notes;
+             	if($notes == ''){
+             		return '';
+             	}else{
+             		return $notes;
+             	}
+             	
+             },],
+            ['attribute' => 'payment_time',
+			 'mergeHeader' => true,
+			 'value' => function($model){
+             	$time = strtotime($model->payment_time);
+             	if($time == '0'){
+             		return '';
+             	}else{
+             		return date('Y-m-d H:i:s', $time);
+             	}
+             },
+			 'hAlign' => 'center',
+			 'width' => '150px'
+			],
+            ['attribute' => 'invoice_status',
+			'value' => function($model){
+            	$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+            	return $data[$model->invoice_status];
+            },
+			 'filterType'=> GridView::FILTER_SELECT2,
+		     'filter'=> [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
+		     'filterInputOptions'=>['placeholder'=>'请选择'],
+			 'filterWidgetOptions'=>[
+                             'pluginOptions'=>['allowClear'=>true],
+		                 ],
+			 'hAlign' => 'center'],
+        ];
 	
-	#div2 {
-		color: #ffffff;
-	}
-	
-	table tr:hover {
-		background-color: #dafdf3;
-	}
-	
-	#all {
-		overflow-x: auto;
-		overflow-y: auto;
-		height: 500px;
-		width: 100%;
-	}
-	
-	#name {
-		font-size: 35px;
-	}
-	
-	#amount {
-		color: red;
-		font-size: 35px;
-	}
-	
-</style>
-
-<div id="all">
-	<?php $amount = 0; ?>
-	<?php foreach($invoice as $in): $in = (object)$in; ?>
-	<div id="mail">
-		<div id="div<?php echo $in->status ?>">
-			<table width="100%">
-				<tr>
-					<td>
-						<?php echo $in->year.'年'.' '.$in->month.'月'.' '.$in->description;?>
-					</td>
-					<td align="right" style="color: darkorange">
-						<?php $a = $in->amount;
-							 if($in->status == 0){
-							 	$amount += $a;
-							 }
-							 echo $a;
-							 ?>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<?php endforeach; ?>
-</div>
-<table style="font-size: 25px; width: 100%; text-align: center">
-	<tr>
-		<td style=" width: 33%; background: #AADBBD; text-align: right">合计：</td>
-		<td style="background: #AADBBD"><?php echo $amount ?></td>
-		<td width="35%" style="color: red; background: #FDC6C6"><a href="<?php echo Url::to(['/order/index','id' => $id]) ?>">立即缴费</a></td>
-	</tr>
-</table>
+	echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+		'panel' => ['type' => 'info', 'heading' => $home['community'].' '.$home['building'].' '.$home['number'].'单元 '.$home['room'] ,
+				   'before' => Html::a( '预交',
+								'#', [ 
+		                'data-toggle' => 'modal',
+						'data-target' => '#view-modal',
+						'class' => 'btn btn-primary view' ] )],
+        'columns' => $gridview,
+		'toolbar' => [
+		    [ 'content' =>
+				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success',  'title' => '立即缴费'] ),
+			
+			],
+	    	'{toggleData}'
+	    ],
+    ]); ?>
 </div>

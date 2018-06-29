@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
-use app\models\Company;
 use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
@@ -11,7 +11,10 @@ use mdm\admin\components\Helper;
 
 $this->title = '小区';
 //$this->params['breadcrumbs'][] = $this->title;
-?>
+
+//引入模态文件
+echo $this->render('..\..\..\common\modal\modal.php'); ?>
+
 <div class="community-basic-index">
 
     <?php 
@@ -25,11 +28,7 @@ $this->title = '小区';
 		    ['attribute' =>'company',
 			 'value' => 'c.name',
 			 'filterType' => GridView::FILTER_SELECT2,
-			 'filter' => Company::find()
-			             ->select(['name', 'id'])
-			             ->indexBy('id')
-			             ->orderBy('id')
-			             ->column(),
+			 'filter' => \app\models\Company::getCompany(),
 			 'filterInputOptions' => [ 'placeholder' => '请选择……'],
 			 'filterWidgetOptions' => [
 	              'pluginOptions' => ['allowClear' => true],
@@ -39,10 +38,11 @@ $this->title = '小区';
 				'header' => '详情',
 				'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => Company::find()->select( [ 'name', 'id' ] )->orderBy( 'name' )->indexBy( 'id' )->column(),
+				'data' => \app\models\Company::getCompany(),
 			],
 			'width' => '20%',
 			'hAlign' => 'center'],
+		
 		
 		   ['attribute' =>'community_name',
 			'width' => 'px',
@@ -52,17 +52,14 @@ $this->title = '小区';
 			'width' => 'px',
 			'hAlign' => 'center'],
 		
-            /*['attribute' =>'province_id',
-			'width' => 'px',
-			'hAlign' => 'center'],
+            ['attribute' =>'province_id',
+			 'value' => 'province.area_name'],
 		
-            ['attribute' =>'city_id',
-			'width' => 'px',
-			'hAlign' => 'center'],
+		   ['attribute' =>'city_id',
+			'value' => 'city.area_name'],
 		
-            ['attribute' =>'area_id',
-			'width' => 'px',
-			'hAlign' => 'center'],*/
+		   ['attribute' =>'area_id',
+			'value' => 'area.area_name'],
 		
             ['attribute' =>'community_address',
 			'width' => 'px',
@@ -78,14 +75,31 @@ $this->title = '小区';
 
             ['class' => 'kartik\grid\ActionColumn',
 			 'header' => '操<br />作',
-			 'template' => Helper::filterActionColumn('{view}{update}{delete}')],
+			 'template' => Helper::filterActionColumn('{update}{delete}'),
+			 'buttons' => [
+				'update' => function ( $url, $model, $key ) {
+					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
+						'data-toggle' => 'modal',
+						'data-target' => '#common-modal',
+						'data-url' => Url::toRoute( ['update', 'id' => $key] ),
+						'data-title' => '编辑小区',
+						'class' => 'pay',
+					] );
+				},
+			],],
         ];
 	
 	echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' =>'info', 'heading' => '小区列表',
-				   'before' => Html::a('New', ['create'],['class' => 'btn btn-info'])],
+				   'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', '#', [
+								'class' => 'btn btn-success pay',
+								'data-toggle' => 'modal',
+								'data-url' => Url::toRoute( 'create' ),
+								'data-title' => '创建小区', //如果不设置子标题，默认使用大标题
+								'data-target' => '#common-modal',
+							] )],
 		'hover' => true,
         'columns' => $gridview,
     ]); ?>

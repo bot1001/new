@@ -142,9 +142,6 @@ $this->title = '房屋管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				$building = CommunityBuilding::find()->select( 'building_name' )->where( [ 'building_id' => $model->building_id ] )->asArray()->one();
-				/*$url = Yii::$app->urlManager->createUrl( [ 'costrelation/create',
-					'realestate_id' => $model->realestate_id,
-				] );*/
 				return Html::a( $building[ 'building_name' ], '#', [
 					'data-toggle' => 'modal',
 					'data-target' => '#view-modal',
@@ -158,7 +155,7 @@ $this->title = '房屋管理';
 		[ 'attribute' => 'room_number',
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index1', 'realestate_id' => $model->realestate_id ] );
+				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index', 'realestate_id' => $model->realestate_id ] );
 				return Html::a( $model->room_number . '单元', $url );
 			},
 			'hAlign' => 'center',
@@ -342,7 +339,7 @@ $this->title = '房屋管理';
 		//'showFooter' => true,
 		'options' => [ 'id' => 'grid' ],
 		'panel' => [ 'type' => 'info', 'heading' => '房屋列表',
-			'before' => Html::a( 'New', //[ 'create' ], [ 'class' => 'btn btn-primary' ] )
+			'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>',
 								'#', [ 
 		                'data-toggle' => 'modal',
 						'data-target' => '#view-modal',
@@ -350,7 +347,7 @@ $this->title = '房屋管理';
 		],
 		'toolbar' => [
 			[ 'content' =>
-				Html::a( '导入','#', [ 
+				Html::a( '<i class="glyphicon glyphicon-cloud-upload"></i>','#', [ 
 		                'data-toggle' => 'modal',
 						'data-target' => '#view-modal',
 						'class' => 'btn btn-info i' ] ).''.

@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
+use yii\data\Pagination;
 
 /**
  * UserInvoiceController implements the CRUD actions for UserInvoice model.
@@ -70,7 +71,7 @@ class UserInvoiceController extends Controller
 			}
 		}
 		
-		$c = $_SESSION['community'];
+		$c = $_SESSION['community']; //从回话中获取小区ID
 	    
 	    $comm = CommunityBasic::find()
 	    	->select(' community_name')
@@ -101,6 +102,29 @@ class UserInvoiceController extends Controller
 			$time =  $one.' to '.$two;
 			$searchModel->payment_time = $time;			
 		}
+		
+		//判断来自统计页面的的参数
+		if(isset($_GET['community']))
+		{
+			$community = $_GET['community'];
+			$searchModel->community_id = $community;
+		}
+		
+		if(isset($_GET['description']))
+		{
+			$description = $_GET['description'];
+			$searchModel->description = $description;
+		}
+		
+		//判断是否存在时间
+		if(isset($_GET['from']) && isset($_GET['to']))
+		{
+			$from = $_GET['from']; //接收起始时间
+			$to = $_GET['to']; //接收截止时间
+			$t = $from.' to '.$to; //拼接时间
+			$searchModel->payment_time = $t;
+		}
+		//判断来自统计页面费项查询止
 		
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
@@ -224,7 +248,7 @@ class UserInvoiceController extends Controller
 							$m=str_pad($m,2,"0",STR_PAD_LEFT); //月份自动补0
 							
 							//判断费项是否存在							
-							if($cost_name[ $sheet[ 'F' ] ]){
+							if(isset($cost_name[ $sheet[ 'F' ] ])){
 								$d = $cost_name[ $sheet[ 'F' ] ];
 							}else{
 								$a <= $i;
@@ -259,7 +283,14 @@ class UserInvoiceController extends Controller
 							$model->description = $d;
 							$model->year = $y;
 							$model->month = $m;
-							$model->invoice_amount = $price;
+							
+							if($price == '0' || $price == ''){ //判断导入金额是否为0或为空
+								$a += 1;
+								continue;
+							}else{
+								$model->invoice_amount = $price;
+							}
+							
 							$model->create_time = $f;
 							$model->invoice_status = $i_s;
 								
@@ -299,12 +330,14 @@ class UserInvoiceController extends Controller
 	{
 		$ids = Yii::$app->request->post();
 
+		$is = 0; //删除条数
 		//删除代码
 		foreach ( $ids as $id );
 		foreach ( $id as $i ) {
 			$this->findModel( $id )->delete();
+			$is ++;
 		}
-		return $this->redirect( Yii::$app->request->referrer );//返回请求页面
+		return $is;
 	}
 
 	//缴费
@@ -324,177 +357,173 @@ class UserInvoiceController extends Controller
 	public function actionSum() 
 	{
 		$searchModel = new \app\models\InvoiceSumSearch(); //实例化搜索模型
-		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
-		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
-				
-		$c = $_SESSION['community'];
 		
-		//获取小区
-	    if($c)
-		{
-	    	$comm = CommunityBasic::find()
-	    		->select('community_name, community_id')
-	    		->where(['in', 'community_id', $c])
-	    		->orderBy('community_name')
-				->indexBy('community_id')
-	    		->column();
-			$building = CommunityBuilding::find()
-				->select('building_name')
-				->distinct()
-				->where(['in', 'community_id', $c])							
-				->orderBy('building_name')
-				->indexBy('building_name')
-				->column();
-	    }else{
-			$comm = '';
-			$building = '';
-		}
+		$c = $_SESSION['community']; //从回话中获取小区ID
+	    
+	    $comm = CommunityBasic::find()
+	    	->select(' community_name')
+	    	->where(['in', 'community_id', $_SESSION['community']])
+			->orderBy('community_name DESC')
+	    	->indexBy('community_id')
+	    	->column();
 				
-		if(isset($_GET['InvoiceSumSearch']['from'])) //判断并处理支付时间
-		{
-			$time = explode(' to ',$_GET ['InvoiceSumSearch']['from']);
-		    
+		$building = CommunityBuilding::find()
+			->select('building_name')
+			->where(['in', 'community_id', $c])	
+			->distinct()						
+			->orderBy('building_name')
+			->indexBy('building_name')
+			->column();
+				
+		if(!empty($_GET['InvoiceSumSearch']['payment_time'])){
+			$time = explode(' to ',$_GET ['InvoiceSumSearch']['payment_time']); //分割支付时间
 		    $from = reset($time); //起始年月
 		    $to = end($time); //截止年月
+		}elseif(!empty($this->from)) //判断并筛选支付时间
+		{
+			$time = explode(' to ',$this->from);
+		    $from = reset($time); //起始年月
+		    $to = end($time); //截止年月
+			
+			$fr = date('Y-m', strtotime("+13 month", strtotime($from))); //搜索起始时间加上一年
+			
+			$community = $this->community_id;
+			
+			$c = count($community); //计算小区数量
+			
+			//判断选择小区数量和时间长度
+			if(strtotime($fr) <= strtotime($to) && ($c >10 || $community == ''))
+			{
+				$session = Yii::$app->session;
+    	    	$session->setFlash( 'fail', '0' );
+				return $this->redirect(Yii::$app->request->referrer);
+			}
+			
 		}else{
-			$from = date('Y-m-d', time() );
-		    $to = date('Y-m-d', time() );
+			$from = date('Y-m', time());
+		    $to = date('Y-m', time());
 		}
-				
+		
 		//获取费项名称并去重复
 		$c_name = CostName::find()
 			->select('cost_name')
-			->distinct()
+			->where(['level' => "0"])
 			->indexBy('cost_name')
 			->asArray()
 			->column();
 		
-		return $this->render('summ',['data' => $data,
+		$dataProvider = $searchModel->search( Yii::$app->request->queryParams ); //实例化数据提供器
+		$data = $dataProvider->getModels(); //获取数据提供器中的查询数据
+	
+		return $this->render('sum',['data' => $data,
 									 'searchModel' => $searchModel,
-									 'comm' => $comm,
 									 'building' => $building,
 									 'from' => $from,
 									 'c_name' => $c_name,
+									'comm' => $comm,
 									 'to' => $to]);
 	}
-
-	//缴费统计查询
-	public function actionSearch() 
+	
+	//数据统计第二页面
+	public function actionSumm($key, $a)
 	{
-		$model = new UserInvoice;
+		$get = $_GET['search']; //接收搜索参数
+		$sum = $a; //接收总金额
 		
-		$comm = $_SESSION['community']; //从session中获取小区代号
-		if($_POST)
+		$from = $to = date('Y-m'); //设置默认费项期间
+				
+		if(empty($_GET)){
+			echo "<script> alert('参数错误，请返回！');parent.location.href='./sum'; </script>";exit;
+		}
+		$community = $key; //提取小区
+		$f = $get['from']; //获取起始日期
+		$p = $get['payment_time']; //获取截止日期
+				
+		$ds = (new \yii\db\Query())
+			->select('user_invoice.invoice_id as id, community_basic.community_name as community, community_building.building_name as building,
+			community_realestate.room_number as number, community_realestate.room_name as name, user_invoice.description as description,
+			user_invoice.invoice_amount as amount, user_invoice.payment_time as payment_time,
+			user_invoice.year as year, user_invoice.month as month,
+			user_invoice.order_id as order, user_invoice.invoice_status as status')
+			->from('user_invoice')
+			->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
+			->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
+			->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
+			->andwhere(['user_invoice.community_id' => "$community"]);
+		
+		$description = $get['description']; //获取费项详情
+		if($description !== '')
 		{
-		    $fr = Yii::$app->request->post();//接受传过来的时间
-		    foreach ( $fr as $f ); //遍历时间
-		    $time = $f['from']; //提取时间
-		    
-			if(empty($time)){
-				$from = strtotime(date('Y-m-d'));
-		        $to = date( time() );
-			}else{
-				$t = explode(' - ',$time); //分割时间
-				$from = strtotime( reset($t) ); //转换时间戳
-		        $to = strtotime( end($t) ); //转换时间戳
-			}
-			
-			//判断楼宇是否存在
-		    if(!empty($f['building_id'])){
-		    	$b = $f['building_id'];
-		    }elseif(empty($comm)){
-		    	$b = CommunityBuilding::find()->select('building_id')->asArray()->all();
-		    }else{
-				$b = CommunityBuilding::find()->select('building_id')->where(['community_id' => $comm])->asArray()->all();
-			}
-			//判断小区是否存在
-		    if(!empty($f['community_id'])){
-		    	$c_id = $f['community_id'];
-		    }elseif(empty($comm)){
-		    	$c_id = CommunityBasic::find()->select('community_id')->asArray()->all();
-		    }else{
-				$c_id = CommunityBasic::find()->select('community_id')->where(['community_id' => $comm])->asArray()->all();
-			}
-		}else{
-			$from = strtotime(date('Y-m-d'));
-		    $to = date( time() );
-			
-			//判断楼宇是否存在
-		    if(empty($comm)){
-		    	$b = CommunityBuilding::find()->select('building_id')->asArray()->all();
-		    }else{
-				$b = CommunityBuilding::find()->select('building_id')->where(['community_id' => $comm])->asArray()->all();
-			}
-			//判断小区是否存在
-		    if(empty($comm)){
-		    	$c_id = CommunityBasic::find()->select('community_id')->asArray()->all();
-		    }else{
-				$c_id = CommunityBasic::find()->select('community_id')->where(['community_id' => $comm])->asArray()->all();
-			}
+			$ds = $ds->andwhere(['in', 'user_invoice.description', $description]);
 		}
-
-		$C = CommunityBasic::find()->select('community_id, community_name');
 		
-		
-        if(empty($comm)){
-			$name = $C->asArray()->All();
-			if(!empty($f['community_id'])){
-				$community = $C->where(['community_id' => $f['community_id']])->asArray()->All();
-			}else{
-				$community = $C->asArray()->All();
-			}
-			
-		    $c = ArrayHelper::map($name,'community_id', 'community_name');//组合小区信息
-			//print_r($name);exit;
-			$sum = UserInvoice::find()
-				->select('community_id, order_id, description, invoice_amount')
-				->andwhere(['in', 'community_id', $c_id])
-				->andwhere(['in', 'building_id', $b])
-				->andwhere( [ 'between', 'payment_time', $from, $to ] )
-				->orderBy('description')
-				->asArray()
-				->all();
-        }else{
-            $community = $C->where(['community_id' => $comm])
-				->asArray()
-				->All();
-			$sum = UserInvoice::find()
-				->select('community_id, description, order_id,invoice_amount')
-				->andwhere(['in', 'community_id', $c_id])
-				->andwhere(['in', 'building_id', $b])
-				->andwhere(['community_id' => $comm])
-				->andwhere( [ 'between', 'payment_time', $from, $to ] )
-				->orderBy('description')
-				->asArray()
-				->all();
-			$c = ArrayHelper::map($community,'community_id', 'community_name');//组合小区信息
+		$b = $get['building_id']; //获取楼宇
+		if($b !== '')
+		{
+			$ds = $ds->andwhere(['in', 'community_building.building_name', $b]);
 		}
-		$d = array_column($sum,'description'); //提取费项名称
-		$de = array_unique($d); //费项名称去重复
-		$in = array_sum( array_column($sum, 'invoice_amount') ); //求总金额
+		
+		$status = $get['invoice_status']; //获取状态
+		if($status !== '')
+		{
+			$ds = $ds->andwhere(['in', 'user_invoice.invoice_status', $get['invoice_status']]);
+			
+		}
+		
+		if(!empty($f)){
+			$from = explode(' to ', $f); //拆分区间起始时间
+		    $from01 = reset($from); //获取起始年
+		    $from02 = end($from); //获取起始月
+			
+			//拆分年月
+			$year01 = explode('-', $from01); //起始时间
+			$year02 = explode('-', $from02); //截止时间
+			
+			$from = $from01;
+			$to = $from02;
+			
+			$year_1 = reset($year01);
+			$year_2 = reset($year02);
+			
+			$month01 = end($year01);
+			$month02 = end($year02);
+		}
+		
+		if(!empty($p)){
+			$to = explode(' to ', $p); //拆分支付截止时间
+		    $payment01 = reset($to); // 获取截止月
+		    $payment02 = end($to); //获取截止月
+			
+			$from = $payment01;
+			$to = $payment02;
+		}
+		
+		if($p !== '')
+		{
+			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', strtotime($payment01), strtotime($payment02)]);
+		}
+		
+		if($f !== '')
+		{
+			$ds = $ds->andWhere(['and', "year >= $year_1", "month >=$month01"])
+			->andWhere(['and', "year <= $year_2", "month <= $month02"]);
+		}
+		
+        $count = $ds->count();// 计算总数
+		
+        $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
         
-		$cost = CostName::find()->select('cost_name')->where(['level' => '0'])->asArray()->all();
-        
-		if ( !$from ) {
-			$from = date( time() );
-		}
-
-		if ( !$to ) {
-			$to = date( time() );
-		}
+        // 使用分页对象来填充 limit 子句并取得文章数据
+        $data = $ds->offset($pagination->offset)
+                   ->limit($pagination->limit)
+                   ->all();
 		
-		return $this->render( 'sum', [
-			'model' => $model,
-			'community' => $community,
-			'from' => $from,
-			'to' => $to,
-			'in' => $in,
-			'sum' => $sum,
-			'comm' => $comm,
-			'cost' => $cost,
-			'de' => $de,
-			'c' => $c
-		] );
+		return $this->render('summ',['data' => $data,
+									'pagination' => $pagination,
+								    'from' => $from,
+								    'to' => $to,
+								    'sum' => $sum,
+								    'count' => $count]);
 	}
 
 	//批量生产费项预览
@@ -519,7 +548,8 @@ class UserInvoiceController extends Controller
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
 			->andwhere( [ 'community_realestate.community_id' => $_SESSION[ 'community' ] ] )
-			->andwhere(['cost_name.inv' =>1])
+			->andwhere(['cost_name.inv' => 1, 'cost_relation.status' => '1'])
+			->andwhere(['<', 'cost_relation.from', time()])
 		    ->limit( 20 )
 		    ->all();
 
@@ -532,68 +562,10 @@ class UserInvoiceController extends Controller
 	public function actionAdd() 
 	{
 		ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为2048M(2GB)
-		set_time_limit(900); //等待时间是10分钟
+		set_time_limit(0); //等待时间是10分钟
 		
-		$query = ( new\ yii\ db\ Query() )->select( [
-			'community_realestate.community_id',
-			'community_realestate.building_id',
-			'cost_relation.realestate_id',
-			'community_realestate.acreage',
-			'cost_relation.cost_id',
-			'cost_name.cost_name',
-			'cost_name.parent',
-			'cost_name.price',
-		] )
-			->from( 'cost_relation' )
-			->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
-			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
-			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
-			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->andwhere( ['in', 'community_realestate.community_id', $_SESSION[ 'community' ] ] )
-			->andwhere(['cost_name.inv' =>1])
-			->all();
-		
-		$y = date( 'Y' );
-		$m = date( 'm' );
-		$f = date( time() );
-		$a = 0;
-		$b = 0;
-		$i = count( $query );
-		
-		foreach ( $query as $q ) {
-			sleep(0.01);
-			$community = $q[ 'community_id' ];
-			$building = $q[ 'building_id' ];
-			$realestate = $q[ 'realestate_id' ];
-			$cost = $q[ 'cost_id' ];
-			$description = $q[ 'cost_name' ];
-			$d = $y . "年" . $m . "月份" . $description;
-			$price = $q[ 'price' ];
-			$acreage = $q[ 'acreage' ];
-						
-			if ( $description == "物业费" ) {
-				$p = $price*$acreage;
-				$price = number_format($p, 1);
-				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
-				values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0')";
-				$result = Yii::$app->db->createCommand( $sql )->execute();
-			} else {
-				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
-				values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0')";
-				$result = Yii::$app->db->createCommand( $sql )->execute();
-			}
-
-			if ( $result ) {
-				$a <= $i;
-				$a += 1;
-			} else {
-				$b <= $i;
-				$b += 1;
-			}
-		}
-		$con = "成功生成费项" . $a . "条！-  失败：" . $b . "条 - 合计：" . $i . "条";
-		echo "<script> alert('$con');parent.location.href='./'; </script>";
-
+		$result = UserInvoice::Add();//调用数据
+		return true;
 	}
 
 	//单个房号生成费项条件筛选
@@ -619,10 +591,12 @@ class UserInvoiceController extends Controller
 
 		$cost_id = CostRelation::find()
 			->select( 'cost_id' )
-			->where( [ 'realestate_id' => $id ] )
+			->andwhere( [ 'realestate_id' => $id, 'status' => '1' ] )
+			->andwhere(['<', 'from', time()])
 			->asArray()
-			->all(); //获取关联费项序号（二维数组）
+			->all(); 
 		
+		//获取关联费项序号（二维数组）		
 		$c_id = array_column( $cost_id, 'cost_id' ); //提取关联费项序号
 		$cost_info = CostName::find()
 			->select( 'cost_id, cost_name' )
@@ -665,15 +639,18 @@ class UserInvoiceController extends Controller
 				'cost_relation.realestate_id',
 				'cost_name.cost_id',
 				'cost_name.cost_name',
+				'cost_name.formula',
 			    'cost_name.inv',
 				'cost_name.parent',
 				'cost_name.price',
+			    'cost_name.property',
 			] )->from( 'cost_relation' )
 			->join( 'left join', 'community_realestate', 'cost_relation.realestate_id = community_realestate.realestate_id' )
 			->join( 'left join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
 			->join( 'left join', 'community_basic', 'community_basic.community_id = community_realestate.community_id' )
 			->join( 'left join', 'cost_name', 'cost_relation.cost_id = cost_name.cost_id' )
-			->where( [ 'cost_relation.realestate_id' => $b['realestate_id'], 'cost_name.cost_id' => $cost ] )
+			->andwhere( [ 'cost_relation.realestate_id' => $b['realestate_id'], 'cost_name.cost_id' => $cost, 'cost_relation.status' => '1' ] )
+			->andwhere(['<', 'cost_relation.from', time()])
 			->all();
 		
 		return $this->render( 'v', [
@@ -700,7 +677,10 @@ class UserInvoiceController extends Controller
 		$f = date( time() ); //生成时间
 		
 		//查询费项信息
-		$query = CostName::find()->select('cost_id,cost_name,price,inv')->where(['in','cost_id',$co])->asArray()->all();
+		$query = CostName::find()
+			->andwhere(['in','cost_id',$co])
+			->asArray()
+			->all();
 		
 		$i = 1;
 	    $d = date('Y-m', strtotime("-1 month", strtotime($q['from'])));
@@ -711,22 +691,30 @@ class UserInvoiceController extends Controller
 			foreach ( $query as $key => $qs ) {
 				$c_id = $qs['cost_id']; //费项编码，将来会用到
 				$description = $qs[ 'cost_name' ];//费项名称
+				$formula = $qs[ 'formula' ];//计费方式 
 				
 				$time = explode('-',$date);
 				$y = reset($time); //年
 				$ms = end($time); //月
 				
-				$price = $qs[ 'price' ]; //费项价格
+				$pr = $qs[ 'price' ]; //费项价格
+				$property = $qs[ 'property' ]; //费项备注
 				
-				if ( $description == "物业费" ) {
-					//判定物业费
-					$p = $price*$acreage;
-				    $price = number_format($p, 1);
+				//判定物业费
+				if ( $formula == '1' ) {
+					$p = $pr*$acreage;
+					if($p == 0){
+						$h ++;
+						continue;
+					}
+				    $price = round($p,1); //保留一位小数点
+				}else{
+					$price = $pr;
 				}
 				
 				//MySQL插入语句
-				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status)
-						values ('$community','$building', '$id','$description', '$y', '$ms', '$price','$f','0')";
+				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status,invoice_notes)
+						values ('$community','$building', '$id','$description', '$y', '$ms', '$price', '$f','0', '$property')";
 				$e = Yii::$app->db->createCommand( $sql )->execute();
 				
 				

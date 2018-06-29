@@ -59,18 +59,42 @@ class TicketController extends Controller
 	    	->indexBy('building_name')
 	    	->column();
 		
+<<<<<<< HEAD
 		//判断是否存在状态参数
+=======
+		//判断是有是来自处理结果页面的查询
+		if(isset($_GET['ticket_id']))
+		{
+			$id = $_GET['ticket_id'];
+			$searchModel->ticket_id = $id;
+		}
+		
+		//判断是否存在状态传值
+>>>>>>> master
 		if(isset($_GET['ticket_status'])){
 			$get = $_GET;
 			$searchModel->ticket_status = $get['ticket_status'];
 		}
 		
+<<<<<<< HEAD
 		//判断是否存在小区和楼宇参数
 		if(isset($_GET['building'])&& isset($_GET['c']))
 		{
 			$c = $_GET['community'];
 			$building = $_GET['building'];;
 			$searchModel->community_id = $c;
+=======
+		//判断是否存在小区传值
+		if(isset($_GET['community'])){
+			$get = $_GET;
+			$searchModel->community_id = $get['community'];
+		}
+		
+		//判断是否存在小区和楼宇传值
+		if(isset($_GET['building'])&& isset($_GET['c']))
+		{
+			$building = $_GET['building'];;
+>>>>>>> master
 			$searchModel->building = $building;
 		}
 		
@@ -134,16 +158,25 @@ class TicketController extends Controller
 		
 		$community = CommunityBasic::find()
 			->select('community_name, community_id')
+			->where(['in', 'community_id', $c])
 			->orderBy('community_name')
 			->indexBy('community_id')
 			->column();
-		
-		$assignee = WorkR::find()->select('user_data.real_name, work_relationship_account.account_id')
-			->joinWith('data')
-			->where(['account_superior' => '0'/*, 'account_status' => '3'*/])
-		    ->indexBy('account_id')
+				
+		$assignee = (new \yii\db\Query())
+			->select('user_account.user_name, user_account.account_id')
+			->from('user_account')
+			->join('inner join', 'work_relationship_account', 'work_relationship_account.account_id = user_account.account_id')
+			->andwhere(['user_account.status' => '1'])
+			->andwhere(['in', 'work_relationship_account.community_id', $c])
 			->orderBy('community_id')
+		    ->indexBy('account_id')
 			->column();
+		
+		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
+		$number = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		
+		$model->ticket_number = $number;
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -152,7 +185,8 @@ class TicketController extends Controller
         return $this->renderAjax('create', [
             'model' => $model,
 			'community' => $community,
-			'assignee' => $assignee
+			'assignee' => $assignee,
+			'number' => $number
         ]);
     }
 

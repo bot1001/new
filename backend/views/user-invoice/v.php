@@ -55,10 +55,10 @@ $this->params['breadcrumbs'][] = '费项预览';
 	
     table{ 
         border-collapse:collapse;  
-		width: 900px;
+		width: 80%;
     }
   </style>
-   
+     
   <table border="1">
 	   <thead>
 		   <tr>
@@ -92,39 +92,38 @@ $this->params['breadcrumbs'][] = '费项预览';
                 <td><?php $count ++; echo $count; ?></td>
                 <td><?php echo $a->community_name?></td>
 	      	    <td><?php echo $a->building_name; ?></td>
-	      	    <td><?php echo $a->room_name ?></td>
-	      	    <td><?php echo $a->room_number; ?></td>
+	      	    <td><?php echo $a->room_number ?></td>
+	      	    <td><?php echo $a->room_name; ?></td>
 	      	  
                 <td> <?php 
-	      	  $time = explode('-', $date);
-	      	  echo reset($time).'年'; ?>
+	      	        $time = explode('-', $date);
+	      	        echo reset($time).'年'; ?>
                 </td>
                 
                 <td><?php echo end($time).'月'; ?></td>
                 
                 <td style="text-align: left"><?php echo $a->cost_name; ?></td>
                 
-	      	  <td style="text-align: right"><?php 
-	      	  
-	      	       $price = $a->price;
-	      		      $acreage = $a->acreage;
-	      		      if($a->cost_name == "物业费"){
-	      		   	   $p = $price*$acreage;
-	      		   	   $price = number_format($p, 1);
-	      		   	   echo $price;
-	      		      }else{
-	      		   	   echo $price;
-	      		      }
-				     if($a->inv == 0)
-				     {
-				   	  unset($query[$key]);
-				     }
-				    
-				     $sum += $price;
-				     
-	      		   ?>
-	      		  </td>
-	      	  <td></td>
+	      	    <td style="text-align: right"> 
+	      	    <?php
+	      	         $price = $a->price;
+	      		        $acreage = $a->acreage;
+	      		        if($a->formula == "1"){
+	      		     	   $p = $price*$acreage;
+	      		     	   $price = number_format($p, 1);
+	      		     	   echo $price;
+	      		        }else{
+	      		     	   echo $price;
+	      		        }
+				  
+				       if($a->inv == 0) //判断费固定费用
+				       {
+				     	  unset($query[$key]);
+				       }
+				       $sum += $price;
+	      		     ?>
+	      	    </td>
+	      	    <td><?= $a->property; ?></td>
              </tr>
            <?php endforeach; ?>
            

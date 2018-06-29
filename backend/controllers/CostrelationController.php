@@ -3,17 +3,18 @@
 namespace backend\ controllers;
 
 use Yii;
-use app\ models\ CostRelation;
-use app\ models\ CostName;
-use app\ models\ CostRelationSearch;
-use app\ models\ CommunityBasic;
-use app\ models\ CommunityBuilding;
-use app\ models\ CommunityRealestate;
-use yii\ helpers\ Json;
-use yii\ helpers\ ArrayHelper;
-use yii\ web\ Controller;
-use yii\ web\ NotFoundHttpException;
-use yii\ filters\ VerbFilter;
+use app\models\CostRelation;
+use app\models\CostName;
+use app\models\CostRelationSearch;
+use app\models\CommunityBasic;
+use app\models\CommunityBuilding;
+use app\models\CommunityRealestate;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use kartik\grid\EditableColumnAction;
 
 /*use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -46,6 +47,12 @@ class CostrelationController extends Controller {
 	public function actionIndex() 
 	{
 		$searchModel = new CostRelationSearch();
+		
+		//来自房屋列表的绑定费用查询
+		if(isset($_GET['realestate_id']))
+		{
+			$searchModel->realestate_id = $_GET['realestate_id'];
+		}
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 		
 		$c = $_SESSION['community'];
@@ -64,6 +71,20 @@ class CostrelationController extends Controller {
 		] );
 	}
 	
+	//GridView页面直接编辑
+	public function actions()
+   {
+       return ArrayHelper::merge(parent::actions(), [
+           'relation' => [                                       // identifier for your editable action
+               'class' => EditableColumnAction::className(),     // action class name
+               'modelClass' => CostRelation::className(),                // the update model class
+               'outputValue' => function ($model, $attribute, $key, $index) {
+               },
+               'ajaxOnly' => true,
+           ]
+       ]);
+   }
+	
 	//检查用户是否登录
 	public function  beforeAction($action)
     {
@@ -74,24 +95,10 @@ class CostrelationController extends Controller {
         return true;
     }
 
-	//来自房屋列表的绑定费用查询
-	public function actionIndex1( $realestate_id ) 
-	{
-		$searchModel = new CostRelationSearch();
-		
-		$searchModel->realestate_id = $realestate_id;
-		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
-
-		return $this->render( 'index', [
-			'searchModel' => $searchModel,
-			'dataProvider' => $dataProvider,
-		] );
-	}
-
 	public function actionAdd() 
 	{
 		$a = Yii::$app->request->get();
-		//print_r($a);
+		
 		$community = $a[ 'community_id' ];
 		$building_id = $a[ 'building_id' ];
 		$realestate_id = $a[ 'realestate_id' ];
@@ -126,14 +133,47 @@ class CostrelationController extends Controller {
 	{
 		$model = new CostRelation();
 		
-		$model->load($_POST);
-        /*if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return \yii\bootstrap\ActiveForm::validate($model);
-        }*/
-
-		if ( $model->load( Yii::$app->request->post() ) && $model->save() ) {
-			return $this->redirect( [ 'index' ] );
+		if ( $model->load( Yii::$app->request->post() )) {
+			$post = $_POST['CostRelation']; // 接收传递过来的信息
+			
+			$community = $post['community'];
+			$building = $post['building_id'];
+			$realestate_id = $post['realestate_id'];
+			$price = $post['price'];
+			$cost = $post['cost_id'];
+			$from = $post['from'];
+			$status = $post['status'];
+			$property = $post['property'];
+			
+			$i=0; //成功次数
+			$f=0; //失败次数
+			
+			foreach($realestate_id as $realestate)
+			{
+				$model = new CostRelation(); //实例化模型，每次循环必须实例化一次
+				
+				$model->community = $community;
+			    $model->building_id = $building;			    
+			    $model->cost_id = $cost;
+			    $model->from = $from;
+			    $model->status = $status;
+			    $model->property = $property;
+				$model->realestate_id = $realestate;
+				
+			    $e = $model->save(); //保存数据
+				if($e){ //自动计数
+					$i ++;
+				}else{
+					$f ++;
+				}
+			}
+			
+			$count = $i+$f; // 生成条数综合
+			
+			$session = Yii::$app->session; //实例化flash信息
+			$session->setFlash('success', "成功：$i 条，失败： $f 条，合计：$count 条");
+			
+			return $this->redirect( [ 'index', ] );
 		} else {
 			return $this->renderAjax( '_form', [
 				'model' => $model,
@@ -144,6 +184,18 @@ class CostrelationController extends Controller {
 	//三级联动之 楼宇
 	public function actionB( $selected = null ) 
 	{
+		$community_id = $_POST['depdrop_parents']['0']; //接收小区编号
+		
+		//获取楼宇ID
+		$building_id = CommunityBuilding::find()
+			->select('building_id')
+			->where(['in', 'community_id', $community_id])
+			->asArray()
+			->one();
+
+		//将楼宇编号添加到session中，以备由单元获取房号时使用
+		$_SESSION['building_id'] = $building_id;
+		
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = CommunityBuilding::find()->where( [ 'community_id' => $id ] )->all();
@@ -171,7 +223,6 @@ class CostrelationController extends Controller {
 	//三级联动之 楼宇2
 	public function actionB2( $selected = null ) 
 	{
-		print_r($_POST[ 'depdrop_parents' ]);exit;
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
 			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
@@ -201,20 +252,22 @@ class CostrelationController extends Controller {
 	public function actionR( $selected = null ) 
 	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
-		{
-			$id = $_POST[ 'depdrop_parents' ];
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = CommunityRealestate::find()
-				->andwhere( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
-			
+
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {
 					$out[] = [ 'id' => $account[ 'room_name' ], 'name' => $account[ 'room_name' ] ];
 					if ( $i == 0 ) {
-						$first = $account[ 'room_number' ];
+						$first = $account[ 'room_name' ];
 					}
-					if ( $account[ 'realestate_id' ] == $selected ) {
+					if ( $account[ 'room_name' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -231,10 +284,13 @@ class CostrelationController extends Controller {
 	//三级联动之 房号（二）
 	public function actionRe( $selected = null ) 
 	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{			
+			$number = $_POST['depdrop_all_params']['number'];
+			$id =$_POST['depdrop_all_params']['building'];
 			$list = CommunityRealestate::find()
-				->where( [ 'building_id' => $id ] )
+				->andwhere( ['in', 'building_id', $id] )
+				->andwhere( ['in', 'room_number', $number] )
 				->all();
 
 			$isSelectedIn = false;
@@ -245,6 +301,35 @@ class CostrelationController extends Controller {
 						$first = $account[ 'room_number' ];
 					}
 					if ( $account[ 'realestate_id' ] == $selected ) {
+						$isSelectedIn = true;
+					}
+				}
+				if ( !$isSelectedIn ) {
+					$selected = $first;
+				}
+				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+				return;
+			}
+		}
+		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+	}
+		
+	//三级联动之 单元
+	public function actionNumber( $selected = null ) 
+	{
+		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
+		{
+			$id = $_POST[ 'depdrop_parents' ];
+			
+			$list = CommunityRealestate::find()->select('room_number')->where( ['in', 'building_id', $id ] )->distinct()->all();
+			$isSelectedIn = false;
+			if ( $id != null && count( $list ) > 0 ) {
+				foreach ( $list as $i => $account ) {
+					$out[] = [ 'id' => $account[ 'room_number' ], 'name' => $account[ 'room_number' ] ];
+					if ( $i == 0 ) {
+						$first = $account[ 'room_number' ];
+					}
+					if ( $account[ 'room_number' ] == $selected ) {
 						$isSelectedIn = true;
 					}
 				}
@@ -292,8 +377,22 @@ class CostrelationController extends Controller {
 	{
 		$model = new CostRelation();
 		
-	    $array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')->queryAll();
-	    $cost = ArrayHelper::map($array,'cost_id','cost_name');
+		$relation = (new \yii\db\Query)
+			->select('cost_name.parent, cost_name.cost_name, cost_name.property')
+			->from('cost_name')
+			->join('inner join', 'cost_relation', 'cost_name.cost_id = cost_relation.cost_id')
+			->where(['cost_relation.realestate_id' => "$id"])
+			->all();
+		
+		$r = array_column($relation, 'parent');
+		
+	    $cost = CostName::find()
+			->select('cost_name, cost_id')
+			->andwhere(['level' => "0"])
+			->andwhere(['not in', 'cost_id', $r])
+			->orderBy('cost_id ASC')
+			->indexBy('cost_id')
+			->column();
  
 		//获取小区和楼宇编号
 		$r_info = (new \yii\db\Query())
@@ -304,33 +403,7 @@ class CostrelationController extends Controller {
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
 			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 			->where(['realestate_id' => $id])
-			->orderBy('')
-			->indexBy('')
 			->all();
-				
-		/*//获取小区名称
-		$community = CommunityBasic::find()
-			->select('community_name,community_id')
-			->where(['community_id' => $r_info['community_id']])
-			->orderBy('community_name')
-			->indexBy('community_id')
-			->all();
-		
-		//获取楼宇名称
-		$building = CommunityBuilding::find()
-			->select('building_name,building_id')
-			->where(['building_id' => $r_info['building_id']])
-			->orderBy('building_name')
-			->indexBy('building_id')
-			->all();
-		
-	    //获取房号信息
-	    $array1 = CommunityRealestate::find()
-	       ->select('realestate_id,room_name')
-	       ->where(['realestate_id' => $id])
-		   ->orderBy('room_name')
-		   ->indexBy('realestate_id')
-	       ->All();*/
 	    	   
 	   $community = ArrayHelper::map($r_info,'community_id','community_name');//提取房号信息
 	   $building = ArrayHelper::map($r_info,'building_id','building_name');//提取房号信息
@@ -345,6 +418,7 @@ class CostrelationController extends Controller {
 				'cost' => $cost,
 				'community' => $community,
 				'building' => $building,
+				'relation' => $relation,
 			] );
 		}
 	}
@@ -360,17 +434,34 @@ class CostrelationController extends Controller {
 		$model = $this->findModel( $id );
 
 		//获取房屋序号
-		$r_id = Costrelation::find()->select('realestate_id as id,community,building_id,cost_id')->where(['id' => $id])->asArray()->one();
+		$r_id = Costrelation::find()
+			->select('realestate_id as id,community,building_id,cost_id')
+			->where(['id' => $id])
+			->asArray()
+			->one();
 		//获取房屋信息
-		$r_info = CommunityRealestate::find()->select('room_number,room_name')->where(['realestate_id' => $r_id])->asArray()->one();
+		$r_info = CommunityRealestate::find()
+			->select('room_number,room_name')
+			->where(['realestate_id' => $r_id])
+			->asArray()
+			->one();
 		
 		//获取小区
-		$c_info = CommunityBasic::find()->select('community_name,community_id')->where(['community_id' => $r_id['community']])->asArray()->all();
+		$c_info = CommunityBasic::find()
+			->select('community_name,community_id')
+			->where(['community_id' => $r_id['community']])
+			->asArray()
+			->all();
 		
 		//获取楼宇
-		$b_info = CommunityBuilding::find()->select('building_name,building_id')->where(['building_id' => $r_id['building_id']])->asArray()->all();
+		$b_info = CommunityBuilding::find()
+			->select('building_name,building_id')
+			->where(['building_id' => $r_id['building_id']])
+			->asArray()
+			->all();
 		
-		$array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')->queryAll();
+		$array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where level = 0')
+			->queryAll();
 	    $cost = ArrayHelper::map($array,'cost_id','cost_name');
 		
 		//获取房屋相关信息

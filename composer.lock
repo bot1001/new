@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bd1b53b1f4a0ca7144c3188ef0942aa",
+    "content-hash": "c3827d3dfe9a0cfe4325a926b38d25c0",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -134,7 +134,7 @@
             "version": "v1.35.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nakupanda/bootstrap3-dialog.git",
+                "url": "git@github.com:nakupanda/bootstrap3-dialog.git",
                 "reference": "3dd11d586f78de75356af418907ec6e3b347377c"
             },
             "dist": {
@@ -220,7 +220,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -263,7 +263,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/cebe/markdown/7b158880b9c128de39d1102dc26e68082d1c4aa9.zip",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/7b158880b9c128de39d1102dc26e68082d1c4aa9",
                 "reference": "7b158880b9c128de39d1102dc26e68082d1c4aa9",
                 "shasum": ""
             },
@@ -546,7 +546,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/doctrine/lexer/464b5feb7c005a39414e3e17499dd90ac6a7df4c.zip",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/464b5feb7c005a39414e3e17499dd90ac6a7df4c",
                 "reference": "464b5feb7c005a39414e3e17499dd90ac6a7df4c",
                 "shasum": ""
             },
@@ -1007,7 +1007,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/kartik-v/yii2-grid/3b0bc0268f11a5eb49be6ebb010e2327525052f8.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/3b0bc0268f11a5eb49be6ebb010e2327525052f8",
                 "reference": "3b0bc0268f11a5eb49be6ebb010e2327525052f8",
                 "shasum": ""
             },
@@ -1100,58 +1100,6 @@
                 "yii2"
             ],
             "time": "2017-11-17T06:34:33+00:00"
-        },
-        {
-            "name": "kartik-v/yii2-mpdf",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kartik-v/yii2-mpdf.git",
-                "reference": "67980ab7861ae9541b1a1784be8938dbeba13045"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/67980ab7861ae9541b1a1784be8938dbeba13045",
-                "reference": "67980ab7861ae9541b1a1784be8938dbeba13045",
-                "shasum": ""
-            },
-            "require": {
-                "mpdf/mpdf": "~7.0"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "kartik\\mpdf\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kartik Visweswaran",
-                    "email": "kartikv2@gmail.com",
-                    "homepage": "http://www.krajee.com/"
-                }
-            ],
-            "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
-            "homepage": "https://github.com/kartik-v/yii2-mpdf",
-            "keywords": [
-                "component",
-                "extension",
-                "html",
-                "mpdf",
-                "pdf",
-                "utf8",
-                "yii2"
-            ],
-            "time": "2017-07-19T09:51:02+00:00"
         },
         {
             "name": "kartik-v/yii2-popover-x",
@@ -1263,7 +1211,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/kartik-v/yii2-widget-datepicker/eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550",
                 "reference": "eb7e829b8a0b341dc22ef2dc28d1bb4ff08e3550",
                 "shasum": ""
             },
@@ -1410,6 +1358,39 @@
             "time": "2018-02-24T05:28:25+00:00"
         },
         {
+            "name": "kucha/ueditor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BigKuCha/yii2-ueditor-widget.git",
+                "reference": "6dc87f119a95a69a839823a2b7bd1ebae53f4c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BigKuCha/yii2-ueditor-widget/zipball/6dc87f119a95a69a839823a2b7bd1ebae53f4c24",
+                "reference": "6dc87f119a95a69a839823a2b7bd1ebae53f4c24",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kucha\\ueditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "BigKuCha",
+                    "email": "nevermore1989@vip.qq.com"
+                }
+            ],
+            "description": "desc",
+            "time": "2018-05-08T05:12:22+00:00"
+        },
+        {
             "name": "mdmsoft/yii2-admin",
             "version": "dev-master",
             "source": {
@@ -1466,121 +1447,6 @@
                 "yii"
             ],
             "time": "2017-11-18T13:27:11+00:00"
-        },
-        {
-            "name": "mpdf/mpdf",
-            "version": "dev-development",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mpdf/mpdf.git",
-                "reference": "11b1e0987d2136c2f313f4f68ab51a3f540bf0ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/mpdf/mpdf/11b1e0987d2136c2f313f4f68ab51a3f540bf0ef.zip",
-                "reference": "11b1e0987d2136c2f313f4f68ab51a3f540bf0ef",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-mbstring": "*",
-                "paragonie/random_compat": "^1.4|^2.0",
-                "php": "^5.6 || ~7.0.0 || ~7.1.0 || ~7.2.0",
-                "psr/log": "^1.0",
-                "setasign/fpdi": "1.6.*"
-            },
-            "require-dev": {
-                "mockery/mockery": "^0.9.5",
-                "phpunit/phpunit": "^5.0",
-                "squizlabs/php_codesniffer": "^2.7.0",
-                "tracy/tracy": "^2.4"
-            },
-            "suggest": {
-                "ext-bcmath": "Needed for generation of some types of barcodes",
-                "ext-xml": "Needed mainly for SVG manipulation",
-                "ext-zlib": "Needed for compression of embedded resources, such as fonts"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-development": "7.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mpdf\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Matěj Humpál",
-                    "role": "Developer, maintainer"
-                },
-                {
-                    "name": "Ian Back",
-                    "role": "Developer (retired)"
-                }
-            ],
-            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
-            "homepage": "https://mpdf.github.io",
-            "keywords": [
-                "pdf",
-                "php",
-                "utf-8"
-            ],
-            "time": "2018-04-05T15:55:46+00:00"
-        },
-        {
-            "name": "paragonie/random_compat",
-            "version": "v2.0.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/paragonie/random_compat/258c89a6b97de7dfaf5b8c7607d0478e236b04fb.zip",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*|5.*"
-            },
-            "suggest": {
-                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "lib/random.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com"
-                }
-            ],
-            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-            "keywords": [
-                "csprng",
-                "pseudorandom",
-                "random"
-            ],
-            "time": "2018-04-04T21:24:14+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -1669,53 +1535,6 @@
             "time": "2018-03-04T20:41:15+00:00"
         },
         {
-            "name": "psr/log",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-fig/log/3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda.zip",
-                "reference": "3490ba5925e6dcbe6de950c5c6b8dce9f6e96eda",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2018-04-03T15:59:15+00:00"
-        },
-        {
             "name": "psr/simple-cache",
             "version": "dev-master",
             "source": {
@@ -1773,7 +1592,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/rmrevin/yii2-fontawesome/2ebb38f62727a46dcd06d27bb73c4a5833b54f74.zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/2ebb38f62727a46dcd06d27bb73c4a5833b54f74",
                 "reference": "2ebb38f62727a46dcd06d27bb73c4a5833b54f74",
                 "shasum": ""
             },
@@ -1814,55 +1633,6 @@
                 "yii"
             ],
             "time": "2017-04-03T14:19:13+00:00"
-        },
-        {
-            "name": "setasign/fpdi",
-            "version": "1.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Setasign/FPDI.git",
-                "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
-                "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
-                "shasum": ""
-            },
-            "suggest": {
-                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use \"tecnickcom/tcpdf\" as an alternative there's no fixed dependency configured.",
-                "setasign/fpdi-fpdf": "Use this package to automatically evaluate dependencies to FPDF.",
-                "setasign/fpdi-tcpdf": "Use this package to automatically evaluate dependencies to TCPDF."
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "filters/",
-                    "fpdi.php",
-                    "fpdf_tpl.php",
-                    "fpdi_pdf_parser.php",
-                    "pdf_context.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jan Slabon",
-                    "email": "jan.slabon@setasign.com",
-                    "homepage": "https://www.setasign.com"
-                }
-            ],
-            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
-            "homepage": "https://www.setasign.com/fpdi",
-            "keywords": [
-                "fpdf",
-                "fpdi",
-                "pdf"
-            ],
-            "time": "2017-05-11T14:25:49+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1933,7 +1703,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-framework/8436dd12404c6492cb267ca18991b9328be00363.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/8436dd12404c6492cb267ca18991b9328be00363",
                 "reference": "8436dd12404c6492cb267ca18991b9328be00363",
                 "shasum": ""
             },
@@ -2033,7 +1803,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-bootstrap/7889c96f786c5cafd7a7325b432d774029835647.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/7889c96f786c5cafd7a7325b432d774029835647",
                 "reference": "7889c96f786c5cafd7a7325b432d774029835647",
                 "shasum": ""
             },
@@ -2147,7 +1917,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-jui/b3f5680692460fae1130cb7a7dc8dd86cfa64da1.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/b3f5680692460fae1130cb7a7dc8dd86cfa64da1",
                 "reference": "b3f5680692460fae1130cb7a7dc8dd86cfa64da1",
                 "shasum": ""
             },
@@ -2335,7 +2105,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Codeception/base/fb07b713f2a97cdf0c5c81c93fa26a0785eb44a6.zip",
+                "url": "https://api.github.com/repos/Codeception/base/zipball/fb07b713f2a97cdf0c5c81c93fa26a0785eb44a6",
                 "reference": "fb07b713f2a97cdf0c5c81c93fa26a0785eb44a6",
                 "shasum": ""
             },
@@ -2424,7 +2194,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Codeception/phpunit-wrapper/e8528cb777cf5a5ccea1cf57a3522b142625d1b5.zip",
+                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/e8528cb777cf5a5ccea1cf57a3522b142625d1b5",
                 "reference": "e8528cb777cf5a5ccea1cf57a3522b142625d1b5",
                 "shasum": ""
             },
@@ -2641,7 +2411,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/guzzle/psr7/773750151c47189c24f9026620e43ddd55d453a2.zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/773750151c47189c24f9026620e43ddd55d453a2",
                 "reference": "773750151c47189c24f9026620e43ddd55d453a2",
                 "shasum": ""
             },
@@ -3105,7 +2875,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-code-coverage/774a82c0c5da4c1c7701790c262035d235ab7856.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/774a82c0c5da4c1c7701790c262035d235ab7856",
                 "reference": "774a82c0c5da4c1c7701790c262035d235ab7856",
                 "shasum": ""
             },
@@ -3354,7 +3124,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/fa86bc82879b1addc77b1c71dec8b56aa8ff9a22.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa86bc82879b1addc77b1c71dec8b56aa8ff9a22",
                 "reference": "fa86bc82879b1addc77b1c71dec8b56aa8ff9a22",
                 "shasum": ""
             },
@@ -3434,7 +3204,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit-mock-objects/3f5ca97eee66a07951d018f6726017629c85c86d.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3f5ca97eee66a07951d018f6726017629c85c86d",
                 "reference": "3f5ca97eee66a07951d018f6726017629c85c86d",
                 "shasum": ""
             },
@@ -3585,7 +3355,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/comparator/f77ea710f800679202c6d92c3e2f2f56457a19f2.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/f77ea710f800679202c6d92c3e2f2f56457a19f2",
                 "reference": "f77ea710f800679202c6d92c3e2f2f56457a19f2",
                 "shasum": ""
             },
@@ -4160,7 +3930,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/console/0d62adf9f4dc46a837560dee07b2b94675ddc492.zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0d62adf9f4dc46a837560dee07b2b94675ddc492",
                 "reference": "0d62adf9f4dc46a837560dee07b2b94675ddc492",
                 "shasum": ""
             },
@@ -4228,7 +3998,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/css-selector/797df6009c3ef46f54156011639a8347115f7223.zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/797df6009c3ef46f54156011639a8347115f7223",
                 "reference": "797df6009c3ef46f54156011639a8347115f7223",
                 "shasum": ""
             },
@@ -4337,7 +4107,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/event-dispatcher/2391ed210a239868e7256eb6921b1bd83f3087b5.zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/2391ed210a239868e7256eb6921b1bd83f3087b5",
                 "reference": "2391ed210a239868e7256eb6921b1bd83f3087b5",
                 "shasum": ""
             },
@@ -4400,7 +4170,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/finder/d78fff5c545a7ecb13f17efa8212ba13ef312fd8.zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/d78fff5c545a7ecb13f17efa8212ba13ef312fd8",
                 "reference": "d78fff5c545a7ecb13f17efa8212ba13ef312fd8",
                 "shasum": ""
             },
@@ -4508,7 +4278,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/yaml/97c4a3753f1311c69383a268bf399f9479a4b871.zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/97c4a3753f1311c69383a268bf399f9479a4b871",
                 "reference": "97c4a3753f1311c69383a268bf399f9479a4b871",
                 "shasum": ""
             },
@@ -4656,7 +4426,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-debug/ad32bff2411d798c5d58c687bd8815c64f4ab9bf.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/ad32bff2411d798c5d58c687bd8815c64f4ab9bf",
                 "reference": "ad32bff2411d798c5d58c687bd8815c64f4ab9bf",
                 "shasum": ""
             },
@@ -4703,7 +4473,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-faker/6fd989e79369a8b8e79099e4d5098fc44faa6176.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/6fd989e79369a8b8e79099e4d5098fc44faa6176",
                 "reference": "6fd989e79369a8b8e79099e4d5098fc44faa6176",
                 "shasum": ""
             },
@@ -4750,7 +4520,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-gii/563fde754533b67ff04f934d7a236c76decb0305.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/563fde754533b67ff04f934d7a236c76decb0305",
                 "reference": "563fde754533b67ff04f934d7a236c76decb0305",
                 "shasum": ""
             },
@@ -4800,7 +4570,6 @@
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-widget-activeform": 20,
         "yiisoft/yii2-jui": 20,
-        "kartik-v/yii2-mpdf": 20,
         "phpoffice/phpspreadsheet": 20,
         "kartik-v/yii2-widget-depdrop": 20,
         "kartik-v/yii2-widget-select2": 20,

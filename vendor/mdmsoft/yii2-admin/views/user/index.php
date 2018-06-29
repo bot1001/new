@@ -210,3 +210,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	] );
 	?>
 </div>
+
+<?php 
+	$message = Yii::$app->getSession()->getFlash('success');
+	if($message == '1'){
+		echo "<script>alert('修改成功！')</script>";
+	}elseif($message == '0'){
+		echo "<script>alert('修改失败！')</script>";
+	} ?>

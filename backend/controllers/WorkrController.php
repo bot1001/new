@@ -42,8 +42,7 @@ class WorkrController extends Controller
     public function actionIndex()
     {
         $searchModel = new WorkRSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		
+        
 		if(isset($_GET['id'])){
 			$id = $_GET['id'];
 			$searchModel->account_id = $id;
@@ -54,6 +53,8 @@ class WorkrController extends Controller
 			->orderBy('community_name')
 			->indexBy('community_id')
 			->column();
+		
+		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		
         return $this->render('index', [
             'searchModel' => $searchModel,

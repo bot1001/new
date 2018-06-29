@@ -20,6 +20,5 @@ return [
 		//支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
 		
 		'gatewayUrl' => "https://openapi.alipay.com/gateway.do",
-
-],
+     ],
 ];

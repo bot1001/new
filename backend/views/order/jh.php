@@ -59,11 +59,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	function loadText() {
 		var xhr = new XMLHttpRequest();
 		//xml请求参数
-		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
+		xhr.open( 'GET', "<?php echo Url::to(['/pay/wei', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
-					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to([' / order / print ', 
-																								 'order_id ' => $order_id]); ?>">支付成功！</a>';
+					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
+																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 
@@ -89,7 +89,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 	</div>
 	<div id="div2">
-		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'&nbsp&nbsp&nbsp'.'合计金额：'.'<k>'.$order_amount.'</k>';
+		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'<br />'.'合计：'.'<k>'.$order_amount.'</k>';
 		?>
 	</div>
 </div>

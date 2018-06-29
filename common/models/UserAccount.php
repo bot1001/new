@@ -23,6 +23,7 @@ use Yii;
  */
 class UserAccount extends \yii\db\ActiveRecord
 {
+	public $new_pd;
     /**
      * @inheritdoc
      */
@@ -37,16 +38,15 @@ class UserAccount extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+			[['new_pd', 'password'],'required'],
 			[['mobile_phone'],'string','min' => 11],
-			[['account_id'],'string','min' => 28],
-			//[['account_id'],'string','max' => 32],
+			[['account_id'],'string','min' => 28,'max' => 32],
             [['password','mobile_phone'], 'required'],
-			[['account_id'], 'unique', 'targetAttribute' => ['account_id'], 'message' => '用户重复'],
-			[['mobile_phone'], 'unique', 'targetAttribute' => ['mobile_phone'], 'message' => '手机号码重复'],
+			['new_pd', 'compare', 'compareAttribute' => 'password', 'message' => '两次密码输入不一致'],
+			[['mobile_phone', 'account_id'], 'unique', 'targetAttribute' => ['mobile_phone', 'account_id'], 'message' => '用户重复'],
             [['account_role', 'new_message', 'status'], 'integer'],
             [['account_id', 'user_name', 'password', 'qq_openid', 'weixin_openid', 'weibo_openid'], 'string', 'max' => 64],
             [['mobile_phone'], 'string', 'max' => 11],
-            [['account_id'], 'unique'],
         ];
     }
 	
@@ -63,11 +63,13 @@ class UserAccount extends \yii\db\ActiveRecord
             'account_id' => '用户_ID',
             'user_name' => '名字',
             'password' => '密码',
+            'new_pd' => '密码',
             'mobile_phone' => '手机号码',
             'qq_openid' => 'Qq Openid',
             'weixin_openid' => 'Weixin Openid',
+            'wx_unionid' => 'wx_unionid',
             'weibo_openid' => 'Weibo Openid',
-            'account_role' => 'Account Role',
+            'account_role' => '角色',
             'new_message' => 'New Message',
 			'status' => '状态',
 			'fromdate' => 'From','todate' => 'To',
@@ -80,15 +82,10 @@ class UserAccount extends \yii\db\ActiveRecord
        {
            if($insert)
            {
-               $this->new_message = 0;
                $this->account_role = 0;
+               $this->new_message = 0;
                $this->status = 1;
 			   $this->property = 1;
-           }else{
-               $this->new_message = 0;
-               $this->account_role = 0;
-               $this->status = 1;
-			   $this->property =1;
            }
            return true;
        }else{

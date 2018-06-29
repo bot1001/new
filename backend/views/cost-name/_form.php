@@ -75,22 +75,30 @@ use yii\helpers\ArrayHelper;
 					</div>
 
 					<div class="row">
-						<div class="col-lg-4">
-							<?= $form->field($model, 'price')->textInput(['maxlength' => true, 'value' => 0]) ?>
+						<div class="col-lg-3">
+							<?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<?= $form->field($model, 'inv')->dropDownList(['否','是'],['length' => 1]) ?>
+						</div>
+						
+						<div class="col-lg-3">
+							<?= $form->field($model, 'sale')->dropDownList(['否','是'],['length' => 1]) ?>
+						</div>
+						
+						<div class="col-lg-3">
+							<?= $form->field($model, 'formula')->dropDownList(['月','面积/月'],['length' => 1]) ?>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
-							<?= $form->field($model, 'property')->textArea(['maxlength' => true]) ?>
+							<?= $form->field($model, 'property')->textArea(['maxlength' => true, 'placeholder' => '请输入备注信息'])->label(false) ?>
 						</div>
 					</div>
 
 					<div class="form-group" align="center">
-						<?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+						<?= Html::submitButton($model->isNewRecord ? '保存' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 					</div>
 				</td>
 				<td width="4%"></td>

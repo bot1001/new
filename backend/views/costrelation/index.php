@@ -9,7 +9,7 @@ use app\ models\ CommunityBuilding;
 
 Modal::begin( [
 	'id' => 'update-modal',
-	'header' => '<h4 class="modal-title">费项关联</h4>',
+	'header' => '<h4 class="modal-title">费项批量关联</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
 $c_Url = Url::toRoute( 'create' );
@@ -49,13 +49,14 @@ $this->title = '费项列表';
 <div class="cost-relation-index">
 
 	<?php
-			
+	
+	$message = Yii::$app->getSession()->getFlash('success'); //获取提示信息
+				
 	$gridColumn = [
 		[ 'class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'
 		],
 
-		//'id',
 		[ 'attribute' => 'community',
 			'value' => 'c.community_name',
 			'filterType' => GridView::FILTER_SELECT2,
@@ -70,6 +71,7 @@ $this->title = '费项列表';
 
 		[ 'attribute' => 'building',
 			'value' => 'b.building_name',
+		    'label' => '楼宇',
 			'hAlign' => 'center',
 			'width' => '50px'
 		],
@@ -106,6 +108,24 @@ $this->title = '费项列表';
 			'hAlign' => 'center',
 			'width' => 'px'
 		],
+		
+		['attribute' => 'status',
+		 'value' => function($model){
+	    	return $model->status== 0 ? '否' : '是';
+	    },
+		 //单元格背景色变换
+		 'contentOptions' => function ( $model ) {
+		 	return ( $model->status == 0 ) ? [ 'class' => 'bg-orange' ] : [];
+		 },
+		 'class' => 'kartik\grid\EditableColumn',
+			 'editableOptions' => [
+				'header' => '详情',
+				'formOptions' => [ 'action' => [ '/costrelation/relation' ] ],
+				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'data' => ['禁用', '启用'],
+		],
+		'hAlign' => 'center',
+		],
 
 		[ 'attribute' => 'property', ],
 
@@ -113,7 +133,7 @@ $this->title = '费项列表';
 			'template' => '{update}',
 				'buttons' => [
 					'update' => function ( $url, $model, $key ) {
-						return Html::a( '更新', '#', [
+						return Html::a( '<span class = "glyphicon glyphicon-pencil"></span>', '#', [
 							'data-toggle' => 'modal',
 							'data-target' => '#update-modal', //modal 名字
 							'class' => 'update', //操作名
@@ -128,7 +148,7 @@ $this->title = '费项列表';
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'info', 'heading' => '费项关联',
-			'before' => Html::a( 'New', '#', [
+			'before' => Html::a( '<span class = "glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info create',

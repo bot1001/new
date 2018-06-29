@@ -3,9 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
-use frontend\models\Login;
+use frontend\models\LoginForm;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\Realestate;
@@ -23,10 +22,11 @@ class LoginController extends Controller
 	//微信登录或注册
 	public function actionWx()
 	{
-		/*$code = $_GET['code'];
+		$code = $_GET['code'];
 		$appid = 'wx6a6b40dfed3cf871';
+		$secret = 'dedd7bad5b2b3c43a8e23597dfa27698';
 		
-		$output = Login::Wx($code,$appid); //返回数据
+		$output = Login::Wx($code,$appid, $secret); //返回数据
 		$arr = json_decode($output, true); //数据转换
 		
 		$token = $arr['access_token'];
@@ -52,8 +52,8 @@ class LoginController extends Controller
 			
 				if($relationship)
 				{
-					$r_id = array_column($relationship,'realestate_id');*/
-		$r_id = 5286;
+					$r_id = array_column($relationship,'realestate_id');
+		            $r_id = 5286;
 					$reale = (new \yii\db\Query())->select('
 					community_basic.community_name, community_building.building_name,community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.realestate_id as id
 					')
@@ -66,7 +66,7 @@ class LoginController extends Controller
 					
 					//进入房屋选择界面
 				    return $this->render('choice',['reale' => $reale, 'id' => $r_id]);
-				/*}else{
+				}else{
 					//否则进入房屋管理页面
 					return $this->render('#');
 				}
@@ -74,77 +74,176 @@ class LoginController extends Controller
 		}else{
 			$account = new UserAccount();
 		    $realestate = new Realestate();
-		    $community = Community::find()
+			$data = new UserData();
+			
+		    $comm = Community::find()
 		    	->select('community_id, community_name')
-		    	->asArray()
-		    	->all();
-		    
-		    $comm = ArrayHelper::map($community, 'community_id', 'community_name');
+		    	->indexBy('community_id')
+		    	->column();
+			
+			define("CAPTCHA_LEN", 36); // 随机数长度
+            $Source = "0123456789abcdefghijklmnopqrstuvwxyz"; // 随机数字符源
+			        
+            $k = ""; // 随机数返回值
+            for($i=0;$i<CAPTCHA_LEN;$i++){
+                $n = rand(0, strlen($Source));
+                if($n >= 36){
+                    $n = 36 + ceil(($n - 36) / 3) * 3;
+                    $k .= substr($Source, $n, 3);
+                }else{
+                    $k .= substr($Source, $n, 1);
+                }
+            }
 		
-		    return $this->render('/login/login', [
+		    return $this->render('/login/register', [
 		    	'account' => $account, 
 				'realestate' => $realestate,
+				'k' => $k,
+				'data' => $data,
 				'comm' => $comm,
 				'w_info' => $w_info
 		    ]);
-		}*/
+		}
 	}
 	
+	// 微信扫码注册后转跳到这里
 	public function actionNew()
 	{
 		$post = $_POST;
-		$info = $_GET['w_info'];
+		$w_info = $_GET['w_info']; //接收微信账号信息
 		
-		$account_id = $info['openid']; //接收微信用户的openID
-		$nickname = $info['nickname'] ; //用户昵称
-		$r_id = $post['Realestate']['room_number'];	//房屋编号	
-		$phone = $post['UserAccount']['mobile_phone']; //接收手机号码
-		$password = $post['UserAccount']['password']; //接收密码（明文)
-		$password = md5($password); //md5加密明文密码
-				
-		$r_p = Realestate::find()
-			->select('owners_cellphone')
-			->where(['realestate_id' => $r_id])
+		$data = $post['UserData'];
+		$realestate = $post['Realestate'];
+		$account = $post['UserAccount'];
+		
+		$province = $data['province_id']; //接收省份ID
+		$city = $data['city_id']; //接收城市ID
+		$area = $data['area_id']; //接收县区ID
+		$gender = $data['gender']; //接收性别
+		$face = $data['face_path']; //接收图像地址
+		
+		$community = $realestate['community_id']; //接收小区ID
+		$building = $realestate['building_id']; //接收楼宇ID
+		$number = $realestate['room_number']; //接收单元
+		$name = $realestate['room_name']; //接收房号
+		$mobile = $realestate['phone']; //接收验证手机号码
+		$nick = $realestate['owners_name']; //接收用户昵称
+		
+		$user_name = $account['user_name']; //接收用户昵称
+		$phone = $account['mobile_phone']; //接收登录手机号码
+		$p = $account['password'];
+		$password = md5($p); //接收并加密密码
+		$weixin_openid = $account['weixin_openid']; //接收微信用户的openID
+		$account_id = $account['account_id']; //接收用户ID（程序随机生成）
+		$unionid = $account['wx_unionid']; //接收微信唯一编码（暂时存着）
+		
+		$nickname = $w_info['nickname'] ; //用户昵称
+		
+		//验证注册手机号码是否存在
+		$u_account = UserAccount::find()
+			->where(['mobile_phone' => "$phone", 'account_role' => '0', 'status' => '1'])
 			->asArray()
 			->one();
 		
-		if($phone === $r_p['owners_cellphone'])
-		{
-			$account = new UserAccount(); //实例化模型
-	
+		if($u_account){ //如果存在则绑定微信账号
+			$result = UserAccount::updateAll(['weixin_openid' => $weixin_openid, 'wx_unionid' => $unionid],
+											  'account_id = :a_id', [':a_id' => $u_account['account_id']]);
+			$u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $u_account['account_id']]);
+			
+			//如果修改成功则自动登录
+			if($result || $u_data){
+				\frontend\models\Site::saveLogin($phone);
+				return $this->render('/site/index');
+			}
+		}else{
+		    if(empty($user_name)){
+		    	$user_name == $nickname;
+		    }
+			
+		    $transaction = Yii::$app->db->beginTransaction();
+		    try{
+		        $account = new UserAccount(); //实例化模型
+		        
+		        //模型块赋值
+		        $account->account_id = $account_id;
+		        $account->user_name = $nick;
+		        $account->password = $password;
+		        $account->new_pd = $password;
+		        $account->mobile_phone = $phone;
+		        $account->weixin_openid = $weixin_openid;
+		        $account->wx_unionid = $unionid;
+		        $account->new_message = '0';
+		        $account->status = '1';
 		    
-		    //模型块赋值
-		    $account->account_id = $account_id;
-		    $account->mobile_phone = $phone;
-		    $account->password = $password;
-		    $account->user_name = $nickname;
-		    $account->account_role = '0';
-		    $account->new_message = '0';
-		    $account->status = '1';
-		    
-		    $e = $account->save(); // 保存
-    
-		    if($e){
-		    	$ship = new UserRealestate();
+		        $yes = $account->save(); // 保存
 		    	
-		    	$ship->account_id =  $account_id;
-		    	$ship->realestate_id = $r_id;
-		    	$r = $ship->save();
+                $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+		    	
+		        $ship = new UserRealestate();
+		        $ship->account_id =  $account_id;
+		        $ship->realestate_id = $name;
+		    	
+		        $r = $ship->save(); //保存用户关联信息
+		    		
+		    	$userdata = new UserData();
+		    	
+		    	$userdata->account_id = $account_id;
+		    	$userdata->real_name = $nick;
+		    	$userdata->gender = $gender;
+		    	$userdata->face_path = $face;
+		    	$userdata->province_id = $province;
+		    	$userdata->city_id = $city;
+		    	$userdata->area_id = $area;
+		    	$userdata->nickname = $nick;
+		    	
+		    	$u = $userdata->save(); //保存用户资料
+
+		    	if($yes && $r && $u){
+		    		$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->asArray()->one();
+		    						
+		    		\frontend\models\Site::saveMessage($user, $w_info);
+		    	}
+				$transaction->commit();
+		    }catch(\Exception $e){
+		    	$transaction->rollback();
 		    }
 		    
-		    return $this->render('#', ['id' => $r_id]);
-		}else{
-			echo '<script>alert("信息校验失败，请检查数据！")</script>';
-			//echo "<script>alert('打印数据为空，请确认订单信息！')</script>";
-			//return $this->redirect(Yii::$app->request->referrer);
+		    if(isset($user)){
+		    	return $this->render('/site/index');
+		    }
 		}
-	
-		
+		return $this->redirect(['/login/login']);//如果以上操作失败，则自动转跳到登录页面
 	}
 	
 	//裕家人开放平台授权回调地址
-	public function actionYjr()
+	public function actionIndex()
 	{
-		echo '测试';
+		return $this->render('index');
 	}
+		
+	//用户登录
+	public function actionLogin()
+    {
+		$this->layout = 'login';
+		
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+		
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+		{
+			$post = $_POST['LoginForm'];
+			$phone = $post['mobile_phone'];
+			
+			\frontend\models\Site::saveLogin($phone);
+			
+            return $this->goBack();
+        } else {
+            return $this->render('l', [
+                'model' => $model,
+            ]);
+        }
+    }
 }

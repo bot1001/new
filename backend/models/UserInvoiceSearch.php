@@ -50,12 +50,11 @@ class UserInvoiceSearch extends UserInvoice
     public function search($params)
     {
 		$c = $_SESSION['community'];
+
+		$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
 		
-		if($c){
-			$query = UserInvoice::find()->where(['in', 'user_invoice.community_id', $c]);
-		}else{
-			$query = UserInvoice::find();
-		}
+		ini_set( 'memory_limit', '3072M' ); // 调整PHP由默认占用内存为3072M(3GB)
+		set_time_limit(0); //设置时间无限
 		
 		$query->joinWith('community');
 		//$query->joinWith('building');

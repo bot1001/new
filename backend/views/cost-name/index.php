@@ -47,9 +47,9 @@ $this->title = '费项管理';
     <?php
 	
 	    $c = Yii::$app->getSession()->getflash('m');
-	if($c == 1){
-		echo "<script>alert('抱歉，您的权限不足！')</script>";
-	}
+	    if($c == 1){
+	    	echo "<script>alert('抱歉，您的权限不足！')</script>";
+	    }
 	?>
 	<?php
 	$gridview = [
@@ -74,14 +74,14 @@ $this->title = '费项管理';
 	     },
 		 'filterType' => GridView::FILTER_SELECT2,
 		 'filter' => ['父级','子级'],
-			'filterInputOptions' => [ 'placeholder' => '请选择' ],
-			'filterWidgetOptions' => [
-				'pluginOptions' => [ 'allowClear' => true ],
-			],
-			'contentOptions' => function ( $model ) {
-				return ( $model->level == 0 ) ? [ 'class' => 'bg-info' ] : [];
-			},
-			'hAlign' => 'center' ],
+		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		 'filterWidgetOptions' => [
+		 	'pluginOptions' => [ 'allowClear' => true ],
+		 ],
+		 'contentOptions' => function ( $model ) {
+		 	return ( $model->level == 0 ) ? [ 'class' => 'bg-info' ] : [];
+		 },
+		 'hAlign' => 'center' ],
 		
 		/*[ 'attribute' => 'parent',
 			'value' => function ( $model ) {
@@ -115,12 +115,43 @@ $this->title = '费项管理';
 		
 		[ 'attribute' => 'price',
 		'hAlign' => 'center'],
+		
+		[ 'attribute' => 'sale',
+		 'value' => function($model){
+	     	$a = ['否','是'];
+	     	return $a[$model['sale']];
+	     },
+		 'filterType' => GridView::FILTER_SELECT2,
+		 'filter' => ['否','是'],
+		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		 'filterWidgetOptions' => [
+		 	'pluginOptions' => [ 'allowClear' => true ],
+		 ],
+		'hAlign' => 'center'],
+		
+		[ 'attribute' => 'formula',
+		 'value' => function($model){
+	     	$a = ['月','面积/月'];
+	     	return $a[$model['formula']];
+	     },
+		 'filterType' => GridView::FILTER_SELECT2,
+		 'filter' => ['月','面积/月'],
+		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
+		 'filterWidgetOptions' => [
+		 	'pluginOptions' => [ 'allowClear' => true ],
+		 ],
+		'hAlign' => 'center'],
+		
 		[ 'attribute' => 'create_time',
+		 'mergeHeader' => true,
 		 'width' => '180px',
 		'hAlign' => 'center'],
+		
 		[ 'attribute' => 'update_time',
+		 'mergeHeader' => true,
 		 'width' => '180px',
-		'hAlign' => 'center'],
+		 'hAlign' => 'center'],
+		
 		[ 'attribute' => 'builder',
 		 'value' => 'sys.name',
 		'hAlign' => 'center'],
@@ -131,7 +162,7 @@ $this->title = '费项管理';
 			'template' => '{update}',
 			'buttons' => [
 				'update' => function ( $url, $model, $key ) {
-					return Html::a( '编辑', '#', [
+					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
 						'data-toggle' => 'modal',
 						'data-target' => '#update-modal',
 						'class' => 'update',
@@ -147,10 +178,11 @@ $this->title = '费项管理';
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'info', 'heading' => '费项列表',
-			'before' => Html::a( 'New', '#', [ 'class' => 'btn btn-info new',
-													  'data-toggle' => 'modal',
-													  'data-target' => '#update-modal',
-													  ] )
+			'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', 
+								[ 'class' => 'btn btn-info new',
+								  'data-toggle' => 'modal',
+								  'data-target' => '#update-modal',
+								] )
 		],
 		'columns' => $gridview,
 		'hover' => true,

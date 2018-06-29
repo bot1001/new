@@ -24,16 +24,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	            		'community0.community_name',
 	            		'building0.building_name',
 	
-	                    [ 'attribute' => 'room_name',
-	            			'value' => function ( $model ) {
-	            				$name = explode( '-', $model[ 'room_name' ] );
-	            				if ( count( $name ) == 1 ) {
-	            					return '1' . '单元';
-	            				} else {
-	            					return $name[ '0' ] . '单元';
-	            				}
-	            			}
-	            		],
+	                    [ 'attribute' => 'room_number'],
 	            		[ 'attribute' => 'room_name',
 	            			'value' => function ( $model ) {
 	            				$number = explode( '-', $model[ 'room_name' ] );
@@ -45,7 +36,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	            		'owners_cellphone',
 	            		'acreage',
 		                'finish',
-		                //'inherit',
 		                'decoration',
 		                'delivery',
 		                'orientation',
@@ -60,6 +50,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	</tbody>
 </table>
 
-	<a href="<?php echo Url::to(['/house/view01','id' => $model->realestate_id]) ?>" > 更多</a>
+	<div align="center">
+		<a href="<?php echo Url::to(['/house/view01','id' => $model->realestate_id]) ?>" class="btn btn-info"> 更多</a>
+	</div>
 
 </div>

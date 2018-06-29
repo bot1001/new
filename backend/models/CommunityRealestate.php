@@ -46,7 +46,7 @@ class CommunityRealestate extends \yii\db\ActiveRecord
             [['community_id', 'building_id', 'room_name', 'room_number', 'owners_name', 'owners_cellphone'], 'required'],
             [['community_id', 'building_id'], 'integer'],
 			[['acreage'], 'number', 'max' => 1500],
-		    [['owners_name'], 'string', 'max' => 6],
+		    [['owners_name'], 'string', 'max' => 32],
 		    //[['orientation'], 'string', 'max' => 11],
 		   [['finish', 'inherit', 'decoration', 'commencement', 'delivery'], function($attr, $params) {
                 if ($this->hasErrors()) return false;
@@ -63,9 +63,12 @@ class CommunityRealestate extends \yii\db\ActiveRecord
                 $this->{$attr} = $time;
                 return true;
             }],
-            [['room_name', 'room_number'], 'string', 'max' => 7, 'on' => 'update'],
+            [['room_number'], 'string', 'max' => 2, 'on' => 'update'],
+            [['room_name'], 'string', 'max' => 7, 'on' => 'update'],
+            [['room_number'], 'integer', 'max' => 10, 'on' => 'create'],
+            [['room_name'], 'string', 'max' => 6, 'on' => 'create'],
             [['owners_cellphone'], 'string', 'max' => 12, 'on' => 'update'],
-            [['community_id', 'building_id', 'room_name', 'room_number', 'owners_name'],
+           [['community_id', 'building_id', 'room_name', 'room_number', 'owners_name'],
 			 'unique', 'targetAttribute' => ['community_id', 'building_id', 'room_name', 'room_number'], 
 			 'message' => '数据重复，请勿再次提交！'],
         ];

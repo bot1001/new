@@ -38,7 +38,6 @@ class UserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
-                    'logout' => ['post'],
                     'activate' => ['post'],
                 ],
             ],
@@ -160,17 +159,6 @@ class UserController extends Controller
     }
 
     /**
-     * Logout
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->getUser()->logout();
-
-        return $this->goHome();
-    }
-
-    /**
      * Signup new user
      * @return string
      */
@@ -275,8 +263,23 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) 
+		{
+			$post = $_POST['SysUser']['new_pd']; //接收传输过来的密码，未加密
+			$id = $_POST['SysUser']['id']; //接收传输过来的id
+			$session = Yii::$app->session;
+			
+			if(strlen($post) != '32')
+			{
+				$user = SysUser::updateAll(['new_pd' => md5($post)], 'id = :oid', [':oid' => $id]);
+				if($user){
+					$session->setFlash( 'success', '1' );
+					return $this->redirect(['index']);
+				}
+			}
+			
+			$session->setFlash( 'success', '0');
+			return $this->redirect(['index']);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,

@@ -67,16 +67,6 @@ class UserController extends Controller
 			'comm' => $comm
         ]);
     }
-	
-	//检查用户是否登录
-	/*public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }*/
 
 	public function actionBatchdelete()
 	{

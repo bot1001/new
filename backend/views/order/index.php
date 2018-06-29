@@ -79,7 +79,7 @@ $this->title = '订单管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				$name = OrderRelationshipAddress::find()->select( 'name' )->where( [ 'order_id' => $model->order_id ] )->asArray()->one();
-				$url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id ] );
+				$url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id, 'amount' => $model->order_amount ] );
 				return Html::a( $name[ 'name' ], $url );
 			},
 			'hAlign' => 'center',

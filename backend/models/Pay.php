@@ -4,10 +4,14 @@ namespace app\models;
 
 use Yii;
 use dosamigos\qrcode\QrCode;
+use app\models\OrderProducts;
+use app\models\UserInvoice;
+use app\models\OrderBasic;
 
 class Pay extends \yii\db\ActiveRecord
 {
-    public static function HttpReq_GET($URL) {
+    public static function HttpReq_GET($URL) 
+	{
 		    $ch=curl_init(); //设置选项，包括URL
 		    curl_setopt($ch,CURLOPT_URL,$URL);
 		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -63,6 +67,42 @@ class Pay extends \yii\db\ActiveRecord
 		return $tmpStr;
 	}
 	
+	static function Wx($order_id, $url)
+	{
+		$dir = "images"; //二维码保存路径
+		if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
+			mkdir($dir);
+		}
+		$qc = $dir."/".$order_id.'.png'; //重命名二维码
+		$errorCorrectionLevel = 'H';//容错级别   
+		
+		QRcode::png($url,$qc,$errorCorrectionLevel, 10, 2); //创建二维码
+		if ( !file_exists($qc) ) {
+			echo "生成二维码图片处理失败";
+			return unll ;
+		}
+		return $qc;
+	}
+	
+	//微信支付打印日志
+	static function Log($post)
+	{
+		$dir = "log"; //日志保存路径
+		if( !is_dir($dir)) //判断路径是否存在
+		{
+			mkdir($dir); // 如存在则创建
+		}
+		
+		$filename = "./log/".date("Y-m-d").".log";
+		$date = date("Y-m-d H:i:s");
+		foreach($post as $key => $p){
+			$str = $date."\n"."$key"."=>"."$p"."\n";
+            file_put_contents($filename, $str, FILE_APPEND|LOCK_EX);
+		}
+        
+        return null;		
+	}
+	
 	public static function Jh($order_id)
 	{
 		//变量赋值
@@ -116,4 +156,108 @@ class Pay extends \yii\db\ActiveRecord
 		
         return $xmlarray; 
     }
+	
+	//后台线下缴费状态变更
+	public static function change($order_id, $gateway)
+	{
+		//获取订单费项ID
+		$i_id = OrderProducts::find()
+			->select('product_id')
+			->where(['order_id' => $order_id])
+			->asArray()
+			->all();
+		
+		    if($i_id){
+				$transaction = Yii::$app->db->beginTransaction(); //$transaction = Yii::$app->db->beginTransaction();
+				try{
+					//变更订单状态
+					$order =  OrderBasic::updateAll(['payment_time' => time(),
+					       					  'payment_gateway' => $gateway,
+					       					  'payment_number' => $order_id,
+					       					  'status' => 2],
+					       					  'order_id = :o_id', [':o_id' => $order_id]
+					       					 );
+					if($order){						
+		                foreach($i_id as $i){//变更费项状态
+						   $invoice = UserInvoice::updateAll(['payment_time' => time(),
+		    							      'update_time' => time(),
+		    							      'invoice_status' => $gateway, 
+		    							      'order_id' => $order_id],
+		    							      'invoice_id = :product_id', [':product_id' => $i['product_id']]
+		    							    );
+					   }
+				       
+					    $transaction->commit();
+					    return true;
+					}	
+				}catch(\exception $e){
+					print_r($e);
+					$transaction->rollback(); 
+					exit;
+				}
+		    	
+		 }
+		return false;
+	}
+	
+	//支付宝异步回调处理订单
+	public static function alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway)
+	{
+		//查询order_id 和金额order_amount
+		$ord = OrderBasic::find()
+				->select('order_id,order_amount')
+				->andwhere(['order_id' => "$out_trade_no"])
+				->andwhere(['order_amount' => "$total_amount"])
+				->asArray()
+				->one();
+		
+		if($ord){
+			$transaction = Yii::$app->db->beginTransaction();
+			try{
+				foreach($ord as $order){
+				$order = OrderBasic::updateAll(['status' => 2, //变更订单状态
+				    					   'payment_gateway' => $gateway, //变更支付方式
+				    					   'payment_number' => $trade_no, // 支付流水号
+				    					   'payment_time' => $p_time // 支付时间
+				    					   ],
+				    					   'order_id = :oid', [':oid' => $out_trade_no]
+				    				 );
+				
+				    if($order){
+				    	$p_id = OrderProducts::find()
+				    	    ->select('product_id, sale')
+				    	    ->where(['order_id' => "$out_trade_no"])
+				    	    ->asArray()
+				    	    ->all();
+				    
+				    	foreach($p_id as $pid)
+				    	{
+				    		if($pid['sale'] == 1){
+				    			$status = '4';
+				    		}else{
+				    			$status = $gateway;
+				    		}
+				    		
+				    		$invoice = UserInvoice::updateAll(['invoice_status' => $status,
+				    						    'payment_time' => $p_time,
+				    						    'update_time' => $p_time,
+				    							'order_id' => $out_trade_no],
+				    				            'invoice_id = :oid', [':oid' => $pid['product_id']]
+				    					);
+				    	}
+				    }
+				}
+				if($invoice){
+					$transaction->commit();
+					return true;
+				}else{
+					$transaction->rollback();
+				}
+			}catch(\Exception $e) {
+                $transaction->rollback();
+            }
+		}else{
+			return false;
+		}
+	}
 }

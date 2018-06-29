@@ -17,7 +17,7 @@ use kartik\daterange\DateRangePicker;
 <div class="community-realestate-form">
 
 	<?php 
-	$c = $_SESSION['user']['community'];
+	$c = $_SESSION['community'];
 	if($c){
 		$Array = CommunityBasic::find()->select( 'community_id,community_name')->where(['community_id' => $c])->All();;
 	}else{
@@ -79,57 +79,67 @@ use kartik\daterange\DateRangePicker;
 				</div>
 
 				<div class="row">
-		      			
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'finish', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
-		      			</div>
-		      			
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'delivery', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
-		      			</div>
-		      			
-				</div>
-	      			<div class="row">
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'decoration', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
-		      			</div>
+		      		<div class="col-lg-3">
+		      			<?= $form->field($model, 'finish', [
+                            'addon'=>['prepend'=>['content'=>'']],
+                            //'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                            'options'=>['class'=>'drp-container']])
+	                                 ->widget(DateRangePicker::classname(), [
+                                'useWithAddon'=>true,
+			                	'pluginOptions'=>[
+                                    'singleDatePicker'=>true,
+                                    'showDropdowns'=>true,
+					        	    'useWithAddon'=>true,
+                                ]
+                            ]) ?> 
 		      		</div>
-            		
-            		<div class="row">
-						<div class="col-lg-9">
-							<?= $form->field($model, 'property')->textInput(['maxlength' => true, 'placeholder' => '请输入相对应的信息……']) ?>
-						</div>
+		      		
+		      		<div class="col-lg-3">
+		      			<?= $form->field($model, 'delivery', [
+                             'addon'=>['prepend'=>['content'=>'']],
+                             'options'=>['class'=>'drp-container']])
+	                                  ->widget(DateRangePicker::classname(), [
+                                 'useWithAddon'=>true,
+			                 	'pluginOptions'=>[
+                                     'singleDatePicker'=>true,
+                                     'showDropdowns'=>true,
+					         	    'useWithAddon'=>true,
+                                 ]
+                             ]) ?> 
+		      		</div>
+		      		
+		      		<div class="col-lg-3">
+		      			<?= $form->field($model, 'decoration', [
+                            'addon'=>['prepend'=>['content'=>'']],
+                            'options'=>['class'=>'drp-container']])
+	                                 ->widget(DateRangePicker::classname(), [
+                                'useWithAddon'=>true,
+			                	'pluginOptions'=>[
+                                    'singleDatePicker'=>true,
+                                    'showDropdowns'=>true,
+					        	    'useWithAddon'=>true,
+                                ]
+                            ]) ?> 
+		      		</div>		      			
+				</div>
+      		
+	      		<div class="row">
+		      		<div class="col-lg-5">
+		      			<?= $form->field($house, 'IDcard')->textInput(['length' => '18', 'placeholder' => '请输入身份证……']); ?>
+		      		</div>
+				</div>
+	      		
+	      		<div class="row">
+		      		<div class="col-lg-9">
+		      			<?= $form->field($house, 'address')->textArea(['placeholder' => '请输入地址……']) ?>
+		      		</div>					
+		      	</div>
+            	
+            	<div class="row">
+					<div class="col-lg-11">
+						<?= $form->field($model, 'property')->textInput(['maxlength' => true, 'placeholder' => '请输入相对应的信息……']) ?>
 					</div>
+				</div>
 
 				<div class="form-group" align="center">
 					<?= Html::submitButton($model->isNewRecord ? '提交' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

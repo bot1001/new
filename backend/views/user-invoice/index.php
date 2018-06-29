@@ -17,7 +17,6 @@ Modal::begin( [
 ] );
 $requestUpdateUrl = Url::toRoute( 'view' );
 $importUrl = Url::toRoute( 'import' );
-$newUrl = Url::toRoute( 'new' );
 
 $updateJs = <<<JS
     $('.order').on('click', function () {
@@ -41,18 +40,6 @@ $updateJs = <<<JS
 JS;
 $this->registerJs( $updateJs );
 
-$updateJs = <<<JS
-    $('.new').on('click', function () {
-	    $('.modal-title').html('生成费项');
-        $.get('{$newUrl}', { id: $(this).closest('tr').data('key') },
-            function (data) {
-                $('.modal-body').html(data);
-            }  
-        );
-    });
-JS;
-$this->registerJs( $updateJs );
-
 Modal::end();
 
 $script = <<<SCRIPT
@@ -65,7 +52,11 @@ if(confirm('您确定要删除吗？')){
             url: '/user-invoice/del',
             data: {ids:keys},
             type: 'post',
-                   })
+			success: function(is){
+			    alert("成功删除："+is+"条！");
+				location.reload();
+			}
+        })
     }
 });
 
@@ -167,15 +158,7 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
-				$y = explode( '年', $model->description );
-				$l = strlen( reset( $y ) );
-				if ( $model->year ) {
-					return $model->year . '年';
-				} elseif ( $l != 4 ) {
-					return '';
-				} else {
-					return reset( $y ) . '年';
-				}
+				return $model->year . '年';
 			},
 		 'filterType' => GridView::FILTER_SELECT2,
 			'filter' => $y,
@@ -202,10 +185,6 @@ $this->title = '缴费管理';
 		//'year',
 
 		[ 'attribute' => 'description',
-			'value' => function ( $model ) {
-				$d = explode( '份', $model->description );
-				return end( $d );
-			},
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
 				return ( $model->invoice_status != 0 ); // 判断活动列是否可编辑
@@ -222,7 +201,7 @@ $this->title = '缴费管理';
 			'width' => ''
 		],
 		[ 'attribute' => 'invoice_amount',
-			'refreshGrid' => 'true',
+//			'refreshGrid' => 'true',
 			'pageSummary' => true,
 			'class' => 'kartik\grid\EditableColumn',
 			'readonly' => function ( $model, $key, $index, $widget ) {
@@ -313,12 +292,12 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
-				$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', '7' => '建行' ];
+				$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
 				return $data[ $model[ 'invoice_status' ] ];
 			},
 			//'refreshGrid' => 'true',
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', '7' => '建行' ],
+			'filter' => [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ],
 			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
@@ -330,7 +309,7 @@ $this->title = '缴费管理';
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金', '7' => '建行' ],
+				'data' => [ '0' => '欠费', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ],
 			],
 			'hAlign' => 'center',
 			'width' => ''
@@ -349,7 +328,6 @@ $this->title = '缴费管理';
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
-			//'width' => '5%'
 			],
 	];
 	echo GridView::widget( [
@@ -359,12 +337,7 @@ $this->title = '缴费管理';
 		//'showFooter' => true,
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '缴费',
-			'before' => Html::a( '新费项', '#', [
-				'data-toggle' => 'modal',
-				'data-target' => '#update-modal', 
-		        'class' => 'btn btn-success new',
-			] ) . ' ' .
-			Html::a( '导入', 'import', [
+			'before' => Html::a( '<span class="glyphicon glyphicon-cloud-upload"></span>', 'import', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info import',
@@ -374,8 +347,8 @@ $this->title = '缴费管理';
 
 		'toolbar' => [
 			[ 'content' =>
-				Html::a( '删除', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] ) . ' ' .
-				Html::a( '统计', [ 'search' ], [ 'class' => 'btn btn-success' ] )
+				Html::a( '<span class="glyphicon glyphicon-trash"></span>', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] ) . ' ' .
+				Html::a( '统计', [ 'sum' ], [ 'class' => 'btn btn-success' ] )
 			],
 			'{toggleData}',
 			'{export}'
