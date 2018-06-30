@@ -507,6 +507,8 @@ class UserInvoiceController extends Controller
 		{
 			$ds = $ds->andWhere(['and', "year >= $year_1", "month >=$month01"])
 			->andWhere(['and', "year <= $year_2", "month <= $month02"]);
+		}else{
+			$ds = $ds->andWhere(['year' => date('Y'), 'month' => date('m')]);
 		}
 		
         $count = $ds->count();// 计算总数
