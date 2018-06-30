@@ -67,6 +67,7 @@ class UserInvoiceSearch extends UserInvoice
 			'pagination' =>['pageSize' => '15'],
 			'sort' => [
 			     'defaultOrder' =>[
+			           'invoice_id' => SORT_DESC,
 			           'description' => SORT_DESC,
 		              ]
 		         ]

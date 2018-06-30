@@ -371,7 +371,12 @@ class PayController extends Controller
 		$result = \WxPayAPI::unifiedOrder($input);
 		
 		//获取支付链接
-		$url = $result['code_url'];
+		if($result['code_url']){
+			$url = $result['code_url'];
+		}else{
+			return $this->redirect(Yii::$app->request->referrer);
+		}
+		
 		
 		//生成支付二维码
 		$img = Pay::wx($order_id, $url);

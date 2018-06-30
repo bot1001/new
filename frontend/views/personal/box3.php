@@ -87,7 +87,7 @@ use yii\helpers\Html;
         <?php endforeach; ?>
     </table>
 
-<table id="box303" border="1px">
+<table id="box303">
   <tbody>
     <tr>
         <td id="c" width="50px">共:</td>

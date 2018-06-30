@@ -109,4 +109,21 @@ class Pay extends \yii\db\ActiveRecord
 		
 		return $end;
 	}
+	
+	static function Wx($order_id, $url)
+	{
+		$dir = "img"; //二维码保存路径
+		if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
+			mkdir($dir);
+		}
+		$qc = $dir."/".$order_id.'.png'; //重命名二维码
+		$errorCorrectionLevel = 'H';//容错级别   
+		
+		QRcode::png($url,$qc,$errorCorrectionLevel, 10, 2); //创建二维码
+		if ( !file_exists($qc) ) {
+			echo "生成二维码图片处理失败";
+			return unll ;
+		}
+		return $qc;
+	}
 }

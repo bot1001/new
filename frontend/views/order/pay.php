@@ -73,10 +73,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</td>
 
 			<td>
-				<a href="#<?= Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
+				<a href="<?= Url::to(['/pay/pay', 'method' => 'wx','pay'=> $pay ]) ?>"  title="微信支付" onmouseover="show()">
 					<div class="dropdown">
 						<span>
-							<img id="pay" src="/image/wx.png" onClick="wx()" />
+							<img id="pay" src="/image/wx.png" />
 						</span>
 						<div class="dropdown-content">
 							微信支付

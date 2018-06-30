@@ -23,7 +23,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body>
+<body style="background: #F7F6F0">
 <?php $this->beginBody() ?>
 
 <div class="wrap">

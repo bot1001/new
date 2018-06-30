@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		margin: auto;
 		font-size: 25px;
 		line-height: 60px;
+		border-radius: 20px;
 		width: 116px;
 		height: 54px;
 		background: url(/image/timg.jpg);

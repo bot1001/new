@@ -45,7 +45,7 @@ use yii\helpers\Url;
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
 					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
-																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
+																								 'order_id' => $order_id, 'amount' => $amount]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 
@@ -68,7 +68,7 @@ use yii\helpers\Url;
    <div id="wx">
      <img src="<?= '/'.$img ?>"/>
       <div id="div2">
-          <p><?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'合计：'.'<k>'.$order_amount.'</k>'; ?></p>
+          <p><?php echo '订单编号：'.'<k>'.$order_id.'</k>'; echo '<br>'; echo '合计：'.'<k>'.$amount.'</k>'; ?></p>
       </div>
       <div id="remind" style="color: darkred">
 	     <p></p>
