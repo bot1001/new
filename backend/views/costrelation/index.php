@@ -1,11 +1,11 @@
 <?php
 
-use yii\ helpers\ Html;
-use kartik\ grid\ GridView;
-use yii\ bootstrap\ Modal;
-use yii\ helpers\ Url;
-use app\ models\ CommunityBasic;
-use app\ models\ CommunityBuilding;
+use yii\helpers\Html;
+use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+use app\models\CommunityBasic;
+use app\models\CommunityBuilding;
 
 Modal::begin( [
 	'id' => 'update-modal',
@@ -111,7 +111,7 @@ $this->title = '费项列表';
 		
 		['attribute' => 'status',
 		 'value' => function($model){
-	    	return $model->status== 0 ? '否' : '是';
+	    	return $model->status== 0 ? '禁用' : '启用';
 	    },
 		 //单元格背景色变换
 		 'contentOptions' => function ( $model ) {
@@ -121,7 +121,7 @@ $this->title = '费项列表';
 			 'editableOptions' => [
 				'header' => '详情',
 				'formOptions' => [ 'action' => [ '/costrelation/relation' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 				'data' => ['禁用', '启用'],
 		],
 		'hAlign' => 'center',
