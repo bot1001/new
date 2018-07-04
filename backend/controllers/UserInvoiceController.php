@@ -497,7 +497,7 @@ class UserInvoiceController extends Controller
 			$from = $payment01;
 			$to = $payment02;
 		}
-		
+
 		if($p !== '')
 		{
 			$ds = $ds->andwhere(['between', 'user_invoice.payment_time', strtotime($payment01), strtotime($payment02)]);
@@ -507,8 +507,8 @@ class UserInvoiceController extends Controller
 		{
 			$ds = $ds->andWhere(['and', "year >= $year_1", "month >=$month01"])
 			->andWhere(['and', "year <= $year_2", "month <= $month02"]);
-		}else{
-			$ds = $ds->andWhere(['year' => date('Y'), 'month' => date('m')]);
+		}elseif(empty($f) && empty($p)){
+			$ds = $ds->andFilterWhere(['year' => date('Y'), 'month' => date('m')]);
 		}
 		
         $count = $ds->count();// 计算总数
