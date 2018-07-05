@@ -61,6 +61,11 @@ class houseSearch extends HouseInfo
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' =>[
+                'defaultOrder' => [
+                    'house_id' => SORT_DESC
+                ]
+            ]
         ]);
 
         $this->load($params);

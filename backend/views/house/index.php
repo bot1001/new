@@ -153,18 +153,7 @@ $this->title = '房屋信息';
 			'width' => 'px'],
 		
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => Helper::filterActionColumn('{update}{delete}'),
-			 'buttons' => [
-				'update' => function ( $url, $model, $key ) {
-					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
-						'data-toggle' => 'modal',
-						'data-target' => '#view-modal',
-						'class' => 'up',
-						'data-id' => $key,
-
-					] );
-				},
-			],
+			 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
 			'header' => '操<br />作'],
         ];
 		

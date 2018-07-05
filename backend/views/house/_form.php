@@ -17,9 +17,9 @@ use kartik\depdrop\DepDrop;
     
     <div class="row">
     	<div class="col-lg-4">
-    		<?= $form->field($model, 'community')->dropDownList($community, ['prompt' => '请选择', 'id'=> 'community'])->label('小区') ?>
+    		<?= $form->field($model, 'community')->dropDownList($_SESSION['community_id'], ['prompt' => '请选择', 'id'=> 'community'])->label('小区') ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
     		<?= $form->field($model, 'building')->widget(DepDrop::classname(), [
                             'type' => DepDrop::TYPE_SELECT2,
                             'options'=>['id'=>'building'],
@@ -31,15 +31,29 @@ use kartik\depdrop\DepDrop;
                             ]
                         ])->label('楼宇'); ?>
     	</div>
-    	<div class="col-lg-3">
+    	<div class="col-lg-2">
+    		<?= $form->field($model, 'number')->widget(DepDrop::classname(), [
+                            'type' => DepDrop::TYPE_SELECT2,
+                            'options'=>['id'=>'number'],
+	                        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                            'pluginOptions'=>[
+                                'depends'=>['building'],
+                                'placeholder'=>'请选择...',
+                                'url'=>Url::to(['/costrelation/number'])
+                            ]
+                        ])->label('单元') ?>
+    	</div>
+
+        <div class="col-lg-3">
     		<?= $form->field($model, 'realestate')->widget(DepDrop::classname(), [
                             'type' => DepDrop::TYPE_SELECT2,
                             'options'=>['id'=>'room_name'],
 	                        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                             'pluginOptions'=>[
-                                'depends'=>['building'],
+                                'depends'=>['number'],
                                 'placeholder'=>'请选择...',
-                                'url'=>Url::to(['/costrelation/re'])
+                                'url'=>Url::to(['/costrelation/re']),
+                                'params'=>['building'], //另一个上层目录
                             ]
                         ])->label('房号') ?>
     	</div>
@@ -52,10 +66,6 @@ use kartik\depdrop\DepDrop;
     	<div class="col-lg-4">
     		<?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
     	</div>
-    	
-    	<div class="col-lg-3">
-    		<?= $form->field($model, 'politics')->dropDownList(['0' => '群众', '1'=> '团员', '2'=> '党员']) ?>
-    	</div>
     </div>
     
     <div class="row">
@@ -65,14 +75,14 @@ use kartik\depdrop\DepDrop;
     </div>
     
     <div class="row">
-    	<div class="col-lg-8">
-    		<?= $form->field($model, 'address')->textArea(['maxlength' => true]) ?>
+    	<div class="col-lg-12">
+    		<?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
     	</div>
 	</div>
   	
     <div class="row">
-    	<div class="col-lg-10">
-    		<?= $form->field($model, 'property')->textArea(['maxlength' => true]) ?>
+    	<div class="col-lg-12">
+    		<?= $form->field($model, 'property')->textInput(['maxlength' => true]) ?>
     	</div>
     </div>
 

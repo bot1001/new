@@ -298,7 +298,7 @@ class CostrelationController extends Controller {
 				foreach ( $list as $i => $account ) {
 					$out[] = [ 'id' => $account[ 'realestate_id' ], 'name' => $account[ 'room_name' ] ];
 					if ( $i == 0 ) {
-						$first = $account[ 'room_number' ];
+						$first = $account[ 'realestate_id' ];
 					}
 					if ( $account[ 'realestate_id' ] == $selected ) {
 						$isSelectedIn = true;

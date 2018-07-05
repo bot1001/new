@@ -15,7 +15,7 @@ Modal::begin( [
 	'header' => '<h4 class="modal-title">房屋操作</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
-$V_Url = Url::toRoute( [ 'view' ] );
+$V_Url = Url::toRoute( [ '/house/index01' ] );
 $u_Url = Url::toRoute( [ 'update' ] );
 $n_Url = Url::toRoute( [ '/costrelation/create1' ] );
 $c_Url = Url::toRoute( [ '/user-invoice/c' ] );

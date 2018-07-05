@@ -314,8 +314,8 @@ class CommunityRealestateController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
-            'model' => $this->findModel($id),
+        return $this->redirect(['/house/index01',
+            'id' => $id,
         ]);
     }
 

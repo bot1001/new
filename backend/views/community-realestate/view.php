@@ -51,7 +51,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 </table>
 
 	<div align="center">
-		<a href="<?php echo Url::to(['/house/view01','id' => $model->realestate_id]) ?>" class="btn btn-info"> 更多</a>
+		<a href="<?php echo Url::to(['/house/index01','id' => $model->realestate_id]) ?>" class="btn btn-info"> 更多</a>
 	</div>
 
 </div>
