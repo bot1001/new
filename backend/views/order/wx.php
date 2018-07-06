@@ -68,7 +68,7 @@ use yii\helpers\Url;
    <div id="wx">
      <img src="<?= '/'.$img ?>"/>
       <div id="div2">
-          <p><?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'合计：'.'<k>'.$order_amount.'</k>'; ?></p>
+          <p><?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'<br />'.'合计：'.'<k>'.$order_amount.'</k>'; ?></p>
       </div>
       <div id="remind" style="color: darkred">
 	     <p></p>

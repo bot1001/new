@@ -154,7 +154,7 @@ $this->title = '缴费管理';
 			//'value' => 'room.room_number',
 			// 'group' => true,
 			'hAlign' => 'center',
-			'width' => '80px'
+			'width' => '60px'
 		],
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
@@ -167,7 +167,7 @@ $this->title = '缴费管理';
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'hAlign' => 'center',
-			'width' => '70px'
+			'width' => '90px'
 		],
 		[ 'attribute' => 'month',
 			'value' => function ( $model ) {
@@ -180,7 +180,7 @@ $this->title = '缴费管理';
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'hAlign' => 'center',
-			'width' => '55px'
+			'width' => '100px'
 		],
 		//'year',
 
@@ -251,7 +251,7 @@ $this->title = '缴费管理';
 		],
 		
 		[ 'attribute' => 'payment_time',
-			//'group' => true,
+//			'group' => true,
 		    'value' => function($model){
 	        	if(empty($model->payment_time)){
 	        		return '';
@@ -285,19 +285,20 @@ $this->title = '缴费管理';
                 ],
                 'options' => [
                     'placeholder' => '请选择...',
-                    //'style'=>'width:200px',
+                    'style'=>'width:200px',
                 ],
 		    ],
+            'width' => '180px',
 			'hAlign' => 'center',		
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
-				$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '8' => '优惠' ];
+				$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
 				return $data[ $model[ 'invoice_status' ] ];
 			},
 			//'refreshGrid' => 'true',
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '8' => '优惠' ],
+			'filter' => [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ],
 			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
@@ -328,6 +329,7 @@ $this->title = '缴费管理';
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
+            'width' => '25px'
 			],
 	];
 	echo GridView::widget( [

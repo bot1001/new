@@ -59,7 +59,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	function loadText() {
 		var xhr = new XMLHttpRequest();
 		//xml请求参数
-		xhr.open( 'GET', "<?php echo Url::to(['/pay/wei', 'order_id' => $order_id]); ?>", true );
+		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
 					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
@@ -88,8 +88,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</div>
 
 	</div>
+    <p></p>
 	<div id="div2">
-		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'<br />'.'合计：'.'<k>'.$order_amount.'</k>';
-		?>
+
+		<?php echo '订单编号：'.'<k>'.$order_id.'</k>'.'<br />'.'合计：'.'<k>'.$order_amount.'</k>';?>
 	</div>
 </div>

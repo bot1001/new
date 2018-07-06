@@ -5,13 +5,13 @@ use yii\helpers\Html;
 
 ?>
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+    <img src="/image/logo.png" class="user-image" alt="User Image"/>
     <span class="hidden-xs"><?php echo $session['name'] ?></span>
 </a>
 <ul class="dropdown-menu">
     <!-- User image -->
     <li class="user-header">
-        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
+        <img src="/image/logo.png" class="img-circle"
              alt="User Image"/>
         <p>
 			当前小区：<l><?php if(count($a) == 1)
@@ -43,7 +43,7 @@ use yii\helpers\Html;
         <div class="pull-left">
            <?= Html::a(
                 '修改密码',
-                ['/sysuser/change'],
+                '/sysuser/change',
                 ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
             ) ?>
             
@@ -51,7 +51,7 @@ use yii\helpers\Html;
         <div class="pull-right">
             <?= Html::a(
                 '退出',
-                ['/site/logout'],
+                '/site/logout',
                 ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
             ) ?>
         </div>
