@@ -50,7 +50,7 @@ class Menu extends MenuModel
         }]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
 
         $sort = $dataProvider->getSort();
@@ -64,7 +64,7 @@ class Menu extends MenuModel
             'desc' => ['parent.order' => SORT_DESC, 't.order' => SORT_DESC],
             'label' => 'order',
         ];
-        $sort->defaultOrder = ['menuParent.name' => SORT_ASC];
+        $sort->defaultOrder = ['id' => SORT_DESC,'menuParent.name' => SORT_ASC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

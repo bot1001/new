@@ -132,6 +132,12 @@ class CostrelationController extends Controller {
 	public function actionCreate() 
 	{
 		$model = new CostRelation();
+		$cost = CostName::find()
+            ->select('cost_name,cost_id')
+            ->where(['level' => '0'])
+            ->orderBy('cost_id ASC')
+            ->indexBy('cost_id')
+            ->column();
 		
 		if ( $model->load( Yii::$app->request->post() )) {
 			$post = $_POST['CostRelation']; // 接收传递过来的信息
@@ -177,6 +183,7 @@ class CostrelationController extends Controller {
 		} else {
 			return $this->renderAjax( '_form', [
 				'model' => $model,
+                'cost' => $cost
 			] );
 		}
 	}
@@ -347,11 +354,7 @@ class CostrelationController extends Controller {
 	public function actionP( $selected = null ) {
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
 			$id = $_POST[ 'depdrop_parents' ];
-			$l = CostName::find()->andwhere( [ 'cost_id' => $id ] )->all();
-			foreach ( $l as $li );
-			$i = $li[ 'cost_id' ];
-			$list = CostName::find()->where( [ 'parent' => $i ] )->orderBy('price ASC')->all();
-			//print_r($list);die;
+			$list = CostName::find()->where( [ 'parent' => reset($id) ] )->orderBy('price ASC')->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {
 				foreach ( $list as $i => $account ) {

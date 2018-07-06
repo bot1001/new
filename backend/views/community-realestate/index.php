@@ -24,6 +24,7 @@ $cr_Url = Url::toRoute(['create']);
 
 $vJs = <<<JS
     $('.view').on('click', function () {
+        $('.modal-title').html('业主信息');
         $.get('{$V_Url}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
@@ -35,6 +36,7 @@ $this->registerJs( $vJs );
 
 $uJs = <<<JS
     $('.update').on('click', function () {
+        $('.modal-title').html('更新');
         $.get('{$u_Url}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
@@ -46,6 +48,7 @@ $this->registerJs( $uJs );
 
 $nJs = <<<JS
     $('.create1').on('click', function () {
+        $('.modal-title').html('费项关联');
         $.get('{$n_Url}', { id: $(this).closest('tr').data('key') },
            function(data){
               $('.modal-body').html(data);
@@ -57,6 +60,7 @@ $this->registerJs( $nJs );
 
 $cJs = <<<JS
     $('.c').on('click', function () {
+        $('.modal-title').html('费项生成');
         $.get('{$c_Url}', { id: $(this).closest('tr').data('key') },
            function(data){
               $('.modal-body').html(data);
@@ -68,6 +72,7 @@ $this->registerJs( $cJs );
 
 $cJs = <<<JS
     $('.i').on('click', function () {
+        $('.modal-title').html('费项导入');
         $.get('{$i_Url}', { id: $(this).closest('tr').data('key') },
            function(data){
               $('.modal-body').html(data);
@@ -79,6 +84,7 @@ $this->registerJs( $cJs );
 
 $cJs = <<<JS
     $('.cr').on('click', function () {
+        $('.modal-title').html('添加房屋');
         $.get('{$cr_Url}', { id: $(this).closest('tr').data('key') },
            function(data){
               $('.modal-body').html(data);

@@ -48,6 +48,15 @@ $this->title = '房屋信息';
 <div class="house-info-index">
 
     <?php
+    $message=Yii::$app->getSession()->getFlash('fail');
+    if($message == 1){
+        echo '<script>alert("更新对象不能为空！")</script>';
+    }elseif ($message == 2){
+        echo '<script>alert("添加对象不能为空！")</script>';
+    }
+    ?>
+
+    <?php
 	$gridview = [
 		
             ['class' => 'kartik\grid\SerialColumn',
@@ -147,13 +156,13 @@ $this->title = '房屋信息';
 			 'class' => 'kartik\grid\EditableColumn',
 			 'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 			],
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => Helper::filterActionColumn('{view}{update}{delete}'),
+			 'template' => Helper::filterActionColumn('{delete}'),
 			'header' => '操<br />作'],
         ];
 		

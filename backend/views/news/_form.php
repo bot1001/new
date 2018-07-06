@@ -10,23 +10,10 @@ use app\models\CommunityBasic;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="community-news-form">
+<div class="community-news-form" style="max-width: 700px">
 
    <?php
-	$c = $_SESSION['community'];
-	if(empty($c)){
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->asArray()
-			->all();
-	}else{
-		$community = CommunityBasic::find()
-			->select('community_id, community_name')
-			->where(['community_id' => $c])
-			->asArray()
-			->all();
-	}
-	 $comm = ArrayHelper::map($community,'community_id', 'community_name');
+	 $comm = CommunityBasic::community();
 	?>
     <?php $form = ActiveForm::begin(); ?>
     
@@ -73,7 +60,7 @@ use app\models\CommunityBasic;
     </div>
 
     <div class="form-group" align="center">
-        <?= Html::submitButton('保存<span class="glyphicon glyphicon-save"></span>', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

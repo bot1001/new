@@ -391,19 +391,13 @@ class CommunityRealestateController extends Controller
     {
         $model = $this->findModel($id);
 		$model->setScenario('update');
-		
-		$b = CommunityBuilding::find()->select('building_id,building_name')->where(['building_id' => $model['building_id']])->asArray()->all();
-	    $c = CommunityBasic::find()->select('community_name,community_id')->where(['community_id' => $model['community_id']])->asArray()->all();
-	    $comm = ArrayHelper::map($c,'community_id','community_name');
-	    $bu = ArrayHelper::map($b,'building_id','building_name');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect( Yii::$app->request->referrer );
         } else {
             return $this->renderAjax('form', [
                 'model' => $model,
-				'comm' => $comm,
-				'bu' => $bu
+				'id' => $id
             ]);
         }
     }

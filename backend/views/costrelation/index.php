@@ -91,10 +91,10 @@ $this->title = '费项列表';
 		],
 
 		[ 'attribute' => 'name',
-			'value' => 'cos.cost_name',
-		 'label' => '名称',
-			'hAlign' => 'center',
-			'width' => '100px'
+            'value' => 'cos.cost_name',
+            'label' => '名称',
+            'hAlign' => 'center',
+            'width' => '100px'
 		],
 
 		[ 'attribute' => 'price',
@@ -113,6 +113,12 @@ $this->title = '费项列表';
 		 'value' => function($model){
 	    	return $model->status== 0 ? '禁用' : '启用';
 	    },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => ['0' => '禁用', '1' => '启用'],
+            'filterInputOptions' => ['placeholder' => '请选择'],
+            'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear'=> true]
+            ],
 		 //单元格背景色变换
 		 'contentOptions' => function ( $model ) {
 		 	return ( $model->status == 0 ) ? [ 'class' => 'bg-orange' ] : [];

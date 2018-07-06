@@ -26,7 +26,7 @@ use kartik\daterange\DateRangePicker;
 
 		</td>
 		<td>
-			<div class="row">
+			<div class="row" style="display: none">
 				<div class="col-lg-5">
 					<?= $form->field($model, 'community')->dropDownList($community);?>
 				</div>
@@ -40,7 +40,7 @@ use kartik\daterange\DateRangePicker;
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-5">
 					<?= $form->field($model, 'price')->dropDownList($cost,['prompt'=>'请选择','id'=>'costrelation-parent'])->label('费项') ?>
 				</div>
 				<div class="col-lg-4">
@@ -55,13 +55,9 @@ use kartik\daterange\DateRangePicker;
                         ]
                     ])->label('单价') ?>
 				</div>
-				
-				<div class="col-lg-4">
-					<?= $form->field($model, 'status')->dropDownList(['禁用', '启用'],['prompt'=>'请选择']) ?>
-				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<?= $form->field($model, 'from', [
                         'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
                         'options'=>['class'=>'drp-container']])
@@ -72,8 +68,12 @@ use kartik\daterange\DateRangePicker;
                                 'showDropdowns'=>true,
 							    'useWithAddon'=>true,
                             ]
-                        ])/*->textInput(['value' => date('Y-m-d')])*/ ?>
+                        ])->textInput(['value' => date('Y-m-d')]) ?>
 				</div>
+
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'status')->dropDownList(['禁用', '启用'],['prompt'=>'请选择']) ?>
+                </div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
@@ -82,7 +82,7 @@ use kartik\daterange\DateRangePicker;
 			</div>
 
 			<div class="form-group" align="center">
-				<?= Html::submitButton($model->isNewRecord ? '提交' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+				<?= Html::submitButton($model->isNewRecord ? '保存' : '提交', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 			</div>
 		</td>
 		<td width="3%">
@@ -97,10 +97,10 @@ use kartik\daterange\DateRangePicker;
 			text-align: center
 		}
 	</style>
-    
-    <?php if(isset($relation)){ ?>
+
+    <?php if(!empty($relation)){ ?>
     <p></p>
-    <p>此房屋当前绑定的房号如下：</p>
+    <p>此房屋当前绑定的 <l>费项</l> 如下：</p>
     <table border="1" width="60%">
     	<tr>
     		<th>序号</th>

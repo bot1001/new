@@ -14,19 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?=
-        Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ])
-        ?>
-    </p>
-
     <?=
     DetailView::widget([
         'model' => $model,
@@ -38,5 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ])
     ?>
+
+    <p align="center">
+        <?php // echo Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?=
+        Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '您确定要删除吗?',
+                'method' => 'post',
+            ],
+        ])
+        ?>
+    </p>
 
 </div>

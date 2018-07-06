@@ -73,9 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '菜单列表',
-				   'before' => Html::a(Yii::t('rbac-admin', 'New'), ['create'], ['class' => 'btn btn-info'])],
+				   'before' => Html::a(Yii::t('rbac-admin', '<span class="glyphicon glyphicon-plus"></span>'), ['create'], ['class' => 'btn btn-info'])],
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn','header' => '序<br/>号'],
             'name',
             [
                 'attribute' => 'menuParent.name',

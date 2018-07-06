@@ -8,6 +8,11 @@ use kartik\daterange\DateRangePicker;
 /* @var $model app\models\CommunityRealestate */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<style>
+    #none{
+        display: none;
+    }
+</style>
 
 <div class="community-realestate-form">
 
@@ -18,11 +23,9 @@ use kartik\daterange\DateRangePicker;
 		      	<td width="5%"></td>
 		      	<td>
 		      		<div class="row">
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'community_id')->dropDownList($comm,['readonly' => true]) ?>
-		      			</div>
-		      			<div class="col-lg-3">
-		      				<?= $form->field($model, 'building_id')->dropDownList($bu,['readonly' => true]) ?>
+		      			<div id="none">
+		      				<?= $form->field($model, 'community_id')->textInput(['maxlength' => true]) ?>
+		      				<?= $form->field($model, 'building_id')->textInput(['maxlength' => true]) ?>
 		      			</div>
 		      			<div class="col-lg-2">
 		      				<?= $form->field($model, 'room_number')->textInput(['maxlength' => true]) ?>
@@ -30,70 +33,67 @@ use kartik\daterange\DateRangePicker;
 		      			<div class="col-lg-2">
 		      				<?= $form->field($model, 'room_name')->textInput(['maxlength' => true]) ?>
 		      			</div>
+
+                        <div class="col-lg-5">
+                            <?= $form->field($model, 'owners_name')->textInput(['maxlength' => true]) ?>
+                        </div>
+                        <div class="col-lg-3">
+                            <?= $form->field($model, 'owners_cellphone')->textInput(['maxlength' => true]) ?>
+                        </div>
 		      		</div>
 		      		<div class="row">
-		      			<div class="col-lg-3">
-		      				<?= $form->field($model, 'owners_name')->textInput(['maxlength' => true]) ?>
-		      			</div>
-		      			<div class="col-lg-3">
-		      				<?= $form->field($model, 'owners_cellphone')->textInput(['maxlength' => true]) ?>
-		      			</div>
-		      			
-		      			<div class="col-lg-2">
-		      				<?= $form->field($model, 'acreage')->textInput(['maxlength' => true]) ?>
-		      			</div>
-		      			
-		      			<div class="col-lg-3">
-		      				<?= $form->field($model, 'orientation')->textInput(['maxlength' => true]) ?>
-		      			</div>
+                        <div class="col-lg-3">
+                            <?= $form->field($model, 'acreage')->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <?= $form->field($model, 'orientation')->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <?= $form->field($model, 'finish', [
+                                'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                                'options'=>['class'=>'drp-container']])
+                                ->widget(DateRangePicker::classname(), [
+                                    'useWithAddon'=>true,
+                                    'pluginOptions'=>[
+                                        'singleDatePicker'=>true,
+                                        'showDropdowns'=>true,
+                                        'useWithAddon'=>true,
+                                    ]
+                                ]) ?>
+                        </div>
 		      		</div>
 		      		
 		      		<div class="row">
-		      			
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'finish', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
-		      			</div>
-		      			
 		      			<div class="col-lg-4">
 		      				<?= $form->field($model, 'delivery', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
+                            'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                            'options'=>['class'=>'drp-container']])
+	                                 ->widget(DateRangePicker::classname(), [
+                                'useWithAddon'=>true,
+			                	'pluginOptions'=>[
+                                    'singleDatePicker'=>true,
+                                    'showDropdowns'=>true,
+						    	    'useWithAddon'=>true,
+                                ]
+                            ]) ?>
 		      			</div>
-		      			
+
+                        <div class="col-lg-4">
+                            <?= $form->field($model, 'decoration', [
+                                'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
+                                'options'=>['class'=>'drp-container']])
+                                ->widget(DateRangePicker::classname(), [
+                                    'useWithAddon'=>true,
+                                    'pluginOptions'=>[
+                                        'singleDatePicker'=>true,
+                                        'showDropdowns'=>true,
+                                        'useWithAddon'=>true,
+                                    ]
+                                ]) ?>
+                        </div>
 					</div>
-	      			<div class="row">
-		      			<div class="col-lg-4">
-		      				<?= $form->field($model, 'decoration', [
-                        'addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
-                        'options'=>['class'=>'drp-container']])
-	                             ->widget(DateRangePicker::classname(), [
-                            'useWithAddon'=>true,
-			            	'pluginOptions'=>[
-                                'singleDatePicker'=>true,
-                                'showDropdowns'=>true,
-							    'useWithAddon'=>true,
-                            ]
-                        ]) ?> 
-		      			</div>
-		      		</div>
             		
             		<div class="roa">
 						<div class="col-lg9">

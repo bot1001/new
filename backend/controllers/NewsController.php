@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\CommunityBasic;
 use Yii;
 use app\models\CommunityNews;
 use yii\helpers\ArrayHelper;
@@ -50,9 +51,12 @@ class NewsController extends Controller
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $comm = CommunityBasic::community(); //从模型中获取小区数组
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'comm' => $comm
         ]);
     }
 	
@@ -77,9 +81,16 @@ class NewsController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(isset($_GET['note'])){
+            return $this->renderAjax('v', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
     }
 	public function actionView1($id)
     {

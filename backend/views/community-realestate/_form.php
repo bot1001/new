@@ -54,7 +54,16 @@ use kartik\daterange\DateRangePicker;
                         ]); ?>
 					</div>
 					<div class="col-lg-2">
-						<?= $form->field($model, 'room_number')->textInput(['maxlength' => true/*,'readonly' => true*/]) ?>
+						<?= $form->field($model, 'room_number')->widget(DepDrop::classname(), [
+                            'type' => DepDrop::TYPE_SELECT2,
+                            'options'=>['id'=>'number'],
+                            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                            'pluginOptions'=>[
+                                'depends'=>['building'],
+                                'placeholder'=>'请选择...',
+                                'url'=>Url::to(['/costrelation/number'])
+                            ]
+                        ]); ?>
 					</div>
 					<div class="col-lg-3">
 						<?= $form->field($model, 'room_name')->textInput(['placeholder' => '请输入……']) ?>
@@ -74,7 +83,7 @@ use kartik\daterange\DateRangePicker;
 					</div>
 					
 					<div class="col-lg-2">
-						<?= $form->field($model, 'orientation')->textInput(['maxlength' => true, 'placeholder' => '房屋面积']) ?>
+						<?= $form->field($model, 'orientation')->textInput(['maxlength' => true, 'placeholder' => '朝向']) ?>
 					</div>
 				</div>
 

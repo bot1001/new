@@ -161,9 +161,18 @@ class HouseController extends Controller
         ]);
     }
 
-    function actionC($id, $room)
+    function actionC()
     {
         $model= New houseInfo;
+        $get=$_GET;
+        if(isset($get['room'] ) && isset($get['id'])){
+            $room=$get['room'];
+            $id=$get['id'];
+        }else{
+            $session=Yii::$app->session;
+            $session->setFlash('fail', '2');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -182,8 +191,17 @@ class HouseController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
+        $model= New houseInfo;
+        $get=$_GET;
+        if(isset($get['id'])){
+            $id=$get['id'];
+        }else{
+            $session=Yii::$app->session;
+            $session->setFlash('fail', '1');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         $model = $this->findModel($id);
 
         $ids = HouseInfo::find()->where(['house_id' => "$id"])->select('realestate')->asArray()->one();

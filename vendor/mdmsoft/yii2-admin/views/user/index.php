@@ -200,7 +200,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'panel' => [ 'type' => 'info', 'heading' => '账户列表',
-				   'before' => Html::a( 'New', '#', [
+				   'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 
 		        'class' => 'btn btn-success create',
@@ -210,11 +210,3 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	] );
 	?>
 </div>
-
-<?php 
-	$message = Yii::$app->getSession()->getFlash('success');
-	if($message == '1'){
-		echo "<script>alert('修改成功！')</script>";
-	}elseif($message == '0'){
-		echo "<script>alert('修改失败！')</script>";
-	} ?>

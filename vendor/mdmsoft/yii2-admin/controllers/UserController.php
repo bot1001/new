@@ -85,11 +85,6 @@ class UserController extends Controller
 			->indexBy('id')
 			->column();
 		
-		$community = CommunityBasic::find()
-			->select( [ 'community_name', 'community_id' ] )
-			->orderBy( 'community_name' )
-			->indexBy( 'community_id' )
-			->column();
 		$company = Company::find()
 			->select('name, id')
 			->orderBy('name')
@@ -108,7 +103,6 @@ class UserController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
 			    'date' => $date,
-			    'community' => $community,
 			    'company' => $company
         ]);
     }
@@ -273,12 +267,12 @@ class UserController extends Controller
 			{
 				$user = SysUser::updateAll(['new_pd' => md5($post)], 'id = :oid', [':oid' => $id]);
 				if($user){
-					$session->setFlash( 'success', '1' );
+					$session->setFlash( 'success', '修改成功！' );
 					return $this->redirect(['index']);
 				}
 			}
 			
-			$session->setFlash( 'success', '0');
+			$session->setFlash( 'success', '修改失败！');
 			return $this->redirect(['index']);
         } else {
             return $this->renderAjax('update', [

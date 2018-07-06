@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\SysCommunitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '用户关联小区';
+$this->title = '关联小区';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sys-community-index">

@@ -86,8 +86,6 @@ use kartik\depdrop\DepDrop;
     	</div>
     </div>
 
-    
-
     <div class="form-group" align="center">
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
     </div>

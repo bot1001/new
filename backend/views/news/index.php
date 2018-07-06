@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use app\models\CommunityBasic;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\NewsSearch */
@@ -15,7 +14,7 @@ Modal::begin( [
 	'header' => '<h4 class="modal-title">公告栏相关操作</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
-$v_Url = Url::toRoute( [ 'view' ] );
+$v_Url = Url::toRoute( [ 'view', 'note' => '1' ] );
 $u_Url = Url::toRoute( [ 'update' ] );
 $c_Url = Url::toRoute( [ 'create' ] );
 
@@ -61,15 +60,7 @@ $this->title = '公告栏';
 <div class="community-news-index">
 
     <?php
-	$c = $_SESSION['community'];
-	
-		$comm = CommunityBasic::find()
-			->select('community_name, community_id')
-			->where(['in', 'community_id', $c])
-			->orderBy('community_name DESC')
-			->indexBy('community_id')
-			->column();
-	
+
 	$gridview =[
             ['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'],
@@ -77,8 +68,7 @@ $this->title = '公告栏';
             ['attribute'=> 'community_id',
 			 'value' => 'c.community_name',
 			 'filterType' => GridView::FILTER_SELECT2,
-			 //'filter' => CommunityBasic::find()->select(['community_name'])->orderBy('community_name')->indexBy('community_id')->column() ,
-			 'filter' => $comm,//CommunityBasic::find()->select( [ 'community_name' ] )->orderBy( 'community_name' )->indexBy( 'community_name' )->column(),
+			 'filter' => $comm,
 			 'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
@@ -87,13 +77,9 @@ $this->title = '公告栏';
 			'width' => '150px'],
 		
             ['attribute'=> 'title',
-			 'value' => 'B',
-			'hAlign' => 'left',
 			'width' => 'px'],
 		
             ['attribute'=> 'excerpt',
-			'hAlign' => 'center',
-			'value' => 'E', 
 			'width' => 'px'],
 		
             ['attribute'=> 'content',
@@ -156,7 +142,7 @@ $this->title = '公告栏';
 			'width' => '20px'],
 
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => '{update}',
+			 'template' => '{update}{view}',
 			 'header' => '操<br />作'],
         ];
 	echo GridView::widget([

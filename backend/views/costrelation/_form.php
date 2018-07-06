@@ -18,20 +18,9 @@ use kartik\daterange\DateRangePicker;
 <div class="cost-relation-form">
 
 	<?php $form = ActiveForm::begin(); ?>
-
-	<?php 
-	   $array = Yii::$app->db->createCommand('select cost_id,cost_name from cost_name where parent=0')->queryAll();
-	   $cost = ArrayHelper::map($array,'cost_id','cost_name');
-	
-	   $c = $_SESSION['community'];
-	   $array1 = CommunityBasic::find()->select( 'community_id,community_name')->where(['community_id' => $c])->all();
-	   
-	   $comm = ArrayHelper::map($array1,'community_id','community_name');
-	?>
-
-		<div class="row">
+    	<div class="row">
 			<div class="col-lg-4">
-				<?= $form->field($model, 'community')->dropDownList($comm, ['prompt'=>'请选择', 'id'=>'community']);?>
+				<?= $form->field($model, 'community')->dropDownList($_SESSION['community_id'], ['prompt'=>'请选择', 'id'=>'community']);?>
 			</div>
 			<div class="col-lg-3">
 				<?= $form->field($model, 'building_id')->widget(DepDrop::classname(), [
@@ -117,7 +106,5 @@ use kartik\daterange\DateRangePicker;
 		<div class="form-group" align="center">
 			<?= Html::submitButton($model->isNewRecord ? '提交' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
-				
 	<?php ActiveForm::end(); ?>
-
 </div>

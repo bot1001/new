@@ -130,4 +130,17 @@ class CommunityBasic extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CommunityRealestate::className(), ['community_id' => 'community_id']);
     }
+
+    //提供小区数组
+    static function community()
+    {
+        $comm = CommunityBasic::find()
+            ->select('community_name, community_id')
+            ->where(['in', 'community_id', $_SESSION['community']])
+            ->orderBy('community_name DESC')
+            ->indexBy('community_id')
+            ->column();
+
+        return $comm;
+    }
 }
