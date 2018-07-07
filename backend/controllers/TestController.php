@@ -56,5 +56,30 @@ class TestController extends \yii\web\Controller
         }
 
         echo '成功修改: '.$i.' 个'.'失败：'.$f.' 个';
-	}	
+	}
+	
+	function actionSend()
+	{
+		//引用发送短信类
+		require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/RequestCheckUtil.php');
+		require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/TopClient.php');
+		require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/request/AlibabaAliqinFcSmsNumSendRequest.php');
+		
+		$c = new \TopClient();
+		$RequestCheckUtil = new \RequestCheckUtil();
+		$appkey = '23613259';
+		$secret = '041f45bb4449c66a81a8d6b8a3079e1c';
+		
+        $c->appkey = $appkey;
+        $c->secretKey = $secret;
+        $req = new \AlibabaAliqinFcSmsNumSendRequest();
+        $req->setExtend("123456");
+        $req->setSmsType("normal");
+        $req->setSmsFreeSignName("裕达物业");
+        $req->setSmsParam("{code:'123456'}");
+        $req->setRecNum("15296500211");
+        $req->setSmsTemplateCode("SMS_24910206");
+        $resp = $c->execute($req);
+		print_r($resp);
+	}
 }
