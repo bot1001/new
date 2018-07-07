@@ -198,11 +198,16 @@ class CommunityRealestateController extends Controller
 							$transaction = Yii::$app->db->beginTransaction();
 							try{
 						    	//插入新记录
-								
 						    	$community_id = (int)$b_id['community_id']; //小区
 						    	$building_id = (int)$b_id['building_id']; //楼宇
 						    	$room_number = (int)$sheet['C']; //单元
+                                $room_number = str_pad($room_number, '2', '0', STR_PAD_LEFT); //房屋单元不足两位数的自动补0
 						    	$room_name = $sheet['D']; //房号
+
+                                if(strlen($room_name) == '3'){
+                                    $room_name = str_pad($room_name, '4', '0', STR_PAD_LEFT); //房号长度为3的自动补0
+                                }
+
 						    	$owners_name = $sheet['E']; //业主姓名
 						    	$owners_cellphone = (int)$sheet['F']; //手机号码
 						    	$acreage = (float)$sheet['G']; //面积

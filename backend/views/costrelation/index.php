@@ -69,9 +69,8 @@ $this->title = '费项列表';
 			'width' => '150px'
 		],
 
-		[ 'attribute' => 'building',
+		[ 'attribute' => 'building_id',
 			'value' => 'b.building_name',
-		    'label' => '楼宇',
 			'hAlign' => 'center',
 			'width' => '50px'
 		],
@@ -93,7 +92,6 @@ $this->title = '费项列表';
 		[ 'attribute' => 'name',
             'value' => 'cos.cost_name',
             'label' => '名称',
-            'hAlign' => 'center',
             'width' => '100px'
 		],
 

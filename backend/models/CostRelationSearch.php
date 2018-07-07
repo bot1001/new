@@ -24,7 +24,7 @@ class CostRelationSearch extends CostRelation
     {
         return [
             [['id', 'community', 'building_id', 'realestate_id', 'cost_id', 'from'], 'integer'],
-            [['number', 'building', 'property','name','price', 'room_name', 'status'], 'safe'],
+            [['number', 'building', 'property', 'name', 'price', 'room_name', 'status'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class CostRelationSearch extends CostRelation
         		'defaultOrder' => [
         			'id' => SORT_DESC,
         		],
-        		'attributes' => ['id', 'number', 'building', 'name', 'price', 'community', 'realestate_id', 'from', 'status', 'property', 'room_name' ]
+//        		'attributes' => ['id', 'number', 'building', 'price', 'community', 'realestate_id', 'from', 'status', 'property', 'room_name' ]
         	]
         ] );
 
@@ -80,21 +80,43 @@ class CostRelationSearch extends CostRelation
         $query->andFilterWhere([
             'id' => $this->id,
             'community' => $this->community,
-            'building_id' => $this->building_id,
             'cost_relation.realestate_id' => $this->realestate_id,
             'cost_id' => $this->cost_id,
             'from' => $this->from,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'property', $this->property]);
-		
 		$query->andFilterWhere(['like','community_realestate.room_number',$this->number])
-		      ->andFilterWhere(['like','community_building.building_name',$this->building])
+		      ->andFilterWhere(['like','community_building.building_name',$this->building_id])
 		      ->andFilterWhere(['like','community_realestate.room_name',$this->room_name])
 		      ->andFilterWhere(['like','cost_name.cost_name',$this->name])
-		      ->andFilterWhere(['like','cost_name.price',$this->price]);
-		
+		      ->andFilterWhere(['like','cost_name.price',$this->price])
+              ->andFilterWhere(['like', 'property', $this->property]);
+
+        $dataProvider -> sort->attributes['name']=
+            [
+                'asc' => ['cost_name'=>SORT_ASC],
+                'desc' => ['cost_name'=>SORT_DESC],
+            ];
+
+        $dataProvider -> sort->attributes['number']=
+            [
+                'asc' => ['room_number'=>SORT_ASC],
+                'desc' => ['room_number'=>SORT_DESC],
+            ];
+
+        $dataProvider -> sort->attributes['room_name']=
+            [
+                'asc' => ['room_name'=>SORT_ASC],
+                'desc' => ['room_name'=>SORT_DESC],
+            ];
+
+        $dataProvider -> sort->attributes['price']=
+            [
+                'asc' => ['price' => SORT_ASC],
+                'desc' => ['price' => SORT_DESC],
+            ];
+
         return $dataProvider;
     }
 }

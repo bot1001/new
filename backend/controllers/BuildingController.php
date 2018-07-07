@@ -89,8 +89,11 @@ class BuildingController extends Controller
             return $this->redirect(['index'/*, 'id' => $model->building_id*/]);
         }
 
+        $company = Company::getCompany(); //获取公司数组
+
         return $this->renderAjax('create', [
             'model' => $model,
+            'company' => $company
         ]);
     }
 

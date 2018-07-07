@@ -528,7 +528,7 @@ class UserInvoiceController extends Controller
 								    'count' => $count]);
 	}
 
-	//批量生产费项预览
+	//批量生成费项预览
 	public function actionNew() 
 	{
 		$query = ( new\ yii\ db\ Query() )->select( [

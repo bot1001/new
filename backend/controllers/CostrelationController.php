@@ -189,50 +189,11 @@ class CostrelationController extends Controller {
 	}
 
 	//三级联动之 楼宇
-	public function actionB( $selected = null ) 
-	{
-		$community_id = $_POST['depdrop_parents']['0']; //接收小区编号
-		
-		//获取楼宇ID
-		$building_id = CommunityBuilding::find()
-			->select('building_id')
-			->where(['in', 'community_id', $community_id])
-			->asArray()
-			->one();
-
-		//将楼宇编号添加到session中，以备由单元获取房号时使用
-		$_SESSION['building_id'] = $building_id;
-		
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
-			$list = CommunityBuilding::find()->where( [ 'community_id' => $id ] )->all();
-			$isSelectedIn = false;
-			if ( $id != null && count( $list ) > 0 ) {
-				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'building_id' ], 'name' => $account[ 'building_name' ] ];
-					if ( $i == 0 ) {
-						$first = $account[ 'building_id' ];
-					}
-					if ( $account[ 'building_id' ] == $selected ) {
-						$isSelectedIn = true;
-					}
-				}
-				if ( !$isSelectedIn ) {
-					$selected = $first;
-				}
-				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
-				return;
-			}
-		}
-		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
-	}
-	
-	//三级联动之 楼宇2
 	public function actionB2( $selected = null ) 
 	{
 		if ( isset( $_POST[ 'depdrop_parents' ] ) ) 
 		{
-			$id = array_column($_POST[ 'depdrop_parents' ], 'community_id');
+			$id = $_POST[ 'depdrop_parents' ];
 			$list = CommunityBuilding::find()->where( ['in', 'community_id', $id ] )->all();
 			$isSelectedIn = false;
 			if ( $id != null && count( $list ) > 0 ) {

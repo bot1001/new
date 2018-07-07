@@ -4,8 +4,8 @@ use yii\ helpers\ Html;
 use yii\ helpers\ Url;
 use kartik\ form\ ActiveForm;
 use app\models\CommunityBasic;
-use kartik\ depdrop\ DepDrop;
-use kartik\ select2\ Select2;
+use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CommunityRealestatenSearch */
@@ -44,7 +44,7 @@ use kartik\ select2\ Select2;
                 'pluginOptions'=>[
                     'depends'=>['community'],
                     'placeholder'=>'请选择...',
-                    'url'=>Url::to(['/costrelation/b'])
+                    'url'=>Url::to(['/costrelation/b2'])
                 ]
             ]); ?>
 		</div>
