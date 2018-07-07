@@ -68,6 +68,7 @@ class UserInvoice extends \yii\db\ActiveRecord
 	public $from;
 	public $to;
 	public $file;
+	public $name;
 
     /**
      * @inheritdoc
@@ -80,6 +81,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             'building_id' => '楼宇',
             'realestate_id' => '房号',
             'description' => '详情',
+            'name' => '业主',
 			'cost' => '费项',
             'year' => '年份',
             'month' => '月份',
@@ -91,7 +93,7 @@ class UserInvoice extends \yii\db\ActiveRecord
             'invoice_status' => '状态',
             'update_time' => '更改时间',
 			'from' => '起始日期',
-            'name' => 'to',
+//            'name' => 'to',
 			'to' => '费项名称',
 			'file' => '文件',
         ];

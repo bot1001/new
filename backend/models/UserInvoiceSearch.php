@@ -16,7 +16,7 @@ class UserInvoiceSearch extends UserInvoice
 	//搜索键
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['room.room_name']);
+		return array_merge(parent::attributes(),['room.room_name', 'number', 'name']);
 	}
 	
     /**
@@ -26,7 +26,7 @@ class UserInvoiceSearch extends UserInvoice
     {
         return [
             [['invoice_id', 'community_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['building_id', 'description', 'year', 'month', 'create_time', 'order_id','room.room_name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
+            [['building_id', 'description', 'year', 'month', 'create_time', 'order_id','room.room_name', 'number', 'name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
             [['invoice_amount'], 'number'],
         ];
     }
@@ -57,7 +57,7 @@ class UserInvoiceSearch extends UserInvoice
 		set_time_limit(0); //设置时间无限
 		
 		$query->joinWith('community');
-		//$query->joinWith('building');
+		$query->joinWith('building');
 		$query->joinWith('room');
         
         // add conditions that should always apply here->batch(10);
@@ -103,18 +103,29 @@ class UserInvoiceSearch extends UserInvoice
             ->andFilterWhere(['like', 'create_time', $this->create_time])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])
-            //->andFilterWhere(['like', 'payment_time', $this->payment_time])
-            ->andFilterWhere(['like', 'update_time', $this->update_time]);
-		
-		$query->join('inner join','community_building','community_building.building_id=user_invoice.building_id')
+            ->andFilterWhere(['like', 'update_time', $this->update_time])
 			->andFilterWhere(['community_building.building_name' => $this->building_id])
+			->andFilterWhere(['community_realestate.room_number' => $this->getAttribute('number')])
+			->andFilterWhere(['like', 'community_realestate.owners_name', $this->name])
 			->andFilterWhere(['room_name' => $this->getAttribute('room.room_name')]);
-		
+
 		$dataProvider -> sort->attributes['room.room_name']=
 			[
 				'asc' => ['room_name'=>SORT_ASC],
 				'desc' => ['room_name'=>SORT_DESC],
 			];
+
+		$dataProvider -> sort->attributes['number']=
+        [
+            'asc' => ['room_number'=> SORT_ASC],
+            'desc' => ['room_number' => SORT_DESC],
+        ];
+
+		$dataProvider -> sort->attributes['name']=
+            [
+                'asc' => ['owners_name' => SORT_ASC],
+                'desc' => ['owners_name' => SORT_DESC]
+            ];
 		
         return $dataProvider;
     }

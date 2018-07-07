@@ -73,20 +73,22 @@ class UserInvoiceController extends Controller
 		
 		$c = $_SESSION['community']; //从回话中获取小区ID
 	    
-	    $comm = CommunityBasic::find()
-	    	->select(' community_name')
-	    	->where(['in', 'community_id', $_SESSION['community']])
-			->orderBy('community_name DESC')
-	    	->indexBy('community_id')
-	    	->column();
+	    $comm = CommunityBasic::community();
 		
 		$build = CommunityBuilding::find()
 	    	->select('building_name')
-			->where(['in', 'community_id', $_SESSION['community']])
+			->where(['in', 'community_id', $c])
 	    	->distinct()
 	    	->indexBy('building_name')
 	    	->column();
-		
+
+		$number = CommunityRealestate::find()
+            ->select('room_number')
+            ->where(['in', 'community_id', $c])
+            ->distinct()
+            ->indexBy('room_number')
+            ->column();
+
 		$w = date('Y');
 	    $y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
 	    $m = $m = [ '01' => '01月', '02' => '02月', '03' => '03月', '04' => '04月', '05' => '05月', '06' => '06月', '07' => '07月', '08' => '08月', '09' => '09月', 10 => '10月', 11 => '11月', 12 => '12月' ];
@@ -133,6 +135,7 @@ class UserInvoiceController extends Controller
 			'dataProvider' => $dataProvider,
 			'comm' => $comm,
 			'build' => $build,
+			'number' => $number,
 			'y' => $y,
 			'm' => $m
 		] );

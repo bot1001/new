@@ -152,12 +152,30 @@ $this->title = '缴费管理';
 			'width' => '70px'
 		],
 
-		[ 'attribute' => 'room.room_name',
+		[ 'attribute' => 'number',
+			'value' => 'room.room_number',
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => $number,
+            'filterInputOptions' => ['placeholder' => ''],
+            'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+            ],
+            'label' => '单元',
+			'hAlign' => 'center',
+			'width' => '70px'
+		],
+
+        [ 'attribute' => 'room.room_name',
 			//'value' => 'room.room_number',
 			// 'group' => true,
 			'hAlign' => 'center',
 			'width' => '70px'
 		],
+
+        ['attribute' => 'name',
+            'value' => 'room.owners_name',
+            'hAlign' => 'center'],
+
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
 				return $model->year . '年';
