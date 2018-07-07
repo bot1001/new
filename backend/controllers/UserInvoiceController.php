@@ -221,11 +221,19 @@ class UserInvoiceController extends Controller
 					foreach ( $sheetData as $sheet ) 
 					{
 						sleep(0.01);
-						if(count($sheet) != 9){
+						if(count($sheet) != 10){
 							$session->setFlash('fail','3');
 							unlink($inputFileName);
 							return $this->redirect( Yii::$app->request->referrer );
 						}
+						$number = (int)$sheet[ 'C' ]; //单元
+						$number = str_pad($number, '2', '0',STR_PAD_LEFT);
+
+						$room_name = $sheet['D']; //房号
+                        if(strlen($room_name) == '3'){
+                            $room_name = str_pad($room_name, '2', '0', STR_PAD_LEFT);
+                        }
+
 						//验证房号是否存在
 						$r_id = (new \yii\db\Query())
 							->select( 'community_basic.community_id as community, 
@@ -236,32 +244,33 @@ class UserInvoiceController extends Controller
 							->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 							->andwhere( [ 'community_basic.community_name' => $sheet[ 'A' ] ] )
 							->andwhere(['community_building.building_name' => $sheet[ 'B' ]])
-							->andwhere(['community_realestate.room_name' => $sheet[ 'C' ]])
+							->andwhere(['community_realestate.room_number' => $number])
+							->andwhere(['community_realestate.room_name' => $room_name])
 							->andwhere(['in', 'community_realestate.community_id', $c_r])
 							->one();
-						
+
 						//获取费项
 						if ($r_id) 
 						{
-							$y = (int)$sheet[ 'D' ];  //将年份转换为整数型，保证数据的单一性
-							$m = (int)$sheet[ 'E' ]; //将月份转换为整数型，保证数据的单一性
+							$y = (int)$sheet[ 'E' ];  //将年份转换为整数型，保证数据的单一性
+							$m = (int)$sheet[ 'F' ]; //将月份转换为整数型，保证数据的单一性
 							$m=str_pad($m,2,"0",STR_PAD_LEFT); //月份自动补0
 							
 							//判断费项是否存在							
-							if(isset($cost_name[ $sheet[ 'F' ] ])){
-								$d = $cost_name[ $sheet[ 'F' ] ];
+							if(isset($cost_name[ $sheet[ 'G' ] ])){
+								$d = $cost_name[ $sheet[ 'G' ] ];
 							}else{
 								$a <= $i;
 								$a += 1;
 								continue;
 							}
-														
-							$price = (float)$sheet[ 'G' ]; //将金额数据进行处理，除了保证数据的单一性外只保留两位数
+
+							$price = (float)$sheet[ 'H' ]; //将金额数据进行处理，除了保证数据的单一性外只保留两位数
 							$f = date( time() );
 							$c = $r_id[ 'community' ];
 							$b = $r_id[ 'building' ];
 							$r = $r_id[ 'id' ];
-							$s = $sheet['I'];
+							$s = $sheet['J'];
 							
 							//验证提交的费项状态
 							if(isset($status[$s]))

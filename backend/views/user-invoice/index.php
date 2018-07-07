@@ -12,7 +12,7 @@ use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'update-modal',
-	'header' => '<h4 class="modal-title">费项管理</h4>',
+	'header' => '<h4 class="modal-title">缴费管理</h4>',
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
 $requestUpdateUrl = Url::toRoute( 'view' );
@@ -20,6 +20,7 @@ $importUrl = Url::toRoute( 'import' );
 
 $updateJs = <<<JS
     $('.order').on('click', function () {
+        $('.modal-title').html('订单详情');
         $.get('{$requestUpdateUrl}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
@@ -31,6 +32,7 @@ $this->registerJs( $updateJs );
 
 $updateJs = <<<JS
     $('.import').on('click', function () {
+        $('.modal-title').html('费项导入');
         $.get('{$importUrl}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
@@ -154,7 +156,7 @@ $this->title = '缴费管理';
 			//'value' => 'room.room_number',
 			// 'group' => true,
 			'hAlign' => 'center',
-			'width' => '60px'
+			'width' => '70px'
 		],
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
@@ -180,7 +182,7 @@ $this->title = '缴费管理';
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'hAlign' => 'center',
-			'width' => '100px'
+//			'width' => '100px'
 		],
 		//'year',
 

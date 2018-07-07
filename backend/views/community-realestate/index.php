@@ -72,7 +72,7 @@ $this->registerJs( $cJs );
 
 $cJs = <<<JS
     $('.i').on('click', function () {
-        $('.modal-title').html('费项导入');
+        $('.modal-title').html('导入');
         $.get('{$i_Url}', { id: $(this).closest('tr').data('key') },
            function(data){
               $('.modal-body').html(data);
