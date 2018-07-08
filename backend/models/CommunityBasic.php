@@ -41,8 +41,8 @@ class CommunityBasic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company', 'community_name', 'province_id', 'city_id', 'area_id', 'community_address'], 'required'],
-            [['company', 'province_id', 'city_id', 'area_id'], 'integer'],
+            [['company', 'community_name', 'province_id', 'city_id', 'area_id'], 'required'],
+            [['company', 'province_id', 'city_id', 'area_id', 'sms'], 'integer'],
             [['community_longitude', 'community_latitude'], 'number'],
             [['community_name', 'community_address'], 'string', 'max' => 64],
             [['community_logo'], 'string', 'max' => 300],

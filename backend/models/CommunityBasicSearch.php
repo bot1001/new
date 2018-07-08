@@ -18,7 +18,7 @@ class CommunityBasicSearch extends CommunityBasic
     public function rules()
     {
         return [
-            [['community_id', 'company', 'province_id', 'area_id'], 'integer'],
+            [['community_id', 'company', 'province_id', 'area_id', 'city_id'], 'integer'],
             [['community_name', 'community_logo', 'community_address', 'sms', 'creater', 'city_id'], 'safe'],
             [['community_longitude', 'community_latitude'], 'number'],
         ];
@@ -67,7 +67,7 @@ class CommunityBasicSearch extends CommunityBasic
         // grid filtering conditions
         $query->andFilterWhere([
             'community_id' => $this->community_id,
-            'company' => $this->company,
+            'community_basic.company' => $this->company,
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
