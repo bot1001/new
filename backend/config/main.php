@@ -87,10 +87,11 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/index',//允许访问的节点，可自行添加
-	        'login/*',
-	        'pay/*',
-	        'test/*',
-	        'user-invoice/add'
+	        'login/*', //登陆类
+	        'pay/*', //支付类
+	        'test/*', //测试功能类
+	        'user-invoice/add', //自动生成费项目
+            'auto/*', //自动发送短信
         ]
     ],
 	 

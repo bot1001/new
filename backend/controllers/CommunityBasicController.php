@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Area;
 use Yii;
 use app\models\CommunityBasic;
 use app\models\CommunityBasicSearch;
@@ -43,11 +44,44 @@ class CommunityBasicController extends Controller
 			$id = $_GET['id'];
 			$searchModel->community_id = $id;
 		}
+
+		//另类三级联动城市
+		if(isset($_GET['CommunityBasicSearch']['province_id']))
+		{
+		    $parent = $_GET['CommunityBasicSearch']['province_id'];
+
+		    $city = Area::getCity($parent);
+        }else{
+		    $city = Area::find()
+                ->select('area_name, id')
+                ->indexBy('id')
+                ->orderBy('id DESC')
+                ->limit(80)
+                ->column();
+        }
+
+        //另类三级联动县级
+		if(isset($_GET['CommunityBasicSearch']['city_id']))
+		{
+		    $parent = $_GET['CommunityBasicSearch']['city_id'];
+
+		    $area = Area::getCity($parent);
+        }else{
+		    $area = Area::find()
+                ->select('area_name, id')
+                ->indexBy('id')
+                ->orderBy('id DESC')
+                ->limit(80)
+                ->column();
+        }
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'city' => $city,
+            'area' => $area
         ]);
     }
 		

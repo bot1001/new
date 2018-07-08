@@ -14,10 +14,7 @@ use kartik\select2\Select2;
 <div class="community-basic-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= $form->field($model, 'company')->dropDownList(\app\models\Company::getCompany(), ['maxlength' => true, 'prompt' => '请选择']) ?>
-    <?= $form->field($model, 'community_name')->textInput(['maxlength' => true]) ?>
-    
+
     <div class="row">
     	<div class="col-lg-4">
     		<?= $form->field($model, 'province_id')->dropDownList(\common\models\Area::getProvince(), ['maxlength' => true, 'prompt' => '请选择', 'id' => 'province']) ?>

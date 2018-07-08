@@ -65,7 +65,7 @@ class HouseInfo extends \yii\db\ActiveRecord
             'update' => '更新时间',
             'status' => '状态',
             'address' => '地址',
-            'politics' => '政治面貌',
+            'politics' => '发送信息',
             'property' => '备注',
         ];
     }
@@ -104,6 +104,12 @@ class HouseInfo extends \yii\db\ActiveRecord
     public function getRe()
     {
         return $this->hasOne(CommunityRealestate::className(), ['realestate_id' => 'realestate']);
+    }
+
+    //同收费项目建立关系
+    public function getInvoice()
+    {
+        return $this->hasMany(UserInvoice::className(), ['realestate_id' => 'realestate']);
     }
 	
 	//建立关联小区

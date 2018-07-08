@@ -41,9 +41,7 @@ class BuildingSearch extends CommunityBuilding
      */
     public function search($params)
     {
-        $c = $_SESSION['community'];
-		
-		$query = CommunityBuilding::find()->where(['in', 'community_building.community_id', $_SESSION['community']]);		       
+		$query = CommunityBuilding::find()->where(['in', 'community_building.community_id', $_SESSION['community']]);
 				   
 		$query->joinWith('com');
 		$query->joinWith('c');

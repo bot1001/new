@@ -45,33 +45,88 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
 		
 		
 		   ['attribute' =>'community_name',
-			'width' => 'px',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'header' => '详情',
+                'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
+                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+            ],
 			'hAlign' => 'center'],
 		
-            ['attribute' =>'community_logo',
+            /*['attribute' =>'community_logo',
 			'width' => 'px',
-			'hAlign' => 'center'],
+			'hAlign' => 'center'],*/
 		
             ['attribute' =>'province_id',
-			 'value' => 'province.area_name'],
+			 'value' => 'province.area_name',
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \common\models\Area::getProvince(),
+                'filterInputOptions' => [ 'placeholder' => '请选择……'],
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+            ],
 		
 		   ['attribute' =>'city_id',
-			'value' => 'city.area_name'],
+			'value' => 'city.area_name',
+             'filterType' => GridView::FILTER_SELECT2,
+             'filter' => $city,
+             'filterInputOptions' => [ 'placeholder' => '请选择……'],
+             'filterWidgetOptions' => [
+                 'pluginOptions' => ['allowClear' => true],
+             ],
+           ],
 		
 		   ['attribute' =>'area_id',
-			'value' => 'area.area_name'],
+			'value' => 'area.area_name',
+             'filterType' => GridView::FILTER_SELECT2,
+             'filter' => $area,
+             'filterInputOptions' => [ 'placeholder' => '请选择……'],
+             'filterWidgetOptions' => [
+                 'pluginOptions' => ['allowClear' => true],
+             ],
+           ],
 		
             ['attribute' =>'community_address',
-			'width' => 'px',
+             'class' => 'kartik\grid\EditableColumn',
+             'editableOptions' => [
+                 'header' => '详情',
+                 'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
+                 'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+             ],
+			'hAlign' => 'center'],
+
+           ['attribute' =>'sms',
+            'value' => function($model){
+		         $date = ['0' => '否', '1' => '是'];
+		         return $date[$model->sms];
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => ['0' => '否', '1' => '是'],
+            'filterInputOptions' => [ 'placeholder' => '请选择……'],
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'header' => '详情',
+                'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
+                'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                'data' => ['0' => '否', '1' => '是'],
+            ],
+               //单元格背景色变换
+               'contentOptions' => function ( $model ) {
+                   return ( $model->sms == 0 ) ? [ 'class' => 'bg-info' ] : [];
+               },
 			'hAlign' => 'center'],
 		
-            ['attribute' =>'community_longitude',
-			'width' => 'px',
+           ['attribute' =>'creater',
+			'value' => 'sys.name',
 			'hAlign' => 'center'],
 		
-            ['attribute' =>'community_latitude',
+            /* ['attribute' =>'community_latitude',
 			'width' => 'px',
-			'hAlign' => 'center'],
+			'hAlign' => 'center'],*/
 
             ['class' => 'kartik\grid\ActionColumn',
 			 'header' => '操<br />作',

@@ -18,8 +18,8 @@ class CommunityBasicSearch extends CommunityBasic
     public function rules()
     {
         return [
-            [['community_id', 'company', 'province_id', 'city_id', 'area_id'], 'integer'],
-            [['community_name', 'community_logo', 'community_address'], 'safe'],
+            [['community_id', 'company', 'province_id', 'area_id'], 'integer'],
+            [['community_name', 'community_logo', 'community_address', 'sms', 'creater', 'city_id'], 'safe'],
             [['community_longitude', 'community_latitude'], 'number'],
         ];
     }
@@ -42,11 +42,12 @@ class CommunityBasicSearch extends CommunityBasic
      */
     public function search($params)
     {
-		$c = $_SESSION['community'];
+        $session = reset($_SESSION['user']);
 
-	    $query = CommunityBasic::find()->where(['in', 'community_id', $c]);
+	    $query = CommunityBasic::find()->andwhere(['or', ['in','community_id', $_SESSION['community']], ['creater' => $session['id']] ]);
 				
 		$query->joinWith('c');
+		$query->joinWith('sys');
 		$query->joinWith('province');
 
         // add conditions that should always apply here
@@ -70,12 +71,14 @@ class CommunityBasicSearch extends CommunityBasic
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
+            'sms' => $this->sms,
             'community_longitude' => $this->community_longitude,
             'community_latitude' => $this->community_latitude,
         ]);
 
         $query->andFilterWhere(['like', 'community_name', $this->community_name])
             ->andFilterWhere(['like', 'community_logo', $this->community_logo])
+            ->andFilterWhere(['like', 'sys_user.name', $this->creater])
             ->andFilterWhere(['like', 'community_address', $this->community_address]);
 
         return $dataProvider;

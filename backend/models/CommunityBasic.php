@@ -67,7 +67,28 @@ class CommunityBasic extends \yii\db\ActiveRecord
             'community_address' => '地址',
             'community_longitude' => '经度',
             'community_latitude' => '纬度',
+            'sms' => '发短信',
+            'creater' => '创建人',
+            'create_time' => '创建时间'
         ];
+    }
+
+    //创建楼于时自动插入或者更新的字段
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                //插入新纪录时自动添加以下字段
+                $this->creater = $_SESSION['user']['0']['id'];
+                $this->create_time = time();
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -99,6 +120,11 @@ class CommunityBasic extends \yii\db\ActiveRecord
     public function getCostRelations()
     {
         return $this->hasMany(CostRelation::className(), ['community' => 'community_id']);
+    }
+
+    public function getSys()
+    {
+        return $this->hasOne(SysUser::className(), ['id' => 'creater']);
     }
 
     /**
@@ -134,13 +160,17 @@ class CommunityBasic extends \yii\db\ActiveRecord
     //提供小区数组
     static function community()
     {
-        $comm = CommunityBasic::find()
-            ->select('community_name, community_id')
-            ->where(['in', 'community_id', $_SESSION['community']])
-            ->orderBy('community_name DESC')
+        $comm = CommunityBasic::find()->select('community_name, community_id');
+
+        $session = reset($_SESSION['user']);
+        if($session['name'] !== "admin"){ //判断是否是超级管理员
+            $comm->andwhere(['or', ['in','community_id', $_SESSION['community']],['creater' => $session['id']]]);
+        }
+
+        $community = $comm->orderBy('community_id DESC')
             ->indexBy('community_id')
             ->column();
 
-        return $comm;
+        return $community;
     }
 }

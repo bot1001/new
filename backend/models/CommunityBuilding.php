@@ -64,6 +64,7 @@ class CommunityBuilding extends \yii\db\ActiveRecord
         ];
     }
 
+    //创建楼于时自动插入或者更新的字段
     public function beforeSave($insert)
 	{
 		if(parent::beforeSave($insert))

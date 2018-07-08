@@ -60,7 +60,7 @@ class Area extends \yii\db\ActiveRecord
         ];
     }
 	
-	//抽取数组
+	//抽取省市数组
 	public static function getProvince()
 	{
 		$province = self::find()
@@ -71,4 +71,17 @@ class Area extends \yii\db\ActiveRecord
 			->column();
 		return $province;
 	}
+
+	//抽取市级数组
+    static function getCity($parent)
+    {
+        $city = self::find() ->select('area_name, id')
+               ->andFilterWhere(['area_parent_id' => "$parent"])
+               ->indexBy('id')
+               ->orderBy('id DESC')
+               ->limit(80)
+               ->column();
+
+        return $city;
+    }
 }

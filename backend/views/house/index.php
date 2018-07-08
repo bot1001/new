@@ -138,7 +138,7 @@ $this->title = '房屋信息';
 			 'class' => 'kartik\grid\EditableColumn',
 			 'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 		        'data' => ['停用', '在用'],
 			],
 			'hAlign' => 'center',
@@ -148,8 +148,31 @@ $this->title = '房屋信息';
 			 'class' => 'kartik\grid\EditableColumn',
 			 'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 			],
+			'width' => 'px'],
+
+           ['attribute'=> 'politics',
+               'value' => function($model){
+	               $date = ['0' => '否', '1' => '是'];
+	               return $date[$model->politics];
+               },
+               'filterType' => GridView::FILTER_SELECT2,
+               'filter' => ['0' => '否', '1' => '是'],
+               'filterInputOptions' => ['placeholder' => '请选择'],
+               'filterWidgetOptions' => [
+                   'pluginOptions' => ['allowClear' => true],
+               ],
+			 'class' => 'kartik\grid\EditableColumn',
+			 'editableOptions' => [
+				'formOptions' => [ 'action' => [ '/house/house' ] ],
+				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                 'data' => ['0' => '否', '1' => '是'],
+			],
+               'contentOptions' => function($model){
+	               return ($model->politics == 0) ? ['class' => 'bg-success' ]:[];
+               },
+               'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['attribute'=> 'property',
