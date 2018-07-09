@@ -148,6 +148,32 @@ class CommunityRealestate extends \yii\db\ActiveRecord
             ->one();
         return empty($result) ? false : $result;
     }
+
+    //由小区获取提取单元
+    static function community_number($community_id)
+    {
+        $number = self::find()
+            ->select('room_number')
+            ->where(['in', 'community_id', $community_id])
+            ->orderBy('room_number')
+            ->indexBy('room_number')
+            ->column();
+
+        return $number;
+    }
+
+    //由楼宇获取提取单元
+    static function Number($building_id)
+    {
+        $number = self::find()
+            ->select('room_number')
+            ->where(['building_id' => "$building_id"])
+            ->orderBy('room_number')
+            ->indexBy('room_number')
+            ->column();
+
+        return $number;
+    }
 	
 	/**
      * @return \yii\db\ActiveQuery

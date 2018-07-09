@@ -57,9 +57,33 @@ class CommunityRealestateController extends Controller
         $searchModel = new CommunityRealestatenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if(isset($_GET['CommunityRealestatenSearch']['community_id']))
+        {
+            $community_id = $_GET['CommunityRealestatenSearch']['community_id'];
+            $building = CommunityBuilding::Building($community_id);
+        }else{
+            $building = '';
+        }
+
+        if(isset($_GET['CommunityRealestatenSearch']['building_id']))
+        {
+            $building_id = $_GET['CommunityRealestatenSearch']['building_id'];
+            if($building_id !== '')
+            {
+                $number = CommunityRealestate::Number($building_id);
+            }else{
+                $number = '';
+            }
+//            print_r($building);exit;
+        }else{
+            $number = '';
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'building' => $building,
+            'number' => $number
         ]);
     }
 	

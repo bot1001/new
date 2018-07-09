@@ -17,8 +17,8 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
 
 <div class="community-basic-index">
 
-    <?php 
-	$gridview = [
+    <?php
+    $gridview = [
             ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
 
             /*['attribute' =>'community_id',
@@ -37,14 +37,20 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
 			 'editableOptions' => [
 				'header' => '详情',
 				'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 				'data' => \app\models\Company::getCompany(),
 			],
+                'readonly' => function ( $model, $key, $index, $widget ) {
+                    return \app\models\Limit::limit($url='/community-basic/community') == 0 ; // 判断活动列是否可编辑
+                },
 			'width' => '20%',
 			'hAlign' => 'center'],
 		
 		
 		   ['attribute' =>'community_name',
+             'readonly' => function(){
+		         return \app\models\Limit::limit($url='/community-basic/community') == 0;
+             },
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'header' => '详情',
@@ -88,6 +94,9 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
            ],
 		
             ['attribute' =>'community_address',
+                'readonly' => function(){
+                    return \app\models\Limit::limit($url='/community-basic/community') == 0;
+                },
              'class' => 'kartik\grid\EditableColumn',
              'editableOptions' => [
                  'header' => '详情',
@@ -107,6 +116,9 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true],
             ],
+               'readonly' => function(){
+                   return \app\models\Limit::limit($url='/community-basic/community') == 0;
+               },
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'header' => '详情',

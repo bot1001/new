@@ -19,7 +19,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
     {
         return [
             [['realestate_id', 'community_id', 'building_id'], 'integer'],
-            [['room_name', 'room_number', 'owners_name', 'owners_cellphone'], 'safe'],
+            [['room_name', 'room_number', 'owners_name', 'owners_cellphone', 'property'], 'safe'],
             [['acreage'], 'number'],
         ];
     }
@@ -77,6 +77,7 @@ class CommunityRealestatenSearch extends CommunityRealestate
 
         $query->andFilterWhere(['like', 'room_name', $this->room_name])
             ->andFilterWhere(['like', 'room_number', $this->room_number])
+            ->andFilterWhere(['like', 'property', $this->property])
             ->andFilterWhere(['like', 'owners_name', $this->owners_name])
             ->andFilterWhere(['like', 'owners_cellphone', $this->owners_cellphone]);
 

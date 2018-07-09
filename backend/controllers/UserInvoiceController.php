@@ -52,42 +52,34 @@ class UserInvoiceController extends Controller
 		$searchModel = new UserInvoiceSearch();
 		
 		if(isset($get['order'])) //判断来自订单列表的查询
-		{ 
-			if(isset($get['order_id']))
-			{ //判断订单编号是否存在
+		{
+		    $session = Yii::$app->session;
+			if(isset($get['order_id']))//判断订单编号是否存在
+			{
 				$order_id = $get['order_id']; //接收订单编号
 		        $searchModel->order_id = $order_id; //为搜索模型赋值
-				//查找对应订单编号的费项是否存在
-				$s = UserInvoice::find()->select('order_id')->where(['order_id' => $order_id])->asArray()->one();
+
+				$s = UserInvoice::find()//查找对应订单编号的费项是否存在
+                    ->select('order_id')
+                    ->where(['order_id' => $order_id])
+                    ->asArray()
+                    ->one();
+
 				if ( empty( $s ) ) { //如果为空则……
-    	    	    $session = Yii::$app->session;
     	    	    $session->setFlash( 'm_order', '2' );
     	    	    return $this->redirect( Yii::$app->request->referrer );
 		    	}
 			}else{ //否则返回
-				$session = Yii::$app->session;
     	    	$session->setFlash( 'm_order', '2' );
     	    	return $this->redirect( Yii::$app->request->referrer );
 			}
 		}
 		
-		$c = $_SESSION['community']; //从回话中获取小区ID
+		$c = $_SESSION['community']; //从会话中获取小区ID
 	    
-	    $comm = CommunityBasic::community();
-		
-		$build = CommunityBuilding::find()
-	    	->select('building_name')
-			->where(['in', 'community_id', $c])
-	    	->distinct()
-	    	->indexBy('building_name')
-	    	->column();
-
-		$number = CommunityRealestate::find()
-            ->select('room_number')
-            ->where(['in', 'community_id', $c])
-            ->distinct()
-            ->indexBy('room_number')
-            ->column();
+	    $comm = CommunityBasic::community(); //从模型中获取小区
+		$build = CommunityBuilding::Building($c); //从模型中获取楼宇
+		$number = CommunityRealestate::community_number($c); //从模型中获取单元
 
 		$w = date('Y');
 	    $y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
@@ -96,7 +88,8 @@ class UserInvoiceController extends Controller
 		if(isset($get['order_id'])){
 			$searchModel->order_id = $get['order_id'];
 		}
-		
+
+		//判断是否由来自模板头部文件的时间
 		if(isset($get['one']) && isset($get['two']))
 		{
 			$one = date('Y-m-d', time($get['one']));
@@ -104,30 +97,7 @@ class UserInvoiceController extends Controller
 			$time =  $one.' to '.$two;
 			$searchModel->payment_time = $time;			
 		}
-		
-		//判断来自统计页面的的参数
-		if(isset($_GET['community']))
-		{
-			$community = $_GET['community'];
-			$searchModel->community_id = $community;
-		}
-		
-		if(isset($_GET['description']))
-		{
-			$description = $_GET['description'];
-			$searchModel->description = $description;
-		}
-		
-		//判断是否存在时间
-		if(isset($_GET['from']) && isset($_GET['to']))
-		{
-			$from = $_GET['from']; //接收起始时间
-			$to = $_GET['to']; //接收截止时间
-			$t = $from.' to '.$to; //拼接时间
-			$searchModel->payment_time = $t;
-		}
-		//判断来自统计页面费项查询止
-		
+
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
 		return $this->render( 'index', [

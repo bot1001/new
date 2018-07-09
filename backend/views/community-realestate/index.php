@@ -105,7 +105,7 @@ $this->title = '房屋管理';
 ?>
 
 <div class="community-realestate-index">
-	<?php echo $this->render('_search', ['model' => $searchModel]);
+	<?php // echo $this->render('_search', ['model' => $searchModel]);
 	
 	    $message = Yii::$app->getSession()->getFlash('fail');
 	    if($message == 2){
@@ -130,16 +130,12 @@ $this->title = '房屋管理';
 		],
 		[ 'attribute' => 'community_id',
 			'value' => 'community0.community_name',
-			/*'filterType'=>GridView::FILTER_SELECT2,
-		     'filter'=> CommunityBasic::find()
-		             -> select(['community_name','community_id'])
-		             -> orderBy('community_name')
-		             -> indexBy('community_id')
-		             -> column(),
+			'filterType'=>GridView::FILTER_SELECT2,
+		     'filter'=> CommunityBasic::community(),
 		     'filterInputOptions'=>['placeholder'=>'请选择'],
 			 'filterWidgetOptions'=>[
                              'pluginOptions'=>['allowClear'=>true],
-		                 ],*/
+		                 ],
 			'width' => '180px',
 			'hAlign' => 'center',
 		],
@@ -154,6 +150,12 @@ $this->title = '房屋管理';
 					'class' => 'create1',
 				] );
 			},
+            'filterType'=>GridView::FILTER_SELECT2,
+            'filter'=> $building,
+            'filterInputOptions'=>['placeholder'=>'请选择'],
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
 			'hAlign' => 'center',
 			'width' => '80px',
 		],
@@ -164,6 +166,12 @@ $this->title = '房屋管理';
 				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index', 'realestate_id' => $model->realestate_id ] );
 				return Html::a( $model->room_number . '单元', $url );
 			},
+            'filterType'=>GridView::FILTER_SELECT2,
+            'filter'=> $number,
+            'filterInputOptions'=>['placeholder'=>'请选择'],
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
 			'hAlign' => 'center',
 			'width' => '80px',
 		],
@@ -227,6 +235,7 @@ $this->title = '房屋管理';
 		'hAlign' => 'center'],*/
 		
 		['attribute' => 'finish',
+            'mergeHeader' => true,
 		 'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
@@ -253,6 +262,7 @@ $this->title = '房屋管理';
 		'hAlign' => 'center'],*/
 		
 		['attribute' => 'delivery',
+            'mergeHeader' => true,
 		 'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
@@ -293,7 +303,7 @@ $this->title = '房屋管理';
                      ]
                 ],
           ],
-		'width' => 'px',
+            'mergeHeader' => true,
 		'hAlign' => 'center'],
 				
 		['attribute' => 'orientation',
@@ -302,7 +312,7 @@ $this->title = '房屋管理';
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
 				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
           ],
-		'width' => 'px',
+            'mergeHeader' => true,
 		'hAlign' => 'center'],
 		
 		['attribute' => 'property',
@@ -341,7 +351,7 @@ $this->title = '房屋管理';
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
-		//'filterModel' => $searchModel,
+		'filterModel' => $searchModel,
 		//'showFooter' => true,
 		'options' => [ 'id' => 'grid' ],
 		'panel' => [ 'type' => 'info', 'heading' => '房屋列表',

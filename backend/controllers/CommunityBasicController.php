@@ -52,27 +52,22 @@ class CommunityBasicController extends Controller
 
 		    $city = Area::getCity($parent);
         }else{
-		    $city = Area::find()
-                ->select('area_name, id')
-                ->indexBy('id')
-                ->orderBy('id DESC')
-                ->limit(80)
-                ->column();
+		    $city = '';
         }
 
         //另类三级联动县级
 		if(isset($_GET['CommunityBasicSearch']['city_id']))
 		{
-		    $parent = $_GET['CommunityBasicSearch']['city_id'];
+		    if($_GET['CommunityBasicSearch']['city_id'] !== '')
+            {
+                $parent = $_GET['CommunityBasicSearch']['city_id'];
 
-		    $area = Area::getCity($parent);
+                $area = Area::getCity($parent);
+            }else{
+		        $area = '';
+            }
         }else{
-		    $area = Area::find()
-                ->select('area_name, id')
-                ->indexBy('id')
-                ->orderBy('id DESC')
-                ->limit(80)
-                ->column();
+		    $area = '';
         }
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -81,7 +76,7 @@ class CommunityBasicController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'city' => $city,
-            'area' => $area
+            'area' => $area,
         ]);
     }
 		

@@ -121,4 +121,16 @@ class CommunityBuilding extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CommunityBasic::className(), ['community_id' => 'community_id']);
     }
+
+    static function Building($community_id)
+    {
+        $building = self::find()
+            ->select('building_name, building_id')
+            ->where(['in', 'community_id', $community_id])
+            ->indexBy('building_id')
+            ->OrderBy('building_name ASC')
+            ->column();
+
+        return $building;
+    }
 }
