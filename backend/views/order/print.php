@@ -21,35 +21,42 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	}
 </script>
 
-<div class="user-order-pay">
-
+<div class="order-print">
 	<span id='div1'>
-		<style>
-        	h3{
-        		text-align: center;
-				font-family: 仿宋;
-				font-weight: 820;
-        	}
-           th{
-           		text-align:center;
-           	}
-			
-			tr{
-				height:27px;
-			}
-        	table{
-        		text-align: center;
-        		margin:auto;
-        		width: 820px;
-				font-family: 仿宋;
-        	}
-			img{
-	        	width: 25%;
-	        	border-radius:20px;
-	        }
+        <style>
+            .order-print{
+                margin: auto;
+                border-radius:10px;
+                background: #ffffff;
+                max-width: 1200px;
+            }
+
+            h3{
+                text-align: center;
+                font-family: 仿宋;
+                font-weight: 820;
+            }
+            th{
+                text-align:center;
+            }
+
+            tr{
+                height:27px;
+            }
+            table{
+                text-align: center;
+                margin:auto;
+                width: 820px;
+                font-family: 仿宋;
+            }
+            img{
+                width: 25%;
+                border-radius:20px;
+            }
         </style>
-        
-		<h3><?= $comm['community'];  ?></h3>
+
+		<p style="height: 5px;"> </p>
+        <h3><?= $comm['community'];  ?></h3>
 			<br>
 		<table border="0">
 			<tr>
