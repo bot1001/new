@@ -141,7 +141,7 @@ class LoginController extends Controller
 		
 		//验证注册手机号码是否存在
 		$u_account = UserAccount::find()
-			->where(['mobile_phone' => "$phone", 'account_role' => '0', 'status' => '1'])
+			->where(['mobile_phone' => "$phone", 'account_role' => '0'])
 			->asArray()
 			->one();
 		
@@ -214,13 +214,7 @@ class LoginController extends Controller
 		}
 		return $this->redirect(['/login/login']);//如果以上操作失败，则自动转跳到登录页面
 	}
-	
-	//裕家人开放平台授权回调地址
-	public function actionIndex()
-	{
-		return $this->render('index');
-	}
-		
+
 	//用户登录
 	public function actionLogin()
     {

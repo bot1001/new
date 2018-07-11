@@ -166,8 +166,9 @@ class WaterController extends Controller
     		$count = WaterMeter::find()
 				->andwhere( [ 'year' => date( 'Y' ),'month' => date( 'm' ), 'type' => $type ])
 				->andwhere(['in', 'community', $comm])
+				->andwhere(['type' => "$type"])
 				->count(); //查询水表读数数量
-			
+
     		if($count !== $r_count){ 
 				foreach($r_id ->batch(50) as $d)
 				{
@@ -179,6 +180,7 @@ class WaterController extends Controller
     			        $readout = WaterMeter::find()
 				    		->where( [ 'realestate_id' => $realestate_id ] )
 				    		->select( 'readout' )
+                            ->andwhere(['type' => "$type"])
 				    		->orderBy( 'property DESC' )
 				    		->asArray()
 				    		->one();
@@ -194,9 +196,8 @@ class WaterController extends Controller
     			        
     			        set_time_limit( 600 );
     			        ini_set( 'memory_limit', '1024M' ); // 调整PHP由默认占用内存为1024M(1GB)
-						
 
-						$sql = "insert into water_meter(community, building, realestate_id, year, month, readout, type)
+						$sql = "insert ignore into water_meter(community, building, realestate_id, year, month, readout, type)
 						values('$community', '$building', '$realestate_id', '$y', '$m', '$read', '$type')";
 						$sql = Yii::$app->db->createCommand($sql)->execute();
 

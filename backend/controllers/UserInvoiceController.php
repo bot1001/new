@@ -204,7 +204,7 @@ class UserInvoiceController extends Controller
 
 						$room_name = $sheet['D']; //房号
                         if(strlen($room_name) == '3'){
-                            $room_name = str_pad($room_name, '2', '0', STR_PAD_LEFT);
+                            $room_name = str_pad($room_name, '4', '0', STR_PAD_LEFT);
                         }
 
 						//验证房号是否存在

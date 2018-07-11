@@ -63,7 +63,7 @@ class CommunityRealestate extends \yii\db\ActiveRecord
                 $this->{$attr} = $time;
                 return true;
             }],
-            [['room_number'], 'string', 'max' => 2, 'on' => 'update'],
+            [['room_number'], 'string', 'max' => 2, 'length' => 2, 'on' => 'update'],
             [['room_name'], 'string', 'max' => 7, 'on' => 'update'],
             [['room_number'], 'integer', 'max' => 10, 'on' => 'create'],
             [['room_name'], 'string', 'max' => 6, 'on' => 'create'],

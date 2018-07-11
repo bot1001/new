@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use app\models\CommunityRealestate;
+use Yii;
 
 class TestController extends \yii\web\Controller
 {	
@@ -56,4 +57,18 @@ class TestController extends \yii\web\Controller
 
         echo '成功修改: '.$i.' 个'.'失败：'.$f.' 个';
 	}
+
+	//message
+    function actionManager()
+    {
+        $manager = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id); //获取当前用户角色信息
+        $role = Yii::$app->authManager->getRole( 'admin' ); //获取指定角色信息
+        $childAll = Yii::$app->authManager->getChildren( $role->name );
+
+        echo '<pre />';
+//        foreach($manager as $key => $m){
+            print_r($role);
+//        }
+
+    }
 }
