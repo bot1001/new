@@ -281,8 +281,13 @@ class TopClient
 				$resp = $this->curl_with_memory_file($requestUrl, $apiParams, $fileFields);
 			}else{
 				$resp = $this->curl($requestUrl, $apiParams);
+				if(strstr($resp, "短信签名不合法"))
+                {
+                    return false;
+                };
 			}
 		}
+
 		catch (Exception $e)
 		{
 			$this->logCommunicationError($sysParams["method"],$requestUrl,"HTTP_ERROR_" . $e->getCode(),$e->getMessage());
@@ -310,6 +315,12 @@ class TopClient
 		else if("xml" == $this->format)
 		{
 			$respObject = @simplexml_load_string($resp);
+
+			if($respObject->sub_msg == '短信模板不合法' || $respObject->sub_code == 'isv.MOBILE_NUMBER_ILLEGAL')
+            {
+                return false;
+            }
+
 			if (false !== $respObject)
 			{
 				$respWellFormed = true;

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use app\models\CommunityBasic;
 use app\models\CommunityBuilding;
 use app\models\HouseInfo;
+use app\models\SmsLog;
 use common\models\Sms;
 
 class AutoController extends \yii\web\Controller
@@ -44,10 +45,17 @@ class AutoController extends \yii\web\Controller
             ->asArray()
             ->all();
 
+        $success = 0; // 短信发送成功条数
+        $fail = 0; //短信发送失败条数
+
         foreach ($message as $m)
         {
             $realestate = $m['realestate'];
             $amount = $m['amount']; //合计欠费金额
+            if($amount == '0'){ //判断合计金额为零则终止当前循环
+                $fail ++;
+                continue;
+            }
             $invoice = $m['invoice']; //提取费项
             $now = 0; //当月费用总和
 
@@ -64,19 +72,31 @@ class AutoController extends \yii\web\Controller
             $address = $comm[$m['community']].' '.$b[$m['building']].' '.$add;
 
             $signName = '裕家人'; //发送短信模板名称
-            $phone = $m['phone']; //接收手机号码
+            $phone = '152965100211'; //接收手机号码
             $SMS = 'SMS_139425010'; //短信模板编号
             $guest = '裕达集团'; //客户
 
             $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
 
-//            $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
+            $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
 
             if($result == '1'){
-                return true;
+                $success ++;
             }else{
-                return false;
+                $fail ++;
             }
+
+            $sms_log = new SmsLog();
+
+            $sms_log->sign_name = $signName;
+            $sms_log->sms = $SMS;
+            $sms_log->type = '1';
+            $sms_log->count = $fail+$success;
+            $sms_log->success = $success;
+            $sms_log->sms_time = time();
+            $sms_log->property = '月度缴费单';
+            $sms_log->save();
         }
+        return true;
     }
 }

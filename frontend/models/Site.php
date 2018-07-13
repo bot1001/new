@@ -117,7 +117,7 @@ class Site extends ActiveRecord
 			->join('inner join', 'user_relationship_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
 			->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
 			->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-			->zwhere(['in', 'user_relationship_realestate.account_id', $user['account_id']])
+			->where(['in', 'user_relationship_realestate.account_id', $user['account_id']])
 			->all();
 		
 		

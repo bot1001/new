@@ -29,6 +29,9 @@ class Sms extends \yii\db\ActiveRecord
         $req->setSmsTemplateCode($SMS);
         $resp = $c->execute($req);
 
+        if($resp == false){
+            return false;
+        }
         $r= $resp->result; //提取发送返回结果
         $re = (array)$r; //转换XML数组为普通数组
 

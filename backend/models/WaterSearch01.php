@@ -14,7 +14,7 @@ class WaterSearch01 extends WaterMeter
 {
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['build', 'name', 'type']);
+		return array_merge(parent::attributes(),['build', 'name', 'type', 'number']);
 	}
 	
     /**
@@ -24,7 +24,7 @@ class WaterSearch01 extends WaterMeter
     {
         return [
             [['id', 'community', 'building', 'realestate_id', 'year', 'month', 'readout', 'property'], 'integer'],
-			[['build', 'name', 'type'],'safe'],
+			[['build', 'name', 'type', 'number'],'safe'],
         ];
     }
 
@@ -88,8 +88,9 @@ class WaterSearch01 extends WaterMeter
         ]);
 		
 		$query->andFilterWhere(['like', 'room_name' , $this->name])
+			->andFilterWhere(['like', 'room_number', $this->number])
 			->andFilterWhere(['like', 'building_name', $this->build]);
-		
+
 		$dataProvider -> sort->attributes['build']=
 			[
 				'asc' => ['building_name'=>SORT_ASC],
@@ -101,6 +102,12 @@ class WaterSearch01 extends WaterMeter
 				'asc' => ['room_name'=>SORT_ASC],
 				'desc' => ['room_name'=>SORT_DESC],
 			];
+
+		$dataProvider -> sort->attributes['number']=
+            [
+                'asc' => ['room_number'=>SORT_ASC],
+                'desc' => ['room_number'=>SORT_DESC],
+            ];
 
         return $dataProvider;
     }
