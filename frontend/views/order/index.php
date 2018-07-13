@@ -17,7 +17,6 @@ Modal::begin( [
 	'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">关闭</a>',
 ] );
 
-
 $js = <<<JS
 $(".pay").click(function(){ 
         aUrl = $(this).attr('data-url');
@@ -155,19 +154,31 @@ Modal::end();
 		</tr>
 
 		<tr id="img">
-			<td id="center"><img id="order_img" src="/image/logo.png"/>
-			</td>
-			<td><a href="<?= Url::to(['view', 'id' => $d->id]) ?>"><?= $d->address; ?></a>
-			</td>
-			<td id="center">
-				<?= $d->name; ?>
-			</td>
-			<td id="center">
-				<?= mb_substr($d->description, 0, 15); ?>
-			</td>
-			<td id="right">
-				<?= $d->amount; ?>
-			</td>
+			<td id="center"><img id="order_img" src="/image/logo.png"/>	</td>
+            <?php
+            //分割地址以获取小区
+            $community = explode(' ', $d->address);
+            if(count($community) == '1'){
+                $community = explode('-', $d->address);
+            }
+
+            $name = reset($community); // 提取小区名称
+
+            $community_id = \common\models\Community::find() //查找小区编码
+                         ->select('community_id as id')
+                         ->where(['community_name' => $name])
+                         ->asArray()
+                         ->one();
+
+            if(empty($community_id)){ //如果小区不存在则默认为0
+                $community_id['id'] = 0;
+            }
+            ?>
+
+			<td><a href="<?= Url::to(['view', 'id' => $d->id, 'community' => $community_id['id']]) ?>"><?= $d->address; ?></a></td>
+			<td id="center"><?= $d->name; ?></td>
+			<td id="center"><?= mb_substr($d->description, 0, 15); ?></td>
+			<td id="right"><?= $d->amount; ?>	</td>
 			<td id="center" width="100px">
 				<?php $key = $d->id; ?>
 				<div class="dropdown">
@@ -177,15 +188,13 @@ Modal::end();
 							echo Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', '#', [
 								'class' => 'btn btn-success pay',
 								'data-toggle' => 'modal',
-								'data-url' => Url::toRoute( [ 'pay', 'id' => $key ] ),
+								'data-url' => Url::toRoute( [ 'pay', 'id' => $key, 'community' => $community_id['id'] ] ),
 								'data-title' => '支付方式', //如果不设置子标题，默认使用大标题
 								'data-target' => '#common-modal',
 							] );
 							?>
 					</span>
-					<div class="dropdown-content">
-						立即支付
-					</div>
+					<div class="dropdown-content">立即支付</div>
 				</div>
 
 				<?php
@@ -222,5 +231,4 @@ Modal::end();
 	          echo '<h1>'.'暂无缴费记录'.'</h1>';
           } ?>
 	</div>
-
 </div>

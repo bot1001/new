@@ -87,8 +87,7 @@ class InvoiceController extends Controller
 		$id = $_SESSION['home']['id'];
 		$invoice = Invoice::find()
 			->select('invoice_id, year, month, description, invoice_amount as amount, invoice_notes as notes')
-			->andwhere(['in', 'invoice_status', '0'])
-			->andwhere(['in', 'realestate_id', $id])
+			->where([ 'invoice_status'=> '0', 'realestate_id'=> "$id"])
 			->asArray()
 			->all();
 		
@@ -116,6 +115,12 @@ class InvoiceController extends Controller
 			->andwhere(['in', 'cost_name.inv', '1'])
 			->andwhere(['<', 'cost_relation.from', time()])
 			->all();
+
+		if(empty($cost))
+        {
+            echo "<script>alert('您的房屋无绑定费项目，请联系物业服务中心')</script> ";
+            exit;
+        }
 
         if ($model->load(Yii::$app->request->post())) 
 		{

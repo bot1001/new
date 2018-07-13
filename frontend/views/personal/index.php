@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 		
 		<div id="box2" class="col-lg-4">
-			<?= $this->render('box2') ?>
+			<?= $this->render('box2',['data' => $data, 'order' => $order]) ?>
 		</div>
 		
 		<div id="box3" class="col-lg-3">

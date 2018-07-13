@@ -39,25 +39,6 @@ use yii\helpers\Html;
    </h3>
 	
 	</p>
-	<?php
-	$account_id = $_SESSION['user']['account_id']; //获取用户编码
-	$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
-		  
-    //获取订单信息
-	$order = ( new\ yii\ db\ Query )->select( 'order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
-			order_basic.order_type as type, order_basic.payment_time as payment_time,
-			order_basic.payment_gateway as gateway, order_basic.description as description,
-			order_basic.order_amount as amount, order_basic.status as status,
-			order_relationship_address.address as address, user_data.real_name as name' )
-		->from( 'order_basic' )
-		->join( 'inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id' )
-		->join( 'inner join', 'user_data', 'user_data.account_id = order_basic.account_id' )
-		->andwhere( [ '=', 'order_basic.status', '2' ] )
-		->andwhere([ 'in', 'order_basic.account_id', "$account_id"])
-		->orderBy( 'payment_time DESC' )
-		->limit( 20 )
-		->all();
-	?>
 	
 	<?php if($order){ ?> 
 	<div style="height: 250px; width: 100%; overflow: auto">
@@ -87,7 +68,26 @@ use yii\helpers\Html;
 
 			<tr>
 				<td colspan="2">
-					<div id="box2td0"><a href="<?= Url::to(['/order/view', 'id' => $or->id]) ?>"><?= $or->address; ?></a>
+                    <?php
+                    //分割地址以获取小区
+                    $community = explode(' ', $or->address);
+                    if(count($community) == '1'){
+                        $community = explode('-', $or->address);
+                    }
+
+                    $name = reset($community); // 提取小区名称
+
+                    $community_id = \common\models\Community::find() //查找小区编码
+                    ->select('community_id as id')
+                        ->where(['community_name' => $name])
+                        ->asArray()
+                        ->one();
+
+                    if(empty($community_id)){ //如果小区不存在则默认为0
+                        $community_id['id'] = 0;
+                    }
+                    ?>
+					<div id="box2td0"><a href="<?= Url::to(['/order/view', 'id' => $or->id, 'community' => $community_id['id']]) ?>"><?= $or->address; ?></a>
 					</div>
 				</td>
 				</td>

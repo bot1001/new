@@ -152,7 +152,8 @@ class LoginController extends Controller
 			
 			//如果修改成功则自动登录
 			if($result || $u_data){
-				\frontend\models\Site::saveLogin($phone);
+                $user = \frontend\models\User::find()->where(['mobile_phone'=> "$phone"])->asArray()->one();
+                \frontend\models\Site::saveMessage($user, $w_info);
 				return $this->render('/site/index');
 			}
 		}else{
@@ -218,7 +219,7 @@ class LoginController extends Controller
 	//用户登录
 	public function actionLogin()
     {
-		$this->layout = 'login';
+		$this->layout = 'login'; //设置模板
 		
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();

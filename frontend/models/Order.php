@@ -26,7 +26,7 @@ use Yii;
  * @property UserAccount $account
  * @property UserInvoice $order1
  */
-class OrderBasic extends \yii\db\ActiveRecord
+class Order extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

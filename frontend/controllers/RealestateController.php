@@ -74,7 +74,8 @@ class RealestateController extends Controller
 		{
 			$id = $_POST[ 'depdrop_parents' ];
 			$list = Realestate::find()
-				->andwhere( [ 'building_id' => $id ] )
+				->where( [ 'building_id' => $id ] )
+                ->orderBy('room_name ASC')
 				->all();
 			
 			$isSelectedIn = false;
@@ -106,8 +107,8 @@ class RealestateController extends Controller
 			$number = $_POST['depdrop_all_params']['number'];
 			$id =$_POST['depdrop_all_params']['building'];
 			$list = Realestate::find()
-				->andwhere( ['in', 'building_id', $id] )
-				->andwhere( ['in', 'room_number', $number] )
+				->where( ['building_id'=> "$id", 'room_number' => "$number"] )
+                ->orderBy('room_name ASC')
 				->all();
 
 			$isSelectedIn = false;

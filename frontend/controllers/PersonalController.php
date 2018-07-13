@@ -39,7 +39,27 @@ class PersonalController extends Controller
 	
 	public function actionIndex()
 	{
-		return $this->render('index');
+        $account_id = $_SESSION['user']['account_id']; //获取用户编码
+        $data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+
+        //获取订单信息
+        $order = ( new\ yii\ db\ Query )->select( 'order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
+			order_basic.order_type as type, order_basic.payment_time as payment_time,
+			order_basic.payment_gateway as gateway, order_basic.description as description,
+			order_basic.order_amount as amount, order_basic.status as status,
+			order_relationship_address.address as address, user_data.real_name as name' )
+            ->from( 'order_basic' )
+            ->join( 'inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id' )
+            ->join( 'inner join', 'user_data', 'user_data.account_id = order_basic.account_id' )
+            ->andwhere( [ '=', 'order_basic.status', '2' ] )
+            ->andwhere([ 'order_basic.account_id' => "$account_id"])
+            ->orderBy( 'payment_time DESC' )
+            ->limit( 20 )
+            ->all();
+		return $this->render('index',[
+		    'data' => $data,
+            'order' => $order
+        ]);
 	}
 	
 	//添加新房屋
@@ -66,10 +86,10 @@ class PersonalController extends Controller
 		    $ship->realestate_id = $realestate_id; //赋值关联房屋ID
 			
 			$r = $ship->save(); //保存用户关联信息
-			
-			if($r){
+
+			if($r == '1'){
 				\frontend\models\Site::saveLogin($phone); //变更用户房屋信息
-				return $this->render('index');
+				return $this->redirect('index');
 			}else{
 				return $this->redirect( Yii::$app->request->referrer);
 			}

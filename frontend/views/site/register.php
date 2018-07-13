@@ -28,8 +28,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	}
 </style>
 
-<h1 align="center"><?= Html::encode($this->title) ?></h1>
-
 <div class="login-form" style="background: #76DFCD">
     <table style="border-radius: 50px">
     	<tbody>
@@ -212,7 +210,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 success: function (result) {
                     if (result == 1) {
 						document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info"></input>';
-						alert("信息验证成功！");
                     };
                 },
                 error : function() {

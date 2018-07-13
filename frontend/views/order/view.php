@@ -100,7 +100,7 @@ Modal::end();
             ['attribute' => 'payment_number',
 			 'value' => function($model){
 	             if(!empty($model['payment_number'])){
-             	     return $model['payment_gateway'];
+             	     return $model['payment_number'];
 				 }else{
 					 return '';
 				 }

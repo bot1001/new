@@ -140,11 +140,7 @@ use common\ models\ Area;
 	    			</td>
 	    		</tr>
     
-	    		<tr>
-	    			<td colspan="5">
-	    				房屋信息：
-	    			</td>
-	    		</tr>
+	    		<tr><td colspan="5">	房屋信息：</td></tr>
 	    		<?php foreach($house as $k => $h): $h = (object)$h; ?>
 	    		<?php if($h){ ?>
 	    		<tr>
@@ -154,10 +150,10 @@ use common\ models\ Area;
 	    			</td>
     
 	    			<td rowspan="2">
-	    				<?php if($k > '0') {
-	                        echo Html::a('<span class="glyphicon glyphicon-minus"></span>', '#' , ['class' => 'btn btn-warning', 'onclick' => "d($h->id, $k)", 'title' => '解绑房屋']);
-                                    }else{
+	    				<?php if(count($house) > '2') {
 	                        echo Html::a('<span class="glyphicon glyphicon-home"></span>','#', ['class' => 'btn btn-success', 'title' => '我的房屋']);
+                                    }else{
+	                        echo Html::a('<span class="glyphicon glyphicon-minus"></span>', '#' , ['class' => 'btn btn-warning', 'onclick' => "d($h->id, $k)", 'title' => '解绑房屋']);
                         }
 	                    ?>
 	    			</td>

@@ -52,13 +52,13 @@ class OrderController extends Controller
 			->select('order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,
 			order_basic.order_type as type, order_basic.payment_time as payment_time,
 			order_basic.payment_gateway as gateway, order_basic.description as description,
-			order_basic.order_amount as amount, order_basic.status as status,
+			order_basic.order_amount as amount, order_basic.status,
 			order_relationship_address.address as address, user_data.real_name as name')
 			->from('order_basic')
 			->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
 			->join('inner join', 'user_data', 'user_data.account_id = order_basic.account_id')
-			->where([ 'in', 'order_basic.account_id', "$account_id"])
-			->orderBy('payment_time DESC');
+			->where(['order_basic.account_id' => "$account_id"])
+			->orderBy('order_basic.status ASC, order_basic.order_id DESC');
 		
 		$count = $date->count();// 计算总数
 		
@@ -196,7 +196,7 @@ class OrderController extends Controller
 			->where(['in', 'id', $id])
 			->asArray()
 			->one();
-		
+
 		return $this->renderAjax('pay', ['order' => $order, 'community' => $community]);
 	}
 	

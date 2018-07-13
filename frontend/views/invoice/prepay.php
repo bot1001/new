@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<td id='center'>优惠</td>
 				<td id='center'><l><?= number_format($sale, 2); ?></l></td>
 				<td id='right'>合计:&nbsp;&nbsp;&nbsp;</td>
-				<td><?= number_format($sum, 2).'元' ?></td>
+				<td><?= number_format($sum-$sale, 2).'元' ?></td>
 			</tr>
 		</tbody>
 	</table>
