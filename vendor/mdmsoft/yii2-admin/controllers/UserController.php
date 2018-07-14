@@ -19,7 +19,7 @@ use yii\base\UserException;
 use yii\mail\BaseMailer;
 use app\models\SysRole;
 use app\models\CommunityBasic;
-use app\models\Company;
+use common\models\Company;
 
 /**
  * User controller

@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\SysUser;
-use app\models\Company;
+use common\models\Company;
 use app\models\SysRole;
 use app\models\SysCommunity;
 use app\models\SysuserSearch;
@@ -48,16 +48,6 @@ class SysuserController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-	
-	//检查用户是否登录
-	public function  beforeAction($action)
-    {
-        if(Yii::$app->user->isGuest){
-            $this->redirect(['/login']);
-            return false;
-        }
-        return true;
-    }
 
 	//GridView页面直接编辑
 	public function actions()
@@ -93,13 +83,13 @@ class SysuserController extends Controller
     {
         $model = new SysUser();
 		$model->setScenario('create'); //设置场景$model->setScenario('up');
-	
+
 		$company = Company::find()
 			->select('name, id')
 			->orderBy('name')
 			->indexBy('id')
 			->column();
-		
+
 		$role = SysRole::find()
 			->select('name, id')
 			->where(['not like', 'name', 'admin'])
@@ -107,14 +97,14 @@ class SysuserController extends Controller
 			->indexBy('id')
 			->column();
 
-        if ($model->load(Yii::$app->request->post())/* && $model->save()*/) 
+        if ($model->load(Yii::$app->request->post())/* && $model->save()*/)
 		{
 			$post = $_POST['SysUser']; // 接收传递过来的数据
-			
+
             $transaction=$model->db->beginTransaction();
             try{
 				$model = new SysUser(); //实例化用户模型
-				
+
 				//模型块赋值
                 $model->company = $post['company'];
 			    $model->community = $post['community'];
@@ -124,25 +114,25 @@ class SysuserController extends Controller
 			    $model->new_pd = md5($post['new_pd']);
 			    $model->status = $post['status'];
 			    $model->comment = $post['comment'];
-			
+
                 $m = $model->save(); //保存数据
-				
-				if($m){					
+
+				if($m){
 				    $user = new SysCommunity(); //实例化关联小区模型
-				    
+
 				    $id = Yii::$app->db->getLastInsertId(); //获取最新插入的记录ID
 			        $user->sys_user_id = $id;
 			        $user->community_id = $post['community'];
 			        $user->own_update = '0';
-			
+
 				    $e = $user->save(); //保存数据
-				}				
+				}
 				$transaction->commit(); //结束事务
             }catch(Exception $e){
 				print_r($e);
                 $transaction->rollBack();
             }
-			
+
             return $this->redirect(['/admin/user/index', 'name' => $post['name']]);
         } else {
             return $this->renderAjax('create', [
@@ -157,12 +147,12 @@ class SysuserController extends Controller
 	public function actionChange()
 	{
 		$model = new SysUser();
-		
+
         return $this->render('form', [
             'model' => $model,
         ]);
 	}
-	
+
 	//提交新密码
 	public function actionP()
 	{
@@ -170,19 +160,19 @@ class SysuserController extends Controller
 		$id = $_SESSION['user']['0']['id'];
 		//获取数据中的密码
 		$pd = SysUser::find()->select('new_pd')->where(['id'=> $id])->asArray()->one();
-		
+
 		$password = $_POST['SysUser']['password'];// 传递过来的密码
 		$new = $_POST['SysUser']['n'];//传递过来的新密码
 		$p = md5($password); // 经过md5加密旧密码
 		$n = md5($new); // 经过md5加密新密码
-		
+
 		if($pd['new_pd'] == $p){
 			Sysuser::updateAll(['new_pd' => $n],'id = :id',[':id' => $id]);
 			echo "<script>alert('密码修改成功！');parent.location.href='/site';</script>";
 		}else{
 			$session->setFlash('fail','1');
 			return $this->redirect(Yii::$app->request->referrer);
-		}	
+		}
 	}
     /**
      * Updates an existing SysUser model.

@@ -2,6 +2,7 @@
 
 namespace app\models;
 use mdm\admin\components\Configs;
+use common\models\Company;
 
 use Yii;
 

@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\SysCommunity;
-use app\models\Company;
+use common\models\Company;
 use app\models\SysUser;
 use app\models\SysCommunitySearch;
 use yii\web\Controller;

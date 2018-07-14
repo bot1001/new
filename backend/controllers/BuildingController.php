@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
-use app\models\Company;
+use common\models\Company;
 
 /**
  * BuildingController implements the CRUD actions for CommunityBuilding model.

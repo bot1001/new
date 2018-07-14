@@ -28,7 +28,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
 		    ['attribute' =>'company',
 			 'value' => 'c.name',
 			 'filterType' => GridView::FILTER_SELECT2,
-			 'filter' => \app\models\Company::getCompany(),
+			 'filter' => \common\models\Company::getCompany(),
 			 'filterInputOptions' => [ 'placeholder' => '请选择……'],
 			 'filterWidgetOptions' => [
 	              'pluginOptions' => ['allowClear' => true],
@@ -38,7 +38,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
 				'header' => '详情',
 				'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-				'data' => \app\models\Company::getCompany(),
+				'data' => \common\models\Company::getCompany(),
 			],
                 'readonly' => function ( $model, $key, $index, $widget ) {
                     return \app\models\Limit::limit($url='/community-basic/community') == 0 ; // 判断活动列是否可编辑

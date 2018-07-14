@@ -95,11 +95,11 @@ class UserInvoiceSearch extends UserInvoice
             'realestate_id' => $this->realestate_id,
             'invoice_amount' => $this->invoice_amount,
             'invoice_status' => $this->invoice_status,
+            'year' => $this->year,
+            'month' => $this->month,
         ]);
 
         $query->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'year', $this->year])
-            ->andFilterWhere(['like', 'month', $this->month])
             ->andFilterWhere(['like', 'create_time', $this->create_time])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])

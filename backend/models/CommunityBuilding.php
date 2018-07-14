@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use common\models\Company;
 
 /**
  * This is the model class for table "community_building".
