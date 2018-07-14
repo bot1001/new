@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -32,10 +32,10 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['creator', 'create_time'], 'integer'],
+            [['creator', 'create_time', 'parent'], 'integer'],
             [['name', 'property'], 'string', 'max' => 50],
             [['name'], 'unique'],
-            [['creator'], 'exist', 'skipOnError' => true, 'targetClass' => SysUser::className(), 'targetAttribute' => ['creator' => 'id']],
+            [['creator'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator' => 'id']],
         ];
     }
 
@@ -47,6 +47,7 @@ class Company extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '名字',
+            'parent' => '总公司',
             'creator' => '创建人',
             'create_time' => '创建时间',
             'property' => '备注',
@@ -75,7 +76,7 @@ class Company extends \yii\db\ActiveRecord
      */
     public function getCr()
     {
-        return $this->hasOne(SysUser::className(), ['id' => 'creator']);
+        return $this->hasOne(User::className(), ['id' => 'creator']);
     }
 	
 	static function getCompany()

@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Company;
+use common\models\Company;
 use app\models\CompanySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

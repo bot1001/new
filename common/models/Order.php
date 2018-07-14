@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use common\models\Products;
+use common\models\OrderAddress as Address;
 
 /**
  * This is the model class for table "order_basic".
@@ -104,4 +106,65 @@ class Order extends \yii\db\ActiveRecord
 		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
 		return $order_id;
 	}
+
+	static function create($order_id, $amount)
+    {
+        $user = $_SESSION['user']; //用户信息
+        $house = $_SESSION['home']; //用户下单房屋信息
+
+        $account_id = $user['account_id'];
+        $type = '1'; //物业订单
+        $description = '物业缴费';
+        $community = $house['community_id']; //小区编码
+
+        $name = $user['real_name']; //下单人
+        $phone = $user['mobile_phone']; //手机号码
+        $address = $house['community'].' '.$house['building'].' '.$house['number'].'单元'.' '.$house['room'].'号'; //订单地址
+        $province = $user['province_id'];
+        $city = $user['city_id'];
+        $area = $user['area_id'];
+
+        $model = new Order(); //实例化订单模型
+
+        $transaction = Yii::$app->db->beginTransaction(); //标记事务
+        try{
+            $model->account_id = $account_id;
+            $model->order_id = $order_id;
+            $model->create_time = time();
+            $model->order_type = $type;
+            $model->description = $description;
+            $model->order_amount = $amount;
+
+            $e = $model->save(); //保存
+            $o_id = Yii::$app->db->getLastInsertID(); //获取最新插入的订单ID
+
+            if($e){
+                $add = new Address(); //实例化订单地址模型
+
+                $add->order_id = $order_id;
+                $add->address = $address;
+                $add->mobile_phone = $phone;
+                $add->name = $name;
+                $add->province_id = $province;
+                $add->city_id = $city;
+                $add->area_id = $area;
+
+                $a = $add->save(); //保存
+            }
+            if($a){
+                $transaction->commit(); //提交事务
+            }else{
+                $transaction->rollback(); //滚回事务
+            }
+        }catch(\Exception $e) {
+            $transaction->rollback(); //滚回事务
+        }
+
+        if($a && $o_id)
+        {
+            return $o_id;
+        }else{
+            return false;
+        }
+    }
 }
