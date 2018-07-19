@@ -150,7 +150,7 @@ use common\ models\ Area;
 	    			</td>
     
 	    			<td rowspan="2">
-	    				<?php if(count($house) > '2') {
+	    				<?php if(count($house) == '1') {
 	                        echo Html::a('<span class="glyphicon glyphicon-home"></span>','#', ['class' => 'btn btn-success', 'title' => '我的房屋']);
                                     }else{
 	                        echo Html::a('<span class="glyphicon glyphicon-minus"></span>', '#' , ['class' => 'btn btn-warning', 'onclick' => "d($h->id, $k)", 'title' => '解绑房屋']);

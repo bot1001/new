@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use common\models\Invoice;
 
 /**
  * This is the model class for table "user_invoice".
@@ -85,7 +84,7 @@ class Invoice extends \yii\db\ActiveRecord
 	//计算预交费用
 	public static function prepay($cost, $year, $month, $id)
 	{
-		$house = $_SESSION['house']['0']; //获取房号
+		$house = $_SESSION['home']; //获取房号
 		
 		$sale = 0; //优惠计算
 		
@@ -145,7 +144,7 @@ class Invoice extends \yii\db\ActiveRecord
 				}else{
 					$amount = $c['price'];
 				}
-				
+
 				$invoice['amount'] = number_format($amount, 2); //保留两位小区点
 				
 				$prepay[] = $invoice; //收集数据

@@ -107,8 +107,8 @@ class PersonalController extends Controller
 		
 		if($ship){
 			unset($_SESSION['house'][$k]);
+			return true;
 		}
-		
-		return true;
+		return false;
 	}
 }

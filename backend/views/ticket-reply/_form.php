@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ticket_id')->textInput() ?>
 
-    <?= $form->field($model, 'account_id')->dropDownList($assignee,['prompt' => '请选择']) ?>
+    <?= $form->field($model, 'account_id')->dropDownList(\app\models\UserAccount::getAccount(),['prompt' => '请选择']) ?>
 
     <?= $form->field($model, 'content')->textArea(['maxlength' => true, 'max' => 5]) ?>
 

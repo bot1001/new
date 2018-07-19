@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TicketReplySearch */
@@ -98,6 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'hAlign' => 'center'],
 		    	    
             ['class' => 'kartik\grid\ActionColumn',
+                'template' => Helper::filterActionColumn('{update}{view}{delete}'),
 			'header' => '操<br />作'],
         ];
 		

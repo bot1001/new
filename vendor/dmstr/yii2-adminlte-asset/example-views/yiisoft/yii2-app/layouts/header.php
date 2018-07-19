@@ -12,29 +12,26 @@ use app\models\SysRole;
 use mdm\admin\components\Helper;
 
     $session= $_SESSION['user']['0'];
-    $a = $_SESSION['community']; //获取小区
+    $a = $_SESSION['community']; //获取用户关联小区编码
+    $community = $_SESSION['community_id']; //用户关联小区
     $t = TicketBasic::getTicket(); //调用获取投诉数据方法
     $o = OrderBasic::getOr(); //调用获取订单数据方法
     
     $one = strtotime(date('Y-m-d')); // 本日时间戳
     $two = date(time()); //当前时间戳
-    $r_id = $session['role']; //用户角色编号
-    
-    //获取关联小区名字
-	$c_name = CommunityBasic::find()
-		->select('community_name, community_id')
-		->where(['in', 'community_id', $a])
-		->asArray()
-		->all();
+    $r = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
 
-    $name = array_column($c_name, 'community_name');
+    foreach($r as $ro);
+    $role = $ro->name;
+
+    $name = array_column($community, 'community_name');
 
 	//获取小区投诉
 	$ticket = $t->andwhere(['in', 'ticket_basic.community_id', $a])
 		->andwhere(['ticket_status' => 1])
 	    ->asArray()
 		->all();
-	
+
 	//获取订单
 	$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
 		->andwhere(['or like', 'order_relationship_address.address', $name]);
@@ -47,27 +44,12 @@ use mdm\admin\components\Helper;
     $order = $or->orderBy('payment_time DESC')->limit('20')->all(); // 当日订单数据
     $o_count = $or->count(); //订单总量
 
-    $o_c = array_column($order, 'community_id'); //订单中的小区编号
-    $u_c = array_column($user, 'community_id'); //注册中的小区编号
-    $o_b = array_column($order, 'building_id'); //订单中的楼宇编号
-    $t_c = array_column(array_column($ticket, 'r'), 'community_id'); //投诉列表总的小区编号
-    $t_b = array_column(array_column($ticket, 'r'), 'building_id'); //投诉列表总的楼宇编号
-    
-    $build_id = array_unique(array_merge($o_b,$t_b)); //合并和去重复小区编号
-
     //获取楼宇
-    $b_name = CommunityBuilding::find()
+    $building = CommunityBuilding::find()
     	->select('building_name, building_id')
-    	->where(['in', 'building_id', $build_id])
-    	->asArray()
-    	->all();
-
-    //角色
-    $role = SysRole::find()->select('id, name')->asArray()->all();
-    $r_name = ArrayHelper::map($role, 'id', 'name');
-
-    $community = ArrayHelper::map($c_name, 'community_id', 'community_name'); //重新组合小区
-    $building = ArrayHelper::map($b_name, 'building_id', 'building_name'); //重新组合楼宇
+    	->where(['in', 'community_id', $a])
+    	->indexBy('building_id')
+    	->column();
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -111,7 +93,7 @@ use mdm\admin\components\Helper;
                 <li class="dropdown notifications-menu">
                    <?php
 	                   if (Helper::checkRoute('/user/index')) {
-                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user, 'u_c' => $u_c, 'community' => $community,]);
+                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user, 'u_c' => $community, 'community' => $community,]);
                            }
 	                    ?>
                 </li>
@@ -126,7 +108,7 @@ use mdm\admin\components\Helper;
                 
                 <!-- 用户信息 -->
                 <li class="dropdown user user-menu">
-                   <?= $this->render('user', ['directoryAsset' => $directoryAsset, 'session' => $session, 'community' => $community, 'a' => $a, 'r_name' => $r_name, 'r_id' => $r_id]); ?>                    
+                   <?= $this->render('user', ['directoryAsset' => $directoryAsset, 'session' => $session, 'community' => $community, 'a' => $a, 'role' => $role]); ?>
                 </li>
 
                 <!-- User Account: style can be found in dropdown.less -->

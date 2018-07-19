@@ -43,24 +43,16 @@ class TicketReplyController extends Controller
 		
 		if(isset($_GET['id']))
 		{
-			$data = (new \Yii\db\Query())
-				->select('ticket_reply.content as content, ticket_reply.reply_time as time, user_data.real_name as name')
-				->from('ticket_reply')
-				->join('inner join', 'user_data', 'user_data.account_id = ticket_reply.account_id')
-				->where(['ticket_reply.ticket_id' => $_GET['id']])
-				->orderBy('reply_time ASC')
-				->all();
-			
-			$model = new TicketReply();
-			
-			if(isset($data)){
-				return $this->renderAjax('view', [
-				    'model' => $model,
-				    'data' => $data]);
-			}else{
-				echo '<center>'.'无回复'.'</center>';
-			}
-			
+			$id = $_GET['id'];
+			$ids = TicketReply::find()
+                ->select('reply_id')
+                ->where(['ticket_id' => "$id"])
+                ->asArray()
+                ->one();
+
+			return $this->renderAjax('view', [
+			    'model' => $this->findModel($ids)
+            ]);
 		}else{
 			$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -93,7 +85,7 @@ class TicketReplyController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -110,20 +102,7 @@ class TicketReplyController extends Controller
 		if($id){
 			$model->ticket_id = $id;
 		}
-		
-		//获取用户绑定的小区
-		$c = $_SESSION['community'];
-				
-		$assignee = (new \yii\db\Query())
-			->select('user_account.user_name, user_account.account_id')
-			->from('user_account')
-			->join('inner join', 'work_relationship_account', 'work_relationship_account.account_id = user_account.account_id')
-			->andwhere(['user_account.status' => '1'])
-			->andwhere(['in', 'work_relationship_account.community_id', $c])
-			->orderBy('community_id')
-		    ->indexBy('account_id')
-			->column();
-		
+
         if ($model->load(Yii::$app->request->post()))
 		{
 			$model = new TicketReply(); //实例化模型
@@ -157,7 +136,6 @@ class TicketReplyController extends Controller
 
         return $this->renderAjax('create', [
             'model' => $model,
-			'assignee' => $assignee
         ]);
     }
 

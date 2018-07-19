@@ -11,12 +11,8 @@ $this->title = $model->reply_id;
 $this->params['breadcrumbs'][] = ['label' => 'Ticket Replies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ticket-reply-view">
-    
-    <?php foreach($data as $d)
-    {
-    ?>
-    
+<div class="ticket-reply-view" style="max-width: 800px">
+
     <p align="right">
         <?php		
 		if (Helper::checkRoute('delete')) {
@@ -31,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
    
     <?= DetailView::widget([
-        'model' => $d,
+        'model' => $model,
         'attributes' => [
-		   ['attribute' => 'name',
+		   ['attribute' => 'a.user_name',
 		   'label' => '姓名'
 		   ],
 		
@@ -42,10 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		   ],
 		
            ['attribute' => 'time',
-			'value'=>date('Y-m-d H:i:s',$d['time']),
+			'value'=>date('Y-m-d H:i:s',$model->reply_time),
 		   'label' => '时间'
 		   ],
         ],
     ]) ?>
-	<?php } ?>
 </div>

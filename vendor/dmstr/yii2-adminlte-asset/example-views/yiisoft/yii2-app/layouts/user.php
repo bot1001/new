@@ -20,10 +20,7 @@ use yii\helpers\Html;
                     }else{
                     	echo '点击查看';
                     } ?></l>
-            <small>角色：<?php if(isset($r_name[$r_id]))
-                        {
-		                     echo ($r_name[$r_id]);
-                        } ?></small>
+            <small>角色：<?= $role ?></small>
         </p>
     </li>
     <!-- Menu Body -->

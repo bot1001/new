@@ -39,24 +39,37 @@ use kartik\select2\Select2;
                 'pluginOptions'=>[
                     'depends'=>['community'],
                     'placeholder'=>'请选择...',
-                    'url'=>Url::to(['/costrelation/b'])
+                    'url'=>Url::to(['/costrelation/b2'])
                 ]
             ]); ?>
     	</div>
-    	<div class="col-lg-2">
+        <div class="col-lg-3">
+    		<?= $form->field($model, 'account_id')->widget(DepDrop::classname(), [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options'=>['id'=>'number'],
+	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                'pluginOptions'=>[
+                    'depends'=>['building'],
+                    'placeholder'=>'请选择...',
+                    'url'=>Url::to(['/costrelation/number']),
+                    
+                ]
+            ])->label('单元') ?>
+    	</div>
+    	<div class="col-lg-3">
     		<?= $form->field($model, 'realestate_id')->widget(DepDrop::classname(), [
                 'type' => DepDrop::TYPE_SELECT2,
                 'options'=>['id'=>'realestate'],
 	            'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
                 'pluginOptions'=>[
-                    'depends'=>['building'],
+                    'depends'=>['number'],
                     'placeholder'=>'请选择...',
-                    'url'=>Url::to(['/costrelation/re'])
+                    'url'=>Url::to(['/costrelation/re']),'params'=>['building'],
                 ]
             ]); ?>
     	</div>
     	
-    	<div class="col-lg-3">
+    	<div class="col-lg-3" style="display:none">
     		<?= $form->field($model, 'ticket_number')->textInput(['maxlength' => true, 'readOnly' => true]) ?>
     	</div>
     </div>

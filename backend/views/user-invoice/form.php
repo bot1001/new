@@ -20,12 +20,10 @@ use kartik\daterange\DateRangePicker;
 
 <table align="center" style="width:500px; background-color:#F3F3F3;border-radius:20px;" border="0">
 	<tr>
-
-		<td>	
-		</td>
+		<td></td>
 	</tr>
 </table>
-	<div class="row">
+	<div class="row" style="display: none">
 		<div class="col-lg-3">
 			<?= $form->field($model, 'community_id')->dropDownList($comm) ?>
 		</div>

@@ -118,4 +118,23 @@ class UserAccount extends \yii\db\ActiveRecord
     {
         return $this->hasOne(WorkR::className(), ['account_id' => 'account_id']);
     }
+
+    //数组
+    static function getAccount()
+    {
+        //获取用户绑定的小区
+        $c = $_SESSION['community'];
+
+        $account = $assignee = (new \yii\db\Query())
+            ->select('user_account.user_name, user_account.account_id')
+            ->from('user_account')
+            ->join('inner join', 'work_relationship_account', 'work_relationship_account.account_id = user_account.account_id')
+            ->andwhere(['user_account.status' => '1'])
+            ->andwhere(['in', 'work_relationship_account.community_id', $c])
+            ->orderBy('community_id')
+            ->indexBy('account_id')
+            ->column();
+
+        return $account;
+    }
 }

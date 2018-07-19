@@ -49,6 +49,7 @@ class TicketReplySearch extends TicketReply
         $query = TicketReply::find();
 		$query->joinWith('d');
 		$query->joinWith('t');
+		$query->where(['in', 'ticket_basic.community_id', $_SESSION['community']]);
 
         // add conditions that should always apply here
 
