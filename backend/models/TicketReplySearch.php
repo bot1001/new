@@ -81,7 +81,7 @@ class TicketReplySearch extends TicketReply
         // grid filtering conditions
         $query->andFilterWhere([
             'reply_id' => $this->reply_id,
-            'ticket_id' => $this->ticket_id,
+            'ticket_reply.ticket_id' => $this->ticket_id,
             'is_attachment' => $this->is_attachment,
             //'reply_time' => $this->reply_time,
             'reply_status' => $this->reply_status,

@@ -126,9 +126,10 @@ class CommunityBuilding extends \yii\db\ActiveRecord
     static function Building($community_id)
     {
         $building = self::find()
-            ->select('building_name, building_id')
+            ->select('building_name')
             ->where(['in', 'community_id', $community_id])
-            ->indexBy('building_id')
+            ->distinct()
+            ->indexBy('building_name')
             ->OrderBy('building_name ASC')
             ->column();
 

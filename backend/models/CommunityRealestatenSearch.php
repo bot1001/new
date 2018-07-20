@@ -18,8 +18,8 @@ class CommunityRealestatenSearch extends CommunityRealestate
     public function rules()
     {
         return [
-            [['realestate_id', 'community_id', 'building_id'], 'integer'],
-            [['room_name', 'room_number', 'owners_name', 'owners_cellphone', 'property'], 'safe'],
+            [['realestate_id', 'community_id'], 'integer'],
+            [['room_name', 'room_number', 'owners_name', 'owners_cellphone', 'property', 'building_id'], 'safe'],
             [['acreage'], 'number'],
         ];
     }
@@ -47,7 +47,8 @@ class CommunityRealestatenSearch extends CommunityRealestate
 		$query = CommunityRealestate::find()->where(['in', 'community_realestate.community_id', $c]);
 		
         $query->joinWith('community0');
-		
+        $query->joinWith('building0');
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -71,12 +72,12 @@ class CommunityRealestatenSearch extends CommunityRealestate
         $query->andFilterWhere([
             'realestate_id' => $this->realestate_id,
             'community_realestate.community_id' => $this->community_id,
-            'building_id' => $this->building_id,
             'acreage' => $this->acreage,
         ]);
 
         $query->andFilterWhere(['like', 'room_name', $this->room_name])
             ->andFilterWhere(['like', 'room_number', $this->room_number])
+            ->andFilterWhere(['in', 'community_building.building_name', $this->building_id])
             ->andFilterWhere(['like', 'property', $this->property])
             ->andFilterWhere(['like', 'owners_name', $this->owners_name])
             ->andFilterWhere(['like', 'owners_cellphone', $this->owners_cellphone]);

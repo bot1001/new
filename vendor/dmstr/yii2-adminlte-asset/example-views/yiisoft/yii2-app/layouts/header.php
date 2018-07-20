@@ -24,8 +24,6 @@ use mdm\admin\components\Helper;
     foreach($r as $ro);
     $role = $ro->name;
 
-    $name = array_column($community, 'community_name');
-
 	//获取小区投诉
 	$ticket = $t->andwhere(['in', 'ticket_basic.community_id', $a])
 		->andwhere(['ticket_status' => 1])
@@ -34,7 +32,7 @@ use mdm\admin\components\Helper;
 
 	//获取订单
 	$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
-		->andwhere(['or like', 'order_relationship_address.address', $name]);
+		->andwhere(['or like', 'order_relationship_address.address', $community]);
 	
 	//计算当日注册量
 	$query = \app\models\UserAccount::getUser($one, $two, $a);
@@ -93,7 +91,7 @@ use mdm\admin\components\Helper;
                 <li class="dropdown notifications-menu">
                    <?php
 	                   if (Helper::checkRoute('/user/index')) {
-                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user, 'u_c' => $community, 'community' => $community,]);
+                               echo $this->render('register', ['today' => $today, 'one' => $one, 'two' => $two, 'user' => $user, 'community' => $community,]);
                            }
 	                    ?>
                 </li>

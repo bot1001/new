@@ -18,7 +18,7 @@ use yii\helpers\Url;
 		        
 			        <?php 
                          echo '<i class="fa fa-users text-aqua"></i>'.' '.
-                             $o['address'].' '.'时间：'.
+                             $o['address'].' '.
                              date('H:i', $o['payment_time']).' '.
                              '<l>'.$o['order_amount'].'</l>';
 					     $address = $o['address'];
