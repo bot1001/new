@@ -163,11 +163,13 @@ class CommunityRealestate extends \yii\db\ActiveRecord
     }
 
     //由楼宇获取提取单元
-    static function Number($building_id)
+    static function Number($building_id, $community_id)
     {
         $number = self::find()
             ->select('room_number')
-            ->where(['building_id' => "$building_id"])
+            ->joinWith('building0')
+            ->andwhere(['community_building.building_name' => "$building_id"])
+            ->andwhere(['in', 'community_realestate.community_id', $community_id])
             ->orderBy('room_number')
             ->indexBy('room_number')
             ->column();
