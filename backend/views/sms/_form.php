@@ -9,25 +9,26 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="sms-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'sign_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sign_name')->textInput(['maxlength' => true, 'placeholder' => '模板名称'])->label(false) ?>
 
-    <?= $form->field($model, 'sms')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sms')->textInput(['maxlength' => true, 'placeholder' => '模板编号'])->label(false) ?>
 
-    <?= $form->field($model, 'count')->textInput() ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <?= $form->field($model, 'count')->input('number', ['placeholder' => '变量总数'])->label(false) ?>
+        </div>
+        <div class="col-lg-6">
+            <?= $form->field($model, 'status')->dropDownList([ 0 => '否', 1 => '是'], ['placeholder' => '状态'])->label(false) ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'creator')->textInput() ?>
+    <?= $form->field($model, 'property')->textarea(['maxlength' => true, 'placeholder' => '备注'])->label(false) ?>
 
-    <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'property')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group" align="center">
+        <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

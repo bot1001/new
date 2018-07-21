@@ -13,9 +13,9 @@ use app\models\OrderBasic;
 class OrderSearch extends OrderBasic
 {
 	public function attributes()
-	{
-		return array_merge(parent::attributes(),['order0.name','order0.mobile_phone','order0.address','order_id']);
-	}
+{
+    return array_merge(parent::attributes(),['order0.name','order0.mobile_phone','order0.address','order_id']);
+}
     /**
      * @inheritdoc
      */

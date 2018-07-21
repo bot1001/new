@@ -5,10 +5,9 @@ use yii\bootstrap\Modal;
 
 Modal::begin( [
 	'id' => 'common-modal',
-	'header' => '<h4 class="modal-title">小区</h4>',
+	'header' => '<h4 class="modal-title">默认标题</h4>',
 //	'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">关闭</a>',
 ] );
-
 
 $js = <<<JS
 $(".pay").click(function(){ 

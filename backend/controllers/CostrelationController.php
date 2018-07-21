@@ -226,6 +226,7 @@ class CostrelationController extends Controller {
 			$list = CommunityRealestate::find()
 				->andwhere( ['in', 'building_id', $id] )
 				->andwhere( ['in', 'room_number', $number] )
+                ->orderBy('room_name asc')
 				->all();
 
 			$isSelectedIn = false;
@@ -259,6 +260,7 @@ class CostrelationController extends Controller {
 			$list = CommunityRealestate::find()
 				->andwhere( ['in', 'building_id', $id] )
 				->andwhere( ['in', 'room_number', $number] )
+                ->orderBy('room_name asc')
 				->all();
 
 			$isSelectedIn = false;

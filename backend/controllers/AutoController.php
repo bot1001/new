@@ -21,10 +21,9 @@ class AutoController extends \yii\web\Controller
             ->column();
 
         //遍历小区提取编号
-        $community_id = '';
         foreach($comm as $key => $com)
         {
-            $community_id .= $key.',';
+            $community_id[] = $key;
         }
 
         //查找楼宇
@@ -37,13 +36,17 @@ class AutoController extends \yii\web\Controller
         $message = HouseInfo::find() //查找发送短信的信息
             ->select('house_info.realestate, house_info.phone, sum(user_invoice.invoice_amount) as amount, user_invoice.community_id as community, user_invoice.building_id as building')
             ->joinWith('invoice')
-            ->joinWith('re')
-            ->andwhere(['house_info.status' => '1', 'politics' => '1','user_invoice.invoice_status' => '0'])
+            ->joinWith('re') //关联房屋
+            ->andwhere(['house_info.status' => '1', 'politics' => '1', 'user_invoice.invoice_status' => '0'])
             ->andWhere(['in', 'user_invoice.community_id', $community_id])
-            ->groupBy('house_info.phone')
+            ->groupBy('house_info.realestate')
             ->orderBy('house_info.realestate desc')
+//            ->limit(3)
             ->asArray()
             ->all();
+        echo '<pre />';
+        print_r(count($message));
+        exit;
 
         $success = 0; // 短信发送成功条数
         $fail = 0; //短信发送失败条数
@@ -72,31 +75,34 @@ class AutoController extends \yii\web\Controller
             $address = $comm[$m['community']].' '.$b[$m['building']].' '.$add;
 
             $signName = '裕家人'; //发送短信模板名称
-            $phone = '152965100211'; //接收手机号码
+            $phone = '15296500211'; //接收手机号码$m['phone'];//
             $SMS = 'SMS_139425010'; //短信模板编号
             $guest = '裕达集团'; //客户
 
             $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
-
-            $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
+            $result = '';
+//            $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
 
             if($result == '1'){
                 $success ++;
             }else{
                 $fail ++;
             }
-
-            $sms_log = new SmsLog();
-
-            $sms_log->sign_name = $signName;
-            $sms_log->sms = $SMS;
-            $sms_log->type = '1';
-            $sms_log->count = $fail+$success;
-            $sms_log->success = $success;
-            $sms_log->sms_time = time();
-            $sms_log->property = '月度缴费单';
-            $sms_log->save();
         }
-        return true;
+
+
+//         $sms_log = new SmsLog(); //实例化短信发送记录模型
+//
+//         $sms_log->sign_name = $signName;
+//         $sms_log->sms = $SMS;
+//         $sms_log->type = '1';
+//         $sms_log->count = $fail+$success;
+//         $sms_log->success = $success;
+//         $sms_log->sms_time = time();
+//         $sms_log->property = '月度缴费单';
+//
+//         $sms_log->save(); //保存
+
+//        return true;
     }
 }

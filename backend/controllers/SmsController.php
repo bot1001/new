@@ -36,12 +36,29 @@ class SmsController extends Controller
     public function actionIndex()
     {
         $searchModel = new SmsSearch();
+
+        if(isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            $searchModel->id = $id;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    //手动发送短信
+    function actionSend()
+    {
+        $signName = '裕家人'; //发送短信模板名称
+        $phone = '15296500211'; //接收手机号码$m['phone'];//
+        $SMS = 'SMS_139425010'; //短信模板编号
+        $guest = '裕达集团'; //客户
+        $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
+        $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
     }
 
     /**
@@ -67,10 +84,10 @@ class SmsController extends Controller
         $model = new Sms();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +104,10 @@ class SmsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

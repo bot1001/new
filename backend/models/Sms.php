@@ -17,6 +17,8 @@ use Yii;
  */
 class Sms extends \yii\db\ActiveRecord
 {
+    public $name;
+
     /**
      * {@inheritdoc}
      */
@@ -31,8 +33,9 @@ class Sms extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sign_name', 'sms', 'count', 'creator', 'create_time', 'property'], 'required'],
-            [['count', 'creator', 'create_time'], 'integer'],
+            [['sign_name', 'sms', 'count', 'status', 'property'], 'required'],
+            [['count', 'creator', 'create_time'], 'integer', 'min' => '1'],
+            [['status'], 'integer'],
             [['sign_name', 'sms', 'property'], 'string', 'max' => 50],
             [['sign_name', 'sms', 'count'], 'unique', 'targetAttribute' => ['sign_name', 'sms', 'count']],
         ];
@@ -48,9 +51,34 @@ class Sms extends \yii\db\ActiveRecord
             'sign_name' => '模板名称',
             'sms' => '模板编号',
             'count' => '变量总数',
+            'status' => '状态',
             'creator' => '创建人',
             'create_time' => '创建时间',
             'property' => '备注',
         ];
+    }
+
+    //数据保存前自动插入
+    function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                //插入新纪录时自动添加以下字段
+                $this->create_time = time();
+                $this->creator = $_SESSION['user']['0']['id'];
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //同系统用户建立关联
+    public function getSys()
+    {
+        return $this->hasOne(SysUser::className(), ['id' => 'creator']);
     }
 }
