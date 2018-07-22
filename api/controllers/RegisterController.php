@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use Yii;
 use common\models\Api;
 use common\models\User;
 use common\models\UserAccount;
@@ -40,8 +41,7 @@ class RegisterController extends Controller
                 //模型块赋值
                 $account->account_id = $account_id;
                 $account->user_name = $nick;
-                $account->password = $password;
-                $account->new_pd = $password;
+                $account->password = md5($password);
                 $account->mobile_phone = $phone;
                 $account->weixin_openid = $weixin_openid;
                 $account->wx_unionid = $unionid;
@@ -49,29 +49,34 @@ class RegisterController extends Controller
                 $account->status = '1';
 
                 $result = $account->save(); // 保存
+                if($result){
+                    $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
 
-                $id = Yii::$app->db->getLastInsertID(); //最新插入的数据ID
+                    $ship = new UserRealestate();
+                    $ship->account_id = $account_id;
+                    $ship->realestate_id = $realestate;
 
-                $ship = new UserRealestate();
-                $ship->account_id = $account_id;
-                $ship->realestate_id = $realestate;
+                    $r = $ship->save(); //保存用户关联信息
 
-                $r = $ship->save(); //保存用户关联信息
+                    $userdata = new UserData(); //实例化用户信息模型
 
-                $userdata = new UserData(); //实例化用户信息模型
+                    $userdata->account_id = $account_id;
+                    $userdata->real_name = $nick;
+                    $userdata->gender = $gender;
+                    $userdata->face_path = $face;
+                    $userdata->province_id = $province;
+                    $userdata->city_id = $city;
+                    $userdata->area_id = $area;
+                    $userdata->nickname = $nick;
 
-                $userdata->account_id = $account_id;
-                $userdata->real_name = $nick;
-                $userdata->gender = $gender;
-                $userdata->face_path = $face;
-                $userdata->province_id = $province;
-                $userdata->city_id = $city;
-                $userdata->area_id = $area;
-                $userdata->nickname = $nick;
-
-                $u = $userdata->save(); //保存用户资料
-
-                $transaction->commit(); //结束事务管理
+                    $u = $userdata->save(); //保存用户资料
+                }
+                if($result && $r && $u){
+                    $transaction->commit(); //结束事务管理
+                }else{
+                    $transaction->rollback();
+                    return false;
+                }
             }catch(\Exception $e){
                 $transaction->rollback();
                 return false;

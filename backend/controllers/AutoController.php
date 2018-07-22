@@ -13,66 +13,50 @@ class AutoController extends \yii\web\Controller
     //自动发送短信
     function actionSend()
     {
-        //查找可发送短信的的小区
-        $comm = CommunityBasic::find()
-            ->select('community_name, community_id ')
-            ->where(['sms' => '1'])
-            ->indexBy('community_id')
-            ->column();
-
-        //遍历小区提取编号
-        foreach($comm as $key => $com)
-        {
-            $community_id[] = $key;
-        }
-
-        //查找楼宇
-        $b = CommunityBuilding::find()
-                ->select('building_name, building_id')
-                ->indexBy('building_id')
-                ->where(['in', 'community_id', $community_id])
-                ->column();
-
-        $message = HouseInfo::find() //查找发送短信的信息
-            ->select('house_info.realestate, house_info.phone, sum(user_invoice.invoice_amount) as amount, user_invoice.community_id as community, user_invoice.building_id as building')
-            ->joinWith('invoice')
-            ->joinWith('re') //关联房屋
-            ->andwhere(['house_info.status' => '1', 'politics' => '1', 'user_invoice.invoice_status' => '0'])
-            ->andWhere(['in', 'user_invoice.community_id', $community_id])
-            ->groupBy('house_info.realestate')
-            ->orderBy('house_info.realestate desc')
-//            ->limit(3)
-            ->asArray()
+        //获取发短信的房屋信息
+        $realestate = (new \yii\db\Query())
+            ->select('house_info.realestate as id, community_basic.community_id, community_basic.community_name as community, community_building.building_name as building, house_info.phone, community_realestate.room_number as number, community_realestate.room_name as name')
+            ->from('house_info')
+            ->join('inner join', 'community_realestate', 'community_realestate.realestate_id = house_info.realestate')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+            ->andwhere(['community_basic.sms' => '1', 'house_info.status' => '1', 'house_info.politics' => '1'])
+            ->andWhere(['<', 'length(house_info.phone)', '11'])
+            ->orderBy('house_info.realestate asc')
+            ->limit('10')
             ->all();
         echo '<pre />';
-        print_r(count($message));
-        exit;
+        print_r($realestate);exit;
 
         $success = 0; // 短信发送成功条数
         $fail = 0; //短信发送失败条数
 
-        foreach ($message as $m)
-        {
-            $realestate = $m['realestate'];
-            $amount = $m['amount']; //合计欠费金额
-            if($amount == '0'){ //判断合计金额为零则终止当前循环
+        foreach ($realestate as $reale){
+            $amount = (new \yii\db\Query()) //查询总欠费
+                ->select('sum(invoice_amount) as amount')
+                ->from('user_invoice')
+                ->andwhere(['realestate_id' => $reale['id'], 'invoice_status' => '0'])
+                ->one();
+            $amount = $amount['amount'];
+
+
+
+            if(is_null($amount))
+            {
                 $fail ++;
                 continue;
             }
-            $invoice = $m['invoice']; //提取费项
-            $now = 0; //当月费用总和
 
-            foreach ($invoice as $in){ //遍历并求当月费用
-                if($in['year'] == date('Y') && $in['month'] == date('m'))
-                {
-                    $now += $in['invoice_amount'];
-                }
-            }
+            $now = (new \yii\db\Query()) //查询当月费用
+                ->select('sum(invoice_amount) as amount')
+                ->from('user_invoice')
+                ->andwhere(['realestate_id' => $reale['id'], 'invoice_status' => '0', 'year' => date('Y'), 'month' => date('m')])
+                ->one();
 
-            $old = $amount - $now; //历史欠费
-            $room = $m['re']; //房屋信息
-            $add = $room['room_number'].' 单元 '. $room['room_name'];
-            $address = $comm[$m['community']].' '.$b[$m['building']].' '.$add;
+            $now = $now['amount'];
+            $old = $amount - $now; //计算往期费用
+            $add = $reale['number'].' 单元 '. $reale['name'];
+            $address = $reale['community'].' '.$reale['building'].' '.$add;
 
             $signName = '裕家人'; //发送短信模板名称
             $phone = '15296500211'; //接收手机号码$m['phone'];//
@@ -88,21 +72,26 @@ class AutoController extends \yii\web\Controller
             }else{
                 $fail ++;
             }
+
+            echo '<pre />';
+//            print_r($amount);
+            var_dump($reale['phone']);
         }
 
+        exit;
 
-//         $sms_log = new SmsLog(); //实例化短信发送记录模型
-//
-//         $sms_log->sign_name = $signName;
-//         $sms_log->sms = $SMS;
-//         $sms_log->type = '1';
-//         $sms_log->count = $fail+$success;
-//         $sms_log->success = $success;
-//         $sms_log->sms_time = time();
-//         $sms_log->property = '月度缴费单';
-//
-//         $sms_log->save(); //保存
+         $sms_log = new SmsLog(); //实例化短信发送记录模型
 
-//        return true;
+         $sms_log->sign_name = $signName;
+         $sms_log->sms = $SMS;
+         $sms_log->type = '1';
+         $sms_log->count = $fail+$success;
+         $sms_log->success = $success;
+         $sms_log->sms_time = time();
+         $sms_log->property = '月度缴费单';
+
+         $sms_log->save(); //保存
+
+        return true;
     }
 }

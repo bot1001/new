@@ -91,10 +91,10 @@ class SiteController extends Controller
 				return $this->redirect(['/login/login']);
 			}
 				
-			$openid = $w_info['openid']; //提取openID
+			$unionid = $w_info['unionid']; //提取openID
 			
 			$user = UserAccount::find() //查询用户是否存在
-				->where(['in', 'weixin_openid', $openid])
+				->where(['in', 'wx_unionid', $unionid])
 				->asArray()
 				->one();
 						

@@ -23,7 +23,6 @@ use Yii;
  */
 class UserAccount extends \yii\db\ActiveRecord
 {
-	public $new_pd;
     /**
      * @inheritdoc
      */
@@ -38,21 +37,16 @@ class UserAccount extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-			[['new_pd', 'password'],'required'],
 			[['mobile_phone'],'string','min' => 11],
 			[['account_id'],'string','min' => 28,'max' => 32],
             [['password','mobile_phone'], 'required'],
-			['new_pd', 'compare', 'compareAttribute' => 'password', 'message' => '两次密码输入不一致'],
-			[['mobile_phone', 'account_id'], 'unique', 'targetAttribute' => ['mobile_phone', 'account_id'], 'message' => '用户重复'],
+			[['mobile_phone'], 'unique', 'targetAttribute' => ['mobile_phone'], 'message' => '用户重复'],
             [['account_role', 'new_message', 'status'], 'integer'],
             [['account_id', 'user_name', 'password', 'qq_openid', 'weixin_openid', 'weibo_openid'], 'string', 'max' => 64],
             [['mobile_phone'], 'string', 'max' => 11],
         ];
     }
-	
-	public $fromdate;
-	public $todate;
-	public $k;
+
     /**
      * @inheritdoc
      */
