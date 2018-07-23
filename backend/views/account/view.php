@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('设置关联小区', ['workr/create', 'user_id' => $model->user_id], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('修改', ['update','id' => $model->user_id],['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([

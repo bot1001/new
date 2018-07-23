@@ -33,9 +33,16 @@ echo $this->render('..\..\..\common\modal\modal.php');
 
         ['attribute' => 'status',
             'value' => function($model){
-                $date = ['0' => '否', '1' => '是'];
+                $date = ['0' => '内用', '1' => '可售'];
                 return $date[$model->status];
             },
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'header' => '详情',
+                'formOptions' => [ 'action' => [ '/sms/sms' ] ],
+                'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                'data' => ['0' => '内用', '1' => '可售'],
+            ],
             'hAlign' => 'center'],
 
         ['attribute' => 'create_time',

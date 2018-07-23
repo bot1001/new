@@ -70,7 +70,6 @@ class AccountController extends Controller
             }
         }
 
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -174,10 +173,16 @@ class AccountController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-		$userdata = new UserData();
+        $account_id = $model['account_id'];
+		$userdata = $this->findData($account_id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->user_id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            $user = $_POST['UserData'];
+            $gender = $user['gender'];
+            $u = $userdata::updateAll(['gender' => $gender], 'account_id = :aid', [':aid' => $account_id]);
+
+            return $this->redirect(['index']);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -209,6 +214,16 @@ class AccountController extends Controller
     protected function findModel($id)
     {
         if (($model = UserAccount::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    //查找用户信息
+    protected  function findData($account_id)
+    {
+        if (($model = UserData::findOne(['account_id' => $account_id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

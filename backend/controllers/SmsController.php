@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use app\models\Sms;
 use app\models\SmsSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\grid\EditableColumnAction;
 
 /**
  * SmsController implements the CRUD actions for Sms model.
@@ -27,6 +29,20 @@ class SmsController extends Controller
                 ],
             ],
         ];
+    }
+
+    //GridView页面直接编辑
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'sms' => [                                       // identifier for your editable action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => Sms::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                },
+                'ajaxOnly' => true,
+            ]
+        ]);
     }
 
     /**

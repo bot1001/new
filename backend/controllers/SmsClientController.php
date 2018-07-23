@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\Sms;
 use Yii;
 use common\models\SmsClient;
 use app\models\SmsClientSearch;
@@ -107,6 +108,12 @@ class SmsClientController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    function actionSend()
+    {
+        $sms = Sms::Sms();
+        return $this->render('send', ['sms' => $sms]);
     }
 
     /**

@@ -51,7 +51,7 @@ class Sms extends \yii\db\ActiveRecord
             'sign_name' => '模板名称',
             'sms' => '模板编号',
             'count' => '变量总数',
-            'status' => '状态',
+            'status' => '短信状态',
             'creator' => '创建人',
             'create_time' => '创建时间',
             'property' => '备注',
@@ -80,5 +80,15 @@ class Sms extends \yii\db\ActiveRecord
     public function getSys()
     {
         return $this->hasOne(SysUser::className(), ['id' => 'creator']);
+    }
+
+    static function Sms()
+    {
+        $sms = self::find()
+            ->select('sign_name as name, sms, count, property')
+            ->where(['status' => '1'])
+            ->asArray()
+            ->all();
+        return $sms;
     }
 }

@@ -45,7 +45,7 @@ Modal::end();
 $this->title = '用户列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-account-index">
+<div class="user-account-index"style="max-width: 800px">
    
     <?php
 	$gridColumn = [
@@ -62,6 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		 	'formOptions' => [ 'action' => [ '/account/account' ] ],
 		 	'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 		 ],],
+
+        'data.gender',
 		
 		['attribute' => 'mobile_phone',
 		 'format' => 'raw',

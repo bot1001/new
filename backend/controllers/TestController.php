@@ -9,6 +9,7 @@ class TestController extends \yii\web\Controller
 {	
 	public function actionIndex()
 	{
+	    return false;
         ini_set( 'memory_limit', '2048M' );// 调整PHP由默认占用内存为2048M(2GB)
         set_time_limit(0);
 		$community=$_SESSION['community'];
@@ -69,6 +70,15 @@ class TestController extends \yii\web\Controller
 //        foreach($manager as $key => $m){
             print_r($role);
 //        }
+    }
 
+    function actionTest()
+    {
+        $invoice = (new \yii\db\Query())
+            ->select('count(*)')
+            ->from('user_invoice')
+            ->groupBy('realestate_id')
+            ->all();
+        print_r(count($invoice));
     }
 }

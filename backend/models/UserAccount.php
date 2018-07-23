@@ -119,6 +119,12 @@ class UserAccount extends \yii\db\ActiveRecord
         return $this->hasOne(WorkR::className(), ['account_id' => 'account_id']);
     }
 
+    //内部员工表格
+	public function getData()
+    {
+        return $this->hasOne(UserData::className(), ['account_id' => 'account_id']);
+    }
+
     //数组
     static function getAccount()
     {
