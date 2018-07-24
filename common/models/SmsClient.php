@@ -20,6 +20,10 @@ use Yii;
  */
 class SmsClient extends \yii\db\ActiveRecord
 {
+    public $phone;
+    public $building;
+    public $number;
+    public $room;
     /**
      * {@inheritdoc}
      */
@@ -34,9 +38,10 @@ class SmsClient extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'type', 'community', 'count', 'surplus', 'status', 'property'], 'required'],
+            [['user_id', 'type', 'community', 'count', 'surplus', 'status', 'property', 'phone'], 'required'],
             [['user_id', 'type', 'community', 'count', 'surplus', 'status'], 'integer'],
             [['property'], 'string', 'max' => 50],
+            [['phone'], 'string', 'length' => '11'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -51,6 +56,7 @@ class SmsClient extends \yii\db\ActiveRecord
             'user_id' => '商户',
             'type' => '类型',
             'community' => '预发送小区',
+            'phone' => '手机号码',
             'count' => '短信总量',
             'surplus' => '短信余量',
             'status' => '状态',

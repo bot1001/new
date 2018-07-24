@@ -62,8 +62,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
-					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
-																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
+					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 
@@ -86,7 +85,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<div id="qr">
 			<img src='<?php echo Url::to("@web/$f"); ?>' style="height: 280px;width: 280px; border-radius: 20px">
 		</div>
-
 	</div>
     <p></p>
 	<div id="div2">

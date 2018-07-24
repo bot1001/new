@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -43,11 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div id="div">
             <div id="title">模板列表</div>
             <?php foreach($sms as $s): $s =(object)$s ?>
-            <div class="row" title="<?= $s->property;?>">
-                <div class="col-lg-6"><?= $s->name; ?></div>
-                <div class="col-lg-6"><?= $s->sms; ?></div>
-            </div>
-
+            <a href="<?= Url::to(['/sms-client/send01/', 'sms' => $s->sms, 'name' => $s->name]) ?>">
+                <div class="row" title="<?= $s->property;?>">
+                    <div class="col-lg-6"><?= $s->name; ?></div>
+                    <div class="col-lg-6"><?= $s->sms; ?></div>
+                </div>
+            </a>
             <?php endforeach; ?>
         </div>
 

@@ -66,17 +66,6 @@ class SmsController extends Controller
         ]);
     }
 
-    //手动发送短信
-    function actionSend()
-    {
-        $signName = '裕家人'; //发送短信模板名称
-        $phone = '15296500211'; //接收手机号码$m['phone'];//
-        $SMS = 'SMS_139425010'; //短信模板编号
-        $guest = '裕达集团'; //客户
-        $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
-        $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
-    }
-
     /**
      * Displays a single Sms model.
      * @param integer $id
