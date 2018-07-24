@@ -19,7 +19,7 @@ class SmsLogSearch extends SmsLog
     {
         return [
             [['id', 'type', 'count', 'success'], 'integer'],
-            [['sign_name', 'sms', 'property', 'sms_time'], 'safe'],
+            [['sign_name', 'sms', 'property', 'sms_time', 'sender'], 'safe'],
         ];
     }
 
@@ -42,6 +42,7 @@ class SmsLogSearch extends SmsLog
     public function search($params)
     {
         $query = SmsLog::find();
+        $query->joinWith('sys');
 
         // add conditions that should always apply here
 
@@ -84,6 +85,7 @@ class SmsLogSearch extends SmsLog
 
         $query->andFilterWhere(['like', 'sign_name', $this->sign_name])
             ->andFilterWhere(['like', 'sms', $this->sms])
+            ->andFilterWhere(['like', 'sys_user.name', $this->sender])
             ->andFilterWhere(['like', 'property', $this->property]);
 
         return $dataProvider;

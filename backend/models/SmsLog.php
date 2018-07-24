@@ -32,7 +32,7 @@ class SmsLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sign_name', 'sms', 'type', 'count', 'success', 'sms_time', 'property'], 'required'],
+            [['sign_name', 'sms', 'type', 'count', 'success', 'sms_time', 'sender', 'property'], 'required'],
             [['type', 'count', 'success'], 'integer'],
             [['sign_name', 'sms', 'property'], 'string', 'max' => 50],
         ];
@@ -49,9 +49,15 @@ class SmsLog extends \yii\db\ActiveRecord
             'sms' => '模板编号',
             'type' => '类型',
             'count' => '总数',
+            'sender' => '发送人',
             'success' => '成功',
             'sms_time' => '发送时间',
             'property' => '备注',
         ];
+    }
+
+    public function getSys()
+    {
+        return $this->hasOne(SysUser::className(), ['id' => 'sender']);
     }
 }

@@ -217,7 +217,7 @@ class TopClient
 
 	public function execute($request, $session = null,$bestUrl = null)
 	{
-		require_once dirname(__FILE__).'./ResultSet.php';
+		require_once (dirname(__FILE__).'/ResultSet.php');
 		$result =  new \ResultSet(); 
 		if($this->checkRequest) {
 			try {

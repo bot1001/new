@@ -152,7 +152,7 @@ if ( !empty($data) ) //判断是否存在缴费数据
 				$count = array_column($invoice, 'invoice');
 				$count = array_sum($count);
 				$all_count += $count; //费项条数总和
-				$n++; //计数器					
+				$n ++; //计数器
 		?>
 			<tr>
 			    <td id="center"><?= $n ?></td>

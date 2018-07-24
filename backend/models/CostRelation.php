@@ -15,7 +15,7 @@ use Yii;
  * @property int $from 启用时间
  * @property string $property
  *
- * @property CommunityBasic $community
+ * @property CommunityBasic
  * @property CommunityBuilding $building
  * @property CommunityRealestate $realestate
  * @property CostName $cost

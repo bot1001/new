@@ -46,8 +46,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $model->success.'条';
             },
             'hAlign' => 'center'],
+        ['attribute' => 'sender',
+            'value' => 'sys.name',
+            'hAlign' => 'center'],
 
         ['attribute' => 'sms_time',
+            'value' => function($model){
+                return date('Y-m-d H:i:s', $model->sms_time);
+            },
             'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
             'filterWidgetOptions'=>[
                 'pluginOptions'=>[

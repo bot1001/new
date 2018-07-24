@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .row{
         background: #0DE842;
         border-radius:5px;
-        width: 90%;
+        width: 95%;
         margin: auto;
         font-size: 16px;
     }
@@ -46,8 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach($sms as $s): $s =(object)$s ?>
             <a href="<?= Url::to(['/sms-client/send01/', 'sms' => $s->sms, 'name' => $s->name]) ?>">
                 <div class="row" title="<?= $s->property;?>">
-                    <div class="col-lg-6"><?= $s->name; ?></div>
-                    <div class="col-lg-6"><?= $s->sms; ?></div>
+                    <div class="col-lg-3"><?= $s->name; ?></div>
+                    <div class="col-lg-4"><?= $s->sms; ?></div>
+                    <div class="col-lg-5" style="text-align: right"><?= $s->property; ?></div>
                 </div>
             </a>
             <?php endforeach; ?>

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use app\models\Sms;
+use app\models\SmsLog;
 use Yii;
 use common\models\SmsClient;
 use app\models\SmsClientSearch;
@@ -121,15 +122,55 @@ class SmsClientController extends Controller
     function actionSend01($sms, $name)
     {
         $model = new SmsClient();
-        $signName = $name; //发送短信模板名称
-        $phone = '15296500211'; //接收手机号码$m['phone'];//
-        $SMS = $sms; //短信模板编号
         $guest = '裕达集团'; //客户
 
-        return $this->render('form', ['model' => $model, 'sms' => $sms, 'name' => $name, 'guest' => $guest]);
-        print_r($sms);exit;
-        $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
-        $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $post = $_POST['SmsClient'];
+            $realestate = $post['room']; //房号ID
+            $result = SmsClient::send($realestate); //查询需要发送的数据
+
+            $result = Json::decode($result); //转换数组
+
+            $address = $result['name'];
+            $old = $result['old'];
+            $now = $result['now'];
+            $phone = $post['phone'];
+
+            $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
+            $r = \common\models\Sms::Send($name, $phone, $sms, $SmsParam); //调用发送短信类
+
+            $success = '0'; //默认发送成功条数为0
+            $fail = '0'; //默认发送失败条数为0
+            if($r == '1')
+            {
+                $success ++;
+            }else{
+                $fail ++;
+            }
+
+            $user = reset($_SESSION['user']);
+
+            $log = new SmsLog();
+
+            $log->sign_name = $name;
+            $log->sms = $sms;
+            $log->type = '1';
+            $log->sender = $user['id'];
+            $log->count = $fail+$success;
+            $log->success = $success;
+            $log->sms_time = time();
+            $log->property = '月度缴费单';
+
+            $log->save(); //保存发送记录
+
+            $session = Yii::$app->session;
+            $session->setFlash('result', "成功发送 $success 条，失败 $fail 条");
+
+            return $this->redirect(['send01','sms' => $sms, 'name' => $name]);
+        }
+
+        return $this->render('form', ['model' => $model, 'guest' => $guest]);
     }
 
     //短信预览
@@ -138,44 +179,9 @@ class SmsClientController extends Controller
         $get = $_GET['SmsClient'];
 
         $realestate = $get['room']; //房号ID
+        $result = SmsClient::send($realestate);
 
-        //房屋信息
-        $massege = (new \yii\db\Query())
-            ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as name')
-            ->from('community_realestate')
-            ->join('inner join','community_basic', 'community_basic.community_id = community_realestate.community_id')
-            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-            ->where(['community_realestate.realestate_id' => "$realestate"])
-            ->one();
-
-        $amount = (new \yii\db\Query()) //查询总欠费
-            ->select('sum(invoice_amount) as amount')
-            ->from('user_invoice')
-            ->andwhere(['realestate_id' => "$realestate", 'invoice_status' => '0'])
-            ->one();
-        $old = $amount['amount'];
-
-        $now = (new \yii\db\Query()) //查询当月费用
-        ->select('sum(invoice_amount) as amount')
-            ->from('user_invoice')
-            ->andwhere(['realestate_id' => "$realestate", 'invoice_status' => '0', 'year' => date('Y'), 'month' => date('m')])
-            ->one();
-        $now = $now['amount'];
-
-        if(empty($now)){
-            $now = '0';
-        }
-
-        $address = $massege['community'].' '.$massege['building'].' '.$massege['number'].'单元 '.$massege['name'];
-        $result = ['name' => $address, 'now' => $now , 'old' => $old];
-        $result = Json::encode($result);
-
-        if($amount == 0)
-        {
-            return false;
-        }else{
-            return $result;
-        }
+        return $result;
     }
 
     /**

@@ -80,6 +80,7 @@ class AutoController extends \yii\web\Controller
          $sms_log->count = $fail+$success;
          $sms_log->success = $success;
          $sms_log->sms_time = time();
+         $sms_log->sender = '64';
          $sms_log->property = '月度缴费单';
 
          $sms_log->save(); //保存

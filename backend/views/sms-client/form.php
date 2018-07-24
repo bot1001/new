@@ -29,13 +29,43 @@ $this->params['breadcrumbs'][] = $this->title;
         border-radius:10px;
     }
     #sms01 .col-sm-3{
-        height: 300px;
+        min-height: 300px;
         max-width: 350px;
         border-radius: 10px;
         background: #ffffff;
         margin-left:5%
     }
+    #title{
+        width: 30%;
+        border-radius: 10px;
+        text-align: center;
+        background: #3baae3;
+        position: relative;
+        margin: auto;
+        top: 10px;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+    .preview{
+        position: relative;
+        top: 15px;
+        font-size: 16px;
+        width: 90%;
+        margin:auto;
+        background: #0DE842;
+        border-radius: 5px;
+    }
+    g{
+        font-weight: bolder;
+    }
 </style>
+
+<?php
+$message = Yii::$app->getSession()->getFlash('result'); //获取提示信息
+if($message){
+    echo "<script>alert('$message')</script>";
+}
+?>
 
 <div class="sms-client-form col-sm-6">
     <div id="sms">
@@ -81,7 +111,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'phone')->input('number', ['id' => 'phone']) ?>
 
         <div class="form-group" style="text-align: center">
-            <?= Html::submitButton('确定', ['class' => 'btn btn-success']) ?>
+            <span id="submit">
+                <input type="submit" disabled value="确定" class="btn info">
+            </span>
+
             <?= Html::a('预览', '#', ['class' => 'btn btn-success', 'onclick' => "phone()"]) ?>
         </div>
         <br />
@@ -91,7 +124,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div id="sms01">
     <div class="col-sm-3" id="view">
-        46546
+        <div id="title">实时预览</div>
+        <div class="preview">
+            <div style="width: 90%; margin: auto">
+                【裕家人】尊敬的裕达业主，您好。您现居住的房子 <g><span id="address"> 金座小区 5栋1单元 2002 </span></g> 当月费用为 <g><span id="now"> XXX.XX </span></g> 元，历史欠费 <g><span id="old"> XXX.XX </span></g> 元；为不影响您自身的良好形象，<?= $guest ?>提醒您尽快缴费；详情请登录http:://www.gxydwy.com查看，裕达物业祝您身体健康、工作顺利。
+            </div>
+        </div>
     </div>
 </div>
 
@@ -103,30 +141,27 @@ $this->params['breadcrumbs'][] = $this->title;
             url: "/sms-client/message" ,//验证地址
             data: $('#form').serialize(),
             success: function (result) {
-                document.getElementById( 'view' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
+                var result = eval(result);
+                if(result.end == 1)
+                {
+                    document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info">';
+                }
+
+                if(result.end == 0)
+                {
+                    document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';
+                }
+                document.getElementById( 'address' ).innerHTML = result.name;
+                document.getElementById( 'now' ).innerHTML = result.now;
+                document.getElementById( 'old' ).innerHTML = result.old;
             },
             error : function() {
-                // document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info"></input>';
-                // alert("手机号码或姓名验证失败！");
+                document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';
+                alert("选择有误，请重新选择！");
             }
         });
     }
 </script>
-
-<!--<script type="text/javascript">-->
-<!--    function OnInput (event) {-->
-<!--        alert (event.target.value);-->
-<!--    }-->
-<!--    function OnPropChanged (event) {-->
-<!--        if (event.propertyName.toLowerCase () == "value") {-->
-<!--            alert (event.srcElement.value);-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
-<!--<form>-->
-<!--    用户名:<input name="user" type="text" oninput="OnInput (event)" onpropertychange="OnPropChanged (event)"/>-->
-<!--</form>-->
-
 
 
 

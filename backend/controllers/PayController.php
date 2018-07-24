@@ -410,7 +410,8 @@ class PayController extends Controller
 	//微信回调地址
 	function actionWeixin()
 	{
-		$post = $GLOBALS['HTTP_RAW_POST_DATA']; //接收微信回调信息
+		$post = file_get_contents("php://input"); //接收微信回调信息
+
 		if($post){
             $post = (array) simplexml_load_string($post); //xml数组转换
 		    
