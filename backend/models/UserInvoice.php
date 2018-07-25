@@ -117,7 +117,7 @@ class UserInvoice extends \yii\db\ActiveRecord
 			->orderBy('community_id ASC')
 			->asArray()
 			->all();
-		
+
 		foreach($community as $comm)
 		{
 		    $query = ( new\ yii\ db\ Query() )->select( [
@@ -144,9 +144,9 @@ class UserInvoice extends \yii\db\ActiveRecord
 		    
 		    $y = date( 'Y' );
 		    $m = date( 'm' );
-		    $f = date( time() );		    
-		    
-		    foreach ( $query ->batch(50) as $qu ) 
+		    $f = date( time() );
+
+		    foreach ( $query ->batch(50) as $qu )
 		    {
 		    	foreach($qu as $q){
 		    	    $community = $q[ 'community_id' ];
@@ -157,12 +157,15 @@ class UserInvoice extends \yii\db\ActiveRecord
 		    	    $price = $q[ 'price' ];
 		    	    $acreage = $q[ 'acreage' ];
 		    	    $notes = $q['property'];
-		    	    			
+
 		    	    if ( $q['formula'] == "1" ) {
 		    	    	$p = $price*$acreage;
 		    	    	$price = round($p,1); //保留一位小数点
-		    	    }
-		    	    
+		    	    }elseif($q['formula'] == '2'){
+		    	        $p = $price*date('t');
+		    	        $price = round($p, 1);
+                    }
+
 		    	    //查入语句
 		    	    $sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status, invoice_notes)
 		    	    values ('$community','$building', '$realestate','$description', '$y', '$m', '$price','$f','0','$notes')";

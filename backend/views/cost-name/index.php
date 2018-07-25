@@ -131,11 +131,11 @@ $this->title = '费项管理';
 		
 		[ 'attribute' => 'formula',
 		 'value' => function($model){
-	     	$a = ['月','面积/月'];
+	     	$a = ['月','面积/月', '天'];
 	     	return $a[$model['formula']];
 	     },
 		 'filterType' => GridView::FILTER_SELECT2,
-		 'filter' => ['月','面积/月'],
+		 'filter' => ['月','面积/月', '天'],
 		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
 		 'filterWidgetOptions' => [
 		 	'pluginOptions' => [ 'allowClear' => true ],

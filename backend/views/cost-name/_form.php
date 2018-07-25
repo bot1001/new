@@ -87,7 +87,7 @@ use yii\helpers\ArrayHelper;
 						</div>
 						
 						<div class="col-lg-3">
-							<?= $form->field($model, 'formula')->dropDownList(['月','面积/月'],['length' => 1]) ?>
+							<?= $form->field($model, 'formula')->dropDownList(['月','面积/月', '天'],['length' => 1]) ?>
 						</div>
 					</div>
 

@@ -277,8 +277,7 @@ class CostrelationController extends Controller {
 				if ( !$isSelectedIn ) {
 					$selected = $first;
 				}
-				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
-				return;
+				return Json::encode( [ 'output' => $out, 'selected' => $selected ] );
 			}
 		}
 		echo Json::encode( [ 'output' => '', 'selected' => '' ] );

@@ -20,7 +20,7 @@ use kartik\daterange\DateRangePicker;
 	<?php $form = ActiveForm::begin(); ?>
     	<div class="row">
 			<div class="col-lg-4">
-				<?= $form->field($model, 'community')->dropDownList($_SESSION['community_id'], ['prompt'=>'请选择', 'id'=>'community']);?>
+				<?= $form->field($model, 'community')->dropDownList( \app\models\CommunityBasic::community(), ['prompt'=>'请选择', 'id'=>'community']);?>
 			</div>
 			<div class="col-lg-3">
 				<?= $form->field($model, 'building_id')->widget(DepDrop::classname(), [

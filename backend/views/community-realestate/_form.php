@@ -49,7 +49,7 @@ use kartik\daterange\DateRangePicker;
                             'pluginOptions'=>[
                                 'depends'=>['community'],
                                 'placeholder'=>'请选择...',
-                                'url'=>Url::to(['/costrelation/b'])
+                                'url'=>Url::to(['/costrelation/b2'])
                             ]
                         ]); ?>
 					</div>
