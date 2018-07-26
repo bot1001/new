@@ -114,10 +114,12 @@ $this->params['breadcrumbs'][] = '费项预览';
                         $acreage = $a->acreage;
                         $collagen = '1'; //设置默认计算比例
                         $day = date("t",strtotime("$date")); //指定月天数
+                        $days = $day; //设置默认天数
 
                         if($date == date('Y-m', strtotime($first))){ //判断当前循环是否为第一次循环
                             $days = $day - $from_day+ 1; //计算本月剩余天数
                             $collagen = round($days/$day, '2'); //计算剩余天数占比
+                            $a->property = '合计 '.$days.' 天';
                         }
 
                         if($a->formula == "1"){ //计算金额
@@ -125,7 +127,7 @@ $this->params['breadcrumbs'][] = '费项预览';
                             $price = round($p, 1);
                             echo $price;
                         }elseif($a->formula == "2"){
-                            $p = $price*$day;
+                            $p = $price*$days;
                             $price = round($p, 1);
                             echo $price;
                         }else{

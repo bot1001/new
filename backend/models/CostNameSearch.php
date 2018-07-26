@@ -19,8 +19,8 @@ class CostNameSearch extends CostName
     {
         return [
             [['cost_id', 'level', 'inv', 'parent', 'builder', 'formula', 'sale'], 'integer'],
-            [['cost_name', 'create_time', 'update_time', 'property'], 'safe'],
-            [['price'], 'number'],
+            [['cost_name', 'create_time', 'price', 'update_time', 'property'], 'safe'],
+//            [['price'], 'number'],
         ];
     }
 
@@ -69,7 +69,7 @@ class CostNameSearch extends CostName
         $query->andFilterWhere([
             'cost_id' => $this->cost_id,
             'level' => $this->level,
-            'price' => $this->price,
+//            'price' => $this->price,
             'inv' => $this->inv,
             'parent' => $this->parent,
             'builder' => $this->builder,
@@ -80,6 +80,7 @@ class CostNameSearch extends CostName
         ]);
 
         $query->andFilterWhere(['like', 'cost_name', $this->cost_name])
+            ->andFilterWhere(['like', 'price', $this->price])
             ->andFilterWhere(['like', 'property', $this->property]);
 
         return $dataProvider;

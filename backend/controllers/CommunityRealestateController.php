@@ -188,7 +188,7 @@ class CommunityRealestateController extends Controller
 						    		'orientation' => $sheet['M'],
 						    		'property' => $sheet['N']
 						    	], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
-//print_r($sheet);exit;
+
 								$house = New HouseInfo(); //实例化模型
 						    
 						    	$house->realestate = $r_id['realestate_id'];
