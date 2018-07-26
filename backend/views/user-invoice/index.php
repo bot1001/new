@@ -92,8 +92,8 @@ $this->title = '缴费管理';
 <div class="user-invoice-index">
 
 	<?php
-	
 	$message = Yii::$app->getSession()->getFlash('fail');
+    $success = Yii::$app->getSession()->getFlash('success'); //获取提示信息
 	if($message == 1){
 		echo "<script>alert('选择内容不能为空，请重新选择！')</script>";
 	}elseif($message == 2){
@@ -105,7 +105,7 @@ $this->title = '缴费管理';
 	}elseif($message == 5){
 		echo "<script>alert('关联小区错误，请联系管理员！')</script>";
 	}
-		
+
 	?>
 	<?php // echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm]); ?>
 	<?php //Pjax::begin(); ?>

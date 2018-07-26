@@ -13,7 +13,7 @@ use dmstr\widgets\Alert;
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>版本号：</b> 2.7.3.0.8
+        <b>版本号：</b> 2.7.4.5.0
     </div>
     <strong>&copy;<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong>
 </footer>

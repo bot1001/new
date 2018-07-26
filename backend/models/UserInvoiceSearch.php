@@ -92,7 +92,7 @@ class UserInvoiceSearch extends UserInvoice
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
             'user_invoice.community_id' => $this->community_id,
-            'realestate_id' => $this->realestate_id,
+            'user_invoice.realestate_id' => $this->realestate_id,
             'invoice_amount' => $this->invoice_amount,
             'invoice_status' => $this->invoice_status,
             'year' => $this->year,

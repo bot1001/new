@@ -48,7 +48,6 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['name'], 'unique'],
 			[['name'], 'required', 'message' => '确认密码不能为空'],
             ['n', 'compare', 'compareAttribute' => 'new_pd', 'message' => '两次密码输入不一致'],
-			
             [['community'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community' => 'community_id']],
             [['company'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company' => 'id']],
         ];

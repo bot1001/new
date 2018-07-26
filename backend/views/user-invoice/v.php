@@ -13,6 +13,9 @@ $this->params['breadcrumbs'][] = '费项预览';
 ?>
 <div class="user-invoice-index">
     <style>
+        table{
+            margin: auto;
+        }
         table thead th{
             height: 30px;
             font-family: 宋体;
@@ -36,7 +39,7 @@ $this->params['breadcrumbs'][] = '费项预览';
             background-size:116px 54px;
             border-radius: 30px;
             margin-top: 2%;
-            margin-left: 400px;
+            margin: auto;
         }
 
         a{
@@ -80,15 +83,13 @@ $this->params['breadcrumbs'][] = '费项预览';
             $sum = 0; //求和
             $i = 1;
             $mark = 0;
-
             $first = $b['from'];//起始日期
-            if(strtotime($first) == strtotime(date('Y-m'))){
-                $mark = '1';
-            }
+            $from_day = date('d', strtotime($first)); //提取预交当天日期
+
             $d = date('Y-m', strtotime("-1 month", strtotime($b['from'])));
             for($i; $i <= $b['month']; $i++)
             {
-            $date = date('Y-m', strtotime("+$i month", strtotime($d)));
+                $date = date('Y-m', strtotime("+$i month", strtotime($d)));
             ?>
 
             <?php foreach($query as $key => $a):  $a = (object)$a; ?>
@@ -99,30 +100,28 @@ $this->params['breadcrumbs'][] = '费项预览';
                     <td><?php echo $a->room_number ?></td>
                     <td><?php echo $a->room_name; ?></td>
 
-                    <td> <?php
-                        $time = explode('-', $date);
-                        echo reset($time).'年'; ?>
+                    <td><?php
+                        $time = strtotime($date); //将时间转换成时间戳
+                        echo date('Y', $time).'年'; ?>
                     </td>
 
-                    <td><?php echo end($time).'月'; ?></td>
-
-                    <td style="text-align: left"><?php echo $a->cost_name; ?></td>
+                    <td><?= date('m', $time).'月'; ?></td>
+                    <td style="text-align: left"><?= $a->cost_name; ?></td>
 
                     <td style="text-align: right">
                         <?php
                         $price = $a->price;
                         $acreage = $a->acreage;
+                        $collagen = '1'; //设置默认计算比例
                         $day = date("t",strtotime("$date")); //指定月天数
-                        if(strtotime($first) == strtotime($date)){ //判断当前循环是否为第一次循环
-                            if($mark = '1'){ //判断起始日期是否为当月
-                                $day = $day - date('d')+ 1; //计算本月剩余天数
-                                $collagen = round($day/date("t",strtotime("$date")), '2'); //计算剩余天数占比
-                            }
+
+                        if($date == date('Y-m', strtotime($first))){ //判断当前循环是否为第一次循环
+                            $days = $day - $from_day+ 1; //计算本月剩余天数
+                            $collagen = round($days/$day, '2'); //计算剩余天数占比
                         }
 
-                        if($a->formula == "1"){
+                        if($a->formula == "1"){ //计算金额
                             $p = $price*$acreage*$collagen;
-                            $collagen = '1'; //重新设置默认比例
                             $price = round($p, 1);
                             echo $price;
                         }elseif($a->formula == "2"){
@@ -153,11 +152,15 @@ $this->params['breadcrumbs'][] = '费项预览';
     <table>
         <tr>
             <td align="center">
-                <?php echo '共：'.'<l>'.$count.'</l>'.' 条'; ?>
+                <?= '起始日期：'.'<l>'.$first.'</l>'; ?>
+            </td>
+
+            <td align="center">
+                <?= '共：'.'<l>'.$count.'</l>'.' 条'; ?>
             </td>
 
             <td>
-                <?php echo '合计：'.'<l>'.$sum.'</l>'.' 元'; ?>
+                <?= '合计：'.'<l>'.$sum.'</l>'.' 元'; ?>
             </td>
         </tr>
     </table>

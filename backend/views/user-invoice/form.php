@@ -52,8 +52,8 @@ use kartik\daterange\DateRangePicker;
                     'singleDatePicker'=>true,
                     'showDropdowns'=>true,
 					'locale'=>[
-                        'format'=>'Y-M',
-                        'separator'=>' to ',
+//                        'format'=>'Y-M',
+//                        'separator'=>' to ',
                     ],
                 ]
             ])->textInput(['placeHolder' => '请输入预交起始月份'])->label('起始日期'); ?>

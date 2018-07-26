@@ -180,7 +180,7 @@ class CommunityRealestateController extends Controller
 				             try{
 						 	   //更新数据库记录
 						     	$d = CommunityRealestate::updateAll([
-									'owners_cellphone' => $sheet[ 'F' ],
+									'owners_cellphone' => (int)$sheet[ 'F' ],
 						    		'acreage' => (float)$sheet[ 'G' ], 
 						    		'finish' => strtotime($sheet['H']),
 						    		'delivery' => strtotime($sheet['I']),
@@ -188,7 +188,7 @@ class CommunityRealestateController extends Controller
 						    		'orientation' => $sheet['M'],
 						    		'property' => $sheet['N']
 						    	], 'realestate_id = :id',[':id' => $r_id['realestate_id']]);
-
+//print_r($sheet);exit;
 								$house = New HouseInfo(); //实例化模型
 						    
 						    	$house->realestate = $r_id['realestate_id'];

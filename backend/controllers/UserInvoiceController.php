@@ -98,6 +98,13 @@ class UserInvoiceController extends Controller
 			$searchModel->payment_time = $time;			
 		}
 
+		//判断是否是来自自动生成费项的访问
+        if(isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            $searchModel->realestate_id = $id;
+        }
+
 		$dataProvider = $searchModel->search( Yii::$app->request->queryParams );
 
 		return $this->render( 'index', [
@@ -665,12 +672,10 @@ class UserInvoiceController extends Controller
 		$i = 1;
 	    $d = date('Y-m', strtotime("-1 month", strtotime($q['from'])));
 	    $first = $q['from'];
-        if(strtotime($first) == strtotime(date('Y-m'))){
-            $mark = '1';
-        }
+        $from_day = date('d', strtotime($first)); //提取预交当天日期
 
 	    for($i; $i <= $q['month']; $i++)
-	    { 
+	    {
 	        $date = date('Y-m', strtotime("+$i month", strtotime($d)));
 				  
 			foreach ( $query as $key => $qs ) {
@@ -681,28 +686,24 @@ class UserInvoiceController extends Controller
 				$time = explode('-',$date);
 				$y = reset($time); //年
 				$ms = end($time); //月
-				
+                $collagen = '1'; //设置默认计算比例
 				$pr = $qs[ 'price' ]; //费项价格
 				$property = $qs[ 'property' ]; //费项备注
 
                 $day = date("t",strtotime("$date")); //指定月天数
-                if(strtotime($first) == strtotime($date)){ //判断当前循环是否为第一次循环
-                    if($mark = '1'){ //判断起始日期是否为当月
-                        $day = $day - date('d')+ 1; //计算本月剩余天数
-                        $collagen = round($day/date("t",strtotime("$date")), '2'); //计算剩余天数占比
-                    }
+                if($date == date('Y-m', strtotime($first))){ //判断当前循环是否为第一次循环
+                    $days = $day - $from_day+ 1; //计算本月剩余天数
+                    $collagen = round($days/$day, '2'); //计算剩余天数占比
                 }
-				
+
 				//判定物业费
 				if ( $formula == '1' ) {
-                    $p = $pr*$acreage*$collagen;print_r($collagen);
-                    $collagen = '1'; //重新设置默认比例
+                    $p = $pr*$acreage*$collagen;
 					if($p == 0){
 						$h ++;
 						continue;
 					}
 				    $price = round($p,1); //保留一位小数点
-
 				}elseif($formula == '2'){
                     $p = $pr*$day;
                     if($p == 0){
@@ -713,11 +714,11 @@ class UserInvoiceController extends Controller
                 }else{
 					$price = $pr;
 				}
-				continue;
-				//MySQL插入语句
+
+                //MySQL插入语句
 				$sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status,invoice_notes)
 						values ('$community','$building', '$id','$description', '$y', '$ms', '$price', '$f','0', '$property')";
-//				$e = Yii::$app->db->createCommand( $sql )->execute();
+				$e = Yii::$app->db->createCommand( $sql )->execute();
 				
 				
 				//插入条数计数器
@@ -734,10 +735,14 @@ class UserInvoiceController extends Controller
 				  }
             }	
 		}
-//        $count = $j+$h; //合计生成的条数
-//		$con = "成功生成缴费记录" . $j . "条！-  失败：" . $h . "条 - 合计：" . $count . "条";
-//		echo "<script> alert('$con');parent.location.href='/user-invoice'; </script>";
+        $count = $j+$h; //合计生成的条数
+		$con = "成功生成缴费记录" . $j . "条！-  失败：" . $h . "条 - 合计：" . $count . "条";
 
+		$sesion = Yii::$app->session;
+		$sesion->setFlash('success', $con);
+
+		return $this->redirect(['/user-invoice', 'id' => $id]);
+//		echo "<script> alert('$con');parent.location.href='/user-invoice'; </script>";
 	}
 
 	public function actions() 
