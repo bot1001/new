@@ -33,13 +33,21 @@ class Sms extends \yii\db\ActiveRecord
             return false;
         }
         $r= $resp->result; //提取发送返回结果
-        $re = (array)$r; //转换XML数组为普通数组
-
-        if($re['err_code'] == '0' && $re['success'] == true)
-        {
-            return true;
+        if(empty($r)){
+            $re = (array)$resp;
         }else{
-            return false;
+            $re = (array)$r; //转换XML数组为普通数组
+        }
+
+        if(isset($re['err_code']) && isset($re['success'])) //判断是否存在错误和是否发送成功
+        {
+            $success = $re['success'];
+            $err = $re['err_code'];
+            if($err == '0' && $success == true){
+                return true; //无错误且发送成功的返回true
+            }else{
+                return false;
+            }
         }
     }
 }

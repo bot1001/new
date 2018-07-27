@@ -41,7 +41,8 @@ class SmsLogSearch extends SmsLog
      */
     public function search($params)
     {
-        $query = SmsLog::find();
+        $c = $_SESSION['community'];
+        $query = SmsLog::find()->where(['in', 'sms_log.sender', $c]);
         $query->joinWith('sys');
 
         // add conditions that should always apply here
