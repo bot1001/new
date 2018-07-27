@@ -135,10 +135,11 @@ class SmsClientController extends Controller
             $address = $result['name'];
             $old = $result['old'];
             $now = $result['now'];
+            $amount = $result['amount'];
             $cellphone = $result['phone']; //物业服务中心联系方式
             $phone = $post['phone']; //接收手机号码
 
-            $SmsParam = "{name:'$address',now:'$now',old:'$old', phone: $cellphone,guest:'$guest'}"; //组合短信信息
+            $SmsParam = "{name:'$address',now:'$now',old:'$old','amount': $amount, phone: $cellphone,guest:'$guest'}"; //组合短信信息
             $r = \common\models\Sms::Send($name, $phone, $sms, $SmsParam); //调用发送短信类
 
             $success = '0'; //默认发送成功条数为0

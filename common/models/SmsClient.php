@@ -89,9 +89,12 @@ class SmsClient extends \yii\db\ActiveRecord
             ->from('user_invoice')
             ->andwhere(['realestate_id' => "$realestate", 'invoice_status' => '0'])
             ->one();
+
         if(empty($amount)) //判断是否为空
         {
-            $amount['amount'] = 0;
+            $amount = 0;
+        }else{
+            $amount = $amount['amount'];
         }
 
         $now = (new \yii\db\Query()) //查询当月费用
@@ -106,7 +109,7 @@ class SmsClient extends \yii\db\ActiveRecord
             $now = '0';
         }
 
-        $old = $amount['amount'] - $now;
+        $old = $amount - $now;
 
         if($old == '0' && $now == '0')
         {
@@ -118,7 +121,7 @@ class SmsClient extends \yii\db\ActiveRecord
         $phone = $massege['phone']; //物业中心手机号码
 
         $address = $massege['community'].' '.$massege['building'].' '.$massege['number'].'单元 '.$massege['name'];
-        $result = ['name' => $address, 'now' => $now , 'old' => "$old", 'phone' => $phone, 'end' => "$end"];
+        $result = ['name' => $address, 'now' => $now , 'old' => "$old", 'amount' => $amount, 'phone' => $phone, 'end' => "$end"];
         $result = Json::encode($result);
 
         return $result;

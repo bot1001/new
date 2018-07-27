@@ -34,8 +34,8 @@ use kartik\daterange\DateRangePicker;
                     ]
                 ]); ?>
 			</div>
-			
-			<div class="col-lg-2">
+
+			<div class="col-lg-3">
 				<?= $form->field($model, 'number')->widget(DepDrop::classname(), [
                     'type' => DepDrop::TYPE_SELECT2,
                     'options'=>['id'=>'number'],
@@ -47,21 +47,19 @@ use kartik\daterange\DateRangePicker;
                     ]
                 ]); ?>
 			</div>
+        </div>
 
-			<div class="col-lg-3">
-				<?= $form->field($model, 'realestate_id')->widget(DepDrop::classname(), [
-                   'type' => DepDrop::TYPE_SELECT2,
-                   'options'=>['id'=>'realestate'],
-	               'select2Options'=>['pluginOptions'=>['multiple' => true, 'allowClear'=>true]],
-                   'pluginOptions'=>[
-                       'depends'=>['number'],
-                       'placeholder'=>'请选择...',
-                       'url'=>Url::to(['/costrelation/re']),
-	                   'params'=>['building'], //另一个上级目录ID
-                   ]
-               ]); ?>
-			</div>
-		</div>
+		<?= $form->field($model, 'realestate_id')->widget(DepDrop::classname(), [
+           'type' => DepDrop::TYPE_SELECT2,
+           'options'=>['id'=>'realestate'],
+	       'select2Options'=>['pluginOptions'=>['multiple' => true, 'allowClear'=>true]],
+           'pluginOptions'=>[
+               'depends'=>['number'],
+               'placeholder'=>'请选择...',
+               'url'=>Url::to(['/costrelation/re']),
+	           'params'=>['building'], //另一个上级目录ID
+           ]
+        ]); ?>
 
 		<div class="row">
 			<div class="col-lg-4">

@@ -127,8 +127,8 @@ if($message){
         <div id="title">实时预览</div>
         <div class="preview">
             <div style="width: 90%; margin: auto">
-                【裕家人】尊敬的业主，您好。您现居住的房子:<g><span id="address"> XXXX小区 XX栋 X单元 XXXX </span></g> 当月费用：<g><span id="now"> XXX.XX </span></g> 元，往期费用：<g><span id="old"> XXX.XX </span></g> 元（仅供参考）;
-                为维护良好信用记录，请您于当月16日前通过裕家人或移步物业服务中心缴清费用；如有疑问请联系客服员<g><span id="cellphone"> 154656 </span></g> ;<?= $guest ?>祝您身体健康、工作顺利。
+                【裕家人】尊敬的业主，您好。您现居住的房子:<g><span id="address"> XXXX小区 XX栋 X单元 XXXX </span></g> 当月费用：<g><span id="now"> XXX.XX </span></g> 元，往期费用：<g><span id="old"> XXX.XX </span></g> 元,合计：<g><span id="amount"> XXX.XX </span></g> 元（仅供参考），
+                如有疑问请联系客服员<g><span id="cellphone"> 0772-5314739 </span></g> ;为维护良好信用记录，请您于当月16日前通过裕家人或移步物业服务中心缴清费用，<?= $guest ?>祝您身体健康、工作顺利。
             </div>
         </div>
     </div>
@@ -155,6 +155,7 @@ if($message){
                 document.getElementById( 'address' ).innerHTML = result.name;
                 document.getElementById( 'now' ).innerHTML = result.now;
                 document.getElementById( 'old' ).innerHTML = result.old;
+                document.getElementById( 'amount' ).innerHTML = result.amount;
                 document.getElementById( 'cellphone' ).innerHTML = result.phone;
             },
             error : function() {

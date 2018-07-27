@@ -57,12 +57,12 @@ class AutoController extends \yii\web\Controller
                 $address = $reale['community'].' '.$reale['building'].' '.$add;
 
                 $signName = '裕家人'; //发送短信模板名称
-                $phone = '15296500211'; //接收手机号码 $reale['cellphone']
-                $SMS = 'SMS_140710004'; //短信模板编号
+                $phone = $reale['cellphone']; //接收手机号码
+                $SMS = 'SMS_140620003'; //短信模板编号
 
                 $guest = '裕达集团'; //客户
 
-                $SmsParam = "{name:'$address',now:'$now',old:'$old', phone:'$cellphone', guest:'$guest'}"; //组合短信信息
+                $SmsParam = "{name:'$address',now:'$now',old:'$old', 'amount': $amount, phone:'$cellphone', guest:'$guest'}"; //组合短信信息
                 $result = Sms::Send($signName, $phone, $SMS, $SmsParam); //调用发送短信类
 
                 if($result == '1'){ //发送计数
