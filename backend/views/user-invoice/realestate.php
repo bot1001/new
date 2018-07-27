@@ -5,44 +5,9 @@ use yii\ helpers\ArrayHelper;
 use kartik\ grid\ GridView;
 use yii\ widgets\ Pjax;
 use app\ models\ Status;
-use yii\ bootstrap\ Modal;
 use yii\ helpers\ Url;
 use kartik\daterange\DateRangePicker;
 use mdm\admin\components\Helper;
-
-Modal::begin( [
-	'id' => 'update-modal',
-	'header' => '<h4 class="modal-title">缴费管理</h4>',
-	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
-] );
-$requestUpdateUrl = Url::toRoute( 'view' );
-$importUrl = Url::toRoute( 'import' );
-
-$updateJs = <<<JS
-    $('.order').on('click', function () {
-        $('.modal-title').html('订单详情');
-        $.get('{$requestUpdateUrl}', { id: $(this).closest('tr').data('key') },
-            function (data) {
-                $('.modal-body').html(data);
-            }  
-        );
-    });
-JS;
-$this->registerJs( $updateJs );
-
-$updateJs = <<<JS
-    $('.import').on('click', function () {
-        $('.modal-title').html('费项导入');
-        $.get('{$importUrl}', { id: $(this).closest('tr').data('key') },
-            function (data) {
-                $('.modal-body').html(data);
-            }  
-        );
-    });
-JS;
-$this->registerJs( $updateJs );
-
-Modal::end();
 
 $script = <<<SCRIPT
 
@@ -105,10 +70,12 @@ $this->title = '缴费管理';
 	}elseif($message == 5){
 		echo "<script>alert('关联小区错误，请联系管理员！')</script>";
 	}
+
 	?>
 	<?php // echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm]); ?>
 	<?php //Pjax::begin(); ?>
 	<?php
+	
 	$gridColumn = [
 		/*['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'],*/
@@ -118,61 +85,10 @@ $this->title = '缴费管理';
 		],
 
 		[ 'attribute' => 'invoice_id',
-			'pageSummary' => Html::a('<span class="glyphicon glyphicon-credit-card" style="font-size: 25px; color: green"></span>', "javascript:void(0);", ['class' => 'gridviewpay', 'id' => 'jf', 'title' => '立即缴费']),
+			//'footer' => Html::a('缴费', "javascript:void(0);", ['class' => 'btn btn-default gridviewpay ']),
 			'width' => '70px',
 			'hAlign' => 'center'
 		],
-		[ 'attribute' => 'community_id',
-		  'value' => 'community.community_name',
-	      'pageSummary' => '合计：',
-	      'filterType' => GridView::FILTER_SELECT2,
-	      'filter' => $comm,
-	      'filterInputOptions' => [ 'placeholder' => '请选择' ],
-	      'filterWidgetOptions' => [
-	      	'pluginOptions' => [ 'allowClear' => true ],
-	      ],
-	      'hAlign' => 'center',
-	      'width' => '150px'
-		],
-
-		[ 'attribute' => 'building_id',
-		 'value' => 'building.building_name',
-		 'filterType' => GridView::FILTER_SELECT2,
-		 'filter' => $build,
-		 'filterInputOptions' => ['placeholder' => ''],
-		 'filterWidgetOptions' => [
-	     	'pluginOptions' => ['allowClear' => true],
-	     ],
-			'label' => '楼宇',
-			//'group' => true,
-			//'hidden' => true,
-			'hAlign' => 'center',
-			'width' => '70px'
-		],
-
-		[ 'attribute' => 'number',
-			'value' => 'room.room_number',
-            'filterType' => GridView::FILTER_SELECT2,
-            'filter' => $number,
-            'filterInputOptions' => ['placeholder' => ''],
-            'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-            ],
-            'label' => '单元',
-			'hAlign' => 'center',
-			'width' => '70px'
-		],
-
-        [ 'attribute' => 'room.room_name',
-			//'value' => 'room.room_number',
-			// 'group' => true,
-			'hAlign' => 'center',
-			'width' => '70px'
-		],
-
-        ['attribute' => 'name',
-            'value' => 'room.owners_name',
-            'hAlign' => 'center'],
 
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
@@ -232,13 +148,7 @@ $this->title = '缴费管理';
 			'hAlign' => 'center',
 			'width' => '60px'
 		],
-		/*['attribute' => 'create_time',
-			 'mergeHeader' => true,
-			 //'group' => true,
-			'format' => ['date','php:Y-m-d H:m:s'],
-			 'hAlign' => 'center',
-			'width' => '150px'
-			],*/
+
 		[ 'attribute' => 'order_id',
 			'format' => 'raw',
 			'value' => function ( $model ) {
@@ -278,34 +188,6 @@ $this->title = '缴费管理';
 	        	}
 	        },
 			//'mergeHeader' => true,
-		    'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>[
-                    'autoUpdateOnInit'=>false,
-                    //'showWeekNumbers' => false,
-                    'useWithAddon'=>true,
-                    'convertFormat'=>true,
-                    'timePicker'=>false,
-                    'locale'=>[
-                        'format' => 'YYYY-MM-DD',
-                        'separator'=>' to ',
-                        'applyLabel' => '确定',
-                        'cancelLabel' => '取消',
-                        'fromLabel' => '起始时间',
-                        'toLabel' => '结束时间',
-                        //'daysOfWeek'=>false,
-                    ],
-                    'opens'=>'center',
-                    //起止时间的最大间隔
-                    'dateLimit' =>[
-                        'days' => 90
-                    ]
-                ],
-                'options' => [
-                    'placeholder' => '请选择...',
-                    'style'=>'width:200px',
-                ],
-		    ],
             'width' => '180px',
 			'hAlign' => 'center',		
 		],
@@ -334,16 +216,6 @@ $this->title = '缴费管理';
 			'width' => ''
 		],
 
-		/*['attribute' => 'update_time',
-			 'mergeHeader' => true,
-			'value'=>
-                function($model){
-                    return  date('Y-m-d H:i:s',$model->update_time);   //主要通过此种方式实现
-                },
-			 'hAlign' => 'center',
-			'width' => '170px'
-			],*/
-
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
@@ -357,22 +229,14 @@ $this->title = '缴费管理';
 		//'showFooter' => true,
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '缴费',
-			'before' => Html::a( '<span class="glyphicon glyphicon-cloud-upload"></span>', 'import', [
-				'data-toggle' => 'modal',
-				'data-target' => '#update-modal',
-				'class' => 'btn btn-info import',
-			] ) . ' ' .
-			Html::a( '缴费', "javascript:void(0);", [ 'class' => 'btn btn-default gridviewpay ' ] ),
+			'before' => Html::a( '缴费', "javascript:void(0);", [ 'class' => 'btn btn-default gridviewpay ' ] ),
 		],
 
 		'toolbar' => [
 			[ 'content' =>
-            Yii::$app->urlManager->createUrl(['#']).
 				Html::a( '<span class="glyphicon glyphicon-trash"></span>', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] ) . ' ' .
 				Html::a( '统计', [ 'sum' ], [ 'class' => 'btn btn-success' ] )
 			],
-			'{toggleData}',
-			'{export}'
 		],
 		'columns' => $gridColumn,
 		'hover' => true

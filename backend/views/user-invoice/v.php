@@ -35,11 +35,25 @@ $this->params['breadcrumbs'][] = '费项预览';
             line-height: 60px;
             width: 116px;
             height: 54px;
-            background: url(/image/timg.jpg);
+            /*background: url(/image/timg.jpg);*/
+            background-size:232px 54px;
+            border-radius: 30px;
+            margin-top: 2%;
+            margin: auto;
+            display:inline;
+        }
+
+        #div2{
+            font-size: 25px;
+            text-align: center;
+            line-height: 60px;
+            width: 116px;
+            height: 54px;
             background-size:116px 54px;
             border-radius: 30px;
             margin-top: 2%;
             margin: auto;
+            display:inline;
         }
 
         a{
@@ -119,18 +133,26 @@ $this->params['breadcrumbs'][] = '费项预览';
                         if($date == date('Y-m', strtotime($first))){ //判断当前循环是否为第一次循环
                             $days = $day - $from_day+ 1; //计算本月剩余天数
                             $collagen = round($days/$day, '2'); //计算剩余天数占比
-                            $a->property = '合计 '.$days.' 天';
                         }
 
-                        if($a->formula == "1"){ //计算金额
+                        //计算金额
+                        if($a->formula == "1"){ //按面积计算
                             $p = $price*$acreage*$collagen;
                             $price = round($p, 1);
+                            if($collagen < 1){
+                                $a->property = '合计 '.$days.' 天';
+                            }
                             echo $price;
-                        }elseif($a->formula == "2"){
+                        }elseif($a->formula == "2"){ //按天计算
                             $p = $price*$days;
                             $price = round($p, 1);
+                            if($days < $day){
+                                $a->property = '合计 '.$days.' 天';
+                            }
                             echo $price;
                         }else{
+                            $price = $price*$collagen;
+                            $price = round($price, 2);
                             echo $price;
                         }
 
@@ -166,11 +188,18 @@ $this->params['breadcrumbs'][] = '费项预览';
             </td>
         </tr>
     </table>
-
-    <div id="div1">
-        <a href="<?=Url::to(['user-invoice/one',
-            'acreage' => $acreage,
-            'b' => $b,
-        ]) ?>">GOing...</a>
+    <div style="text-align: center; width: 250px; margin: auto;">
+        <div id="div1" title="继续">
+            <a href="<?=Url::to(['user-invoice/one',
+                'acreage' => $acreage,
+                'b' => $b,
+            ]) ?>"><img src="/image/going.jpg" style="width: 116px; height: 54px; border-radius: 15px;"> </a>
+        </div>
+        <div id="div2" title="直接进入缴费页面">
+            <a href="<?=Url::to(['/user-invoice/index',
+                'id' => $b['realestate_id'],
+            ]) ?>"><img src="/image/cancel.jpg" style="width: 54px; height: 54px; border-radius: 15px"><l style="color: #4f5964">取消</l></a>
+        </div>
     </div>
+
 </div>

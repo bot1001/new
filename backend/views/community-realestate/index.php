@@ -119,7 +119,6 @@ $this->title = '房屋管理';
 
 	<?php
 	$gridColumn = [
-		
 		[ 'class' => 'kartik\grid\CheckboxColumn',
 			'width' => '30px',
 			'name' => 'id',

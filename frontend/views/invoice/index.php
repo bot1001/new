@@ -114,8 +114,7 @@ Modal::end();
         'columns' => $gridview,
 		'toolbar' => [
 		    [ 'content' =>
-				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success',  'title' => '立即缴费'] ),
-			
+				Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', 'view', [ 'class' => 'btn btn-success', 'title' => '立即缴费'] ),
 			],
 	    	'{toggleData}'
 	    ],

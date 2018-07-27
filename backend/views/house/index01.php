@@ -47,9 +47,9 @@ $this->title = '房屋信息';
 			'hAlign' => 'center',
 			'width' => 'px'],
 		
-            ['class' => 'kartik\grid\ActionColumn',
-			 'template' => Helper::filterActionColumn('{update}{delete}'),
-			 'header' => '操作'],
+//            ['class' => 'kartik\grid\ActionColumn',
+//			 'template' => Helper::filterActionColumn('{update}{delete}'),
+//			 'header' => '操作'],
         ];
 		
 	echo GridView::widget([

@@ -556,7 +556,7 @@ class UserInvoiceController extends Controller
 		set_time_limit(0); //等待时间是10分钟
 		
 		$result = UserInvoice::Add();//调用数据
-//		return true;
+		return true;
 	}
 
 	//单个房号生成费项条件筛选
@@ -695,7 +695,6 @@ class UserInvoiceController extends Controller
                 if($date == date('Y-m', strtotime($first))){ //判断当前循环是否为第一次循环
                     $days = $day - $from_day+ 1; //计算本月剩余天数
                     $collagen = round($days/$day, '2'); //计算剩余天数占比
-                    $property = '合计 '.$days.' 天';
                 }
 
 				//判定物业费
@@ -705,16 +704,24 @@ class UserInvoiceController extends Controller
 						$h ++;
 						continue;
 					}
-				    $price = round($p,1); //保留一位小数点
+				    $price = round($p,2); //保留一位小数点
+                    if($collagen < 1){
+                        $property = '合计 '.$days.' 天';
+                    }
 				}elseif($formula == '2'){
                     $p = $pr*$days;
                     if($p == 0){
                         $h ++;
                         continue;
                     }
-                    $price = round($p, 1);
+                    $price = round($p, 2);
+                    if($days < $day){
+                        $property = '合计 '.$days.' 天';
+                    }
                 }else{
-					$price = $pr;
+                    $price = $pr*$collagen;
+                    $price = round($price, 2);
+                    echo $price;
 				}
 
                 //MySQL插入语句
@@ -722,9 +729,7 @@ class UserInvoiceController extends Controller
 						values ('$community','$building', '$id','$description', '$y', '$ms', '$price', '$f','0', '$property')";
 				$e = Yii::$app->db->createCommand( $sql )->execute();
 				
-				
-				//插入条数计数器
-				if ($e) {
+				if ($e) {//插入条数计数器
 				    $j <= $i;
 			    	$j += 1;
 			    } else {
