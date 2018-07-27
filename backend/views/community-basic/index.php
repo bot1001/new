@@ -59,9 +59,14 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
             ],
 			'hAlign' => 'center'],
 		
-            /*['attribute' =>'community_logo',
-			'width' => 'px',
-			'hAlign' => 'center'],*/
+            ['attribute' =>'phone',
+                'class' => 'kartik\grid\EditableColumn',
+                'editableOptions' => [
+                    'header' => '详情',
+                    'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
+                    'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+                ],
+			'hAlign' => 'center'],
 		
             ['attribute' =>'province_id',
 			 'value' => 'province.area_name',

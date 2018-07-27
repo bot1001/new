@@ -19,7 +19,7 @@ class CommunityBasicSearch extends CommunityBasic
     {
         return [
             [['community_id', 'company', 'province_id', 'area_id', 'city_id'], 'integer'],
-            [['community_name', 'community_logo', 'community_address', 'sms', 'creater', 'city_id'], 'safe'],
+            [['community_name', 'community_logo', 'community_address', 'sms', 'creater', 'city_id', 'phone'], 'safe'],
             [['community_longitude', 'community_latitude'], 'number'],
         ];
     }
@@ -78,6 +78,7 @@ class CommunityBasicSearch extends CommunityBasic
 
         $query->andFilterWhere(['like', 'community_name', $this->community_name])
             ->andFilterWhere(['like', 'community_logo', $this->community_logo])
+            ->andFilterWhere(['like', 'community_basic.phone', $this->phone])
             ->andFilterWhere(['like', 'sys_user.name', $this->creater])
             ->andFilterWhere(['like', 'community_address', $this->community_address]);
 

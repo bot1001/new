@@ -127,7 +127,8 @@ if($message){
         <div id="title">实时预览</div>
         <div class="preview">
             <div style="width: 90%; margin: auto">
-                【裕家人】尊敬的裕达业主，您好。您现居住的房子 <g><span id="address"> 金座小区 5栋1单元 2002 </span></g> 当月费用为 <g><span id="now"> XXX.XX </span></g> 元，历史欠费 <g><span id="old"> XXX.XX </span></g> 元；为不影响您自身的良好形象，<?= $guest ?>提醒您尽快缴费；详情请登录http:://www.gxydwy.com查看，裕达物业祝您身体健康、工作顺利。
+                【裕家人】尊敬的业主，您好。您现居住的房子:<g><span id="address"> XXXX小区 XX栋 X单元 XXXX </span></g> 当月费用：<g><span id="now"> XXX.XX </span></g> 元，往期费用：<g><span id="old"> XXX.XX </span></g> 元（仅供参考）;
+                为维护良好信用记录，请您于当月16日前通过裕家人或移步物业服务中心缴清费用；如有疑问请联系客服员<g><span id="cellphone"> 154656 </span></g> ;<?= $guest ?>祝您身体健康、工作顺利。
             </div>
         </div>
     </div>
@@ -154,6 +155,7 @@ if($message){
                 document.getElementById( 'address' ).innerHTML = result.name;
                 document.getElementById( 'now' ).innerHTML = result.now;
                 document.getElementById( 'old' ).innerHTML = result.old;
+                document.getElementById( 'cellphone' ).innerHTML = result.phone;
             },
             error : function() {
                 document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';

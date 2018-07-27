@@ -367,7 +367,6 @@ $this->title = '缴费管理';
 
 		'toolbar' => [
 			[ 'content' =>
-            Yii::$app->urlManager->createUrl(['#']).
 				Html::a( '<span class="glyphicon glyphicon-trash"></span>', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] ) . ' ' .
 				Html::a( '统计', [ 'sum' ], [ 'class' => 'btn btn-success' ] )
 			],

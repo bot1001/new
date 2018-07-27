@@ -47,6 +47,7 @@ class CommunityBasic extends \yii\db\ActiveRecord
             [['community_longitude', 'community_latitude'], 'number'],
             [['community_name', 'community_address'], 'string', 'max' => 64],
             [['community_logo'], 'string', 'max' => 300],
+            [['phone'], 'string', 'min' => '11', 'max' => 12],
             [['company', 'community_name'], 'unique', 'targetAttribute' => ['company', 'community_name']],
             [['company'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company' => 'id']],
         ];
@@ -62,6 +63,7 @@ class CommunityBasic extends \yii\db\ActiveRecord
             'company' => '公司',
             'community_name' => '名称',
             'community_logo' => 'LOGO',
+            'phone' => '联系方式',
             'province_id' => '省份',
             'city_id' => '市级',
             'area_id' => '地区',

@@ -77,7 +77,7 @@ class SmsClient extends \yii\db\ActiveRecord
     {
         //房屋信息
         $massege = (new \yii\db\Query())
-            ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as name')
+            ->select('community_basic.community_name as community, community_basic.phone, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as name')
             ->from('community_realestate')
             ->join('inner join','community_basic', 'community_basic.community_id = community_realestate.community_id')
             ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
@@ -115,8 +115,10 @@ class SmsClient extends \yii\db\ActiveRecord
             $end = 1;
         }
 
+        $phone = $massege['phone']; //物业中心手机号码
+
         $address = $massege['community'].' '.$massege['building'].' '.$massege['number'].'单元 '.$massege['name'];
-        $result = ['name' => $address, 'now' => $now , 'old' => "$old", 'end' => "$end"];
+        $result = ['name' => $address, 'now' => $now , 'old' => "$old", 'phone' => $phone, 'end' => "$end"];
         $result = Json::encode($result);
 
         return $result;

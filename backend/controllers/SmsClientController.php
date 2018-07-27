@@ -122,7 +122,7 @@ class SmsClientController extends Controller
     function actionSend01($sms, $name)
     {
         $model = new SmsClient();
-        $guest = '裕达集团'; //客户
+        $guest = '裕达物业'; //客户
 
         if ($model->load(Yii::$app->request->post()))
         {
@@ -135,9 +135,10 @@ class SmsClientController extends Controller
             $address = $result['name'];
             $old = $result['old'];
             $now = $result['now'];
-            $phone = $post['phone'];
+            $cellphone = $result['phone']; //物业服务中心联系方式
+            $phone = $post['phone']; //接收手机号码
 
-            $SmsParam = "{name:'$address',now:'$now',old:'$old',guest:'$guest'}"; //组合短信信息
+            $SmsParam = "{name:'$address',now:'$now',old:'$old', phone: $cellphone,guest:'$guest'}"; //组合短信信息
             $r = \common\models\Sms::Send($name, $phone, $sms, $SmsParam); //调用发送短信类
 
             $success = '0'; //默认发送成功条数为0
