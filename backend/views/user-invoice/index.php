@@ -48,35 +48,49 @@ $script = <<<SCRIPT
 
 //删除
 $(".gridviewdelete").on("click", function () {
-if(confirm('您确定要删除吗？')){
-    var keys = $("#grid").yiiGridView("getSelectedRows");
-     $.ajax({
-            url: '/user-invoice/del',
-            data: {ids:keys},
-            type: 'post',
-			success: function(is){
-			    alert("成功删除："+is+"条！");
-				location.reload();
-			}
-        })
+   if(confirm('您确定要删除吗？')){
+       var keys = $("#grid").yiiGridView("getSelectedRows");
+       if(keys.length == 0){
+           alert("选择有误，请重新选择！");
+       }else{
+           $.ajax({
+               url: '/user-invoice/del',
+               data: {ids:keys},
+               type: 'post',
+	   		     success: function(is){
+	   		         alert("成功删除："+is+"条！");
+	   		     	  location.reload();
+	   		     },
+	   		     error:function(){
+	   		        alert("您无此权限，请联系管理员！");
+	   		     }
+           })
+       }     
     }
 });
 
 //缴费
 $(".gridviewpay").on("click", function () {
-if(confirm('您确定要缴费吗？')){
-    var keys = $("#grid").yiiGridView("getSelectedRows");
-     $.ajax({
-            url: '/user-invoice/pay',
-            data: {ids:keys},
-            type: 'post',
-            success: function (id) {
-                t = JSON.parse(id);
-                if (isset(t)) {
-                    window.location.href= window.location.href;
-                }
-            },
-        })
+    if(confirm('您确定要缴费吗？')){
+        var keys = $("#grid").yiiGridView("getSelectedRows");
+        if(keys.length == 0){
+            alert('选择不能为空！');
+        }else{
+            $.ajax({
+                url: '/user-invoice/pay',
+                data: {ids:keys},
+                type: 'post',
+                //多余代码起
+                success: function (id) {
+                    t = JSON.parse(id);
+                    console.log(id);
+                    if (isset(t)) {
+                        window.location.href= window.location.href;
+                    }
+                },
+                //多余代码止
+            })
+        }     
     }
 });
 SCRIPT;
@@ -114,6 +128,7 @@ $this->title = '缴费管理';
 			'header' => '序<br />号'],*/
 		[ 'class' => 'kartik\grid\CheckboxColumn',
 			'name' => 'id',
+            'content' => null,
 			'width' => '30px'
 		],
 

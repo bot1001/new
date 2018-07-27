@@ -41,8 +41,19 @@ class SmsLogSearch extends SmsLog
      */
     public function search($params)
     {
-        $c = $_SESSION['community'];
-        $query = SmsLog::find()->where(['in', 'sms_log.sender', $c]);
+        $user = $_SESSION['user'];
+
+        $role = array_column($user, 'Role'); //提取角色
+        $id = Array_column($user, 'id'); // 提取用户ID
+        $id = array_unique($id); //用户ID去唯一
+
+        $query = SmsLog::find();
+        if(in_array('admin', $role)){
+            $query = SmsLog::find();
+        }else{
+            $query = SmsLog::find()->where(['in', 'sms_log.sender', $id]);
+        }
+
         $query->joinWith('sys');
 
         // add conditions that should always apply here
