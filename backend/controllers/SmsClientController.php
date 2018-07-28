@@ -137,6 +137,10 @@ class SmsClientController extends Controller
             $now = $result['now'];
             $amount = $result['amount'];
             $cellphone = $result['phone']; //物业服务中心联系方式
+            if(empty($cellphone)){ //判断号码是否为空，如果为空默认综合部行政电话
+                $cellphone = "0772-5314739";
+            }
+
             $phone = $post['phone']; //接收手机号码
 
             $SmsParam = "{name:'$address',now:'$now',old:'$old','amount': $amount, phone: $cellphone,guest:'$guest'}"; //组合短信信息

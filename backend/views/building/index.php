@@ -5,6 +5,7 @@ use kartik\grid\GridView;
 use app\models\CommunityBasic;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'update-modal',
@@ -44,7 +45,7 @@ Modal::end();
 $this->title = '楼宇列表';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="community-building-index">
+<div class="community-building-index" style="max-width: 1000px">
 
     <?php
 	$gridview = [
@@ -59,25 +60,28 @@ $this->title = '楼宇列表';
 		        'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => $company,
 			],
+                'readonly' => function(){
+	    return \app\models\Limit::limit($url='/building/building') == 0;
+                },
 			 'filterType' => GridView::FILTER_SELECT2,
 		     'filter' => $company,
 		     'filterInputOptions' => [ 'placeholder' => '请选择' ],
 		     'filterWidgetOptions' => [
 		     	'pluginOptions' => [ 'allowClear' => true ],
 		     ],
-			'width' => 'px',],
+			'width' => '180px',],
 		
             ['attribute' => 'community_id',
 			 'value' => 'c.community_name',
 			 'filterType' => GridView::FILTER_SELECT2,
-			'filter' => CommunityBasic::find()->select( [ 'community_name', 'community_id' ] )->orderBy( 'community_name' )->indexBy( 'community_id' )->column(),
+			'filter' => \app\models\CommunityBasic::community(),
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			], 
 			 'label' => '小区',
 			'hAlign' => 'center',
-			'width' => 'px',],
+			'width' => '180px',],
 		
 		   ['attribute' => 'building_name',
 			'hAlign' => 'center',
@@ -90,6 +94,7 @@ $this->title = '楼宇列表';
 			'width' => 'px',],
 		
 		    ['attribute' => 'create_time',
+                'mergeHeader' => true,
 			 'value' => function($model)
 			 {
 	         	return date('Y-m-d H:i:s', $model->create_time);
@@ -97,15 +102,12 @@ $this->title = '楼宇列表';
 			'hAlign' => 'center',
 			'width' => 'px',],
 		
-		    
-		
             /*['attribute' => 'building_parent',
 			'hAlign' => 'center',
 			'width' => 'px',],*/
-		
 
             ['class' => 'kartik\grid\ActionColumn',
-			 'template' => '{update}{view}',
+			 'template' => Helper::filterActionColumn('{update}{view}'),//Helper::filterActionColumn
 			 'buttons' => [
 				'update' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
@@ -123,7 +125,7 @@ $this->title = '楼宇列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '楼宇列表',
-				   'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [
+            'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 
 		        'class' => 'btn btn-success new',

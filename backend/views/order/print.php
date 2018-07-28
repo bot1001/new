@@ -50,8 +50,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 font-family: 仿宋;
             }
             img{
-                width: 25%;
+                width: 75px;
                 border-radius:20px;
+            }
+            #print{
+                width: 100px;
+                height: 80px;
+                background: #fff9e5;
+                border-radius: 15px;
             }
         </style>
 
@@ -219,10 +225,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</tr>
 		</table>
 	</span>
-	<table>
+	<table id="print">
 		<tr>
 			<td>
-			<br />
 				<a href="javascript:printme()" rel="external nofollow" target="_self">
 				    <img src='/image/print.png'>
 				</a>

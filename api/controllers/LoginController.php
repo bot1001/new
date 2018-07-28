@@ -5,6 +5,7 @@ use common\models\Api;
 use common\models\Building;
 use common\models\Community;
 use common\models\Company;
+use common\models\HouseInfo;
 use common\models\Realestate;
 use yii\web\Controller;
 use common\models\Order;
@@ -123,5 +124,27 @@ class LoginController extends Controller
 
        $room = Json::encode($room);
        return $room;
+    }
+
+    //验证房号信息
+    function actionRealestate($realestate, $name, $phone)
+    {
+        $info = Realestate::find()
+            ->where(['realestate_id' => $realestate, 'owners_name' => $name, 'owners_cellphone' => $phone])
+            ->asArray()
+            ->one();
+
+        if(!isset($info)){
+            $info = HouseInfo::find()
+                ->where(['realestate' => "$realestate", 'name' => $name, 'phone' => $phone])
+                ->asArray()
+                ->one();
+        }
+
+        if($info){
+            return true;
+        }
+
+        return false;
     }
 }

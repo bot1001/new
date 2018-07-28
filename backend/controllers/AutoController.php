@@ -52,6 +52,9 @@ class AutoController extends \yii\web\Controller
 
                 $now = $now['amount']; //当月费用
                 $cellphone = $reale['phone']; //物业中心联系方式
+                if(empty($cellphone)){ //判断号码是否为空，如果为空默认综合部行政电话
+                    $cellphone = "0772-5314739";
+                }
                 $old = $amount - $now; //计算往期费用
                 $add = $reale['number'].' 单元 '. $reale['name'];
                 $address = $reale['community'].' '.$reale['building'].' '.$add;

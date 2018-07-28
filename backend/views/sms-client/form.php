@@ -156,6 +156,10 @@ if($message){
                 document.getElementById( 'now' ).innerHTML = result.now;
                 document.getElementById( 'old' ).innerHTML = result.old;
                 document.getElementById( 'amount' ).innerHTML = result.amount;
+
+                if(result.phone.length == 0){ //判断号码是否为空，如果为空默认综合部行政电话
+                    result.phone = "0772-5314739";
+                }
                 document.getElementById( 'cellphone' ).innerHTML = result.phone;
             },
             error : function() {

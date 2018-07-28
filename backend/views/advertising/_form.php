@@ -24,6 +24,10 @@ use kartik\daterange\DateRangePicker;
 		height: 30px;
 		font-size: 30px;
 	}
+    #div3{
+        width: 33%;
+        display: inline;
+    }
 </style>
 
 <div class="advertising-form">
@@ -31,44 +35,35 @@ use kartik\daterange\DateRangePicker;
 	<?php $form = ActiveForm::begin(); ?>
 
 	<div class="row">
-		<div class="col-lg-8">
-			<div class="row">
-				<div class="col-lg-12">
-					<?= $form->field($model, 'ad_title')->textInput(['maxlength' => true, 'id' => 'btn'])   ?>
-				</div>
-			</div>
+		<div class="col-lg-7">
+            <?= $form->field($model, 'ad_title')->textInput(['maxlength' => true, 'id' => 'btn'])   ?>
+
+            <?= $form->field($model, 'ad_excerpt')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300', 'id' => 'baidu']])  ?>
 
 			<div class="row">
-				<div class="col-lg-12">
-					<?= $form->field($model, 'ad_excerpt')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300', 'id' => 'test']])  ?>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-3">
-					<?= $form->field($model, 'label_img')->widget('common\widgets\upload\FileUpload')->label(false) ?>
-				</div>
-				<div class="col-lg-3">
-					<?= $form->field($model, 'ad_target_value')->textInput(['rows' => 3, 'placeHolder' => '请输入']) ?>
-				</div>
-			
-				<div class="col-lg-3">
-					<?= $form->field($model, 'ad_publish_community')->dropDownList($_SESSION['community_id'], ['multiple'=>'multiple'], ['prompt' => '请选择']) ?>
-				</div>
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'label_img')->widget('common\widgets\upload\FileUpload')->label(false) ?>
+                </div>
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'ad_target_value')->textInput(['rows' => 3, 'placeHolder' => '请输入Value'])->label(false) ?>
+                </div>
+                <div class="col-lg-4">
+                    <?= $form->field($model, 'ad_publish_community')->dropDownList($_SESSION['community_id'], ['multiple'=>'multiple'], ['prompt' => '请选择'])->label(false) ?>
+                </div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-2">
-					<?= $form->field($model, 'ad_type')->dropDownList(['1' => '文章', '2' => '链接'], ['prompt' => '请选择']) ?>
+					<?= $form->field($model, 'ad_type')->dropDownList(['1' => '文章', '2' => '链接'], ['prompt' => '请选择类型'])->label(false) ?>
 				</div>
 				<div class="col-lg-2">
-					<?= $form->field($model, 'ad_location')->dropDownList(['1' => '顶部', '2' => '底部'], ['prompt' => '请选择']) ?>
-				</div>
-				<div class="col-lg-1">
-					<?= $form->field($model, 'ad_sort')->input('number') ?>
+					<?= $form->field($model, 'ad_location')->dropDownList(['1' => '顶部', '2' => '底部'], ['prompt' => '请选择位置'])->label(false) ?>
 				</div>
 				<div class="col-lg-2">
-					<?= $form->field($model, 'ad_status')->dropDownList(['1' => '正常', '2' => '删除'], ['prompt' => '请选择']) ?>
+					<?= $form->field($model, 'ad_sort')->input('number', ['placeholder' => '排序'])->label(false) ?>
+				</div>
+				<div class="col-lg-2">
+					<?= $form->field($model, 'ad_status')->dropDownList(['1' => '正常', '2' => '删除'], ['prompt' => '请选择状态'])->label(false) ?>
 				</div>
 
 				<div class="col-lg-3">
@@ -82,13 +77,13 @@ use kartik\daterange\DateRangePicker;
                                 'showDropdowns'=>true,
 							    'useWithAddon'=>true,
                             ]
-                        ])->textInput(['value' => date('Y-m-d')]) ?>
+                        ])->textInput(['placeholder' => '截止时间'])->label(false) ?>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-12">
-					<?= $form->field($model, 'property')->textarea(['rows' => 3]) ?>
+					<?= $form->field($model, 'property')->textarea(['rows' => 3, 'placeholder' => '备注'])->label(false) ?>
 				</div>
 			</div>
 			
@@ -97,12 +92,12 @@ use kartik\daterange\DateRangePicker;
 			</div>
 		</div>
 
-		<div id="ad_form" class="col-lg-4">
+		<div id="ad_form" class="col-lg-5">
 			<div id="title">
 				标题
 			</div>
 			<div>
-				你好，世界！<div id="ad_detail"></div>
+                你好，世界！<div id="ad_detail"> <input type="button" onclick="baidu()" name="测试"> </div>
 			</div>
 		</div>
 	</div>
@@ -110,14 +105,22 @@ use kartik\daterange\DateRangePicker;
     <script>
 		var oBtn = document.getElementById('btn');
         var oTi = document.getElementById('title');
+        // var oB = document.getElementById('baidu');
+
+        var editor = new \kucha\ueditor\UEditor.ui.Editor();
 		
 		if('oninput' in oBtn){ 
-                oBtn.addEventListener("input",getWord,false); 
-            }else{ 
-                oBtn.onpropertychange = getWord; 
-            }
+             oBtn.addEventListener("input",getWord,false);
+         }else{
+             oBtn.onpropertychange = getWord;
+         }
+
         function getWord(){
 			oTi.innerHTML = oBtn.value;
+        }
+
+        function baidu(){
+            console.log(editor.getPlainTxt());
         }
 
     </script>

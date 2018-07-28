@@ -160,7 +160,7 @@ class UserInvoice extends \yii\db\ActiveRecord
 
 		    	    if ( $q['formula'] == "1" ) {
 		    	    	$p = $price*$acreage;
-		    	    	$price = round($p,2); //保留一位小数点
+		    	    	$price = round($p,2); //保留两位小数点
 		    	    }elseif($q['formula'] == '2'){
 		    	        $p = $price*date('t');
 		    	        $price = round($p, 2);
