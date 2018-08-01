@@ -27,6 +27,7 @@ $this->registerJs( $cJs );
 
 $uJs = <<<JS
     $('.update').on('click', function () {
+        $('.modal-title').html('更新');
         $.get('{$u_Url}', { id: $(this).closest('tr').data('key') },
             function (data) {
                 $('.modal-body').html(data);
