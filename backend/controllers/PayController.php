@@ -22,9 +22,19 @@ class PayController extends Controller
 	public $enableCsrfValidation = false;
 	
     //调用第三方支付
-	public function actionPay($gateway, $paymethod)
+	public function actionPay()
 	{
 		$b = $_GET;
+
+		if(isset($b['paymethod']))
+        {
+            $paymethod = $b['paymethod'];
+        }
+
+        if(isset($b['gateway']))
+        {
+            $gateway = $b['gateway'];
+        }
 		$pay = $b['pay'];
 
 		$order_id = $pay['order_id'];
