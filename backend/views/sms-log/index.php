@@ -46,6 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $model->success.'条';
             },
             'hAlign' => 'center'],
+        ['attribute' => 'phone',
+            'hAlign' => 'center'],
+
         ['attribute' => 'sender',
             'value' => 'sys.name',
             'hAlign' => 'center'],

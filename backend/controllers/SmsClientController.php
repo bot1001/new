@@ -163,6 +163,7 @@ class SmsClientController extends Controller
             $log->sms = $sms;
             $log->type = '1';
             $log->sender = $user['id'];
+            $log->phone = $phone;
             $log->count = $fail+$success;
             $log->success = $success;
             $log->sms_time = time();

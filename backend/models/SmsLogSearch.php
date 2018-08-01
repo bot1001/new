@@ -18,8 +18,8 @@ class SmsLogSearch extends SmsLog
     public function rules()
     {
         return [
-            [['id', 'type', 'count', 'success'], 'integer'],
-            [['sign_name', 'sms', 'property', 'sms_time', 'sender'], 'safe'],
+            [['id', 'type', 'count', 'success', 'phone'], 'integer'],
+            [['sign_name', 'sms', 'property', 'sms_time', 'sender', 'phone'], 'safe'],
         ];
     }
 
@@ -97,6 +97,7 @@ class SmsLogSearch extends SmsLog
 
         $query->andFilterWhere(['like', 'sign_name', $this->sign_name])
             ->andFilterWhere(['like', 'sms', $this->sms])
+            ->andFilterWhere(['like', 'sms_log.phone', $this->phone])
             ->andFilterWhere(['like', 'sys_user.name', $this->sender])
             ->andFilterWhere(['like', 'property', $this->property]);
 
