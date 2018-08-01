@@ -43,7 +43,7 @@ class OrderBasic extends \yii\db\ActiveRecord
     {
         return [
             [['account_id', 'order_id', 'create_time', 'order_type', 'order_amount'], 'required'],
-            [['order_parent', 'create_time', 'order_type', 'invoice_id', 'status'], 'integer'],
+            [['order_parent', 'create_time', 'order_type', 'invoice_id', 'status', 'check'], 'integer'],
             [['order_amount'], 'number'],
             [['account_id', 'payment_gateway', 'payment_number'], 'string', 'max' => 64],
             [['order_id'], 'string', 'max' => 15],
@@ -74,10 +74,11 @@ class OrderBasic extends \yii\db\ActiveRecord
             'create_time' => '创建时间',
             'order_type' => '类型',
             'payment_time' => '付款时间',
-            'payment_gateway' => '支付方',
+            'payment_gateway' => '收款方式',
             'payment_number' => '交易编号',
             'description' => '详情',
             'order_amount' => '合计',
+            'check' => '财务确认',
             'invoice_id' => 'Invoice ID',
             'status' => '状态',
 			'fromdate' => 'From','todate' => 'To',

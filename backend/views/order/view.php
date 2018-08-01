@@ -39,8 +39,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             ['attribute' =>'create_time',
 			 'label' => '创建时间',
 			'format' => ['date','php:Y:m:d H:i:s']],
-            //'order_type',
-            //'payment_time:datetime',
             ['attribute' => 'payment_gateway',
 			 'label' => '支付方式',
 			 'value'=> function($model){
@@ -94,7 +92,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	             return $data[$model['status']];
              },
 	        'label' => '订单状态'],
-            //'status',
         ],
     ]) ?>
 
@@ -129,26 +126,32 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	    </div>
     
 	    <div class="col-lg-3">
-	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'xj','pay'=> $pay, 'gateway' => '6' ]) ?>">
 	    		<img src="/image/xj.png">
 	    	</a>
 	    </div>
     
 	    <div id="up" class="col-lg-3">
-	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'up','pay'=> $pay, 'gateway' => '3' ]) ?>">
 	    		<img src="/image/up.png">
 	    	</a>
 	    </div>
     
 	    <div id="yh" class="col-lg-3">
-	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'yh','pay'=> $pay, 'gateway' => '4' ]) ?>">
 	    		<img src="/image/yh.png" title="银行代付">
 	    	</a>
 	    </div>
 	    
 	    <div id="zf" class="col-lg-3">
-	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay ]) ?>">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'zf','pay'=> $pay, 'gateway' => '5' ]) ?>">
 	    		<img src="/image/zf.png" title="政府代付">
+	    	</a>
+	    </div>
+
+        <div id="zf" class="col-lg-3">
+	    	<a href="<?= Url::to(['/pay/pay', 'paymethod' => 'sale','pay'=> $pay, 'gateway' => '8' ]) ?>">
+	    		<img src="/image/sale.jpg" title="赠送优惠">
 	    	</a>
 	    </div>
 	</div>

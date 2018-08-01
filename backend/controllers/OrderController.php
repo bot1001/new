@@ -146,7 +146,7 @@ class OrderController extends Controller
 					->where(['community_realestate.realestate_id' => $inv['realestate_id']])
 					->one();
 				
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
+				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ];
 				return $this->render('print',[
 			                      'dc' => $dc,
 			                      'comm' => $comm,

@@ -22,7 +22,7 @@ class PayController extends Controller
 	public $enableCsrfValidation = false;
 	
     //调用第三方支付
-	public function actionPay()
+	public function actionPay($gateway, $paymethod)
 	{
 		$b = $_GET;
 		$pay = $b['pay'];
@@ -32,10 +32,8 @@ class PayController extends Controller
 	    $description = $pay['description'];
 	    $community = $pay['community'];
 	    $order_body = '物业缴费';  // 订单描述
-		$paymethod = $b['paymethod'];
-		
-		//创建订单信息
-		$order = OrderBasic::find()
+
+		$order = OrderBasic::find()//订单信息
 			->select('status,create_time')
 			->where(['order_id' => $order_id])
 			->one();
@@ -45,58 +43,39 @@ class PayController extends Controller
 		$t = $time - $c_time;
 		
 		$session=Yii::$app->session;
-		//判断订单状态
-		if($status != 1){
-			$session->setFlash('cancel', '订单已失效，请重新下单！');
+
+		if($t >= 120 || $status != 1){//判断订单状态和订单有效期，两分钟内有效
+		    if($t >= 120){ //如果订单超时则修改订单状态
+                OrderBasic::updateAll(['status' => 3], 'order_id = :oid', [':oid' => $order_id]);
+            }
+			$session->setFlash('cancel', '订单超时或失效，请重新下单！');
 			return $this->redirect(Yii::$app->request->referrer);
 		}else{
-		     //判断用户权限
-		     if(empty($_SESSION['community'])){
-				$session->setFlash('cancel', '权限不足，无法发起支付请求！');
-		     	return $this->redirect(Yii::$app->request->referrer);
-		     }else{
-		     	 //判断订单有效期，两分钟内有效
-		         if($t >= 120){
-		         	OrderBasic::updateAll(['status' => 3], 'order_id = :oid', [':oid' => $order_id]);
-		     		$session->setFlash('can', '1');
-		         	return $this->redirect(Yii::$app->request->referrer);
-		         }else{
-		         	if($status == 1){
-		        	if($paymethod == 'alipay'){
-		            	    return $this->redirect(['alipay','order_id' => $order_id,
-		            	    						   'description' => $description,
-		            	    						   'order_amount' => $order_amount,
-													   'community' => $community,
-		            	       						   'order_body' => $order_body]);
-		                }elseif($paymethod == 'wx'){
-		                	return $this->redirect(['wx','order_id' => $order_id,
-		                							   'description' => $description,
-		                							   'order_amount' => $order_amount,
-													   'community' => $community,
-		                							   'order_body' => $order_body]);
-		                }elseif($paymethod == 'xj'){
-		    			    return $this->redirect(['xj', 'order_id' => $order_id, 'order_amount' => $order_amount]);
-		    		    }elseif($paymethod == 'up'){
-		    		    	return $this->redirect(['up', 'order_id' => $order_id, 'order_amount' => $order_amount]);
-		    		    }elseif($paymethod == 'yh'){
-		    		    	return $this->redirect(['yh', 'order_id' => $order_id, 'order_amount' => $order_amount]);
-		    		    }elseif($paymethod == 'zf'){
-		    		    	return $this->redirect(['zf', 'order_id' => $order_id]);
-		    		    }elseif($paymethod == 'jh'){
-					    	return $this->redirect(['jh','order_id' => $order_id,
-		                							   'description' => $description,
-		                							   'order_amount' => $order_amount,
-													   'community' => $community,
-		                							   'order_body' => $order_body]);
-					    }else{
-		    		    	return $this->redirect(['qt', 'order_id' => $order_id]);
-		    		    }
-		                 }else{
-		             	return $this->redirect(Yii::$app->request->referrer);
-		             }
-		         }
-		     }
-		}		
+             if($paymethod == 'alipay'){
+                 return $this->redirect(['alipay',
+                     'order_id' => $order_id,
+                     'description' => $description,
+                     'order_amount' => $order_amount,
+                     'community' => $community,
+                     'order_body' => $order_body]);
+                 }elseif($paymethod == 'wx'){
+                 return $this->redirect(['wx',
+                     'order_id' => $order_id,
+                     'description' => $description,
+                     'order_amount' => $order_amount,
+                     'community' => $community,
+                     'order_body' => $order_body]);
+                 }elseif($paymethod == 'jh'){
+                 return $this->redirect(['jh',
+                     'order_id' => $order_id,
+                     'description' => $description,
+                     'order_amount' => $order_amount,
+                     'community' => $community,
+                     'order_body' => $order_body]);
+                 }else{
+                 return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway]);
+                 }
+         }
 	}
 	
 	//建行接口
@@ -170,62 +149,16 @@ class PayController extends Controller
 		return 'success';
 	}
 	
-	//现金支付变更费项状态
-	public function actionXj($order_id, $order_amount)
+	//线下变更费项状态
+	public function actionOfline($order_id, $order_amount,$gateway)
 	{
-		$gateway = '6';
 		$change = Pay::change($order_id,$gateway);
 		
-		if($change == 1){
+		if($change == 1 && $gateway != '4' && $gateway != '5'){
 			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
 		}else{
-			return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(['user-invoice/index','order_id' => $order_id]);
 		}
-	}
-	
-	//刷卡支付变更费项状态
-	public function actionUp($order_id, $order_amount)
-	{
-		$gateway = '3';
-		$change = Pay::change($order_id, $gateway);
-		
-		if($change == 1){
-			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
-		}else{
-			return $this->redirect(Yii::$app->request->referrer);
-		}
-	}
-	
-	//银行代缴支付变更费项状态
-	public function actionYh($order_id, $order_amount)
-	{
-		$gateway = '4';
-		$change = Pay::change($order_id, $gateway);
-		
-		if($change == 1){
-			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
-		}else{
-			return $this->redirect(Yii::$app->request->referrer);
-		}
-	}
-	
-	//政府代缴支付变更费项状态
-	public function actionZf($order_id)
-	{
-		$gateway = '5';
-		$change = Pay::change($order_id, $gateway);
-		
-		if($change == 1){
-			return $this->redirect(['user-invoice/index','order_id' => $order_id]);
-		}else{
-			return $this->redirect(Yii::$app->request->referrer);
-		}
-	}
-	
-	//其他支付变更费项状态
-	public function actionqt($order_id)
-	{
-		return $this->redirect(Yii::$app->request->referrer); // 费项代码 5
 	}
 	
 	//调用支付宝

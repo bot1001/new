@@ -78,9 +78,13 @@ $this->title = '订单管理';
 		[ 'attribute' => 'order0.name',
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				$name = OrderRelationshipAddress::find()->select( 'name' )->where( [ 'order_id' => $model->order_id ] )->asArray()->one();
-				$url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id, 'amount' => $model->order_amount ] );
-				return Html::a( $name[ 'name' ], $url );
+                $name = OrderRelationshipAddress::find()->select( 'name' )->where( [ 'order_id' => $model->order_id ] )->asArray()->one();
+	            if($model->status == '2'){
+                    $url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id, 'amount' => $model->order_amount ] );
+                    return Html::a( $name[ 'name' ], $url );
+                }else{
+	                return $name['name'];
+                }
 			},
 			'hAlign' => 'center',
 			'width' => '75px'
@@ -113,8 +117,12 @@ $this->title = '订单管理';
 			//'mergeHeader' => true,
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				$url = Yii::$app->urlManager->createUrl( [ 'user-invoice/index', 'order_id' => $model->order_id, 'order' => 'order' ] );
-				return Html::a( $model->order_id, $url );
+	            if($model->status == 2){
+                    $url = Yii::$app->urlManager->createUrl( [ 'user-invoice/index', 'order_id' => $model->order_id, 'order' => 'order' ] );
+                    return Html::a( $model->order_id, $url );
+                }else{
+	                return $model->order_id;
+                }
 			},
 			'hAlign' => 'center',
 			'width' => '130px'
@@ -201,13 +209,13 @@ $this->title = '订单管理';
 		[ 'attribute' => 'payment_gateway',
 			//'group' => true,
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ],
+			'filter' => [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8 => '优惠' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'value' => function ( $model ) {
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
+				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8 => '优惠' ];
 				if ( empty( $model[ 'payment_gateway' ] ) ) {
 					return '';
 				} else {
@@ -217,6 +225,32 @@ $this->title = '订单管理';
 			'hAlign' => 'center',
 			'width' => '100px'
 		],
+        ['attribute' =>  'check',
+            'value' => function($model){
+                $date = [ '0' => '否', '1' => '是'];
+                return $date[$model->check];
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => [ '0' => '否', '1' => '是'],
+            'filterInputOptions' =>  ['placeholder' =>'请选择'],
+            'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+            ],
+            'class' => 'kartik\grid\EditableColumn',
+            // 判断活动列是否可编辑
+            'readonly' => function ( $model, $key, $index, $widget ) {
+                return (\app\models\Limit::limit($url = 'order/order') == 0  || $model->check == 1 || $model->status != 2);
+            },
+            'editableOptions' => [
+                'formOptions' => [ 'action' => [ '/order/order' ] ], // point to the new action
+                'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                'data' => [ '0' => '否', '1' => '是'],
+            ],
+            'contentOptions' =>
+            function($model){
+                return ( $model->check == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
+            },
+            'hAlign' => 'center'],
 		/*['attribute' => 'payment_number',
 		 'width' => '200px',
 		 'hAlign' => 'center'],*/
@@ -239,7 +273,7 @@ $this->title = '订单管理';
 			'class' => 'kartik\grid\EditableColumn',
 			// 判断活动列是否可编辑
 			'readonly' => function ( $model, $key, $index, $widget ) {
-				return ( $model->status != 1 );
+                return ( \app\models\Limit::limit($url = 'order/order') != 1 || $model->status != 1 );
 			},
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/order/order' ] ], // point to the new action        
@@ -248,9 +282,7 @@ $this->title = '订单管理';
 			],
 			'contentOptions' =>
 			    function ( $model ) {
-			    	$data = [ 1 => '未支付', 2 => '已支付', 3 => '已取消', 4 => '送货中', 5 => '已签收', 6 => '其他' ];
-			    	return $data;
-			    	( $model == 1 ) ? [ 'class' => 'bg-info' ] : []; // 根据值改变底色
+			    	return ( $model ->status == 2 ) ? [ 'class' => 'bg-info' ] : []; // 根据值改变底色
 			    },
 			'width' => '90px',
 			'hAlign' => 'center'

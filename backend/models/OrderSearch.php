@@ -22,7 +22,7 @@ class OrderSearch extends OrderBasic
     public function rules()
     {
         return [
-            [['id', 'order_parent', 'create_time', 'order_type', 'invoice_id', 'status'], 'integer'],
+            [['id', 'order_parent', 'create_time', 'order_type', 'invoice_id', 'status',  'check'], 'integer'],
             [['account_id', 'order0.name','payment_gateway', 'payment_time', 'order0.mobile_phone', 'order_id', 'order0.address', 'payment_number', 'description','todate','fromdate'], 'safe'],
             [['order_amount'], 'number'],
         ];
@@ -99,6 +99,7 @@ class OrderSearch extends OrderBasic
             'order_amount' => $this->order_amount,
             'invoice_id' => $this->invoice_id,
             'status' => $this->status,
+            'check' => $this->check,
         ]);
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])

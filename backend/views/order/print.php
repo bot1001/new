@@ -35,6 +35,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 text-align: center;
                 font-family: 仿宋;
                 font-weight: 820;
+                text-decoration: underline;
             }
             th{
                 text-align:center;
@@ -46,7 +47,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             table{
                 text-align: center;
                 margin:auto;
-                width: 820px;
+                width: 650px;
                 font-family: 仿宋;
             }
             img{
@@ -139,8 +140,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					$amount01 = array_sum(array_column($des,'invoice_amount')); //费项金额
 					
 					echo ("<tr height=10>
-	                          <td width = 4%>$k</td>
-							  <td width = 15% align = left>$c</td>
+	                          <td width = 6%>$k</td>
+							  <td width = 17% align = left>$c</td>
 							  ");
 					
 					if($c == '水费'){
@@ -183,21 +184,21 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 						}
 					    
 					    echo ("
-					            <td width = 9%>$one</td>
-					            <td width = 9%>$two</td>
+					            <td width = 10%>$one</td>
+					            <td width = 10%>$two</td>
 					    		<td width = 6%>$d </td>
 					         ");
 					}else{
 						echo ("
-						    <td width = 9%></td>
-						    <td width = 9%></td>
+						    <td width = 10%></td>
+						    <td width = 10%></td>
 							<td width = 6%>$count</td>
 						");
 					}
 					echo (" 
-	                        <td width = 5%>$name</td>
-	                        <td width = 9%>$y/$h/1</td>
-	                        <td width = 10%>$Y/$H/$day</td>
+	                        <td width = 7%>$name</td>
+	                        <td width = 12%>$y/$h/1</td>
+	                        <td width = 13%>$Y/$H/$day</td>
 	                        <td width = 7% align = right>$amount01</td>
 						  ");
 					
@@ -219,8 +220,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td></td>
 			</tr>
 			<tr>
-				<td align="left" width = "256px">收款人：<?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></td>
-				<td width = "256px"><?= '时间：'.date('Y-m-d H:i:s', $order['payment_time']) ?></td>
+				<td align="left" width = "200px">收款人：<?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></td>
+				<td width = "200px"><?= '时间：'.date('Y-m-d H:i:s', $order['payment_time']) ?></td>
 				<td align="right" width = "256px">广西裕达集团物业服务有限公司(盖章)</td>
 			</tr>
 		</table>
