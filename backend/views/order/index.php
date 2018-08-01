@@ -225,10 +225,10 @@ $this->title = '订单管理';
 			'hAlign' => 'center',
 			'width' => '100px'
 		],
-        ['attribute' =>  'check',
+        ['attribute' =>  'verify',
             'value' => function($model){
                 $date = [ '0' => '否', '1' => '是'];
-                return $date[$model->check];
+                return $date[$model->verify];
             },
             'filterType' => GridView::FILTER_SELECT2,
             'filter' => [ '0' => '否', '1' => '是'],
@@ -239,7 +239,7 @@ $this->title = '订单管理';
             'class' => 'kartik\grid\EditableColumn',
             // 判断活动列是否可编辑
             'readonly' => function ( $model, $key, $index, $widget ) {
-                return (\app\models\Limit::limit($url = 'order/order') == 0  || $model->check == 1 || $model->status != 2);
+                return (\app\models\Limit::limit($url = 'order/order') == 0  || $model->verify == 1 || $model->status != 2);
             },
             'editableOptions' => [
                 'formOptions' => [ 'action' => [ '/order/order' ] ], // point to the new action
@@ -248,7 +248,7 @@ $this->title = '订单管理';
             ],
             'contentOptions' =>
             function($model){
-                return ( $model->check == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
+                return ( $model->verify == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
             },
             'hAlign' => 'center'],
 		/*['attribute' => 'payment_number',
