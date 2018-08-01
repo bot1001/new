@@ -20,15 +20,16 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		window.print();
 	}
 </script>
-
-<div class="order-print">
+<div style="min-height: 500px; background: #ffffff; max-width: 1000px;margin: auto;border-radius:10px;">
+    <br/>
+    <div class="order-print">
 	<span id='div1'>
         <style>
             .order-print{
+                background: #ffffe5;
+                max-width: 700px;
                 margin: auto;
-                border-radius:10px;
-                background: #ffffff;
-                max-width: 1200px;
+                border-radius: 5px;
             }
 
             h3{
@@ -62,13 +63,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             }
         </style>
 
-		<p style="height: 5px;"> </p>
         <h3><?= $comm['community'];  ?></h3>
 			<br>
 		<table border="0">
 			<tr>
 				<td align="left"><strong>房号:</strong>
-					<?= $comm['building'].'&nbsp'. $comm['number']. '单元 '. $comm['name']; ?>
+                    <?= $comm['building'].'&nbsp'. $comm['number']. '单元 '. $comm['name']; ?>
 				</td>
 				<td align="center"><?= '业主姓名：'.$comm['n']?></td>
 				<td align="center"><?= '订单号：'.$order_id ?></td>
@@ -91,12 +91,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					<th>金额</th>
 					<th>备注</th>
 				</tr>
-				
-				<?php
-				$k = 0;
-				foreach($dc as $key => $c)
-				{					
-					foreach ($invoice as $key => $value)
+
+                <?php
+                $k = 0;
+                foreach($dc as $key => $c)
+                {
+                    foreach ($invoice as $key => $value)
                     {
                         if ($value['description'] !== $c)
                         {
@@ -105,111 +105,111 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                             $des[] = $value;
                         }
                     }
-					
-					$one = end($des); //第一条缴费订单
-					
-					//获取绑定水费编码
-					$price = (new \yii\db\Query())
-						->select('cost_name.price')
-						->from('cost_relation')
-						->join('inner join', 'cost_name', 'cost_name.cost_id = cost_relation.cost_id')
-						->andwhere(['cost_relation.realestate_id' => $comm['id']])
-						->andwhere(['in', 'cost_name.cost_name', $one['description'] ])
-						->limit(20)
-						->one();
-					
-	                //获取绑定费项价格
-					if(!empty($price))
-					{
-						$name = $price['price'];
-					}else{
-						$name = '';
-					}
-						
-	                $k ++;//记录遍历次数
-					
-					$m = reset($des); // 第一条
-					$M = end($des); // 最后一条
-					$y = $m['year']; // 最小年
-					$h = $m['month']; //最小月
-					$Y = $M['year']; // 最大年
-					$H = $M['month']; //最大月
-					$count = count($des); //统计数量
-					$day = date("t",strtotime("$Y-$H"));
-								
-					$amount01 = array_sum(array_column($des,'invoice_amount')); //费项金额
-					
-					echo ("<tr height=10>
+
+                    $one = end($des); //第一条缴费订单
+
+                    //获取绑定水费编码
+                    $price = (new \yii\db\Query())
+                        ->select('cost_name.price')
+                        ->from('cost_relation')
+                        ->join('inner join', 'cost_name', 'cost_name.cost_id = cost_relation.cost_id')
+                        ->andwhere(['cost_relation.realestate_id' => $comm['id']])
+                        ->andwhere(['in', 'cost_name.cost_name', $one['description'] ])
+                        ->limit(20)
+                        ->one();
+
+                    //获取绑定费项价格
+                    if(!empty($price))
+                    {
+                        $name = $price['price'];
+                    }else{
+                        $name = '';
+                    }
+
+                    $k ++;//记录遍历次数
+
+                    $m = reset($des); // 第一条
+                    $M = end($des); // 最后一条
+                    $y = $m['year']; // 最小年
+                    $h = $m['month']; //最小月
+                    $Y = $M['year']; // 最大年
+                    $H = $M['month']; //最大月
+                    $count = count($des); //统计数量
+                    $day = date("t",strtotime("$Y-$H"));
+
+                    $amount01 = array_sum(array_column($des,'invoice_amount')); //费项金额
+
+                    echo ("<tr height=10>
 	                          <td width = 6%>$k</td>
-							  <td width = 17% align = left>$c</td>
+							  <td style='max-width: 17%; text-align: left;'>$c</td>
 							  ");
-					
-					if($c == '水费'){
-					    //获取费表读数
-						$wm = $h-1; //月
-						$wy = $y; //年
-						if($wm == 0){ //判断月份是否为零
-							$wm = 12;
-							$wy = $y-1;
-						}
-						//获取第一条费表读数				
-						$readout = WaterMeter::find()
-					    	->select('readout')
-					    	->andwhere(['realestate_id' => $comm['id']])
-							->andwhere(['<=', 'year', $wy])
-							->andwhere(['<=', 'month', $wm])
-					    	->orderBy('year DESC')
-					    	->asArray()
-					    	->one();
-						//获取最后一条水表读数
-						$read2 = WaterMeter::find()
-					    	->select('readout')
-					    	->andwhere(['realestate_id' => $comm['id']])
-							->andwhere(['year' => $Y])
-							->andwhere(['month' => $H])
-							->orderBy('year DESC')
-							->asArray()
-							->one();
-						
-					    if($readout){
-					        $one = $readout['readout']; //上一个水表读数
-							if($read2){
-								$two = $read2['readout']; //最新水表读数
-								$d = $two-$one; //水费差值
-							}else{
-								$d = $two = '';
-							}   
-						}else{
-							$one = $two = $d = '';
-						}
-					    
-					    echo ("
+
+                    if($c == '水费'){
+                        //获取费表读数
+                        $wm = $h-1; //月
+                        $wy = $y; //年
+                        if($wm == 0){ //判断月份是否为零
+                            $wm = 12;
+                            $wy = $y-1;
+                        }
+                        //获取第一条费表读数
+                        $readout = WaterMeter::find()
+                            ->select('readout')
+                            ->andwhere(['realestate_id' => $comm['id']])
+                            ->andwhere(['<=', 'year', $wy])
+                            ->andwhere(['<=', 'month', $wm])
+                            ->orderBy('year DESC')
+                            ->asArray()
+                            ->one();
+                        //获取最后一条水表读数
+                        $read2 = WaterMeter::find()
+                            ->select('readout')
+                            ->andwhere(['realestate_id' => $comm['id']])
+                            ->andwhere(['year' => $Y])
+                            ->andwhere(['month' => $H])
+                            ->orderBy('year DESC')
+                            ->asArray()
+                            ->one();
+
+                        if($readout){
+                            $one = $readout['readout']; //上一个水表读数
+                            if($read2){
+                                $two = $read2['readout']; //最新水表读数
+                                $d = $two-$one; //水费差值
+                            }else{
+                                $d = $two = '';
+                            }
+                        }else{
+                            $one = $two = $d = '';
+                        }
+
+                        echo ("
 					            <td width = 10%>$one</td>
 					            <td width = 10%>$two</td>
 					    		<td width = 6%>$d </td>
 					         ");
-					}else{
-						echo ("
+                    }else{
+                        echo ("
 						    <td width = 10%></td>
 						    <td width = 10%></td>
 							<td width = 6%>$count</td>
 						");
-					}
-					echo (" 
+                    }
+                    echo (" 
 	                        <td width = 7%>$name</td>
 	                        <td width = 12%>$y/$h/1</td>
 	                        <td width = 13%>$Y/$H/$day</td>
-	                        <td width = 7% align = right>$amount01</td>
+	                        <td style='width: 9%;text-align: right'>$amount01</td>
 						  ");
-					
-					echo "<td>".$m['note']."</td></tr>";
-					
-					unset($des);// 释放数组
-					unset($yj);// 释放数组
-			    }
-				?>
-								
-				<tr>
+
+                    echo "<td>".$m['note']."</td></tr>";
+
+                    unset($des);// 释放数组
+                    unset($yj);// 释放数组
+                }
+                ?>
+
+                <tr>
 					<td colspan="9" align="right">合计：  &nbsp;&nbsp;&nbsp;<?= $amount; ?></td>
 					<td colspan="3"></td>
 				</tr>
@@ -226,13 +226,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</tr>
 		</table>
 	</span>
-	<table id="print">
-		<tr>
-			<td>
-				<a href="javascript:printme()" rel="external nofollow" target="_self">
-				    <img src='/image/print.png'>
-				</a>
-			</td>
-		</tr>
-	</table>
+        <table id="print">
+            <tr>
+                <td>
+                    <a href="javascript:printme()" rel="external nofollow" target="_self">
+                        <img src='/image/print.png'>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
