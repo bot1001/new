@@ -10,6 +10,13 @@ use kartik\grid\GridView;
 $this->title = '短信发送记录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="sms-log-index">
 
     <?php
@@ -17,10 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn','header' => '序<br />号'],
 
-        ['attribute' => 'sign_name'],
+        ['attribute' => 'sign_name',
+            'contentOptions' => ['class' => 'text-left'],],
 
-        ['attribute' => 'sms',
-            'hAlign' => 'center'],
+        ['attribute' => 'sms',],
 
         ['attribute' => 'type',
             'value' => function($model){
@@ -33,25 +40,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pluginOptions' => [ 'allowClear' => true ],
             ],
             'filterInputOptions' => [ 'placeholder' => '请选择' ],
-            'hAlign' => 'center'],
+            ],
 
         ['attribute' => 'count',
             'value' => function($model){
                 return $model->count.'条';
-            },
-            'hAlign' => 'center'],
+            },],
 
         ['attribute' => 'success',
             'value' => function($model){
                 return $model->success.'条';
-            },
-            'hAlign' => 'center'],
-        ['attribute' => 'phone',
-            'hAlign' => 'center'],
+            },],
+        ['attribute' => 'phone',],
 
         ['attribute' => 'sender',
             'value' => 'sys.name',
-            'hAlign' => 'center'],
+            'contentOptions' => ['class' => 'text-left'],
+            ],
 
         ['attribute' => 'sms_time',
             'value' => function($model){
@@ -85,9 +90,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'style'=>'width:200px',
                 ],
             ],
-            'hAlign' => 'center'],
+            ],
 
-        ['attribute' => 'property'],
+        ['attribute' => 'property',
+            'contentOptions' => ['class' => 'text-left'],],
 
         ['class' => 'kartik\grid\ActionColumn',
             'template' => '{delete}',

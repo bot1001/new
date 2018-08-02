@@ -5,6 +5,7 @@ namespace backend\ controllers;
 use Yii;
 use app\models\UserInvoice;
 use app\models\Up;
+use yii\data\ActiveDataProvider;
 use yii\web\UploadedFile;
 use app\models\OrderBasic;
 use app\models\CommunityBasic;
@@ -499,6 +500,32 @@ class UserInvoiceController extends Controller
 		}elseif(empty($f) && empty($p)){
 			$ds = $ds->andFilterWhere(['year' => date('Y'), 'month' => date('m')]);
 		}
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $ds,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'id',
+                    'community',
+                    'building',
+                    'number',
+                    'name',
+                    'year',
+                    'month',
+                    'description',
+                    'amount',
+                    'order',
+                    'payment_time',
+                    'status'
+                ],
+                'defaultOrder' => [
+                    'status' => SORT_ASC,
+                ]
+            ],
+        ]);
 		
         $count = $ds->count();// 计算总数
 		
@@ -511,6 +538,7 @@ class UserInvoiceController extends Controller
 		
 		return $this->render('summ',['data' => $data,
 									'pagination' => $pagination,
+								    'dataProvider' => $dataProvider,
 								    'from' => $from,
 								    'to' => $to,
 								    'sum' => $sum,

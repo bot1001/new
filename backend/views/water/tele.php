@@ -14,6 +14,16 @@ use app\models\CommunityRealestate;
 $this->title = '读数一览表';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th{
+        text-align: center;
+    }
+
+    td{
+        text-align: right;
+    }
+</style>
 <div class="water-meter-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,81 +35,82 @@ $this->title = '读数一览表';
 	    	],
 
 	    	[ 'attribute' => 'community',
+                'contentOptions' => ['class' => 'text-left'],
 			 //'value' => 'c.community_name',
 			 'width' => '15%',
 			],
 	    	[ 'attribute' => 'building',
-			 'width' => '60px',
-			  'hAlign' => 'center', ],
+                'contentOptions' => ['class' => 'text-center'],
+			 'width' => '60px', ],
+
 	    	[ 'attribute' => 'name',
+                'contentOptions' => ['class' => 'text-center'],
 			 //'value' => 'r.room_name',
-			 'width' => '70px',
-			  'hAlign' => 'center', ],
+			 'width' => '70px', ],
+
 	    	[ 'attribute' => 'year',
+                'contentOptions' => ['class' => 'text-center'],
 			 'width' => '70px',
-			 'label' => '年份',
-			  'hAlign' => 'center', ],
+			 'label' => '年份',],
+
 	    	[ 'attribute' => 'Jan', 
 			 'mergeHeader' => true,
 			 'label' => '一月',
-			  'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Feb',
 			 'mergeHeader' => true,
 			 'label' => '二月',
-	    		'hAlign' => 'center',
-	    	], 
+            ],
+
 			[ 'attribute' => 'Mar',
 			 'mergeHeader' => true,
 			 'label' => '三月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Apr',
 			 'mergeHeader' => true,
 			 'label' => '四月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
 			[ 'attribute' => 'May',
 			 'mergeHeader' => true,
 			 'label' => '五月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Jun',
 			 'mergeHeader' => true,
 			 'label' => '六月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Jul',
 			 'mergeHeader' => true,
 			 'label' => '七月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Aug',
 			 'mergeHeader' => true,
 			 'label' => '八月',
-	    		'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Sept',
 			 'mergeHeader' => true,
 			 'label' => '九月',
-			 'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Oct',
 			 'mergeHeader' => true,
 			 'label' => '十月',
-			 'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'Nov',
 			 'mergeHeader' => true,
 			 'label' => '十一月',
-			 'hAlign' => 'center',
-	    	], 
+	    	],
+
 			[ 'attribute' => 'D', 
 			 'mergeHeader' => true,
 			 'label' => '十二月',
-			 'hAlign' => 'center',
 	    	],
-	    	
 	    ];
 	    echo GridView::widget( [
 	    	'dataProvider' => $dataProvider,

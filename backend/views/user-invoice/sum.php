@@ -182,12 +182,13 @@ if ( !empty($data) ) //判断是否存在缴费数据
 			    	    foreach($invoice as $keys =>  $i)
 			    	    {				
 			    	        if($i['description'] == $name) // 判断当前费项是否是当前遍历的收费名称
-			    	        { $des[$cost_key] += $i['amount'];?>
+			    	        {
+			    	            $des[$cost_key] += $i['amount'];?>
 								<td>
 							       <a href="<?php $search['description'] = $name; echo Url::to(['summ', 'search' => $search, 'a' => $i['amount'], 'key' => $key]) ?>">
 							           <?= $i['amount']; ?>
 							       </a>
-			    	        	</rd>
+			    	        	</td>
 			    	      <?php }
 			    	    }
 			    	}else{

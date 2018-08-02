@@ -8,6 +8,12 @@ use kartik\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="water-meter-index">
      
     <?php	
@@ -24,16 +30,14 @@ use kartik\grid\GridView;
 			],
 		  'label' => '楼宇',
 		  'width' => '20%',
-		  'hAlign' => 'center',
 		],
 		['attribute' => 'number',
             'value' => 'r.room_number',
-            'label' => '单元',
-            'hAlign' => 'center'],
+            'label' => '单元',],
+
 		[ 'attribute' => 'name',
 		  'value' => 'r.room_name',
 		  'width' => '20%',
-		  'hAlign' => 'center',
 		],
 		
 		[ 'attribute' => 'readout',
@@ -43,7 +47,6 @@ use kartik\grid\GridView;
 		  'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 		  ],
 		  'width' => '20%',
-          'hAlign' => 'center',
 		],
 	];
 	

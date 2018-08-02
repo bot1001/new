@@ -15,6 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 //引入模态文件
 echo $this->render('..\..\..\common\modal\modal.php');
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="sms-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -23,12 +30,12 @@ echo $this->render('..\..\..\common\modal\modal.php');
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn', 'header' => '序<br />号'],
 
-        'sign_name',
+        [ 'attribute' => 'sign_name',
+            'contentOptions' => ['class' => 'text-left'],],
         'sms',
-        ['attribute' => 'count', 'hAlign' => 'center'],
+        ['attribute' => 'count'],
         ['attribute' => 'name',
             'value' => 'sys.name',
-            'hAlign' => 'center'
         ],
 
         ['attribute' => 'status',
@@ -42,15 +49,14 @@ echo $this->render('..\..\..\common\modal\modal.php');
                 'formOptions' => [ 'action' => [ '/sms/sms' ] ],
                 'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
                 'data' => ['0' => '内用', '1' => '可售'],
-            ],
-            'hAlign' => 'center'],
+            ],],
 
         ['attribute' => 'create_time',
             'value'=> function($model){
                 return date('Y-m-d H:i:s');
-            },
-            'hAlign' => 'center'],
-        'property',
+            },],
+        [ 'attribute' => 'property',
+            'contentOptions' => ['class' => 'text-left'],],
 
         ['class' => 'kartik\grid\ActionColumn',
             'template' => Helper::filterActionColumn('{update}&nbsp;&nbsp;&nbsp;{delete}'),

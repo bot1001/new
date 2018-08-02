@@ -104,6 +104,12 @@ $this->title = '房屋管理';
 //$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="community-realestate-index">
 	<?php // echo $this->render('_search', ['model' => $searchModel]);
 	
@@ -136,7 +142,7 @@ $this->title = '房屋管理';
                              'pluginOptions'=>['allowClear'=>true],
 		                 ],
 			'width' => '180px',
-			'hAlign' => 'center',
+            'contentOptions' => ['class' => 'text-left']
 		],
 		[ 'attribute' => 'building_id',
 			//'value' => 'building0.building_name',
@@ -155,7 +161,6 @@ $this->title = '房屋管理';
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
             ],
-			'hAlign' => 'center',
 			'width' => '80px',
 		],
 
@@ -171,7 +176,6 @@ $this->title = '房屋管理';
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
             ],
-			'hAlign' => 'center',
 			'width' => '80px',
 		],
 
@@ -185,7 +189,6 @@ $this->title = '房屋管理';
 					'class' => 'c',
 				] );
 			},
-			'hAlign' => 'center',
 			'width' => '90px',
 		],
 
@@ -195,7 +198,6 @@ $this->title = '房屋管理';
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => 'px',
 		],
 
@@ -214,7 +216,6 @@ $this->title = '房屋管理';
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 		        
 			],
-			'hAlign' => 'center',
 			'width' => '70px'
 		],
 		
@@ -252,9 +253,7 @@ $this->title = '房屋管理';
 	     	}else{
 	     	    return $model->finish;
 			}
-	     },
-		'width' => 'px',
-		'hAlign' => 'center'],
+	     },],
 		
         /*['attribute' => 'inherit',
 		'width' => 'px',
@@ -279,9 +278,7 @@ $this->title = '房屋管理';
 	     	}else{
 	     	    return $model->delivery;
 			}
-	     },
-		'width' => 'px',
-		'hAlign' => 'center'],
+	     },],
 		
 		['attribute' => 'decoration',
 		 'value' => function($model){
@@ -302,8 +299,7 @@ $this->title = '房屋管理';
                      ]
                 ],
           ],
-            'mergeHeader' => true,
-		'hAlign' => 'center'],
+            'mergeHeader' => true],
 				
 		['attribute' => 'orientation',
 		 'class' => 'kartik\grid\EditableColumn',
@@ -311,8 +307,8 @@ $this->title = '房屋管理';
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
 				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
           ],
-            'mergeHeader' => true,
-		'hAlign' => 'center'],
+            'mergeHeader' => true
+        ],
 		
 		['attribute' => 'property',
 		 'class' => 'kartik\grid\EditableColumn',
@@ -320,8 +316,7 @@ $this->title = '房屋管理';
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
 				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
           ],
-		'width' => 'px',
-		'hAlign' => 'center'],
+          ],
 		
 		[ 'class' => 'kartik\grid\ActionColumn',
 			'template' => Helper::filterActionColumn('{update} {view}'),

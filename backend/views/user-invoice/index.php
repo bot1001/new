@@ -103,6 +103,12 @@ $this->registerJs( $script );
 $this->title = '缴费管理';
 //$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="user-invoice-index">
 
 	<?php
@@ -135,7 +141,6 @@ $this->title = '缴费管理';
 		[ 'attribute' => 'invoice_id',
 			'pageSummary' => Html::a('<span class="glyphicon glyphicon-credit-card" style="font-size: 25px; color: green"></span>', "javascript:void(0);", ['class' => 'gridviewpay', 'id' => 'jf', 'title' => '立即缴费']),
 			'width' => '70px',
-			'hAlign' => 'center'
 		],
 		[ 'attribute' => 'community_id',
 		  'value' => 'community.community_name',
@@ -146,7 +151,7 @@ $this->title = '缴费管理';
 	      'filterWidgetOptions' => [
 	      	'pluginOptions' => [ 'allowClear' => true ],
 	      ],
-	      'hAlign' => 'center',
+            'contentOptions' => ['class' => 'text-left'],
 	      'width' => '150px'
 		],
 
@@ -161,7 +166,6 @@ $this->title = '缴费管理';
 			'label' => '楼宇',
 			//'group' => true,
 			//'hidden' => true,
-			'hAlign' => 'center',
 			'width' => '70px'
 		],
 
@@ -174,20 +178,18 @@ $this->title = '缴费管理';
                     'pluginOptions' => ['allowClear' => true],
             ],
             'label' => '单元',
-			'hAlign' => 'center',
 			'width' => '70px'
 		],
 
         [ 'attribute' => 'room.room_name',
 			//'value' => 'room.room_number',
 			// 'group' => true,
-			'hAlign' => 'center',
 			'width' => '70px'
 		],
 
         ['attribute' => 'name',
             'value' => 'room.owners_name',
-            'hAlign' => 'center'],
+            'contentOptions' => ['class' => 'text-left'],],
 
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
@@ -199,7 +201,6 @@ $this->title = '缴费管理';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'hAlign' => 'center',
 			'width' => '90px'
 		],
 		[ 'attribute' => 'month',
@@ -212,7 +213,6 @@ $this->title = '缴费管理';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'hAlign' => 'center',
 //			'width' => '100px'
 		],
 		//'year',
@@ -230,8 +230,7 @@ $this->title = '缴费管理';
 					'pluginOptions' => [ 'min' => 0, 'max' => 50 ]
 				]
 			],
-			'hAlign' => 'left',
-			'width' => ''
+            'contentOptions' => ['class' => 'text-left'],
 		],
 		[ 'attribute' => 'invoice_amount',
 //			'refreshGrid' => 'true',
@@ -244,14 +243,12 @@ $this->title = '缴费管理';
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => '60px'
 		],
 		/*['attribute' => 'create_time',
 			 'mergeHeader' => true,
 			 //'group' => true,
 			'format' => ['date','php:Y-m-d H:m:s'],
-			 'hAlign' => 'center',
 			'width' => '150px'
 			],*/
 		[ 'attribute' => 'order_id',
@@ -265,7 +262,6 @@ $this->title = '缴费管理';
 				] );
 			},
 			//'group' => true,
-			'hAlign' => 'center',
 			'width' => '115px'
 		],
 		['attribute' => 'invoice_notes',
@@ -281,6 +277,7 @@ $this->title = '缴费管理';
             'formOptions'=>['action' => ['/user-invoice/invoice']], // point to the new action        
             'inputType'=>\kartik\editable\Editable::INPUT_TEXT,
 		    ],
+            'contentOptions' => ['class' => 'text-left'],
 		],
 		
 		[ 'attribute' => 'payment_time',
@@ -322,7 +319,6 @@ $this->title = '缴费管理';
                 ],
 		    ],
             'width' => '180px',
-			'hAlign' => 'center',		
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
@@ -345,7 +341,6 @@ $this->title = '缴费管理';
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => [ '0' => '欠费', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '8' => '优惠' ],
 			],
-			'hAlign' => 'center',
 			'width' => ''
 		],
 
@@ -355,7 +350,6 @@ $this->title = '缴费管理';
                 function($model){
                     return  date('Y-m-d H:i:s',$model->update_time);   //主要通过此种方式实现
                 },
-			 'hAlign' => 'center',
 			'width' => '170px'
 			],*/
 

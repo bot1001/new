@@ -11,6 +11,11 @@ use mdm\admin\components\Helper;
 $this->title = '服务回复';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="ticket-reply-index">
 
     <?php
@@ -24,12 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
 	        	$url = Yii::$app->urlManager->createUrl(['/ticket/index', 'ticket_id' => $model->ticket_id]);
 	        	return Html::a($model->ticket_id, $url);
 	        },
-			 'hAlign' => 'center'],
+                'contentOptions' => ['class' => 'text-left'],],
 		
             ['attribute' => 'name',
 			'value' => 'd.real_name',
-			'label' => '回复人',
-			'hAlign' => 'center'],            ['attribute' => 'content',
+                'contentOptions' => ['class' => 'text-left'],
+			'label' => '回复人',],
+
+        ['attribute' => 'content',
+            'contentOptions' => ['class' => 'text-left'],
 			'value' => 'E'],
 		
             ['attribute' => 'is_attachment',
@@ -43,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	         'filterWidgetOptions' => [
 	         	'pluginOptions' => [ 'allowClear' => true ],
 	         ],
-			'hAlign' => 'center'],
+                ],
 		
             ['attribute' => 'reply_time',
 	        		'value' => function($model){
@@ -77,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'style'=>'width:200px',
                 ],
 		    ],
-			'hAlign' => 'center'],
+                ],
 		
             ['attribute' => 'reply_status',
 			'value' => function($model){
@@ -96,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		         'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 		         'data' => [1 => '正常', 2 => '删除'],
 		     ],
-			 'hAlign' => 'center'],
+                ],
 		    	    
             ['class' => 'kartik\grid\ActionColumn',
                 'template' => Helper::filterActionColumn('{update}{view}{delete}'),

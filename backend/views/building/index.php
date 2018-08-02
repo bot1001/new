@@ -45,6 +45,11 @@ Modal::end();
 $this->title = '楼宇列表';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="community-building-index" style="max-width: 1000px">
 
     <?php
@@ -69,7 +74,8 @@ $this->title = '楼宇列表';
 		     'filterWidgetOptions' => [
 		     	'pluginOptions' => [ 'allowClear' => true ],
 		     ],
-			'width' => '180px',],
+			'width' => '180px',
+            'contentOptions' => ['class' => 'text-left']],
 		
             ['attribute' => 'community_id',
 			 'value' => 'c.community_name',
@@ -80,17 +86,14 @@ $this->title = '楼宇列表';
 				'pluginOptions' => [ 'allowClear' => true ],
 			], 
 			 'label' => '小区',
-			'hAlign' => 'center',
 			'width' => '180px',],
 		
 		   ['attribute' => 'building_name',
-			'hAlign' => 'center',
 			'width' => 'px',],
 		
             ['attribute' => 'creater',
 			 'mergeHeader' => true,
 			 'value' => 'creater0.name',
-			'hAlign' => 'center',
 			'width' => 'px',],
 		
 		    ['attribute' => 'create_time',
@@ -99,7 +102,6 @@ $this->title = '楼宇列表';
 			 {
 	         	return date('Y-m-d H:i:s', $model->create_time);
 	         },
-			'hAlign' => 'center',
 			'width' => 'px',],
 		
             /*['attribute' => 'building_parent',

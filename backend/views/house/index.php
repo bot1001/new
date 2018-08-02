@@ -45,6 +45,13 @@ Modal::end();
 $this->title = '房屋信息';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="house-info-index">
 
     <?php
@@ -70,8 +77,7 @@ $this->title = '房屋信息';
 		         'pluginOptions' => ['allowClear' => true],
 	         ],
 			 'label' => '小区',
-			'hAlign' => 'center',
-			'width' => 'px'],
+                'contentOptions' => ['class' => 'text-left']],
 		
 		    ['attribute'=> 'building',
 			 'filterType' => GridView::FILTER_SELECT2,
@@ -81,7 +87,6 @@ $this->title = '房屋信息';
 		         'pluginOptions' => ['allowClear' => true],
 	         ],
 			 'label' => '楼宇',
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		    ['attribute'=> 'number',
@@ -89,12 +94,10 @@ $this->title = '房屋信息';
 	        	return $model->number.'单元';
 	        },
 			 'label' => '单元',
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		   ['attribute'=> 'room_name',
 			 'label' => '房号',
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['attribute'=> 'name',
@@ -103,8 +106,7 @@ $this->title = '房屋信息';
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
-			'width' => 'px'],
+                'contentOptions' => ['class' => 'text-left']],
 		
             ['attribute'=> 'phone',
 			 'class' => 'kartik\grid\EditableColumn',
@@ -112,7 +114,6 @@ $this->title = '房屋信息';
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => '150px'],
 		
             ['attribute'=> 'IDcard',
@@ -121,7 +122,6 @@ $this->title = '房屋信息';
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => '200px'],
 		
             ['attribute'=> 'status',
@@ -141,7 +141,6 @@ $this->title = '房屋信息';
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 		        'data' => ['停用', '在用'],
 			],
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['attribute'=> 'address',
@@ -172,7 +171,6 @@ $this->title = '房屋信息';
                'contentOptions' => function($model){
 	               return ($model->politics == 0) ? ['class' => 'bg-success' ]:[];
                },
-               'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['attribute'=> 'property',
@@ -181,7 +179,6 @@ $this->title = '房屋信息';
 				'formOptions' => [ 'action' => [ '/house/house' ] ],
 				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
             ['class' => 'kartik\grid\ActionColumn',

@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use app\models\CommunityBasic;
-use app\models\CommunityBuilding;
 
 Modal::begin( [
 	'id' => 'update-modal',
@@ -47,6 +45,12 @@ Modal::end();
 $this->title = '费项列表';
 //$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="cost-relation-index">
 
 	<?php
@@ -66,45 +70,41 @@ $this->title = '费项列表';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'hAlign' => 'center',
+			'contentOptions' => ['class' => 'text-left'],
 			'width' => '150px'
 		],
 
 		[ 'attribute' => 'building_id',
 			'value' => 'b.building_name',
-			'hAlign' => 'center',
 			'width' => '50px'
 		],
 
 		[ 'attribute' => 'number',
 			'value' => 'r.room_number',
 		 //'mergeHeader' => true,
-			'hAlign' => 'center',
 			'width' => '80px'
 		],
 
 		[ 'attribute' => 'room_name',
 		  'label' => '房号',
 		  'value' => 'r.room_name',
-		  'hAlign' => 'center',
 		  'width' => 'px'
 		],
 
 		[ 'attribute' => 'name',
             'value' => 'cos.cost_name',
             'label' => '名称',
+            'contentOptions' => ['class' => 'text-left'],
             'width' => '100px'
 		],
 
 		[ 'attribute' => 'price',
 		 'value' => 'cos.price',
 			//'mergeHeader' => true,
-			'hAlign' => 'center',
 			'width' => 'px'
 		],
 
 		[ 'attribute' => 'from',
-			'hAlign' => 'center',
 			'width' => 'px'
 		],
 		
@@ -129,7 +129,6 @@ $this->title = '费项列表';
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 				'data' => ['禁用', '启用'],
 		],
-		'hAlign' => 'center',
 		],
 
 		[ 'attribute' => 'property', ],

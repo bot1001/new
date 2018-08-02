@@ -11,6 +11,12 @@ use app\models\CommunityBasic;
 
 $this->title = '消息';
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="information-index">
 
     <?php 
@@ -37,16 +43,16 @@ $this->title = '消息';
 			 'filterWidgetOptions' => [
 		         'pluginOptions' =>  ['allowClear' => true],
 	         ],
+                'contentOptions' => ['class' => 'text-left'],
 			'width' => '200px'],
 		
             ['attribute' => 'detail',
-			'hAlign' => ''],
+                'contentOptions' => ['class' => 'text-left'],],
 		
             ['attribute' => 'times',
 			 'value' => function($model){
 		         return $model->times.'次';
-	         },
-			'hAlign' => 'center'],
+	         },],
 		
             ['attribute' => 'reading',
 			 'value' => function($model){
@@ -58,30 +64,25 @@ $this->title = '消息';
 			 'filterInputOptions' => ['placeholder' => ''],
 			 'filterWidgetOptions' => [
 	         	'pluginOptions' => ['allowClear' => true],
-	         ],
-			'hAlign' => 'center'],
+	         ],],
 		
             ['attribute' => 'target',
-			'hAlign' => ''],
+                'contentOptions' => ['class' => 'text-left'],],
 		
             ['attribute' => 'ticket_number',
 			 'format' => 'raw',
 			 'value' => function($model){
 	         	$url = Yii::$app->urlManager->createUrl( [ '/ticket/index', 'ticket_status' => '1', 'community' => $model->community ] );
 	         	return Html::a($model->ticket_number, $url);
-	         },
-			'hAlign' => 'center'],
+	         },],
 		
             ['attribute' => 'remind_time',
 			 'value' => function($model){
 	         	return date('Y-m-d H:i:s', $model->remind_time);
 	         },
-			 'mergeHeader' => true,
-			'hAlign' => 'center'],
+			 'mergeHeader' => true,],
 		
-            ['attribute' => 'property',
-			'hAlign' => ''],
-		
+            ['attribute' => 'property'],
 
             /*['class' => 'kartik\grid\ActionColumn',
 			'header' => '操作'],*/

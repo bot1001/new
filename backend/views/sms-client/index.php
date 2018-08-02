@@ -10,6 +10,13 @@ use kartik\grid\GridView;
 $this->title = '短信列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="sms-client-index">
 
     <?php
@@ -18,27 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['attribute'=> 'name',
             'value' => 'user.name',
-            'label' => '商户',
-            'hAlign' => 'center'],
+            'label' => '商户',],
 
-        ['attribute'=> 'type',
-            'hAlign' => 'center'],
+        ['attribute'=> 'type',],
 
-        ['attribute'=> 'community',
-            'hAlign' => 'center'],
+        ['attribute'=> 'community'],
 
-        ['attribute'=> 'count',
-            'hAlign' => 'center'],
+        ['attribute'=> 'count',],
 
-        ['attribute'=> 'surplus',
-            'hAlign' => 'center'],
+        ['attribute'=> 'surplus',],
 
-        ['attribute'=> 'status',
-            'hAlign' => 'center'],
+        ['attribute'=> 'status',],
 
         ['attribute'=> 'property',
-            'hAlign' => 'center'],
-
+            'contentOptions' => ['class' => 'text-left'],
+        ],
 
         ['class' => 'kartik\grid\ActionColumn'],
     ];

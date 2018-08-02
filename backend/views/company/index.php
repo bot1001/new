@@ -33,6 +33,13 @@ Modal::end();
 $this->title = '公司';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="company-index">
 
     <?php 
@@ -40,14 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	$gridview = [
             ['class' => 'kartik\grid\SerialColumn',
 			'header' => '序号'],
-            'name',
+        ['attribute' => 'name',
+            'contentOptions' => ['class' => 'text-left']],
+
             ['attribute'=> 'creator',
 			'value' => 'cr.name'],
             ['attribute'=> 'create_time',
 			'value' => function($model){
 	        	return date('Y-m-d H:i:s', $model->create_time);
 	        },
-			'hAlign' => 'center'],
+			],
             'property',
 		/*['class' => 'kartik\grid\ActionColumn',
 		 'template' => Helper::filterActionColumn('{view}{update}{delete}'),

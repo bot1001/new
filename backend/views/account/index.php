@@ -44,6 +44,13 @@ Modal::end();
 $this->title = '用户列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="user-account-index"style="max-width: 1000px">
    
     <?php
@@ -53,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		['attribute' => 'number',
 		'value' => 'work.work_number',
+            'contentOptions' => ['class' => 'text-left'],
 		'label' => '工号'],
 		
 		['attribute' => 'user_name',
@@ -73,7 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
             ],
-            'hAlign' => 'center',
             ],
 		
 		['attribute' => 'mobile_phone',
@@ -82,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	     	$url = Yii::$app->urlManager->createUrl(['/workr/create', 'user_id' => $model->user_id]);
 	     	return Html::a($model->mobile_phone, $url);
 	     },
-		'hAlign' => 'center'], 
+        ],
 		
 		['attribute' => 'status',
 		 'filterType' => GridView::FILTER_SELECT2,
@@ -101,7 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		 	'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 		        'data' => [1 => '正常', 2 => '删除', 3 => '锁定'],
 		 ],
-		 'hAlign' => 'center'
 		],
 		
 		['attribute' => 'more',
@@ -111,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    	$url = Yii::$app->urlManager->createUrl( [ '/workr/index', 'id' => $model->account_id] );
 	    	return Html::a('more', $url, ['title' => '查看关联小区']);
 	    },
-		'hAlign' => 'center'],
+        ],
 		
 		['class' => 'kartik\grid\ActionColumn',
 		 'template' => '{view}{update}',

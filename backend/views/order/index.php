@@ -42,6 +42,11 @@ Modal::end();
 $this->title = '订单管理';
 //$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="order-basic-index">
 
 	<?php 
@@ -72,9 +77,8 @@ $this->title = '订单管理';
 			'header' => '序<br />号'
 		],
 
-		//'id',
-		//'account_id',
-		[ 'attribute' => 'order0.address'],
+		[ 'attribute' => 'order0.address',
+            'contentOptions' => ['class' => 'text-left'],],
 		[ 'attribute' => 'order0.name',
 			'format' => 'raw',
 			'value' => function ( $model ) {

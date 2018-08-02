@@ -60,15 +60,20 @@ Modal::end();
 $this->title = '投诉/建议';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="ticket-basic-index">
 
     <?php
 	$gridview = [
            // ['class' => 'kartik\grid\SerialColumn'],
 
-            ['attribute' => 'ticket_id',
-			'width' => 'px',
-			'hAlign' => 'center'],
+            ['attribute' => 'ticket_number',
+			'width' => 'px',],
 		    
             ['attribute' => 'community_id',
 			 'value' => 'c.community_name',
@@ -78,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
+                'contentOptions' => ['class' => 'text-left'],
 			'width' => '10%'],
 		    
             ['attribute' => 'building',
@@ -89,14 +95,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			 'label' => '楼宇',
-			'width' => '5%',
-			'hAlign' => 'center'],
+			'width' => '5%',],
 		
 		   ['attribute' => 'name',
 			'value' => 'r.room_name',
 			'label' => '房号',
-			'width' => 'px',
-			'hAlign' => 'center'],
+			'width' => 'px',],
 		
 		   ['attribute' => 'contact_person',
 			'class' => 'kartik\grid\EditableColumn',
@@ -106,8 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
-			],
-			'hAlign' => 'center'],
+			],],
 		    
            ['attribute' => 'contact_phone',
 			'class' => 'kartik\grid\EditableColumn',
@@ -118,8 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'formOptions' => [ 'action' => [ '/ticket/ticket' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'width' => 'px',
-			'hAlign' => 'center'],
+			'width' => 'px',],
 		   		    
             ['attribute' => 'tickets_taxonomy',
 			 'value' => function($model){
@@ -132,8 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'width' => 'px',
-			'hAlign' => 'center'],
+			'width' => 'px',],
 		    
             ['attribute' => 'explain1',
 			 'class' => 'kartik\grid\EditableColumn',
@@ -144,6 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'formOptions' => [ 'action' => [ '/ticket/ticket' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXTAREA,
 			],
+                'contentOptions' => ['class' => 'text-left'],
 			 'value' => 'E',
 			'width' => '5%',
 			],
@@ -197,8 +199,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'formOptions' => [ 'action' => [ '/ticket/ticket	' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 		        'data' => [1=> '待接单',2 => '已接单',3 => '已完成',6 => '处理中', 4 => '返修', 5 => '关闭'],
-			],
-			'hAlign' => 'center'],
+			],],
 		    
             /*['attribute' => 'remind',
 			'width' => 'px',
@@ -225,12 +226,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	        	}
 	        	
 	        },
-		     'label' => '接单人',
-		     'hAlign' => 'center'],
+		     'label' => '接单人',],
 		    
 		    ['attribute' => 'replay',
 		     'format' => 'raw',
-		     'hAlign' => 'center',
 		     'label' => '结果',
 		     'value' => function($model){
 		         $len = strlen($model->account_id);

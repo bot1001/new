@@ -15,6 +15,12 @@ $this->title = '小区';
 //引入模态文件
 echo $this->render('..\..\..\common\modal\modal.php'); ?>
 
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="community-basic-index">
 
     <?php
@@ -43,8 +49,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                 'readonly' => function ( $model, $key, $index, $widget ) {
                     return \app\models\Limit::limit($url='/community-basic/community') == 0 ; // 判断活动列是否可编辑
                 },
-			'width' => '20%',
-			'hAlign' => 'center'],
+			'width' => '20%'],
 		
 		
 		   ['attribute' =>'community_name',
@@ -56,8 +61,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                 'header' => '详情',
                 'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
                 'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-            ],
-			'hAlign' => 'center'],
+            ],],
 		
             ['attribute' =>'phone',
                 'class' => 'kartik\grid\EditableColumn',
@@ -65,8 +69,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                     'header' => '详情',
                     'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
                     'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-                ],
-			'hAlign' => 'center'],
+                ],],
 		
             ['attribute' =>'province_id',
 			 'value' => 'province.area_name',
@@ -76,6 +79,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
+                'contentOptions' => ['class' => 'text-left']
             ],
 		
 		   ['attribute' =>'city_id',
@@ -86,6 +90,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
              'filterWidgetOptions' => [
                  'pluginOptions' => ['allowClear' => true],
              ],
+               'contentOptions' => ['class' => 'text-left']
            ],
 		
 		   ['attribute' =>'area_id',
@@ -96,6 +101,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
              'filterWidgetOptions' => [
                  'pluginOptions' => ['allowClear' => true],
              ],
+               'contentOptions' => ['class' => 'text-left']
            ],
 		
             ['attribute' =>'community_address',
@@ -108,7 +114,7 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                  'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
                  'inputType' => \kartik\editable\Editable::INPUT_TEXT,
              ],
-			'hAlign' => 'center'],
+                'contentOptions' => ['class' => 'text-left']],
 
            ['attribute' =>'sms',
             'value' => function($model){
@@ -134,12 +140,10 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                //单元格背景色变换
                'contentOptions' => function ( $model ) {
                    return ( $model->sms == 0 ) ? [ 'class' => 'bg-info' ] : [];
-               },
-			'hAlign' => 'center'],
+               },],
 		
            ['attribute' =>'creater',
-			'value' => 'sys.name',
-			'hAlign' => 'center'],
+			'value' => 'sys.name'],
 		
             /* ['attribute' =>'community_latitude',
 			'width' => 'px',

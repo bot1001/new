@@ -57,6 +57,12 @@ Modal::end();
 $this->title = '公告栏';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="community-news-index">
 
     <?php
@@ -73,14 +79,15 @@ $this->title = '公告栏';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			//'hAlign' => 'center',
+                'contentOptions' => ['class' => 'text-left'],
 			'width' => '150px'],
 		
             ['attribute'=> 'title',
-			'width' => 'px'],
+                'contentOptions' => ['class' => 'text-left'],
+                ],
 		
             ['attribute'=> 'excerpt',
-			'width' => 'px'],
+                'contentOptions' => ['class' => 'text-left'],],
 		
             ['attribute'=> 'content',
 			 'format' => 'raw',
@@ -91,26 +98,21 @@ $this->title = '公告栏';
 	        		'data-target' => '#view-modal',
 	        		'class' => 'v',
 	        	] );
-	        },
-			'hAlign' => 'center',
-			'width' => 'px'],
+	        },],
 		
             ['attribute'=> 'post_time',
 			 'value' => function($model){
 	           	return date('Y-m-d H:i:s', $model->post_time);
 	           },
-			'hAlign' => 'center',
 			'width' => '150px'],
 		
             ['attribute'=> 'update_time',
 	         'value' => function($model){
 	           	return date('Y-m-d H:i:s', $model->update_time);
 	           },
-			'hAlign' => 'center',
 			'width' => '150px'],
 		
             /*['attribute'=> 'view_total',
-			'hAlign' => 'center',
 			'width' => 'px'],*/
 		
             ['attribute'=> 'stick_top',
@@ -124,7 +126,6 @@ $this->title = '公告栏';
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 				'data' => ['不置顶', '置顶'],
 			],
-			'hAlign' => 'center',
 			'width' => '30px'],
 		
             ['attribute'=> 'status',
@@ -138,7 +139,6 @@ $this->title = '公告栏';
 				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
 				'data' => [ '1'=> '正常', '2' => '预发布', '3' => '过期'],
 			],
-			'hAlign' => 'center',
 			'width' => '20px'],
 
             ['class' => 'kartik\grid\ActionColumn',

@@ -42,6 +42,13 @@ Modal::end();
 $this->title = '费项管理';
 //$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
+
 <div class="cost-name-index">
 
     <?php
@@ -64,7 +71,8 @@ $this->title = '费项管理';
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
-			]
+			],
+            'contentOptions' => ['class' => 'text-left']
 		],
 		
 		['attribute' => 'level',
@@ -80,8 +88,7 @@ $this->title = '费项管理';
 		 ],
 		 'contentOptions' => function ( $model ) {
 		 	return ( $model->level == 0 ) ? [ 'class' => 'bg-info' ] : [];
-		 },
-		 'hAlign' => 'center' ],
+		 }, ],
 		
 		/*[ 'attribute' => 'parent',
 			'value' => function ( $model ) {
@@ -94,7 +101,6 @@ $this->title = '费项管理';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'hAlign' => 'center',
 		],*/
 
 		[ 'attribute' => 'inv',
@@ -110,11 +116,9 @@ $this->title = '费项管理';
 		    'contentOptions' => function ( $model ) {
 				return ( $model->inv == 0 ) ? [ 'class' => 'bg-warning' ] : [];
 			},
-			'hAlign' => 'center'
 			],
 		
-		[ 'attribute' => 'price',
-		'hAlign' => 'center'],
+		[ 'attribute' => 'price',],
 		
 		[ 'attribute' => 'sale',
 		 'value' => function($model){
@@ -126,8 +130,7 @@ $this->title = '费项管理';
 		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
 		 'filterWidgetOptions' => [
 		 	'pluginOptions' => [ 'allowClear' => true ],
-		 ],
-		'hAlign' => 'center'],
+		 ],],
 		
 		[ 'attribute' => 'formula',
 		 'value' => function($model){
@@ -139,24 +142,19 @@ $this->title = '费项管理';
 		 'filterInputOptions' => [ 'placeholder' => '请选择' ],
 		 'filterWidgetOptions' => [
 		 	'pluginOptions' => [ 'allowClear' => true ],
-		 ],
-		'hAlign' => 'center'],
+		 ],'contentOptions' => ['class' => 'text-right']],
 		
 		[ 'attribute' => 'create_time',
 		 'mergeHeader' => true,
-		 'width' => '180px',
-		'hAlign' => 'center'],
+		 'width' => '180px',],
 		
 		[ 'attribute' => 'update_time',
 		 'mergeHeader' => true,
-		 'width' => '180px',
-		 'hAlign' => 'center'],
+		 'width' => '180px',],
 		
 		[ 'attribute' => 'builder',
-		 'value' => 'sys.name',
-		'hAlign' => 'center'],
-		[ 'attribute' => 'property',
-		'hAlign' => 'center'],
+		 'value' => 'sys.name'],
+		[ 'attribute' => 'property'],
 
 		[ 'class' => 'kartik\grid\ActionColumn',
 			'template' => '{update}',

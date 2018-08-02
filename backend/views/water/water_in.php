@@ -14,6 +14,12 @@ $this->title = '费表录入';
 $this->params['breadcrumbs'][] = ['label' => '读数一览表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="water-meter-index">
 
    <?php // $this->render('_search', ['model' => $searchModel]); ?>
@@ -45,12 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			'header' => '序<br />号'
 		],
 
-		//'id',
-		//'realestate_id',
-
 		[ 'attribute' => 'community',
+            'contentOptions' => ['class' => 'text-left'],
 		 'label' => '小区',
-		  'hAlign' => 'center',
 		  'value' => 'c.community_name',
 		  'filterType' => GridView::FILTER_SELECT2,
 		  'filter' => CommunityBasic::find()->select( [ 'community_name' ] )->orderBy( 'community_name' )->indexBy( 'community_id' )->column(),
@@ -63,27 +66,23 @@ $this->params['breadcrumbs'][] = $this->title;
 		  'value' => 'b.building_name',
 		  'label' => '楼宇',
 		  'width' => '80px',
-		  'hAlign' => 'center',
 		],
 		//['attribute' => 'r.room_number' ],
 		[ 'attribute' => 'name',
 		  'value' => 'r.room_name',
 		  'width' => '100px',
-		  'hAlign' => 'center',
 		],
 		[ 'attribute' => 'year',
 			'value' => function ( $model ) {
 				return $model->year . '年';
 			},
 			'width' => 'px',
-			'hAlign' => 'center',
-		], 
+		],
 		[ 'attribute' => 'month',
 			'value' => function ( $model ) {
 				return $model->month . '月';
 			},
 			'width' => 'px',
-			'hAlign' => 'center',
 		],
 		[ 'attribute' => 'readout',
 		  'class' => 'kartik\grid\EditableColumn',
@@ -91,14 +90,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		      'formOptions' => [ 'action' => [ '/water/water' ] ],
 		      'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 		  ],
-		  'hAlign' => 'right'
+            'contentOptions' => ['class' => 'text-right'],
 		],
 		
 		[ 'attribute' => 'property',
 		  'mergeHeader' => true,
 		  'format' => ['date','php:Y-m-d H:i:s'],//'format' =>['date','php:Y-m-d H:i:s'],
-		  'hAlign' => 'center',
-		 'width' => '180px'
+		 'width' => '180px',
+            'contentOptions' => ['class' => 'text-left'],
 		],
 		[ 'class' => 'kartik\grid\CheckboxColumn'],
 	];

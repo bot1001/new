@@ -13,6 +13,12 @@ use app\ models\ CommunityRealestate;
 $this->title = '后台用户列表';
 $this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="sys-user-index">
 
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,6 +36,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		],*/
 
 		[ 'attribute' => 'company',
+            'contentOptions' => ['class' => 'text-left'],
 		  'width' => '100px'
 		],
 
@@ -60,11 +67,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => CommunityBasic::find()->select( [ 'community_name', 'community_id' ] )->orderBy( 'community_name' )->indexBy( 'community_id' )->column(),
 			],
+            'contentOptions' => ['class' => 'text-left'],
 			'width' => '200px'
 		],
 
-
 		[ 'attribute' => 'name',
+            'contentOptions' => ['class' => 'text-left'],
 			'width' => '200px'
 		],
 
@@ -86,7 +94,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => [ 1 => '正常', 0 => '禁用', 2 => '锁定' ],
 			],
-			'hAlign' => 'center',
 			'width' => '60px'
 		],
 
@@ -111,26 +118,21 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
 				'data' => SysRole::find()->select( [ 'name', 'id' ] )->where( [ 'or not like', 'name', [ 'admin' ] ] )->orderBy( 'name' )->indexBy( 'id' )->column(),
 			],
-			'hAlign' => 'center',
 			'width' => '120px'
 		],
 
 
 
 		/*['attribute' => 'create_time',
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		['attribute' => 'update_time',
-			'hAlign' => 'center',
 			'width' => 'px'],
 		
 		['attribute' => 'update_id',
-			'hAlign' => 'center',
 			'width' => 'px'],*/
 
 		/*['attribute' => 'new_pd',
-			'hAlign' => 'center',
 			'width' => 'px'],*/
 
 		[ 'attribute' => 'phone',
@@ -140,7 +142,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
-			'hAlign' => 'center',
 			'width' => 'px'
 		],
 
@@ -152,12 +153,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 					return $model->comment;
 				}
 			},
+            'contentOptions' => ['class' => 'text-left'],
 			'width' => '200px'
 		],
-		//'password',
-		//'salt',
-		//'create_id',
-
 
 		[ 'class' => 'kartik\grid\ActionColumn',
 			'template' => '{update}{view}',

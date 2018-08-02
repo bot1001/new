@@ -12,6 +12,12 @@ use yii\widgets\Pjax;
 $this->title = '用户管理';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    th, td{
+        text-align: center;
+    }
+</style>
 <div class="user-account-index">
 
     <?php Pjax::begin() ?>
@@ -23,39 +29,34 @@ $this->title = '用户管理';
 			'header' =>'序<br />号'],
 
 	        ['attribute' => 'community_name',
-			 'hAlign' => 'center',
 			 'filterType'=>GridView::FILTER_SELECT2,
 			 'filter' => $comm,
 			 'filterInputOptions'=>['placeholder'=>'请选择'],
 			 'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
              ],
+                'contentOptions' => ['class' => 'text-left'],
 			 // 'hidden'=>true,
 			'label' => '小区',
 			 //'group' =>true,
 			'width' => '150px'],
 	    	['attribute' => 'building_name',
-	    	 'hAlign' => 'center',
 			 'width'=>'80px',
 	    	 'label' => '楼宇'],
 	    	['attribute' => 'room_number',
-	    	 'hAlign' => 'center',
 			 'width'=>'80px',
 	    	 'label' => '单元'],
 	    	['attribute' => 'room_name',
-	    	 'hAlign' => 'center',
 			 'width'=>'80px',
 	    	 'label' => '房号'],
 	    	['attribute' => 'real_name',
-	    	 'hAlign' => 'center',
+                'contentOptions' => ['class' => 'text-left'],
 	    	 'label' => '姓名'],
 	    	 
 	    	['attribute' => 'mobile_phone',
-	    	 'hAlign' => 'center',
 	    	 'label' => '手机号码'],
 	    	['attribute' => 'reg_time',
 	    	 'format' =>['date','php:Y-m-d H:i:s'],
-	    	 'hAlign' => 'center',
 			 'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
              'filterWidgetOptions'=>[
                  'pluginOptions'=>[
@@ -92,14 +93,12 @@ $this->title = '用户管理';
 			 'filterWidgetOptions'=>[
                              'pluginOptions'=>['allowClear'=>true],
 		                 ],
-		   'hAlign' => 'center',
 		   /* 'value' => function($model) {
 			$role = [0=>'业主',1 => '物业'];
                       return $dataProvider->account_role;
                       },*/
 		  	'label' => '角色'],
 		    ['attribute' => 'name',
-		   'hAlign' => 'center',
 		   'filterType'=>GridView::FILTER_SELECT2,
 		   'filter' => Status::find()
 		            -> select(['name'])
