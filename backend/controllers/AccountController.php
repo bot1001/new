@@ -8,7 +8,6 @@ use app\models\UserAccountSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\WorkR;
 use app\models\UserData;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
@@ -177,12 +176,16 @@ class AccountController extends Controller
 		$userdata = $this->findData($account_id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+            $account = $_POST['UserAccount'];
+            $model->password = md5($account['password']);
+
+            $model->save(); //保存数据
+
             $user = $_POST['UserData'];
             $gender = $user['gender'];
             $u = $userdata::updateAll(['gender' => $gender], 'account_id = :aid', [':aid' => $account_id]);
 
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->request->referrer);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,

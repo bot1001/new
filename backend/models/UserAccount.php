@@ -52,6 +52,7 @@ class UserAccount extends \yii\db\ActiveRecord
 	public $fromdate;
 	public $todate;
 	public $k;
+	public $gender;
     /**
      * @inheritdoc
      */
@@ -61,6 +62,7 @@ class UserAccount extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'account_id' => '用户_ID',
             'user_name' => '名字',
+            'gender' => '性别',
             'password' => '密码',
             'mobile_phone' => '手机号码',
             'qq_openid' => 'Qq Openid',

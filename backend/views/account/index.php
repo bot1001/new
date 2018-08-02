@@ -5,7 +5,6 @@ use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
-
 Modal::begin( [
 	'id' => 'update-modal',
 	'header' => '<h4 class="modal-title">权限指配</h4>',
@@ -45,7 +44,7 @@ Modal::end();
 $this->title = '用户列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-account-index"style="max-width: 800px">
+<div class="user-account-index"style="max-width: 1000px">
    
     <?php
 	$gridColumn = [
@@ -63,7 +62,19 @@ $this->params['breadcrumbs'][] = $this->title;
 		 	'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 		 ],],
 
-        'data.gender',
+        ['attribute' => 'gender',
+            'value' => function($model){
+                $date = [1 => '男', 2 => '女'];
+                return $date[$model->gender];
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => ['1' => '男', '2' => '女'],
+            'filterInputOptions' => ['placeholder' => '请选择'],
+            'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+            ],
+            'hAlign' => 'center',
+            ],
 		
 		['attribute' => 'mobile_phone',
 		 'format' => 'raw',
@@ -98,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'format' => 'raw',
 		'value' => function($model){
 	    	$url = Yii::$app->urlManager->createUrl( [ '/workr/index', 'id' => $model->account_id] );
-	    	return Html::a('more', $url);
+	    	return Html::a('more', $url, ['title' => '查看关联小区']);
 	    },
 		'hAlign' => 'center'],
 		
@@ -120,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		'panel' => ['type' => 'info', 'heading' => '内部员工',
-				   'before' => Html::a( 'New', '#', [
+				   'before' => Html::a( '<span class="glyphicon glyphicon-plus"></span>', '#', [
 				'data-toggle' => 'modal',
 				'data-target' => '#update-modal', 
 		        'class' => 'btn btn-success new',

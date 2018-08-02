@@ -14,7 +14,7 @@ class UserAccountSearch extends UserAccount
 {
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['number']);
+		return array_merge(parent::attributes(),['number', 'gender']);
 	}
     /**
      * @inheritdoc
@@ -23,7 +23,7 @@ class UserAccountSearch extends UserAccount
     {
         return [
             [['user_id', 'account_role', 'new_message', 'status'], 'integer'],
-            [['account_id', 'number', 'user_name', 'password', 'mobile_phone', 'qq_openid', 'weixin_openid', 'weibo_openid'], 'safe'],
+            [['account_id', 'number', 'user_name', 'password', 'mobile_phone', 'qq_openid', 'weixin_openid', 'weibo_openid', 'gender'], 'safe'],
         ];
     }
 
@@ -46,6 +46,8 @@ class UserAccountSearch extends UserAccount
     public function search($params)
     {
         $query = UserAccount::find()->where(['user_account.account_role' =>'1']);
+        $query->joinWith('data');
+        $query->select('user_account.*, user_data.gender');
 
         // add conditions that should always apply here
 
@@ -72,6 +74,7 @@ class UserAccountSearch extends UserAccount
             'user_account.account_role' => $this->account_role,
             'new_message' => $this->new_message,
             'status' => $this->status,
+            'gender' => $this->gender
         ]);
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
@@ -88,6 +91,12 @@ class UserAccountSearch extends UserAccount
 				'asc' => ['work_number'=>SORT_ASC],
 				'desc' => ['work_number'=>SORT_DESC],
 			];
+
+		$dataProvider -> sort->attributes['gender'] =
+            [
+                'asc' => ['gender' => SORT_ASC],
+                'desc' => ['gender' => SORT_DESC]
+            ];
 
         return $dataProvider;
     }

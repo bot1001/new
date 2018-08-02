@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         border-radius:10px;
     }
     #sms01 .col-sm-3{
-        min-height: 300px;
-        max-width: 350px;
+        height: 300px;
+        width: 350px;
         border-radius: 10px;
         background: #ffffff;
         margin-left:5%
@@ -83,7 +83,7 @@ if($message){
                 'placeholder'=>'请选择楼宇',
                 'url'=>Url::to(['/costrelation/b2'])
             ]
-        ])->label('楼宇'); ?>
+        ])->label(false); ?>
 
         <?= $form->field($model, 'number')->widget(DepDrop::classname(), [
             'type' => DepDrop::TYPE_SELECT2,
@@ -94,7 +94,7 @@ if($message){
                 'placeholder'=>'请选择单元',
                 'url'=>Url::to(['/costrelation/number'])
             ]
-        ])->label('单元'); ?>
+        ])->label(false); ?>
 
         <?= $form->field($model, 'room')->widget(DepDrop::classname(), [
             'type' => DepDrop::TYPE_SELECT2,
@@ -106,16 +106,16 @@ if($message){
                 'url'=>Url::to(['/costrelation/re']),
                 'params'=>['building'], //另一个上级目录ID
             ]
-        ])->label('房号'); ?>
+        ])->label(false); ?>
 
-        <?= $form->field($model, 'phone')->input('number', ['id' => 'phone']) ?>
+        <?= $form->field($model, 'phone')->input('number', ['id' => 'phone', 'placeholder' => '请输入手机号码'])->label(false) ?>
 
         <div class="form-group" style="text-align: center">
             <span id="submit">
                 <input type="submit" disabled value="确定" class="btn info">
             </span>
 
-            <?= Html::a('预览', '#', ['class' => 'btn btn-success', 'onclick' => "phone()"]) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#', ['class' => 'btn btn-success', 'onclick' => "phone()"]) ?>
         </div>
         <br />
         <?php ActiveForm::end(); ?>
@@ -136,37 +136,43 @@ if($message){
 
 <script>
     function phone() {
-        $.ajax({
-            type: "GET",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/sms-client/message" ,//验证地址
-            data: $('#form').serialize(),
-            success: function (result) {
-                var result = eval(result);
-                if(result.end == 1)
-                {
-                    document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info">';
-                }
+        var room = document.getElementById('room');
+        var phone = document.getElementById('phone');
+        var r = room.value;
+        var p = phone.value;
 
-                if(result.end == 0)
-                {
+        if(r.length == 0 || p.length != 11){
+            alert("房屋或者手机号码，请重新选择！");
+        }else{
+            $.ajax({
+                type: "GET",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/sms-client/message" ,//验证地址
+                data: $('#form').serialize(),
+                success: function (result) {
+                    var result = eval(result);
+                    if(result.end == 1)
+                    {
+                        document.getElementById( 'submit' ).innerHTML = '<input type="submit" value="确定" class="btn info">';
+                    }else{
+                        document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';
+                    }
+                    document.getElementById( 'address' ).innerHTML = result.name;
+                    document.getElementById( 'now' ).innerHTML = result.now;
+                    document.getElementById( 'old' ).innerHTML = result.old;
+                    document.getElementById( 'amount' ).innerHTML = result.amount;
+
+                    if(result.phone.length == 0){ //判断号码是否为空，如果为空默认综合部行政电话
+                        result.phone = "0772-5314739";
+                    }
+                    document.getElementById( 'cellphone' ).innerHTML = result.phone;
+                },
+                error : function() {
                     document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';
+                    alert("选择有误，请重新选择！");
                 }
-                document.getElementById( 'address' ).innerHTML = result.name;
-                document.getElementById( 'now' ).innerHTML = result.now;
-                document.getElementById( 'old' ).innerHTML = result.old;
-                document.getElementById( 'amount' ).innerHTML = result.amount;
-
-                if(result.phone.length == 0){ //判断号码是否为空，如果为空默认综合部行政电话
-                    result.phone = "0772-5314739";
-                }
-                document.getElementById( 'cellphone' ).innerHTML = result.phone;
-            },
-            error : function() {
-                document.getElementById( 'submit' ).innerHTML = '<input type="submit" disabled value="确定" class="btn info">';
-                alert("选择有误，请重新选择！");
-            }
-        });
+            });
+        }
     }
 </script>
 

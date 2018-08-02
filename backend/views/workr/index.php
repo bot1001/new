@@ -37,29 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
 	$grid = [
-            ['class' => 'kartik\grid\CheckboxColumn','name' => 'id'],
+        ['class' => 'kartik\grid\CheckboxColumn','name' => 'id'],
 		
-            ['class' => 'kartik\grid\SerialColumn', 'header' => '序<br />号'],
+        ['class' => 'kartik\grid\SerialColumn', 'header' => '序<br />号'],
 
 		'account_id',
-            ['attribute' => 'community',
-			 'value' => 'c.community_name',
-			 'filterType' => GridView::FILTER_SELECT2,
-		     'filter' => $community,
-		     'filterInputOptions' => [ 'placeholder' => '请选择' ],
-		     'filterWidgetOptions' => [
-		     	'pluginOptions' => [ 'allowClear' => true ],
-		     ],
-			'label' => '关联小区'],
-		
+        ['attribute' => 'community',
+            'value' => 'c.community_name',
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => $community,
+            'filterInputOptions' => [ 'placeholder' => '请选择' ],
+            'filterWidgetOptions' => ['pluginOptions' => [ 'allowClear' => true ],
+            ], 'label' => '关联小区'
+        ],
+
 		    ['attribute'=> 'name',
 			'value' => 'account.user_name',
 			'label' => '用户名'],
-		
+
 		    ['attribute'=> 'phone',
 			'value' => 'account.mobile_phone',
 			'label' => '手机号码'],
-		
+
             ['attribute'=> 'account_status',
 			 'value' => function($model){
 	         	$date = [1 => '正常', 2 => '删除', 3 => '锁定'];
@@ -89,10 +88,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
 		'options' => [ 'id' => 'grid' ],
 		'panel' => ['type' => 'info', 'heading' => '关联小区',
-				   'before' => Html::a('New' ,['create'], ['class' => 'btn btn-primary'])],
+				   'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>' ,['create'], ['class' => 'btn btn-primary'])],
 		'toolbar' => [
 			[ 'content' =>
-				Html::a( '删除', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] )
+				Html::a( '<span class="glyphicon glyphicon-trash"></span>', "javascript:void(0);", [ 'class' => 'btn btn-danger gridviewdelete ' ] )
 			]
 		],
 		'hover' => true,
