@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use app\models\Status;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserSearch */
@@ -20,10 +19,14 @@ $this->title = '用户管理';
 </style>
 <div class="user-account-index">
 
-    <?php Pjax::begin() ?>
-
        <?php
-		
+    $get = $_GET;
+    if(isset($get['UserSearch'])){
+        $user = $get['UserSearch'];
+    }else{
+        $user = '';
+    }
+
 	     $gridColumn = [     
             ['class' => 'kartik\grid\SerialColumn',
 			'header' =>'序<br />号'],
@@ -121,10 +124,11 @@ $this->title = '用户管理';
 			'options' =>['id'=>'grid'],
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
-			'panel' => ['type' => 'info','heading' => '用户管理'],
+			'panel' => ['type' => 'info','heading' => '用户管理',
+                'before' => Html::a('统计', ['sum', 'user' => $user], ['class' => 'btn btn-success'])],
             'columns' => $gridColumn,
+			 'pjax' => true,
 			 'hover' => true
         ]); 	
 	?>
-   <?php Pjax::end() ?>
 </div>

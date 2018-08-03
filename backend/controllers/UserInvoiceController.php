@@ -7,7 +7,6 @@ use app\models\UserInvoice;
 use app\models\Up;
 use yii\data\ActiveDataProvider;
 use yii\web\UploadedFile;
-use app\models\OrderBasic;
 use app\models\CommunityBasic;
 use app\models\CommunityBuilding;
 use app\models\CommunityRealestate;
@@ -20,8 +19,6 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Reader\IReadFilter;
-use yii\data\Pagination;
 
 /**
  * UserInvoiceController implements the CRUD actions for UserInvoice model.
@@ -526,23 +523,11 @@ class UserInvoiceController extends Controller
                 ]
             ],
         ]);
-		
-        $count = $ds->count();// 计算总数
-		
-        $pagination = new Pagination(['totalCount' => $count]);// 创建分页对象
-        
-        // 使用分页对象来填充 limit 子句并取得文章数据
-        $data = $ds->offset($pagination->offset)
-                   ->limit($pagination->limit)
-                   ->all();
-		
-		return $this->render('summ',['data' => $data,
-									'pagination' => $pagination,
-								    'dataProvider' => $dataProvider,
+
+		return $this->render('summ',['dataProvider' => $dataProvider,
 								    'from' => $from,
 								    'to' => $to,
-								    'sum' => $sum,
-								    'count' => $count]);
+								    'sum' => $sum]);
 	}
 
 	//批量生成费项预览

@@ -16,7 +16,7 @@ class UserInvoiceSearch extends UserInvoice
 	//搜索键
 	public function attributes()
 	{
-		return array_merge(parent::attributes(),['room.room_name', 'number', 'name']);
+		return array_merge(parent::attributes(),['room', 'number', 'name']);
 	}
 	
     /**
@@ -26,7 +26,7 @@ class UserInvoiceSearch extends UserInvoice
     {
         return [
             [['invoice_id', 'community_id', 'realestate_id', 'invoice_status'], 'integer'],
-            [['building_id', 'description', 'year', 'month', 'create_time', 'order_id','room.room_name', 'number', 'name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
+            [['building_id', 'description', 'year', 'month', 'create_time', 'order_id','room', 'number', 'name', 'invoice_notes', 'payment_time', 'update_time'], 'safe'],
             [['invoice_amount'], 'number'],
         ];
     }
@@ -88,6 +88,17 @@ class UserInvoiceSearch extends UserInvoice
 			$two = end($time);
             $query->andFilterWhere(['between', 'payment_time', strtotime($one),strtotime($two)]);
         }
+
+        if($this->room != '')
+        {
+            $room = $this->room;
+            $length = strlen($room);
+            if($length == '3'){
+                $room = str_pad($room,'4','0',STR_PAD_LEFT); //房号不足四位数自动补0
+            }
+
+            $query->andFilterWhere(['room_name' => $room]);
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
@@ -106,10 +117,9 @@ class UserInvoiceSearch extends UserInvoice
             ->andFilterWhere(['like', 'update_time', $this->update_time])
 			->andFilterWhere(['community_building.building_name' => $this->building_id])
 			->andFilterWhere(['community_realestate.room_number' => $this->getAttribute('number')])
-			->andFilterWhere(['like', 'community_realestate.owners_name', $this->name])
-			->andFilterWhere(['room_name' => $this->getAttribute('room.room_name')]);
+            ->andFilterWhere(['like', 'community_realestate.owners_name', $this->name])	;
 
-		$dataProvider -> sort->attributes['room.room_name']=
+		$dataProvider -> sort->attributes['room']=
 			[
 				'asc' => ['room_name'=>SORT_ASC],
 				'desc' => ['room_name'=>SORT_DESC],

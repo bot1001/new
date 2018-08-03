@@ -68,7 +68,7 @@ use kartik\daterange\DateRangePicker;
                     ]
                 ])->label(false) ?>
             </div>
-            <button type="button" id="span"><span class=" add glyphicon glyphicon-plus"></span></button>
+<!--            <button type="button" id="span"><span class=" add glyphicon glyphicon-plus"></span></button>-->
         </div>
         <div>
             <add></add>

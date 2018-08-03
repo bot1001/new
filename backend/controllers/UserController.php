@@ -9,6 +9,7 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * UserController implements the CRUD actions for UserAccount model.
@@ -66,6 +67,71 @@ class UserController extends Controller
             'dataProvider' => $dataProvider,
 			'comm' => $comm
         ]);
+    }
+
+    //统计功能
+    function actionSum()
+    {
+        $query = (new \yii\db\Query())->select([
+            'count(user_account.user_id) as sum', 'community_name as community', 'company.name'])
+            ->from ('user_account')
+            ->join('inner join','user_relationship_realestate','user_relationship_realestate.account_id = user_account.account_id')
+            ->join('inner join','community_realestate','community_realestate.realestate_id = user_relationship_realestate.realestate_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+            ->join('inner join', 'company', 'company.id = community_basic.company')
+            ->join('inner join','user_data','user_data.account_id = user_account.account_id')
+            ->andwhere(['in', 'community_realestate.community_id', $_SESSION['community']])
+            ->orderBy('community_realestate.community_id ASC')
+            ->groupBy('community_realestate.community_id');
+
+//        echo '<pre/>';
+//print_r($_SESSION);exit;
+
+        if(isset($_GET['user'])){
+            if($_GET['user'] != '')
+            {
+                $user = $_GET['user'];
+                $community = $user['community_name'];
+                $building = $user['building_name'];
+                $number = $user['room_number'];
+                $number = str_pad($number, '2', '0', STR_PAD_LEFT);
+                $time = $user['reg_time'];
+                $times = explode(' to ', $time);
+                if(count($times) == '2'){
+                    $query->andFilterWhere(['between', 'user_data.reg_time', strtotime(reset($times)), strtotime(end($times))]);
+                }
+                $query->andFilterWhere(['in', 'community_name', "$community"])
+                    ->andFilterWhere(['in', 'community_building.building_name', $building])
+                    ->andFilterWhere(['in', 'community_realestate.room_number', $number]);
+            }
+        }
+
+        if(isset($_SESSION['pageSize'])){ //自定义每页页数
+            $pageSize = $_SESSION['pageSize'];
+        }else{
+            $pageSize = '20';
+        }
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => $pageSize,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'name',
+                    'community',
+                    'sum',
+                ],
+                'defaultOrder' => [
+                    'community' => SORT_ASC,
+                ]
+            ],
+        ]);
+
+        return $this->render('sum', ['dataProvider' => $dataProvider]);
     }
 
 	public function actionBatchdelete()

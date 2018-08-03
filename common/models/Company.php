@@ -78,7 +78,8 @@ class Company extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'creator']);
     }
-	
+
+    //获取全部公司
 	static function getCompany()
 	{
 		$company = self::find()
@@ -89,4 +90,32 @@ class Company extends \yii\db\ActiveRecord
 			
 		return $company;
 	}
+
+	//获取隶属总公司
+    static function Company()
+    {
+        $user = $_SESSION['user'];
+        $com = array_column($user, 'company');
+
+        $company = self::find()
+            ->select('name, id')
+            ->where(['in', 'name', $com])
+            ->orderBy('id')
+            ->indexBy('id')
+            ->column();
+
+        return $company;
+    }
+
+    static function getC($parent)
+    {
+        $company = self::find()
+            ->select('name, id')
+            ->where(['in', 'parent', $parent])
+            ->orderBy('id')
+            ->indexBy('id')
+            ->column();
+
+        return $company;
+    }
 }

@@ -127,14 +127,12 @@ $this->title = '缴费管理';
 	}
 	?>
 	<?php // echo $this->render('_search', ['model' => $searchModel, 'comm' => $comm]); ?>
-	<?php //Pjax::begin(); ?>
 	<?php
 	$gridColumn = [
 		/*['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'],*/
 		[ 'class' => 'kartik\grid\CheckboxColumn',
 			'name' => 'id',
-            'content' => null,
 			'width' => '30px'
 		],
 
@@ -181,9 +179,10 @@ $this->title = '缴费管理';
 			'width' => '70px'
 		],
 
-        [ 'attribute' => 'room.room_name',
-			//'value' => 'room.room_number',
+        [ 'attribute' => 'room',
+			'value' => 'room.room_name',
 			// 'group' => true,
+            'label' => '房号',
 			'width' => '70px'
 		],
 
@@ -243,6 +242,7 @@ $this->title = '缴费管理';
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
 				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
 			],
+            'contentOptions' => ['class' => 'text-right'],
 			'width' => '60px'
 		],
 		/*['attribute' => 'create_time',
@@ -386,5 +386,4 @@ $this->title = '缴费管理';
 		'hover' => true
 	] );
 	?>
-	<?php //Pjax::end(); ?>
 </div>
