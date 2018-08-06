@@ -50,7 +50,6 @@ class UserAccount extends \yii\db\ActiveRecord
     }
 	
 	public $company;
-	public $com; //分公司
 	public $community;
 	public $building;
 	public $number;

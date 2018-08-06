@@ -24,11 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
 			 'format' =>['date','php:Y-m-d H:i:s']],
              /*'order.order_type',
             ['attribute' => 'order.payment_gateway'],*/
-             'order.payment_number','order.order_amount',
-             
+             'order.payment_number',
+             'order.order_amount',
         ],
     ]) ?>
-    <p align="right">
-    <a class="btn btn-info" href ="<?=Url::to(['order/index','order_id' => $model->order_id]);?>">订单列表</a>
+    <?php
+    $amount = \common\models\Order::find() //查询订单金额
+    ->select('order_amount as amount')
+    ->where(['order_id' => "$model->order_id"])
+    ->asArray()
+    ->one();
+    ?>
+    <p align="center">
+        <?= Html::a('<span class="glyphicon glyphicon-print"></span>', ['order/print','order_id' => $model->order_id, 'amount' => $amount['amount']], ['class' => 'btn btn-success'])?>
+        <?= Html::a('<span class="glyphicon glyphicon-align-justify"></span>', ['order/index','order_id' => $model->order_id], ['class' => 'btn btn-info']) ?>
 </p>
 </div>

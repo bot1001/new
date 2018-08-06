@@ -1,13 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use app\models\CostRelation;
-use app\models\CommunityBasic;
 use yii\helpers\Url;
 use kartik\form\ActiveForm;
 use kartik\depdrop\DepDrop;
-use kartik\select2\Select2;
 use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */

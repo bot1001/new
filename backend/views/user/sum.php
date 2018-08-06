@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn',
-            'header' => '序<br />号'],
+            'header' => '序号'],
         ['attribute' => 'name',
             'label' => '公司',
             'contentOptions' => [ 'class' => 'text-left'],
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     echo GridView::widget([
             'dataProvider' => $dataProvider,
-        'panel' => ['type' => 'info', 'heading' => '用户统计',
+        'panel' => ['type' => 'info', 'heading' => '起止时间：'.$fromdate,
             'before' => Html::a('<span class="glyphicon glyphicon-refresh"></span>', 'sum', ['class' => 'btn btn-success'])],
         'columns' => $gridview,
         'showPageSummary' => true,

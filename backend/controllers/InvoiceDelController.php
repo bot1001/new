@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Company;
-use app\models\CompanySearch;
+use common\models\InvoiceDel;
+use app\models\InvoiceDelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
-use app\models\CommunityBasic;
 
 /**
- * CompanyController implements the CRUD actions for Company model.
+ * InvoiceDelController implements the CRUD actions for InvoiceDel model.
  */
-class CompanyController extends Controller
+class InvoiceDelController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,12 +30,12 @@ class CompanyController extends Controller
     }
 
     /**
-     * Lists all Company models.
+     * Lists all InvoiceDel models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CompanySearch();
+        $searchModel = new InvoiceDelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a single Company model.
+     * Displays a single InvoiceDel model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,80 +57,26 @@ class CompanyController extends Controller
         ]);
     }
 
-	//三级联动分公司
-	public function actionBranch( $selected = null )
-	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
-			$list = Company::find()->where( [ 'parent' => $id ] )->all();
-			$isSelectedIn = false;
-			if ( $id != null && count( $list ) > 0 ) {
-				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'id' ], 'name' => $account[ 'name' ] ];
-					if ( $i == 0 ) {
-						$first = $account[ 'id' ];
-					}
-					if ( $account[ 'id' ] == $selected ) {
-						$isSelectedIn = true;
-					}
-				}
-				if ( !$isSelectedIn ) {
-					$selected = $first;
-				}
-				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
-				return;
-			}
-		}
-		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
-	}
-
-	//由分公司三级联动获取小区
-	public function actionC( $selected = null )
-	{
-		if ( isset( $_POST[ 'depdrop_parents' ] ) ) {
-			$id = $_POST[ 'depdrop_parents' ];
-			$list = CommunityBasic::find()->where( [ 'company' => $id ] )->all();
-			$isSelectedIn = false;
-			if ( $id != null && count( $list ) > 0 ) {
-				foreach ( $list as $i => $account ) {
-					$out[] = [ 'id' => $account[ 'community_id' ], 'name' => $account[ 'community_name' ] ];
-					if ( $i == 0 ) {
-						$first = $account[ 'community_id' ];
-					}
-					if ( $account[ 'community_id' ] == $selected ) {
-						$isSelectedIn = true;
-					}
-				}
-				if ( !$isSelectedIn ) {
-					$selected = $first;
-				}
-				echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
-				return;
-			}
-		}
-		echo Json::encode( [ 'output' => '', 'selected' => '' ] );
-	}
-
     /**
-     * Creates a new Company model.
+     * Creates a new InvoiceDel model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Company();
+        $model = new InvoiceDel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index'/*, 'id' => $model->id*/]);
+            return $this->redirect(['view', 'id' => $model->invoice_id]);
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Company model.
+     * Updates an existing InvoiceDel model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -143,7 +87,7 @@ class CompanyController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->invoice_id]);
         }
 
         return $this->render('update', [
@@ -152,7 +96,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Deletes an existing Company model.
+     * Deletes an existing InvoiceDel model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -166,15 +110,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Finds the Company model based on its primary key value.
+     * Finds the InvoiceDel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Company the loaded model
+     * @return InvoiceDel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Company::findOne($id)) !== null) {
+        if (($model = InvoiceDel::findOne($id)) !== null) {
             return $model;
         }
 

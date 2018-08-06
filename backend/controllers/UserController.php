@@ -85,26 +85,62 @@ class UserController extends Controller
             ->orderBy('community_realestate.community_id ASC')
             ->groupBy('community_realestate.community_id');
 
-//        echo '<pre/>';
-//print_r($_SESSION);exit;
+        if(isset($_GET['UserAccount'])){ //判断是否存在来自统计页面的搜索条件
+            $user = $_GET['UserAccount']; //接收数据
+            $company = $user['company']; //赋值总公司
+            if (isset($user['user_name'])) //判断分公司是否存在
+            {
+                $query->andFilterWhere(['community_basic.company' => $user['user_name']]);
+            }
 
-        if(isset($_GET['user'])){
+            $community = $user['community']; //赋值小区
+            $time = $user['fromdate']; //赋值统计时间
+
+            $times = explode(' to ', $time); //分割统计时间
+            $first = strtotime(reset($times)); //转换时间戳
+            $second = strtotime(end($times)); //转换时间戳
+
+            if(empty($first) && empty($second)){ //判断统计时间是否为空
+                //if the two all empty, the $first will be the begining of month, the $second will be the end of month
+                $first = mktime(0,0,0,date('m'),1,date('Y')); //当月起时间戳
+                $second = mktime(23,59,59,date('m'),date('t'),date('Y')); //当月止时间戳
+            }
+            $query->andFilterWhere(['between', 'user_data.reg_time', $first, $second])
+                ->andFilterWhere(['in', 'community_basic.community_id', $community]);
+
+            $fromdate = date('Y-m-d H:i:s', $first).' to '.date('Y-m-d H:i:s', $second);
+        }elseif(isset($_GET['user'])){ //判断来自Index页面筛选条件
             if($_GET['user'] != '')
             {
                 $user = $_GET['user'];
                 $community = $user['community_name'];
                 $building = $user['building_name'];
                 $number = $user['room_number'];
-                $number = str_pad($number, '2', '0', STR_PAD_LEFT);
-                $time = $user['reg_time'];
-                $times = explode(' to ', $time);
-                if(count($times) == '2'){
-                    $query->andFilterWhere(['between', 'user_data.reg_time', strtotime(reset($times)), strtotime(end($times))]);
+                if($number != ''){
+                    $number = str_pad($number, '2', '0', STR_PAD_LEFT);
                 }
-                $query->andFilterWhere(['in', 'community_name', "$community"])
+                $time = $user['reg_time'];
+                $times = explode(' to ', $time); //分割搜索时间
+                $first = strtotime(reset($times)); //转换时间戳
+                $second = strtotime(end($times)); //转换时间戳
+                if(empty($first) && empty($second)){ //判断统计时间是否为空
+                    //if the two all empty, the $first will be the begining of month, the $second will be the end of month
+                    $first = mktime(0,0,0,date('m'),1,date('Y')); //当月起时间戳
+                    $second = mktime(23,59,59,date('m'),date('t'),date('Y')); //当月止时间戳
+                }
+                $fromdate = date('Y-m-d H:i:s', $first).' to '.date('Y-m-d H:i:s', $second); //重新组合搜索时间
+
+                $query->andFilterWhere(['between', 'user_data.reg_time', $first, $second])
+                    ->andFilterWhere(['in', 'community_name', $community])
                     ->andFilterWhere(['in', 'community_building.building_name', $building])
                     ->andFilterWhere(['in', 'community_realestate.room_number', $number]);
             }
+        }else{
+            $first = mktime(0,0,0,date('m'),1,date('Y')); //当月起时间戳
+            $second = mktime(23,59,59,date('m'),date('t'),date('Y')); //当月止时间戳
+            $query->andFilterWhere(['between', 'user_data.reg_time', $first, $second]);
+
+            $fromdate = date('Y-m-d H:i:s', $first).' to '.date('Y-m-d H:i:s', $second);
         }
 
         if(isset($_SESSION['pageSize'])){ //自定义每页页数
@@ -112,7 +148,6 @@ class UserController extends Controller
         }else{
             $pageSize = '20';
         }
-
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -131,7 +166,7 @@ class UserController extends Controller
             ],
         ]);
 
-        return $this->render('sum', ['dataProvider' => $dataProvider]);
+        return $this->render('sum', ['dataProvider' => $dataProvider, 'fromdate' => $fromdate]);
     }
 
 	public function actionBatchdelete()

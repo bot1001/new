@@ -55,7 +55,7 @@ use kartik\daterange\DateRangePicker;
                                                         //'singleDatePicker'=>true,
                                                         'showDropdowns'=>true,
                                                         ]
-                                                   ])->textInput(['placeHolder' => '请选择费项区间'])->label(false);
+                                                   ])->textInput(['placeHolder' => '应收区间'])->label(false);
                                                ?>
 		
     	    <?= $form->field($model, 'payment_time',['addon'=>['prepend'=>['content'=>'<i class="glyphicon glyphicon-calendar"></i>']],
@@ -70,7 +70,7 @@ use kartik\daterange\DateRangePicker;
                                                         //'singleDatePicker'=>true,
                                                         'showDropdowns'=>true,
                                                         ]
-                                                   ])->textInput(['placeHolder' => '请选择支付时间'])->label(false);
+                                                   ])->textInput(['placeHolder' => '支付时间'])->label(false);
                                                ?>
 		</div>
    	    <div class="col-lg-1">
