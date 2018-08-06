@@ -191,9 +191,7 @@ class Pay extends \yii\db\ActiveRecord
 					    return true;
 					}	
 				}catch(\exception $e){
-					print_r($e);
-					$transaction->rollback(); 
-					exit;
+					$transaction->rollback();
 				}
 		    	
 		 }

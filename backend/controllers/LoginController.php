@@ -68,9 +68,9 @@ class LoginController extends Controller
 			
 			$community_id = $community->orderBy('community_id')->indexBy('community_id')->column();
 			
-			$session['community_id'] = $community_id;
-			$session['community_name'] = $community_name;
-			$session['community'] = $s; //将用户关联的小区添加到session
+			$session['community_id'] = $community_id; //用户关联小区，如 [55] => 明月园
+			$session['community_name'] = $community_name; //用户关联小区数组，如[community_name] => 明月园
+			$session['community'] = $s; //将用户关联的小区编码添加到session， 如[0] => 55
 			
             return $this->goBack();
         }

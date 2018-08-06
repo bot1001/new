@@ -25,7 +25,7 @@ class InvoiceDelSearch extends InvoiceDel
         return [
             [['invoice_id', 'realestate_id', 'user_id', 'invoice_status'], 'integer'],
             [['description', 'year', 'month', 'order_id', 'invoice_notes', 'payment_time', 'update_time', 'property', 'community', 'building','number', 'name', 'user'], 'safe'],
-            [['invoice_amount'], 'number'],
+            [['amount'], 'number'],
         ];
     }
 
@@ -47,14 +47,22 @@ class InvoiceDelSearch extends InvoiceDel
      */
     public function search($params)
     {
+        $c = $_SESSION['community'];
         $query = InvoiceDel::find();
-        $query->joinWith('community');
+        $query->joinWith('community')->where(['in', 'community_basic.community_id' , $c]);
         $query->joinWith('building');
+        $query->joinWith('user');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder'=>
+                [
+                    'invoice_id' => SORT_DESC,
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -65,11 +73,24 @@ class InvoiceDelSearch extends InvoiceDel
             return $dataProvider;
         }
 
+        //自定义搜索字段
+        if($this->payment_time != ''){
+            $payment_time = $this->payment_time;
+            $times = explode(' to ', $payment_time);
+            $query->andFilterWhere(['between', 'payment_time', strtotime(reset($times)), strtotime(end($times))]);
+        }
+
+        if($this->update_time != '')
+        {
+            $update_time = $this->update_time;
+            $time = explode(' to ', $update_time);
+            $query->andFilterWhere(['between', 'invoice_del.update_time', strtotime(reset($time)), strtotime(end($time))]);
+        }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'invoice_id' => $this->invoice_id,
             'realestate_id' => $this->realestate_id,
-            'invoice_amount' => $this->invoice_amount,
             'user_id' => $this->user_id,
             'invoice_status' => $this->invoice_status,
         ]);
@@ -78,10 +99,44 @@ class InvoiceDelSearch extends InvoiceDel
             ->andFilterWhere(['like', 'year', $this->year])
             ->andFilterWhere(['like', 'month', $this->month])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'amount', $this->amount])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])
-            ->andFilterWhere(['like', 'payment_time', $this->payment_time])
-            ->andFilterWhere(['like', 'update_time', $this->update_time])
+            ->andFilterWhere(['like', 'community.community_id', $this->community])
+            ->andFilterWhere(['like', 'community_building.building_name', $this->building])
+            ->andFilterWhere(['like', 'community_realestate.room_number', $this->number])
+            ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])
+            ->andFilterWhere(['like', 'sys_user.name', $this->user])
             ->andFilterWhere(['like', 'property', $this->property]);
+
+        $dataProvider->sort->attributes['community'] =
+            [
+                'asc' => ['community_basic.community_id' => SORT_ASC],
+                'desc' => ['community_basic.community_id' => SORT_DESC]
+            ];
+
+        $dataProvider->sort->attributes['building'] =
+            [
+                'asc' => ['community_building.building_id' => SORT_ASC],
+                'desc' => ['community_building.building_id' => SORT_DESC],
+            ];
+
+        $dataProvider->sort->attributes['number'] =
+            [
+                'asc' => ['community_realestate.room_number' => SORT_ASC],
+                'desc' => ['community_realestate.room_number' => SORT_DESC],
+            ];
+
+        $dataProvider->sort->attributes['name'] =
+            [
+                'asc' => ['community_realestate.room_name' => SORT_ASC],
+                'desc' => ['community_realestate.room_name' => SORT_DESC],
+            ];
+
+        $dataProvider->sort->attributes['user'] =
+            [
+                'asc' => ['sys_user.name' => SORT_ASC],
+                'desc' => ['sys_user.name' => SORT_DESC]
+            ];
 
         return $dataProvider;
     }

@@ -12,14 +12,14 @@ use Yii;
  * @property string $description （账单说明）
  * @property string $year  年
  * @property string $month  月
- * @property string $invoice_amount （账单金额）
- * @property int $user_id （操作人）
+ * @property string $amount （账单金额）
  * @property string $order_id （订单号，默认为空，支付成功后写入）
  * @property string $invoice_notes （备注）
  * @property string $payment_time （支付时间）
  * @property int $invoice_status （账单状态）（-3,删除,0,未缴纳，1,银行代缴,2,线上已缴纳，3,线下已缴纳）
  * @property string $update_time
  * @property string $property （备注）
+ * @property int $user_id （操作人）
  *
  * @property CommunityRealestate $realestate
  * @property OrderBasic $order
@@ -41,9 +41,9 @@ class InvoiceDel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['realestate_id', 'description', 'invoice_amount', 'user_id', 'invoice_status', 'property'], 'required'],
-            [['realestate_id', 'user_id', 'invoice_status'], 'integer'],
-            [['invoice_amount'], 'number'],
+            [['realestate_id', 'year', 'month', 'description', 'amount'], 'required'],
+            [['realestate_id', 'invoice_status', 'user_id'], 'integer'],
+            [['amount'], 'number'],
             [['invoice_notes', 'update_time'], 'string'],
             [['description'], 'string', 'max' => 200],
             [['year', 'month'], 'string', 'max' => 4],
@@ -66,7 +66,7 @@ class InvoiceDel extends \yii\db\ActiveRecord
             'description' => '详情',
             'year' => '年份',
             'month' => '月份',
-            'invoice_amount' => '金额',
+            'amount' => '金额',
             'user_id' => 'User ID',
             'order_id' => '订单编号',
             'invoice_notes' => '备注',
@@ -75,6 +75,24 @@ class InvoiceDel extends \yii\db\ActiveRecord
             'update_time' => '删除时间',
             'property' => '备注',
         ];
+    }
+
+    //创建楼于时自动插入或者更新的字段
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                //插入新纪录时自动添加以下字段
+                $this->user_id = $_SESSION['user']['0']['id'];
+                $this->update_time = time();
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -95,7 +113,7 @@ class InvoiceDel extends \yii\db\ActiveRecord
 
     public function getCommunity()
     {
-        return $this->hasMany(Community::className(), ['community_id' => 'community_id'])->viaTable('community_realestate', ['realestate_id' => 'realestate_id']);
+        return $this->hasOne(Community::className(), ['community_id' => 'community_id'])->viaTable('community_realestate', ['realestate_id' => 'realestate_id']);
     }
 
     function getBuilding()

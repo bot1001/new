@@ -315,16 +315,48 @@ class UserInvoiceController extends Controller
 	//批量删除
 	public function actionDel() 
 	{
-		$ids = Yii::$app->request->post();
+		$ids = $_POST;
 
 		$is = 0; //删除条数
 		//删除代码
-		foreach ( $ids as $id );
-		foreach ( $id as $i ) {
-			$this->findModel( $id )->delete();
-			$is ++;
+		foreach ( $ids['ids'] as $id ) {
+
+		    $invoice = UserInvoice::find()
+            ->where(['invoice_id' => "$id"])
+            ->asArray()
+            ->one();
+
+
+            $transaction = Yii::$app->db->beginTransaction();
+            try{
+                $del = new \common\models\InvoiceDel(); //实例化模型
+
+                //模型块赋值
+                $del->realestate_id = $invoice['realestate_id'];
+                $del->description = $invoice['description'];
+                $del->year = $invoice['year'];
+                $del->month = $invoice['month'];
+                $del->amount = $invoice['invoice_amount'];
+                $del->order_id = $invoice['order_id'];
+                $del->payment_time = $invoice['payment_time'];
+                $del->invoice_notes = $invoice['invoice_notes'];
+
+                $result = $del->save(); //保存
+                if($result){ //若果删除记录保存成功则执行删除
+                    $d_result = $this->findModel( $id )->delete();
+                }
+
+                if($d_result){ //如果删除成功则提交事务，否则测回
+                    $is ++;
+                    $transaction->commit();
+                }else{
+                    $transaction->rollBack();
+                }
+            }catch(\exception $e){
+                $transaction->rollback();
+            }
 		}
-		return $is;
+		return $is; // 返回成功删除条数
 	}
 
 	//缴费

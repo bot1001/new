@@ -8,6 +8,9 @@ use app\models\InvoiceDelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\CommunityBasic;
+use app\models\CommunityBuilding;
+use app\models\CommunityRealestate;
 
 /**
  * InvoiceDelController implements the CRUD actions for InvoiceDel model.
@@ -37,10 +40,24 @@ class InvoiceDelController extends Controller
     {
         $searchModel = new InvoiceDelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $c = $_SESSION['community']; //从会话中获取小区ID
+
+        $comm = CommunityBasic::community(); //从模型中获取小区
+        $build = CommunityBuilding::Building($c); //从模型中获取楼宇
+        $number = CommunityRealestate::community_number($c); //从模型中获取单元
+
+        $w = date('Y');
+        $y = [ $w - 3 => $w - 3,$w - 2 => $w - 2, $w - 1 => $w - 1, $w => $w, $w + 1 => $w + 1, $w + 2 => $w + 2,$w + 3 => $w + 3, ];
+        $m = [ '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06', '07' => '07', '08' => '08', '09' => '09', 10 => '10', 11 => '11', 12 => '12' ];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'comm' => $comm,
+            'build' => $build,
+            'number' => $number,
+            'y' => $y,
+            'm' => $m
         ]);
     }
 

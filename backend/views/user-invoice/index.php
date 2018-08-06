@@ -1,13 +1,9 @@
 <?php
 
-use yii\ helpers\ Html;
-use yii\ helpers\ArrayHelper;
-use kartik\ grid\ GridView;
-use yii\ widgets\ Pjax;
-use app\ models\ Status;
-use yii\ bootstrap\ Modal;
-use yii\ helpers\ Url;
-use kartik\daterange\DateRangePicker;
+use yii\helpers\Html;
+use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 use mdm\admin\components\Helper;
 
 Modal::begin( [
