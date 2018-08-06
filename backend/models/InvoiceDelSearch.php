@@ -101,7 +101,7 @@ class InvoiceDelSearch extends InvoiceDel
             ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'amount', $this->amount])
             ->andFilterWhere(['like', 'invoice_notes', $this->invoice_notes])
-            ->andFilterWhere(['like', 'community.community_id', $this->community])
+            ->andFilterWhere(['like', 'community_basic.community_id', $this->community])
             ->andFilterWhere(['like', 'community_building.building_name', $this->building])
             ->andFilterWhere(['like', 'community_realestate.room_number', $this->number])
             ->andFilterWhere(['like', 'community_realestate.room_name', $this->name])

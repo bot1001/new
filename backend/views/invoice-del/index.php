@@ -68,7 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterInputOptions' => ['placeholder' => '...'],
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true],
-            ],],
+            ],
+            'width' => '90px'],
 
         ['attribute' => 'month',
             'filterType' => GridView::FILTER_SELECT2,
