@@ -347,13 +347,13 @@ $this->title = '缴费管理';
                     return  date('Y-m-d H:i:s',$model->update_time);   //主要通过此种方式实现
                 },
 			'width' => '170px'
-			],*/
+			],
 
 		['class' => 'kartik\grid\ActionColumn',
 			'header' => '操<br />作',
 			'template' => Helper::filterActionColumn('{delete}'),
             'width' => '25px'
-			],
+			],*/
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,

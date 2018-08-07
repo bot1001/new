@@ -4,8 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\Json;
-use common\models\Products;
-use common\models\OrderProducts;
 use common\models\OrderAddress as Address;
 
 class Api extends \yii\db\ActiveRecord
@@ -25,7 +23,7 @@ class Api extends \yii\db\ActiveRecord
        return $info;
    }
 
-   //生成订单
+   //应收费项生成订单
     static function Order($realestate, $account)
     {
         $user = (new \yii\db\Query()) // 查询用户信息
@@ -40,12 +38,9 @@ class Api extends \yii\db\ActiveRecord
             ->asArray()
             ->all();
 
-        $cost_name = Cost::find()//查找优惠费项
-            ->select('cost_name as cost, cost_id as id')
-            ->where(['sale' => '1'])
-            ->distinct()
-            ->indexBy('id')
-            ->column();
+        if(empty($invoice)){ //如果无缴费信息则返回空
+            return false;
+        }
 
         $order_id = Order::getOrder(); //生成订单函数
 
@@ -80,33 +75,13 @@ class Api extends \yii\db\ActiveRecord
                  $product = new Products();
                  $product->order_id = $order_id;
                  $product->product_id =$in['invoice_id'];
-
-                 if(isset($cost_name[$in['description']]))
-                 {
-                     if($in['year'] > date('Y'))
-                     {
-                         $s ++; //标记预交物业费
-                     }elseif($in['year'] == date('Y')){
-                         if($in['month'] > date('m'))
-                         {
-                             $s ++; //标记预交物业费信息
-                         }
-                         }
-                 }
-                 if($s%13 === "0")
-                 {
-                     $product->sale = 1;
-                     $a += $in['invoice_amount'];
-                 }else{
-                     $product->sale = '0';
-                 }
-
                  $product->product_quantity = '1';
+
                  $p = $product->save(); //保存产品订单
              }
              $model = new Order(); //实例化订单模型
 
-            $am = $amount-$a;
+             $am = $amount-$a;
 
              $model->account_id = $account_id;
              $model->order_id = $order_id;

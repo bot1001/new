@@ -134,6 +134,11 @@ class UserController extends Controller
                     ->andFilterWhere(['in', 'community_name', $community])
                     ->andFilterWhere(['in', 'community_building.building_name', $building])
                     ->andFilterWhere(['in', 'community_realestate.room_number', $number]);
+            }else{
+                $first = mktime(0,0,0,date('m'),1,date('Y')); //当月起时间戳
+                $second = mktime(23,59,59,date('m'),date('t'),date('Y')); //当月止时间戳
+                $fromdate = date('Y-m-d H:i:s', $first).' to '.date('Y-m-d H:i:s', $second); //重新组合搜索时间
+                $query->andFilterWhere(['between', 'user_data.reg_time', $first, $second]);
             }
         }else{
             $first = mktime(0,0,0,date('m'),1,date('Y')); //当月起时间戳

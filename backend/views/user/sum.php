@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => [ 'class' => 'text-right'],
             'pageSummary' => true],
 
-        ['class' => 'kartik\grid\checkBoxColumn'],
+        ['class' => 'kartik\grid\CheckboxColumn'],
     ];
 
     echo GridView::widget([
