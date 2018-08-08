@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use app\models\CommunityRealestate;
+use common\models\UserAccount;
+use common\models\UserOpenid;
 use Yii;
 
 class TestController extends \yii\web\Controller
@@ -80,5 +82,28 @@ class TestController extends \yii\web\Controller
             ->groupBy('realestate_id')
             ->all();
         print_r(count($invoice));
+    }
+
+    //处理用户openID表
+    function actionOpen()
+    {
+        $user_accout = UserAccount::find()
+            ->select('account_id, weixin_openid')
+            ->where(['!=', 'wx_unionid', ''])
+            ->asArray()
+            ->all();
+
+        foreach ( $user_accout as $account){
+            $user_open = new UserOpenid();
+
+            $user_open->account_id = $account['account_id'];
+            $user_open->open_id = $account['weixin_openid'];
+            $user_open->type = '1';
+
+            $user_open->save();
+        }
+
+//        echo '<pre />';
+//        print_r($user_accout);
     }
 }

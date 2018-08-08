@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\UserOpenid;
 use Yii;
 use yii\web\Controller;
 use frontend\models\LoginForm;
@@ -122,11 +123,7 @@ class LoginController extends Controller
 		$gender = $data['gender']; //接收性别
 		$face = $data['face_path']; //接收图像地址
 		
-		$community = $realestate['community_id']; //接收小区ID
-		$building = $realestate['building_id']; //接收楼宇ID
-		$number = $realestate['room_number']; //接收单元
 		$name = $realestate['room_name']; //接收房号
-		$mobile = $realestate['phone']; //接收验证手机号码
 		$nick = $realestate['owners_name']; //接收用户昵称
 		
 		$user_name = $account['user_name']; //接收用户昵称
@@ -146,9 +143,26 @@ class LoginController extends Controller
 			->one();
 		
 		if($u_account){ //如果存在则绑定微信账号
-			$result = UserAccount::updateAll(['weixin_openid' => $weixin_openid, 'wx_unionid' => $unionid],
+			$result = UserAccount::updateAll(['wx_unionid' => $unionid],
 											  'account_id = :a_id', [':a_id' => $u_account['account_id']]);
 			$u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $u_account['account_id']]);
+
+			$union = UserOpenid::unionid($account_id = $weixin_openid);
+			if(!$union){
+                $Account = UserAccount::find()
+                    ->select('account_id, weixin_openid')
+                    ->where(['wx_unionid' => $unionid])
+                    ->asArray()
+                    ->one();
+                
+                $user_open = new UserOpenid();
+
+                $user_open->account_id = $Account['account_id'];
+                $user_open->open_id = $weixin_openid;
+                $user_open->type = '1';
+
+                $user_open->save(); //保存用户openID
+            }
 			
 			//如果修改成功则自动登录
 			if($result || $u_data){
@@ -171,7 +185,6 @@ class LoginController extends Controller
 		        $account->password = $password;
 		        $account->new_pd = $password;
 		        $account->mobile_phone = $phone;
-		        $account->weixin_openid = $weixin_openid;
 		        $account->wx_unionid = $unionid;
 		        $account->new_message = '0';
 		        $account->status = '1';
@@ -198,6 +211,14 @@ class LoginController extends Controller
 		    	$userdata->nickname = $nick;
 		    	
 		    	$u = $userdata->save(); //保存用户资料
+
+                $user_open = new UserOpenid();
+
+                $user_open->account_id = $account_id;
+                $user_open->open_id = $weixin_openid;
+                $user_open->type = '1';
+
+                $result = $user_open->save(); //保存微信openID
 
 		    	if($yes && $r && $u){
 		    		$user = \frontend\models\User::find()->where(['in', 'user_id', $id])->asArray()->one();

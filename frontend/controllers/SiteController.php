@@ -92,12 +92,13 @@ class SiteController extends Controller
 			}
 				
 			$unionid = $w_info['unionid']; //提取openID
-			
-			$user = UserAccount::find() //查询用户是否存在
-				->where(['in', 'wx_unionid', $unionid])
-				->asArray()
-				->one();
-						
+
+			$user = (new \yii\db\Query())//查询用户是否存在
+                ->from('user_account')
+                ->join('inner join', 'user_openid', 'user_account.account_id = user_openid.account_id')
+                ->where(['user_account.wx_unionid' => "$unionid"])
+                ->one();
+
 			if($user){
 				\frontend\models\Site::saveMessage($user, $w_info);
 				

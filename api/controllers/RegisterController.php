@@ -2,33 +2,46 @@
 
 namespace api\controllers;
 
+use common\models\UserOpenid;
 use Yii;
 use common\models\Api;
-use common\models\User;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\UserRealestate;
-use yii\helpers\Json;
-use yii\web\controller;
+use yii\web\Controller;
 
 class RegisterController extends Controller
 {
     function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender, $province, $city, $area)
     {
+        //判断地区编码长度
+        if(strlen($province) != '6' || strlen($city) != '6' || strlen($area) != '6')
+        {
+            return false;
+        }
+
         $account_id = md5($phone); //用户ID
         if($name == ''){ $name = $nick; }//判断姓名是否为空，如果为空自默认和昵称相一致
 
         $user = UserAccount::find() //验证用户是否存在
-            ->where(['mobile_phone' => "$phone"])
+            ->where(['wx_unionid' => "$unionid"])
             ->asArray()
             ->one();
 
         if($user){//如果存在则直接更新
-            $result = UserAccount::updateAll(['weixin_openid' => $weixin_openid, 'wx_unionid' => $unionid],
+            $result = UserAccount::updateAll(['wx_unionid' => $unionid],
                 'mobile_phone = :a_id', [':a_id' => $phone]);
             $u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $user['account_id']]);
 
-            if($result || $u_data) //更新完毕后返回用户信息
+            $user_openid = new UserOpenid();
+
+            $user_openid->account_id = $account_id;
+            $user_openid->open_id = $weixin_openid;
+            $user_openid->type = '1';
+
+            $user_openid->save(); //保存用户open id
+
+            if($result || $u_data || $user_openid) //更新完毕后返回用户信息
             {
                 $info = Api::info($unionid);//调用函数获取用户信息
                 return $info;
@@ -43,7 +56,6 @@ class RegisterController extends Controller
                 $account->user_name = $nick;
                 $account->password = md5($password);
                 $account->mobile_phone = $phone;
-                $account->weixin_openid = $weixin_openid;
                 $account->wx_unionid = $unionid;
                 $account->new_message = '0';
                 $account->status = '1';
@@ -70,6 +82,14 @@ class RegisterController extends Controller
                     $userdata->nickname = $nick;
 
                     $u = $userdata->save(); //保存用户资料
+
+                    $user_openid = new UserOpenid();
+
+                    $user_openid-> account_id = $account_id;
+                    $user_openid-> open_id = $weixin_openid;
+                    $user_openid->type = '1';
+
+                    $user_openid->save();
                 }
                 if($result && $r && $u){
                     $transaction->commit(); //结束事务管理
