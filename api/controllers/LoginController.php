@@ -7,9 +7,8 @@ use common\models\Community;
 use common\models\Company;
 use common\models\HouseInfo;
 use common\models\Realestate;
+use common\models\SysCommunity;
 use yii\web\Controller;
-use common\models\Order;
-use common\models\UserAccount;
 use yii\helpers\Json;
 
 /**
@@ -41,6 +40,20 @@ class LoginController extends Controller
             ->orderBy('id ASC')
             ->indexBy('id')
             ->column();
+        $company = Json::encode($company);
+
+        return $company;
+    }
+
+    //获取公司接口02
+    public function actionCompany02($yuda)
+    {
+        $company = Company::find()
+            ->select('name, id')
+            ->where(['parent' => '0'])
+            ->orderBy('id ASC')
+            ->asArray()
+            ->one();
         $company = Json::encode($company);
 
         return $company;
@@ -144,7 +157,28 @@ class LoginController extends Controller
         if($info){
             return true;
         }
-
         return false;
+    }
+
+    //获取用户关联的小区
+    function actionC($user){
+        $community = SysCommunity::find()
+            ->select('community_id as community')
+            ->where(['sys_user_id' => "$user"])
+            ->asArray()
+            ->one();
+
+        $community = explode(',',$community['community']); //分割小区编码集合
+        $comm = Community::find() //查找小区
+            ->select('community_name as community')
+            ->where(['in', 'community_id', $community])
+            ->orderBy('community_id')
+            ->asArray()
+            ->all();
+
+        $comm = array_column($comm, 'community');
+        $comm = Json::encode($comm);
+
+        return $comm;
     }
 }

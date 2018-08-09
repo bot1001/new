@@ -14,12 +14,6 @@ use common\models\UserRealestate;
 
 class LoginController extends Controller
 {
-	//QQ登录
-	public function actionQq()
-	{
-		echo '测试';
-	}
-	
 	//微信登录或注册
 	public function actionWx()
 	{

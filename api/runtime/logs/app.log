@@ -6639,3 +6639,969 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1533549303.219
     'REQUEST_TIME' => 1533549303
 ]
+2018-08-09 16:39:29 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: name, password in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('info', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/info', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:39:29 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/info'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '63274'
+    'REDIRECT_URL' => '/user/info'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/user/info'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533832769.381
+    'REQUEST_TIME' => 1533832769
+]
+2018-08-09 16:40:09 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'n_pd' in 'where clause' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\api\controllers\UserController.php(18): yii\db\ActiveQuery->one()
+#6 [internal function]: api\controllers\UserController->actionInfo('admin', 'yudawuye')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('info', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/info', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'n_pd' in 'where clause'
+The SQL being executed was: SELECT * FROM `sys_user` WHERE (`name`='admin') AND (`n_pd`='666474501a7d6af3ac20315a1e9fa3f9') in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\api\controllers\UserController.php(18): yii\db\ActiveQuery->one()
+#6 [internal function]: api\controllers\UserController->actionInfo('admin', 'yudawuye')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('info', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/info', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'n_pd' in 'where clause'
+)
+
+2018-08-09 16:40:09 [127.0.0.1][-][-][info][application] $_GET = [
+    'name' => 'admin'
+    'password' => 'yudawuye'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/info'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '63336'
+    'REDIRECT_URL' => '/user/info'
+    'REDIRECT_QUERY_STRING' => 'name=admin&password=yudawuye'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'name=admin&password=yudawuye'
+    'REQUEST_URI' => '/user/info?name=admin&password=yudawuye'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533832809.578
+    'REQUEST_TIME' => 1533832809
+]
+2018-08-09 16:41:03 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected 'echo' (T_ECHO) in C:\Apache24\htdocs\new\api\controllers\UserController.php:22
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('api\\controllers...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('user')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('info')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/info', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#8 {main}
+2018-08-09 16:41:03 [127.0.0.1][-][-][info][application] $_GET = [
+    'name' => 'admin'
+    'password' => 'yudawuye'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/info'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '63425'
+    'REDIRECT_URL' => '/user/info'
+    'REDIRECT_QUERY_STRING' => 'name=admin&password=yudawuye'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'name=admin&password=yudawuye'
+    'REQUEST_URI' => '/user/info?name=admin&password=yudawuye'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533832863.866
+    'REQUEST_TIME' => 1533832863
+]
+2018-08-09 16:52:24 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:52:24 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808080 MicroMessenger/6.5.7 Language/zh_CN webview/'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx7825cf3988c69de6/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '64529'
+    'REDIRECT_URL' => '/login/company'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/company'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533833544.728
+    'REQUEST_TIME' => 1533833544
+]
+2018-08-09 16:52:37 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:52:37 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '64552'
+    'REDIRECT_URL' => '/login/company'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/company'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533833557.384
+    'REQUEST_TIME' => 1533833557
+]
+2018-08-09 16:53:39 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:53:39 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808080 MicroMessenger/6.5.7 Language/zh_CN webview/'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx7825cf3988c69de6/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '64662'
+    'REDIRECT_URL' => '/login/company'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/company'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533833619.687
+    'REQUEST_TIME' => 1533833619
+]
+2018-08-09 16:54:12 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:54:12 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808080 MicroMessenger/6.5.7 Language/zh_CN webview/'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx7825cf3988c69de6/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '64726'
+    'REDIRECT_URL' => '/login/company'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/company'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533833652.477
+    'REQUEST_TIME' => 1533833652
+]
+2018-08-09 16:54:43 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 16:54:43 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808080 MicroMessenger/6.5.7 Language/zh_CN webview/'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx7825cf3988c69de6/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '64793'
+    'REDIRECT_URL' => '/login/company'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/login/company'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533833683.132
+    'REQUEST_TIME' => 1533833683
+]
+2018-08-09 18:00:06 [127.0.0.1][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Missing required parameters: yuda in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('company', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/company', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#6 {main}
+2018-08-09 18:00:06 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/company'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56134'
+    'REDIRECT_URL' => '/login/company'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/company?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837606.834
+    'REQUEST_TIME' => 1533837606
+]
+2018-08-09 18:00:48 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: login/login in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('login', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/login', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#2 {main}
+2018-08-09 18:00:48 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/login'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56197'
+    'REDIRECT_URL' => '/login/login'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/login?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837648.688
+    'REQUEST_TIME' => 1533837648
+]
+2018-08-09 18:01:04 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\api\controllers\LoginController.php(168): yii\db\ActiveQuery->one()
+#6 [internal function]: api\controllers\LoginController->actionC('64')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+The SQL being executed was: SELECT * FROM `sys_user_community` WHERE `user_id`='64' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM `...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT * FROM `...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\ActiveQuery.php(292): yii\db\Query->one(NULL)
+#5 C:\Apache24\htdocs\new\api\controllers\LoginController.php(168): yii\db\ActiveQuery->one()
+#6 [internal function]: api\controllers\LoginController->actionC('64')
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#11 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'user_id' in 'where clause'
+)
+
+2018-08-09 18:01:03 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/c'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56221'
+    'REDIRECT_URL' => '/login/c'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/c?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837663.942
+    'REQUEST_TIME' => 1533837663
+]
+2018-08-09 18:02:38 [127.0.0.1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: explode() expects parameter 2 to be string, array given in C:\Apache24\htdocs\new\api\controllers\LoginController.php:171
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'explode() expec...', 'C:\\Apache24\\htd...', 171, Array)
+#1 C:\Apache24\htdocs\new\api\controllers\LoginController.php(171): explode(',', Array)
+#2 [internal function]: api\controllers\LoginController->actionC('64')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#9 {main}
+2018-08-09 18:02:38 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/c'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56365'
+    'REDIRECT_URL' => '/login/c'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/c?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837758.136
+    'REQUEST_TIME' => 1533837758
+]
+2018-08-09 18:03:21 [127.0.0.1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: explode() expects parameter 2 to be string, array given in C:\Apache24\htdocs\new\api\controllers\LoginController.php:171
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'explode() expec...', 'C:\\Apache24\\htd...', 171, Array)
+#1 C:\Apache24\htdocs\new\api\controllers\LoginController.php(171): explode(',', Array)
+#2 [internal function]: api\controllers\LoginController->actionC('64')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#9 {main}
+2018-08-09 18:03:20 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/c'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56499'
+    'REDIRECT_URL' => '/login/c'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/c?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837800.796
+    'REQUEST_TIME' => 1533837800
+]
+2018-08-09 18:03:31 [127.0.0.1][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: explode() expects parameter 2 to be string, array given in C:\Apache24\htdocs\new\api\controllers\LoginController.php:171
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'explode() expec...', 'C:\\Apache24\\htd...', 171, Array)
+#1 C:\Apache24\htdocs\new\api\controllers\LoginController.php(171): explode(',', Array)
+#2 [internal function]: api\controllers\LoginController->actionC('64')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#9 {main}
+2018-08-09 18:03:31 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/c'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56527'
+    'REDIRECT_URL' => '/login/c'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/c?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533837811.907
+    'REQUEST_TIME' => 1533837811
+]
+2018-08-09 18:07:25 [127.0.0.1][-][-][error][yii\base\ErrorException:8] yii\base\ErrorException: Undefined index: community_id in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php:325
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(325): yii\base\ErrorHandler->handleError(8, 'Undefined index...', 'C:\\Apache24\\htd...', 325, Array)
+#1 C:\Apache24\htdocs\new\api\controllers\LoginController.php(176): yii\db\Query->column()
+#2 [internal function]: api\controllers\LoginController->actionC('64')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('c', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/c', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\api\web\index.php(16): yii\base\Application->run()
+#9 {main}
+2018-08-09 18:07:25 [127.0.0.1][-][-][info][application] $_GET = [
+    'user' => '64'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/c'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56891'
+    'REDIRECT_URL' => '/login/c'
+    'REDIRECT_QUERY_STRING' => 'user=64'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'user=64'
+    'REQUEST_URI' => '/login/c?user=64'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1533838045.605
+    'REQUEST_TIME' => 1533838045
+]
