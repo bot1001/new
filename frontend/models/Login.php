@@ -6,7 +6,6 @@ use Yii;
 use yii\helpers\Url;
 use yii\base\Model;
 
-
 class Login extends Model
 {
 	//微信公众平台获取用access_token

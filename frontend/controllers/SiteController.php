@@ -90,6 +90,10 @@ class SiteController extends Controller
 			if(empty($w_info)){
 				return $this->redirect(['/login/login']);
 			}
+
+			echo '<pre />';
+			print_r($w_info);
+			exit;
 				
 			$unionid = $w_info['unionid']; //提取openID
 

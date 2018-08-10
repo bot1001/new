@@ -3,7 +3,6 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use frontend\models\Login;
 
 /**
  * User model
@@ -130,6 +129,5 @@ class Site extends ActiveRecord
 		
 		$_SESSION['house'] = $house; //保存关联房屋到session
 		$_SESSION['home'] = reset($house); //默认进入第一套房子
-		
 	}
 }

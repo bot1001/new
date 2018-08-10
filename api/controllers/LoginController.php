@@ -181,4 +181,11 @@ class LoginController extends Controller
 
         return $comm;
     }
+
+    //获取微信用户信息
+    function actionOpenid($code, $appid, $secret)
+    {
+        $info = Api::Openid($code, $appid, $secret);
+        return $info;
+    }
 }

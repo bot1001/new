@@ -8,6 +8,25 @@ use common\models\OrderAddress as Address;
 
 class Api extends \yii\db\ActiveRecord
 {
+    //获取微信用户信息
+    static function Openid($code, $appid, $secret)
+    {
+        $config = Yii::$app->params['wx_open'];
+        $output = Login::Wx($code,$appid, $secret); //调用login类中封装好的模拟连接
+        $arr = json_decode($output, true); //将json数组转换成普通数组
+
+        if(!isset($arr['access_token'])){
+            return false;
+        }
+        $token = $arr['access_token']; //提取access_token
+        $openid = $arr['openid']; //提取openID
+
+        $info = Login::Info($token, $openid); //查询登录用户信息
+        $info = json_decode($info, true); //将json数据转换普通数组
+
+        return $info;
+    }
+
    static function info($unionid)
    {
        //查询用户信息

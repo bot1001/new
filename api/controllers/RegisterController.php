@@ -8,10 +8,25 @@ use common\models\Api;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\UserRealestate;
+use yii\helpers\Json;
 use yii\web\Controller;
 
 class RegisterController extends Controller
 {
+    //查询当日注册总量
+    function actionCount()
+    {
+        $time = strtotime(date('Y-m-d'));
+        $count = UserData::find()
+            ->select('count(account_id) as count')
+            ->where([ '>=','reg_time', $time])
+            ->orderBy('reg_time DESC')
+            ->asArray()
+            ->one();
+        $count = Json::encode($count);
+        return $count;
+    }
+
     function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender, $province, $city, $area)
     {
         //判断地区编码长度
