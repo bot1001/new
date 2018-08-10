@@ -3,6 +3,7 @@ namespace api\controllers;
 
 use common\models\Order;
 use Yii;
+use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -26,7 +27,7 @@ class OrderController extends Controller
     }
 
     //查询订单总量
-    function actionList()
+    function actionList($page)
     {
         $time = strtotime(date('Y-m-d')); //当日时间戳
         $order = (new \yii\db\Query())
@@ -34,10 +35,23 @@ class OrderController extends Controller
             ->from('order_basic')
             ->join('inner join' , 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
             ->where(['>=', 'order_basic.create_time', $time])
-            ->orderBy('order_basic.create_time DESC')
+            ->orderBy('order_basic.create_time DESC');
+
+        $count = $order->count(); //求总数
+        $p = '10';
+
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $order = $order->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->all();
 
-        $order = Json::encode($order);
+        $order = Json::encode($order);//转换Json数据
         return $order;
     }
 }

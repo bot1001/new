@@ -16,6 +16,26 @@ use yii\helpers\Json;
  */
 class LoginController extends Controller
 {
+    //裕家人支付助手登录
+    function actionPay($unionid)
+    {
+        $user = (new \yii\db\Query())
+            ->select('sys_user.name, sys_user.role, sys_user.phone, sys_user.comment, sys_user_community.community_id as community')
+            ->from('sys_user')
+            ->join('inner join', 'sys_user_community', 'sys_user_community.sys_user_id = sys_user.id')
+            ->where(['password' => "$unionid"])
+            ->one();
+        if(!$user){
+            return false;
+        }
+        $community = $user['community'];
+
+        $community = explode(',', $community);
+        $user['community'] = $community;
+        $user = Json::encode($user);
+
+        return $user;
+    }
     //小程序登录接口
     public function actionIndex()
     {
