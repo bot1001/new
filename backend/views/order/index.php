@@ -296,7 +296,7 @@ $this->title = '订单管理';
 			'template' => '{view}',
 			'buttons' => [
 				'view' => function ( $url, $model, $key ) {
-					return Html::a( 'More', '#', [
+					return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [
 						'data-toggle' => 'modal',
 						'data-target' => '#view-modal', //modal 名字
 						'class' => 'view', //操作名
@@ -307,13 +307,15 @@ $this->title = '订单管理';
 			'width' => '30px',
 			'header' => '操<br />作'
 		],
+        [ 'class' => 'kartik\grid\CheckboxColumn',
+        ],
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,
 		'filterModel' => $searchModel,
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '订单管理',
-				   //'before' => Html::a('你好')
+				   'before' => Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => "btn btn-info"])
 				   ],
 		'columns' => $gridColumn,
 		'hover' => true

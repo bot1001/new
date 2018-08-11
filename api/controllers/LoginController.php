@@ -20,18 +20,24 @@ class LoginController extends Controller
     function actionPay($unionid)
     {
         $user = (new \yii\db\Query())
-            ->select('sys_user.name, sys_user.role, sys_user.phone, sys_user.comment, sys_user_community.community_id as community')
+            ->select('company.name as company, sys_user.name, sys_user.role, sys_user.phone, sys_user.comment, sys_user_community.community_id as community')
             ->from('sys_user')
             ->join('inner join', 'sys_user_community', 'sys_user_community.sys_user_id = sys_user.id')
+            ->join('inner join', 'company', 'company.id = sys_user.company')
             ->where(['password' => "$unionid"])
             ->one();
         if(!$user){
             return false;
         }
-        $community = $user['community'];
+        $community = $user['community']; //提取小区编码
+        $community = explode(',', $community); //分割小区编码
+        $comm = Community::find() //查询小区
+            ->select('community_name as community')
+            ->where(['in', 'community_id', $community])
+            ->orderBy('community_id DESC')
+            ->column();
 
-        $community = explode(',', $community);
-        $user['community'] = $community;
+        $user['community'] = $comm;
         $user = Json::encode($user);
 
         return $user;
@@ -200,12 +206,5 @@ class LoginController extends Controller
         $comm = Json::encode($comm);
 
         return $comm;
-    }
-
-    //获取微信用户信息
-    function actionOpenid($code, $appid, $secret)
-    {
-        $info = Api::Openid($code, $appid, $secret);
-        return $info;
     }
 }

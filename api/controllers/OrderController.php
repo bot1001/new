@@ -1,7 +1,6 @@
 <?php
 namespace api\controllers;
 
-use common\models\Order;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\Json;
@@ -12,14 +11,17 @@ use yii\web\Controller;
  */
 class OrderController extends Controller
 {
-    public function actionCount() //查询当日订单数量
+    public function actionCount($community) //查询当日订单数量
     {
+        $community = Json::decode($community); //将json数组转换为普通数组
         $time = strtotime(date('Y-m-d')); //当日时间戳
-        $order = Order::find()
-            ->select('count(order_id) as count, sum(order_amount) as amount')
-            ->andwhere(['>=', 'payment_time', $time])
+        $order = (new \yii\db\Query())
+            ->select('count(order_basic.order_id) as count, sum(order_basic.order_amount) as amount')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->andwhere(['>=', 'order_basic.payment_time', $time])
+            ->andWhere(['or like', 'order_relationship_address.address', $community])
             ->andWhere(['status' => '2'])
-            ->asArray()
             ->one();
 
         $order = Json::encode($order); //数组转换
