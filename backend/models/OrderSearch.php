@@ -23,7 +23,7 @@ class OrderSearch extends OrderBasic
     {
         return [
             [['id', 'order_parent', 'create_time', 'order_type', 'invoice_id', 'status',  'verify'], 'integer'],
-            [['account_id', 'order0.name','payment_gateway', 'payment_time', 'order0.mobile_phone', 'order_id', 'order0.address', 'payment_number', 'description','todate','fromdate'], 'safe'],
+            [['account_id', 'order0.name','payment_gateway', 'payment_time', 'order0.mobile_phone', 'order_id', 'order0.address', 'payment_number', 'description','todate','fromdate', 'property'], 'safe'],
             [['order_amount'], 'number'],
         ];
     }
@@ -54,7 +54,8 @@ class OrderSearch extends OrderBasic
 		$query->joinWith('status0');
 		$query->joinWith('order0');
 		
-		$query->andwhere(['or like', 'order_relationship_address.address', $name]);
+		$query->andwhere(['or like', 'order_relationship_address.address', $name])
+        ->andwhere(['!=', 'order_basic.status', '100']);
 
         // add conditions that should always apply here
 
@@ -107,6 +108,7 @@ class OrderSearch extends OrderBasic
             ->andFilterWhere(['like', 'payment_gateway', $this->payment_gateway])
             ->andFilterWhere(['like', 'payment_number', $this->payment_number])
             ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'property', $this->property])
 			->andFilterWhere(['like','order_relationship_address.name',$this->getAttribute('order0.name')])
 		    ->andFilterWhere(['like','mobile_phone',$this->getAttribute('order0.mobile_phone')])
 			->andFilterWhere(['like','address',$this->getAttribute('order0.address')]);

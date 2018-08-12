@@ -2,12 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\Invoice;
+use common\models\Order;
+use common\models\Products;
 use Yii;
 use app\models\OrderBasic;
 use app\models\UserInvoice;
 use app\models\CommunityBasic;
-use app\models\CommunityBuilding;
-use app\models\CommunityRealestate;
 use app\models\OrderRelationshipAddress;
 use app\models\OrderSearch;
 use yii\web\Controller;
@@ -77,6 +78,44 @@ class OrderController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    //作废订单
+    function actionTrash($id)
+    {
+        $status = ['3', '4', '5', '6', '8'];
+        $model = Order::find()
+            ->select('status')
+            ->andwhere(['order_id' => $id])
+            ->andWhere(['in', 'payment_gateway', $status])
+            ->andWhere(['status' => '2'])
+            ->column();
+
+        if(!$model){
+            return false;
+        }
+
+        $invoice = Products::find() //查找费项ID
+            ->select('product_id as id')
+            ->where(['order_id' => "$id"])
+            ->asArray()
+            ->all();
+
+        $transaction = Yii::$app->db->beginTransaction(); //开始数据事务
+        try{
+            foreach($invoice as $in){ //循环数组并更新相关信息
+                Invoice::updateAll(['order_id' => '', 'payment_time' => '', 'invoice_status' => '0'], 'invoice_id = :id', [':id' => $in['id']]);
+            }
+            $order = Order::updateAll(['status' => '100', 'invoice_id' => $_SESSION['user']['0']['id'], 'payment_time' => time()], 'order_id = :o_id', [':o_id' => $id]);
+            $transaction->commit();
+        }catch(\Exception $e){
+            $transaction->rollBack();
+        }
+
+        if($order){
+            return true;
+        }
+        return false;
     }
 	
 	//来自缴费页面订单查询

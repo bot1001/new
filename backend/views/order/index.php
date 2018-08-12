@@ -1,18 +1,13 @@
 <?php
 
-use yii\ helpers\ Html;
-use kartik\ grid\ GridView;
-use yii\ bootstrap\ Modal;
-use yii\ helpers\ Url;
+use yii\helpers\Html;
+use kartik\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\ models\ Status;
-use app\ models\ OrderRelationshipAddress;
-use app\ models\ OrderProducts;
-use app\ models\ UserInvoice;
-use app\ models\ CommunityRealestate;
-use app\ models\ CommunityBuilding;
-use app\ models\ CommunityBasic;
-use kartik\daterange\DateRangePicker;
+use app\models\Status;
+use app\models\OrderRelationshipAddress;
+use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'view-modal',
@@ -47,6 +42,29 @@ $this->title = '订单管理';
         text-align: center;
     }
 </style>
+
+<script>
+    function trash(id){
+        if(confirm('您确定要作废此条订单么？'))
+        {
+            $.ajax({
+                type:"GET",
+                dataType:"Json",
+                url:"/order/trash",
+                data:{"id": id},
+                success: function (result) {
+                    if(result == '1'){
+                        alert('作废成功');
+                        location.reload()
+                    };
+                },
+                error: function () {
+                    alert('操作失败，请联系管理员');
+                }
+            })
+        }
+    }
+</script>
 <div class="order-basic-index">
 
 	<?php 
@@ -292,8 +310,25 @@ $this->title = '订单管理';
 			'hAlign' => 'center'
 		],
 
+        ['attribute' => 'property',
+            'value' => function($model){
+                if(empty($model->property)){
+                    return '无';
+                }
+            },
+            'class' => 'kartik\grid\EditableColumn',
+            // 判断活动列是否可编辑
+            'readonly' => function ( $model, $key, $index, $widget ) {
+                return ( \app\models\Limit::limit($url = 'order/order') != 1 );
+            },
+            'editableOptions' => [
+                'formOptions' => [ 'action' => [ '/order/order' ] ], // point to the new action
+                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+            ],
+        ],
+
 		[ 'class' => 'kartik\grid\ActionColumn',
-			'template' => '{view}',
+			'template' => Helper::filterActionColumn('{view} {trash}'),
 			'buttons' => [
 				'view' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', '#', [
@@ -303,12 +338,21 @@ $this->title = '订单管理';
 						'data-id' => $key,
 					] );
 				},
+                'trash' => function($url, $model, $key){
+		            $payment = $model->payment_time;
+		            $distance = time() - $payment; //计算支付时间差，判断是否超过一周604800
+		            if(in_array($model->payment_gateway, [3,4,5,6,8]) && $model->status == '2' && $distance <= '604800')
+//		            if(($model->payment_gateway == '3' || $model->payment_gateway == '4' || $model->payment_gateway == '5' || $model->payment_gateway == '6' || $model->payment_gateway == '8') && $model->status == '2')
+                    {
+                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', '#', ['title' => '作废订单', 'onclick' => "trash($model->order_id)"]);
+                    }else{
+		                return '';
+                    }
+                }
 			],
 			'width' => '30px',
 			'header' => '操<br />作'
 		],
-        [ 'class' => 'kartik\grid\CheckboxColumn',
-        ],
 	];
 	echo GridView::widget( [
 		'dataProvider' => $dataProvider,

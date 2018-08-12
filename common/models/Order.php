@@ -45,7 +45,7 @@ class Order extends \yii\db\ActiveRecord
             [['account_id', 'order_id', 'create_time', 'order_type', 'order_amount'], 'required'],
             [['order_parent', 'create_time', 'order_type', 'payment_time', 'invoice_id', 'status'], 'integer'],
             [['order_amount'], 'number'],
-            [['account_id', 'payment_gateway', 'payment_number', 'description'], 'string', 'max' => 64],
+            [['account_id', 'payment_gateway', 'payment_number', 'description', 'property'], 'string', 'max' => 64],
             [['order_id'], 'string', 'max' => 15],
             [['order_id'], 'unique'],
         ];
@@ -70,6 +70,7 @@ class Order extends \yii\db\ActiveRecord
             'order_amount' => '合计',
             'invoice_id' => '订单类型', //多余字段
             'status' => '状态',
+            'property' => '备注'
         ];
     }
 	

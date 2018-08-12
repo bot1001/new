@@ -8,11 +8,46 @@ use common\models\Api;
 use common\models\UserAccount;
 use common\models\UserData;
 use common\models\UserRealestate;
+use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\web\Controller;
 
 class RegisterController extends Controller
 {
+    //按小区分类查询注册量(当日）
+    function actionDay($page)
+    {
+        $time = strtotime(date('Y-m-d'));
+        $sum = (new \yii\db\Query())
+            ->select('community_basic.community_name as community, count(*) as count')
+            ->from('user_relationship_realestate')
+            ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
+            ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
+            ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->where([ '>=','user_data.reg_time', $time])
+            ->groupBy('community_basic.community_name')
+            ->orderBy('user_data.reg_time DESC');
+
+        $count = $sum->count(); //求总数
+        $p = '15';
+
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $count = $sum->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+
+        $count = Json::encode($count);
+        return $count;
+    }
+
     //查询当日注册总量
     function actionCount()
     {

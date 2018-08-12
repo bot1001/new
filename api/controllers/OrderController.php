@@ -20,9 +20,10 @@ class OrderController extends Controller
             ->from('order_basic')
             ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
             ->andwhere(['>=', 'order_basic.payment_time', $time])
+            ->andWhere(['!=', 'status', '100'])
             ->andWhere(['or like', 'order_relationship_address.address', $community])
             ->andWhere(['status' => '2'])
-            ->one();
+            ->all();
 
         $order = Json::encode($order); //数组转换
         return $order;
@@ -36,7 +37,8 @@ class OrderController extends Controller
             ->select('order_basic.order_id as order_number, order_basic.order_amount, order_basic.status, order_relationship_address.address')
             ->from('order_basic')
             ->join('inner join' , 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
-            ->where(['>=', 'order_basic.create_time', $time])
+            ->andwhere(['>=', 'order_basic.create_time', $time])
+            ->andWhere(['!=', 'status', '100'])
             ->orderBy('order_basic.create_time DESC');
 
         $count = $order->count(); //求总数

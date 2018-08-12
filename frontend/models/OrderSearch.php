@@ -19,7 +19,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'order_parent', 'create_time', 'order_type', 'payment_time', 'invoice_id', 'status'], 'integer'],
-            [['account_id', 'order_id', 'payment_gateway', 'payment_number', 'description'], 'safe'],
+            [['account_id', 'order_id', 'payment_gateway', 'payment_number', 'description', 'property'], 'safe'],
             [['order_amount'], 'number'],
         ];
     }
@@ -75,6 +75,7 @@ class OrderSearch extends Order
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'property', $this->property])
             ->andFilterWhere(['like', 'payment_gateway', $this->payment_gateway])
             ->andFilterWhere(['like', 'payment_number', $this->payment_number])
             ->andFilterWhere(['like', 'description', $this->description]);
