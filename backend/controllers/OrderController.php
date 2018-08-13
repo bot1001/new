@@ -86,7 +86,7 @@ class OrderController extends Controller
         $status = ['3', '4', '5', '6', '8'];
         $model = Order::find()
             ->select('status')
-            ->andwhere(['order_id' => $id])
+            ->andwhere(['order_id' => "$id"])
             ->andWhere(['in', 'payment_gateway', $status])
             ->andWhere(['status' => '2'])
             ->column();

@@ -328,15 +328,15 @@ $this->title = '缴费管理';
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
-			'class' => 'kartik\grid\EditableColumn',
-			/*'readonly' => function($model, $key, $index, $widget) {
+            /*'class' => 'kartik\grid\EditableColumn',
+          /*'readonly' => function($model, $key, $index, $widget) {
                  return ($model->invoice_status != 0); // 判断活动列是否可编辑
-              },*/
-			'editableOptions' => [
-				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => [ '0' => '欠费', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '8' => '优惠' ],
-			],
+              },
+            'editableOptions' => [
+                'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action
+                'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
+                'data' => [ '0' => '欠费', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '8' => '优惠' ],
+            ],*/
 			'width' => ''
 		],
 

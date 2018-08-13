@@ -20,7 +20,7 @@ class LoginController extends Controller
     function actionPay($unionid)
     {
         $user = (new \yii\db\Query())
-            ->select('company.name as company, sys_user.name, sys_user.role, sys_user.phone, sys_user.comment, sys_user_community.community_id as community')
+            ->select('company.name as company, sys_user.id as id, sys_user.name, sys_user.role, sys_user.phone, sys_user.comment, sys_user_community.community_id as community')
             ->from('sys_user')
             ->join('inner join', 'sys_user_community', 'sys_user_community.sys_user_id = sys_user.id')
             ->join('inner join', 'company', 'company.id = sys_user.company')
