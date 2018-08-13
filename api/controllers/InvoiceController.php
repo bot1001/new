@@ -25,6 +25,13 @@ class InvoiceController extends Controller
             ->orderBy('invoice_status ASC, year DESC, month DESC');
 
         $count = $invoice->count(); //求总数
+
+        $p = '10';
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
         $pagination = new Pagination(['totalCount' => $count, 'pageSize' => '10']); //实例化分页并设置每页显示数量
 
         $invoice = $invoice->offset($pagination->offset)
@@ -72,7 +79,13 @@ class InvoiceController extends Controller
         $orders = Order::find()->andWhere(['account_id' => "$account_id"])->orderBy('status ASC, order_id DESC');
 
         $count = $orders->count();  //求总数
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 10]); //实例化分页模型并设置每页数量
+
+        $p = '10';
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]); //实例化分页模型并设置每页数量
 
         $orders = $orders->offset($pagination->offset) //执行查询命令并按照分页数量获取数据
             ->limit($pagination->limit)

@@ -14,23 +14,25 @@ use yii\web\Controller;
 
 class RegisterController extends Controller
 {
-    //按小区分类查询注册量(当日）
-    function actionDay($page)
-    {
+    //单个小区查询当日注册量
+    function actionOne($community, $page){
         $time = strtotime(date('Y-m-d'));
+
         $sum = (new \yii\db\Query())
-            ->select('community_basic.community_name as community, count(*) as count')
+            ->select(["concat( community_basic.community_name,' ', community_building.building_name,' ',community_realestate.room_number, ' ',community_realestate.room_name) as address
+            ,user_account.mobile_phone as phone, user_data.real_name as name, from_unixtime(user_data.reg_time) as time"])
             ->from('user_relationship_realestate')
-            ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
-            ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
             ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
-            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
-            ->where([ '>=','user_data.reg_time', $time])
-            ->groupBy('community_basic.community_name')
+            ->join('inner join', 'community_basic', 'community_basic.community_id= community_realestate.community_id')
+            ->join('inner join', 'community_building', 'community_building.building_id= community_realestate.building_id')
+            ->join('inner join', 'user_data', 'user_data.account_id = user_relationship_realestate.account_id')
+            ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
+            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andWhere(['or like', 'community_basic.community_name', $community])
             ->orderBy('user_data.reg_time DESC');
 
         $count = $sum->count(); //求总数
-        $p = '15';
+        $p = '10';
 
         $pa = ceil($count/$p); //求页数
         if($page>$pa){
@@ -43,21 +45,72 @@ class RegisterController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+        $count = Json::encode($count);
+        return $count;
+    }
+
+    //按小区分类查询注册量(当日）
+    function actionDay($community, $page)
+    {
+        $community = Json::decode($community);
+        $time = strtotime(date('Y-m-d'));
+        $sum = (new \yii\db\Query())
+            ->select('community_basic.community_name as community, count(*) as count')
+            ->from('user_relationship_realestate')
+            ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
+            ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
+            ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andWhere(['or like', 'community_basic.community_name', $community])
+            ->groupBy('community_basic.community_name')
+            ->orderBy('user_data.reg_time DESC');
+
+        $count = $sum->count(); //求总数
+        $p = '10';
+
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $count = $sum->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
         $count = Json::encode($count);
         return $count;
     }
 
     //查询当日注册总量
-    function actionCount()
+    function actionCount($community)
     {
+        $community = Json::decode($community); //数组类型转换
         $time = strtotime(date('Y-m-d'));
-        $count = UserData::find()
-            ->select('count(account_id) as count')
-            ->where([ '>=','reg_time', $time])
-            ->orderBy('reg_time DESC')
-            ->asArray()
-            ->one();
+
+        $user = (new \yii\db\Query())
+            ->select('community_basic.community_name as community, count(*) as count')
+            ->from('user_relationship_realestate')
+            ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
+            ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
+            ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andWhere(['or like', 'community_basic.community_name', $community])
+            ->groupBy('community_basic.community_name')
+            ->orderBy('user_data.reg_time DESC')
+            ->all();
+
+        //重新计算
+        $c = array_column($user, 'count'); //提取每个小区数量
+        $sum = array_sum($c); //每个小区数量求和
+
+        $comm = count($user); //计算小区总量
+
+        $count = ['community' => $comm, 'count' => $sum];
+
         $count = Json::encode($count);
         return $count;
     }

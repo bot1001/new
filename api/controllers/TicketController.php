@@ -17,7 +17,14 @@ class TicketController extends Controller
         $ticket = Ticket::find()->where(['account_id' => "$account_id"]);
 
         $count = $ticket->count(); // 计算总数
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => '10']);// 创建分页对象
+
+        $p = '10';
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]);// 创建分页对象
 
         $ticket = $ticket->offset($pagination->offset)
             ->limit($pagination->limit)

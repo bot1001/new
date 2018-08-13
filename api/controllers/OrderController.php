@@ -82,8 +82,10 @@ class OrderController extends Controller
     }
 
     //查询订单总量
-    function actionList($page)
+    function actionList($page, $community)
     {
+        $community = Json::decode($community);
+
         $time = strtotime(date('Y-m-d')); //当日时间戳 from_unixtime(payment_time,'Y-m-d H:i:s')payment_time
         $order = (new \yii\db\Query())
             ->select("order_basic.order_id as order_number, order_basic.order_amount, order_basic.status, from_unixtime(payment_time) as payment_time, order_basic.verify,
@@ -93,8 +95,12 @@ class OrderController extends Controller
             ->join('inner join' , 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
             ->andwhere(['>=', 'order_basic.create_time', $time])
             ->andWhere(['!=', 'status', '100'])
+            ->andWhere(['or like', 'order_relationship_address.address', $community])
+            ->andWhere(['order_basic.order_type' => '1'])
             ->orderBy('order_basic.create_time DESC');
-
+        echo '<pre />';
+        print_r(date('Y-m-d'));
+print_r($order);
         $count = $order->count(); //求总数
         $p = '10';
 
@@ -110,6 +116,18 @@ class OrderController extends Controller
             ->all();
 
         $order = Json::encode($order);//转换Json数据
+        return $order;
+    }
+
+    function actionOne($order_id) //订单详情列表
+    {
+        $order = Order::find()
+            ->select('verify')
+            ->where(['order_basic.order_id' => "$order_id"])
+            ->one();
+
+        $order = Json::encode($order); //数组转换
+
         return $order;
     }
 }
