@@ -34,7 +34,7 @@ class TicketController extends Controller
         return $ticket;
     }
 
-    //查询当日投诉总数
+    //支付助手查询当日投诉总数
     function actionCount($fromdate, $todate, $community)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
@@ -46,7 +46,7 @@ class TicketController extends Controller
         $count = (new \yii\db\Query())
             ->select('count(ticket_number) as count, ticket_status as status')
             ->from('ticket_basic')
-            ->join('inner join', 'community_Basic', 'community_basic.community_id = ticket_basic.community_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = ticket_basic.community_id')
             ->where(['between', 'ticket_basic.create_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['or like', 'community_basic.community_name', $community])
             ->orderBy('ticket_status')
