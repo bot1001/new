@@ -63,15 +63,20 @@ class OrderController extends Controller
         return false;
     }
 
-    public function actionCount($community) //查询当日订单数量
+    public function actionCount($fromdate, $todate, $community) //查询当日订单数量
     {
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
+
         $community = Json::decode($community); //将json数组转换为普通数组
         $time = strtotime(date('Y-m-d')); //当日时间戳
         $order = (new \yii\db\Query())
             ->select('count(order_basic.order_id) as count, sum(order_basic.order_amount) as amount')
             ->from('order_basic')
             ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
-            ->andwhere(['>=', 'order_basic.payment_time', $time])
+            ->andwhere(['between', 'order_basic.payment_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['!=', 'status', '100'])
             ->andWhere(['or like', 'order_relationship_address.address', $community])
             ->andWhere(['status' => '2'])
@@ -82,8 +87,12 @@ class OrderController extends Controller
     }
 
     //查询订单总量
-    function actionList($page, $community)
+    function actionList($fromdate, $todate, $page, $community)
     {
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
         $community = Json::decode($community);
 
         $time = strtotime(date('Y-m-d')); //当日时间戳 from_unixtime(payment_time,'Y-m-d H:i:s')payment_time
@@ -93,14 +102,12 @@ class OrderController extends Controller
             order_relationship_address.address, order_relationship_address.mobile_phone as phone, order_relationship_address.name")
             ->from('order_basic')
             ->join('inner join' , 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
-            ->andwhere(['>=', 'order_basic.create_time', $time])
+            ->andWhere([ 'between', 'order_basic.create_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['!=', 'status', '100'])
             ->andWhere(['or like', 'order_relationship_address.address', $community])
             ->andWhere(['order_basic.order_type' => '1'])
             ->orderBy('order_basic.create_time DESC');
-        echo '<pre />';
-        print_r(date('Y-m-d'));
-print_r($order);
+
         $count = $order->count(); //求总数
         $p = '10';
 

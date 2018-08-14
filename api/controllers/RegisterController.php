@@ -15,8 +15,12 @@ use yii\web\Controller;
 class RegisterController extends Controller
 {
     //单个小区查询当日注册量
-    function actionOne($community, $page){
-        $time = strtotime(date('Y-m-d'));
+    function actionOne($fromdate, $todate, $community, $page)
+    {
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
 
         $sum = (new \yii\db\Query())
             ->select(["concat( community_basic.community_name,' ', community_building.building_name,' ',community_realestate.room_number, ' ',community_realestate.room_name) as address
@@ -27,7 +31,7 @@ class RegisterController extends Controller
             ->join('inner join', 'community_building', 'community_building.building_id= community_realestate.building_id')
             ->join('inner join', 'user_data', 'user_data.account_id = user_relationship_realestate.account_id')
             ->join('inner join', 'user_account', 'user_account.account_id = user_relationship_realestate.account_id')
-            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andWhere([ 'between','user_data.reg_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['or like', 'community_basic.community_name', $community])
             ->orderBy('user_data.reg_time DESC');
 
@@ -50,10 +54,14 @@ class RegisterController extends Controller
     }
 
     //按小区分类查询注册量(当日）
-    function actionDay($community, $page)
+    function actionDay($fromdate, $todate, $community, $page)
     {
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
         $community = Json::decode($community);
-        $time = strtotime(date('Y-m-d'));
+
         $sum = (new \yii\db\Query())
             ->select('community_basic.community_name as community, count(*) as count')
             ->from('user_relationship_realestate')
@@ -61,7 +69,7 @@ class RegisterController extends Controller
             ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
             ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
-            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andWhere([ 'between','user_data.reg_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['or like', 'community_basic.community_name', $community])
             ->groupBy('community_basic.community_name')
             ->orderBy('user_data.reg_time DESC');
@@ -85,10 +93,13 @@ class RegisterController extends Controller
     }
 
     //查询当日注册总量
-    function actionCount($community)
+    function actionCount($fromdate, $todate, $community)
     {
         $community = Json::decode($community); //数组类型转换
-        $time = strtotime(date('Y-m-d'));
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
 
         $user = (new \yii\db\Query())
             ->select('community_basic.community_name as community, count(*) as count')
@@ -97,7 +108,7 @@ class RegisterController extends Controller
             ->join('inner join', 'user_data', 'user_data.account_id = user_account.account_id')
             ->join('inner join', 'community_realestate', 'user_relationship_realestate.realestate_id = community_realestate.realestate_id')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
-            ->andWhere([ '>=','user_data.reg_time', $time])
+            ->andwhere(['between', 'user_data.reg_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['or like', 'community_basic.community_name', $community])
             ->groupBy('community_basic.community_name')
             ->orderBy('user_data.reg_time DESC')

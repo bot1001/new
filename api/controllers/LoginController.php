@@ -33,11 +33,13 @@ class LoginController extends Controller
         $community = explode(',', $community); //分割小区编码
         $comm = Community::find() //查询小区
             ->select('community_name as community')
-            ->where(['in', 'community_id', $community])
-            ->orderBy('community_id DESC')
-            ->column();
+            ->where(['in', 'community_id', $community])->orderBy('community_id DESC')
+            ->asArray()
+            ->all();
+        $c = array_column($comm, 'community'); //提取小区名称
 
-        $user['community'] = $comm;
+        $user['community'] = $c; //从新赋值$user中的小区
+        $user = ['user' => $user, 'community' => $comm]; //合并数组
         $user = Json::encode($user);
 
         return $user;

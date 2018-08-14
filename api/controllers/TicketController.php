@@ -35,15 +35,22 @@ class TicketController extends Controller
     }
 
     //查询当日投诉总数
-    function actionCount()
+    function actionCount($fromdate, $todate, $community)
     {
-        $time = strtotime(date('Y-m-d')); //当日时间戳
-        $count = Ticket::find()
+        if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
+        {
+            $todate = date('Y-m-d',strtotime("$todate +1 day"));
+        }
+
+        $community = Json::decode($community); //将json数组转换为普通数组
+        $count = (new \yii\db\Query())
             ->select('count(ticket_number) as count, ticket_status as status')
-            ->where(['>=', 'create_time', $time])
+            ->from('ticket_basic')
+            ->join('inner join', 'community_Basic', 'community_basic.community_id = ticket_basic.community_id')
+            ->where(['between', 'ticket_basic.create_time', strtotime($fromdate), strtotime($todate)])
+            ->andWhere(['or like', 'community_basic.community_name', $community])
             ->orderBy('ticket_status')
             ->groupBy('ticket_status')
-            ->asArray()
             ->all();
 
         $sum = 0; //设置未处理投诉量为0
