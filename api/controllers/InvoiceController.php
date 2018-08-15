@@ -13,6 +13,18 @@ use yii\helpers\Json;
  */
 class InvoiceController extends Controller
 {
+    //裕家人小程序查询房屋欠费总合
+    function actionSum($realestate_id)
+    {
+        $invoice = Invoice::find()
+            ->select('sum(invoice_amount) as amount')
+            ->where(['realestate_id' => $realestate_id, 'invoice_status' => '0'])
+            ->asArray()
+            ->one();
+
+        $invoice = Json::encode($invoice);
+        return $invoice;
+    }
     //批量获取缴费数据
     function actionIndex($realestate, $page)
     {
