@@ -13,7 +13,6 @@ class PayController extends Controller
     public function actionWx($order_id, $description, $community, $amount, $openid)
     {
         require_once dirname( __FILE__ ) . '/wx/WxPay.Api.php'; //微信配置文件
-        require_once dirname( __FILE__ ) . '/wx/jsapi.php'; //微信配置文件
 
         $input = new \WxPayUnifiedOrder();//实例化微信支付
 
@@ -30,11 +29,6 @@ class PayController extends Controller
         $input->SetOpenid( "$openid" ); // 用户openID
 
         $result = \WxPayAPI::unifiedOrder($input);
-
-        $order = new WxPayUnifiedOrder();
-        $jsApiParameters = $order->GetJsApiParameters($order);
-
-
 
         $res = Json::encode($result);
 
