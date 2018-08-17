@@ -14,6 +14,7 @@ $this->title = $model[ 'id' ];
 $this->params[ 'breadcrumbs' ][] = [ 'label' => '订单列表', 'url' => [ 'index' ] ];
 $this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
+
 <div class="order-basic-view">
 	
 	<style>
@@ -22,6 +23,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			height: auto;
 			border-radius: 20px;
 		}
+
 	</style>
 
 	<?= DetailView::widget([
@@ -30,7 +32,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             ['attribute' => 'id',
 			'label' => '序号'],
             
-	        ['attribute' => 'ad',
+	        ['attribute' => 'address',
 			 'label' => '地址',],
 	
             ['attribute' => 'order_id',
@@ -74,15 +76,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	             	return '';
 	             }
             }],
-	
-	       /*['attribute' => 'order.product_name',
-			'label' => '名称',
-			 'format' => 'raw',
-			 'value' => function($model){
-				 $url = Yii::$app->urlManager->createUrl(['/user-invoice/index1','order_id' => $model['order_id']]);
-	             return Html::a('点击查看',$url);
-            }],*/
-	
+
 	        ['attribute' => 'order_amount',
 			 'label' => '金额',],
             
@@ -93,13 +87,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
              },
 	        'label' => '订单状态'],
         ],
+        'template' => '<tr><th style="text-align: right">{label}</th><td style="text-align: left">{value}</td></tr>',
     ]) ?>
 
 	<?php 
 	if($model['status'] != 1) { exit; };
 	
 	$pay = ['order_id'=> $model['order_id'],
-				  'description'=> $model['description'],
+				  'description'=> $model['address'],
 				  'order_amount'=>$model['order_amount'],
 				  'status' => $model['status'],
 			      'community' => $model['account_id']

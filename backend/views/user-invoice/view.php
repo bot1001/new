@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'order.payment_number',
              'order.order_amount',
         ],
+        'template' => '<tr><th style="text-align: right">{label}</th><td style="text-align: left">{value}</td></tr>',
     ]) ?>
     <?php
     $amount = \common\models\Order::find() //查询订单金额
@@ -36,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ->one();
     ?>
     <p align="center">
-        <?= Html::a('<span class="glyphicon glyphicon-print"></span>', ['order/print','order_id' => $model->order_id, 'amount' => $amount['amount']], ['class' => 'btn btn-success'])?>
-        <?= Html::a('<span class="glyphicon glyphicon-align-justify"></span>', ['order/index','order_id' => $model->order_id], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-print"></span>', ['order/print','order_id' => $model->order_id, 'amount' => $amount['amount']], ['class' => 'btn btn-success', 'title'=> '打印'])?>
+        <?= Html::a('<span class="glyphicon glyphicon-align-justify"></span>', ['order/index','order_id' => $model->order_id], ['class' => 'btn btn-info', 'title' => '进入订单列表']) ?>
 </p>
 </div>

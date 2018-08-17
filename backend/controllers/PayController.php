@@ -66,22 +66,18 @@ class PayController extends Controller
                      'order_id' => $order_id,
                      'description' => $description,
                      'order_amount' => $order_amount,
-                     'community' => $community,
                      'order_body' => $order_body]);
                  }elseif($paymethod == 'wx'){
                  return $this->redirect(['wx',
                      'order_id' => $order_id,
                      'description' => $description,
                      'order_amount' => $order_amount,
-                     'community' => $community,
                      'order_body' => $order_body]);
                  }elseif($paymethod == 'jh'){
                  return $this->redirect(['jh',
                      'order_id' => $order_id,
-                     'description' => $description,
                      'order_amount' => $order_amount,
-                     'community' => $community,
-                     'order_body' => $order_body]);
+                     'community' => $community]);
                  }else{
                  return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway]);
                  }
@@ -89,11 +85,11 @@ class PayController extends Controller
 	}
 	
 	//建行接口
-	public function actionJh($order_id,$description,$order_amount,$community,$order_body)
+	public function actionJh($order_id,$order_amount,$community)
 	{		
 	    $MERCHANTID ="105635000000321";  						//商户号 
 	    $POSID="011945623";             						//$_POST["POSID"] ;  
-	    $BRANCHID="450000000"; 									//分行号码 
+	    $BRANCHID="450000000"; 								//分行号码
 	    $ORDERID=$order_id;                                     //订单号
 	    $PAYMENT=$order_amount;									//金额 
 	    $CURCODE="01";											//币种 
@@ -172,23 +168,23 @@ class PayController extends Controller
 	}
 	
 	//调用支付宝
-	public function actionAlipay($community)
+	public function actionAlipay($order_id, $description, $order_amount, $order_body)
 	{	
 		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
         require_once dirname(__FILE__).'/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
 		$config = Yii::$app->params['Alipay'];
  
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        $out_trade_no = trim($_GET['order_id']);
+        $out_trade_no = trim($order_id);
 
         //订单名称，必填
-        $subject = trim($_GET['description']);
+        $subject = trim($description);
 
         //付款金额，必填
-        $total_amount = trim($_GET['order_amount']);
+        $total_amount = trim($order_amount);
 
         //商品描述，可空
-        $body = trim($_GET['order_body'].'-'.$community);
+        $body = trim($order_body);
 
 	    //构造参数
 	    $payRequestBuilder = new \AlipayTradePagePayContentBuilder();
@@ -293,13 +289,13 @@ class PayController extends Controller
 	}
 	
 	//微信支付
-	public function actionWx($order_id, $description, $order_amount, $community, $order_body)
+	public function actionWx($order_id, $description, $order_amount)
 	{
 		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
 		
 		$input = new \WxPayUnifiedOrder();//实例化微信支付
 		
-		$input->SetBody( $description.'-'.$community );//商品标题
+		$input->SetBody( $description);//商品标题
 		
 		$input->SetOut_trade_no( $order_id ); //订单编号
 		

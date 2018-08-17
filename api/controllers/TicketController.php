@@ -62,7 +62,7 @@ class TicketController extends Controller
             ->where(['ticket_reply.ticket_id' => "$ticket_id"])
             ->orderBy('ticket_reply.reply_time')
             ->all();
-
+        
         $result = ['ticket' => $ticket, 'user' => $user, 'answer' => $answer];
 
         $result = Json::encode($result);

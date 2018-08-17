@@ -6,6 +6,7 @@ use common\models\Building;
 use common\models\Community;
 use common\models\Company;
 use common\models\HouseInfo;
+use common\models\Login;
 use common\models\Realestate;
 use common\models\SysCommunity;
 use yii\web\Controller;
@@ -16,6 +17,13 @@ use yii\helpers\Json;
  */
 class LoginController extends Controller
 {
+    //裕家人支付助手获取用户openID
+    function actionOpenid($appid, $secret, $js_code, $grant_type)
+    {
+        $output = Login::Wx($appid, $secret, $js_code, $grant_type);
+
+        return $output;
+    }
     //裕家人支付助手登录
     function actionPay($unionid)
     {
@@ -24,7 +32,7 @@ class LoginController extends Controller
             ->from('sys_user')
             ->join('inner join', 'sys_user_community', 'sys_user_community.sys_user_id = sys_user.id')
             ->join('inner join', 'company', 'company.id = sys_user.company')
-            ->where(['password' => "$unionid"])
+            ->where(['sys_user.password' => "$unionid"])
             ->one();
         if(!$user){
             return false;

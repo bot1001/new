@@ -68,6 +68,8 @@ class UserInvoiceSearch extends UserInvoice
 			'sort' => [
 			     'defaultOrder' =>[
 			           'invoice_id' => SORT_DESC,
+			           'year' => SORT_DESC,
+			           'month' => SORT_DESC,
 			           'description' => SORT_DESC,
 		              ]
 		         ]

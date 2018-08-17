@@ -214,6 +214,14 @@ class OrderController extends Controller
     public function actionView($id)
     {
 		$model = OrderBasic::find()->where(['id' => $id])->asArray()->one();
+
+        $model = (new \yii\db\Query()) // 查找最新生成的订单信息
+        ->select('order_basic.*, order_relationship_address.address')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->where(['order_basic.id' => "$id"])
+            ->one();
+
 		$a_id = $model['account_id'];
 		$o_id = $model['order_id'];
 		$len = strlen($a_id);
@@ -324,7 +332,7 @@ class OrderController extends Controller
 		$number = $a['number']; //单元
 		$name = $a['name']; //房号
 		
-		$address = $c.'-'.$b.'-'.$name; //拼接地址
+		$address = $c.' '.$b.' '.$number.'单元'.' '.$name; //拼接地址
 		
 		return $this->render('add', [
 			    'invoice' => $invoice,
@@ -342,18 +350,12 @@ class OrderController extends Controller
 		
 		$order_id = OrderBasic::Order($c, $id, $c_id, $address); //生成订单信息
 			
-        $model = OrderBasic::find()
-			->where(['order_id' => "$order_id"])
-			->asArray()
+        $model = (new \yii\db\Query()) // 查找最新生成的订单信息
+            ->select('order_basic.*, order_relationship_address.address')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+			->where(['order_basic.order_id' => "$order_id"])
 			->one();
-		
-		$ad = CommunityBasic::find()
-				->select('community_name as ad,community_id')
-			    ->where(['in', 'community_id', $model['account_id']])
-				->asArray()
-			    ->one();
-
-		$model = array_merge($model,$ad);
 
 		return $this->renderAjax('view', [
             'model' => $model,

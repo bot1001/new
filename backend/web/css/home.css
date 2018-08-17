@@ -14,11 +14,11 @@ h{
 		  left: 100px;
 		  background: #E5F5F3
 	  }
-	  
+
 	  g{
 		  color: #000000;
 	  }
-	  
+
 	  #box1{
 		  height: 300px;
 		  width: 400px;
@@ -46,7 +46,7 @@ h{
 		  margin-top: 1%;
 		  margin-left: 1%;
 	  }
-	  
+
 	  #box4{
 		  height: 300px;
 		  width: 400px;
@@ -56,7 +56,7 @@ h{
 		  margin-top: 1%;
 		  margin-left: 1%;
 	  }
-	  
+
 	  #box5{
 		  height: 300px;
 		  width: 400px;
@@ -66,7 +66,7 @@ h{
 		  margin-top: 1%;
 		  margin-left: 1%;
 	  }
-	  
+
 	  #div4{
 		 color: aqua;
 		  background: #DBDADA;
@@ -79,22 +79,22 @@ h{
 		  margin: auto;
 		  border-radius: 5px;
 		  width: 150px;
-		  
+
 	  }
 	  #div5{
 		  height: 210px;
 		  overflow: auto;
-		  
+
 	  }
-	  
+
 	  #div6{
 		  height: auto;
 		  font-size: 19px;
 		  background-color: #E5F5F3;
 		  border-radius: 5px;
-		  margin-bottom: 5px; #div 上下之间的距离
+		  margin-bottom: 5px; /*#div 上下之间的距离*/
 	  }
-	  
+
 	  #div10{
 		  height: auto;
 		  font-size: 19px;
@@ -103,23 +103,23 @@ h{
 		  border-radius: 5px;
 		  margin-bottom:5px; #div 之间的距离
 	  }
-	  
+
 	  #div7{
 		  color: red;
 		  position: relative;
 		  margin-left: 250px;
-		  margin-top: -28px; 
+		  margin-top: -28px;
 	  }
-	  
+
 	  #div8{
 		  height: 250px;
 		  width: 385px;
-		  overflow: auto; 
+		  overflow: auto;
 		  border-radius:10px;
 		  position: relative;
 		  left: 2%;
 	  }
-	  
+
 	  #in01{
 		  background: #7ABD77;
 		  width: 100%;;
@@ -128,7 +128,7 @@ h{
 		  text-align-last:justify;
 		  font-size: 16px;
 	  }
-	  
+
 	  #in02{
 		  width: 100%;
 		  height: 100%;
@@ -138,7 +138,7 @@ h{
 		  font-size: 16px;
 		  background: #A9E0D3;
 	  }
-	  
+
 	  #divin{
 		  position: relative; width: 40%;
 	  }
@@ -156,7 +156,7 @@ h{
 		  background: url('/image/logo.png');
 		  background-size: 98px 100px;
 	  }
-	  
+
 	  #in05{
 		  text-align: center;
 		  background: #7ABD77;
@@ -164,31 +164,31 @@ h{
 		  height: 100%;
 		  width: 100%;
 	  }
-	  
+
 	  table{
 		  background: #88DCDB;
-		  width: 100%;		  
+		  width: 100%;
 	  }
-	  
+
 	  #in06{
 		  width: 180px;
 		  background: #A9E0D3;
 		  border-radius: 5px;
-		  margin-bottom: 2px; 
-	  }	 
-	  
+		  margin-bottom: 2px;
+	  }
+
 	  #in08{
 		  display: inline;
 		  background: #A9E0D3;
 		  border-radius: 5px;
-		  margin-bottom: 2px; #div 上下之间的距离
-	  }	 
-	  
+		  margin-bottom: 2px; /* #div 上下之间的距离*/
+	  }
+
 	  #in07{
 		  width: 200px;
 		  background: #7ABD77;
 		  border-radius: 5px;
-		  margin-bottom: 5px; #div 上下之间的距离
+		  margin-bottom: 5px; /*#div 上下之间的距离*/
 		  text-align: center;
 		  margin: auto;
-	  }	  
+	  }

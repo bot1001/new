@@ -49,8 +49,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['attribute' => 'success',
             'value' => function($model){
-                return $model->success.'条';
-            },],
+                if($model->success == '1')
+                {
+                    return '是';
+                }elseif($model->success == '0'){
+                    return '失败';
+                }else{
+                    return $model->success.'条';
+                }
+            },
+            'contentOptions' => function($model)
+            {
+                return ( $model->success == '0') ? [ 'class' => 'bg-warning' ] : [];
+            }
+        ],
+
         ['attribute' => 'phone',],
 
         ['attribute' => 'sender',
@@ -98,6 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'kartik\grid\ActionColumn',
             'template' => '{delete}',
             'header' => '操<br />作'],
+        ['class' => 'kartik\grid\CheckboxColumn']
     ];
 
     echo GridView::widget([

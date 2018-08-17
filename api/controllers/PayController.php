@@ -29,7 +29,7 @@ class PayController extends Controller
         $input->SetOpenid( "$openid" ); // 用户openID
 
         $result = \WxPayAPI::unifiedOrder($input);
-
+        
         $res = Json::encode($result);
 
         return $res;

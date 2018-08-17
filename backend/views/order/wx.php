@@ -35,6 +35,11 @@ use yii\helpers\Url;
 	img{
 		border-radius: 10px;
 	}
+
+    success{
+        font-size: 20px;
+        font-weight: bolder;
+    }
 </style>
 
 <script>
@@ -45,7 +50,7 @@ use yii\helpers\Url;
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
 					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 
-																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
+																								 'order_id' => $order_id, 'amount' => $order_amount]); ?>"><success>支付成功！</success></a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 

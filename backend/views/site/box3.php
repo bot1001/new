@@ -24,7 +24,7 @@ use yii\helpers\Url;
                 <div id="div6">
                 	<?php
 						echo '<i class="fa fa-flag-o"></i>'.' '.$or->address;
-		                echo "<div id ='div7'>";
+		                echo "<div id ='div7'  style= 'text-align: right'>";
 				           echo $or->order_amount.'<g>'.' '.'元'.'</g>';
 				        echo "</div>";
                 	   ?>
