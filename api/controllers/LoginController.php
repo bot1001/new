@@ -74,8 +74,11 @@ class LoginController extends Controller
             ->select('name, id')
             ->where(['parent' => '0'])
             ->orderBy('id ASC')
-            ->indexBy('id')
-            ->column();
+            ->asArray()
+            ->all();
+
+        $name = array_column($company, 'name');
+        $company = ['name' => $name, 'company' => $company];
         $company = Json::encode($company);
 
         return $company;
@@ -102,13 +105,14 @@ class LoginController extends Controller
             ->select('name, id')
             ->where(['parent' => "$company"])
             ->orderBy('id ASC')
-            ->indexBy('id')
-            ->column();
+            ->all();
+        $name = array_column($companys, 'name');
         if(empty($company))
         {
             return false;
         }
-
+        $name = array_column($companys, 'name');
+        $companys = ['name' => $name, 'companys' => $companys]; //重新组合返回数组
         $companys = Json::encode($companys);
 
         return $companys;
@@ -118,15 +122,19 @@ class LoginController extends Controller
     function actionCommunity($company)
     {
         $community = Community::find()
-            ->select('community_name, community_id')
+            ->select('community_name as name, community_id as id')
             ->where(['company' => "$company"])
-            ->indexBy('community_id')
             ->orderBy('community_name')
-            ->column();
+            ->asArray()
+            ->all();
+
         if(empty($community))
         {
             return false;
         }
+
+        $name = array_column($community, 'name');
+        $community = ['name' => $name, 'communitys' => $community]; //重新组合返回数组
         $community = Json::encode($community);
 
         return $community;
@@ -136,13 +144,14 @@ class LoginController extends Controller
     function actionBuilding($community)
     {
         $building = Building::find()
-            ->select('building_name, building_id')
-            ->where(['community_id' => $community])
-            ->indexBy('building_id')
-            ->orderBy('building_name')
-            ->column();
-
+            ->select('building_name as name, building_id as id')
+            ->where(['community_id' => "$community"])
+            ->asArray()
+            ->all();
+        $name = array_column($building, 'name');
+        $building = ['name' => $name, 'buildings' => $building]; //重新组合返回数组
         $building = Json::encode($building);
+
         return $building;
     }
 
@@ -153,7 +162,6 @@ class LoginController extends Controller
             ->select('room_number')
             ->where(['building_id' => "$building"])
             ->distinct()
-            ->indexBy('room_number')
             ->orderBy('room_number')
             ->column();
 
@@ -165,14 +173,17 @@ class LoginController extends Controller
     function actionRoom($building, $number)
     {
         $room = Realestate::find()
-            ->select('room_name, realestate_id')
+            ->select('room_name as name, realestate_id as id')
             ->where(['building_id' => "$building", 'room_number' => "$number"])
-            ->indexBy('realestate_id')
             ->orderBy('room_name')
-            ->column();
+            ->asArray()
+            ->all();
 
-       $room = Json::encode($room);
-       return $room;
+        $name = array_column($room, 'name');
+        $room = ['name' => $name, 'rooms' => $room]; //重新组合返回数组
+
+        $room = Json::encode($room);
+        return $room;
     }
 
     //验证房号信息
@@ -196,7 +207,7 @@ class LoginController extends Controller
         return false;
     }
 
-    //获取用户关联的小区
+    //裕家人助手获取用户关联的小区
     function actionC($user){
         $community = SysCommunity::find()
             ->select('community_id as community')
