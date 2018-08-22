@@ -182,13 +182,18 @@ $this->title = '房屋管理';
 		[ 'attribute' => 'room_name',
 			'format' => 'raw',
 			'value' => function ( $model ) {
-				//$url = Yii::$app->urlManager->createUrl( [ 'user-invoice/c', 'id' => $model->realestate_id ] );
 				return Html::a( $model->room_name, '#', [
 					'data-toggle' => 'modal',
 					'data-target' => '#view-modal',
 					'class' => 'c',
 				] );
 			},
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => $house,
+            'filterInputOptions' => ['placeholder' => '请选择'],
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
 			'width' => '90px',
 		],
 
@@ -367,6 +372,7 @@ $this->title = '房屋管理';
 			'{toggleData}',
 		],
 		'columns' => $gridColumn,
+		'pjax' => true,
 		'hover' => true,
 	] );
 	?>

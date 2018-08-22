@@ -120,12 +120,16 @@ Modal::end();
     ]) ?>
     
     <p align="center">
-        <?= Html::a('<span class="glyphicon glyphicon-credit-card"></span>', '#', [
-						'data-toggle' => 'modal',
-						'data-target' => '#view-modal', //modal 名字
-						'class' => 'btn btn-success view', //操作名
-	                    'title' => '立即支付'
-					]) ?>
+        <?php
+        if($model['status'] == '1'){
+            echo Html::a('<span class="glyphicon glyphicon-credit-card"></span>', '#', [
+                'data-toggle' => 'modal',
+                'data-target' => '#view-modal', //modal 名字
+                'class' => 'btn btn-success view', //操作名
+                'title' => '立即支付'
+            ]);
+        }
+         ?>
            
 	   <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', [
 		    'class' => 'btn btn-danger',

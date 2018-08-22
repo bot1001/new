@@ -2,6 +2,7 @@
 
 namespace api\controllers;
 
+use common\models\Area;
 use common\models\UserOpenid;
 use Yii;
 use common\models\Api;
@@ -14,8 +15,8 @@ use yii\web\Controller;
 
 class RegisterController extends Controller
 {
-    //单个小区查询当日注册量
-    function actionOne($fromdate, $todate, $community, $page)
+    //支付助手单个小区查询当日注册量
+       function actionOne($fromdate, $todate, $community, $page)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
         {
@@ -92,7 +93,7 @@ class RegisterController extends Controller
         return $count;
     }
 
-    //查询当日注册总量
+    //支付助手查询当日注册总量
     function actionCount($fromdate, $todate, $community)
     {
         $community = Json::decode($community); //数组类型转换
@@ -128,11 +129,24 @@ class RegisterController extends Controller
 
     function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender, $province, $city, $area)
     {
-        //判断地区编码长度
-        if(strlen($province) != '6' || strlen($city) != '6' || strlen($area) != '6')
-        {
-            return false;
-        }
+        //查询地区编码起
+        $province = Area::find()
+            ->select('id')
+            ->where(['arae_name' => "$province"])
+            ->asArray()
+            ->one();
+        $city = Area::find()
+            ->select('id')
+            ->where(['area_parent_id' => $province['id'], 'area_name' => $city])
+            ->asArray()
+            ->one();
+
+        $area = Area::find()
+            ->select('id')
+            ->where(['area_parent_id' => $city['id'], 'area_name' => $area])
+            ->asArray()
+            ->one();
+        //查询地区编码止
 
         $account_id = md5($phone); //用户ID
         if($name == ''){ $name = $nick; }//判断姓名是否为空，如果为空自默认和昵称相一致

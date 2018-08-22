@@ -88,8 +88,7 @@ class CommunityBasic extends \yii\db\ActiveRecord
                 $this->create_time = time();
             }
             return true;
-        }
-        else{
+        }else{
             return false;
         }
     }

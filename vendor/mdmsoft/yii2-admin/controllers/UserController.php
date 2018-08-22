@@ -268,12 +268,12 @@ class UserController extends Controller
 				$user = SysUser::updateAll(['new_pd' => md5($post)], 'id = :oid', [':oid' => $id]);
 				if($user){
 					$session->setFlash( 'success', '修改成功！' );
-					return $this->redirect(['index']);
+					return $this->redirect(Yii::$app->request->referrer);
 				}
 			}
 			
 			$session->setFlash( 'success', '修改失败！');
-			return $this->redirect(['index']);
+			return $this->redirect(Yii::$app->request->referrer);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,

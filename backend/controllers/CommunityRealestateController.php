@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Realestate;
 use Yii;
 use app\models\CommunityRealestate;
 use app\models\Up;
@@ -57,33 +58,35 @@ class CommunityRealestateController extends Controller
         $searchModel = new CommunityRealestatenSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $number = ''; //设置默认值
+        $building = ''; //设置默认值
+        $house = ''; //设置默认值
+
         if(isset($_GET['CommunityRealestatenSearch']['community_id']))
-        {
+        {//判断搜索模型中存在小区
             $community_id = $_GET['CommunityRealestatenSearch']['community_id'];
             $building = CommunityBuilding::Building($community_id);
-        }else{
-            $building = '';
         }
 
         if(isset($_GET['CommunityRealestatenSearch']['building_id']))
         {
-            $building_id = $_GET['CommunityRealestatenSearch']['building_id'];
-            $community_id = $_GET['CommunityRealestatenSearch']['community_id'];
+            $search = $_GET['CommunityRealestatenSearch'];
+            $building_id = $search['building_id'];
+            $community_id = $search['community_id'];
+
             if($building_id !== '')
             {
                 $number = CommunityRealestate::Number($building_id, $community_id);
-            }else{
-                $number = '';
+                $house = Realestate::getR($community_id, $building_id, $number);
             }
-        }else{
-            $number = '';
         }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'building' => $building,
-            'number' => $number
+            'number' => $number,
+            'house' => $house
         ]);
     }
 	

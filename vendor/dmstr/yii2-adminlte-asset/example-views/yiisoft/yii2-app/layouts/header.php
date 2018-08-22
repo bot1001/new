@@ -32,6 +32,7 @@ use mdm\admin\components\Helper;
 
 	//获取订单
 	$or = $o ->andwhere(['between', 'order_basic.payment_time', $one, $two])
+        ->andwhere(['!=', 'status', '100'])
 		->andwhere(['or like', 'order_relationship_address.address', $community]);
 	
 	//计算当日注册量
@@ -84,7 +85,7 @@ use mdm\admin\components\Helper;
 	                   if (Helper::checkRoute('/ticket/index')) {
                                echo $this->render('ticket', ['ticket' => $ticket, 'a' => $a, 'community' => $community, 'building' => $building]);
                            }
-	                    ?>
+                           ?>
                 </li>
                 
                 <!-- 注册信息 -->

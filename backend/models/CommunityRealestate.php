@@ -127,18 +127,23 @@ class CommunityRealestate extends \yii\db\ActiveRecord
         return $scenarios;
     }
 
-    //批量操作
-	public function batchHandle($ids = [],$status = 3)
-	{
-        foreach ($ids as $k=>$v){
-            $model = $this->has(['id'=>$v]);
-            $model->status = $status;
-            if(!$model->save(false))
-                return new BadRequestHttpException('操作失败！');
-        }
-        return true;
+    //保存前动作
+    function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert))
+        {
+            if($insert)
+            {
+                $this->room_number = str_pad($this->room_number, '2', '0', STR_PAD_LEFT); //房屋单元不足两位数的自动补0
+            }else{
+                $this->room_number = str_pad($this->room_number, '2', '0', STR_PAD_LEFT); //房屋单元不足两位数的自动补0
+            }
+            return true;
+        }else{
+            return false;
     }
-     
+    }
+
     //其中has方法如下：
     public function has($where=[], $field='*') 
 	{

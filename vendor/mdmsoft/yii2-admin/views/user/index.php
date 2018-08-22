@@ -107,14 +107,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		],
 
 		[ 'attribute' => 'name',
-		  'format' => 'raw',
-			'value' => function ( $model ) {
-				return Html::a( $model->name, '#', [
-					'data-toggle' => 'modal',
-					'data-target' => '#update-modal',
-					'class' => 'order',
-				] );
-			},
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'header' => '状态',
+                'formOptions' => [ 'action' => [ '/sysuser/sysuser' ] ],
+                'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+            ],
 			'width' => '200px'
 		],
 
@@ -183,7 +181,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 		[
 			'class' => 'kartik\grid\ActionColumn',
-			'template' => Helper::filterActionColumn( [ 'update', 'delete' ] ),
+			'template' => Helper::filterActionColumn( [ 'update', 'check' ] ),
 		    'buttons' => [
 				'update' => function ( $url, $model, $key ) {
 					return Html::a( '<span class="glyphicon glyphicon-pencil"></span>', '#', [
@@ -193,6 +191,15 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 						'data-id' => $key,
 					] );
 				},
+                'check' => function ( $url, $model, $key )
+                {
+                    return Html::a('<span class="glyphicon glyphicon-check"></span>', '#', [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#update-modal',
+                        'class' => 'order',
+                        'data-id' => $key,
+                    ] );
+                }
 			],
 		],
 	];

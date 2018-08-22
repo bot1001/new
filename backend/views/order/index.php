@@ -88,7 +88,6 @@ $this->title = '订单管理';
 		
 	<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php Pjax::begin(); ?>
 	<?php
 	$gridColumn = [
 		[ 'class' => 'kartik\grid\SerialColumn',
@@ -362,8 +361,8 @@ $this->title = '订单管理';
 				   'before' => Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => "btn btn-info"])
 				   ],
 		'columns' => $gridColumn,
+		'pjax' => true,
 		'hover' => true
 	] );
 	?>
-	<?php Pjax::end(); ?>
 </div>

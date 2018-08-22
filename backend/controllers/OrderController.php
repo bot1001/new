@@ -11,6 +11,7 @@ use app\models\UserInvoice;
 use app\models\CommunityBasic;
 use app\models\OrderRelationshipAddress;
 use app\models\OrderSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -116,6 +117,45 @@ class OrderController extends Controller
             return true;
         }
         return false;
+    }
+
+    //订单作废记录
+    function actionTrashLog(){
+        $order = (new \yii\db\Query())
+            ->select("order_relationship_address.address, order_relationship_address.name, 
+            order_basic.order_id, order_basic.payment_time as time, order_basic.payment_gateway as way, order_basic.description, order_basic.order_amount as amount, order_basic.verify,
+            order_basic.order_type as type,
+            sys_user.name as action")
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address','order_relationship_address.order_id = order_basic.order_id')
+            ->join('inner join', 'sys_user', 'sys_user.id = order_basic.invoice_id')
+            ->andwhere(['order_basic.status' => '100'])
+            ->andwhere(['or like', 'order_relationship_address.address', $_SESSION['community_id']]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $order,
+            'pagination' =>[
+                'pageSize' => '20'
+            ],
+            'sort'=>[
+                'attributes'=>[
+                    'address',
+                    'name',
+                    'order_id',
+                    'time',
+                    'way',
+                    'description',
+                    'amount',
+                    'verify',
+                    'type',
+                    'action',
+                ]
+            ]
+        ]);
+
+        return $this->render('trash-log',[
+            'dataProvider' => $dataProvider
+        ]);
     }
 	
 	//来自缴费页面订单查询

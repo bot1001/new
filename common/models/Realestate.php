@@ -89,13 +89,13 @@ class Realestate extends \yii\db\ActiveRecord
 	//获取关联小区
 	public function getC()
     {
-        return $this->hasOne(CommunityBasic::className(), ['community_id' => 'community_id']);
+        return $this->hasOne(Community::className(), ['community_id' => 'community_id']);
     }
 	
 	//获取关联楼宇
 	public function getB()
     {
-        return $this->hasOne(CommunityBuilding::className(), ['building_id' => 'building_id']);
+        return $this->hasOne(Building::className(), ['building_id' => 'building_id']);
     }
 
     /**
@@ -104,5 +104,18 @@ class Realestate extends \yii\db\ActiveRecord
     public function getWaterMeters()
     {
         return $this->hasMany(WaterMeter::className(), ['realestate_id' => 'realestate_id']);
+    }
+
+    //获取房屋
+    static function getR($community, $building, $number)
+    {
+        $home = self::find()
+            ->select('room_name')
+            ->joinWith('b')
+            ->where(['community_building.community_id' => "$community", 'community_building.building_name' => "$building", 'community_realestate.room_number' => $number])
+            ->orderBy('room_name ASC')
+            ->indexBy('room_name')
+            ->column();
+        return $home;
     }
 }

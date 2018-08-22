@@ -60,7 +60,23 @@ class LoginController extends Controller
         if(isset($get['unionid']))
         {
             $unionid = $get['unionid']; //接收微信账号unionid
-            $user = Api::info($get['unionid']);
+            $user = Api::info($unionid); //获取用户信息
+            $user=json_decode($user);
+            $user = (array)$user; //将数组转换为普通数组
+            $account_id = $user['account_id']; //提取用户账户ID
+
+            $address = (new \yii\db\Query()) //查询房屋信息
+                ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room')
+                ->from('user_relationship_realestate')
+                ->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_relationship_realestate.realestate_id')
+                ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+                ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+                ->where(['user_relationship_realestate.account_id' => "$account_id"])
+                ->all();
+
+            $user = ['user' => $user, 'address' => $address];
+            $user = Json::encode($user);
+
             return $user;
         }else{
             return false;

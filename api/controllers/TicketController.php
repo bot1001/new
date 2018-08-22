@@ -11,7 +11,7 @@ use yii\data\Pagination;
  */
 class TicketController extends Controller
 {
-    //批量查询
+    //支付助手批量查询
     function actionIndex($account_id, $page)
     {
         $ticket = Ticket::find()->where(['account_id' => "$account_id"]);
