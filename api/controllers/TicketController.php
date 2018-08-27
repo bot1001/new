@@ -11,10 +11,16 @@ use yii\data\Pagination;
  */
 class TicketController extends Controller
 {
-    //支付助手批量查询
+    //小程序批量查询投诉记录
     function actionIndex($account_id, $page)
     {
-        $ticket = Ticket::find()->where(['account_id' => "$account_id"]);
+        $ticket = (new \yii\db\Query())
+            ->select('ticket_basic.ticket_id, ticket_basic.ticket_number as number, ticket_basic.ticket_status as status, ticket_basic.explain1 as detail, 
+            from_unixtime(ticket_basic.create_time) as time, ticket_basic.tickets_taxonomy as type, user_data.real_name as name')
+            ->from('ticket_basic')
+            ->join('left join', 'user_data', 'user_data.account_id = ticket_basic.assignee_id')
+            ->where(['ticket_basic.account_id' => "$account_id"])
+            ->orderBy('ticket_basic.create_time DESC');
 
         $count = $ticket->count(); // 计算总数
 
@@ -34,7 +40,7 @@ class TicketController extends Controller
         return $ticket;
     }
 
-    //支付助手查询单个投诉
+    //小程序、支付助手查询单个投诉
     function actionOne($ticket_id)
     {
         $ticket = Ticket::find()
@@ -55,7 +61,7 @@ class TicketController extends Controller
         }
 
         $answer = (new \yii\db\Query()) //查询回复人信息及内容
-            ->select('user_data.real_name as answer_name, ticket_reply.content, user_account.account_role as role, ticket_reply.reply_time')
+            ->select('user_data.real_name as answer_name, ticket_reply.content, user_account.account_role as role, from_unixtime(ticket_reply.reply_time) as reply_time')
             ->from('ticket_reply')
             ->join('inner join', 'user_data', 'user_data.account_id = ticket_reply.account_id')
             ->join('inner join', 'user_account', 'user_account.account_id = ticket_reply.account_id')
@@ -69,7 +75,7 @@ class TicketController extends Controller
         return $result;
     }
 
-    //支付助手
+    //支付助手批量查询投诉
     function actionList($fromdate, $todate, $community, $page, $status)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天

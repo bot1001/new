@@ -326,7 +326,6 @@ class UserInvoiceController extends Controller
             ->asArray()
             ->one();
 
-
             $transaction = Yii::$app->db->beginTransaction();
             try{
                 $del = new \common\models\InvoiceDel(); //实例化模型
@@ -342,16 +341,15 @@ class UserInvoiceController extends Controller
                 $del->invoice_notes = $invoice['invoice_notes'];
 
                 $result = $del->save(); //保存
+
                 if($result){ //若果删除记录保存成功则执行删除
                     $d_result = $this->findModel( $id )->delete();
+                    if($d_result){ //如果删除成功则提交事务，否则测回
+                        $is ++;
+                    }
                 }
 
-                if($d_result){ //如果删除成功则提交事务，否则测回
-                    $is ++;
-                    $transaction->commit();
-                }else{
-                    $transaction->rollBack();
-                }
+                $transaction->commit();
             }catch(\exception $e){
                 $transaction->rollback();
             }
@@ -658,12 +656,17 @@ class UserInvoiceController extends Controller
 
 	//单个房号生成费项预览
 	public function actionV() 
-	{		
+	{
+	    if(!isset($_GET['UserInvoice']))
+        {
+            return $this->redirect(Yii::$app->request->referrer); //如果不存在数据则返回
+        }
+
 		$b = $_GET['UserInvoice'];
 
 		$cost = $b[ 'cost' ]; //缴费费项
 
-		$query = ( new\ yii\ db\ Query() )->select( [
+		$query = ( new \yii\db\Query() )->select( [
 				'community_basic.community_name',
 				'community_building.building_name',
 				'community_realestate.room_name',
@@ -719,7 +722,7 @@ class UserInvoiceController extends Controller
 	    $first = $q['from'];
         $from_day = date('d', strtotime($first)); //提取预交当天日期
 
-	    for($i; $i <= $q['month']; $i++)
+	    for($i; $i <= $m; $i++)
 	    {
 	        $date = date('Y-m', strtotime("+$i month", strtotime($d)));
 				  

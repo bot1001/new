@@ -61,7 +61,7 @@ class Api extends \yii\db\ActiveRecord
             return false;
         }
 
-        $order_id = Order::getOrder(); //生成订单函数
+        $order_id = Order::getOrder02(); //生成订单号函数
 
         $house = (new \yii\db\Query())
             ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room')

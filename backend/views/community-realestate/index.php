@@ -144,6 +144,7 @@ $this->title = '房屋管理';
 			'width' => '180px',
             'contentOptions' => ['class' => 'text-left']
 		],
+
 		[ 'attribute' => 'building_id',
 			//'value' => 'building0.building_name',
 			'format' => 'raw',
@@ -168,7 +169,11 @@ $this->title = '房屋管理';
 			'format' => 'raw',
 			'value' => function ( $model ) {
 				$url = Yii::$app->urlManager->createUrl( [ 'costrelation/index', 'realestate_id' => $model->realestate_id ] );
-				return Html::a( $model->room_number . '单元', $url );
+				if(is_numeric($model->room_number)){
+                    return Html::a( $model->room_number . '单元', $url );
+                }else{
+                    return Html::a( $model->room_number . '座', $url );
+                }
 			},
             'filterType'=>GridView::FILTER_SELECT2,
             'filter'=> $number,
@@ -201,7 +206,7 @@ $this->title = '房屋管理';
 			'class' => 'kartik\grid\EditableColumn',
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/community-realestate/reale' ] ],
-				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 			],
 			'width' => 'px',
 		],
@@ -372,7 +377,7 @@ $this->title = '房屋管理';
 			'{toggleData}',
 		],
 		'columns' => $gridColumn,
-		'pjax' => true,
+//		'pjax' => true,
 		'hover' => true,
 	] );
 	?>

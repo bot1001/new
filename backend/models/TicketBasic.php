@@ -138,7 +138,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 	public function afterFind()
     {
         parent::afterFind();
-        $this->create_time = date('Y-m-d h:i:s', $this->create_time);
+        $this->create_time = date('Y-m-d H:i:s', $this->create_time);
     }
 	
 	public static function getPengdingCommentCount()

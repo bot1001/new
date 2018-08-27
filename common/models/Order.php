@@ -100,11 +100,19 @@ class Order extends \yii\db\ActiveRecord
 	    return $this->hasOne(UserData::className(), ['account_id' => 'account_id']); 
 	}
 	
-	//生成订单
+	//裕家人后台生成订单
 	public static function getOrder()
 	{
 		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
 		$order_id = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		return $order_id;
+	}
+
+	//裕家人小程序生成订单
+	public static function getOrder02()
+	{
+		//随机产生12位数订单号，格式为年+月+日+1时+分+秒
+		$order_id = date('ymdHis');
 		return $order_id;
 	}
 

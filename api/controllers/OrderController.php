@@ -14,7 +14,7 @@ use yii\web\Controller;
  */
 class OrderController extends Controller
 {
-    //确认订单
+    //支付助手确认订单
     function actionCheck($order_id)
     {
         $result = Order::updateAll(['verify' => '1'], 'order_id = :id', [':id' => "$order_id"]);
@@ -23,7 +23,7 @@ class OrderController extends Controller
         return $result;
     }
 
-    //确认订单
+    //支付助手作废订单
     function actionTrash($order_id, $id)
     {
         $status = ['3', '4', '5', '6', '8'];
@@ -63,7 +63,8 @@ class OrderController extends Controller
         return false;
     }
 
-    public function actionCount($fromdate, $todate, $community) //查询当日订单数量
+    //支付助手查询当日订单数量
+    public function actionCount($fromdate, $todate, $community)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
         {
@@ -71,7 +72,7 @@ class OrderController extends Controller
         }
 
         $community = Json::decode($community); //将json数组转换为普通数组
-        $time = strtotime(date('Y-m-d')); //当日时间戳
+
         $order = (new \yii\db\Query())
             ->select('count(order_basic.order_id) as count, sum(order_basic.order_amount) as amount')
             ->from('order_basic')
@@ -86,7 +87,7 @@ class OrderController extends Controller
         return $order;
     }
 
-    //查询订单总量
+    //支付助手查询订单总量
     function actionList($fromdate, $todate, $page, $community)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天
@@ -105,6 +106,37 @@ class OrderController extends Controller
             ->andWhere([ 'between', 'order_basic.create_time', strtotime($fromdate), strtotime($todate)])
             ->andWhere(['!=', 'status', '100'])
             ->andWhere(['or like', 'order_relationship_address.address', $community])
+            ->andWhere(['order_basic.order_type' => '1'])
+            ->orderBy('order_basic.create_time DESC');
+
+        $count = $order->count(); //求总数
+        $p = '10';
+
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $order = $order->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        $order = Json::encode($order);//转换Json数据
+        return $order;
+    }
+
+    //小程序查询订单总量
+    function actionOrders($account_id, $page)
+    {
+        $order =(new \yii\db\Query())
+            ->select('order_basic.order_id, from_unixtime(order_basic.create_time) as create_time, from_unixtime(order_basic.payment_time) as payment_time,
+            order_basic.description, order_basic.payment_gateway as way, order_basic.order_amount as amount, order_basic.status, order_relationship_address.address, order_relationship_address.name,
+            order_relationship_address.mobile_phone as phone')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->Where(['order_basic.account_id' => "$account_id"])
             ->andWhere(['order_basic.order_type' => '1'])
             ->orderBy('order_basic.create_time DESC');
 

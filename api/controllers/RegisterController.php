@@ -54,7 +54,7 @@ class RegisterController extends Controller
         return $count;
     }
 
-    //按小区分类查询注册量(当日）
+    //按小区分类查询注册量
     function actionDay($fromdate, $todate, $community, $page)
     {
         if($fromdate == $todate)  //如果起始时间和截止时间一样，截止时间自动加一天

@@ -68,7 +68,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<table border="0">
 			<tr>
 				<td align="left"><strong>房号:</strong>
-                    <?= $comm['building'].'&nbsp'. $comm['number']. '单元 '. $comm['name']; ?>
+                    <?= $address ?>
 				</td>
 				<td align="center"><?= '业主姓名：'.$comm['n']?></td>
 				<td align="center"><?= '订单号：'.$order_id ?></td>

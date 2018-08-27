@@ -379,7 +379,6 @@ $this->title = '缴费管理';
 			'{export}'
 		],
 		'columns' => $gridColumn,
-		'pjax' => true,
 		'hover' => true
 	] );
 	?>

@@ -118,6 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'panel' => ['type' => 'info', 'heading' => '短信发送记录'],
+        'pjax' => true,
         'hover' => true,
         'columns' => $gridview,
     ]); ?>

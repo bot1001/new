@@ -77,6 +77,10 @@ class CommunityRealestateController extends Controller
             if($building_id !== '')
             {
                 $number = CommunityRealestate::Number($building_id, $community_id);
+            }
+        }
+        if (isset($search)){
+            if($search['room_number'] !== ''){
                 $house = Realestate::getR($community_id, $building_id, $number);
             }
         }

@@ -96,6 +96,7 @@ $this->title = '作废记录';
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '作废记录' ],
 		'columns' => $gridColumn,
+		'pjax' => true,
 		'hover' => true
 	] );
 	?>

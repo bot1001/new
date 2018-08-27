@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <style>
     .sms-client-form{
-        width: 500px;
+        width: 400px;
         background:#ffffff;
         border-radius: 10px;
     }
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     #title{
         width: 30%;
-        border-radius: 10px;
+        border-radius: 5px;
         text-align: center;
         background: #3baae3;
         position: relative;

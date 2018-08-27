@@ -18,11 +18,11 @@ use yii\helpers\Url;
 	?>
 	
 	<h4 style="color: #000000">
-        <a href="<?php echo Url::to(['/user/index', 
+        <a href="<?= Url::to(['/user/index',
 									              'one' => strtotime(date('Y-m-d')), 
 									              'two' => time()
 									              ]); ?>">
-        	今日注册量：<l><?php echo $user['today']; ?></l>&nbsp;例
+        	今日注册量：<l><?= $user['today']; ?></l>&nbsp;例
         </a>
     </h4>
 	<div id="div5">
@@ -31,8 +31,7 @@ use yii\helpers\Url;
 	    	foreach($_u as $us)
 	    	{
 				?>
-		<a href="<?php 
-		    echo Url::to(['/user/index',
+		<a href="<?= Url::to(['/user/index',
 		  					  'name' => $us['community'],
 		  					  'one' => strtotime(date('Y-m-d')),
 		  					  'two' => time()
@@ -52,7 +51,7 @@ use yii\helpers\Url;
        <?php } ?>
        
     <div id = "div4">
-        <a href="<?php echo Url::to(['/user/index', 
+        <a href="<?= Url::to(['/user/index',
 									              'one' => strtotime(date('Y-m-d')), 
 									              'two' => time()
 									              ]); ?>" style="color: #000000">查看全部</a>
@@ -63,7 +62,7 @@ use yii\helpers\Url;
 		?>
 	
 	<h4 style="color: #000000">
-        <a href="<?php echo Url::to(['/user-invoice/index']) ?>">
+        <a href="<?= Url::to(['/user/index']) ?>">
         	当日注册汇报：空空如也！
         </a>
     </h4>

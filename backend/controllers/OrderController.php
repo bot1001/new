@@ -224,18 +224,26 @@ class OrderController extends Controller
 					->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
 					->where(['community_realestate.realestate_id' => $inv['realestate_id']])
 					->one();
+
+				if(is_numeric($comm['number']))
+                {
+                    $address = $comm['building'].'&nbsp'. $comm['number']. '单元 '. $comm['name'];
+                }else{
+                    $address = $comm['building'].'&nbsp'. $comm['number']. '座 '. $comm['name'];
+                }
 				
 				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ];
 				return $this->render('print',[
-			                      'dc' => $dc,
-			                      'comm' => $comm,
-					              'order_id' => $order_id,
-			                      'amount'=> $amount,
-					              'e' => $e,
-					              'order' => $order,
-			                      'user_name' => $user_name,
-					              'invoice' => $invoice,
-				                ]);
+			         'dc' => $dc,
+			         'comm' => $comm,
+                     'address' => $address,
+					 'order_id' => $order_id,
+			         'amount'=> $amount,
+					 'e' => $e,
+					 'order' => $order,
+			         'user_name' => $user_name,
+					 'invoice' => $invoice,
+				    ]);
 			}else{
 				$session->setFlash('m','1');
 				return $this->redirect(Yii::$app->request->referrer);
@@ -371,8 +379,13 @@ class OrderController extends Controller
 		$b = $a['building']; //楼宇
 		$number = $a['number']; //单元
 		$name = $a['name']; //房号
-		
-		$address = $c.' '.$b.' '.$number.'单元'.' '.$name; //拼接地址
+
+        if(is_numeric($number)){
+            $address = $c.' '.$b.' '.$number.'单元'.' '.$name; //拼接地址
+        }else{
+            $address = $c.' '.$b.' '.$number.'座'.' '.$name; //拼接地址
+        }
+
 		
 		return $this->render('add', [
 			    'invoice' => $invoice,
