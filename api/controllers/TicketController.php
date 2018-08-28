@@ -1,6 +1,10 @@
 <?php
 namespace api\controllers;
 
+use common\models\TicketReply;
+use Yii;
+use common\models\Order;
+use common\models\Realestate;
 use common\models\Ticket;
 use yii\web\Controller;
 use yii\helpers\Json;
@@ -11,6 +15,63 @@ use yii\data\Pagination;
  */
 class TicketController extends Controller
 {
+    //裕家人小程序新投诉入口
+    function actionReply($ticket_id, $account_id, $content)
+    {
+        $reply = new TicketReply(); //实例化回复模型
+
+        //数据块赋值
+        $reply->ticket_id = $ticket_id;
+        $reply->account_id = $account_id;
+        $reply->content = $content;
+
+        $result = $reply->save(); //保存数据
+
+        if($result){ //如果保存成功返回true
+            $id = Yii::$app->db->getLastInsertID();
+            $reply = TicketReply::find()
+                ->select('content, from_unixtime(reply_time) as time')
+                ->where(['ticket_id' => $id])
+                ->asArray()
+                ->one();
+            $reply = Json::encode($reply);
+            return $reply;
+        }
+
+        return false; //默认返回false
+    }
+
+    //裕家人小程序新投诉入口
+    function actionCreate($realestate, $taxonomy, $detail, $person, $phone, $account)
+    {
+        $community = Realestate::find() //查找用户对应的小区ID
+            ->select('community_id as community')
+            ->where(['realestate_id' => "$realestate"])
+            ->asArray()
+            ->one();
+
+        $model = new Ticket(); //实例化模型
+
+        $model->ticket_number = Order::getOrder02(); // 获取投诉编号
+        $model->account_id = $account;
+        $model->community_id = $community['community'];
+        $model->realestate_id = $realestate;
+        $model->tickets_taxonomy = $taxonomy;
+        $model->explain1 = $detail;
+        $model->contact_person = $person;
+        $model->contact_phone = $phone;
+
+        $result = $model->save(); //保存数据
+
+        if($result){ //返回投诉单ID
+            $id = Yii::$app->db->getLastInsertId();
+            $ticket_id = Json::encode($id);
+            return $ticket_id;
+        }
+
+        return false; //默认返回false
+    }
+
     //小程序批量查询投诉记录
     function actionIndex($account_id, $page)
     {
@@ -44,7 +105,7 @@ class TicketController extends Controller
     function actionOne($ticket_id)
     {
         $ticket = Ticket::find()
-            ->select('explain1 as explain, assignee_id as account_id')
+            ->select('ticket_id, explain1 as explain, assignee_id as account_id')
         ->where(['ticket_id' => "$ticket_id"])
         ->asArray()
         ->one();

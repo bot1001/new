@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -39,7 +39,7 @@ class TicketReply extends \yii\db\ActiveRecord
             [['account_id'], 'string', 'max' => 64],
             [['content'], 'string', 'max' => 128],
             [['ticket_id', 'account_id', 'content'], 'unique', 'targetAttribute' => ['ticket_id', 'account_id', 'content']],
-            [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => TicketBasic::className(), 'targetAttribute' => ['ticket_id' => 'ticket_id']],
+            [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ticket::className(), 'targetAttribute' => ['ticket_id' => 'ticket_id']],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
         ];
     }
@@ -91,7 +91,7 @@ class TicketReply extends \yii\db\ActiveRecord
      */
     public function getT()
     {
-        return $this->hasOne(TicketBasic::className(), ['ticket_id' => 'ticket_id']);
+        return $this->hasOne(Ticket::className(), ['ticket_id' => 'ticket_id']);
     }
 	
 	//建立用户信息关联

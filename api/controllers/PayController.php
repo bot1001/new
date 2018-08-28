@@ -10,13 +10,13 @@ use yii\web\Controller;
 class PayController extends Controller
 {
     //裕家人小程序微信支付
-    public function actionWx($order_id, $description, $community, $amount, $openid)
+    public function actionWx($order_id, $description, $amount, $openid)
     {
         require_once dirname( __FILE__ ) . '/wx/WxPay.Api.php'; //微信配置文件
 
         $input = new \WxPayUnifiedOrder();//实例化微信支付
 
-        $input->SetBody( $description.'-'.$community );//商品标题
+        $input->SetBody( $description);//商品标题
 
         $input->SetOut_trade_no( $order_id ); //订单编号
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Order;
 use Yii;
 use app\models\TicketBasic;
 use app\models\TicketSearch;
@@ -160,8 +161,7 @@ class TicketController extends Controller
 		    ->indexBy('account_id')
 			->column();
 		
-		//随机产生12位数订单号，格式为年+月+日+1到999999随机获取6位数
-		$number = date('ymd').str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+		$number = Order::getOrder();//随机产生12位数订单号
 		
 		$model->ticket_number = $number;
 
