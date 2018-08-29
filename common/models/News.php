@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -20,7 +20,7 @@ use Yii;
  *
  * @property CommunityBasic $community
  */
-class CommunityNews extends \yii\db\ActiveRecord
+class News extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class CommunityNews extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 16],
             [['excerpt'], 'string', 'max' => 24],
             [['content'], 'string', 'max' => 512],
-            //[['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => CommunityBasic::className(), 'targetAttribute' => ['community_id' => 'community_id']],
+            [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => Community::className(), 'targetAttribute' => ['community_id' => 'community_id']],
         ];
     }
 
@@ -107,6 +107,6 @@ class CommunityNews extends \yii\db\ActiveRecord
      */
     public function getC()
     {
-        return $this->hasOne(CommunityBasic::className(), ['community_id' => 'community_id']);
+        return $this->hasOne(Community::className(), ['community_id' => 'community_id']);
     }
 }

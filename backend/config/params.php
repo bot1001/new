@@ -21,9 +21,4 @@ return [
 		
 		'gatewayUrl' => "https://openapi.alipay.com/gateway.do",
      ],
-
-    'sms' =>[
-        'appkey' => '24956669', //短信应用序号
-        'secret' => 'e3bb0dee8b2e567466ecc6ca670b84af', //短信应用秘钥
-    ]
 ];

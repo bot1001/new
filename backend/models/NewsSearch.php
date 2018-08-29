@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CommunityNews;
+use common\models\News;
 
 /**
  * NewsSearch represents the model behind the search form of `app\models\CommunityNews`.
  */
-class NewsSearch extends CommunityNews
+class NewsSearch extends News
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,7 @@ class NewsSearch extends CommunityNews
     {
 		$c = $_SESSION['community'];
 		
-		$query = CommunityNews::find()->where(['in', 'community_id', $c]);
+		$query = News::find()->where(['in', 'community_id', $c]);
 		
         // add conditions that should always apply here
 

@@ -3,6 +3,8 @@
 namespace api\controllers;
 
 use common\models\Area;
+use common\models\Community;
+use common\models\Realestate;
 use common\models\UserOpenid;
 use Yii;
 use common\models\Api;
@@ -127,25 +129,19 @@ class RegisterController extends Controller
         return $count;
     }
 
-    function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender, $province, $city, $area)
+    function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender)
     {
         //查询地区编码起
-        $province = Area::find()
-            ->select('id')
-            ->where(['arae_name' => "$province"])
-            ->asArray()
-            ->one();
-        $city = Area::find()
-            ->select('id')
-            ->where(['area_parent_id' => $province['id'], 'area_name' => $city])
-            ->asArray()
+        $district = (new \yii\db\Query())
+            ->select('province_id as province, city_id as city, area_id as area')
+            ->from('community_basic')
+            ->join('inner join', 'community_realestate', 'community_realestate.community_id = community_basic.community_id')
+            ->where(['community_realestate.realestate_id' => $realestate])
             ->one();
 
-        $area = Area::find()
-            ->select('id')
-            ->where(['area_parent_id' => $city['id'], 'area_name' => $area])
-            ->asArray()
-            ->one();
+        $province = $district['province']; //提取省份
+        $city = $district['city']; //提取城市
+        $area = $district['area']; //提取地区
         //查询地区编码止
 
         $account_id = md5($phone); //用户ID

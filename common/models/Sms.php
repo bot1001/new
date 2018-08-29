@@ -6,6 +6,7 @@ use Yii;
 
 class Sms extends \yii\db\ActiveRecord
 {
+    //发送短信方法
      static function Send($signName, $phone, $SMS, $SmsParam)
     {
         $config = Yii::$app->params['sms']; //从配置文件中获取AppID和secretID

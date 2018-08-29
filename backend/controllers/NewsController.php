@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use app\models\CommunityBasic;
 use Yii;
-use app\models\CommunityNews;
+use common\models\News;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
 use app\models\NewsSearch;
@@ -65,7 +65,7 @@ class NewsController extends Controller
        return ArrayHelper::merge(parent::actions(), [
            'news' => [                                       // identifier for your editable action
                'class' => EditableColumnAction::className(),     // action class name
-               'modelClass' => CommunityNews::className(),                // the update model class
+               'modelClass' => News::className(),                // the update model class
                'outputValue' => function ($model, $attribute, $key, $index) {
                },
                'ajaxOnly' => true,
@@ -106,7 +106,7 @@ class NewsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CommunityNews();
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -160,7 +160,7 @@ class NewsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = CommunityNews::findOne($id)) !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         }
 
