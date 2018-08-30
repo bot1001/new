@@ -73,8 +73,11 @@ $this->title = '消息';
 			 'format' => 'raw',
 			 'value' => function($model){
 	         	$url = Yii::$app->urlManager->createUrl( [ '/ticket/index', 'ticket_status' => '1', 'community' => $model->community ] );
-	         	return Html::a($model->ticket_number, $url);
-	         },],
+	         	return Html::a($model->E, $url);
+	         },
+                'contentOptions' => [
+                        'class' => 'text-left'
+                ]],
 		
             ['attribute' => 'remind_time',
 			 'value' => function($model){

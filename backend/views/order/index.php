@@ -95,7 +95,9 @@ $this->title = '订单管理';
 		],
 
 		[ 'attribute' => 'order0.address',
-            'contentOptions' => ['class' => 'text-left'],],
+            'contentOptions' => ['class' => 'text-left'],
+        ],
+
 		[ 'attribute' => 'order0.name',
 			'format' => 'raw',
 			'value' => function ( $model ) {
@@ -107,12 +109,13 @@ $this->title = '订单管理';
 	                return $name['name'];
                 }
 			},
-			'hAlign' => 'center',
-			'width' => '75px'
+			'width' => '75px',
+            'contentOptions' => ['class' => 'text-left'],
 		],
+
 		[ 'attribute' => 'order0.mobile_phone',
-			'hAlign' => 'center',
-			'width' => '110px'
+			'width' => '110px',
+            'contentOptions' => ['class' => 'text-left'],
 		],
 
 		[ 'attribute' => 'order_type',
@@ -145,7 +148,6 @@ $this->title = '订单管理';
 	                return $model->order_id;
                 }
 			},
-			'hAlign' => 'center',
 			'width' => '130px'
 		],
 
@@ -183,8 +185,6 @@ $this->title = '订单管理';
                  'style'=>'width:160px',
              ],
 		 ],
-		  'hAlign' => 'center',
-		  //'width' => '160px'
 		],
 
 		[ 'attribute' => 'payment_time',
@@ -224,7 +224,6 @@ $this->title = '订单管理';
                     'style'=>'width:200px',
                 ],
 		    ],
-			'hAlign' => 'center',
 			'width' => '160px'
 		],
 		[ 'attribute' => 'payment_gateway',
@@ -243,7 +242,6 @@ $this->title = '订单管理';
 					return $e[ $model[ 'payment_gateway' ] ];
 				};
 			},
-			'hAlign' => 'center',
 			'width' => '100px'
 		],
         ['attribute' =>  'verify',
@@ -271,14 +269,13 @@ $this->title = '订单管理';
             function($model){
                 return ( $model->verify == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
             },
-            'hAlign' => 'center'],
+            ],
 		/*['attribute' => 'payment_number',
 		 'width' => '200px',
 		 'hAlign' => 'center'],*/
 		[ 'attribute' => 'order_amount',
 			'pageSummary' => true,
 			'width' => '70px',
-			'hAlign' => 'center'
 		],
 		/* ['attribute' => 'invoice_id',
 			'hAlign' => 'center'],*/
@@ -306,7 +303,6 @@ $this->title = '订单管理';
 			    	return ( $model ->status == 2 ) ? [ 'class' => 'bg-info' ] : []; // 根据值改变底色
 			    },
 			'width' => '90px',
-			'hAlign' => 'center'
 		],
 
         ['attribute' => 'property',

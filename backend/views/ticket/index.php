@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
                 'contentOptions' => ['class' => 'text-left'],
 			 'value' => 'E',
-			'width' => '5%',
+			 'width' => '5%',
 			],
 		    
             ['attribute' => 'create_time',

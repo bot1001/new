@@ -62,6 +62,15 @@ class Information extends \yii\db\ActiveRecord
         ];
     }
 
+    //截取字符串
+    public function getE()
+    {
+        $tmpStr = strip_tags($this->ticket_number);
+        $tmpLen = mb_strlen($tmpStr);
+
+        return mb_substr($tmpStr,0,20,'utf-8').(($tmpLen>20)?'...':'');
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
