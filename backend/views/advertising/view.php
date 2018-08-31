@@ -12,6 +12,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>
+    .div{
+        background: #fff9e5;
+        border-radius: 15px;
+        margin-left: 10px;
+    }
+
+    .excerpt{
+        background: #ffffff;
+        border-radius: 15px;
+        margin-left: 10px;
+    }
 		
 	img{
 		border-radius: 0px;
@@ -24,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	#td02{
 		text-align:center;
+        width: 250px;
 	}
 	#tr01{
 		height: 25px;
@@ -46,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="advertising-view">
 	<div class="row">
-		<div class="col-lg-3">
+		<div class="col-lg-3 div">
 			<div>
 				<h1><?= Html::encode('信息栏') ?></h1>
 			</div>
@@ -103,8 +115,8 @@ $this->params['breadcrumbs'][] = $this->title;
               </tbody>
             </table>
             <p>
-			    <div align="center"><?= Html::a('更新', ['update', 'id' => $model['id']], ['class' => 'btn btn-primary']) ?>
-	            	 <?= Html::a('删除', ['delete', 'id' => $model['id']], [ 
+			    <div align="center"><?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model['id']], ['class' => 'btn btn-primary']) ?>
+	            	 <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
                         'class' => 'btn btn-danger', 
                         'data' => [ 
                             'confirm' => '确定要删除么?', 
@@ -115,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</p>
 	    </div>
 	
-		<div class="col-lg-8">
+		<div class="col-lg-8 excerpt">
 	    	<?= $model['excerpt'] ?>
 	    </div>
 	</div>

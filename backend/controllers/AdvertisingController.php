@@ -85,7 +85,7 @@ class AdvertisingController extends Controller
 			->column();
 		$type = ['1' => '文章', '2' => '链接'];
 		$location = ['1' => '顶部', '2' => '底部'];
-		$status = ['1' => '正常', '2' => '删除'];
+		$status = ['1' => '上架', '2' => '下架', 3 => '待审核'];
 		
 		$type = $type[$model['type']];
 		$location = $location[$model['location']];
@@ -112,24 +112,22 @@ class AdvertisingController extends Controller
         if ($model->load(Yii::$app->request->post()))
 		{
 			$post = $_POST['Advertising']; //接收传过来的数据
-			
+
 			$model->ad_title  = $post['ad_title'];
 			$model->ad_excerpt  = $post['ad_excerpt'];
 			$model->ad_poster  = $post['ad_poster'];
 			$model->ad_type  = $post['ad_type'];
-			$model->ad_target_value  = $post['ad_target_value'];
 			$model->ad_location  = $post['ad_location'];
 			$model->ad_sort  = $post['ad_sort'];
-			$model->ad_status  = $post['ad_status'];
-			
+
 			$community = $post['ad_publish_community']; //接收发布小区
 			$comm = implode(',', $community); //重组小区
-			
+
 			$model->ad_publish_community  = $comm;
 			$model->property  = $post['property'];
-			
+
 			$model->save();
-			
+
             return $this->redirect(['view', 'id' => $model->ad_id]);
         }
 
@@ -152,16 +150,15 @@ class AdvertisingController extends Controller
         if ($model->load(Yii::$app->request->post()))
 		{
 			$post = $_POST['Advertising']; //接收传过来的数据
-			
+
 			$model->ad_title  = $post['ad_title'];
 			$model->ad_excerpt  = $post['ad_excerpt'];
-			$model->ad_poster  = $post['label_img'];
+			$model->ad_poster  = $post['ad_poster'];
 			$model->ad_type  = $post['ad_type'];
-			$model->ad_target_value  = $post['ad_target_value'];
+			$model->ad_target_value  = '1';
 			$model->ad_location  = $post['ad_location'];
 			$model->ad_sort  = $post['ad_sort'];
-			$model->ad_status  = $post['ad_status'];
-			
+
 			$community = $post['ad_publish_community']; //接收发布小区
 			$comm = implode(',', $community); //重组小区
 			

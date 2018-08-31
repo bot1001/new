@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
             ['attribute'=> 'ad_status',
 			 'filterType' => GridView::FILTER_SELECT2,
-		     'filter' => ['1' => '正常', '2' => '删除'],
+		     'filter' => ['1' => '上架', '2' => '下架', 3 => '待审核'],
 		     'filterInputOptions' => [ 'placeholder' => '请选择' ],
 		     'filterWidgetOptions' => [
 		     	'pluginOptions' => [ 'allowClear' => true ],
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		    	return ( $model->ad_status == 1 ) ? [ ] : [ 'class' => 'bg-warning'];
 		    },
 			 'value' => function($model){
-		        $d = ['1' => '正常', '2' => '删除'];
+		        $d = ['1' => '上架', '2' => '下架', 3 => '待审核'];
 			    return $d[$model->ad_status];
 	        },
 			'hAlign' => 'center',

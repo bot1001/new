@@ -37,7 +37,7 @@ class Advertising extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_publish_community', 'ad_type', 'ad_target_value', 'ad_location', 'ad_created_time', 'ad_end_time', 'ad_status'], 'required'],
+            [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_publish_community', 'ad_type', 'ad_location', 'ad_end_time'], 'required'],
             [['ad_excerpt', 'ad_target_value'], 'string'],
             [['ad_location', 'ad_created_time', 'ad_sort', 'ad_status'], 'integer'],
             [['ad_title'], 'string', 'max' => 64],
@@ -62,9 +62,7 @@ class Advertising extends \yii\db\ActiveRecord
             [['property'], 'string', 'max' => 50],
         ];
     }
-	
-	public $label_img;
-	
+
 	//将时间戳转换成时间然后在activeform输出
 	public function afterFind()
     {
@@ -84,7 +82,7 @@ class Advertising extends \yii\db\ActiveRecord
             'ad_poster' => '缩略图',
             'ad_publish_community' => '可见小区',
             'ad_type' => '类型',
-            'ad_target_value' => 'Value',
+            'ad_target_value' => '审核',
             'ad_location' => '位置',
             'ad_created_time' => '创建时间',
 			'ad_end_time' => '截止时间',
@@ -102,7 +100,9 @@ class Advertising extends \yii\db\ActiveRecord
 			if($insert)
 			{
 				//插入新纪录时自动添加以下字段
-				$this->ad_created_time = date(time());
+				$this->ad_created_time = time();
+                $this->ad_status = '3';
+                $this->ad_target_value = '1';
 			}
 			return true;
 		}
