@@ -10,6 +10,9 @@ use kartik\daterange\DateRangePicker;
 ?>
 
 <style>
+    .row{
+        display:flex;
+    }
     .advertising{
         background: #ffffff;
         border-radius: 5px;
@@ -17,10 +20,14 @@ use kartik\daterange\DateRangePicker;
     }
 
 	#ad_form{
-        margin-left: 10px;
 		border-radius: 5px;
-		min-height: 500px;
-		background: #FFFFF0
+		min-height: 300px;
+        width: 350px;
+		background: #FFFFF0;
+        position: fixed;
+        top: 30%;
+        left: 80%;
+        margin: -175px 0 0 -175px;
 	}
 
 	#title{
@@ -35,10 +42,20 @@ use kartik\daterange\DateRangePicker;
         border-radius: 10px;
     }
 
-    #img{
+    .view{
         margin-top: 30px;
-        width: 100%;
-        border-radius: 15px;
+        border: 1px solid yellow;
+        border-radius: 10px;
+        background: #ffffff;
+        width: 270px;
+        min-height: 50%;
+    }
+
+    .phone-view{
+        margin: auto;
+        overflow-y: auto;
+        height: 500px;
+        width: 300px;
     }
 
 </style>
@@ -50,11 +67,11 @@ use kartik\daterange\DateRangePicker;
 	<div class="row">
 		<div class="col-lg-7 advertising">
             <br />
-            <?= $form->field($model, 'ad_title')->textInput(['maxlength' => true, 'id' => 'btn', 'placeHolder' => '请输入标题'])->label(false)   ?>
+            <?= $form->field($model, 'ad_title')->textInput(['maxlength' => true, 'id' => 'title02', 'placeHolder' => '请输入标题'])->label(false)   ?>
 
             <?= $form->field($model, 'ad_excerpt')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300']])->label(false)  ?>
 
-			<div class="row">
+			<div style="display: flex">
                 <div class="col-lg-4">
                     <?= $form->field($model, 'ad_poster')->widget('common\widgets\upload\FileUpload')->label(false) ?>
                 </div>
@@ -74,10 +91,14 @@ use kartik\daterange\DateRangePicker;
                         ])->textInput(['placeholder' => '截止时间'])->label(false) ?>
                 </div>
 
-                <div class="col-lg-2">
+                <div style="width: 10%; ">
                     <?= $form->field($model, 'ad_type')->dropDownList(['1' => '文章', '2' => '链接'], ['prompt' => '请选择类型'])->label(false) ?>
 
                     <?= $form->field($model, 'ad_location')->dropDownList(['1' => '顶部', '2' => '底部'], ['prompt' => '请选择位置'])->label(false) ?>
+                </div>
+
+                <div class="col-lg-2">
+                    <?= $form->field($model, 'ad_target_value')->dropDownList([1=>'APP',2=>'PC', 3=> '微信'], ['multiple'=>'multiple'], ['prompt' => '请选择'])->label(false) ?>
                 </div>
 
                 <div class="col-lg-3">
@@ -95,20 +116,27 @@ use kartik\daterange\DateRangePicker;
 				<?= Html::submitButton('<span class="glyphicon glyphicon-check"></span>', ['title' => '保存', 'class' => 'btn btn-success']) ?>
 			</div>
 		</div>
+    </div>
 
-		<div id="ad_form" class="col-lg-3">
-			<div id="title">标题<?= $model->ad_title ?></div>
-            <div id="view"> <img src="<?= $model->ad_poster ?>" id="img" /> </div>
-		</div>
-	</div>
+    <div id="ad_form">
+        <div id="title"><?= $model->ad_title ?></div><br />
+        <div class="phone-view">
+            <div class="view"><?= $model->ad_excerpt ?></div>
+        </div>
+    </div>
 
 	<?php ActiveForm::end(); ?>
     <script>
-		var oBtn = document.getElementById('btn');
+		var oBtn = document.getElementById('title02');
         var oTi = document.getElementById('title');
+        var v = document.getElementById('btn');
+
+        function view() {
+            alert(v.value);
+        }
 
 		if('oninput' in oBtn){ 
-             oBtn.addEventListener("input",getWord,false);
+             oBtn.addEventListener("input",getWord, false);
          }else{
              oBtn.onpropertychange = getWord;
          }

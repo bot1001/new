@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -37,12 +37,12 @@ class Advertising extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_publish_community', 'ad_type', 'ad_location', 'ad_end_time'], 'required'],
-            [['ad_excerpt', 'ad_target_value'], 'string'],
-            [['ad_location', 'ad_created_time', 'ad_sort', 'ad_status'], 'integer'],
+            [['ad_title', 'ad_excerpt', 'ad_poster', 'ad_target_value',  'ad_publish_community', 'ad_type', 'ad_location', 'ad_end_time'], 'required'],
+            [['ad_excerpt'], 'string'],
+            [['ad_location', 'ad_sort', 'ad_status'], 'integer'],
             [['ad_title'], 'string', 'max' => 64],
             [['ad_poster'], 'string', 'max' => 300],
-			[['ad_end_time'], function($attr, $params) {
+			[['ad_end_time', 'ad_created_time'], function($attr, $params) {
                 if ($this->hasErrors()) return false;
 
                 $datetime = $this->{$attr};
@@ -67,6 +67,7 @@ class Advertising extends \yii\db\ActiveRecord
 	public function afterFind()
     {
         parent::afterFind();
+        $this->ad_created_time = date('Y-m-d H:i:s', $this->ad_created_time);
         $this->ad_end_time = date('Y-m-d', $this->ad_end_time);
     }
 
@@ -82,7 +83,7 @@ class Advertising extends \yii\db\ActiveRecord
             'ad_poster' => '缩略图',
             'ad_publish_community' => '可见小区',
             'ad_type' => '类型',
-            'ad_target_value' => '审核',
+            'ad_target_value' => '发布平台',
             'ad_location' => '位置',
             'ad_created_time' => '创建时间',
 			'ad_end_time' => '截止时间',
@@ -101,9 +102,10 @@ class Advertising extends \yii\db\ActiveRecord
 			{
 				//插入新纪录时自动添加以下字段
 				$this->ad_created_time = time();
-                $this->ad_status = '3';
-                $this->ad_target_value = '1';
-			}
+                $this->ad_status = '0';
+			}else{
+			    $this->ad_status = '0';
+            }
 			return true;
 		}
 		else{

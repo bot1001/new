@@ -10423,3 +10423,1849 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1535358841.088
     'REQUEST_TIME' => 1535358841
 ]
+2018-08-31 17:26:08 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:26:08 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535707564'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '49592'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535707564&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535707564&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535707564&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535707567.95
+    'REQUEST_TIME' => 1535707567
+]
+2018-08-31 17:45:00 [192.168.172.71][-][-][error][yii\base\ErrorException:2] yii\base\ErrorException: A non-numeric value encountered in C:\Apache24\htdocs\new\api\controllers\SmsController.php:17
+Stack trace:
+#0 C:\Apache24\htdocs\new\api\controllers\SmsController.php(17): yii\base\ErrorHandler->handleError(2, 'A non-numeric v...', 'C:\\Apache24\\htd...', 17, Array)
+#1 [internal function]: api\controllers\SmsController->actionSend('', '13928495461')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('send', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('sms/send', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-08-31 17:45:00 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:45:00 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => ''
+    'phone' => '13928495461'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '51284'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=&phone=13928495461'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=&phone=13928495461'
+    'REQUEST_URI' => '/sms/send?time=&phone=13928495461'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535708700.343
+    'REQUEST_TIME' => 1535708700
+]
+2018-08-31 17:48:57 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:48:56 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535708820'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '51663'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535708820&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535708820&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535708820&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535708936.644
+    'REQUEST_TIME' => 1535708936
+]
+2018-08-31 17:53:24 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:53:23 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535709059'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '52098'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535709059&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535709059&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535709059&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535709203.792
+    'REQUEST_TIME' => 1535709203
+]
+2018-08-31 17:54:29 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:54:28 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535709059'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '52197'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535709059&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535709059&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535709059&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535709268.744
+    'REQUEST_TIME' => 1535709268
+]
+2018-08-31 17:56:21 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-08-31 17:56:21 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535709131'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e7cb9b2e6645d1a2bf241d778a68cd01'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '52375'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535709131&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535709131&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535709131&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535709381.323
+    'REQUEST_TIME' => 1535709381
+]
+2018-09-01 08:57:44 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 08:57:43 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535763077'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56413'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535763077&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535763077&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535763077&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763463.827
+    'REQUEST_TIME' => 1535763463
+]
+2018-09-01 09:00:32 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:00:32 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535763095'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56683'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535763095&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535763095&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535763095&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763632.513
+    'REQUEST_TIME' => 1535763632
+]
+2018-09-01 09:01:16 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 09:01:16 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'http://demos.krajee.com/grid'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.9'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '53433'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763676.16
+    'REQUEST_TIME' => 1535763676
+]
+2018-09-01 09:04:10 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:10 [192.168.172.71][-][-][info][application] $_GET = [
+    'company' => '1'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/companys'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57080'
+    'REDIRECT_URL' => '/login/companys'
+    'REDIRECT_QUERY_STRING' => 'company=1'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'company=1'
+    'REQUEST_URI' => '/login/companys?company=1'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763850.04
+    'REQUEST_TIME' => 1535763850
+]
+2018-09-01 09:04:10 [192.168.172.71][-][-][error][Error] Error: Class 'common\models\Login' not found in C:\Apache24\htdocs\new\api\controllers\LoginController.php:23
+Stack trace:
+#0 [internal function]: api\controllers\LoginController->actionOpenid('wx5b66383c10272...', 'c5856f2376be3bc...', '033fEfhL0mqGC52...', 'authorization_c...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('openid', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('login/openid', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2018-09-01 09:04:10 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:10 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:10 [192.168.172.71][-][-][info][application] $_GET = [
+    'appid' => 'wx5b66383c1027250a'
+    'secret' => 'c5856f2376be3bc281cc0b893f86355e'
+    'js_code' => '033fEfhL0mqGC52AgdkL0809hL0fEfhK'
+    'grant_type' => 'authorization_code'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/openid'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57080'
+    'REDIRECT_URL' => '/login/openid'
+    'REDIRECT_QUERY_STRING' => 'appid=wx5b66383c1027250a&secret=c5856f2376be3bc281cc0b893f86355e&js_code=033fEfhL0mqGC52AgdkL0809hL0fEfhK&grant_type=authorization_code'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'appid=wx5b66383c1027250a&secret=c5856f2376be3bc281cc0b893f86355e&js_code=033fEfhL0mqGC52AgdkL0809hL0fEfhK&grant_type=authorization_code'
+    'REQUEST_URI' => '/login/openid?appid=wx5b66383c1027250a&secret=c5856f2376be3bc281cc0b893f86355e&js_code=033fEfhL0mqGC52AgdkL0809hL0fEfhK&grant_type=authorization_code'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763850.182
+    'REQUEST_TIME' => 1535763850
+]
+2018-09-01 09:04:10 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:10 [192.168.172.71][-][-][info][application] $_GET = [
+    'unionid' => 'oHq83uPL9OP0e-Hy5-DVSdp_YZr0'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/index'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57083'
+    'REDIRECT_URL' => '/login/index'
+    'REDIRECT_QUERY_STRING' => 'unionid=oHq83uPL9OP0e-Hy5-DVSdp_YZr0'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'unionid=oHq83uPL9OP0e-Hy5-DVSdp_YZr0'
+    'REQUEST_URI' => '/login/index?unionid=oHq83uPL9OP0e-Hy5-DVSdp_YZr0'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763850.406
+    'REQUEST_TIME' => 1535763850
+]
+2018-09-01 09:04:35 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:35 [192.168.172.71][-][-][info][application] $_GET = [
+    'company' => '2'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/community'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57121'
+    'REDIRECT_URL' => '/login/community'
+    'REDIRECT_QUERY_STRING' => 'company=2'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'company=2'
+    'REQUEST_URI' => '/login/community?company=2'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763875.535
+    'REQUEST_TIME' => 1535763875
+]
+2018-09-01 09:04:41 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:41 [192.168.172.71][-][-][info][application] $_GET = [
+    'community' => '38'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/building'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57130'
+    'REDIRECT_URL' => '/login/building'
+    'REDIRECT_QUERY_STRING' => 'community=38'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'community=38'
+    'REQUEST_URI' => '/login/building?community=38'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763881.554
+    'REQUEST_TIME' => 1535763881
+]
+2018-09-01 09:04:46 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:46 [192.168.172.71][-][-][info][application] $_GET = [
+    'building' => '163'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/number'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57130'
+    'REDIRECT_URL' => '/login/number'
+    'REDIRECT_QUERY_STRING' => 'building=163'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'building=163'
+    'REQUEST_URI' => '/login/number?building=163'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763886.307
+    'REQUEST_TIME' => 1535763886
+]
+2018-09-01 09:04:47 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:04:47 [192.168.172.71][-][-][info][application] $_GET = [
+    'building' => '163'
+    'number' => '01'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'login/room'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57130'
+    'REDIRECT_URL' => '/login/room'
+    'REDIRECT_QUERY_STRING' => 'building=163&number=01'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'building=163&number=01'
+    'REQUEST_URI' => '/login/room?building=163&number=01'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763887.831
+    'REQUEST_TIME' => 1535763887
+]
+2018-09-01 09:06:17 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:17 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763977.858
+    'REQUEST_TIME' => 1535763977
+]
+2018-09-01 09:06:21 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:21 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763981.854
+    'REQUEST_TIME' => 1535763981
+]
+2018-09-01 09:06:24 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:24 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763984.058
+    'REQUEST_TIME' => 1535763984
+]
+2018-09-01 09:06:24 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:24 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763984.719
+    'REQUEST_TIME' => 1535763984
+]
+2018-09-01 09:06:25 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:25 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763985.094
+    'REQUEST_TIME' => 1535763985
+]
+2018-09-01 09:06:25 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:25 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763985.283
+    'REQUEST_TIME' => 1535763985
+]
+2018-09-01 09:06:25 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:25 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763985.464
+    'REQUEST_TIME' => 1535763985
+]
+2018-09-01 09:06:25 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:25 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763985.637
+    'REQUEST_TIME' => 1535763985
+]
+2018-09-01 09:06:25 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:06:25 [192.168.172.71][-][-][info][application] $_GET = [
+    'realestate' => '38396'
+    'phone' => '13928495461'
+    'name' => '陆路'
+    'nick' => ''
+    'password' => '199'
+    'weixin_openid' => ''
+    'unionid' => ''
+    'face' => ''
+    'gender' => '男'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'register/new'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '57285'
+    'REDIRECT_URL' => '/register/new'
+    'REDIRECT_QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'REQUEST_URI' => '/register/new?realestate=38396&phone=13928495461&name=%E9%99%86%E8%B7%AF&nick=&password=199&weixin_openid=&unionid=&face=&gender=%E7%94%B7'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535763985.802
+    'REQUEST_TIME' => 1535763985
+]
+2018-09-01 09:21:39 [192.168.172.71][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.71
+2018-09-01 09:21:38 [192.168.172.71][-][-][info][application] $_GET = [
+    'time' => '1535764488'
+    'phone' => '18377611365'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'sms/send'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1808101 MicroMessenger/6.5.7 Language/zh_CN webview/ token/e4455c9c9b94d32ab62d4ed71094045f'
+    'CONTENT_TYPE' => 'application/json'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_REFERER' => 'https://servicewechat.com/wx5b66383c1027250a/devtools/page-frame.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.71'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58843'
+    'REDIRECT_URL' => '/sms/send'
+    'REDIRECT_QUERY_STRING' => 'time=1535764488&phone=18377611365'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'time=1535764488&phone=18377611365'
+    'REQUEST_URI' => '/sms/send?time=1535764488&phone=18377611365'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535764898.72
+    'REQUEST_TIME' => 1535764898
+]
+2018-09-01 11:32:15 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 11:32:15 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/widgets'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60057'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535772735.322
+    'REQUEST_TIME' => 1535772735
+]
+2018-09-01 11:32:50 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 11:32:50 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/widget-details/touchspin'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60089'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535772770.33
+    'REQUEST_TIME' => 1535772770
+]
+2018-09-01 11:33:39 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 11:33:39 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/grid'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60141'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535772819.151
+    'REQUEST_TIME' => 1535772819
+]
+2018-09-01 11:36:54 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 11:36:54 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/grid-demo'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60279'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535773014.327
+    'REQUEST_TIME' => 1535773014
+]
+2018-09-01 11:50:28 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 11:50:28 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/grid-demo'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61165'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535773828.638
+    'REQUEST_TIME' => 1535773828
+]
+2018-09-01 12:11:17 [127.0.0.1][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "widgets.js". in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:537
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('widgets.js', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-09-01 12:11:16 [127.0.0.1][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'widgets.js'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'platform.twitter.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:61.0) Gecko/20100101 Firefox/61.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://demos.krajee.com/editable'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\Program Files\\Java\\gradle-3.5/bin;C:\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\Apache24\\bin;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'platform.twitter.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '63086'
+    'REDIRECT_URL' => '/widgets.js'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/widgets.js'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1535775076.963
+    'REQUEST_TIME' => 1535775076
+]

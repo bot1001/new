@@ -14,14 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <style>
     .div{
         background: #fff9e5;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-left: 10px;
     }
 
     .excerpt{
         background: #ffffff;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-left: 10px;
+        overflow-y: auto;
+        max-height: 800px;
     }
 		
 	img{
@@ -30,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	}
 	
 	#td01{
+        width: 150px;
 		text-align: right;
 	}
 	
@@ -74,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   </tr>
                   
 				  <tr id="tr01">
-				      <td id="td01">值：</td><td id="td02"><?= $model['value'] ?></td>
+				      <td id="td01">发布平台：</td><td id="td02"><?= $model['value'] ?></td>
 				  </tr>
 				  
 				  <tr id="tr01">
@@ -82,17 +85,19 @@ $this->params['breadcrumbs'][] = $this->title;
 				  </tr>
 				  
 				  <tr id="tr01">
-				      <td id="td01">创建时间：</td><td id="td02"><?= date('Y-m-d H:i:s', $model['time']) ?></td>
+				      <td id="td01">创建时间：</td><td id="td02"><?= $model['create_time'] ?></td>
+				  </tr>
+
+                  <tr id="tr01">
+                      <td id="td01">截至时间：</td><td id="td02"><?= $model['end_time'] ?></td>
 				  </tr>
 				  
 				  <tr id="tr01">
 				      <td id="td01">顺序：</td><td id="td02"><?= $model['sort'] ?></td>
 				  </tr>
 			      
-			      <tr id="tr01">
-				      <td colspan="2">可见小区：</td>
-				  </tr>
-			      
+			      <tr id="tr01"><td colspan="2">可见小区：</td></tr>
+
 			      <tr>
 				      <td colspan="2">
 				          <div class="row">
@@ -119,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            	 <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
                         'class' => 'btn btn-danger', 
                         'data' => [ 
-                            'confirm' => '确定要删除么?', 
+                            'confirm' => '您确定要删除吗?',
                             'method' => 'post', 
                         ], 
                     ]) ?> 
@@ -127,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</p>
 	    </div>
 	
-		<div class="col-lg-8 excerpt">
+		<div class="col-lg-6 excerpt">
 	    	<?= $model['excerpt'] ?>
 	    </div>
 	</div>

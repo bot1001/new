@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use app\models\CommunityBasic;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use mdm\admin\components\Helper;
@@ -66,7 +65,7 @@ $this->title = '楼宇列表';
 				'data' => $company,
 			],
                 'readonly' => function(){
-	    return \app\models\Limit::limit($url='/building/building') == 0;
+	                return \app\models\Limit::limit($url='/building/building') == 0;
                 },
 			 'filterType' => GridView::FILTER_SELECT2,
 		     'filter' => $company,

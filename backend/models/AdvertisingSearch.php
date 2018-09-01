@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Advertising;
+use common\models\Advertising;
 
 /**
  * AdvertisingSearch represents the model behind the search form of `app\models\Advertising`.

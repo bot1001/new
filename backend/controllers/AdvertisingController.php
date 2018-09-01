@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Advertising;
+use common\models\Advertising;
 use app\models\AdvertisingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\grid\EditableColumnAction;
+use yii\helpers\ArrayHelper;
 
 /**
  * AdvertisingController implements the CRUD actions for Advertising model.
@@ -31,15 +33,23 @@ class AdvertisingController extends Controller
 	
 	public function actions()
     {
-        return [
+        return ArrayHelper::merge(parent::actions(), [
+            'advertising' => [                                       // identifier for your editable action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => Advertising::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                },
+                'ajaxOnly' => true,
+            ],
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
                     "imagePathFormat" => "/img/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+                    "imageMaxSize" => 1024000,
                 ],
             ]
-        ];
+        ]);
     }
 
     /**
@@ -65,11 +75,11 @@ class AdvertisingController extends Controller
      */
     public function actionView($id)
     {
-		$model = \app\models\Advertising::find()
+		$model = Advertising::find()
 			->select('ad_id as id, ad_title as title, ad_excerpt as excerpt,
 			          ad_poster as poster, ad_publish_community as community,
 			          ad_type as type, ad_target_value as value, ad_location as location,
-			          ad_created_time as time, 
+			          from_unixtime(ad_created_time) as create_time, from_unixtime( ad_end_time ) as end_time,
 					  ad_sort as sort, ad_status as status,property')
 			->where(['ad_id' => "$id"])
 			->asArray()
@@ -85,7 +95,17 @@ class AdvertisingController extends Controller
 			->column();
 		$type = ['1' => '文章', '2' => '链接'];
 		$location = ['1' => '顶部', '2' => '底部'];
-		$status = ['1' => '上架', '2' => '下架', 3 => '待审核'];
+		$status = [0 => '待审核', '1' => '上架', '2' => '下架', 3 => '审核失败'];
+
+        //重新赋值发布平台起
+		$platform = [1=>'APP',2=>'PC', 3=> '微信'];
+        $value = explode(',', $model['value']); //分裂数组
+        $result = '';
+        foreach ($value as $v){
+            $result .= $platform[$v].' '; //组合数组
+        }
+        $model['value'] = $result;
+        //重新赋值发布平台止
 		
 		$type = $type[$model['type']];
 		$location = $location[$model['location']];
@@ -120,9 +140,12 @@ class AdvertisingController extends Controller
 			$model->ad_location  = $post['ad_location'];
 			$model->ad_sort  = $post['ad_sort'];
 
+			$value = $post['ad_target_value'];
+			$value = explode(',', $value); //重组发布平台信息
+            $model->ad_target_value = $value;
+
 			$community = $post['ad_publish_community']; //接收发布小区
 			$comm = implode(',', $community); //重组小区
-
 			$model->ad_publish_community  = $comm;
 			$model->property  = $post['property'];
 
@@ -158,6 +181,10 @@ class AdvertisingController extends Controller
 			$model->ad_target_value  = '1';
 			$model->ad_location  = $post['ad_location'];
 			$model->ad_sort  = $post['ad_sort'];
+
+            $value = $post['ad_target_value'];
+            $value = implode(',', $value); //重组发布平台信息
+            $model->ad_target_value = $value;
 
 			$community = $post['ad_publish_community']; //接收发布小区
 			$comm = implode(',', $community); //重组小区
