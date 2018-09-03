@@ -164,7 +164,14 @@ $this->title = '缴费管理';
 		],
 
 		[ 'attribute' => 'number',
-			'value' => 'room.room_number',
+			'value' => function($model){
+                if(!is_numeric($model->room->room_number))
+                {
+                    return $model->room->room_number.'座';
+                }else{
+                    return $model->room->room_number;
+                }
+            },
             'filterType' => GridView::FILTER_SELECT2,
             'filter' => $number,
             'filterInputOptions' => ['placeholder' => ''],

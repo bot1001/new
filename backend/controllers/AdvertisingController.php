@@ -45,7 +45,7 @@ class AdvertisingController extends Controller
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
-                    "imagePathFormat" => "/img/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+                    "imagePathFormat" => "/img/Adertising/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径、广告
                     "imageMaxSize" => 1024000,
                 ],
             ]
@@ -141,7 +141,7 @@ class AdvertisingController extends Controller
 			$model->ad_sort  = $post['ad_sort'];
 
 			$value = $post['ad_target_value'];
-			$value = explode(',', $value); //重组发布平台信息
+			$value = implode(',', $value); //重组发布平台信息
             $model->ad_target_value = $value;
 
 			$community = $post['ad_publish_community']; //接收发布小区
