@@ -95,7 +95,7 @@ $this->title = '用户登录';
 			<div>
 				<table>
 					<tr>
-						<td align="left"><a href="https://open.weixin.qq.com/connect/qrconnect?appid=wx61eec3717a800533&redirect_uri=http://www.gxydwy.com&response_type=code&scope=snsapi_login&state=YES#wechat_redirect"><img src="/image/wx.png"></a></td>
+						<td align="left"><a href="https://open.weixin.qq.com/connect/qrconnect?appid=wx61eec3717a800533&redirect_uri=https://www.gxydwy.com&response_type=code&scope=snsapi_login&state=YES#wechat_redirect"><img src="/image/wx.png"></a></td>
 						<td align="right"><a href="#">立即注册</a></td>
 					</tr>
 				</table>

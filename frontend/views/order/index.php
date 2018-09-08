@@ -38,67 +38,50 @@ Modal::end();
 <div class="order-index">
 
 	<style>
-		#center {
-			text-align: center;
-		}
-		
-		#right {
-			text-align: right;
-		}
+        #invoice{
+            margin-bottom: 10px;
+            background: #fff;
+            border-radius: 5px;
+        }
 		
 		#order {
 			width: 800px;
 			margin: auto;
 			position: relative;
 			margin-top: 10px;
-			background: #F5F5F5;
-			border-radius: 15px;
 		}
-		
-		#tbody {
-			background: #F0F0F0;
-			border-radius: 15px;
-		}
-		
+
 		#order_img {
-			width: 50px;
+			width: 40px;
 			height: auto;
 			border-radius: 5px;
 		}
-		
-		#time {
-			width: 250px;
-		}
-		
-		#img {
-			height: 60px;
-		}
-		
-		#trash {
-			display: none;
-		}
-		
-		.dropdown {
-			position: relative;
-			display: inline-block;
-		}
-		
+
+        .right{
+            text-align: right;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
 		.dropdown-content {
 			display: none;
 			position: absolute;
-			background-color: #f9f9f9;
 			min-width: 120px;
 			font-size: 20px;
 			border-radius: 10px;
-			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
 			padding: 12px 16px;
 			z-index: 1;
 		}
-		
-		.dropdown:hover .dropdown-content {
-			display: block;
-		}
-		
+
+        /*	显示内容样式*/
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
 		#page {
 			width: 800px;
 			margin: auto;
@@ -106,13 +89,13 @@ Modal::end();
 	</style>
 
 	<script>
-		function d() {
+		function d(id) {
 			if ( confirm( '您确定要删除吗？' ) ) {
 				$.ajax( {
 					type: "GET", //方法类型
 					dataType: "json", //预期服务器返回的数据类型
 					url: "/order/delete", //url
-					data: $( '#trash' ).serialize(), //获取值， name作为下标，value作为键值
+					data: {"id":id}, //获取值， name作为下标，value作为键值
 					success: function ( result ) {
 						if ( result == 1 ) {
 							alert( "删除成功！" );
@@ -128,91 +111,67 @@ Modal::end();
 	</script>
 
 	<?php if($data){ ?>
-
-	<table id="order" border="0" cellspacing="0" cellpadding="0">
+	<div id="order">
 		<?php foreach($data as $d): $d = (object)$d ?>
-		<tr id="tbody">
-			<input id="trash" name="id" value="<?= $d->id ?>"/>
-			<td id="time" colspan="2">下单时间：
-				<?= date('Y-m-d H:i:s', $d->create_time) ?>
-			</td>
-			<td colspan="2">缴费单号：<a href="<?= Url::to(['/invoice/index', 'order_id' => $d->order_id]) ?>"><?= $d->order_id ?></a>
-			</td>
-			<td id="center">裕达物业</td>
+        <div id="invoice">
+            <div class="row">
+                <div class="col-lg-4">下单时间：<?= date('Y-m-d H:i:s', $d->create_time) ?></div>
+                <div class="col-lg-4">缴费单号：<a href="<?= Url::to(['/invoice/index', 'order_id' => $d->order_id]) ?>"><?= $d->order_id ?></a></div>
+                <div class="col-lg-3">裕达物业</div>
 
-			<td id="center" colspan="2">
-				<div class="dropdown">
-					<span>
-			             <?= Html::a('<span class="glyphicon glyphicon-trash"></span>
-					', '#', ['class' => 'btn btn-warning', 'onclick' => "d()"]) ?>
-					</span>
-					<div class="dropdown-content">
-						删除
-					</div>
-				</div>
-			</td>
-		</tr>
+                <div class="col-lg-1">
+			         <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => 'btn btn-warning', 'onclick' => "d($d->id)"]) ?>
+                </div>
+            </div>
 
-		<tr id="img">
-			<td id="center"><img id="order_img" src="/image/logo.png"/>	</td>
-            <?php
-            //分割地址以获取小区
-            $community = explode(' ', $d->address);
-            if(count($community) == '1'){
-                $community = explode('-', $d->address);
-            }
+            <div class="row">
+                <?php
+                //分割地址以获取小区
+                $community = explode(' ', $d->address);
+                if(count($community) == '1'){
+                    $community = explode('-', $d->address);
+                }
 
-            $name = reset($community); // 提取小区名称
+                $name = reset($community); // 提取小区名称
 
-            $community_id = \common\models\Community::find() //查找小区编码
-                         ->select('community_id as id')
-                         ->where(['community_name' => $name])
-                         ->asArray()
-                         ->one();
+                $community_id = \common\models\Community::find() //查找小区编码
+                ->select('community_id as id')
+                    ->where(['community_name' => $name])
+                    ->asArray()
+                    ->one();
 
-            if(empty($community_id)){ //如果小区不存在则默认为0
-                $community_id['id'] = 0;
-            }
-            ?>
-
-			<td><a href="<?= Url::to(['view', 'id' => $d->id, 'community' => $community_id['id']]) ?>"><?= $d->address; ?></a></td>
-			<td id="center"><?= $d->name; ?></td>
-			<td id="center"><?= mb_substr($d->description, 0, 15); ?></td>
-			<td id="right"><?= $d->amount; ?>	</td>
-			<td id="center" width="100px">
-				<?php $key = $d->id; ?>
-				<div class="dropdown">
-					<span>
-						<?php
-						if ( $d->status == '1' ) {
-							echo Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', '#', [
-								'class' => 'btn btn-success pay',
-								'data-toggle' => 'modal',
-								'data-url' => Url::toRoute( [ 'pay', 'id' => $key, 'community' => $community_id['id'] ] ),
-								'data-title' => '支付方式', //如果不设置子标题，默认使用大标题
-								'data-target' => '#common-modal',
-							] );
-							?>
-					</span>
-					<div class="dropdown-content">立即支付</div>
-				</div>
-
-				<?php
-				} elseif ( $d->status == '2' ) {
-					echo Html::a( '<span class="glyphicon glyphicon-print"></span>', [ 'print', 'id' => $d->order_id, 'amount' => $d->amount ], [ 'class' => 'btn btn-info', 'title' => '打印' ] );
-				} elseif ( $d->status == '3' ) {
-					echo Html::a( '<span class="glyphicon glyphicon-remove"></span>', '#', [ 'class' => 'btn btn-warning', 'title' => '已取消' ] );
-				}
-				?>
-			</td>
-		</tr>
-
-		<tr style="background: #FFFFFF">
-			<td colspan="6"><br/>
-			</td>
-		</tr>
-		<?php endforeach; ?>
-	</table>
+                if(empty($community_id)){ //如果小区不存在则默认为0
+                    $community_id['id'] = 0;
+                }
+                ?>
+                <div class="col-lg-4"><img id="order_img" src="/image/logo.png"/><a href="<?= Url::to(['view', 'id' => $d->id, 'community' => $community_id['id']]) ?>"><?= $d->address; ?></a></div>
+                <div class="col-lg-2""><?= $d->name; ?></div>
+                <div class="col-lg-4"><?= mb_substr($d->description, 0, 15); ?></div>
+                <div class="right col-lg-1"><?= $d->amount; ?></div>
+                <div class="col-lg-1 dropdown">
+				 	<?php
+                        if ( $d->status == '1' ) {
+                            echo Html::a( '<span class="glyphicon glyphicon-credit-card"></span>', '#', [
+                                'class' => 'btn btn-success pay',
+                                'data-toggle' => 'modal',
+                                'data-url' => Url::toRoute( [ 'pay', 'id' => $d->id, 'community' => $community_id['id'] ] ),
+                                'data-title' => '支付方式', //如果不设置子标题，默认使用大标题
+                                'data-target' => '#common-modal',
+                            ] );
+                        ?>
+                    <div class="dropdown-content">立即支付</div>
+                     <?php
+                         } elseif ( $d->status == '2' ) {
+                             echo Html::a( '<span class="glyphicon glyphicon-print"></span>', [ 'print', 'id' => $d->order_id, 'amount' => $d->amount ], [ 'class' => 'btn btn-info', 'title' => '打印' ] );
+                         } elseif ( $d->status == '3' ) {
+                             echo Html::a( '<span class="glyphicon glyphicon-remove"></span>', '#', [ 'class' => 'btn btn-warning', 'title' => '已取消' ] );
+                     }
+                     ?>
+                 </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+	</div>
 
 	<div id="page">
 		<table width="800" cellspacing="0" cellpadding="0">

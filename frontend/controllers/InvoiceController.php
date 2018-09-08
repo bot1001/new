@@ -54,18 +54,16 @@ class InvoiceController extends Controller
 		}
 		
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-			'data' => $data
         ]);
     }
 	
 	public function actionWx($id)
 	{
-		$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+		$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
 		$invoice = UserInvoice::find()
 			->select('year, month, description, invoice_amount as amount, invoice_status as status')
 			->where(['in', 'realestate_id', "$id"])

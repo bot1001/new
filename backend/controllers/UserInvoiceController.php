@@ -204,8 +204,12 @@ class UserInvoiceController extends Controller
 							unlink($inputFileName);
 							return $this->redirect( Yii::$app->request->referrer );
 						}
-						$number = (int)$sheet[ 'C' ]; //单元
-						$number = str_pad($number, '2', '0',STR_PAD_LEFT);
+
+                        $number = $sheet[ 'C' ]; //单元
+                        if (!preg_match ("/^[A-Za-z]/", $number)) { //判断是否为字母
+                            $number = (int)$number;
+                            $number = str_pad($number, '2', '0',STR_PAD_LEFT);
+                        }
 
 						$room_name = $sheet['D']; //房号
                         if(strlen($room_name) == '3'){

@@ -33,25 +33,28 @@ $this->registerJs( $vJs );
 Modal::end();
 
 ?>
+
 <div class="invoice-index">
-    
+<style>
+    th, .table tbody{
+        text-align: center;
+    }
+</style>
     <?php
 	$home = $_SESSION['home'];
 	
 	$gridview = [
             ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
 
-            ['attribute' => 'year',
-			 'hAlign' => 'center'
-			],
-            ['attribute' => 'month',
-			 'hAlign' => 'center'
-			],
+             'year',
+             'month',
+
             ['attribute' => 'description',
-			 'hAlign' => 'center'
+			 'contentOptions' => ['class' => 'text-left']
 			],
+
             ['attribute' => 'invoice_amount',
-			 'hAlign' => 'center'
+                'contentOptions' => ['class' => 'text-right']
 			],
             ['attribute' => 'order_id',
 			 'value' => function($model){
@@ -62,7 +65,6 @@ Modal::end();
             		return $model->order_id;
             	}
             },
-			 'hAlign' => 'center'
 			],
 	
             ['attribute' => 'invoice_notes',
@@ -73,8 +75,9 @@ Modal::end();
              	}else{
              		return $notes;
              	}
-             	
-             },],
+             },
+                'contentOptions' => ['class' => 'text-left']
+                ],
             ['attribute' => 'payment_time',
 			 'mergeHeader' => true,
 			 'value' => function($model){
@@ -85,21 +88,21 @@ Modal::end();
              		return date('Y-m-d H:i:s', $time);
              	}
              },
-			 'hAlign' => 'center',
 			 'width' => '150px'
 			],
+
             ['attribute' => 'invoice_status',
 			'value' => function($model){
-            	$data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+            	$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
             	return $data[$model->invoice_status];
             },
 			 'filterType'=> GridView::FILTER_SELECT2,
-		     'filter'=> [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ],
+		     'filter'=> [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ],
 		     'filterInputOptions'=>['placeholder'=>'请选择'],
 			 'filterWidgetOptions'=>[
                              'pluginOptions'=>['allowClear'=>true],
 		                 ],
-			 'hAlign' => 'center'],
+			 ],
         ];
 	
 	echo GridView::widget([

@@ -40,7 +40,7 @@ class PersonalController extends Controller
 	public function actionIndex()
 	{
         $account_id = $_SESSION['user']['account_id']; //获取用户编码
-        $data = [ '0' => '欠费', '1' => '银行', '2' => '线上', '3' => '刷卡', '4' => '优惠', '5' => '政府', '6' => '现金' ];
+        $data = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8 => '优惠' ];
 
         //获取订单信息
         $order = ( new\ yii\ db\ Query )->select( 'order_basic.id as id,order_basic.order_id as order_id, order_basic.create_time as create_time,

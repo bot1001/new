@@ -70,12 +70,13 @@ class NewsController extends Controller
     function actionHome($community)
     {
         $news = (new \yii\db\Query())
-            ->select('community_news.news_id as id, community_basic.community_name as community, community_news.title, community_news.excerpt, community_news.content, from_unixtime(community_news.update_time) as time, community_news.status')
+            ->select(["community_news.news_id as id, community_basic.community_name as community, community_news.title, community_news.excerpt, concat(substr(community_news.content, 1,50), '.....') as content, 
+            from_unixtime(community_news.update_time) as time, community_news.status"])
             ->from('community_news')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_news.community_id')
             ->andFilterWhere(['community_basic.community_name' => "$community"])
+            ->distinct()
             ->orderBy('update_time DESC')
-            ->distinct('community_news.title, community_news.excerpt, community_news.content')
             ->one();
 
         $news = Json::encode($news);//转换Json数据

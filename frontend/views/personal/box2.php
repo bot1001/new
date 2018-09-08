@@ -6,68 +6,60 @@ use yii\helpers\Html;
 ?>
 
 <style type="text/css">
-	#box2-2 {
-		font-size: 15px;
-		font-weight: 700;
-		overflow: auto;
-		max-height: 230px;
-		width: 100%;
-	}
-	
-	#box2-2 tr td {
-		text-align: center;
-	}
-	
-	#box2td,
-	#box2td0 {
-		background: #F5F5F5;
-		border-radius: 3px;
-	}
-	
-	#box2td0 {
+    .box2{
+        height: 250px;
+        width: 100%;
+        overflow: auto;
+    }
+    #box2-3, .box2-4{
+        display: flex;
+    }
+    #box2-3-1{
+        width: 35%;
+    }
+
+    #box2-3-2{
+        width: 45%;
+    }
+
+    #box2-3-3{
+        width: 20%;
+        text-align: center;
+    }
+
+	#box2-4-1 {
+        width: 70%;
 		position: relative;
-		margin-bottom: 5px;
 	}
+
+    #box2-4-2 {
+        text-align: center;
+        width: 30%;
+	}
+    .box2-4{
+        display: flex;
+        margin-bottom: 5px;
+    }
 </style>
 
 <div id="b_2">
 	<p>
-		<h3>
-       <a href="<?= Url::to(['/order/index']) ?>">
-       	缴费记录
-       </a>
-   </h3>
-	
+		<h3> <a href="<?= Url::to(['/order/index']) ?>">缴费记录</a> </h3>
 	</p>
 	
 	<?php if($order){ ?> 
-	<div style="height: 250px; width: 100%; overflow: auto">
-		<table id="box2-2">
-			<?php foreach($order as $or): $or = (object)$or ?>
-			<tr>
-				<td>
-					<div id="box2td">
-						<l>
-							<?= $or->order_id; ?>
-						</l>
-					</div>
-				</td>
-				<td>
-					<div id="box2td">
-						<?= date('Y-m-d H:i:s', $or->payment_time); ?>
-					</div>
-				</td>
-				<td>
-					<div id="box2td">
-						<?php if(!empty($or->gateway)){
-               	        echo $data[$or->gateway];
-                    }?>
-					</div>
-				</td>
-			</tr>
+        <div class="box2">
+            <?php foreach($order as $or): $or = (object)$or ?>
+                <div style="border-radius: 5px; background: #fff;">
+                    <div id="box2-3">
+                        <div id="box2-3-1"><l>	<?= $or->order_id; ?></l>	</div>
+                        <div id="box2-3-2"><?= date('Y-m-d H:i:s', $or->payment_time); ?></div>
+                        <div id="box2-3-3" style="width: 16%"><?php if(!empty($or->gateway)){
+                                echo $data[$or->gateway];
+                            }?>
+                        </div>
+                    </div>
 
-			<tr>
-				<td colspan="2">
                     <?php
                     //分割地址以获取小区
                     $community = explode(' ', $or->address);
@@ -87,26 +79,17 @@ use yii\helpers\Html;
                         $community_id['id'] = 0;
                     }
                     ?>
-					<div id="box2td0"><a href="<?= Url::to(['/order/view', 'id' => $or->id, 'community' => $community_id['id']]) ?>"><?= $or->address; ?></a>
-					</div>
-				</td>
-				</td>
-				<td align="right">
-					<div id="box2td0">
-						<?= $or->amount; ?>
-					</div>
-				</td>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</table>
-	</div>
+                    <div class="box2-4">
+                        <div id="box2-4-1"><a href="<?= Url::to(['/order/view', 'id' => $or->id, 'community' => $community_id['id']]) ?>"><?= $or->address; ?></a></div>
+                        <div id="box2-4-2"><?= $or->amount; ?></div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
 		<div id="new">
 		    <?= Html::a('更多','/order/index', ['class' => 'btn btn-info', 'title' => '更多记录']) ?>
 	    </div>
-	
 	<?php }else{
 	          echo '<h1>'.'暂无缴费记录'.'</h1>';
           } ?>
-	
 </div>

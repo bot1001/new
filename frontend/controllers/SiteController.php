@@ -91,10 +91,6 @@ class SiteController extends Controller
 				return $this->redirect(['/login/login']);
 			}
 
-			echo '<pre />';
-			print_r($w_info);
-			exit;
-				
 			$unionid = $w_info['unionid']; //提取openID
 
 			$user = (new \yii\db\Query())//查询用户是否存在

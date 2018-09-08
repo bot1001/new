@@ -22,7 +22,7 @@ class PayController extends Controller
 
         $input->SetTotal_fee( $amount*100 ); //订单金额
 
-        $input->SetNotify_url( "http://home.gxydwy.com/pay/weixin" ); //回调地址
+        $input->SetNotify_url( "https://home.gxydwy.com/pay/weixin" ); //回调地址
 
         $input->SetTrade_type( "JSAPI" ); //交易类型
 

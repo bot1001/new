@@ -31,7 +31,7 @@ class TicketController extends Controller
             $id = Yii::$app->db->getLastInsertID();
             $reply = TicketReply::find()
                 ->select('content, from_unixtime(reply_time) as time')
-                ->where(['ticket_id' => $id])
+                ->where(['reply_id' => "$id"])
                 ->asArray()
                 ->one();
             $reply = Json::encode($reply);
