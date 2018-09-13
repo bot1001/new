@@ -15,7 +15,7 @@ use dmstr\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>版本号：</b> 2.7.5.0.0
     </div>
-    <strong>&copy;<?php echo date('Y'); ?> <a href="http://www.gxydwy.com">裕达物业</a></strong>
+    <strong>&copy;<?php echo date('Y'); ?> <a href="https://www.gxydwy.com">裕达物业</a></strong>
 </footer>
 
 <!-- Control Sidebar -->

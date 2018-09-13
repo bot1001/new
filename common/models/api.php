@@ -37,10 +37,29 @@ class Api extends \yii\db\ActiveRecord
            ->join('inner join' , 'user_data', 'user_data.account_id = user_account.account_id')
            ->where(['user_account.wx_unionid' => "$unionid"])
            ->one();
+
        $info = Json::encode($info);
 
        return $info;
    }
+
+   //查找用户地址
+    static function address($account_id)
+    {
+        $address = (new \yii\db\Query()) //查询房屋信息
+        ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room,
+                community_realestate.acreage, community_realestate.delivery, community_realestate.decoration')
+            ->from('user_relationship_realestate')
+            ->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_relationship_realestate.realestate_id')
+            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->where(['user_relationship_realestate.account_id' => "$account_id"])
+            ->all();
+
+        $address = Json::encode($address); //数组转换
+
+        return $address;
+    }
 
    //应收费项生成订单
     static function Order($realestate, $account)
@@ -61,7 +80,7 @@ class Api extends \yii\db\ActiveRecord
             return false;
         }
 
-        $order_id = Order::getOrder02(); //生成订单号函数
+        $order_id = Order::getOrder(); //生成订单函数
 
         $house = (new \yii\db\Query())
             ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room')

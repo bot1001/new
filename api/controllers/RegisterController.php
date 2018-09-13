@@ -129,7 +129,7 @@ class RegisterController extends Controller
         return $count;
     }
 
-    function actionNew($realestate, $phone, $name, $nick, $password, $weixin_openid, $unionid, $face, $gender)
+    function actionNew($realestate, $phone, $name, $nick, $weixin_openid, $unionid, $face, $gender)
     {
         //查询地区编码起
         $district = (new \yii\db\Query())
@@ -168,6 +168,15 @@ class RegisterController extends Controller
             if($result || $u_data || $user_openid) //更新完毕后返回用户信息
             {
                 $info = Api::info($unionid);//调用函数获取用户信息
+                $account_id = $user['account_id']; //提取用户账户ID
+                $address = Api::address($account_id); //获取用户地址
+
+                $info = Json::decode($info);
+                $address = Json::decode($address);
+
+                $info = ['user' => $info, 'address' => $address];
+                $info = Json::encode($info);
+
                 return $info;
             }
         }else{
@@ -178,7 +187,7 @@ class RegisterController extends Controller
                 //模型块赋值
                 $account->account_id = $account_id;
                 $account->user_name = $nick;
-                $account->password = md5($password);
+                $account->password = 'e10adc3949ba59abbe56e057f20f883e';
                 $account->mobile_phone = $phone;
                 $account->wx_unionid = $unionid;
                 $account->new_message = '0';
@@ -227,6 +236,13 @@ class RegisterController extends Controller
             }
             if($result && $r && $u){
                 $info = Api::info($unionid);//调用函数获取用户信息
+                $address = Api::address($account_id); //获取用户地址
+
+                $info = Json::decode($info);
+                $address = Json::decode($address);
+
+                $info = ['user' => $info, 'address' => $address];
+                $info = Json::encode($info);
                 return $info;
             }
         }

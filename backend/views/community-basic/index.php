@@ -69,7 +69,11 @@ echo $this->render('..\..\..\common\modal\modal.php'); ?>
                     'header' => '详情',
                     'formOptions' => [ 'action' => [ '/community-basic/community' ] ],
                     'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-                ],],
+                ],
+                'readonly' => function ( $model, $key, $index, $widget ) {
+                    return \app\models\Limit::limit($url='/community-basic/community') == 0 ; // 判断活动列是否可编辑
+                },
+            ],
 		
             ['attribute' =>'province_id',
 			 'value' => 'province.area_name',
