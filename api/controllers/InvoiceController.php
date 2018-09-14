@@ -65,6 +65,15 @@ class InvoiceController extends Controller
             ->andWhere(['year' => date('Y'), 'month' => date('m')])
             ->asArray()
             ->all();
+        $month = 0; //设置默认当月欠费
+        foreach($invoice as $i){
+            if($i['invoice_status'] == '0')
+            {
+                $month += $i['invoice_amount']; //遍历求和当月欠费
+            }
+        }
+        $invoice = ['invoice' => $invoice, 'month' => $month]; //重组返回数据
+
         $invoice = Json::encode($invoice);
         if(empty($invoice))
         {
