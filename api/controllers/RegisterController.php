@@ -148,7 +148,7 @@ class RegisterController extends Controller
         if($name == ''){ $name = $nick; }//判断姓名是否为空，如果为空自默认和昵称相一致
 
         $user = UserAccount::find() //验证用户是否存在
-            ->where(['wx_unionid' => "$unionid"])
+            ->where(['mobile_phone' => "$phone"])
             ->asArray()
             ->one();
 
@@ -161,7 +161,7 @@ class RegisterController extends Controller
 
             $user_openid->account_id = $account_id;
             $user_openid->open_id = $weixin_openid;
-            $user_openid->type = '1';
+            $user_openid->type = '2';
 
             $user_openid->save(); //保存用户open id
 
