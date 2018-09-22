@@ -102,7 +102,6 @@ class InvoiceController extends Controller
     function actionOrderCreate($realestate, $account)
     {
         $result = Api::Order($realestate, $account);
-        $result = Json::encode($result);
 
         return $result;
     }

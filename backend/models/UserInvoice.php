@@ -165,6 +165,10 @@ class UserInvoice extends \yii\db\ActiveRecord
 		    	        $p = $price*date('t');
 		    	        $price = round($p, 2);
                     }
+                    if($price == '0.00')
+                    {
+                        continue;
+                    }
 
 		    	    //查入语句
 		    	    $sql = "insert ignore into user_invoice(community_id,building_id,realestate_id,description, year, month, invoice_amount,create_time,invoice_status, invoice_notes)
