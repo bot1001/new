@@ -243,7 +243,7 @@ $this->title = '缴费管理';
 			},
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/user-invoice/invoice' ] ], // point to the new action        
-				'inputType' => \kartik\ editable\ Editable::INPUT_TEXT,
+				'inputType' => \kartik\editable\Editable::INPUT_TEXT,
 			],
             'contentOptions' => ['class' => 'text-right'],
 			'width' => '60px'
@@ -276,6 +276,9 @@ $this->title = '缴费管理';
 			}	
 	    },
 		'class'=>'kartik\grid\EditableColumn',
+            'readonly' => function($model){
+                return $model->invoice_status != 0;
+            },
 		'editableOptions'=>[
             'formOptions'=>['action' => ['/user-invoice/invoice']], // point to the new action        
             'inputType'=>\kartik\editable\Editable::INPUT_TEXT,

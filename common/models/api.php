@@ -47,7 +47,7 @@ class Api extends \yii\db\ActiveRecord
     static function address($account_id)
     {
         $address = (new \yii\db\Query()) //查询房屋信息
-        ->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room,
+        ->select('community_realestate.realestate_id as realestate, community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as room,
                 community_realestate.acreage, community_realestate.delivery, community_realestate.decoration')
             ->from('user_relationship_realestate')
             ->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_relationship_realestate.realestate_id')

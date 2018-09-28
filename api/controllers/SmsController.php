@@ -14,11 +14,13 @@ class SmsController extends Controller
     function actionSend($time, $phone)
     {
         //判断获取验证码时间
-        $time = date(time())-$time;
-        if($time < '60'){
-            $msg = '2'; //一分钟内获取验证码返回2
-            $msg = Json::encode($msg);
-            return $msg;
+        if(!empty($time)){ //如果短信发送时间不为空
+            $time = date(time())-$time;
+            if($time < '60'){
+                $msg = '2'; //一分钟内获取验证码返回2
+                $msg = Json::encode($msg);
+                return $msg;
+            }
         }
 
         $name = '裕家人'; //应用名称
@@ -33,6 +35,7 @@ class SmsController extends Controller
 
         if($r == '1') //发送成功返回验证码
         {
+            $code = ['code' => $code, 'timeStamp' => date(time())]; //组合返回信息
             $code = Json::encode($code);
             return $code;
         }

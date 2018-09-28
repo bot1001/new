@@ -142,7 +142,7 @@ if($message){
         var p = phone.value;
 
         if(r.length == 0 || p.length != 11){
-            alert("房屋或者手机号码，请重新选择！");
+            alert("房屋或手机号码有误，请重新选择！");
         }else{
             $.ajax({
                 type: "GET",//方法类型

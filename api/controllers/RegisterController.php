@@ -157,15 +157,24 @@ class RegisterController extends Controller
                 'mobile_phone = :a_id', [':a_id' => $phone]);
             $u_data = UserData::updateAll(['face_path' => $face], 'account_id = :a_id', [':a_id' => $user['account_id']]);
 
-            $user_openid = new UserOpenid();
+            $new = UserOpenid::find() //判断用户openID是否已存在
+                ->where(['open_id' => "$weixin_openid"])
+                ->one();
 
-            $user_openid->account_id = $account_id;
-            $user_openid->open_id = $weixin_openid;
-            $user_openid->type = '2';
+            $r = ''; //设置默认值
+            if($new){//如果存在之间更新
+                $r = UserOpenid::updateAll(['type' => '2'], 'account_id = :o_id', ['o_id' => "$weixin_openid"]);
+            }else{
+                $user_openid = new UserOpenid();
 
-            $user_openid->save(); //保存用户open id
+                $user_openid->account_id = $user['account_id'];
+                $user_openid->open_id = $weixin_openid;
+                $user_openid->type = '2';
 
-            if($result || $u_data || $user_openid) //更新完毕后返回用户信息
+                $r = $user_openid->save(); //保存用户open id
+            }
+
+            if($result || $u_data || $r) //更新完毕后返回用户信息
             {
                 $info = Api::info($unionid);//调用函数获取用户信息
                 $account_id = $user['account_id']; //提取用户账户ID
@@ -220,7 +229,7 @@ class RegisterController extends Controller
 
                     $user_openid-> account_id = $account_id;
                     $user_openid-> open_id = $weixin_openid;
-                    $user_openid->type = '1';
+                    $user_openid->type = '2';
 
                     $user_openid->save();
                 }
