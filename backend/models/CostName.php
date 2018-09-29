@@ -78,8 +78,7 @@ class CostName extends \yii\db\ActiveRecord
 				$this->update_time = date('Y-m-d h:i:s');
 			}
 			return true;
-		}
-		else{
+		}else{
 			return false;
 		}
 	}

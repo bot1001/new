@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
-use yii\widgets\Pjax;
 use app\models\Status;
 use app\models\OrderRelationshipAddress;
 use mdm\admin\components\Helper;

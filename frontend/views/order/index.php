@@ -21,8 +21,6 @@ $js = <<<JS
 $(".pay").click(function(){ 
         aUrl = $(this).attr('data-url');
         aTitle = $(this).attr('data-title');
-        console.log(aTitle);
-        console.log(aUrl);
         
         $($(this).attr('data-target')+" .modal-title").text(aTitle);
         $($(this).attr('data-target')).modal("show")

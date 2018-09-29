@@ -65,7 +65,6 @@ $this->title = '房屋信息';
 
     <?php
 	$gridview = [
-		
             ['class' => 'kartik\grid\SerialColumn',
 			'header' => '序<br />号'],
 				
