@@ -12,6 +12,7 @@ use app\models\CommunityBasic;
 use app\models\OrderRelationshipAddress;
 use app\models\OrderSearch;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -313,17 +314,26 @@ class OrderController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($realestate, $order)
     {
-        $model = new OrderBasic();
+        $address = (new Query()) //查询房号地址
+            ->select(["contact(community_basic.community_name,community_building.building_name,community_realestate.room_number,community_realestate.room_name)"])
+            ->join('inner join', 'community_building', 'community_realestate.building_id = community_building.building_id')
+            ->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic')
+            ->from('community_realestate')
+            ->where(['community_realestate.realestate_id' => $realestate])
+            ->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        $model = new OrderBasic();
+        print_r($realestate);
+
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['view', 'id' => $model->id]);
+//        } else {
+//            return $this->render('create', [
+//                'model' => $model,
+//            ]);
+//        }
     }
 	
 	//确认缴费详情

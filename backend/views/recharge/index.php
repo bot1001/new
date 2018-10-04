@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use mdm\admin\components\Helper;
-use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RechargeSearch */
@@ -21,18 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
     function pay(){
         if(confirm('您确定充值吗？')){
+            var realestate = document.getElementById('room')
             var keys = $("#grid").yiiGridView("getSelectedRows"); //获取选中列id
-            if(keys.length == 0){
+            if(keys.length == 0 || realestate.length == 0){
                 alert( '选择有误，请重新选择！');
             }else{
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url:"create",
-                    data:{id: keys},
-                    error: function () {
-                        alert('操作失败，请联系管理员');
-                    }
+                    url:"add",
+                    data:{id: keys, realestate: realestate.value},
+                    // error: function () {
+                    //     alert('操作失败，请联系管理员');
+                    // }
                 })
             }
         }
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </script>
 
 <div class="recharge-index">
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
     <?php
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn',
@@ -105,8 +106,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'options' => ['id' => 'grid'],
         'panel' => ['type' => 'info', 'heading' => '充值列表',
-            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info']).' '.
-        Html::a('<span class="glyphicon glyphicon-new-window"></span>', '#', ['class' => 'btn btn-default', 'onClick' => 'pay()'])],
+            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info'])
+        ],
         'columns' => $gridview
     ]); ?>
 </div>

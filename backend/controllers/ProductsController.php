@@ -33,14 +33,18 @@ class ProductsController extends Controller
      * Lists all Products models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($realestate, $order)
     {
         $searchModel = new ProductSearch();
+        $searchModel->order_id = $_GET['order'];
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'order' => $order,
+            'realestate' => $realestate
         ]);
     }
 

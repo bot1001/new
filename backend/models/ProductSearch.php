@@ -43,6 +43,7 @@ class ProductSearch extends Products
     public function search($params)
     {
         $query = Products::find();
+//        $query->joinWith('order')->where(['order_basic.order_type' => '2']);
 
         // add conditions that should always apply here
 

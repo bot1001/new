@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use kartik\depdrop\DepDrop;
-use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\SmsClient */

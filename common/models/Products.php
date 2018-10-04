@@ -48,13 +48,18 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_id' => 'Order ID',
-            'product_id' => 'Product ID',
-            'product_quantity' => 'Product Quantity',
-            'store_id' => 'Store ID',
-            'product_name' => 'Product Name',
-            'sale' => 'Sale',
-            'product_price' => 'Product Price',
+            'order_id' => '订单编号',
+            'product_id' => '商品编号',
+            'product_quantity' => '数量',
+            'store_id' => '商店编号',
+            'product_name' => '商品名称',
+            'sale' => '优惠',
+            'product_price' => '商品价格',
         ];
+    }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['order_id' => 'order_id']);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Order;
+use common\models\Products;
 use Yii;
 use common\models\Recharge;
 use app\models\RechargeSearch;
@@ -71,6 +73,34 @@ class RechargeController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    //添加充值订单
+    function actionAdd($realestate)
+    {
+        $id = $_GET['id']; //接收传参
+        $recharge = Recharge::find() //查找充值数组
+            ->where(['in', 'id', $id])
+            ->asArray()
+            ->all();
+
+        $order_id = Order::getOrder(); //生成订单编号
+        foreach ( $recharge as $r){
+            $model = new Products(); //实例化模型
+
+            $model->order_id = $order_id;
+            $model->product_id = $r['id'];
+            $model->product_quantity = '1'; // 商品数量默认为1
+            $model->product_name = $r['name'];
+            $model->sale = '0';
+            $model->product_price = $r['price'];
+
+            $result = $model->save();
+        }
+
+        if($result){ //如果添加成功则转跳到产品页面
+            return $this->redirect(['/products/index','order' => $order_id, 'realestate' => $realestate]);
+        }
     }
 
     /**

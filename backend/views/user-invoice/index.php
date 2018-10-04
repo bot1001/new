@@ -79,7 +79,6 @@ $(".gridviewpay").on("click", function () {
                 //多余代码起
                 success: function (id) {
                     t = JSON.parse(id);
-                    console.log(id);
                     if (isset(t)) {
                         window.location.href= window.location.href;
                     }
