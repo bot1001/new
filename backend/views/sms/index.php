@@ -61,15 +61,15 @@ echo $this->render('..\..\..\common\modal\modal.php');
         ['class' => 'kartik\grid\ActionColumn',
             'template' => Helper::filterActionColumn('{update}&nbsp;&nbsp;&nbsp;{delete}'),
             'buttons' => [
-                    'update' => function($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#',[
-                          'class' => 'pay',
-                          'data-toggle' => 'modal',
-                          'data-url' => Url::to(['update', 'id' => $key]),
-                          'data-title' => '修改',
-                          'data-target' => '#common-modal',
-        ]);
-                    }
+                'update' => function($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#',[
+                      'class' => 'pay',
+                      'data-toggle' => 'modal',
+                      'data-url' => Url::to(['update', 'id' => $key]),
+                      'data-title' => '修改',
+                      'data-target' => '#common-modal',
+                    ]);
+                }
             ],
             'header' => '操<br />作'],
     ];

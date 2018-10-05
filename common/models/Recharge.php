@@ -31,7 +31,7 @@ class Recharge extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'create_time', 'creater', 'type'], 'required'],
+            [['name', 'price', 'type'], 'required'],
             [['price'], 'number'],
             [['create_time'], function($arr){
                 if($this->hasErrors()) return false;

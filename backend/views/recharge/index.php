@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 use mdm\admin\components\Helper;
 
@@ -10,6 +11,10 @@ use mdm\admin\components\Helper;
 
 $this->title = '费用充值';
 $this->params['breadcrumbs'][] = $this->title;
+
+//引入模态窗文件
+echo $this->render('..\..\..\common\modal\modal.php');
+
 ?>
 <style>
     th, td, tr{
@@ -66,11 +71,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['attribute' => 'type',
             'value' => function($model){
-                $date = ['1' => '欠费'];
+                $date = ['1' => '电费'];
                 return $date[$model->type];
             },
             'filterType' => GridView::FILTER_SELECT2,
-            'filter' => [ 1 => '欠费'],
+            'filter' => [ 1 => '电费'],
             'filterWidgetOptions' => [
                 'pluginOptions' => [ 'allowClear' => true ],
             ],
@@ -112,7 +117,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => 'user.name'],
 
         ['class' => 'kartik\grid\ActionColumn',
-            'template' => Helper::filterActionColumn('{view}{update}'),
+            'template' => Helper::filterActionColumn('{update}'),
+            'buttons' => [
+                'update' => function($url, $model, $key){
+                    return Html::a("<span class='glyphicon glyphicon-pencil'></span>", '#',[
+                        'data-toggle' => 'modal',
+                        'data-url' => Url::to(['update', 'id' => $key]),
+                        'data-title' => '修改',
+                        'class' => 'pay',
+                        'data-target' => '#common-modal'
+                    ]);
+                },
+            ],
             'header' => '操<br />作'],
     ];
 
@@ -121,7 +137,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'options' => ['id' => 'grid'],
         'panel' => ['type' => 'info', 'heading' => '充值列表',
-            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info'])
+            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', '#', [
+                'class' => 'btn btn-success pay',
+                'data-toggle' => 'modal',
+                'data-url' => "create",
+                'data-title' => '创建', //如果不设置子标题，默认使用大标题
+                'data-target' => '#common-modal',
+            ])
         ],
         'columns' => $gridview
     ]); ?>

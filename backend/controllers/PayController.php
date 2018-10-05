@@ -327,7 +327,6 @@ class PayController extends Controller
 			return $this->redirect(Yii::$app->request->referrer);
 		}
 		
-		
 		//生成支付二维码
 		$img = Pay::wx($order_id, $url);
 				
