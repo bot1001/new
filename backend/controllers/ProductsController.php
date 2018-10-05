@@ -8,6 +8,8 @@ use app\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -27,6 +29,20 @@ class ProductsController extends Controller
                 ],
             ],
         ];
+    }
+
+    //GridView页面直接编辑
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'products' => [                                       // identifier for your editable action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => Products::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                },
+                'ajaxOnly' => true,
+            ]
+        ]);
     }
 
     /**

@@ -69,17 +69,14 @@ $this->title = '订单管理';
 	<?php 
 		$message = Yii::$app->getSession()->getFlash('m');
 		if($message == 1){
-	        echo "<script>alert('打印数据为空，请确认订单信息！')</script>";
-	        }
-	        elseif ( $message == 2 ) {
-	        		echo "<script>alert('订单未支付，无法打印！')</script>";
-	        	} elseif ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
-	        			$a = Yii::$app->getSession()->getFlash( 'cancel' );
-	        			echo "<script>alert('$a')</script>";
-	        		} elseif ( Yii::$app->getSession()->hasFlash( 'm_order' ) ) {
-	        				$m_order = Yii::$app->getSession()->getFlash( 'm_order' );
-	        				echo "<script>alert('未支付订单，暂无更多信息！')</script>";
-	        			} elseif ( Yii::$app->getSession()->hasFlash( 'can' ) ) {
+	        echo "<script>alert('无法打印，请确认订单信息！')</script>";
+		} elseif ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
+		    $a = Yii::$app->getSession()->getFlash( 'cancel' );
+		    echo "<script>alert('$a')</script>";
+		} elseif ( Yii::$app->getSession()->hasFlash( 'm_order' ) ) {
+		    $m_order = Yii::$app->getSession()->getFlash( 'm_order' );
+		    echo "<script>alert('未支付订单，暂无更多信息！')</script>";
+		} elseif ( Yii::$app->getSession()->hasFlash( 'can' ) ) {
 			$m_order = Yii::$app->getSession()->getFlash('can');
 			echo "<script>alert('订单超时，请重新下单！')</script>";
 		}
@@ -102,7 +99,7 @@ $this->title = '订单管理';
 			'value' => function ( $model ) {
                 $name = OrderRelationshipAddress::find()->select( 'name' )->where( [ 'order_id' => $model->order_id ] )->asArray()->one();
 	            if($model->status == '2'){
-                    $url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id, 'amount' => $model->order_amount ] );
+                    $url = Yii::$app->urlManager->createUrl( [ 'order/print', 'order_id' => $model->order_id, 'amount' => $model->order_amount, 'type' => $model->order_type ] );
                     return Html::a( $name[ 'name' ], $url );
                 }else{
 	                return $name['name'];

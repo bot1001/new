@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -11,24 +11,36 @@ $this->title = '确认';
 $this->params['breadcrumbs'][] = $this->title;
 
 //引入模态窗文件
-echo $this->render('..\..\..\common\modal\modal.php');
+//echo $this->render('..\..\..\common\modal\modal.php');
 ?>
 <style>
     .products-index{
-        width: 400px;
-        border: solid #00a0e9;
+        max-width: 600px;
+        border: solid #00a0e9 1px;
         border-radius: 10px;
     }
     th, td{
         text-align: center;
     }
     .sure{
+        max-width: 600px;
         text-align: center;
         font-size: 40px;
+        margin-top: 30px;
+    }
+    .img{
+        width: 70px;
+        border-radius: 10px;
     }
 </style>
-<div class="products-index">
 
+<?php
+if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
+    $a = Yii::$app->getSession()->getFlash( 'cancel' );
+    echo "<script>alert('$a')</script>";
+}
+?>
+<div class="products-index">
     <?php
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn', 'header' => '序号'],
@@ -36,6 +48,11 @@ echo $this->render('..\..\..\common\modal\modal.php');
             'pageSummary' => '合计：'],
 
         ['attribute' => 'product_price',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => [ 'action' => [ '/products/products' ] ],
+                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+            ],
             'pageSummary' => true],
     ];
 
@@ -45,14 +62,32 @@ echo $this->render('..\..\..\common\modal\modal.php');
         'showPageSummary' => true,
         'columns' => $gridview,
     ]); ?>
+</div>
 
+<div>
     <div class="sure">
-        <?= Html::a('<span class="glyphicon glyphicon-new-window"></span>', '#', [
-            'class' => 'btn btn-success pay',
-            'data-toggle' => 'modal',
-            'data-url' => "/order/create?order=$order&realestate=$realestate",
-            'data-title' => '支付', //如果不设置子标题，默认使用大标题
-            'data-target' => '#common-modal',
-        ]) ?>
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'alipay','order'=> $order, 'realestate' => $realestate ]) ?>" title="支付宝">
+            <img src="\image\zfb.png" class="img">
+        </a>
+
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'wx','order'=> $order, 'realestate' => $realestate ]) ?>" title="微信">
+            <img src="\image\wx.png" class="img">
+        </a>
+
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'jh','order'=> $order, 'realestate' => $realestate ]) ?>" title="龙支付">
+            <img src="\image\j.png" class="img">
+        </a>
+
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'up','order'=> $order, 'realestate' => $realestate, 'gateway' => '3']) ?>" title="刷卡">
+            <img src="\image\up.png" class="img">
+        </a>
+
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'yh','order'=> $order, 'realestate' => $realestate, 'gateway' => '4']) ?>" title="银行代付">
+            <img src="\image\yh.png" class="img">
+        </a>
+
+        <a href="<?= Url::to(['/order/create', 'paymethod' => 'xj','order'=> $order, 'realestate' => $realestate, 'gateway' => '6']) ?>" title="现金">
+            <img src="\image\xj.png" class="img">
+        </a>
     </div>
 </div>

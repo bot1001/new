@@ -52,9 +52,9 @@ class Products extends \yii\db\ActiveRecord
             'product_id' => '商品编号',
             'product_quantity' => '数量',
             'store_id' => '商店编号',
-            'product_name' => '商品名称',
+            'product_name' => '名称',
             'sale' => '优惠',
-            'product_price' => '商品价格',
+            'product_price' => '金额',
         ];
     }
 

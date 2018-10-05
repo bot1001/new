@@ -62,6 +62,6 @@ class OrderAddress extends \yii\db\ActiveRecord
 	
 	public function getOrder() 
 	{ 
-	    return $this->hasOne(OrderBasic::className(), ['order_id' => 'order_id']); 
+	    return $this->hasOne(Order::className(), ['order_id' => 'order_id']);
 	} 
 }

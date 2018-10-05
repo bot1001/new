@@ -37,7 +37,7 @@ class OrderRelationshipAddress extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'province_id', 'city_id', 'area_id', 'address', 'zipcode', 'mobile_phone', 'name'], 'required'],
+            [['order_id', 'address', 'mobile_phone', 'name'], 'required'],
             [['province_id', 'city_id', 'area_id'], 'integer'],
             [['order_id', 'address', 'zipcode'], 'string', 'max' => 64],
             [['mobile_phone'], 'string', 'max' => 11],
@@ -54,11 +54,11 @@ class OrderRelationshipAddress extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'order_id' => '订单编号',
-            'province_id' => 'Province ID',
-            'city_id' => 'City ID',
-            'area_id' => 'Area ID',
+            'province_id' => '省份',
+            'city_id' => '城市',
+            'area_id' => '地区',
             'address' => '地址',
-            'zipcode' => 'Zipcode',
+            'zipcode' => '邮编',
             'mobile_phone' => '手机号码',
             'name' => '名字',
         ];

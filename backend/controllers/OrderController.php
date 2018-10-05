@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Invoice;
 use common\models\Order;
+use common\models\OrderAddress;
 use common\models\Products;
 use Yii;
 use app\models\OrderBasic;
@@ -188,71 +189,82 @@ class OrderController extends Controller
 	//打印订单
 	public function actionPrint($order_id, $amount)
 	{
-		$session = Yii::$app->session;
+        $session = Yii::$app->session;
 		$user_name = $_SESSION['user']['0']['name']; //收款用户名
-		
-		//获取订单信息
-		$order = OrderBasic::find()
-			->select('order_id,payment_time,payment_gateway,payment_time')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->one();
-		 
-		if($order['payment_time'] || $order['payment_gateway']){
-			//查询缴费费项信息
-			$i = UserInvoice::find()
-				->select('community_id,building_id,realestate_id,year,month,description,invoice_amount, invoice_notes as note')
-				->where(['order_id'=>$order_id])
-				->orderBy('year,month ASC');
-						
-			foreach ($i->asArray()->batch(200) as $invoice);//单次获取200条费项
-			if(empty($invoice)){
-				$session->setFlash('m','1');
-				return $this->redirect(Yii::$app->request->referrer);
-			}
-			
-		    $de = array_column($invoice, 'description');// 选择费详情列
-			$dc = array_unique($de); //去重复
-									
-			if($invoice){
-				$inv = reset($invoice);
-				
-				//缴费信息
-				$comm = (new \yii\db\Query())
-					->select('community_basic.community_name as community, community_building.building_name as building, community_realestate.room_number as number, community_realestate.room_name as name, community_realestate.owners_name as n, community_realestate.realestate_id as id')
-					->from('community_realestate')
-					->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
-					->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-					->where(['community_realestate.realestate_id' => $inv['realestate_id']])
-					->one();
 
-				if(is_numeric($comm['number']))
-                {
-                    $address = $comm['building'].'&nbsp'. $comm['number']. '单元 '. $comm['name'];
-                }else{
-                    $address = $comm['building'].'&nbsp'. $comm['number']. '座 '. $comm['name'];
-                }
-				
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ];
-				return $this->render('print',[
-			         'dc' => $dc,
-			         'comm' => $comm,
-                     'address' => $address,
-					 'order_id' => $order_id,
-			         'amount'=> $amount,
-					 'e' => $e,
-					 'order' => $order,
-			         'user_name' => $user_name,
-					 'invoice' => $invoice,
-				    ]);
-			}else{
-				$session->setFlash('m','1');
-				return $this->redirect(Yii::$app->request->referrer);
-			}		 
-		}else{
-			$session->setFlash('m','2');
-			return $this->redirect(Yii::$app->request->referrer);
-		}
+		//获取订单信息
+		$order = (new Query())
+			->select('order_basic.order_type as type, order_basic.order_id, order_basic.payment_time, order_basic.payment_gateway, order_basic.payment_time, order_relationship_address.address')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->from('order_basic')
+			->where(['order_basic.order_id' => $order_id])
+			->one();
+		if(!$order){
+		    return $this->redirect(Yii::$app->request->referrer);
+        }
+        $address = $order['address']; //分割地址
+        $type = $order['type']; //提取支付方式
+
+        $add = explode(' ', $address);
+        $number = (int)$add['2']; //强制转换成整数
+        $number=str_pad($number,2,"0",STR_PAD_LEFT); //单元自动补0
+        //缴费房号信息
+        $comm = (new \yii\db\Query())
+            ->select('community_basic.community_name as community, community_realestate.owners_name as n, community_realestate.realestate_id as id')
+            ->from('community_realestate')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
+            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
+            ->where(['community_basic.community_name' => reset($add), 'community_building.building_name' => $add['1'], 'community_realestate.room_number' => "$number", 'community_realestate.room_name' => end($add)])
+            ->one();
+
+        $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ]; //订单状态
+
+
+        if($type == '1'){//判断是否是物业缴费
+            $invoice = UserInvoice::find()
+                ->select('realestate_id, year, month, description, invoice_amount, invoice_notes as note')
+                ->where(['order_id'=>$order_id])
+                ->orderBy('year,month ASC')
+                ->asArray()
+                ->all();
+            if(!$invoice){ //如果不存在则说明订单未支付
+                $session->setFlash('m','1');
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+
+            if($order['payment_time'] || $order['payment_gateway']){
+                $de = array_column($invoice, 'description');// 选择费详情列
+                $dc = array_unique($de); //去重复
+
+                return $this->render('print',[
+                    'dc' => $dc,
+                    'comm' => $comm,
+                    'address' => $address,
+                    'order_id' => $order_id,
+                    'amount'=> $amount,
+                    'e' => $e,
+                    'order' => $order,
+                    'user_name' => $user_name,
+                    'invoice' => $invoice,
+                ]);
+            }
+        }else{
+            $invoice = Products::find() //查询产品信息
+                ->where(['order_id' => "$order_id"])
+                ->asArray()
+                ->all();
+            return $this->render('print_s',[
+                'comm' => $comm,
+                'address' => $address,
+                'order_id' => $order_id,
+                'amount'=> $amount,
+                'e' => $e,
+                'order' => $order,
+                'user_name' => $user_name,
+                'invoice' => $invoice,
+            ]);
+        }
+        return false;
 	}
 	
     /**
@@ -297,43 +309,85 @@ class OrderController extends Controller
     }
 	
 	//支付宝缴费成功后转到这里
-	public function actionV($out_trade_no)
-	{
-		$model = OrderBasic::find()
-			->where(['order_id' => $out_trade_no])
-			->asArray()
-			->one();
-		
-		return $this->render('view', [
-            'model' =>$model,
-        ]);
-	}
+//	public function actionV($out_trade_no)
+//	{
+//		$model = OrderBasic::find()
+//			->where(['order_id' => $out_trade_no])
+//			->asArray()
+//			->one();
+//
+//		return $this->render('view', [
+//            'model' =>$model,
+//        ]);
+//	}
 	
     /**
      * Creates a new OrderBasic model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($realestate, $order)
+    public function actionCreate($realestate, $order, $paymethod, $gateway = 1)
     {
-        $address = (new Query()) //查询房号地址
-            ->select(["contact(community_basic.community_name,community_building.building_name,community_realestate.room_number,community_realestate.room_name)"])
+        if(isset($_GET['gateway']))//判断是否存在支付参数
+        {
+            $gateway = $_GET['gateway'];
+        }
+        $address = (new \yii\db\Query()) //查询房号地址
+            ->select(["community_realestate.community_id as community, concat(community_basic.community_name,' ',community_building.building_name,' ',community_realestate.room_number,'单元 ',community_realestate.room_name) as address"])
             ->join('inner join', 'community_building', 'community_realestate.building_id = community_building.building_id')
-            ->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic')
+            ->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic.community_id')
             ->from('community_realestate')
-            ->where(['community_realestate.realestate_id' => $realestate])
+            ->where(['community_realestate.realestate_id' => "$realestate"])
             ->one();
 
-        $model = new OrderBasic();
-        print_r($realestate);
+        //查找订单金额总和
+        $amount = Products::find()
+            ->select(['sum(product_price) as price'])
+            ->where(['order_id' => "$order"])
+            ->asArray()
+            ->one();
 
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-//        }
+        $time = date(time());//生成时间
+        $des = '电费充值服务'; //订单描述
+        $phone = $_SESSION['user']['0']['phone']; //操作人联系方式
+        $name = $_SESSION['user']['0']['name']; //操作人姓名
+
+        $transaction = Yii::$app->db->beginTransaction(); //开启数据库数据
+        try{
+            $model = new OrderBasic();
+
+            $model->account_id = $address['community'];
+            $model->order_id = $order;
+            $model->create_time = $time;
+            $model->order_type = '3';
+            $model->description = $des;
+            $model->order_amount = $amount['price'];
+
+            $result = $model->save(); //保存数据
+
+            if($result){
+                $order_address = new OrderAddress(); //实例化对应模型
+
+                $order_address->order_id = $order;
+                $order_address->address = $address['address'];
+                $order_address->mobile_phone = $phone;
+                $order_address->name = $name;
+
+                $order_address->save(); //保存数据
+            }
+            $transaction->commit(); //提交数据
+        }catch (\Exception $e){
+            print_r($e); //打印错误信息
+            $transaction->rollBack();
+        }
+
+        //组合支付信息
+        $pay = ['order_id'=> $order,
+            'description'=> $address['address'],
+            'order_amount'=>$amount['price'],
+            'community' => $address['community']
+        ];
+        return $this->redirect(['/pay/pay', 'paymethod' => $paymethod,'pay'=> $pay, 'gateway' => $gateway]);
     }
 	
 	//确认缴费详情

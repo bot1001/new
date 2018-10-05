@@ -157,44 +157,69 @@ class Pay extends \yii\db\ActiveRecord
         return $xmlarray; 
     }
 	
-	//后台线下缴费状态变更
+	//物业缴费后台线下缴费状态变更
 	public static function change($order_id, $gateway)
 	{
-		//获取订单费项ID
-		$i_id = OrderProducts::find()
-			->select('product_id')
-			->where(['order_id' => $order_id])
-			->asArray()
-			->all();
-		
-		    if($i_id){
-				$transaction = Yii::$app->db->beginTransaction(); //$transaction = Yii::$app->db->beginTransaction();
-				try{
-					//变更订单状态
-					$order =  OrderBasic::updateAll(['payment_time' => time(),
-					       					  'payment_gateway' => $gateway,
-					       					  'payment_number' => $order_id,
-					       					  'status' => 2],
-					       					  'order_id = :o_id', [':o_id' => $order_id]
-					       					 );
-					if($order){						
-		                foreach($i_id as $i){//变更费项状态
-						   $invoice = UserInvoice::updateAll(['payment_time' => time(),
-		    							      'update_time' => time(),
-		    							      'invoice_status' => $gateway, 
-		    							      'order_id' => $order_id],
-		    							      'invoice_id = :product_id', [':product_id' => $i['product_id']]
-		    							    );
-					   }
-				       
-					    $transaction->commit();
-					    return true;
-					}	
-				}catch(\exception $e){
-					$transaction->rollback();
-				}
-		    	
-		 }
+	    //核实订单类型,1=> 物业缴费；2=>商城订单, 3=>充值服务
+        $type = OrderBasic::find()
+            ->select(['order_type as type'])
+            ->where(['order_id' => "$order_id"])
+            ->asArray()
+            ->one();
+
+        if($type['type'] == '1'){
+            //获取订单费项ID
+            $i_id = OrderProducts::find()
+                ->select('product_id')
+                ->where(['order_id' => $order_id])
+                ->asArray()
+                ->all();
+
+            if($i_id){
+                $transaction = Yii::$app->db->beginTransaction(); //$transaction = Yii::$app->db->beginTransaction();
+                try{
+                    //变更订单状态
+                    $order =  OrderBasic::updateAll(['payment_time' => time(),
+                        'payment_gateway' => $gateway,
+                        'payment_number' => $order_id,
+                        'status' => 2],
+                        'order_id = :o_id', [':o_id' => $order_id]
+                    );
+                    if($order){
+                        foreach($i_id as $i){//变更费项状态
+                            $invoice = UserInvoice::updateAll(['payment_time' => time(),
+                                'update_time' => time(),
+                                'invoice_status' => $gateway,
+                                'order_id' => $order_id],
+                                'invoice_id = :product_id', [':product_id' => $i['product_id']]
+                            );
+                        }
+
+                        $transaction->commit();
+                        return true;
+                    }
+                }catch(\exception $e){
+                    $transaction->rollback();
+                }
+            }
+        }else{
+            $transaction = Yii::$app->db->beginTransaction();
+            try{
+                //变更订单状态
+                $order = OrderBasic::updateAll(['payment_time' => time(),
+                    'payment_gateway' => $gateway,
+                    'payment_number' => $order_id,
+                    'status' => '2'],
+                    'order_id = :o_id', [':o_id' => $order_id]);
+                $transaction->commit();
+
+                if ($order){ //如果修改成功
+                    return true;
+                }
+            }catch(\Exception $e){
+                $transaction->rollBack();
+            }
+        }
 		return false;
 	}
 	
@@ -203,59 +228,74 @@ class Pay extends \yii\db\ActiveRecord
 	{
 		//查询order_id 和金额order_amount
 		$ord = OrderBasic::find()
-				->select('order_id,order_amount')
+				->select('order_id, order_amount, order_type as type')
 				->andwhere(['order_id' => "$out_trade_no"])
 				->andwhere(['order_amount' => "$total_amount"])
 				->asArray()
 				->one();
 		
 		if($ord){
-			$transaction = Yii::$app->db->beginTransaction();
-			try{
-				foreach($ord as $order){
-				$order = OrderBasic::updateAll(['status' => 2, //变更订单状态
-				    					   'payment_gateway' => $gateway, //变更支付方式
-				    					   'payment_number' => $trade_no, // 支付流水号
-				    					   'payment_time' => $p_time // 支付时间
-				    					   ],
-				    					   'order_id = :oid', [':oid' => $out_trade_no]
-				    				 );
-				
-				    if($order){
-				    	$p_id = OrderProducts::find()
-				    	    ->select('product_id, sale')
-				    	    ->where(['order_id' => "$out_trade_no"])
-				    	    ->asArray()
-				    	    ->all();
-				    
-				    	foreach($p_id as $pid)
-				    	{
-				    		if($pid['sale'] == 1){
-				    			$status = '4';
-				    		}else{
-				    			$status = $gateway;
-				    		}
-				    		
-				    		$invoice = UserInvoice::updateAll(['invoice_status' => $status,
-				    						    'payment_time' => $p_time,
-				    						    'update_time' => $p_time,
-				    							'order_id' => $out_trade_no],
-				    				            'invoice_id = :oid', [':oid' => $pid['product_id']]
-				    					);
-				    	}
-				    }
-				}
-				if($invoice){
-					$transaction->commit();
-					return true;
-				}else{
-					$transaction->rollback();
-				}
-			}catch(\Exception $e) {
-                $transaction->rollback();
+		    if($ord['type'] == '1') //如果订单为物业缴费
+            {
+                $transaction = Yii::$app->db->beginTransaction();
+                try{
+                    $order = OrderBasic::updateAll(['status' => 2, //变更订单状态
+                        'payment_gateway' => $gateway, //变更支付方式
+                        'payment_number' => $trade_no, // 支付流水号
+                        'payment_time' => $p_time // 支付时间
+                    ],
+                        'order_id = :oid', [':oid' => $out_trade_no]
+                    );
+
+                    if($order){
+                        $p_id = OrderProducts::find()
+                            ->select('product_id, sale')
+                            ->where(['order_id' => "$out_trade_no"])
+                            ->asArray()
+                            ->all();
+
+                        foreach($p_id as $pid)
+                        {
+                            if($pid['sale'] == 1){ //判断费项是否为优惠
+                                $status = '4';
+                            }else{
+                                $status = $gateway;
+                            }
+
+                            $invoice = UserInvoice::updateAll(['invoice_status' => $status,
+                                'payment_time' => $p_time,
+                                'update_time' => $p_time,
+                                'order_id' => $out_trade_no],
+                                'invoice_id = :oid', [':oid' => $pid['product_id']]
+                            );
+                        }
+                    }
+                    if($invoice){
+                        $transaction->commit();
+                        return true;
+                    }else{
+                        $transaction->rollback();
+                    }
+                }catch(\Exception $e) {
+                    $transaction->rollback();
+                }
+            }else{
+                $transaction = Yii::$app->db->beginTransaction();
+                try{
+                    $order = OrderBasic::updateAll(['status' => 2, //变更订单状态
+                        'payment_gateway' => $gateway, //变更支付方式
+                        'payment_number' => $trade_no, // 支付流水号
+                        'payment_time' => $p_time // 支付时间
+                    ],
+                        'order_id = :oid', [':oid' => $out_trade_no]
+                    );
+                    $transaction->commit();
+                }catch(\Exception $e) {
+                    $transaction->rollback();
+                }
             }
-		}else{
-			return false;
 		}
+
+		return false;
 	}
 }

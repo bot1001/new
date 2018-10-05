@@ -15,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     th, td, tr{
         text-align: center;
     }
+    .recharge-index{
+        max-width: 800px;
+    }
 </style>
 
 <script>
@@ -52,16 +55,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => ['class' => ['text-left']]
         ],
 
-        ['attribute' => 'price',
-            'class' => 'kartik\grid\EditableColumn',
-            'editableOptions' => [
-                'formOptions' => [ 'action' => [ '/recharge/recharge' ] ],
-                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-            ],
-            'contentOptions' => ['class' => ['text-right']]
-            ],
+//        ['attribute' => 'price',
+//            'class' => 'kartik\grid\EditableColumn',
+//            'editableOptions' => [
+//                'formOptions' => [ 'action' => [ '/recharge/recharge' ] ],
+//                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+//            ],
+//            'contentOptions' => ['class' => ['text-right']]
+//            ],
 
-        ['attribute' => 'type'],
+        ['attribute' => 'type',
+            'value' => function($model){
+                $date = ['1' => '欠费'];
+                return $date[$model->type];
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => [ 1 => '欠费'],
+            'filterWidgetOptions' => [
+                'pluginOptions' => [ 'allowClear' => true ],
+            ],
+            'filterInputOptions' => [ 'placeholder' => '请选择' ],],
+
         ['attribute' => 'create_time',
             'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
             'filterWidgetOptions'=>[
@@ -94,6 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
 
         ['attribute' => 'creater',
+            'mergeHeader' => true,
             'value' => 'user.name'],
 
         ['class' => 'kartik\grid\ActionColumn',

@@ -22,16 +22,11 @@ class PayController extends Controller
 	public $enableCsrfValidation = false;
 	
     //调用第三方支付
-	public function actionPay()
+	public function actionPay($paymethod)
 	{
 		$b = $_GET;
 
-		if(isset($b['paymethod']))
-        {
-            $paymethod = $b['paymethod'];
-        }
-
-        if(isset($b['gateway']))
+        if(isset($b['gateway'])) //判断是否存在支付参数
         {
             $gateway = $b['gateway'];
         }
@@ -67,20 +62,20 @@ class PayController extends Controller
                      'description' => $description,
                      'order_amount' => $order_amount,
                      'order_body' => $order_body]);
-                 }elseif($paymethod == 'wx'){
+             }elseif($paymethod == 'wx'){
                  return $this->redirect(['wx',
                      'order_id' => $order_id,
                      'description' => $description,
                      'order_amount' => $order_amount,
                      'order_body' => $order_body]);
-                 }elseif($paymethod == 'jh'){
+             }elseif($paymethod == 'jh'){
                  return $this->redirect(['jh',
                      'order_id' => $order_id,
                      'order_amount' => $order_amount,
                      'community' => $community]);
-                 }else{
+             }else{
                  return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway]);
-                 }
+             }
          }
 	}
 	
@@ -156,15 +151,31 @@ class PayController extends Controller
 	}
 	
 	//线下变更费项状态
-	public function actionOfline($order_id, $order_amount,$gateway)
+	public function actionOfline($order_id, $order_amount, $gateway)
 	{
 		$change = Pay::change($order_id,$gateway);
-		
-		if($change == 1 && $gateway != '4' && $gateway != '5'){
-			return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount]);
-		}else{
-            return $this->redirect(['user-invoice/index','order_id' => $order_id]);
-		}
+
+		if($change){
+            //核实订单类型,1=> 物业缴费；2=>商城订单, 3=>充值服务
+            $type = OrderBasic::find()
+                ->select(['order_type as type'])
+                ->where(['order_id' => "$order_id"])
+                ->asArray()
+                ->one();
+            $type = $type['type'];
+
+            if($type == '1'){
+                if($gateway != '4' && $gateway != '5'){
+                    return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount, 'type' => $type]);
+                }else{
+                    return $this->redirect(['user-invoice/index','order_id' => $order_id]);
+                }
+            }else{
+                return $this->redirect(['/order/print','order_id' => $order_id, 'amount' => $order_amount, 'type' => $type]);
+            }
+        }
+
+		return false;
 	}
 	
 	//调用支付宝
