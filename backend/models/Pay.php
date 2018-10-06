@@ -294,6 +294,15 @@ class Pay extends \yii\db\ActiveRecord
                     $transaction->rollback();
                 }
             }
+
+            $files = glob('images/*');//删除所有支付二维码
+            foreach ($files as $file) {
+                $time = time(); //当前时间戳
+                $filetime = filetime($file); //支付二维码创建时间
+                if ($time - $filetime >= 3600) { //判断创建时间是否为一个小时前
+                    unlink($file); //删除二维码
+                }
+            }
 		}
 
 		return false;

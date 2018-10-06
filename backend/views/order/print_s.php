@@ -78,18 +78,17 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         text-align: center;
                         border: solid 1px;
                     }
-                    #address{
-                        width: 35%;
+                    /*#address{*/
+                        /*width: 35%;*/
+                    /*}*/
+                    #name, #order_id, #way{
+                        margin-left: 10px;
+                        /*width: 25%;*/
                     }
-                    #name{
-                        width: 20%;
+                    sr{
+                        font-weight: bolder;
                     }
-                    #order_id{
-                        width: 25%;
-                    }
-                    #way{
-                        width: 20%;
-                    }
+
                     .manager, .time{
                         width: 30%;
                     }
@@ -106,10 +105,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 </style>
                 <h3><?= $comm['community'];  ?></h3>
                 <div class="row">
-                    <div id="address"> 房号：<?= $address ?></div>
-                    <div id="name">业主姓名：<?= $comm['n'] ?></div>
-                    <div id="order_id">订单号：<?= $order_id ?></div>
-                    <div id="way" style="text-align: right;"><?= '收款方式：'.$e[$order['payment_gateway']]; ?></div>
+                    <div id="address"> 房号：<sr><?= $address ?></sr></div>
+                    <div id="name">业主姓名：<sr><?= $comm['n'] ?></sr></div>
+                    <div id="order_id">订单号：<sr><?= $order_id ?></sr></div>
+                    <div id="way" style="text-align: right;">收款方式：<sr><?= $e[$order['payment_gateway']]; ?></sr></div>
                 </div>
 
                 <table id="d">
@@ -140,8 +139,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                     </tr>
                 </table>
                 <div class="row">
-                    <div class="manager">收款人：<?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></div>
-                    <div class="time"><?= '时间：'.date('Y-m-d H:i:s', $order['payment_time']) ?></div>
+                    <div class="manager">收款人：<sr><?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></sr></div>
+                    <div class="time">时间：<sr><?= date('Y-m-d H:i:s', $order['payment_time']) ?></sr></div>
                     <div class="company">广西裕达集团物业服务有限公司(盖章)</div>
                 </div>
             </div>
