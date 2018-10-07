@@ -13,6 +13,50 @@ $this->params['breadcrumbs'][] = $this->title;
 //引入模态窗文件
 //echo $this->render('..\..\..\common\modal\modal.php');
 ?>
+<script>
+    function pay(method) {
+        document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/><br />请稍后……"; //图片切换和加载
+
+        $.ajax({
+            type: "GET",
+            dataType: "html",
+            url:"/order/create",
+            data:{paymethod: method, order: <?= $order ?>, realestate: <?= $realestate ?>},
+            success: function (s) {
+                if(s == '1'){
+                    document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $order ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                }else{
+                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />二维码过期，请重新获取！";
+                    clearInterval( intervalId ); //清除定时器
+                }
+            },
+        })
+
+        function find() {
+            var xhr = new XMLHttpRequest();
+            if(method == 'wx'){//xml请求参数
+                xhr.open( 'GET', "<?= Url::to(['/pay/wei', 'order_id' => $order]); ?>", true );
+            }else if(method == 'jh'){
+                xhr.open( 'GET', "<?= Url::to(['/pay/jhang', 'order_id' => $order]); ?>", true );
+            }
+            xhr.onload = function () {
+                if ( this.responseText == '1' ) {
+                    document.getElementById( 'div2' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">支付成功！</a>';
+                    clearInterval( intervalId ); //清除定时器
+                }
+
+                if ( this.responseText == '' ) {
+                    document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
+                }
+            }
+            xhr.send();//发送请求
+        }
+
+        var intervalId = setInterval( function () {//定时器 2秒
+            find();
+        }, 2000 );
+    }
+</script>
 <style>
     .products-index{
         max-width: 600px;
@@ -30,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     .img{
         width: 70px;
-        border-radius: 10px;
+        border-radius: 20px;
     }
     .yes{
         margin-left: 0px;
@@ -49,8 +93,13 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     #qr{
         margin-top: 80px;
-        border-radius: 5px;
+        border-radius: 20px;
         width: 250px;
+    }
+    .remind{
+        position: relative;
+        bottom: -190px;
+        /*color: #00ca6d;*/
     }
 </style>
 
@@ -92,11 +141,11 @@ if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
                     <img src="\image\zfb.png" class="img">
                 </a>
 
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'wx','order'=> $order, 'realestate' => $realestate ]) ?>" title="微信">
+                <a href="#" title="微信" onclick="pay('wx')">
                     <img src="\image\wx.png" class="img">
                 </a>
 
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'jh','order'=> $order, 'realestate' => $realestate ]) ?>" title="龙支付">
+                <a href="#" title="龙支付" onclick="pay('jh')">
                     <img src="\image\j.png" class="img">
                 </a>
 
@@ -115,13 +164,9 @@ if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
         </div>
     </div>
 
-    <div class="QR">
-        <img src="\images\QR_0_181006036731.png" id="qr" />
-        <div class="word">
-           支付二维码！<br />
-        </div>
-
-
+    <div class="QR" id="QR">
+<!--        <img src="\images\QR_0_181007987213.png" id="qr" />-->
+        <div class="remind">请确定充值金额！<br /></div>
     </div>
 </div>
 

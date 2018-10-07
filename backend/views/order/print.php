@@ -61,18 +61,19 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 background: #fff9e5;
                 border-radius: 15px;
             }
+            str{
+                font-weight: bolder;
+            }
         </style>
 
         <h3><?= $comm['community'];  ?></h3>
 			<br>
 		<table border="0">
 			<tr>
-				<td align="left"><strong>房号:</strong>
-                    <?= $address ?>
-				</td>
-				<td align="center"><?= '业主姓名：'.$comm['n']?></td>
-				<td align="center"><?= '订单号：'.$order_id ?></td>
-				<td align="right"><?= '收款方式：'.$e[$order['payment_gateway']]; ?></td>
+				<td align="left">房号:<str><?= $address ?></str></td>
+				<td align="center">业主姓名：<str><?= $comm['n']?></str></td>
+				<td align="center">订单号：<str><?= $order_id ?></str></td>
+				<td align="right">收款方式：<str><?= $e[$order['payment_gateway']]; ?></str></td>
 			</tr>
 			<tr style="height: 5px;">
 				<td></td>
@@ -220,8 +221,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td></td>
 			</tr>
 			<tr>
-				<td align="left" width = "200px">收款人：<?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></td>
-				<td width = "200px"><?= '时间：'.date('Y-m-d H:i:s', $order['payment_time']) ?></td>
+				<td align="left" width = "200px">收款人：<str><?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></str></td>
+				<td width = "200px">时间：<str><?= date('Y-m-d H:i:s', $order['payment_time']) ?></str></td>
 				<td align="right" width = "256px">广西裕达集团物业服务有限公司(盖章)</td>
 			</tr>
 		</table>

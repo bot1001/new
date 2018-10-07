@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\Pay;
 use common\models\Invoice;
 use common\models\Order;
 use common\models\OrderAddress;
@@ -187,21 +188,23 @@ class OrderController extends Controller
    }
 	
 	//打印订单
-	public function actionPrint($order_id, $amount)
+	public function actionPrint($order_id)
 	{
         $session = Yii::$app->session;
 		$user_name = $_SESSION['user']['0']['name']; //收款用户名
 
 		//获取订单信息
 		$order = (new Query())
-			->select('order_basic.order_type as type, order_basic.order_id, order_basic.payment_time, order_basic.payment_gateway, order_basic.payment_time, order_relationship_address.address')
+			->select('order_basic.order_type as type, order_basic.order_amount, order_basic.order_id, order_basic.payment_time, order_basic.payment_gateway, order_basic.payment_time, order_relationship_address.address')
             ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
             ->from('order_basic')
-			->where(['order_basic.order_id' => $order_id])
+			->andwhere(['order_basic.order_id' => $order_id])
+			->andwhere(['>','order_basic.payment_gateway',  '0'])
 			->one();
 		if(!$order){
 		    return $this->redirect(Yii::$app->request->referrer);
         }
+        $amount = $order['order_amount']; //订单金额
         $address = $order['address']; //分割地址
         $type = $order['type']; //提取支付方式
 
@@ -218,7 +221,6 @@ class OrderController extends Controller
             ->one();
 
         $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ]; //订单状态
-
 
         if($type == '1'){//判断是否是物业缴费
             $invoice = UserInvoice::find()
@@ -387,7 +389,35 @@ class OrderController extends Controller
             'order_amount'=>$amount['price'],
             'community' => $address['community']
         ];
-        return $this->redirect(['/pay/pay', 'paymethod' => $paymethod,'pay'=> $pay, 'gateway' => $gateway]);
+
+        $server = $_SERVER['HTTP_HOST']; //获取本地域名
+        if($server == 'www.gxydwy.com'){ //判断本地环境和正式环境
+            $header = 'https://';
+        }else{
+            $header = 'http://';
+        }
+
+        $order_id = $order;
+        $description = $address['address'];
+        $order_amount = $amount['price'];
+        $community = $address['community'];
+
+        if($paymethod == 'jh' || $paymethod == 'wx'){
+            if($paymethod == 'jh'){//建行支付链接
+                $result = Pay::PayForCode($order_id,$order_amount,$community, $type = '3');print_r($result);exit;
+            }elseif ($paymethod == 'wx'){
+                $result = Pay::wx($order_id, $description, $order_amount, $type = '3'); //生成微信支付二维码
+            }
+
+            if($result == '1'){
+                return true;
+            }
+            return false;
+        }else{ //现金或刷卡支付链接
+            return $this->redirect(['/pay/pay', 'paymethod' => $paymethod,'pay'=> $pay, 'gateway' => $gateway]);
+        }
+
+        return false;
     }
 	
 	//确认缴费详情

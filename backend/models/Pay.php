@@ -12,21 +12,36 @@ class Pay extends \yii\db\ActiveRecord
 {
     public static function HttpReq_GET($URL) 
 	{
-		    $ch=curl_init(); //设置选项，包括URL
-		    curl_setopt($ch,CURLOPT_URL,$URL);
-		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-		    curl_setopt($ch,CURLOPT_HEADER,0);
-		    $output=curl_exec($ch); 
-		    curl_close($ch);
-		    return $output ;
-	    }
+	    $ch=curl_init(); //设置选项，包括URL
+	    curl_setopt($ch,CURLOPT_URL,$URL);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	    curl_setopt($ch,CURLOPT_HEADER,0);
+	    $output=curl_exec($ch);
+	    curl_close($ch);
+	    return $output ;
+	}
 	
 	   //增加交易码和币种的传入处理 20180317
-	public static function PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2) 
+	public static function PayForCode($order_id,$order_amount,$community, $type)
     {
- 
+        $MERCHANTID ="105635000000321";  						//商户号
+        $POSID="011945623";             						//$_POST["POSID"] ;
+        $BRANCHID="450000000"; 								//分行号码
+        $ORDERID=$order_id;                                     //订单号
+        $PAYMENT=$order_amount;									//金额
+        $CURCODE="01";											//币种
+        $TXCODE="530550";										//交易类型
+        $REMARK1= $community;									//说明1  千万不能有中文
+
+        //备注信息中包含支付公钥前面14位数
+        $REMARK2="30819d300d0609";				                            //说明2  千万不能有中文
+        $RETURNTYPE="2";										//$_POST["RETURNTYPE"] ;
+        $TIMEOUT="30";											//请求有限时间
+        $PUB32TR2="42375f6a3517265797d7f877020113";				//$_POST["PUB32TR2"] ;
+        $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6" ;	//请求网址
+
 		$tmpStr = "MERCHANTID=".$MERCHANTID."&POSID=".$POSID."&BRANCHID=".$BRANCHID."&ORDERID=".$ORDERID.
  		 	 "&PAYMENT=".$PAYMENT."&CURCODE=".$CURCODE."&TXCODE=".$TXCODE."&REMARK1=".$REMARK1.
 		 	 "&REMARK2=".$REMARK2."&RETURNTYPE=3&TIMEOUT=";
@@ -51,38 +66,43 @@ class Pay extends \yii\db\ActiveRecord
 		$URL = urldecode($URL); //解码二维码
 		
 		$URL = iconv("gb2312","utf-8//IGNORE",$URL);
-		
-		$dir = "images"; //二维码保存路径
-		if ( !is_dir($dir) ) {
-			mkdir($dir);
-		}
-		$tmpStr = $dir."/QR_0_".$ORDERID.'.png'; //重命名二维码
-		//$logo = "./image/logo01.png" ;
-		
-		QRcode::png($URL,$tmpStr); //创建二维码
-		if ( !file_exists($tmpStr) ) {
-			echo "生成二维码图片处理失败";
-			return unll ;
+
+        $tmpStr = Pay::qr($ORDERID, $URL); //生成二维码
+
+		if ( $tmpStr && $type == '3' ) { //判断是否为充值订单
+		    return true;
 		}
 		return $tmpStr;
 	}
-	
-	static function Wx($order_id, $url)
+	//生成二维码
+	static function qr($order_id, $url)
 	{
 		$dir = "images"; //二维码保存路径
 		if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
 			mkdir($dir);
 		}
 		$qc = $dir."/".$order_id.'.png'; //重命名二维码
+        Pay::del($order_id);//判断并删除同名二维码
 		$errorCorrectionLevel = 'H';//容错级别   
 		
 		QRcode::png($url,$qc,$errorCorrectionLevel, 10, 2); //创建二维码
 		if ( !file_exists($qc) ) {
-			echo "生成二维码图片处理失败";
-			return unll ;
+			return false ;  //如果二维码生成失败返回false
 		}
 		return $qc;
 	}
+
+	//判断并删除同名二维码
+    static function del($order){
+        $dir = "images"; //二维码保存路径
+        if ( !is_dir($dir) ) {
+            mkdir($dir);
+        }
+        $tmpStr = $dir."/".$order.'.png'; //重命名二维码
+        if(is_file($tmpStr)){ //判断如果存在同名二维码
+            unlink($tmpStr);
+        }
+    }
 	
 	//微信支付打印日志
 	static function Log($post)
@@ -298,7 +318,7 @@ class Pay extends \yii\db\ActiveRecord
             $files = glob('images/*');//删除所有支付二维码
             foreach ($files as $file) {
                 $time = time(); //当前时间戳
-                $filetime = filetime($file); //支付二维码创建时间
+                $filetime = filemtime($file); //支付二维码最新修改时间
                 if ($time - $filetime >= 3600) { //判断创建时间是否为一个小时前
                     unlink($file); //删除二维码
                 }
@@ -307,4 +327,45 @@ class Pay extends \yii\db\ActiveRecord
 
 		return false;
 	}
+
+	//创建微信支付链接
+    static function wx($order_id, $description, $order_amount, $type)
+    {
+        require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Api.php'; //微信配置文件
+
+        $input = new \WxPayUnifiedOrder();//实例化微信支付
+
+        $input->SetBody( $description);//商品标题
+
+        $input->SetOut_trade_no( $order_id ); //订单编号
+
+        $input->SetTotal_fee( $order_amount*100 ); //订单金额
+
+        $input->SetNotify_url( "https://home.gxydwy.com/pay/weixin" ); //回调地址
+
+        $input->SetTrade_type( "NATIVE" ); //交易类型
+
+        $input->SetProduct_id( "123456789" ); // 商品编码
+
+        $result = \WxPayAPI::unifiedOrder($input);
+
+        if($result['code_url']){//获取支付链接
+            $url = $result['code_url'];
+        }else{
+            return false;
+        }
+        Pay::del($order_id); //判断并删除同名二维码
+        $img = Pay::qr($order_id, $url);//生成支付二维码
+
+        if($type == 3){ //判断是否是充值订单
+            if (is_file($img)) { //判断创建时间是否为一个小时前
+                return true;
+            }
+            return false;
+        }else {
+            return $img;
+        }
+
+        return false;
+    }
 }

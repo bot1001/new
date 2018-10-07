@@ -61,46 +61,39 @@ class PayController extends Controller
                      'order_id' => $order_id,
                      'description' => $description,
                      'order_amount' => $order_amount,
-                     'order_body' => $order_body]);
+                     'order_body' => $order_body,
+                     'type' => '1']);
              }elseif($paymethod == 'wx'){
                  return $this->redirect(['wx',
                      'order_id' => $order_id,
                      'description' => $description,
                      'order_amount' => $order_amount,
-                     'order_body' => $order_body]);
+                     'order_body' => $order_body,
+                     'type' => '1']);
              }elseif($paymethod == 'jh'){
                  return $this->redirect(['jh',
                      'order_id' => $order_id,
                      'order_amount' => $order_amount,
-                     'community' => $community]);
+                     'community' => $community,
+                     'type' => '1']);
              }else{
-                 return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway]);
+                 return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway, 'type' => '1']);
              }
          }
 	}
 	
 	//建行接口
-	public function actionJh($order_id,$order_amount,$community)
-	{		
-	    $MERCHANTID ="105635000000321";  						//商户号 
-	    $POSID="011945623";             						//$_POST["POSID"] ;  
-	    $BRANCHID="450000000"; 								//分行号码
-	    $ORDERID=$order_id;                                     //订单号
-	    $PAYMENT=$order_amount;									//金额 
-	    $CURCODE="01";											//币种 
-	    $TXCODE="530550";										//交易类型 
-	    $REMARK1= $community;									//说明1  千万不能有中文
-		
-		//备注信息中包含支付公钥前面14位数
-	    $REMARK2="30819d300d0609";				                            //说明2  千万不能有中文
-	    $RETURNTYPE="2";										//$_POST["RETURNTYPE"] ;  
-	    $TIMEOUT="30";											//请求有限时间 
-	    $PUB32TR2="42375f6a3517265797d7f877020113";				//$_POST["PUB32TR2"] ;  
-	    $bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain?CCB_IBSVersion=V6" ;	//请求网址
-     
-	    $f = Pay::PayForCcbQRCode($bankURL,$MERCHANTID,$POSID,$BRANCHID,$ORDERID,$CURCODE,$TXCODE,$PAYMENT,$REMARK1,$REMARK2,$PUB32TR2);
-		
-		return $this->render('/order/jh',['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
+	public function actionJh($order_id,$order_amount,$community, $type)
+	{
+	    $f = Pay::PayForCode($order_id,$order_amount,$community, $type);
+	    if($type == 3){
+            if (is_file($f)) { //判断是否存在支付二维码
+                return true;
+            }
+            return false;
+        }else{
+            return $this->render('/order/jh',['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
+        }
 	}
 	
 	//建行主动查询
@@ -115,10 +108,10 @@ class PayController extends Controller
 		$o = $order['payment_number'];
 		
 		if($o != ''){ //如果支付编号不为空
-			return '1'; 
-		}else{
-			return '0';
+			return true;
 		}
+
+		return false;
 	}
 	
 	public function actionJian()
@@ -140,8 +133,11 @@ class PayController extends Controller
 			if($pay == '1'){
 				//支付完成后自动删除二维码
 				$files = glob('images/*');
+				$time = time();
+
                 foreach ($files as $file) {
-                    if (is_file($file)) {
+                    $filetime = filectime($file);//二维码创建时间
+                    if ($time - $filetime >= 3600) { //判断并删除一个小时内创建的二维码
                         unlink($file);
                     }
                 }
@@ -181,8 +177,8 @@ class PayController extends Controller
 	//调用支付宝
 	public function actionAlipay($order_id, $description, $order_amount, $order_body)
 	{	
-		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
-        require_once dirname(__FILE__).'/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
+		require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/service/AlipayTradeService.php';
+        require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
 		$config = Yii::$app->params['Alipay'];
  
         //商户订单号，商户网站订单系统中唯一订单号，必填
@@ -222,7 +218,7 @@ class PayController extends Controller
 	//支付宝异步回调
 	public function actionNotify()
 	{
-		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
+		require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/service/AlipayTradeService.php';
 		$arr= $_POST;
 		
 		$config = Yii::$app->params['Alipay'];
@@ -273,7 +269,7 @@ class PayController extends Controller
 	//支付宝同步回调
 	public function actionReturn()
 	{
-		require_once dirname(__FILE__).'/alipay/pagepay/service/AlipayTradeService.php';
+		require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/service/AlipayTradeService.php';
 		$arr= $_GET;
 		
 		$config = Yii::$app->params['Alipay'];
@@ -302,44 +298,18 @@ class PayController extends Controller
 	//微信支付
 	public function actionWx($order_id, $description, $order_amount)
 	{
-		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
-		
-		$input = new \WxPayUnifiedOrder();//实例化微信支付
-		
-		$input->SetBody( $description);//商品标题
-		
-		$input->SetOut_trade_no( $order_id ); //订单编号
-		
-		$input->SetTotal_fee( $order_amount*100 ); //订单金额
-				
-		$input->SetNotify_url( "https://home.gxydwy.com/pay/weixin" ); //回调地址
-		
-		$input->SetTrade_type( "NATIVE" ); //交易类型
-		
-		$input->SetProduct_id( "123456789" ); // 商品编码
-		
-		$result = \WxPayAPI::unifiedOrder($input);
-		
-		//获取支付链接
-		if($result['code_url']){
-			$url = $result['code_url'];
-		}else{
-			return $this->redirect(Yii::$app->request->referrer);
-		}
-		
-		//生成支付二维码
-		$img = Pay::wx($order_id, $url);
-				
-		return $this->render('/order/wx', 
-                ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount
-            ]);		
+        $img = Pay::wx($order_id, $description, $order_amount, $type = '1'); //生成微信支付二维码
+
+        return $this->render('/order/wx',
+            ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount
+            ]);
 	}
 	
 	//微信主动查询
 	function actionWei($order_id)
 	{
-		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Api.php'; //微信配置文件
-		require_once dirname( __FILE__ ) . '/wx/lib/WxPay.Notify.php'; //微信回调文件
+		require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Api.php'; //微信配置文件
+		require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Notify.php'; //微信回调文件
 		
 		$input = new \WxPayOrderQuery();
 		$input->SetOut_trade_no($order_id);

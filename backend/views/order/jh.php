@@ -59,14 +59,14 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	function loadText() {
 		var xhr = new XMLHttpRequest();
 		//xml请求参数
-		xhr.open( 'GET', "<?php echo Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
+		xhr.open( 'GET', "<?= Url::to(['/pay/jhang', 'order_id' => $order_id]); ?>", true );
 		xhr.onload = function () {
 				if ( this.responseText == '1' ) {
-					document.getElementById( 'div2' ).innerHTML = '<a href= "<?php echo Url::to(['/order/print', 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
+					document.getElementById( 'div2' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order_id, 'amount' => $order_amount]); ?>">支付成功！</a>';
 					clearInterval( intervalId ); //清除定时器
 				}
 
-				if ( this.responseText == '0' ) {
+				if ( this.responseText == '' ) {
 					document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
 				}
 			}
@@ -83,7 +83,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 <div>
 	<div id="div1">
 		<div id="qr">
-			<img src='<?php echo Url::to("@web/$f"); ?>' style="height: 280px;width: 280px; border-radius: 20px">
+			<img src='<?= Url::to("@web/$f"); ?>' style="height: 280px;width: 280px; border-radius: 20px">
 		</div>
 	</div>
     <p></p>
