@@ -26,7 +26,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
     }
     .print{
         background: #ffffe5;
-        max-width: 700px;
+        max-width: 745px;
         margin: auto;
         border-radius: 5px;
         position: relative;
@@ -56,6 +56,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         <span id="market">
             <div class="detail" style="font-family: 仿宋">
                 <style>
+                    #market{
+                        width: 700px;
+                    }
                     h3{
                         text-align: center;
                         font-family: 仿宋;
@@ -64,13 +67,13 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         margin-bottom: 20px;
                     }
                     .row{
-                        width: 665px;
+                        width: 700px;
                         display: flex;
                         margin: auto;
                     }
 
                     #d{
-                        width: 665px;
+                        width: 700px;
                         margin: auto;
                     }
 
@@ -78,12 +81,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         text-align: center;
                         border: solid 1px;
                     }
-                    /*#address{*/
-                        /*width: 35%;*/
-                    /*}*/
                     #name, #order_id, #way{
                         margin-left: 10px;
-                        /*width: 25%;*/
                     }
                     sr{
                         font-weight: bolder;

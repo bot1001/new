@@ -4,9 +4,6 @@ namespace app\models;
 
 use Yii;
 use dosamigos\qrcode\QrCode;
-use app\models\OrderProducts;
-use app\models\UserInvoice;
-use app\models\OrderBasic;
 
 class Pay extends \yii\db\ActiveRecord
 {
@@ -214,10 +211,12 @@ class Pay extends \yii\db\ActiveRecord
                                 'invoice_id = :product_id', [':product_id' => $i['product_id']]
                             );
                         }
-
-                        $transaction->commit();
-                        return true;
+                        if($invoice){ //如果修改成功
+                            $transaction->commit();
+                            return true;
+                        }
                     }
+                    $transaction->rollBack();
                 }catch(\exception $e){
                     $transaction->rollback();
                 }
@@ -289,13 +288,13 @@ class Pay extends \yii\db\ActiveRecord
                                 'invoice_id = :oid', [':oid' => $pid['product_id']]
                             );
                         }
+                        if($invoice){
+                            $transaction->commit();
+                            Pay::delqr(); //自动判断并删除过期支付二维码
+                            return true;
+                        }
                     }
-                    if($invoice){
-                        $transaction->commit();
-                        return true;
-                    }else{
-                        $transaction->rollback();
-                    }
+                    $transaction->rollback();
                 }catch(\Exception $e) {
                     $transaction->rollback();
                 }
@@ -309,24 +308,34 @@ class Pay extends \yii\db\ActiveRecord
                     ],
                         'order_id = :oid', [':oid' => $out_trade_no]
                     );
-                    $transaction->commit();
+                    if($order){
+                        $transaction->commit();
+                        Pay::delqr();
+                        return true;
+                    }
+                    $transaction->rollBack();
                 }catch(\Exception $e) {
                     $transaction->rollback();
-                }
-            }
-
-            $files = glob('images/*');//删除所有支付二维码
-            foreach ($files as $file) {
-                $time = time(); //当前时间戳
-                $filetime = filemtime($file); //支付二维码最新修改时间
-                if ($time - $filetime >= 3600) { //判断创建时间是否为一个小时前
-                    unlink($file); //删除二维码
                 }
             }
 		}
 
 		return false;
 	}
+
+	//自动判断并删除过期支付二维码
+    static function delqr(){
+        //支付完成后自动删除二维码
+        $files = glob('images/*');
+        $time = time();
+
+        foreach ($files as $file) {
+            $filetime = filemtime($file);//二维码创建时间
+            if ($time - $filetime >= 600) { //判断并删除一个小时内创建的二维码
+                unlink($file);
+            }
+        }
+    }
 
 	//创建微信支付链接
     static function wx($order_id, $description, $order_amount, $type)

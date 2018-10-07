@@ -349,6 +349,11 @@ class OrderController extends Controller
             ->asArray()
             ->one();
 
+        $order_amount = $amount['price'];
+        if($order_amount == '0'){ //如果金额为零
+            return '2';
+        }
+
         $time = date(time());//生成时间
         $des = '电费充值服务'; //订单描述
         $phone = $_SESSION['user']['0']['phone']; //操作人联系方式

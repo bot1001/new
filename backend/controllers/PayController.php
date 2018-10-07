@@ -4,10 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use app\models\OrderBasic;
-use app\models\OrderProducts;
-use app\models\UserInvoice;
 use app\models\Pay;
 
 /**
@@ -37,6 +34,10 @@ class PayController extends Controller
 	    $description = $pay['description'];
 	    $community = $pay['community'];
 	    $order_body = '物业缴费';  // 订单描述
+
+        if($order_amount == '0'){ //如果金额为零
+            return '2';
+        }
 
 		$order = OrderBasic::find()//订单信息
 			->select('status,create_time')
@@ -86,14 +87,9 @@ class PayController extends Controller
 	public function actionJh($order_id,$order_amount,$community, $type)
 	{
 	    $f = Pay::PayForCode($order_id,$order_amount,$community, $type);
-	    if($type == 3){
-            if (is_file($f)) { //判断是否存在支付二维码
-                return true;
-            }
-            return false;
-        }else{
-            return $this->render('/order/jh',['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount]);
-        }
+
+	    return $this->render('/order/jh',
+            ['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount ]);
 	}
 	
 	//建行主动查询
@@ -130,17 +126,8 @@ class PayController extends Controller
 			
 			$pay = Pay::alipay($out_trade_no, $total_amount, $p_time, $trade_no, $gateway); //修改订单相关状态函数
 			
-			if($pay == '1'){
-				//支付完成后自动删除二维码
-				$files = glob('images/*');
-				$time = time();
-
-                foreach ($files as $file) {
-                    $filetime = filectime($file);//二维码创建时间
-                    if ($time - $filetime >= 3600) { //判断并删除一个小时内创建的二维码
-                        unlink($file);
-                    }
-                }
+			if($pay == '1'){//自动判断并删除过期支付二维码
+				Pay::delqr();
 			}			
 		}
 		return 'success';
@@ -301,8 +288,7 @@ class PayController extends Controller
         $img = Pay::wx($order_id, $description, $order_amount, $type = '1'); //生成微信支付二维码
 
         return $this->render('/order/wx',
-            ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount
-            ]);
+            ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount ]);
 	}
 	
 	//微信主动查询

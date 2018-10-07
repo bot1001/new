@@ -14,17 +14,20 @@ $this->params['breadcrumbs'][] = $this->title;
 //echo $this->render('..\..\..\common\modal\modal.php');
 ?>
 <script>
-    function pay(method) {
+    function pay(method, way) {
         document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/><br />请稍后……"; //图片切换和加载
 
         $.ajax({
             type: "GET",
             dataType: "html",
             url:"/order/create",
-            data:{paymethod: method, order: <?= $order ?>, realestate: <?= $realestate ?>},
+            data:{paymethod: method, order: <?= $order ?>, realestate: <?= $realestate ?>, gateway: way},
             success: function (s) {
                 if(s == '1'){
                     document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $order ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                }else if (s == '2') {
+                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />支付金额有误，请确认！";
+                    clearInterval( intervalId ); //清除定时器
                 }else{
                     document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />二维码过期，请重新获取！";
                     clearInterval( intervalId ); //清除定时器
@@ -141,25 +144,15 @@ if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
                     <img src="\image\zfb.png" class="img">
                 </a>
 
-                <a href="#" title="微信" onclick="pay('wx')">
-                    <img src="\image\wx.png" class="img">
-                </a>
+                <a href="#" title="微信" onclick="pay('wx', '')"><img src="\image\wx.png" class="img"></a>
 
-                <a href="#" title="龙支付" onclick="pay('jh')">
-                    <img src="\image\j.png" class="img">
-                </a>
+                <a href="#" title="龙支付" onclick="pay('jh', '')"><img src="\image\j.png" class="img"></a>
 
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'up','order'=> $order, 'realestate' => $realestate, 'gateway' => '3']) ?>" title="刷卡">
-                    <img src="\image\up.png" class="img">
-                </a>
+                <a href="#" title="刷卡"  onclick="pay('up', '3')"><img src="\image\up.png" class="img"></a>
 
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'yh','order'=> $order, 'realestate' => $realestate, 'gateway' => '4']) ?>" title="银行代付">
-                    <img src="\image\yh.png" class="img">
-                </a>
+                <a href="#" title="银行代付" onclick="pay('yh', '4')"><img src="\image\yh.png" class="img"></a>
 
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'xj','order'=> $order, 'realestate' => $realestate, 'gateway' => '6']) ?>" title="现金">
-                    <img src="\image\xj.png" class="img">
-                </a>
+                <a href="#" title="现金" onclick="pay('xj', '6')"><img src="\image\xj.png" class="img"></a>
             </div>
         </div>
     </div>
