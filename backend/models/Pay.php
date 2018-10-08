@@ -340,7 +340,7 @@ class Pay extends \yii\db\ActiveRecord
 	//创建微信支付链接
     static function wx($order_id, $description, $order_amount, $type)
     {
-        require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Api.php'; //微信配置文件
+        require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.php'; //微信配置文件
 
         $input = new \WxPayUnifiedOrder();//实例化微信支付
 

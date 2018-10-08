@@ -3,7 +3,6 @@ namespace api\controllers;
 
 use common\models\Api;
 use common\models\Invoice;
-use common\models\Order;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\helpers\Json;

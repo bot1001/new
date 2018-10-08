@@ -76,8 +76,13 @@ class Order extends \yii\db\ActiveRecord
 	
 	public function getProducts() 
 	{ 
-	    return $this->hasMany(OrderProducts::className(), ['order_id' => 'order_id']); 
-	} 
+	    return $this->hasOne(OrderProducts::className(), ['order_id' => 'order_id']);
+	}
+
+	function getInvoice()
+    {
+        return $this->hasMany(Invoice::className(), ['order_id' => 'order_id']);
+    }
 	
 	/** 
 	 * @return \yii\db\ActiveQuery 

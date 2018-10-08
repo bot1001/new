@@ -6,6 +6,7 @@ use common\models\Order;
 use common\models\Products;
 use Yii;
 use yii\data\Pagination;
+use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -14,6 +15,27 @@ use yii\web\Controller;
  */
 class OrderController extends Controller
 {
+    //小程序查看订单订单详细
+    function actionOrder($order){
+        $or = (new Query()) //查询订单信息
+            ->select('order_basic.order_id, from_unixtime(order_basic.create_time) as create_time, from_unixtime(order_basic.payment_time) as payment_time, order_basic.payment_gateway as gateway, order_basic.payment_number as number, description,
+            order_basic.order_amount as amount, order_basic.status, order_relationship_address.address, order_relationship_address.name')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->where(['order_basic.order_id' => "$order"])
+            ->one();
+
+        $invoice = Invoice::find() //查询缴费信息
+            ->select('user_invoice.year, user_invoice.month, user_invoice.description, user_invoice.invoice_amount as amount, invoice_notes as notes')
+            ->where(['order_id' => "$order" ])
+            ->orderBy('year DESC, month DESC')
+            ->asArray()
+            ->all();
+
+        $detail = ['order' => $or, 'invoice' => $invoice];
+
+        return Json::encode($detail);
+    }
     //支付助手确认订单
     function actionCheck($order_id)
     {
