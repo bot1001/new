@@ -7,6 +7,7 @@ use common\models\Invoice;
 use common\models\Order;
 use common\models\OrderAddress;
 use common\models\Products;
+use common\models\Realestate;
 use Yii;
 use app\models\OrderBasic;
 use app\models\UserInvoice;
@@ -328,89 +329,93 @@ class OrderController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($realestate, $order, $paymethod, $gateway = 1)
+    public function actionCreate($realestate, $order, $paymethod, $gateway )
     {
-        if(isset($_GET['gateway']))//判断是否存在支付参数
-        {
-            $gateway = $_GET['gateway'];
-        }
-        $address = (new \yii\db\Query()) //查询房号地址
-            ->select(["community_realestate.community_id as community, concat(community_basic.community_name,' ',community_building.building_name,' ',community_realestate.room_number,'单元 ',community_realestate.room_name) as address"])
-            ->join('inner join', 'community_building', 'community_realestate.building_id = community_building.building_id')
-            ->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic.community_id')
-            ->from('community_realestate')
-            ->where(['community_realestate.realestate_id' => "$realestate"])
-            ->one();
-
-        //查找订单金额总和
-        $amount = Products::find()
-            ->select(['sum(product_price) as price'])
-            ->where(['order_id' => "$order"])
-            ->asArray()
-            ->one();
-
-        $order_amount = $amount['price'];
-        if($order_amount == '0'){ //如果金额为零
-            return '2';
-        }
-
-        $time = date(time());//生成时间
-        $des = '电费充值服务'; //订单描述
-        $phone = $_SESSION['user']['0']['phone']; //操作人联系方式
-        $name = $_SESSION['user']['0']['name']; //操作人姓名
-
-        $transaction = Yii::$app->db->beginTransaction(); //开启数据库数据
-        try{
-            $model = new OrderBasic();
-
-            $model->account_id = $address['community'];
-            $model->order_id = $order;
-            $model->create_time = $time;
-            $model->order_type = '3';
-            $model->description = $des;
-            $model->order_amount = $amount['price'];
-
-            $result = $model->save(); //保存数据
-
-            if($result){
-                $order_address = new OrderAddress(); //实例化对应模型
-
-                $order_address->order_id = $order;
-                $order_address->address = $address['address'];
-                $order_address->mobile_phone = $phone;
-                $order_address->name = $name;
-
-                $order_address->save(); //保存数据
-            }
-            $transaction->commit(); //提交数据
-        }catch (\Exception $e){
-            print_r($e); //打印错误信息
-            $transaction->rollBack();
-        }
-
-        //组合支付信息
-        $pay = ['order_id'=> $order,
-            'description'=> $address['address'],
-            'order_amount'=>$amount['price'],
-            'community' => $address['community']
-        ];
-
-        $server = $_SERVER['HTTP_HOST']; //获取本地域名
-        if($server == 'www.gxydwy.com'){ //判断本地环境和正式环境
-            $header = 'https://';
-        }else{
-            $header = 'http://';
-        }
-
         $order_id = $order;
-        $description = $address['address'];
-        $order_amount = $amount['price'];
-        $community = $address['community'];
         $order_body = '物业缴费';  // 订单描述
+        $order_info = (new Query())
+            ->select('order_basic.order_amount as amount, order_relationship_address.address, order_relationship_address.name, order_basic.status')
+            ->from('order_basic')
+            ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
+            ->where(['order_basic.order_id' => "$order_id"])
+            ->one();
+
+        if ($order_info) {
+            if($order_info['status'] == '1'){ //如果是未支付状态
+                $description = $order_info['address'];
+                $order_amount = $order_info['amount'];
+                $comm = Realestate::find($realestate)//查找房屋
+                ->asArray()
+                    ->one();
+                $community = $comm['community_id']; //小区编号
+            }else{ //否则直接返回充值页面
+                $session = Yii::$app->session;
+                $session->setFlash('fail', '订单状态有误，请检查！');
+                return $this->redirect('/recharge/index');
+            }
+        }else{
+            $address = (new \yii\db\Query()) //查询房号地址
+            ->select(["community_realestate.community_id as community, concat(community_basic.community_name,' ',community_building.building_name,' ',community_realestate.room_number,'单元 ',community_realestate.room_name) as address"])
+                ->join('inner join', 'community_building', 'community_realestate.building_id = community_building.building_id')
+                ->join('inner join', 'community_basic', 'community_realestate.community_id = community_basic.community_id')
+                ->from('community_realestate')
+                ->where(['community_realestate.realestate_id' => "$realestate"])
+                ->one();
+
+            //查找订单金额总和
+            $amount = Products::find()
+                ->select(['sum(product_price) as price'])
+                ->where(['order_id' => "$order"])
+                ->asArray()
+                ->one();
+
+            $order_amount = $amount['price'];
+            if($order_amount == '0'){ //如果金额为零
+                return '2';
+            }
+
+            $time = date(time());//生成时间
+            $des = '电费充值服务'; //订单描述
+            $phone = $_SESSION['user']['0']['phone']; //操作人联系方式
+            $name = $_SESSION['user']['0']['name']; //操作人姓名
+
+            $transaction = Yii::$app->db->beginTransaction(); //开启数据库数据
+            try{
+                $model = new OrderBasic();
+
+                $model->account_id = $address['community'];
+                $model->order_id = $order;
+                $model->create_time = $time;
+                $model->order_type = '3';
+                $model->description = $des;
+                $model->order_amount = $amount['price'];
+
+                $result = $model->save(); //保存数据
+
+                if($result){
+                    $order_address = new OrderAddress(); //实例化对应模型
+
+                    $order_address->order_id = $order;
+                    $order_address->address = $address['address'];
+                    $order_address->mobile_phone = $phone;
+                    $order_address->name = $name;
+
+                    $order_address->save(); //保存数据
+                }
+                $transaction->commit(); //提交数据
+            }catch (\Exception $e){
+                print_r($e); //打印错误信息
+                $transaction->rollBack();
+            }
+
+            $description = $address['address'];
+            $order_amount = $amount['price'];
+            $community = $address['community'];
+        }
 
         if($paymethod == 'jh' || $paymethod == 'wx' || $paymethod == 'alipay'){
             if($paymethod == 'jh'){//建行支付链接
-                $result = Pay::PayForCode($order_id,$order_amount,$community, $type = '3');print_r($result);exit;
+                $result = Pay::PayForCode($order_id,$order_amount,$community, $type = '3');
             }elseif ($paymethod == 'wx'){
                 $result = Pay::wx($order_id, $description, $order_amount, $type = '3'); //生成微信支付二维码
             }elseif ($paymethod == 'alipay'){
@@ -422,7 +427,7 @@ class OrderController extends Controller
             }
             return false;
         }else{ //现金或刷卡支付链接
-            return $this->redirect(['/pay/pay', 'paymethod' => $paymethod,'pay'=> $pay, 'gateway' => $gateway]);
+            return $this->redirect(['/pay/pay', 'paymthod' => $paymethod,'description'=> $description,'order_id' => $order, 'order_amount' => $order_amount, 'community' => $community,  'gateway' => $gateway]);
         }
 
         return false;
@@ -454,11 +459,12 @@ class OrderController extends Controller
             ->limit(300)
             ->all();
 
-		if(!$invoice){
+		if(count($invoice) == '0'){
 			$session = Yii::$app->session;
 			$session->setFlash('fail','1');
 			return $this->redirect( Yii::$app->request->referrer );
 		}
+
 		$in = array_column($invoice, 'amount'); //提取金额
 		$id = array_column($invoice, 'id'); //提取费项ID
 		$m = array_sum($in); //求和金额

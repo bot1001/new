@@ -109,9 +109,9 @@ $this->title = '缴费管理';
 	<?php
 	$message = Yii::$app->getSession()->getFlash('fail');
     $success = Yii::$app->getSession()->getFlash('success'); //获取提示信息
-	if($message == 1){
-		echo "<script>alert('选择内容不能为空，请重新选择！')</script>";
-	}elseif($message == 2){
+    if($message == 1){
+        echo "<script>alert('选择内容不能为空，请重新选择！')</script>";
+    }elseif($message == 2){
 		echo "<script>alert('文件格式有误，请重新选择')</script>";
 	}elseif($message == 3){
 		echo "<script>alert('数据有误，请修改源数据')</script>";

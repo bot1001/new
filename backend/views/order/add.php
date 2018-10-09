@@ -14,6 +14,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 Modal::begin( [
 	'id' => 'view-modal',
 	'header' => '<h4 class="modal-title">支付方式</h4>',
+	'options' => [
+	        'data-backdrop' => 'static'
+    ]
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>', ['pay', 'id' => $model['id']]
 ] );
 $url = Url::toRoute( ['/order/add','c' => $m,'id' => $id,'address' => $address, 'c_id' => $c_id ] );
@@ -62,6 +65,7 @@ Modal::end();
 			position: relative;
 			top: 12px;
 		}
+
 		</style>
 							
 		<table width="768" border="1" cellspacing="0" cellpadding="0">
@@ -101,4 +105,5 @@ Modal::end();
 						'class' => 'view', //模态窗名称
 					]) ?></h></div>
 	</table>
+
 </div>

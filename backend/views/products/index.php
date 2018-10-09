@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <script>
     function pay(method, way) {
-        document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/><br />请稍后……"; //图片切换和加载
-
+        document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/>"; //图片切换和加载
+        document.getElementById('div2').innerHTML = "<l>请稍后……</l>";
         $.ajax({
             type: "GET",
             dataType: "html",
@@ -25,20 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
             success: function (s) {
                 if(s == '1'){
                     if(method == 'wx'){
-                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_wx' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_wx' ?>.png\" id=\"qr\" />";
                     }else if(method == 'jh'){
-
-                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_jh' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_jh' ?>.png\" id=\"qr\" />";
                     }else if(method == 'alipay'){
-
-                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_ali' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_ali' ?>.png\" id=\"qr\" />";
                     }
-
+                    document.getElementById('div2').innerHTML = "<l>请扫码完成支付！</l>";
                 }else if (s == '2') {
-                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />支付金额有误，请确认！";
+                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" />";
+                    document.getElementById('div2').innerHTML = "<l>金额有误，请确认！</l>";
+
                     clearInterval( intervalId ); //清除定时器
                 }else{
-                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />二维码过期，请重新获取！";
+                    document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" />";
+                    document.getElementById('div2').innerHTML = "<l>二维码过期，请重新获取！</l>";
                     clearInterval( intervalId ); //清除定时器
                 }
             },
@@ -116,7 +117,9 @@ $this->params['breadcrumbs'][] = $this->title;
     .remind{
         position: relative;
         bottom: -190px;
-        /*color: #00ca6d;*/
+    }
+    #div2{
+        color: red;
     }
 </style>
 
@@ -169,10 +172,15 @@ if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
         </div>
     </div>
 
-    <div class="QR" id="QR">
+    <div class="QR">
+        <div  id="QR">
+            <div class="remind">请确定充值金额！</div>
+        </div>
+        <div id="div2"></div>
 <!--        <img src="\images\QR_0_181007987213.png" id="qr" />-->
-        <div class="remind">请确定充值金额！<br /></div>
+
     </div>
+
 </div>
 
 

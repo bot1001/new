@@ -82,7 +82,19 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                         border: solid 1px;
                     }
                     #name, #order_id, #way{
-                        margin-left: 10px;
+                        text-align: center;
+                    }
+                    #address, .company{
+                        width: 40%;
+                    }
+                    #order_id{
+                        width: 22%;
+                    }
+                    #name{
+                        width: 20%;
+                     }
+                    #way{
+                        width: 17%;
                     }
                     sr{
                         font-weight: bolder;
@@ -91,11 +103,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                     .manager, .time{
                         width: 30%;
                     }
-                    .company{
-                        width: 40%;
-                        text-align: right;
-                    }
-                    .right{
+                    .right, .company{
                         text-align: right;
                     }
                     .left{
@@ -105,7 +113,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 <h3><?= $comm['community'];  ?></h3>
                 <div class="row">
                     <div id="address"> 房号：<sr><?= $address ?></sr></div>
-                    <div id="name">业主姓名：<sr><?= $comm['n'] ?></sr></div>
+                    <div id="name">业主：<sr><?= mb_substr($comm['n'], 0, '3') ?></sr></div>
                     <div id="order_id">订单号：<sr><?= $order_id ?></sr></div>
                     <div id="way" style="text-align: right;">收款方式：<sr><?= $e[$order['payment_gateway']]; ?></sr></div>
                 </div>

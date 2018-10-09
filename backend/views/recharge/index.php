@@ -27,7 +27,7 @@ echo $this->render('..\..\..\common\modal\modal.php');
 
 <script>
     function pay(){
-        if(confirm('您确定充值吗？')){
+        if(confirm('您确要继续吗？')){
             var realestate = document.getElementById('room')
             var keys = $("#grid").yiiGridView("getSelectedRows"); //获取选中列id
             if(keys.length == 0 || realestate.length == 0){
@@ -47,6 +47,13 @@ echo $this->render('..\..\..\common\modal\modal.php');
     }
 </script>
 
+<?php
+$session = Yii::$app->getSession()->getFlash('fail');
+if($session){
+    echo "<script>alert('$session')</script>";
+}
+?>
+
 <div class="recharge-index">
     <?= $this->render('_search', ['model' => $searchModel]); ?>
     <?php
@@ -62,11 +69,11 @@ echo $this->render('..\..\..\common\modal\modal.php');
 
         ['attribute' => 'type',
             'value' => function($model){
-                $date = ['1' => '电费'];
+                $date = ['1' => '电费', '2' => '服务费', '3' => '押金'];
                 return $date[$model->type];
             },
             'filterType' => GridView::FILTER_SELECT2,
-            'filter' => [ 1 => '电费'],
+            'filter' => ['1' => '电费', '2' => '服务费', '3' => '押金'],
             'filterWidgetOptions' => [
                 'pluginOptions' => [ 'allowClear' => true ],
             ],

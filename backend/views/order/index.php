@@ -10,7 +10,10 @@ use mdm\admin\components\Helper;
 
 Modal::begin( [
 	'id' => 'view-modal',
-	'header' => '<h4 class="modal-title"><center>订单详情</center></h4>',
+	'header' => '<h4 class="modal-title">订单详情</h4>',
+	'options' => [
+	        'data-backdrop' => 'static'
+    ]
 	//'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>',
 ] );
 $V_Url = Url::toRoute( 'view' );
@@ -350,7 +353,7 @@ $this->title = '订单管理';
 		'filterModel' => $searchModel,
 		'showPageSummary' => true,
 		'panel' => [ 'type' => 'info', 'heading' => '订单管理',
-				   'before' => Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => "btn btn-info"])
+//				   'before' => Html::a('<span class="glyphicon glyphicon-trash"></span>', '#', ['class' => "btn btn-info"])
 				   ],
 		'columns' => $gridColumn,
 		'pjax' => true,

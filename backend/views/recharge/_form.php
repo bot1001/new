@@ -32,7 +32,7 @@ use kartik\form\ActiveForm;
         <?= $form->field($model, 'creater')->textInput(['maxlength' => true]) ?>
     </div>
 
-    <?= $form->field($model, 'type')->dropDownList(['1' => '电费']) ?>
+    <?= $form->field($model, 'type')->dropDownList(['1' => '电费', '2' => '服务费', '3' => '押金']) ?>
 
     <?= $form->field($model, 'property')->textInput(['maxlength' => true]) ?>
 

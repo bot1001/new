@@ -19,12 +19,20 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 	<style>
 		img{
-			width:100%;
+			width:90%;
 			height: auto;
 			border-radius: 20px;
 		}
         #pay{
-            width: 25%;
+            background: #eaf5f7;
+            width: 24%;
+            text-align: center;
+            border-radius: 20px;
+            margin: auto;
+        }
+        button{
+            border-radius: 20px;
+            border: solid 0px;
         }
         .pay{
             display: flex;
@@ -34,8 +42,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         }
 
         #QR{
+            position: absolute;
+            left:0; right:0; top:-180px; bottom:0;
+            margin:auto;
             text-align: center;
-            margin-bottom: 10px;
+            max-width: 250px;
+            max-height: 250px;
         }
 
         #qr{
@@ -54,7 +66,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         }
 	</style>
 
-    <div id="QR">
+    <div id="QR"></div>
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
@@ -118,7 +130,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             ],
             'template' => '<tr><th style="text-align: right">{label}</th><td style="text-align: left">{value}</td></tr>',
         ]) ?>
-    </div>
+
 
 	<?php
 	if($model['status'] != 1) { exit; };
@@ -127,7 +139,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	?>
     <script>
         function pay(method, gateway) {
-            document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/>"; //图片切换和加载
+            if(method == 'wx' || method == 'jh' || method == 'alipay'){
+                document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" style='border-radius: 20px'/>"; //图片切换和加载
+            }
+
             $.ajax({
                 Type:'GET',
                 dataType:'json',
@@ -188,35 +203,38 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         <div id="div2"></div>
         <div class="pay">
             <div id="pay">
-                <a href="#"  onclick="pay('alipay','1')"><img src="/image/zfb.png"></a>
+                <button onclick="pay('alipay','1')"><img src="/image/zfb.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('wx','2')">	<img src="/image/wx.png" title="微信支付">	</a>
+                <button onclick="pay('wx','2')" title="微信支付"><img src="/image/wx.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('jh','')">	<img src="/image/j.png" title="建行龙支付"></a>
+                <button onclick="pay('jh','')" title="建行龙支付"><img src="/image/j.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('xj','6')"><img src="/image/xj.png"></a>
+                <button onclick="pay('xj','6')"><img src="/image/xj.png"></button>
+            </div>
+        </div>
+    </div>
+    <div class="success">
+        <div class="pay">
+            <div id="pay">
+                <button onclick="pay('up','3')"><img src="/image/up.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('up','3')"><img src="/image/up.png"></a>
+                <button title="银行代付"  onclick="pay('yh','4')"><img src="/image/yh.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('yh','4')"><img src="/image/yh.png" title="银行代付"></a>
+                <button title="政府代付" onclick="pay('zf','5')"><img src="/image/zf.png"></button>
             </div>
 
             <div id="pay">
-                <a href="#" onclick="pay('zf','5')"><img src="/image/zf.png" title="政府代付"></a>
-            </div>
-
-            <div id="pay">
-                <a href="#" onclick="pay('sal','8')"><img src="/image/sale.jpg" title="赠送优惠"></a>
+                <button title="赠送优惠" onclick="pay('sal','8')"><img src="/image/sale.jpg"></button>
             </div>
         </div>
     </div>
