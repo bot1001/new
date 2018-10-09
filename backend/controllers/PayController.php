@@ -19,20 +19,16 @@ class PayController extends Controller
 	public $enableCsrfValidation = false;
 	
     //调用第三方支付
-	public function actionPay($paymethod)
+	public function actionPay()
 	{
 		$b = $_GET;
 
-        if(isset($b['gateway'])) //判断是否存在支付参数
-        {
-            $gateway = $b['gateway'];
-        }
-		$pay = $b['pay'];
-
-		$order_id = $pay['order_id'];
-	    $order_amount = $pay['order_amount'];
-	    $description = $pay['description'];
-	    $community = $pay['community'];
+		$order_id = $b['order_id'];
+	    $order_amount = $b['order_amount'];
+	    $description = $b['description'];
+	    $community = $b['community'];
+	    $gateway = $b['gateway'];
+        $paymethod = $b['paymthod']; //支付方式
 	    $order_body = '物业缴费';  // 订单描述
 
         if($order_amount == '0'){ //如果金额为零
@@ -58,40 +54,31 @@ class PayController extends Controller
 			return $this->redirect(Yii::$app->request->referrer);
 		}else{
              if($paymethod == 'alipay'){
-                 return $this->redirect(['alipay',
-                     'order_id' => $order_id,
-                     'description' => $description,
-                     'order_amount' => $order_amount,
-                     'order_body' => $order_body,
-                     'type' => '1']);
+                 $result = Pay::ali($order_id, $description, $order_amount, $order_body);//生成支付二维码
+                 if($result){
+                     return true;
+                 }
+                 return false;
+
              }elseif($paymethod == 'wx'){
-                 return $this->redirect(['wx',
-                     'order_id' => $order_id,
-                     'description' => $description,
-                     'order_amount' => $order_amount,
-                     'order_body' => $order_body,
-                     'type' => '1']);
+                 $result = Pay::wx($order_id, $description, $order_amount, $type = '1'); //生成支付二维码
+                 if($result){
+                     return true;
+                 }
+                 return false;
+
              }elseif($paymethod == 'jh'){
-                 return $this->redirect(['jh',
-                     'order_id' => $order_id,
-                     'order_amount' => $order_amount,
-                     'community' => $community,
-                     'type' => '1']);
+                 $result = Pay::PayForCode($order_id,$order_amount,$community); //生成支付二维码
+                 if($result){
+                     return true;
+                 }
+                 return false;
              }else{
                  return $this->redirect(['ofline', 'order_id' => $order_id, 'order_amount' => $order_amount, 'gateway' => $gateway, 'type' => '1']);
              }
          }
 	}
-	
-	//建行接口
-	public function actionJh($order_id,$order_amount,$community, $type)
-	{
-	    $f = Pay::PayForCode($order_id,$order_amount,$community, $type);
 
-	    return $this->render('/order/jh',
-            ['f' => $f, 'order_id' => $order_id, 'order_amount' => $order_amount ]);
-	}
-	
 	//建行主动查询
 	public function actionJhang($order_id)
 	{
@@ -109,8 +96,16 @@ class PayController extends Controller
 
 		return false;
 	}
+
+	//支付宝主动查询
+    function actionAlipay($order_id, $trade, $or)
+    {
+        $result = Pay::Alis($order_id, $trade, $or);
+
+        return $result;
+    }
 	
-	public function actionJian()
+	public function actionJian() //建行异步回调
 	{
 		//验签秘钥
 		$key = '30819d300d0609';	
@@ -159,47 +154,6 @@ class PayController extends Controller
         }
 
 		return false;
-	}
-	
-	//调用支付宝
-	public function actionAlipay($order_id, $description, $order_amount, $order_body)
-	{	
-		require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/service/AlipayTradeService.php';
-        require_once dirname(__FILE__).'../../../vendor/alipay/pagepay/buildermodel/AlipayTradePagePayContentBuilder.php';
-		$config = Yii::$app->params['Alipay'];
- 
-        //商户订单号，商户网站订单系统中唯一订单号，必填
-        $out_trade_no = trim($order_id);
-
-        //订单名称，必填
-        $subject = trim($description);
-
-        //付款金额，必填
-        $total_amount = trim($order_amount);
-
-        //商品描述，可空
-        $body = trim($order_body);
-
-	    //构造参数
-	    $payRequestBuilder = new \AlipayTradePagePayContentBuilder();
-	    $payRequestBuilder->setBody($body);
-	    $payRequestBuilder->setSubject($subject);
-	    $payRequestBuilder->setTotalAmount($total_amount);
-	    $payRequestBuilder->setOutTradeNo($out_trade_no);
- 
-		$aop = new \AlipayTradeService($config);
-    
-	    /**
-	     * pagePay 电脑网站支付请求
-	     * @param $builder 业务参数，使用buildmodel中的对象生成。
-	     * @param $return_url 同步跳转地址，公网可以访问
-	     * @param $notify_url 异步通知地址，公网可以访问
-	     * @return $response 支付宝返回的信息
- 	    */
-	    $response = $aop->pagePay($payRequestBuilder,$config['return_url'],$config['notify_url']);
-    
-	    //输出表单
-	    var_dump($response);
 	}
 	
 	//支付宝异步回调
@@ -281,20 +235,11 @@ class PayController extends Controller
             echo "验证失败";
         }
 	}
-	
-	//微信支付
-	public function actionWx($order_id, $description, $order_amount)
-	{
-        $img = Pay::wx($order_id, $description, $order_amount, $type = '1'); //生成微信支付二维码
 
-        return $this->render('/order/wx',
-            ['img' => $img, 'order_id' => $order_id, 'order_amount' => $order_amount ]);
-	}
-	
 	//微信主动查询
 	function actionWei($order_id)
 	{
-		require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Api.php'; //微信配置文件
+		require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.php'; //微信配置文件
 		require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.Notify.php'; //微信回调文件
 		
 		$input = new \WxPayOrderQuery();

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use dosamigos\qrcode\QrCode;
+use yii\helpers\Json;
 
 class Pay extends \yii\db\ActiveRecord
 {
@@ -21,7 +22,7 @@ class Pay extends \yii\db\ActiveRecord
 	}
 	
 	   //增加交易码和币种的传入处理 20180317
-	public static function PayForCode($order_id,$order_amount,$community, $type)
+	public static function PayForCode($order_id,$order_amount,$community)
     {
         $MERCHANTID ="105635000000321";  						//商户号
         $POSID="011945623";             						//$_POST["POSID"] ;
@@ -64,13 +65,90 @@ class Pay extends \yii\db\ActiveRecord
 		
 		$URL = iconv("gb2312","utf-8//IGNORE",$URL);
 
-        $tmpStr = Pay::qr($ORDERID, $URL); //生成二维码
+        $tmpStr = Pay::qr($ORDERID.'_jh', $URL); //生成二维码
 
-		if ( $tmpStr && $type == '3' ) { //判断是否为充值订单
+		if ( $tmpStr ) { //判断是否为充值订单
 		    return true;
 		}
 		return $tmpStr;
 	}
+
+    //调用支付宝
+    static function ali($order_id, $description, $order_amount, $order_body)
+    {
+        require_once dirname(__FILE__).'../../../vendor/alipay/AopSdk.php';
+        $config = Yii::$app->params['Alipay'];
+
+        $aop = new \AopClient ();
+        $aop->gatewayUrl = $config['gatewayUrl'];
+        $aop->appId = $config['app_id'];
+        $aop->rsaPrivateKey = $config['merchant_private_key'];
+        $aop->alipayrsaPublicKey= $config['alipay_public_key'];
+        $aop->apiVersion = '1.0';
+        $aop->postCharset='utf-8';
+        $aop->format='json';
+        $aop->signType = 'RSA2';
+        $timeout_express = '2m'; //设置支付订单有效时间
+
+        $request = new \AlipayTradePrecreateRequest(); //实例化支付信息
+        $request->setBizContent("{\"out_trade_no\":\"".$order_id."\",\"total_amount\":\"".$order_amount."\",\"timeout_express\":\"".$timeout_express."\",\"subject\":\"$description\"}");
+        $request->setNotifyUrl($config['notify_url']);
+        $result = $aop->execute($request); //发起支付请求
+
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $qrCode = $result->$responseNode->qr_code; //支付链接
+
+        $result = Pay::qr($order_id.'_ali', $qrCode); //生成二维码
+
+        if($result){
+            return true;
+        }
+        return false;
+    }
+
+    //支付宝主动查询
+    static function Alis($order, $trade, $org)
+    {
+        require_once dirname(__FILE__).'../../../vendor/alipay/AopSdk.php';
+        $config = Yii::$app->params['Alipay'];
+
+        $aop = new \AopClient ();
+        $aop->gatewayUrl = $config['gatewayUrl'];
+        $aop->appId = $config['app_id'];
+        $aop->rsaPrivateKey = $config['merchant_private_key'];
+        $aop->alipayrsaPublicKey= $config['alipay_public_key'];
+        $aop->apiVersion = '1.0';
+        $aop->postCharset='utf-8';
+        $aop->format='json';
+        $aop->signType = 'RSA2';
+
+        $request = new \AlipayTradeQueryRequest ();
+        $request->setBizContent("{" .
+            "\"out_trade_no\":\"$order\"," .
+            "\"trade_no\":\"\"," .
+            "\"org_pid\":\"\"" .
+            "  }");
+        $result = $aop->execute ( $request);
+
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $resultCode = $result->$responseNode->code;
+        if($resultCode == '10000'){
+            $res = $result->$responseNode;
+            $response = (array)$res;//强制转换数据
+
+            $status = $response['trade_status']; //状态
+            $buyer = ['buyer' => $response['buyer_logon_id']]; //
+
+            if($status == 'WAIT_BUYER_PAY'){ //扫描微支付则返回用户
+                return Json::encode($buyer);
+            }elseif ($status == 'TRADE_FINISHED'){ //支付成功返回true
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 	//生成二维码
 	static function qr($order_id, $url)
 	{
@@ -83,10 +161,10 @@ class Pay extends \yii\db\ActiveRecord
 		$errorCorrectionLevel = 'H';//容错级别   
 		
 		QRcode::png($url,$qc,$errorCorrectionLevel, 10, 2); //创建二维码
-		if ( !file_exists($qc) ) {
-			return false ;  //如果二维码生成失败返回false
+		if ( file_exists($qc) ) {
+			return true ;  //如果二维码生成失败返回false
 		}
-		return $qc;
+		return false;
 	}
 
 	//判断并删除同名二维码
@@ -338,7 +416,7 @@ class Pay extends \yii\db\ActiveRecord
     }
 
 	//创建微信支付链接
-    static function wx($order_id, $description, $order_amount, $type)
+    static function wx($order_id, $description, $order_amount)
     {
         require_once dirname( __FILE__ ) . '../../../vendor/wx/lib/WxPay.php'; //微信配置文件
 
@@ -364,15 +442,10 @@ class Pay extends \yii\db\ActiveRecord
             return false;
         }
         Pay::del($order_id); //判断并删除同名二维码
-        $img = Pay::qr($order_id, $url);//生成支付二维码
+        $img = Pay::qr($order_id.'_wx', $url);//生成支付二维码
 
-        if($type == 3){ //判断是否是充值订单
-            if (is_file($img)) { //判断创建时间是否为一个小时前
-                return true;
-            }
-            return false;
-        }else {
-            return $img;
+        if ($img) { //判断创建时间是否为一个小时前
+            return true;
         }
 
         return false;

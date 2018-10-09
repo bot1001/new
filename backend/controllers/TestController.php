@@ -3,12 +3,45 @@
 namespace backend\controllers;
 
 use app\models\CommunityRealestate;
+use common\models\Order;
 use common\models\UserAccount;
 use common\models\UserOpenid;
 use Yii;
 
 class TestController extends \yii\web\Controller
-{	
+{
+    //支付宝测试支付
+    function actionAlipay()
+    {
+        require_once dirname(__FILE__).'../../../vendor/alipay/AopSdk.php';
+        $config = Yii::$app->params['Alipay'];
+
+        $aop = new \AopClient ();
+        $aop->gatewayUrl = $config['gatewayUrl'];
+        $aop->appId = $config['app_id'];
+        $aop->rsaPrivateKey = $config['merchant_private_key'];
+        $aop->alipayrsaPublicKey= $config['alipay_public_key'];
+        $aop->apiVersion = '1.0';
+        $aop->postCharset='utf-8';
+        $aop->format='json';
+        $aop->signType = 'RSA2';
+
+        $request = new \AlipayTradeQueryRequest ();
+        $request->setBizContent("{" .
+            "\"out_trade_no\":\"180409445612\"," .
+            "\"trade_no\":\"\"," .
+            "\"org_pid\":\"\"" .
+            "  }");
+        $result = $aop->execute ( $request);
+
+        $responseNode = str_replace(".", "_", $request->getApiMethodName()) . "_response";
+        $resultCode = $result->$responseNode;
+        $response = (array)$resultCode;//强制转换数据
+
+        echo '<pre />';
+        print_r($response);
+    }
+
 	public function actionIndex()
 	{
 	    return false;

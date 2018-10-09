@@ -24,7 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
             data:{paymethod: method, order: <?= $order ?>, realestate: <?= $realestate ?>, gateway: way},
             success: function (s) {
                 if(s == '1'){
-                    document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $order ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                    if(method == 'wx'){
+                        <?php $img = $order.'_wx' ?>
+                    }else if(method == 'jh'){
+                        <?php $img = $order.'_jh' ?>
+                    }
+                    document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
                 }else if (s == '2') {
                     document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />支付金额有误，请确认！";
                     clearInterval( intervalId ); //清除定时器

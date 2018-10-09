@@ -428,20 +428,11 @@ class OrderController extends Controller
 	//确认缴费详情
 	public function actionAffirm()
     {
-		$id = Yii::$app->request->get();
-		foreach($id as $k => $s)
-		{
-			$ids = ($s['ids']);
-			
-			if(empty($s)){
-				$session = Yii::$app->session;
-				$session->setFlash('fail','4');
-			       return $this->redirect( Yii::$app->request->referrer );
-			}
-			
-			//获取缴费项目
-		    $invoice = (new \yii\db\Query())
-				->select('user_invoice.community_id as c_id,
+		$id = $_GET['id']['ids'];
+
+        //获取缴费项目
+        $invoice = (new \yii\db\Query())
+            ->select('user_invoice.community_id as c_id,
 				       community_basic.community_name as community,
 			           community_building.building_name as building,
 					   community_realestate.room_number as number,
@@ -451,17 +442,16 @@ class OrderController extends Controller
 			           user_invoice.month as month,
 			           user_invoice.invoice_amount as amount,
 			           user_invoice.description as description')
-				->from('user_invoice')
-				->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
-				->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
-				->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
-		       	->andwhere(['in', 'user_invoice.invoice_id', $ids])
-		       	->andwhere(['user_invoice.invoice_status' => '0'])
-		    	->limit(300)
-		       	->all();
-	    }
-		
-		if(empty($invoice)){
+            ->from('user_invoice')
+            ->join('inner join', 'community_basic', 'community_basic.community_id = user_invoice.community_id')
+            ->join('inner join', 'community_building', 'community_building.building_id = user_invoice.building_id')
+            ->join('inner join', 'community_realestate', 'community_realestate.realestate_id = user_invoice.realestate_id')
+            ->andwhere(['in', 'user_invoice.invoice_id', $id])
+            ->andwhere(['user_invoice.invoice_status' => '0'])
+            ->limit(300)
+            ->all();
+
+		if(!$invoice){
 			$session = Yii::$app->session;
 			$session->setFlash('fail','1');
 			return $this->redirect( Yii::$app->request->referrer );

@@ -365,13 +365,7 @@ class UserInvoiceController extends Controller
 	public function actionPay() {
 		$id = Yii::$app->request->post();
 
-		if ( empty( $id ) ) {
-			$session = Yii::$app->session;
-			$session->setFlash('fail','1');
-			return $this->redirect( Yii::$app->request->referrer );
-		} else {
-			return $this->redirect( [ 'order/affirm', 'id' => $id ] );
-		}
+		return $this->redirect( [ 'order/affirm', 'id' => $id ] );
 	}
 
 	//缴费统计列表
