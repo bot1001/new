@@ -167,6 +167,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                     }else if ( this.responseText == '1' ) {
                         document.getElementById( 'success' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">支付成功！</a>';
                         clearInterval( intervalId ); //清除定时器
+                    }else if ( this.responseText == '3' ) {
+                        document.getElementById( 'success' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">交易关闭！</a>';
+                        clearInterval( intervalId ); //清除定时器
                     }else{
                         var name = JSON.parse(this.responseText);
                         document.getElementById( 'div2' ).innerHTML = name.buyer;

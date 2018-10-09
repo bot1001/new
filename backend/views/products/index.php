@@ -25,11 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
             success: function (s) {
                 if(s == '1'){
                     if(method == 'wx'){
-                        <?php $img = $order.'_wx' ?>
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_wx' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
                     }else if(method == 'jh'){
-                        <?php $img = $order.'_jh' ?>
+
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_jh' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+                    }else if(method == 'alipay'){
+
+                        document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img = $order.'_ali' ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
                     }
-                    document.getElementById('QR').innerHTML = "<img src=\"\\images\\<?= $img ?>.png\" id=\"qr\" /><br /><div id='div2'>支付二维码！</div>";
+
                 }else if (s == '2') {
                     document.getElementById('QR').innerHTML = "<img src=\"\\image\\logo_108.png\" id=\"qr\" /><br />支付金额有误，请确认！";
                     clearInterval( intervalId ); //清除定时器
@@ -46,15 +50,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 xhr.open( 'GET', "<?= Url::to(['/pay/wei', 'order_id' => $order]); ?>", true );
             }else if(method == 'jh'){
                 xhr.open( 'GET', "<?= Url::to(['/pay/jhang', 'order_id' => $order]); ?>", true );
+            }else if (method == 'alipay') {
+                xhr.open('GET', "<?= Url::to(['/pay/alipay', 'order_id' => $order, 'trade' => '', 'or' => '']); ?>", true );
             }
             xhr.onload = function () {
                 if ( this.responseText == '1' ) {
                     document.getElementById( 'div2' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">支付成功！</a>';
                     clearInterval( intervalId ); //清除定时器
-                }
-
-                if ( this.responseText == '' ) {
-                    document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
+                }else if ( this.responseText == '' ) {
+                    // document.getElementById( 'div2' ).innerHTML = '<l>等待支付中,请稍后……</l>';
+                }else if ( this.responseText == '3' ) {
+                    document.getElementById( 'div2' ).innerHTML = '<l>交易关闭！</l>';
+                }else{
+                    var name = JSON.parse(this.responseText);
+                    document.getElementById( 'div2' ).innerHTML = name.buyer;
                 }
             }
             xhr.send();//发送请求
@@ -145,9 +154,7 @@ if ( Yii::$app->getSession()->hasFlash( 'cancel' ) ) {
 
         <div>
             <div class="sure">
-                <a href="<?= Url::to(['/order/create', 'paymethod' => 'alipay','order'=> $order, 'realestate' => $realestate ]) ?>" title="支付宝">
-                    <img src="\image\zfb.png" class="img">
-                </a>
+                <a href="#" title="支付宝" onclick="pay('alipay', '')"><img src="\image\zfb.png" class="img"></a>
 
                 <a href="#" title="微信" onclick="pay('wx', '')"><img src="\image\wx.png" class="img"></a>
 

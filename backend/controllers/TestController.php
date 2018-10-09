@@ -11,7 +11,7 @@ use Yii;
 class TestController extends \yii\web\Controller
 {
     //支付宝测试支付
-    function actionAlipay()
+    function actionAlipay($order)
     {
         require_once dirname(__FILE__).'../../../vendor/alipay/AopSdk.php';
         $config = Yii::$app->params['Alipay'];
@@ -28,7 +28,7 @@ class TestController extends \yii\web\Controller
 
         $request = new \AlipayTradeQueryRequest ();
         $request->setBizContent("{" .
-            "\"out_trade_no\":\"180409445612\"," .
+            "\"out_trade_no\":\"$order\"," .
             "\"trade_no\":\"\"," .
             "\"org_pid\":\"\"" .
             "  }");

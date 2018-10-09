@@ -125,8 +125,8 @@ class Pay extends \yii\db\ActiveRecord
         $request = new \AlipayTradeQueryRequest ();
         $request->setBizContent("{" .
             "\"out_trade_no\":\"$order\"," .
-            "\"trade_no\":\"\"," .
-            "\"org_pid\":\"\"" .
+            "\"trade_no\":\"$trade\"," .
+            "\"org_pid\":\"$org\"" .
             "  }");
         $result = $aop->execute ( $request);
 
@@ -141,8 +141,10 @@ class Pay extends \yii\db\ActiveRecord
 
             if($status == 'WAIT_BUYER_PAY'){ //扫描微支付则返回用户
                 return Json::encode($buyer);
-            }elseif ($status == 'TRADE_FINISHED'){ //支付成功返回true
+            }elseif ($status == 'TRADE_SUCCESS'){ //支付成功返回true
                 return true;
+            }elseif ($status == 'TRADE_FINISHED'){ //交易关闭
+                return '3';
             }
         }
 

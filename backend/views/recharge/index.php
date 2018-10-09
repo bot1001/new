@@ -53,21 +53,12 @@ echo $this->render('..\..\..\common\modal\modal.php');
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn',
             'header' => '序<br />号'],
-        ['class' => 'kartik\grid\checkBoxColumn',
+        ['class' => 'kartik\grid\CheckboxColumn',
             'name' => 'id'],
 
         ['attribute' => 'name',
             'contentOptions' => ['class' => ['text-left']]
         ],
-
-//        ['attribute' => 'price',
-//            'class' => 'kartik\grid\EditableColumn',
-//            'editableOptions' => [
-//                'formOptions' => [ 'action' => [ '/recharge/recharge' ] ],
-//                'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-//            ],
-//            'contentOptions' => ['class' => ['text-right']]
-//            ],
 
         ['attribute' => 'type',
             'value' => function($model){

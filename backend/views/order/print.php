@@ -71,7 +71,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<table border="0">
 			<tr>
 				<td align="left">房号:<str><?= $address ?></str></td>
-				<td align="center">业主姓名：<str><?= $comm['n']?></str></td>
+				<td align="center">业主：<str><?= mb_substr($comm['n'], 0, 3)?></str></td>
 				<td align="center">订单号：<str><?= $order_id ?></str></td>
 				<td align="right">收款方式：<str><?= $e[$order['payment_gateway']]; ?></str></td>
 			</tr>
@@ -221,8 +221,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td></td>
 			</tr>
 			<tr>
-				<td align="left" width = "200px">收款人：<str><?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></str></td>
-				<td width = "200px">时间：<str><?= date('Y-m-d H:i:s', $order['payment_time']) ?></str></td>
+				<td align="left" width = "220px">收款人：<str><?= $user_name; echo '('.Yii::$app->request->userIP.')'; ?></str></td>
+				<td width = "190px">时间：<str><?= date('Y-m-d H:i:s', $order['payment_time']) ?></str></td>
 				<td align="right" width = "256px">广西裕达集团物业服务有限公司(盖章)</td>
 			</tr>
 		</table>

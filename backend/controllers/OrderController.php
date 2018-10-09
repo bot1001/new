@@ -406,12 +406,15 @@ class OrderController extends Controller
         $description = $address['address'];
         $order_amount = $amount['price'];
         $community = $address['community'];
+        $order_body = '物业缴费';  // 订单描述
 
-        if($paymethod == 'jh' || $paymethod == 'wx'){
+        if($paymethod == 'jh' || $paymethod == 'wx' || $paymethod == 'alipay'){
             if($paymethod == 'jh'){//建行支付链接
                 $result = Pay::PayForCode($order_id,$order_amount,$community, $type = '3');print_r($result);exit;
             }elseif ($paymethod == 'wx'){
                 $result = Pay::wx($order_id, $description, $order_amount, $type = '3'); //生成微信支付二维码
+            }elseif ($paymethod == 'alipay'){
+                $result = Pay::ali($order_id, $description, $order_amount, $order_body);//生成支付二维码
             }
 
             if($result == '1'){
