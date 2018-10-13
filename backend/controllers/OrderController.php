@@ -206,20 +206,35 @@ class OrderController extends Controller
 		    return $this->redirect(Yii::$app->request->referrer);
         }
         $amount = $order['order_amount']; //订单金额
-        $address = $order['address']; //分割地址
-        $type = $order['type']; //提取支付方式
-
-        $add = explode(' ', $address);
-        $number = (int)$add['2']; //强制转换成整数
-        $number=str_pad($number,2,"0",STR_PAD_LEFT); //单元自动补0
+        $address = $order['address'];
+        $add = explode(' ', $address);//分割地址
         //缴费房号信息
         $comm = (new \yii\db\Query())
             ->select('community_basic.community_name as community, community_realestate.owners_name as n, community_realestate.realestate_id as id')
             ->from('community_realestate')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
-            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-            ->where(['community_basic.community_name' => reset($add), 'community_building.building_name' => $add['1'], 'community_realestate.room_number' => "$number", 'community_realestate.room_name' => end($add)])
-            ->one();
+            ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id');
+
+        if(count($add) != '1'){
+            $number = (int)$add['2']; //强制转换成整数
+            $number=str_pad($number,2,"0",STR_PAD_LEFT); //单元自动补0
+            $comm = $comm->where(['community_basic.community_name' => reset($add), 'community_building.building_name' => $add['1'], 'community_realestate.room_number' => "$number", 'community_realestate.room_name' => end($add)])
+                ->one();
+        }else{
+            $realestate = Products::find()
+                ->select('product_id as id')
+                ->where(['order_id' => "$order_id"])
+                ->asArray()
+                ->one();
+            //缴费房号信息
+            $comm = $comm->where(['community_realestate.realestate_id' => $realestate['id']])->one();
+        }
+
+
+        $type = $order['type']; //提取支付方式
+
+
+
 
         $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ]; //订单状态
 

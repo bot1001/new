@@ -376,7 +376,7 @@ $this->title = '缴费管理';
 				'data-target' => '#update-modal',
 				'class' => 'btn btn-info import',
 			] ) . ' ' .
-			Html::a( '缴费', "javascript:void(0);", [ 'class' => 'btn btn-default gridviewpay ' ] ),
+			Html::a( '缴费', "javascript:void(0);", [ 'class' => 'btn btn-default gridviewpay ', 'title' => '修改费项状态' ] ),
 		],
 
 		'toolbar' => [
