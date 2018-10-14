@@ -25,18 +25,60 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'store',
             'value' => 'store.store_name',
             'label' => '商城',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
             'contentOptions' => ['class' => 'text-left']],
 
         ['attribute' => 'product_name',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_TEXT,
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
             'contentOptions' => ['class' => 'text-left']],
+
         ['attribute' => 'product_subhead',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_TEXT,
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
             'contentOptions' => ['class' => 'text-left']],
 
 //        ['attribute' => 'product_taxonomy'],
 //        ['attribute' => 'brand_id'],
-        ['attribute' => 'market_price', 'contentOptions' => ['class' => 'text-right']],
+        ['attribute' => 'market_price',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_TEXT,
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
+            'contentOptions' => ['class' => 'text-right']],
 
         ['attribute' => 'product_price',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_TEXT,
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
             'contentOptions' => ['class' => 'text-right']],
         ['attribute' => 'product_image',
             'format' => ['image',
@@ -51,6 +93,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //        ['attribute' => 'product_introduction'],
         ['attribute' => 'product_quantity',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_TEXT,
+//                'data' => ['1' => '大型', 2 => '小型']
+            ],
+            'readonly' => function($model){
+                return $model->product_status == '2';
+            },
             'contentOptions' => ['class' => 'text-right']],
 
         ['attribute' => 'product_status',
@@ -63,9 +114,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model){
                 $date = ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中'];
                 return $date[$model->product_status];
-            }],
+            },
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['product/product']],
+                'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                'data' => ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中']
+            ],
+//            'readonly' => function($model){
+//                return $model->product_status == '2';
+//            },
+            ],
 
-        ['class' => 'kartik\grid\ActionColumn', 'header' => '操<br />作'],
+        ['class' => 'kartik\grid\ActionColumn',
+            'template' => '{view}{update}',
+            'header' => '操<br />作'],
     ];
     echo GridView::widget([
         'dataProvider' => $dataProvider,

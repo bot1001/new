@@ -44,7 +44,18 @@ class Store extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['store_cover', 'province_id', 'city_id', 'area_id', 'store_name', 'store_address', 'store_introduce', 'store_phone', 'add_time', 'store_status', 'type'], 'required'],
+            [['store_cover', 'province_id', 'city_id', 'area_id', 'store_name', 'store_address', 'store_introduce', 'store_phone', 'store_status', 'type'], 'required'],
+            [['add_time'], function($model){
+                if ($this->hasErrors()) return false;
+                $datetime = $this->{$model};
+                $time = strtotime($datetime);
+                if($time == false){
+                    $this->addError($model, '时间格式错误');
+                    return false;
+                }
+                $this->{$model} = $time;
+                return true;
+            }],
             [['province_id', 'city_id', 'area_id', 'add_time', 'is_certificate', 'store_sort', 'type', 'store_taxonomy'], 'integer'],
             [['store_longitude', 'store_latitude'], 'number'],
             [['store_cover'], 'string', 'max' => 300],
@@ -82,12 +93,19 @@ class Store extends \yii\db\ActiveRecord
         ];
     }
 
+    //时间转换
+    public function afterFind()
+    {
+        parent::afterFind(); // 继承父级搜索
+        $this->add_time = date('Y:m:d H:i:s', $this->add_time);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getProduct()
     {
-        return $this->hasMany(ProductBasic::className(), ['store_id' => 'store_id']);
+        return $this->hasMany(Product::className(), ['store_id' => 'store_id']);
     }
 
     //获取商店
@@ -99,5 +117,23 @@ class Store extends \yii\db\ActiveRecord
             ->column();
 
         return $store;
+    }
+
+    public function getProvince()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'province_id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'city_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArea()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'area_id']);
     }
 }
