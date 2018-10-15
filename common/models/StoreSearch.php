@@ -43,6 +43,8 @@ class StoreSearch extends Store
     public function search($params)
     {
         $query = Store::find();
+        $query->joinWith('taxonomy')
+            ->joinWith('province');
 
         // add conditions that should always apply here
 

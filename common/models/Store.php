@@ -56,13 +56,10 @@ class Store extends \yii\db\ActiveRecord
                 $this->{$model} = $time;
                 return true;
             }],
-            [['province_id', 'city_id', 'area_id', 'add_time', 'is_certificate', 'store_sort', 'type', 'store_taxonomy'], 'integer'],
-            [['store_longitude', 'store_latitude'], 'number'],
-            [['store_cover'], 'string', 'max' => 300],
-            [['store_name', 'store_address', 'store_phone', 'store_status'], 'string', 'max' => 64],
-            [['community_id'], 'string', 'max' => 128],
-            [['store_introduce'], 'string', 'max' => 20000],
-            [['area_id', 'store_name'], 'unique', 'targetAttribute' => ['area_id', 'store_name']],
+            [['province_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['province_id' => 'id']],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['city_id' => 'id']],
+            [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
+            [['store_taxonomy'], 'exist', 'skipOnError' => true, 'targetClass' => StoreTaxonomy::className(), 'targetAttribute' => ['store_taxonomy' => 'id']],
         ];
     }
 
@@ -89,7 +86,7 @@ class Store extends \yii\db\ActiveRecord
             'store_sort' => '商城位置',
             'store_status' => '状态',
             'type' => '类型',
-            'store_taxonomy' => 'Store Taxonomy',
+            'store_taxonomy' => '行业',
         ];
     }
 
@@ -135,5 +132,11 @@ class Store extends \yii\db\ActiveRecord
     public function getArea()
     {
         return $this->hasOne(Area::className(), ['id' => 'area_id']);
+    }
+
+    //同商城类别表建立关系
+    public function getTaxonomy()
+    {
+        return $this->hasOne(StoreTaxonomy::className(), ['id' => 'store_taxonomy']);
     }
 }

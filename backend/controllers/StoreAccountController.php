@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
-use kartik\grid\EditableColumnAction;
 use Yii;
-use common\models\Store;
-use common\models\StoreSearch;
-use yii\helpers\ArrayHelper;
+use common\models\StoreAccount;
+use common\models\StoreAccountSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StoreController implements the CRUD actions for Store model.
+ * StoreAccountController implements the CRUD actions for StoreAccount model.
  */
-class StoreController extends Controller
+class StoreAccountController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,39 +29,23 @@ class StoreController extends Controller
         ];
     }
 
-    function actions()
-    {
-        return ArrayHelper::merge(parent::actions(),[
-            'store' => [
-                'class' => EditableColumnAction::className(),
-                'modelClass' => Store::className(),
-                'outputValue' => function ($model, $attribute, $key, $index) {
-
-                },
-                'ajaxOnly' => true
-            ]
-        ]);
-    }
-
     /**
-     * Lists all Store models.
+     * Lists all StoreAccount models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StoreSearch();
+        $searchModel = new StoreAccountSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $taxonomy = \common\models\StoreTaxonomy::Taxonomy($type = '1');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'taxonomy' => $taxonomy
         ]);
     }
 
     /**
-     * Displays a single Store model.
+     * Displays a single StoreAccount model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -76,16 +58,16 @@ class StoreController extends Controller
     }
 
     /**
-     * Creates a new Store model.
+     * Creates a new StoreAccount model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Store();
+        $model = new StoreAccount();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->store_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -94,7 +76,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Updates an existing Store model.
+     * Updates an existing StoreAccount model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -105,7 +87,7 @@ class StoreController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->store_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -114,7 +96,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Deletes an existing Store model.
+     * Deletes an existing StoreAccount model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -128,15 +110,15 @@ class StoreController extends Controller
     }
 
     /**
-     * Finds the Store model based on its primary key value.
+     * Finds the StoreAccount model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Store the loaded model
+     * @return StoreAccount the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Store::findOne($id)) !== null) {
+        if (($model = StoreAccount::findOne($id)) !== null) {
             return $model;
         }
 

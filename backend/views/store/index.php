@@ -129,7 +129,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
             ],
 
-//        ['attribute' => 'store_taxonomy'],
+        ['attribute' => 'store_taxonomy',
+            'value' => 'taxonomy.name',
+            'class' => 'kartik\grid\EditableColumn',
+            'editableOptions' => [
+                'formOptions' => ['action' => ['store/store']],
+                'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+                'data' => $taxonomy,
+            ],
+            'readonly' => function($model){
+                return $model->store_status == '0';
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => $taxonomy,
+            'filterInputOptions' => ['placeholder' => '请选择'],
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true]
+            ]],
 
         ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{update}',
