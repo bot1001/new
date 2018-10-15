@@ -25,11 +25,12 @@ class OrderController extends Controller
             ->where(['order_basic.order_id' => "$order"])
             ->one();
 
-        $invoice = Invoice::find() //查询缴费信息
+        $invoice = (new Query()) //查询缴费信息 ->join('inner join', 'order_products', 'order_products.product_id = invoice_id.product_id')
             ->select('user_invoice.year, user_invoice.month, user_invoice.description, user_invoice.invoice_amount as amount, invoice_notes as notes')
-            ->where(['order_id' => "$order" ])
+            ->from('order_products')
+            ->join('inner join', 'user_invoice', 'order_products.product_id = user_invoice.invoice_id')
+            ->where(['order_products.order_id' => "$order" ])
             ->orderBy('year DESC, month DESC')
-            ->asArray()
             ->all();
 
         $detail = ['order' => $or, 'invoice' => $invoice];
