@@ -73,9 +73,7 @@ use yii\helpers\Url;
    				{
    					?>
    						<div id="in06" class="col-lg-1">
-   						     <?php
-   				                  echo $name['community_name'];
-   				              ?>
+   						     <?= $name['community_name']; ?>
    				         </div>
    					<?php } ?>
             	</td>

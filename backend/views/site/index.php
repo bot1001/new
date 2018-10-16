@@ -11,7 +11,7 @@ use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 
-$this->title = '裕达物业';
+$this->title = '裕家人';
 AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 ?>
   
