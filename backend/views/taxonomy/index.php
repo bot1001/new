@@ -30,20 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
         [ 'attribute' => 'type',
             'value' => function($model){
-                $date = ['1' => '商店', '2' => '商品'];
+                $date = ['1' => '行业', '2' => '类别'];
                 return $date[$model->type];
             },
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'formOptions' => ['action' => ['taxonomy/taxonomy']],
                 'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-                'data' => ['1' => '商店', '2' => '商品'],
+                'data' => ['1' => '行业', '2' => '类别'],
             ],
 //            'readonly' => function($model){
 //                return $model->store_status == '0';
 //            },
             'filterType' => GridView::FILTER_SELECT2,
-            'filter' => ['1' => '商店', '2' => '商品'],
+            'filter' => ['1' => '行业', '2' => '类别'],
             'filterInputOptions' => ['placeholder' => '请选择'],
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true]
