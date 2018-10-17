@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	
             ['attribute'=> 'ad_poster',
                 'mergeHeader' => true,
-                'format' => 'raw',
+                'format' => ['image', ['height' => '30px']],
                 'value' => function($model){
-                    return Html::img('http://'.$_SERVER['HTTP_HOST'].$model->ad_poster,['alt' => '缩略图','width' => 80]);
+                    return 'http://img.gxydwy.com/'.$model->ad_poster;
                 },
                 'enableSorting' => false,
 			'width' => '80px'],

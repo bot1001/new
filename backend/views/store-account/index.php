@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => 'user.name',
             'contentOptions' => ['class' => 'text-left']],
 
+        ['attribute' => 'phone',
+            'value' => 'user.phone',
+            'label' => ' 联系方式'],
+
         ['attribute' =>  'work_number',
             'contentOptions' => ['class' => 'text-left']],
         ['attribute' =>  'store_id',
@@ -55,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'panel' => ['type' => 'info', 'heading' => '商城用户列表',
+        'panel' => ['type' => 'info', 'heading' => '我的店员',
             'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info'])],
         'columns' => $gridview,
     ]); ?>

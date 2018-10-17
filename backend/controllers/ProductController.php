@@ -38,7 +38,7 @@ class ProductController extends Controller
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
                     "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
-                    "imagePathFormat" => "/market/Adertising/{yyyy}{mm}{dd}/{time}{rand:6}", //商城图片
+                    "imagePathFormat" => "/img/market/{yyyy}{mm}{dd}/{time}{rand:6}", //商城图片
                     "imageMaxSize" => 1024000,
                 ],
             ],

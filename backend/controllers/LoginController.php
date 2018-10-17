@@ -34,11 +34,9 @@ class LoginController extends Controller
                 $login = Login::market($id, $session);
             }elseif($type == '0'){
                 $login = Login::manager($id, $session);
-            }else{
-                $this->redirect(['/site/logout']);
             }
 
-            if($login){ //如果登陆成功则返回
+            if(isset($login)){ //如果登陆成功则返回
                 return $this->goBack();
             }
             return $this->redirect(['/site/logout']);

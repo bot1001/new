@@ -19,7 +19,7 @@ class StoreAccountSearch extends StoreAccount
     {
         return [
             [['id', 'work_number', 'role', 'status'], 'integer'],
-            [['user_id','property', 'store_id'], 'safe'],
+            [['user_id','property', 'store_id', 'phone'], 'safe'],
         ];
     }
 
@@ -69,7 +69,14 @@ class StoreAccountSearch extends StoreAccount
 
         $query->andFilterWhere(['like', 'sys_user.name', $this->user_id])
               ->andFilterWhere(['like', 'store_basic.store_name', $this->store_id])
+              ->andFilterWhere(['like', 'sys_user.phone', $this->phone])
               ->andFilterWhere(['like', 'property', $this->property]);
+
+        $dataProvider->sort->attributes['phone'] =
+            [
+                'desc' => ['phone' => SORT_DESC],
+                'asc' => ['phone' => SORT_ASC],
+            ];
 
         return $dataProvider;
     }

@@ -20,6 +20,7 @@ use Yii;
  */
 class StoreAccount extends \yii\db\ActiveRecord
 {
+    public $phone;
     /**
      * {@inheritdoc}
      */
@@ -36,7 +37,7 @@ class StoreAccount extends \yii\db\ActiveRecord
         return [
             [['user_id', 'work_number', 'store_id', 'role', 'status'], 'required'],
             [['user_id', 'work_number', 'store_id', 'role', 'status'], 'integer'],
-            [['备注'], 'string', 'max' => 50],
+            [['property'], 'string', 'max' => 50],
             [['user_id', 'work_number'], 'unique', 'targetAttribute' => ['user_id', 'work_number']],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'store_id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],

@@ -63,7 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'height' =>'30px',
                 ]],
             'value' => function($model){
-                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
+//                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
+                return "http://".$_SERVER['HTTP_HOST'].'/'.$model->product_image;
             },
             'header' => '缩略图',
             'mergeHeader' => true],
@@ -122,9 +123,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
                 'data' => ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中']
             ],
-//            'readonly' => function($model){
-//                return $model->product_status == '2';
-//            },
+            'readonly' => function($model){
+//                if($model->product_status == '3')
+                return $model->product_status == '3';
+            },
             ],
 
         ['class' => 'kartik\grid\ActionColumn',
