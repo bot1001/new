@@ -53,7 +53,7 @@ class StoreAccount extends \yii\db\ActiveRecord
             'user_id' => '用户',
             'work_number' => '工号',
             'store_id' => '关联商城',
-            'role' => '角色',
+            'role' => '职位',
             'status' => '状态',
             'property' => '备注',
         ];

@@ -25,6 +25,18 @@ class UserController extends Controller
         return $info; //返回数组
     }
 
+    //小程序短信修改密码
+    function actionPassword($account_id, $password)
+    {
+        $password = md5($password); //MD5处理密码
+        //更新旧密码
+        $result = UserAccount::updateAll(['password' => "$password"], 'account_id = :a_id', [':a_id' => "$account_id"]);
+        if($result){
+            return true;
+        }
+        return false;
+    }
+
     //裕家人小程序修改密码
     function actionChange($account_id, $old_p, $new_p)
     {

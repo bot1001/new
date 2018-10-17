@@ -24,11 +24,28 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'kartik\grid\SerialColumn',
             'header' => '序<br />号'],
 
-        ['attribute' =>  'user_id'],
-        ['attribute' =>  'work_number'],
-        ['attribute' =>  'store_id'],
-        ['attribute' =>  'role'],
-        ['attribute' =>  'status'],
+        ['attribute' =>  'user_id',
+            'value' => 'user.name',
+            'contentOptions' => ['class' => 'text-left']],
+
+        ['attribute' =>  'work_number',
+            'contentOptions' => ['class' => 'text-left']],
+        ['attribute' =>  'store_id',
+            'value' => 'store.store_name',
+            'contentOptions' => ['class' => 'text-left']],
+
+        ['attribute' =>  'role',
+            'value' => function($model){
+                $date = ['1' => '店长', '2' => '管理员', 3=> '职员'];
+                return $date[$model->role];
+            }],
+
+        ['attribute' =>  'status',
+            'value' => function($model){
+                $date = ['0' => '禁用', '1' => '启用', '2' => '锁定', 3=> '其他'];
+                return $date[$model->status];
+            }],
+
         ['attribute' =>  'property'],
 
         ['class' => 'kartik\grid\ActionColumn',

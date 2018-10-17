@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\form\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -65,8 +65,9 @@ use kartik\form\ActiveForm;
         <div class="price"><?= $form->field($model, 'product_image')->widget('common\widgets\upload\FileUpload')->label(false) ?></div>
     </div>
 
-
-    <?= $form->field($model, 'product_introduction')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300', 'config' => '']])->label(false) ?>
+    <?= $form->field($model, 'product_introduction')->widget('kucha\ueditor\UEditor',['clientOptions' =>['initialFrameHeight' => '300', 'toolbars' => [
+        ['fullscreen', 'undo', 'redo', 'bold','imageScaleEnabled', 'autoClearEmptyNode', 'fontfamily', 'snapscreen', 'link', 'unlink', 'simpleupload', 'insertImage']
+    ]]])->label(false) ?>
 
     <div id="end">
         <?= $form->field($model, 'product_quantity')->input('number') ?>

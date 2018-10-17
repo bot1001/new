@@ -68,16 +68,25 @@ class Realestate extends \yii\db\ActiveRecord
             'owners_cellphone' => '手机号码',
             'phone' => '验证手机号码',
             'acreage' => '面积',
-            'finish' => '交付时间',
-            'decoration' => '装修时间',
+            'commencement' => '动工时间',
+            'inherit' => '交付时间',
+            'finish' => '封顶时间',
             'delivery' => '交房时间',
-            'inherit' => 'Inherit',
+            'decoration' => '装修时间',
             'orientation' => '房屋朝向',
             'property' => 'Property',
-            'commencement' => 'Commencement',
+
         ];
     }
-	
+
+    //查询时间转换
+    function afterFind()
+    {
+        parent::afterFind(); // 继承父类查询
+        $this->finish = date('Y-m-d H:i:s', $this->finish);
+        $this->decoration = date('Y:m:d H:i:s', $this->decoration);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

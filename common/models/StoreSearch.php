@@ -42,9 +42,14 @@ class StoreSearch extends Store
      */
     public function search($params)
     {
+        $store_id = $_SESSION['community']; //提取商店ID
+
         $query = Store::find();
         $query->joinWith('taxonomy')
-            ->joinWith('province');
+            ->joinWith('province')
+        ->joinWith('account');
+
+        $query->andFilterWhere(['in', 'store_account.store_id', $store_id]);
 
         // add conditions that should always apply here
 

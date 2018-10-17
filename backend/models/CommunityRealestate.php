@@ -100,7 +100,7 @@ class CommunityRealestate extends \yii\db\ActiveRecord
             'owners_cellphone' => '手机',
 			'acreage' => '面积',
 			'finish' => '交付时间',
-			'inherit' => '交房时间', //多余字段
+			'inherit' => '封顶时间', //多余字段
 		    'decoration' => '装修时间',
 		    'commencement' => '开工时间',
 		    'delivery' => '交房时间',

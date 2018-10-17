@@ -75,7 +75,7 @@ class Store extends \yii\db\ActiveRecord
             'city_id' => '城市',
             'area_id' => '地区',
             'store_name' => '名称',
-            'community_id' => 'Community ID',
+            'community_id' => '可下单小区',
             'store_address' => '地址',
             'store_introduce' => '介绍',
             'store_phone' => '联系方式',
@@ -138,5 +138,10 @@ class Store extends \yii\db\ActiveRecord
     public function getTaxonomy()
     {
         return $this->hasOne(StoreTaxonomy::className(), ['id' => 'store_taxonomy']);
+    }
+
+    public function getAccount()
+    {
+        return $this->hasOne(StoreAccount::className(), ['store_id' => 'store_id']);
     }
 }

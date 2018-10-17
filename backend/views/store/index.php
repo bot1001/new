@@ -87,20 +87,20 @@ $this->params['breadcrumbs'][] = $this->title;
 //        ['attribute' => 'store_sort'],
         ['attribute' => 'store_status',
             'value' => function($model){
-                $date = [0 => '禁用', 1 => '启用'];
+                $date = [0 => '禁用', 1 => '启用', 2=>'待审核', 3 => '锁定'];
                 return $date[$model->store_status];
             },
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'formOptions' => ['action' => ['store/store']],
                 'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-                'data' => [0 => '禁用', 1 => '启用']
+                'data' => [0 => '禁用', 1 => '启用', 2=>'待审核', 3 => '锁定']
             ],
 //            'readonly' => function($model){
 //                return $model->store_status == '0';
 //            },
             'filterType' => GridView::FILTER_SELECT2,
-            'filter' => [0 => '禁用', 1 => '启用'],
+            'filter' => [0 => '禁用', 1 => '启用', 2=>'待审核', 3 => '锁定'],
             'filterInputOptions' => ['placeholder' => '请选择'],
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true]

@@ -57,6 +57,17 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'contentOptions' => ['class' => 'text-left']],
 
+        ['attribute' => 'product_image',
+            'format' => ['image',
+                [
+                    'height' =>'30px',
+                ]],
+            'value' => function($model){
+                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
+            },
+            'header' => '缩略图',
+            'mergeHeader' => true],
+
 //        ['attribute' => 'product_taxonomy'],
 //        ['attribute' => 'brand_id'],
         ['attribute' => 'market_price',
@@ -80,16 +91,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $model->product_status == '2';
             },
             'contentOptions' => ['class' => 'text-right']],
-        ['attribute' => 'product_image',
-            'format' => ['image',
-                [
-                        'height' =>'30px',
-                ]],
-            'value' => function($model){
-                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
-            },
-            'header' => '缩略图',
-            'mergeHeader' => true],
 
 //        ['attribute' => 'product_introduction'],
         ['attribute' => 'product_quantity',

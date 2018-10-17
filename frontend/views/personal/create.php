@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use kartik\depdrop\DepDrop;
-use kartik\select2\Select2;
 
 $this->title = '房屋添加';
 $this->params[ 'breadcrumbs' ][] = [ 'label' => '个人中心', 'url' => [ 'index' ] ];

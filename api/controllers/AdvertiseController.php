@@ -17,7 +17,7 @@ class AdvertiseController extends Controller
             ->one();
 
         $advertise = Advertising::find() //获取广告数据
-            ->select('ad_id as id, ad_title as title, ad_poster as poster, ad_excerpt as excerpt, ad_sort as sort')
+            ->select('ad_id as id, ad_poster as poster')
             ->andFilterWhere(['ad_publish_community' => "$comm"])
             ->andWhere(['ad_status' => '1'])
             ->orderBy('ad_sort ASC, ad_end_time DESC')

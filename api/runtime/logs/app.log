@@ -12507,3 +12507,2166 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1536394703.674
     'REQUEST_TIME' => 1536394703
 ]
+2018-10-17 08:44:07 [127.0.0.1][-][-][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: Controller class must extend from \yii\base\Controller. in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php:645
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('realestate')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('one')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#4 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#5 {main}
+2018-10-17 08:44:07 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '8971'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '53357'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=8971'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=8971'
+    'REQUEST_URI' => '/realestate/one?id=8971'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539737047.814
+    'REQUEST_TIME' => 1539737047
+]
+2018-10-17 08:47:31 [127.0.0.1][-][-][error][Error] Error: Call to undefined function api\controllers\where() in C:\Apache24\htdocs\new\api\controllers\RealestateController.php:20
+Stack trace:
+#0 [internal function]: api\controllers\RealestateController->actionOne('8971')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#7 {main}
+2018-10-17 08:47:31 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '8971'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '53653'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=8971'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=8971'
+    'REQUEST_URI' => '/realestate/one?id=8971'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539737250.986
+    'REQUEST_TIME' => 1539737250
+]
+2018-10-17 09:16:55 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected 'fnction' (T_STRING), expecting function (T_FUNCTION) or const (T_CONST) in C:\Apache24\htdocs\new\common\models\Realestate.php:93
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('common\\models\\R...')
+#1 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(20): spl_autoload_call('common\\models\\R...')
+#2 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#9 {main}
+2018-10-17 09:16:55 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56279'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739015.384
+    'REQUEST_TIME' => 1539739015
+]
+2018-10-17 09:21:46 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owneres_phone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.owneres_phone' in 'field list'
+)
+
+2018-10-17 09:21:46 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56718'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739306.725
+    'REQUEST_TIME' => 1539739306
+]
+2018-10-17 09:22:14 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owneres_phone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.owneres_phone' in 'field list'
+)
+
+2018-10-17 09:22:14 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56760'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739334.641
+    'REQUEST_TIME' => 1539739334
+]
+2018-10-17 09:22:46 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owneres_phone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.owneres_phone' in 'field list'
+)
+
+2018-10-17 09:22:46 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56807'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739365.988
+    'REQUEST_TIME' => 1539739365
+]
+2018-10-17 09:23:46 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_phone' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owneres_phone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.owneres_phone' in 'field list'
+)
+
+2018-10-17 09:23:46 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56906'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739426.564
+    'REQUEST_TIME' => 1539739426
+]
+2018-10-17 09:24:12 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_cellphone' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.owneres_cellphone' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owneres_cellphone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.owneres_cellphone' in 'field list'
+)
+
+2018-10-17 09:24:12 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56944'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739452.728
+    'REQUEST_TIME' => 1539739452
+]
+2018-10-17 09:24:34 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.commentcement' in 'field list' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'community_realestate.commentcement' in 'field list'
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number) as number, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owners_cellphone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.finish), from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.decoration) as decoration, from_unixtime(community_realestate.commentcement) as commentcement, from_unixtime(community_realestate.delivery) as delivery FROM `community_realestate` inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'community_realestate.commentcement' in 'field list'
+)
+
+2018-10-17 09:24:34 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '56978'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539739474.84
+    'REQUEST_TIME' => 1539739474
+]
+2018-10-17 09:34:54 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 1 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 1
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number, `'单元')` AS `number`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owners_cellphone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.commencement) as commentcement, from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.finish) as finish, from_unixtime(community_realestate.delivery) as delivery, from_unixtime(community_realestate.decoration) as decoration, `community_realestate`.`orientation`, community_realestate.property')
+            ->from('community_realestate inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 1
+)
+
+2018-10-17 09:34:54 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58070'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740094.595
+    'REQUEST_TIME' => 1539740094
+]
+2018-10-17 09:35:35 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')` AS `number`, `community_realestate`.`room_name` AS `room`, `community_real' at line 1 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')` AS `number`, `community_realestate`.`room_name` AS `room`, `community_real' at line 1
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number, `'`.``.``.`')` AS `number`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owners_cellphone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.commencement) as commentcement, from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.finish) as finish, from_unixtime(community_realestate.delivery) as delivery, from_unixtime(community_realestate.decoration) as decoration, `community_realestate`.`orientation`, community_realestate.property')
+            ->from('community_realestate inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')` AS `number`, `community_realestate`.`room_name` AS `room`, `community_real' at line 1
+)
+
+2018-10-17 09:35:35 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58132'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740135.719
+    'REQUEST_TIME' => 1539740135
+]
+2018-10-17 09:36:15 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`own' at line 1 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`own' at line 1
+The SQL being executed was: SELECT `community_basic`.`community_name` AS `community`, `community_building`.`building_name` AS `building`, concat(community_realestate.room_number, `'`.``.``.`')`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`owners_name` AS `name`, `community_realestate`.`owners_cellphone` AS `phone`, `community_realestate`.`acreage`, from_unixtime(community_realestate.commencement) as commentcement, from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.finish) as finish, from_unixtime(community_realestate.delivery) as delivery, from_unixtime(community_realestate.decoration) as decoration, `community_realestate`.`orientation`, community_realestate.property')
+            ->from('community_realestate inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT `communi...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT `communi...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`')`, `community_realestate`.`room_name` AS `room`, `community_realestate`.`own' at line 1
+)
+
+2018-10-17 09:36:15 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58204'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740175.387
+    'REQUEST_TIME' => 1539740175
+]
+2018-10-17 09:36:37 [127.0.0.1][-][-][error][yii\db\Exception] PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 4 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php:1258
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1258): PDOStatement->execute()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT communit...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+
+Next yii\db\Exception: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 4
+The SQL being executed was: SELECT community_basic.community_name as community, community_building.building_name as building, concat(community_realestate.room_number, '...') as number, community_realestate.room_name as room,
+            community_realestate.owners_name as name, community_realestate.owners_cellphone as phone, community_realestate.acreage, from_unixtime(community_realestate.commencement) as commentcement,
+            from_unixtime(community_realestate.inherit) as inherit, from_unixtime(community_realestate.finish) as finish, from_unixtime(community_realestate.delivery) as delivery, 
+            from_unixtime(community_realestate.decoration) as decoration, community_realestate.orientation, community_realestate.property')
+            ->from('community_realestate inner join `community_basic` ON community_basic.community_id = community_realestate.community_id inner join `community_building` ON community_building.building_id = community_realestate.building_id WHERE `realestate_id`='5453' in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Schema.php:664
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1263): yii\db\Schema->convertException(Object(PDOException), 'SELECT communit...')
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(1148): yii\db\Command->internalExecute('SELECT communit...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Command.php(413): yii\db\Command->queryInternal('fetch', NULL)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\db\Query.php(274): yii\db\Command->queryOne()
+#4 C:\Apache24\htdocs\new\api\controllers\RealestateController.php(30): yii\db\Query->one()
+#5 [internal function]: api\controllers\RealestateController->actionOne('5453')
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#9 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#10 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#12 {main}
+Additional Information:
+Array
+(
+    [0] => 42000
+    [1] => 1064
+    [2] => You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'community_realestate inner join `community_basic` ON community_basic.community_i' at line 4
+)
+
+2018-10-17 09:36:37 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58251'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740197.485
+    'REQUEST_TIME' => 1539740197
+]
+2018-10-17 09:44:30 [127.0.0.1][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Response content must not be an array. in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Response.php:1057
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Response.php(337): yii\web\Response->prepare()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(392): yii\web\Response->send()
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+2018-10-17 09:44:30 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58953'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740670.759
+    'REQUEST_TIME' => 1539740670
+]
+2018-10-17 09:44:43 [127.0.0.1][-][-][error][yii\base\InvalidArgumentException] yii\base\InvalidArgumentException: Response content must not be an array. in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Response.php:1057
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Response.php(337): yii\web\Response->prepare()
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(392): yii\web\Response->send()
+#2 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#3 {main}
+2018-10-17 09:44:43 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '58976'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539740683.086
+    'REQUEST_TIME' => 1539740683
+]
+2018-10-17 09:52:23 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) in C:\Apache24\htdocs\new\api\controllers\RealestateController.php:62
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('api\\controllers...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('realestate')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('one')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-10-17 09:52:23 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '59839'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741143.508
+    'REQUEST_TIME' => 1539741143
+]
+2018-10-17 09:52:37 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) in C:\Apache24\htdocs\new\api\controllers\RealestateController.php:62
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('api\\controllers...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('realestate')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('one')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-10-17 09:52:37 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '59851'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741157.649
+    'REQUEST_TIME' => 1539741157
+]
+2018-10-17 09:52:57 [127.0.0.1][-][-][error][ParseError] ParseError: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) in C:\Apache24\htdocs\new\api\controllers\RealestateController.php:62
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('api\\controllers...')
+#1 [internal function]: spl_autoload_call('api\\controllers...')
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(637): class_exists('api\\controllers...')
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(596): yii\base\Module->createControllerByID('realestate')
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(522): yii\base\Module->createController('one')
+#5 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#6 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#8 {main}
+2018-10-17 09:52:57 [127.0.0.1][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'api.yuda.com'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => 'api.yuda.com'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '59857'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741177.13
+    'REQUEST_TIME' => 1539741177
+]
+2018-10-17 09:56:29 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 09:56:29 [192.168.172.84][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '59963'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741389.855
+    'REQUEST_TIME' => 1539741389
+]
+2018-10-17 10:05:40 [192.168.172.84][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：realestate in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('one', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('realestate/one', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-10-17 10:05:40 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:05:40 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:05:40 [192.168.172.84][-][-][info][application] $_GET = [
+    'id' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60104'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'id=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=5453'
+    'REQUEST_URI' => '/realestate/one?id=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741939.987
+    'REQUEST_TIME' => 1539741939
+]
+2018-10-17 10:05:46 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:05:46 [192.168.172.84][-][-][info][application] $_GET = [
+    'realestate' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60106'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'realestate=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=5453'
+    'REQUEST_URI' => '/realestate/one?realestate=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539741946.157
+    'REQUEST_TIME' => 1539741946
+]
+2018-10-17 10:13:06 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:13:06 [192.168.172.84][-][-][info][application] $_GET = [
+    'realestate' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60173'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'realestate=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=5453'
+    'REQUEST_URI' => '/realestate/one?realestate=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539742386.339
+    'REQUEST_TIME' => 1539742386
+]
+2018-10-17 10:14:50 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:14:49 [192.168.172.84][-][-][info][application] $_GET = [
+    'realestate' => '5453'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'realestate/one'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60188'
+    'REDIRECT_URL' => '/realestate/one'
+    'REDIRECT_QUERY_STRING' => 'realestate=5453'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'realestate=5453'
+    'REQUEST_URI' => '/realestate/one?realestate=5453'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539742489.946
+    'REQUEST_TIME' => 1539742489
+]
+2018-10-17 10:27:30 [192.168.172.84][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：old_p, new_p in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/change', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-10-17 10:27:30 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:27:30 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:27:30 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => '$account_id'
+    'password' => '$password'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_USER_AGENT' => 'Microsoft Office Excel 2014'
+    'HTTP_X_OFFICE_MAJOR_VERSION' => '16'
+    'HTTP_X_MS_COOKIEURI_REQUESTED' => 't'
+    'HTTP_X_FEATUREVERSION' => '1'
+    'HTTP_ACCEPT_AUTH' => 'badger,Wlid1.1,Bearer'
+    'HTTP_HOST' => '192.168.172.84'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60296'
+    'REDIRECT_URL' => '/user/change'
+    'REDIRECT_QUERY_STRING' => 'account_id=$account_id&password=$password'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'HEAD'
+    'QUERY_STRING' => 'account_id=$account_id&password=$password'
+    'REQUEST_URI' => '/user/change?account_id=$account_id&password=$password'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743250.072
+    'REQUEST_TIME' => 1539743250
+]
+2018-10-17 10:27:30 [192.168.172.84][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：old_p, new_p in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/change', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-10-17 10:27:30 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:27:30 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:27:30 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => '$account_id'
+    'password' => '$password'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E; ms-office)'
+    'HTTP_UA_CPU' => 'AMD64'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '60297'
+    'REDIRECT_URL' => '/user/change'
+    'REDIRECT_QUERY_STRING' => 'account_id=$account_id&password=$password'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=$account_id&password=$password'
+    'REQUEST_URI' => '/user/change?account_id=$account_id&password=$password'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743250.192
+    'REQUEST_TIME' => 1539743250
+]
+2018-10-17 10:36:57 [192.168.172.84][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：old_p, new_p in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/change', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-10-17 10:36:57 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:36:57 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:36:57 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61448'
+    'REDIRECT_URL' => '/user/change'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/change?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743817.084
+    'REQUEST_TIME' => 1539743817
+]
+2018-10-17 10:37:06 [192.168.172.84][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: user/password in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('password', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/password', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-10-17 10:37:06 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:37:06 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:37:06 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/password'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61468'
+    'REDIRECT_URL' => '/user/password'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/password?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743826.524
+    'REQUEST_TIME' => 1539743826
+]
+2018-10-17 10:37:45 [192.168.172.84][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: user/password in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('password', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/password', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-10-17 10:37:45 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:37:45 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:37:45 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/password'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61507'
+    'REDIRECT_URL' => '/user/password'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/password?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743865.135
+    'REQUEST_TIME' => 1539743865
+]
+2018-10-17 10:38:47 [192.168.172.84][-][-][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: 缺少参数：old_p, new_p in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Controller.php:149
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\InlineAction.php(51): yii\web\Controller->bindActionParams(Object(yii\base\InlineAction), Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php(157): yii\base\InlineAction->runWithParams(Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('change', Array)
+#3 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/change', Array)
+#4 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#5 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#6 {main}
+2018-10-17 10:38:47 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:38:47 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:38:47 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/change'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61560'
+    'REDIRECT_URL' => '/user/change'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/change?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743927.125
+    'REQUEST_TIME' => 1539743927
+]
+2018-10-17 10:38:55 [192.168.172.84][-][-][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: user/password in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Controller.php:128
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Module.php(528): yii\base\Controller->runAction('password', Array)
+#1 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction('user/password', Array)
+#2 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#3 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: 页面未找到。 in C:\Apache24\htdocs\new\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\Apache24\htdocs\new\vendor\yiisoft\yii2\base\Application.php(386): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\new\api\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2018-10-17 10:38:55 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:38:55 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:38:55 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/password'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61565'
+    'REDIRECT_URL' => '/user/password'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/password?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743935.944
+    'REQUEST_TIME' => 1539743935
+]
+2018-10-17 10:39:11 [192.168.172.84][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 192.168.172.84
+2018-10-17 10:39:11 [192.168.172.84][-][-][info][application] $_GET = [
+    'account_id' => 'a478a660a55f864448fd28e3ea2ffc6c'
+    'password' => '1234567'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'REDIRECT_PATH_INFO' => 'user/password'
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => '192.168.172.84'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => 'C:\\Program Files\\Java\\jdk1.8.0_91\\bin;C:\\Program Files\\Java\\jdk1.8.0_91\\jre\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\wamp\\bin\\php\\php5.6.25;C:\\Apache24\\bin;C:\\php;C:\\composer;C:\\ProgramData\\ComposerSetup\\bin;C:\\windows\\System32\\OpenSSH\\;E:\\Android\\android-sdk;E:\\Android\\android-sdk\\platform-tools;C:\\Program Files\\Git\\cmd;C:\\windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps'
+    'SystemRoot' => 'C:\\windows'
+    'COMSPEC' => 'C:\\windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.29 (Win64) PHP/7.1.4'
+    'SERVER_NAME' => '192.168.172.84'
+    'SERVER_ADDR' => '192.168.172.84'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '192.168.172.84'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs/new/api/web'
+    'SERVER_ADMIN' => '8052935015@qq.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/new/api/web/index.php'
+    'REMOTE_PORT' => '61569'
+    'REDIRECT_URL' => '/user/password'
+    'REDIRECT_QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'REQUEST_URI' => '/user/password?account_id=a478a660a55f864448fd28e3ea2ffc6c&password=1234567'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1539743951.333
+    'REQUEST_TIME' => 1539743951
+]

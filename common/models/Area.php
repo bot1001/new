@@ -67,7 +67,7 @@ class Area extends \yii\db\ActiveRecord
 			->select('area_name, id')
 			->where(['area_parent_id' => '0'])
 			->indexBy('id')
-			->orderBy('id DESC')
+			->orderBy('id ASC')
 			->column();
 		return $province;
 	}

@@ -18,8 +18,8 @@ class StoreAccountSearch extends StoreAccount
     public function rules()
     {
         return [
-            [['id', 'user_id', 'work_number', 'store_id', 'role', 'status'], 'integer'],
-            [['property'], 'safe'],
+            [['id', 'work_number', 'role', 'status'], 'integer'],
+            [['user_id','property', 'store_id'], 'safe'],
         ];
     }
 
@@ -42,6 +42,8 @@ class StoreAccountSearch extends StoreAccount
     public function search($params)
     {
         $query = StoreAccount::find();
+        $query->joinWith('user')
+        ->joinWith('store');
 
         // add conditions that should always apply here
 
@@ -60,14 +62,14 @@ class StoreAccountSearch extends StoreAccount
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'work_number' => $this->work_number,
-            'store_id' => $this->store_id,
             'role' => $this->role,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'property', $this->property]);
+        $query->andFilterWhere(['like', 'sys_user.name', $this->user_id])
+              ->andFilterWhere(['like', 'store_basic.store_name', $this->store_id])
+              ->andFilterWhere(['like', 'property', $this->property]);
 
         return $dataProvider;
     }

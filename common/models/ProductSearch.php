@@ -2,10 +2,8 @@
 
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Product;
 
 /**
  * ProductSearch represents the model behind the search form of `common\models\Product`.
@@ -47,8 +45,10 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
+        $store_id = $_SESSION['community'];
+
         $query = Product::find();
-        $query -> joinWith('store');
+        $query -> joinWith('store')->where(['in', 'product_basic.store_id', $store_id]);
 
         // add conditions that should always apply here
 

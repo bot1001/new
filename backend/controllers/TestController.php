@@ -100,11 +100,12 @@ class TestController extends \yii\web\Controller
         $manager = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id); //获取当前用户角色信息
         $role = Yii::$app->authManager->getRole( 'admin' ); //获取指定角色信息
         $childAll = Yii::$app->authManager->getChildren( $role->name );
+        $Role = array_column($_SESSION['user'], 'role'); //提取用户角色
 
         echo '<pre />';
-//        foreach($manager as $key => $m){
-            print_r($role);
-//        }
+//        print_r($role);
+//        print_r($manager);
+        print_r($_SESSION);
     }
 
     function actionTest()
