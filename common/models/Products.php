@@ -62,4 +62,19 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Order::className(), ['order_id' => 'order_id']);
     }
+
+    public function getStore()
+    {
+        return $this->hasOne(Store::className(), ['store_id' => 'store_id']);
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['product_id' => 'product_id']);
+    }
+
+    function getAddress()
+    {
+        return $this->hasOne(OrderAddress::className(), ['order_id' => 'order_id']);
+    }
 }

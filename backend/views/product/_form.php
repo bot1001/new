@@ -19,6 +19,15 @@ use kartik\form\ActiveForm;
     .center{
         text-align: center;
     }
+    #title{
+        display: flex;
+    }
+    .title{
+        margin-left: -3%;
+    }
+    .per_upload_img{
+        border-radius: 10px;
+    }
     #product-product_name, #product-product_subhead, #product-brand_id, #product-product_taxonomy, #product-product_price, #product-product_quantity, #product-market_price{
         border-radius: 5px;
     }
@@ -34,18 +43,15 @@ use kartik\form\ActiveForm;
     <div class="main">
         <?php $form = ActiveForm::begin(); ?>
 
-        <div class="row">
-            <div class="col-lg-4"><?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'placeHolder' => '标题'])->label(false) ?></div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-4"><?= $form->field($model, 'product_subhead')->textInput(['maxlength' => true, 'placeHolder' => '副标题'])->label(false) ?></div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-4"><?= $form->field($model, 'brand_id')->textInput(['maxlength' => true, 'placeHolder' => '品牌'])->label(false) ?></div>
-            <div class="col-lg-3"><?= $form->field($model, 'product_taxonomy')->textInput(['maxlength' => true, 'placeHolder' => '系列'])->label(false) ?></div>
-            <div class="col-lg-3"><?= $form->field($model, 'product_image')->widget('common\widgets\upload\FileUpload')->label(false) ?></div>
+        <div id="title">
+            <div class="col-lg-6 title">
+                <div class="col-lg-8"><?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'placeHolder' => '标题'])->label(false) ?></div>
+                <div class="col-lg-12"><?= $form->field($model, 'product_subhead')->textInput(['maxlength' => true, 'placeHolder' => '副标题'])->label(false) ?></div>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <div class="col-lg-3"><?= $form->field($model, 'product_image')->widget('common\widgets\upload\FileUpload')->label(false) ?></div>
+            </div>
         </div>
 
         <div class="row">
@@ -57,6 +63,11 @@ use kartik\form\ActiveForm;
                     ]
                 )->label(false) ?>
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4"><?= $form->field($model, 'brand_id')->textInput(['maxlength' => true, 'placeHolder' => '品牌'])->label(false) ?></div>
+            <div class="col-lg-3"><?= $form->field($model, 'product_taxonomy')->textInput(['maxlength' => true, 'placeHolder' => '系列'])->label(false) ?></div>
         </div>
 
         <div class="row">

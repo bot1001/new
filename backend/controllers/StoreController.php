@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\ProductsSearch;
 use kartik\grid\EditableColumnAction;
 use Yii;
 use common\models\Store;
@@ -59,6 +60,18 @@ class StoreController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'taxonomy' => $taxonomy
+        ]);
+    }
+
+    //订单列表
+    function actionOrder()
+    {
+        $search = new ProductsSearch(); //实例化搜索模型
+        $dataProvider = $search->search(Yii::$app->request->queryParams);
+
+        return $this->render('order',[
+            'dataProvider' => $dataProvider,
+            'search' => $search
         ]);
     }
 

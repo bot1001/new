@@ -122,10 +122,10 @@ class OrderBasic extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAccount()
-    {
-        return $this->hasOne(UserAccount::className(), ['account_id' => 'account_id']);
-    }
+//    public function getAccount()
+//    {
+//        return $this->hasOne(UserAccount::className(), ['account_id' => 'account_id']);
+//    }
 
     /**
      * @return \yii\db\ActiveQuery
