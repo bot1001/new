@@ -18,6 +18,16 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
+    //自定义变量
+    public $phone;
+//    public $address;
+    public $add;
+    public $name;
+    public $create_time;
+    public $payment_time;
+    public $status;
+    public $amount;
+
     /**
      * {@inheritdoc}
      */
@@ -54,7 +64,7 @@ class Products extends \yii\db\ActiveRecord
             'store_id' => '商店编号',
             'product_name' => '名称',
             'sale' => '优惠',
-            'product_price' => '金额',
+            'product_price' => '单价',
         ];
     }
 

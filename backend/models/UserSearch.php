@@ -122,8 +122,7 @@ class UserSearch extends UserAccount
 			->andFilterWhere(['like','room_name',$this->getAttribute('room_name')])
 			//->andFilterWhere(['like','reg_time',$this->getAttribute('reg_time')])
 			->andFilterWhere(['like','real_name',$this->getAttribute('real_name')])
-			->andFilterWhere(['like','name',$this->getAttribute('name')])
-			;
+			->andFilterWhere(['like','name',$this->getAttribute('name')])			;
 
 			return $dataProvider;
     }
