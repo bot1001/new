@@ -16,20 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
            'header' => '序<br />号'],
 
        ['attribute' => 'order_id'],
-       ['attribute' => 'product_name',
-           'contentOptions' => ['class' => 'text-left']],
 
-       ['attribute' => 'add',
-           'value' => 'address.address',
+       ['attribute' => 'address',
            'contentOptions' => ['class' => 'text-left'],
            'label' => '地址'],
 
-       ['attribute' => 'phone',
-           'value' => 'address.mobile_phone',
+       ['attribute' => 'mobile_phone',
            'label' => '手机号码'],
 
        ['attribute' => 'name',
-           'value' => 'address.name',
            'contentOptions' => ['class' => 'text-left'],
            'label' => '下单人'],
 
@@ -49,11 +44,13 @@ $this->params['breadcrumbs'][] = $this->title;
            'value' => 'order.status',
            'label' => '状态'],
 
-       ['attribute' => 'product_price',
-           'contentOptions' => ['class' => 'text-right']],
-
-       ['attribute' => 'product_quantity',
-           'contentOptions' => ['class' => 'text-right']],
+//       ['attribute' => 'price',
+//           'value'=> 'products.product_price',
+//           'contentOptions' => ['class' => 'text-right']],
+//
+//       ['attribute' => 'price',
+//           'value'=> 'products.product_quantity',
+//           'contentOptions' => ['class' => 'text-right']],
 
        ['attribute' => 'amount',
            'value' => 'order.order_amount',
@@ -61,7 +58,14 @@ $this->params['breadcrumbs'][] = $this->title;
            'label' => '合计'],
 
        ['class' => 'kartik\grid\checkBoxColumn'],
+
        ['class' => 'kartik\grid\ActionColumn',
+           'template' => '{view}{update}',
+           'buttons' => [
+                   'view' => function($model, $url, $key){
+                       return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['store-view', 'id' => $key]);
+                   }
+           ],
            'header' => '操<br />作'],
    ];
    echo GridView::widget([

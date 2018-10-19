@@ -19,6 +19,12 @@ use Yii;
  */
 class OrderAddress extends \yii\db\ActiveRecord
 {
+    //自定义变量
+    public $create_time;
+    public $payment_time;
+    public $status;
+    public $amount;
+    public $description;
     /**
      * {@inheritdoc}
      */
@@ -49,19 +55,24 @@ class OrderAddress extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_id' => 'Order ID',
-            'province_id' => 'Province ID',
-            'city_id' => 'City ID',
-            'area_id' => 'Area ID',
-            'address' => 'Address',
-            'zipcode' => 'Zipcode',
-            'mobile_phone' => 'Mobile Phone',
-            'name' => 'Name',
+            'order_id' => '订单号',
+            'province_id' => '省份',
+            'city_id' => '城市',
+            'area_id' => '地区',
+            'address' => '地址',
+            'zipcode' => '邮编',
+            'mobile_phone' => '联系方式',
+            'name' => '下单人',
         ];
     }
 	
 	public function getOrder() 
 	{ 
 	    return $this->hasOne(Order::className(), ['order_id' => 'order_id']);
-	} 
+	}
+
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['order_id' => 'order_id']);
+    }
 }

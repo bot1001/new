@@ -18,16 +18,6 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
-    //自定义变量
-    public $phone;
-//    public $address;
-    public $add;
-    public $name;
-    public $create_time;
-    public $payment_time;
-    public $status;
-    public $amount;
-
     /**
      * {@inheritdoc}
      */

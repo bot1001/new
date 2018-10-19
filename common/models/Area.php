@@ -84,4 +84,15 @@ class Area extends \yii\db\ActiveRecord
 
         return $city;
     }
+
+    //地区查询
+    static function getOne($id)
+    {
+        $area = self::find()
+            ->select('area_name')
+            ->where(['id' => $id])
+            ->asArray()
+            ->column();
+            return $area['0'];
+    }
 }

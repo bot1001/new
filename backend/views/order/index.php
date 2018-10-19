@@ -152,10 +152,6 @@ $this->title = '订单管理';
 
 		[ 'attribute' => 'create_time',
 		  'mergeHeader' => true,
-		  'value' =>
-			    function ( $model ) {
-			    	return date( 'Y-m-d H:i:s', $model->create_time ); //主要通过此种方式实现
-			    },
 		 'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
          'filterWidgetOptions'=>[
              'pluginOptions'=>[
@@ -192,7 +188,7 @@ $this->title = '订单管理';
 		        if(empty($model->payment_time)){
 		        	return '';
 		        }else{
-		                return date('Y-m-d H:i:s', $model->payment_time);
+		            return date('Y-m-d H:i:s', $model->payment_time);
 		        }
 	        },
 		    'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，

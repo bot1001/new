@@ -2,11 +2,15 @@
 
 namespace backend\controllers;
 
-use common\models\ProductsSearch;
+use common\models\AddressSearch;
+use common\models\Area;
+use common\models\OrderAddress;
+use common\models\Products;
 use kartik\grid\EditableColumnAction;
 use Yii;
 use common\models\Store;
 use common\models\StoreSearch;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -66,7 +70,7 @@ class StoreController extends Controller
     //订单列表
     function actionOrder()
     {
-        $search = new ProductsSearch(); //实例化搜索模型
+        $search = new AddressSearch(); //实例化搜索模型
         $dataProvider = $search->search(Yii::$app->request->queryParams);
 
         return $this->render('order',[
@@ -85,6 +89,44 @@ class StoreController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    //订单详情预览
+    function actionStoreView($id)
+    {
+        $order = OrderAddress::find() //查询订单信息
+            ->joinWith('order')
+            ->where(['order_basic.order_type' => '2', 'order_relationship_address.id' => "$id"])
+            ->asArray()
+            ->one();
+
+        $province = Area::getOne($order['province_id']);
+        $city = Area::getOne($order['city_id']);
+        $area = Area::getOne($order['area_id']);
+
+        $address = $province.$city.$area.$order['address']; //拼接地址
+        $phone = $order['mobile_phone'];
+        $name = $order['name'];
+        $order_id = $order['order_id']; //订单编号
+        $order_info = $order['order']; //订单信息
+
+        $url = 'http://'.$_SERVER['HTTP_HOST'];
+        $product = (new Query())
+            ->select(["order_products.product_quantity as count, order_products.product_price as price,
+            product_basic.product_name as name, product_basic.product_subhead as header, concat('$url',product_basic.product_image) as image"])
+            ->from('order_products')
+            ->join('inner join', 'product_basic', 'product_basic.product_id = order_products.product_id')
+            ->where(['order_products.order_id' => "$order_id"])
+            ->all();
+
+        return $this->render('store-view',[
+            'address' => $address,
+            'phone' => $phone,
+            'name' => $name,
+            'order_id' => $order_id,
+            'order_info' => $order_info,
+            'product' => $product
         ]);
     }
 
