@@ -55,7 +55,7 @@ use mdm\admin\components\Helper;
 ?>
 
 <!-- 页面自动更新代码 每5分钟刷新一次页面-->
-<meta http-equiv='refresh' content='300'/>
+<!--<meta http-equiv='refresh' content='300'/>-->
 
 <style>
 	l{
