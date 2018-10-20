@@ -92,7 +92,8 @@ return [
 	        'test/*', //测试功能类
 	        'user-invoice/add', //自动生成费项目
             'auto/*', //自动发送短信
-            'area/*' //地区
+            'area/*', //地区
+            'store/register'
         ]
     ],
 	 

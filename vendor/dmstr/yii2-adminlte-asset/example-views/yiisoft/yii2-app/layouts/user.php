@@ -48,7 +48,7 @@ use yii\helpers\Html;
         <div class="pull-right">
             <?= Html::a(
                 '退出',
-                '/site/logout',
+                '/login/logout',
                 ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
             ) ?>
         </div>

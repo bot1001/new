@@ -19,8 +19,8 @@ class StoreSearch extends Store
     {
         return [
             [['store_id', 'province_id', 'city_id', 'area_id', 'add_time', 'is_certificate', 'store_sort', 'type', 'store_taxonomy'], 'integer'],
-            [['store_cover', 'store_name', 'community_id', 'store_address', 'store_introduce', 'store_phone', 'store_status'], 'safe'],
-            [['store_longitude', 'store_latitude'], 'number'],
+            [['store_name', 'store_phone', 'store_cover', 'person', 'store_address', 'store_introduce', 'store_status'], 'safe'],
+            [['store_code', 'store_people'], 'number'],
         ];
     }
 
@@ -47,7 +47,7 @@ class StoreSearch extends Store
         $query = Store::find();
         $query->joinWith('taxonomy')
             ->joinWith('province')
-        ->joinWith('account');
+            ->joinWith('account');
 
         $query->andFilterWhere(['in', 'store_account.store_id', $store_id]);
 
@@ -71,8 +71,8 @@ class StoreSearch extends Store
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
-            'store_longitude' => $this->store_longitude,
-            'store_latitude' => $this->store_latitude,
+            'store_code' => $this->store_code,
+            'store_people' => $this->store_people,
             'add_time' => $this->add_time,
             'is_certificate' => $this->is_certificate,
             'store_sort' => $this->store_sort,
@@ -80,12 +80,12 @@ class StoreSearch extends Store
             'store_taxonomy' => $this->store_taxonomy,
         ]);
 
-        $query->andFilterWhere(['like', 'store_cover', $this->store_cover])
-            ->andFilterWhere(['like', 'store_name', $this->store_name])
-            ->andFilterWhere(['like', 'community_id', $this->community_id])
+        $query->andFilterWhere(['like', 'store_name', $this->store_name])
+            ->andFilterWhere(['like', 'store_phone', $this->store_phone])
+            ->andFilterWhere(['like', 'store_cover', $this->store_cover])
+            ->andFilterWhere(['like', 'person', $this->person])
             ->andFilterWhere(['like', 'store_address', $this->store_address])
             ->andFilterWhere(['like', 'store_introduce', $this->store_introduce])
-            ->andFilterWhere(['like', 'store_phone', $this->store_phone])
             ->andFilterWhere(['like', 'store_status', $this->store_status]);
 
         return $dataProvider;

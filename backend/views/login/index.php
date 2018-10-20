@@ -104,7 +104,7 @@ $this->title = '用户登录';
 
     <?php
     $form = ActiveForm::begin( [
-    	'id' => 'login-form-inline', 
+    	'id' => 'login-form-inline',
         'type' => ActiveForm::TYPE_INLINE
     ] );
     ?>
@@ -123,12 +123,13 @@ $this->title = '用户登录';
             <div class="lg"><?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?></div>
             <div class="remember"><?= $form->field($model, 'rememberMe')->checkbox() ?></div>
         </div>
+
         <div class="dropdown">
             <span class="glyphicon glyphicon-eye-open text-red"></span>
             <div class="dropdown-content">
                 <div id="content">
                     <div class="forget"><?= Html::a('忘记密码', '#', ['onclick' => 'forget()']) ?></div>
-                    <div class="register"><?= Html::a('商户注册', '#', ['onclick' => 'forget()', 'title' => '裕家人商家注册入口']) ?></div>
+                    <div class="register"><?= Html::a('商户注册', '/store/register', [ 'title' => '裕家人商家注册入口']) ?></div>
                 </div>
             </div>
         </div>

@@ -88,34 +88,6 @@ class SiteController extends Controller
 		
 		return true;
 	}
-	
-    public function actionLogin()
-    {
-		$this->layout = 'main1';
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-        /*Yii::$app->session->removeAll();
-        if(!isset(Yii::$app->session['user']['islogin'])){
-           $this->reditect(['site/login']);
-           Yii::$app->end();
-        }
-        $this->goback();*/
-        return $this->goHome();
-    }
 
     public function actionContact()
     {

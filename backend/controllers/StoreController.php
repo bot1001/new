@@ -130,6 +130,14 @@ class StoreController extends Controller
         ]);
     }
 
+    //商户注册
+    function actionRegister()
+    {
+        $this->layout = 'reg';
+
+        return $this->render('register');
+    }
+
     /**
      * Creates a new Store model.
      * If creation is successful, the browser will be redirected to the 'view' page.

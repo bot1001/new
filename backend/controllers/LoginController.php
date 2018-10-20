@@ -11,11 +11,11 @@ use app\models\CommunityBasic;
 
 class LoginController extends Controller
 {
-    //public $layout = 'main2';
-    
+    public $layout = 'login';//设置默认布局
+
     public function actionIndex()
     {
-		$this->layout = 'main1';
+		$this->layout = 'login';
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -46,9 +46,11 @@ class LoginController extends Controller
             'model' => $model,
         ]);
     }
-	//QQ登录
-	public function actionQQ()
-	{
-		
-	}
+
+    //退出登陆
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return $this->goHome();
+    }
 }

@@ -4,8 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
 
@@ -28,9 +27,8 @@ AppAsset::register($this);
 <style>
 	#div_m
 	{
-		background: url(image/bg.png);
+		background: url(<?= Url::toRoute('image/bg.png') ?>);
 		background-size: cover;
-		position: fix;
 		right: 0;
 		left: 0;
 		top: 0;
