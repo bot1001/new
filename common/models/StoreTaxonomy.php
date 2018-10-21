@@ -77,6 +77,18 @@ class StoreTaxonomy extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'creator']);
     }
 
+    //获取类别数组
+    static function T($type)
+    {
+        $taxonomy = self::find() //查询数据
+            ->select('name, id')
+            ->where(['type' => "$type"])
+            ->asArray()
+            ->all();
+
+        return $taxonomy;
+    }
+
     //获取类别
     static function Taxonomy($type)
     {

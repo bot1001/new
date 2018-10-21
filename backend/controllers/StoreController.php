@@ -79,6 +79,15 @@ class StoreController extends Controller
         ]);
     }
 
+    //裕家人商家注册
+    function actionPassword()
+    {
+        $this->layout = false;
+        $name = $_POST['name'];
+
+        return $this->render("$name");
+    }
+
     /**
      * Displays a single Store model.
      * @param integer $id

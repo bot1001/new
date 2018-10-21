@@ -93,7 +93,8 @@ return [
 	        'user-invoice/add', //自动生成费项目
             'auto/*', //自动发送短信
             'area/*', //地区
-            'store/register'
+            'store/register',
+            'store/*'
         ]
     ],
 	 

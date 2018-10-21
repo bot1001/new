@@ -74,6 +74,14 @@ AppAsset::register($this);
     .ready a:hover{
         color: #ececec;
     }
+    .main{
+        width: 100%;
+        min-height: 800px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.63);
+        position: relative;
+        top: 10px;
+    }
 </style>
 
 <body>
