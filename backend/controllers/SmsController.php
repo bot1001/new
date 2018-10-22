@@ -88,16 +88,16 @@ class SmsController extends Controller
 
         //短信发送
         $SmsParam = "{code:'$code'}"; //组合短信信息
-//        $r = \common\models\Sms::Send($name, $phone, $sms, $SmsParam); //调用发送短信类
-//
-//        if($r == '1') //发送成功返回验证码
-//        {
+        $r = \common\models\Sms::Send($name, $phone, $sms, $SmsParam); //调用发送短信类
+
+        if($r == '1') //发送成功返回验证码
+        {
             $code = ['code' => $code, 'timeStamp' => date(time())]; //组合返回信息
             $code = Json::encode($code);
             return $code;
-//        }
+        }
 
-        return false;
+        return '2';
     }
 
     /**

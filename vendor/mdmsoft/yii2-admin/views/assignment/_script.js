@@ -32,7 +32,7 @@ function search(target) {
     var q = $('.search[data-target="' + target + '"]').val();
 
     var groups = {
-        role: [$('<optgroup label="Roles">'), false],
+        role: [$('<optgroup label="角色">'), false],
         permission: [$('<optgroup label="Permission">'), false],
     };
     $.each(_opts.items[target], function (name, group) {

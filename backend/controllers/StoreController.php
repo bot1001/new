@@ -9,6 +9,7 @@ use common\models\OrderAddress;
 use common\models\User;
 use common\models\StoreAccount;
 use kartik\grid\EditableColumnAction;
+use mdm\admin\models\Assignment;
 use Yii;
 use common\models\Store;
 use common\models\StoreSearch;
@@ -81,15 +82,6 @@ class StoreController extends Controller
         ]);
     }
 
-    //裕家人商家注册步骤转跳连接
-    function actionPassword()
-    {
-        $this->layout = false;
-        $name = $_POST['name'];
-
-        return $this->render("$name");
-    }
-
     /**
      * Displays a single Store model.
      * @param integer $id
@@ -141,12 +133,21 @@ class StoreController extends Controller
         ]);
     }
 
-    //商户注册
+    //商户注册之注册页面
     function actionRegister()
     {
         $this->layout = 'reg';
 
         return $this->render('register');
+    }
+
+    //裕家人商家注册步骤转跳连接
+    function actionPassword()
+    {
+        $this->layout = false;
+        $name = $_POST['name'];
+
+        return $this->render("$name");
     }
 
     //裕家人商户注册之保存信息
@@ -192,10 +193,7 @@ class StoreController extends Controller
             $s = $store->save(); //保存数据
             $store_id = Yii::$app->db->getLastInsertId();
 
-            print_r($user_id);
-            print_r($store_id);
-
-            if($user && $s){
+            if($user && $s){ //如果成功添加用户账号和商城店铺
                 $storeAccount = new StoreAccount();//实例化模型
 
                 $storeAccount->user_id = $user_id;
@@ -206,8 +204,12 @@ class StoreController extends Controller
 
                 $reasult = $storeAccount->save(); //保存数据
 
-                if($reasult){
+                $role = new Assignment($id = $user_id); //保存用户角色
+                $success = $role->assign($items = ['商户']);
+
+                if($reasult && $success){
                     $transaction->commit();
+                    return true;
                 }
             }
             $transaction->rollback();//数据回滚
@@ -216,7 +218,7 @@ class StoreController extends Controller
             $transaction -> rollBack();
         }
 
-        return '路由参数设置正常';
+        return false;
     }
 
     //商户注册查询

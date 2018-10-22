@@ -49,7 +49,7 @@ class Store extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//          [['store_name', 'store_phone', 'store_cover', 'province_id', 'city_id', 'area_id', 'store_address', 'store_introduce', 'store_status', 'type'], 'required'],
+          [['store_name', 'store_phone', 'province_id', 'city_id', 'area_id', 'store_address', 'store_status', 'type'], 'required'],
               [['add_time'], function($model){
                 if ($this->hasErrors()) return false;
                 $datetime = $this->{$model};
@@ -62,9 +62,8 @@ class Store extends \yii\db\ActiveRecord
                 return true;
             }],
             [['province_id', 'city_id', 'area_id', 'add_time', 'is_certificate', 'store_sort', 'type', 'store_taxonomy', 'store_people'], 'integer'],
-            [['store_code'], 'number'],
             [['store_name', 'store_phone', 'store_address', 'store_status'], 'string', 'max' => 64],
-            [['store_cover'], 'string', 'max' => 300],
+            [['store_cover', 'store_code'], 'string', 'max' => 300],
             [['person'], 'string', 'max' => 128],
             [['store_introduce'], 'string', 'max' => 20000],
             [['area_id', 'store_name'], 'unique', 'targetAttribute' => ['area_id', 'store_name']],

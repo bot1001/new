@@ -11,9 +11,9 @@ class Sms extends \yii\db\ActiveRecord
     {
         $config = Yii::$app->params['sms']; //从配置文件中获取AppID和secretID
         //引用发送短信类
-        require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/RequestCheckUtil.php');
-        require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/TopClient.php');
-        require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/request/AlibabaAliqinFcSmsNumSendRequest.php');
+//        require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/RequestCheckUtil.php');
+        require_once(dirname(__FILE__).'/../../vendor/ali-sms/TopSDK.php');
+//        require_once(dirname(__FILE__).'/../../vendor/ali-sms/top/request/AlibabaAliqinFcSmsNumSendRequest.php');
 
         $c = new \TopClient();
         $RequestCheckUtil = new \RequestCheckUtil();

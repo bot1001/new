@@ -17,19 +17,6 @@ use yii\helpers\Html;
 </script>
 
 <style>
-    .re{
-        position: fixed;
-        top: 80%;
-        left: 50%;
-        margin: 0 0 0 0;
-        width: 150px;
-        height: 200px;
-    }
-    #re{
-        width: 150px;
-        height: 100px;
-    }
-
     .going{
         width: 300px;
         height: 100px;
@@ -48,8 +35,4 @@ use yii\helpers\Html;
 </style>
 <div class="going">
     <?= Html::a('注册成功,请点击登录', '/login') ?>
-</div>
-
-<div class="re">
-    <button onclick="ref()" id="re" class="btn-block">点击异步刷新</button>
 </div>

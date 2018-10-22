@@ -93,9 +93,11 @@ return [
 	        'user-invoice/add', //自动生成费项目
             'auto/*', //自动发送短信
             'area/*', //地区
-            'store/register',
-            'store/*',
-            'sms/send'
+            'store/register', //商户注册页面
+            'store/r', //商户注册页面转跳
+            'sms/send',//发送短信
+            'store/find', //查询用户手机
+            'store/password', //保存信息
         ]
     ],
 	 

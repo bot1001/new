@@ -170,7 +170,7 @@ $this->title = '商户注册';
             console.log(num)
         if(num == 0)
         {
-            clearInterval(Interval);
+            clearInterval(Interval); //清理定时器
             num = 61;
             document.getElementById('change').innerHTML =  '<button id="getcode" onclick="code()">重新获取</button>';
         }
@@ -179,7 +179,6 @@ $this->title = '商户注册';
     function code() {//获取验证码
         var phone = document.getElementById('phone');
         Phone = phone.value;
-        console.log(n_time);
 
         //接下来执行获取短信验证码程序
         if(Phone.length != 11){
@@ -190,17 +189,17 @@ $this->title = '商户注册';
             xhr.open('GET', '/sms/send?time='+n_time+'&phone='+Phone, true); //设置请求连接
             xhr.onload = function(){
                 var text = JSON.parse(this.responseText);
-                console.log(text);
                 if(text == '2'){
                    document.getElementById('p_phone').innerHTML = '验证码获取失败，请1分钟后再试';
                 }else{
                     Code = text.code;//将获取的验证码赋值给公共变量
                     n_time = text.timeStamp;//用户设备时间
                     document.getElementById('p_phone').innerHTML = '';
+                    document.getElementById('m').innerHTML = '<button class="btn-block" style="background: rgba(221, 0, 0, 0.53)" onclick="next()">下一步</button>';
                 }
             }
             xhr.send();
-            document.getElementById('m').innerHTML = '<button class="btn-block" style="background: rgba(221, 0, 0, 0.53)" onclick="next()">下一步</button>';
+
 
             //定时更新验证码发送后的时间
             Interval = setInterval(function () {
@@ -221,7 +220,8 @@ $this->title = '商户注册';
         }else if(!check){
             alert('请仔细阅读《裕家人服务条款》');
         }else{
-            $("#M").load("/store/password", {"name" : "reg_password"});
+            clearInterval(Interval); //清理定时器
+            $("#M").load("/store/password", {"name" : "reg_password"}); //加载用户名及密码页面
         }
     }
 </script>

@@ -66,6 +66,7 @@ use  yii\helpers\Url;
 
     function account() {
         var N = account_name.value;
+
         Name = N; //赋值到全局变量
         if(N.length < 2 || N.length > 16){
             document.getElementById('a_name').innerHTML = '用户名长度应在2到16位数区间';

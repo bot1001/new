@@ -16,7 +16,7 @@ $this->title = '用户登录';
 <style type="text/css">
 	.login{
 		width:400px;
-		height: 300px;
+		min-height: 300px;
         background-color: rgba(255,250,240,0.7);
 		#opacity: 0.8;
 		border-radius:15px;

@@ -14,20 +14,6 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
     .code{
         margin-top: 20px;
     }
-
-    .re{
-        position: fixed;
-        top: 60%;
-        left: 70%;
-        margin: 0 0 0 0;
-        width: 150px;
-        height: 100px;
-        background: lightsalmon;
-    }
-    #re{
-        width: 150px;
-        height: 100px;
-    }
 </style>
 
 <script>
@@ -129,6 +115,7 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
             xhr.onload = function(){
                 var text = this.responseText;
                 if(text == '1'){
+                    alert('注册成功！');
                     $("#M").load("/store/password", {"name" : "end"});
                 }else{
                     alert('注册失败，请检查对应的信息');
@@ -136,10 +123,6 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
             }
             xhr.send();
         }
-    }
-
-    function ref() {
-        $("#M").load("/store/password", {"name" : "reg_company"});
     }
 </script>
 
@@ -227,13 +210,9 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
 
         <div class="phone code">
             <div class="m" id="m">
-                <button class="btn-block" /*disabled*/ style="float: right" onclick="next_3()">下一步</button>
+                <button class="btn-block" style="background: rgba(221, 0, 0, 0.53)" onclick="next_3()">下一步</button>
             </div>
         </div>
-    </div>
-
-    <div class="re">
-        <button onclick="ref()" id="re" class="btn-block">点击异步刷新</button>
     </div>
 </div>
 

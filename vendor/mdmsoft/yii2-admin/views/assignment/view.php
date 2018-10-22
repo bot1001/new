@@ -36,26 +36,33 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
     <div class="row">
         <div class="col-sm-5">
             <input class="form-control search" data-target="available"
-                   placeholder="<?=Yii::t('rbac-admin', 'Search for available');?>">
+                   placeholder="<?=Yii::t('rbac-admin', '搜索可用路由');?>">
+
             <select multiple size="20" class="form-control list" data-target="available">
             </select>
         </div>
+
         <div class="col-sm-1">
             <br><br>
             <?=Html::a('&gt;&gt;' . $animateIcon, ['assign', 'id' => (string) $model->id], [
-    'class' => 'btn btn-success btn-assign',
-    'data-target' => 'available',
-    'title' => Yii::t('rbac-admin', 'Assign'),
-]);?><br><br>
+                    'class' => 'btn btn-success btn-assign',
+                    'data-target' => 'available',
+                    'title' => Yii::t('rbac-admin', 'Assign'),
+                ]);
+            ?>
+            <br><br>
+
             <?=Html::a('&lt;&lt;' . $animateIcon, ['revoke', 'id' => (string) $model->id], [
-    'class' => 'btn btn-danger btn-assign',
-    'data-target' => 'assigned',
-    'title' => Yii::t('rbac-admin', 'Remove'),
-]);?>
+                 'class' => 'btn btn-danger btn-assign',
+                 'data-target' => 'assigned',
+                 'title' => Yii::t('rbac-admin', 'Remove'),
+             ]);?>
         </div>
+
         <div class="col-sm-5">
             <input class="form-control search" data-target="assigned"
-                   placeholder="<?=Yii::t('rbac-admin', 'Search for assigned');?>">
+                   placeholder="<?=Yii::t('rbac-admin', '搜索已用路由');?>">
+
             <select multiple size="20" class="form-control list" data-target="assigned">
             </select>
         </div>
