@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use app\models\SysUser;
 use common\models\AddressSearch;
 use common\models\Area;
 use common\models\OrderAddress;
-use common\models\Products;
+use common\models\User;
+use common\models\StoreAccount;
 use kartik\grid\EditableColumnAction;
 use Yii;
 use common\models\Store;
@@ -79,7 +81,7 @@ class StoreController extends Controller
         ]);
     }
 
-    //裕家人商家注册
+    //裕家人商家注册步骤转跳连接
     function actionPassword()
     {
         $this->layout = false;
@@ -145,6 +147,91 @@ class StoreController extends Controller
         $this->layout = 'reg';
 
         return $this->render('register');
+    }
+
+    //裕家人商户注册之保存信息
+    function actionR($phone, $Name, $password, $type, $code, $name, $address, $tax, $count, $person, $qr)
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+            $sysUser = new SysUser(); //实例化模型
+
+            //块赋值
+            $sysUser->company = '';
+            $sysUser->real_name = $Name;
+            $sysUser->name = $Name;
+            $sysUser->phone = $phone;
+            $sysUser->salt = '2';
+            $sysUser->status = '1';
+            $sysUser->new_pd = md5($password);
+            $user = $sysUser->comment = '商户用户';
+
+            $s = $sysUser->save();//保存数据
+            $user_id = Yii::$app->db->getLastInsertID();
+
+            $store = new Store(); //实例化商城模型
+
+            $store->store_name = $name;
+            $store->store_phone = $phone;
+            $store->store_cover = '';
+            $store->province_id = '450000';
+            $store->city_id = '451300';
+            $store->area_id = '451302';
+            $store->person = $person;
+            $store->store_address = $address;
+            $store->store_introduce = '';
+            $store->store_code = $code;
+            $store->store_people = $count;
+            $store->add_time = date('Y-m-d H:i:s');
+            $store->is_certificate = '0';
+            $store->store_sort = '0';
+            $store->store_status = '2';
+            $store->type = $type;
+            $store->store_taxonomy = $tax;
+
+            $s = $store->save(); //保存数据
+            $store_id = Yii::$app->db->getLastInsertId();
+
+            print_r($user_id);
+            print_r($store_id);
+
+            if($user && $s){
+                $storeAccount = new StoreAccount();//实例化模型
+
+                $storeAccount->user_id = $user_id;
+                $storeAccount->work_number = $user_id;
+                $storeAccount->store_id = $store_id;
+                $storeAccount->role = '1';
+                $storeAccount->status = '1';
+
+                $reasult = $storeAccount->save(); //保存数据
+
+                if($reasult){
+                    $transaction->commit();
+                }
+            }
+            $transaction->rollback();//数据回滚
+
+        }catch (\Exception $e){
+            $transaction -> rollBack();
+        }
+
+        return '路由参数设置正常';
+    }
+
+    //商户注册查询
+    function actionFind($phone)
+    {
+        $user = User::find() //查询数据中是否存在此号码
+            ->where(['phone' => $phone])
+            ->asArray()
+            ->one();
+
+        if($user){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**

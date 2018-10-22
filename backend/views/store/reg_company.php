@@ -98,10 +98,11 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
 
     function c_count() { //公司人数判断
         C_count = company_count.value;
-        if(C_count != ''){
+        if(C_count > 0){
             document.getElementById('co_count').innerHTML = '';
         }else{
-            document.getElementById('co_count').innerHTML = '公司人数为空';
+            C_count = '';
+            document.getElementById('co_count').innerHTML = '公司人数有误';
         }
     }
 
@@ -119,11 +120,21 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
     }
 
     function next_3() {
-        if (Phone == '' || Name == '' || P == '' || C_type == '' || C_code == '' || C_name == '' || C_address == '' || C_tax == '' || C_count == '' || C_person == '')
+        if (Phone == '' || Name == '' || P == '' || C_type == '' || C_code == '' || C_name == '' || C_address == '' || C_tax == '' || C_count < 1 || C_person == '')
         {
             alert('您输入的注册信息有误，请检查！');
         }else{
-            $("#M").load("/store/password", {"name" : "end"});
+            var xhr = new XMLHttpRequest(); //实例化请求
+            xhr.open('GET', '/store/r?phone='+Phone+'&Name='+Name+'&password='+P+'&type='+C_type+'&code='+C_code+'&name='+C_name+'&address='+C_address+'&tax='+C_tax+'&count='+C_count+'&person='+C_person+'&qr='+C_qr, true); //设置请求连接
+            xhr.onload = function(){
+                var text = this.responseText;
+                if(text == '1'){
+                    $("#M").load("/store/password", {"name" : "end"});
+                }else{
+                    alert('注册失败，请检查对应的信息');
+                }
+            }
+            xhr.send();
         }
     }
 

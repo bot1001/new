@@ -89,18 +89,24 @@ class SysUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	{
 		if(parent::beforeSave($insert))
 		{
+		    //判断用户id是否存在
+            if(isset($_SESSION['user']['0']['id'])){
+                $id = $_SESSION['user']['0']['id'];
+            }else{
+                $id = '64';
+            }
+
 			if($insert)
 			{
 				//创建数据前自动插入以下字段
-				$this->create_id = $_SESSION['user']['0']['id'];
+				$this->create_id = $id;
 				$this->create_time = date('Y-m-d h:i:s');
 				$this->password = 'e10adc3949ba59abbe56e057f20f883e';
-				$this->salt = 'e10adc3949ba59abbe56e057f20f883e';
-				$this->update_id = $_SESSION['user']['0']['id'];
+				$this->update_id = $id;
 				$this->update_time = date('Y-m-d h:i:s');
 			}else{
 				$this->update_time = date('Y-m-d h:i:s');
-				$this->update_id = $_SESSION['user']['0']['id'];
+				$this->update_id = $id;
 			}
 			return true;
 		}else{

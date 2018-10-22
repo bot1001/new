@@ -116,16 +116,22 @@ $this->title = '商户注册';
         top: 40px;
         margin: auto;
     }
+    .second{
+        text-align: center;
+        padding: 13px;
+        font-size: 16px;
+        color: gray;
+    }
 </style>
 
 <script>
     //设置公共变量
     var Code = '';  //验证码
     var Phone = '';  //用户手机号码
-    var Name = '';  //
+    var Name = '';  //用户登录名
     var P = '';  //用户密码
     var C_type = '';  //商城类型，公司或私人
-    var C_code = '';  //商城（公司代码
+    var C_code = '';  //商城（公司)代码
     var C_name = '';  //商城名称
     var C_address = '';  //商城地址
     var C_tax = '';  //商城行业
@@ -133,38 +139,71 @@ $this->title = '商户注册';
     var C_person = '';  //商城联系人
     var C_qr = '';  //商户开通邀请码
     var num = 61; //验证码计时器
+    var n_code = ''; //服务器发送的验证码
+    var n_time = '';
 
     function search() { //查询账号是否已存在
         var phone = document.getElementById('phone');
-        alert('查询功能有待开发');
+        var phone01 = phone.value;
+
+        if(phone01.length == 11)
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','/store/find?phone='+phone.value, true);
+            xhr.onload = function(){
+                var text = this.responseText;
+                if(text == ''){
+                    document.getElementById('p_phone').innerHTML = '号码不可用';
+                }else{
+                    document.getElementById('p_phone').innerHTML = '号码可用';
+                }
+            }
+            xhr.send();
+        }else{
+            alert('手机号码有误，请检查');
+        }
     }
 
     function down(){ //时间自动减去1
         num --;
+        document.getElementById('change').innerHTML = '<div  id="getcode" class="second">'+num+'s后重新获取</div>';
             console.log(num)
         if(num == 0)
         {
-            clearInterval(s);
+            clearInterval(Interval);
+            num = 61;
+            document.getElementById('change').innerHTML =  '<button id="getcode" onclick="code()">重新获取</button>';
         }
     }
-
 
     function code() {//获取验证码
         var phone = document.getElementById('phone');
         Phone = phone.value;
+        console.log(n_time);
 
         //接下来执行获取短信验证码程序
         if(Phone.length != 11){
             document.getElementById('m').innerHTML = '<button class="btn-block" disabled onclick="next()">下一步</button>';
             alert('输入的手机号码有误！')
         }else {
-            down();
-            Code = '123456'; //修改验证码
-            alert('您将要输入的验证码是：'+Code);
+            var xhr = new XMLHttpRequest(); //实例化请求
+            xhr.open('GET', '/sms/send?time='+n_time+'&phone='+Phone, true); //设置请求连接
+            xhr.onload = function(){
+                var text = JSON.parse(this.responseText);
+                console.log(text);
+                if(text == '2'){
+                   document.getElementById('p_phone').innerHTML = '验证码获取失败，请1分钟后再试';
+                }else{
+                    Code = text.code;//将获取的验证码赋值给公共变量
+                    n_time = text.timeStamp;//用户设备时间
+                    document.getElementById('p_phone').innerHTML = '';
+                }
+            }
+            xhr.send();
             document.getElementById('m').innerHTML = '<button class="btn-block" style="background: rgba(221, 0, 0, 0.53)" onclick="next()">下一步</button>';
 
             //定时更新验证码发送后的时间
-            var s = setInterval(function () {
+            Interval = setInterval(function () {
                 down();
             }, 1000)
         }
@@ -203,9 +242,11 @@ $this->title = '商户注册';
                 </div>
             </div>
 
+            <div class="com" id="p_phone"></div>
+
             <div class="mobile_phone code">
                 <div><input id="code" class="in" value=""></div>
-                <div><button id="getcode" onclick="code()"> </div>
+                <div id="change"><button id="getcode" onclick="code()">获取验证码</button></div>
             </div>
         </div>
 

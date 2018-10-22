@@ -94,7 +94,8 @@ return [
             'auto/*', //自动发送短信
             'area/*', //地区
             'store/register',
-            'store/*'
+            'store/*',
+            'sms/send'
         ]
     ],
 	 

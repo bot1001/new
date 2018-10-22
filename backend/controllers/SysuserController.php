@@ -109,6 +109,7 @@ class SysuserController extends Controller
                 $model->company = $post['company'];
 			    $model->community = $post['community'];
 			    $model->role = $post['role'];
+			    $model->salt = '1';
 			    $model->real_name = $model->name = $post['name'];
 			    $model->phone = $post['phone'];
 			    $model->new_pd = md5($post['new_pd']);
