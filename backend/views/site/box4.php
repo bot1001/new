@@ -33,16 +33,17 @@ use yii\helpers\Url;
             <tr>
             	<td width = "23%"><div id="in01" class="col-lg-1">用户名:</div></td>
             	<td width = "50%"><div id="in02" class="col-lg-1">
-            	<?php 
-   				foreach($name as $n) {
-   					echo $n;
-   				}
-   				?>
-            	</div></td>
-            	<td width = "27%" rowspan=3><div id="in04"></div></td>
+            	    <?php
+   				    foreach($name as $n) {
+   				    	echo $n;
+   				    }
+   				    ?>
+            	    </div>
+                </td>
+            	<td width = "27%" rowspan=3 align="center"> <img src="/image/logo.png" id="in04" /> </td>
             </tr>
             <tr>
-            	<td><div id="in01" class="col-lg-1">职位:</div></td>
+            	<td><div id="in01" class="col-lg-1">角色:</div></td>
             	<td><div id="in02" class="col-lg-1">
                      	<?php
    				        $count = count($Role);
@@ -61,11 +62,9 @@ use yii\helpers\Url;
    				        }
    	          			?>
                      </div>
-                 </td>
+                </td>
             </tr>
-            <tr>
-            	<td colspan="2"><div id="in05">关联小区</div></td>
-            </tr>
+            <tr> <td colspan="2"><div id="in05">关联小区</div></td> </tr>
             <tr>
             	<td colspan="3">
             		<?php 

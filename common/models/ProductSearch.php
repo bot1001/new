@@ -45,10 +45,17 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $store_id = $_SESSION['community'];
-
         $query = Product::find();
-        $query -> joinWith('store')->where(['in', 'product_basic.store_id', $store_id]);
+
+        $user = $_SESSION['user'];
+        $market = array_column($user, 'market');
+
+        if(in_array('2', $market)){
+            $store_id = $_SESSION['community'];
+            $query -> andWhere(['in', 'product_basic.store_id', $store_id]);
+        }
+
+        $query -> joinWith('store');
 
         // add conditions that should always apply here
 

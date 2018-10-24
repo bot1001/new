@@ -120,9 +120,7 @@ class TicketBasic extends \yii\db\ActiveRecord
 			}
 			return true;
 		}
-		else{
-			return false;
-		}
+		return false;
 	}
 	
 	//截取字符串

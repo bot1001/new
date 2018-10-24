@@ -22,7 +22,7 @@ class RegisterController extends Controller
     function actionPhone($phone)
     {
         $realestate = (new Query()) //通过手机号码查询房号
-            ->select(["community_realestate.realestate_id as id, concat(community_basic.community_name,' ', community_building.building_name, ' ', community_realestate.room_number, '-', community_realestate.room_name) as room"])
+            ->select(["community_realestate.realestate_id as id, concat(community_basic.community_name,' ', community_building.building_name, ' ', community_realestate.room_number, '-', community_realestate.room_name) as room, community_realestate.owners_name"])
             ->from('community_realestate')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
             ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id' )

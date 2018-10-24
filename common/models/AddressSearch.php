@@ -43,8 +43,16 @@ class AddressSearch extends OrderAddress
     {
         $query = OrderAddress::find();
         $query->joinWith('order')
-//            ->joinWith('products')
+            ->joinWith('products')
         ->where(['order_basic.order_type' => '2']);
+
+        $user = $_SESSION['user'];
+        $market = array_column($user, 'market');
+
+        if(in_array('2', $market)){ //判断是否是商城用户
+            $store_id = $_SESSION['community'];
+            $query -> andWhere(['in', 'order_products.store_id', $store_id]);
+        }
 
         // add conditions that should always apply here
 

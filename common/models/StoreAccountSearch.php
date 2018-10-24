@@ -45,6 +45,14 @@ class StoreAccountSearch extends StoreAccount
         $query->joinWith('user')
         ->joinWith('store');
 
+        $user = $_SESSION['user'];
+        $market = array_column($user, 'market');
+
+        if(in_array('2', $market)){ //判断是否是商城用户
+            $user_id = Yii::$app->user->id;
+            $query -> andWhere(['in', 'store_account.user_id', $user_id]);
+        }
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

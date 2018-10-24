@@ -165,9 +165,9 @@ class StoreController extends Controller
             $sysUser->salt = '2';
             $sysUser->status = '1';
             $sysUser->new_pd = md5($password);
-            $user = $sysUser->comment = '商户用户';
+            $sysUser->comment = '商户用户';
 
-            $s = $sysUser->save();//保存数据
+            $user = $sysUser->save();//保存数据
             $user_id = Yii::$app->db->getLastInsertID();
 
             $store = new Store(); //实例化商城模型

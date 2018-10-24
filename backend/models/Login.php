@@ -13,12 +13,13 @@ class Login extends \yii\db\ActiveRecord
         $user = (new \yii\db\Query())->select('
 			         sys_user.id as id, 
 			         company.name as company,
-			         sys_user.name as name, 
-			         sys_user.role as role, 
-			         sys_user.phone as phone, 
-			         sys_user.comment as comment, 
+			         sys_user.name, 
+			         sys_user.role, 
+			         sys_user.salt as market, 
+			         sys_user.phone, 
+			         sys_user.comment, 
 			         sys_user.create_id as create, 
-			         sys_user.create_time as create_time,
+			         sys_user.create_time,
 			         auth_assignment.item_name as Role')
             ->from('sys_user')
             ->join('inner join', 'company', 'company.id = sys_user.company')
@@ -72,12 +73,13 @@ class Login extends \yii\db\ActiveRecord
         $user = (new \yii\db\Query())->select('
 			         sys_user.id as id, 
 			         store_account.store_id as store,
-			         sys_user.name as name, 
-			         store_account.role as role, 
-			         sys_user.phone as phone, 
-			         sys_user.comment as comment, 
+			         sys_user.name, 
+			         store_account.role, 
+			         sys_user.phone, 
+			         sys_user.salt as market, 
+			         sys_user.comment, 
 			         sys_user.create_id as create, 
-			         sys_user.create_time as create_time,
+			         sys_user.create_time,
 			         auth_assignment.item_name as Role')
             ->from('sys_user')
             ->join('inner join', 'store_account', 'store_account.user_id = sys_user.id')

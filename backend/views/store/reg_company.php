@@ -155,7 +155,7 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
             <div id="co_type" class="com"></div>
 
             <div class="mobile_phone code">
-                <div class="china">公司代码</div>
+                <div class="china">营业执照</div>
                 <div class="input">
                     <input id="company_code" type="text" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" placeholder="不能有中文" class="in"/>
                 </div>
@@ -202,7 +202,7 @@ $taxonomy = \common\models\StoreTaxonomy::T($type = 1);
             <div class="mobile_phone code">
                 <div class="china">邀请码</div>
                 <div class="input">
-                    <input id="company_qr" type="text" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" placeholder="不能有中文" minlength="6" placeholder="" class="in"/>
+                    <input id="company_qr" type="text" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" placeholder="不能有中文（可留空）" minlength="6" placeholder="" class="in"/>
                 </div>
             </div>
             <div id="co_qr" class="com"></div>

@@ -48,4 +48,13 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 	   <div id="box5" class="col-lg-3">
 	       <?= $this->render('box5') ?>   	
 	   </div>
+
+       <div id="box6" class="col-lg-3">
+	       <?= $this->render('box6') ?>
+	   </div>
+
+<!--       --><?php
+//       echo '<pre />';
+//       print_r($_SESSION);
+//       ?>
  </div>
