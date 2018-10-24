@@ -47,7 +47,11 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-lg-2">
-            <?= $form->field($model, 'type')->dropDownList(['1' => '后台', '2' => '微信', '3' => 'APP'], ['prompt' => '请选择'])->label(false) ?>
+            <?= $form->field($model, 'type')->dropDownList(\common\models\Instructions::arr($one = 'type'), ['prompt' => '平台'])->label(false) ?>
+        </div>
+
+        <div class="col-lg-2">
+            <?= $form->field($model, 'status')->dropDownList(\common\models\Instructions::arr($one = 'status'), ['prompt' => '状态'])->label(false) ?>
         </div>
 
         <div class="col-lg-4">

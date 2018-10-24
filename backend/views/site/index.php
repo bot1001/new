@@ -53,8 +53,12 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 	       <?= $this->render('box6') ?>
 	   </div>
 
-<!--       --><?php
-//       echo '<pre />';
-//       print_r($_SESSION);
-//       ?>
+       <?php
+       echo '<pre />';
+//       $info = Yii::$app->request->hostInfo;
+//
+//       print_r($info);
+
+//       print_r($_SERVER);
+       ?>
  </div>

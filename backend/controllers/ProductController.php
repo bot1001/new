@@ -37,7 +37,7 @@ class ProductController extends Controller
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
+                    "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
                     "imagePathFormat" => "/img/market/{yyyy}{mm}{dd}/{time}{rand:6}", //商城图片
                     "imageMaxSize" => 1024000,
                 ],

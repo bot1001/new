@@ -5,10 +5,12 @@ namespace backend\controllers;
 use Yii;
 use common\models\Instructions;
 use common\models\InstructionsSearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 
 /**
  * InstructionsController implements the CRUD actions for Instructions model.
@@ -36,10 +38,17 @@ class InstructionsController extends Controller
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
+                    "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
                     "imagePathFormat" => "/img/Instructions/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径、广告
                     "imageMaxSize" => 512000,
                 ],
+            ],
+            'instructions' => [
+                'class' => EditableColumnAction::className(),
+                'modelClass' => Instructions::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                },
+                'ajaxOnly' => true,
             ]
         ]);
     }
@@ -67,8 +76,15 @@ class InstructionsController extends Controller
      */
     public function actionView($id)
     {
+        $model = (new Query())
+            ->select('instructions.*, sys_user.name')
+            ->from('instructions')
+            ->where(['instructions.id' => "$id"])
+            ->join('inner join', 'sys_user', 'sys_user.id = instructions.author')
+            ->one();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -137,6 +153,6 @@ class InstructionsController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('请求页面不存在.');
     }
 }

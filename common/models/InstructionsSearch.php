@@ -18,7 +18,7 @@ class InstructionsSearch extends Instructions
     public function rules()
     {
         return [
-            [['id', 'author', 'create_time', 'update_time', 'type'], 'integer'],
+            [['id', 'author', 'create_time', 'update_time', 'type', 'status'], 'integer'],
             [['title', 'content', 'version', 'property'], 'safe'],
         ];
     }
@@ -41,7 +41,8 @@ class InstructionsSearch extends Instructions
      */
     public function search($params)
     {
-        $query = Instructions::find()->joinWith('au');
+        $query = Instructions::find()
+            ->joinWith('au');
 
         // add conditions that should always apply here
 
@@ -69,6 +70,7 @@ class InstructionsSearch extends Instructions
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'version', $this->version])
+            ->andFilterWhere(['like', 'instructions.status', $this->status])
             ->andFilterWhere(['like', 'property', $this->property]);
 
         return $dataProvider;

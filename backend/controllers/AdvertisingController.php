@@ -44,7 +44,7 @@ class AdvertisingController extends Controller
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => 'http://'.$_SERVER['HTTP_HOST'],//图片访问路径前缀
+                    "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
                     "imagePathFormat" => "/img/Adertising/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径、广告
                     "imageMaxSize" => 1024000,
                 ],
