@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use mdm\admin\components\Helper;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PhoneSearch */
@@ -9,6 +11,9 @@ use kartik\grid\GridView;
 
 $this->title = '便民电话';
 $this->params['breadcrumbs'][] = $this->title;
+
+//引入模态文件
+echo $this->render('..\..\..\common\modal\modal.php');
 ?>
 <style>
     .phone-list-index{
@@ -32,6 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'phone_sort'],
 
         ['class' => 'kartik\grid\ActionColumn',
+            'template' => Helper::filterActionColumn('{update}{view}{delete}'),
+            'buttons' => [
+                'update' => function($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#',[
+                        'class' => 'pay',
+                        'data-toggle' => 'modal',
+                        'data-url' => Url::to(['update', 'id' => $key]),
+                        'data-title' => '修改',
+                        'data-target' => '#common-modal',
+                    ]);
+                },
+
+                'view' => function($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#',[
+                        'class' => 'pay',
+                        'data-toggle' => 'modal',
+                        'data-url' => Url::to(['view', 'id' => $key]),
+                        'data-title' => '修改',
+                        'data-target' => '#common-modal',
+                    ]);
+                }
+            ],
             'header' => '操<br />作'],
     ];
 
@@ -39,7 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'panel' => ['type' => 'info', 'heading' => '电话列表',
-            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info'])],
+            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', '#', [
+                'class' => 'btn btn-success pay',
+                'data-toggle' => 'modal',
+                'data-url' => 'create',
+                'data-title' => '创建', //如果不设置子标题，默认使用大标题
+                'data-target' => '#common-modal',
+            ])
+        ],
         'columns' => $gridview,
     ]); ?>
 </div>

@@ -3,16 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\PhoneList;
-use common\models\PhoneSearch;
+use common\models\CommunityFees;
+use common\models\CommunityFeesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
- * PhonetController implements the CRUD actions for PhoneList model.
+ * CommunityFeesController implements the CRUD actions for CommunityFees model.
  */
-class PhoneController extends Controller
+class CommunityFeesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +31,12 @@ class PhoneController extends Controller
     }
 
     /**
-     * Lists all PhoneList models.
+     * Lists all CommunityFees models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PhoneSearch();
+        $searchModel = new CommunityFeesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,38 +46,46 @@ class PhoneController extends Controller
     }
 
     /**
-     * Displays a single PhoneList model.
+     * Displays a single CommunityFees model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+        $model = (new Query())
+            ->select('community_fees.*, sys_user.name, community_basic.community_name as community')
+            ->from('community_fees')
+            ->join('inner join', 'sys_user', 'sys_user.id = community_fees.author')
+            ->join('inner join', 'community_basic', 'community_fees.community_id = community_basic.community_id')
+            ->where(['community_fees.id' => "$id"])
+            ->one();
 
-    /**
-     * Creates a new PhoneList model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new PhoneList();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->phone_id]);
-        }
-
-        return $this->renderAjax('create', [
+        return $this->render('view', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing PhoneList model.
+     * Creates a new CommunityFees model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new CommunityFees();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing CommunityFees model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,16 +96,16 @@ class PhoneController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->phone_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('update', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing PhoneList model.
+     * Deletes an existing CommunityFees model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +119,15 @@ class PhoneController extends Controller
     }
 
     /**
-     * Finds the PhoneList model based on its primary key value.
+     * Finds the CommunityFees model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return PhoneList the loaded model
+     * @return CommunityFees the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PhoneList::findOne($id)) !== null) {
+        if (($model = CommunityFees::findOne($id)) !== null) {
             return $model;
         }
 

@@ -52,6 +52,19 @@ class PhoneList extends \yii\db\ActiveRecord
         ];
     }
 
+    //父级数组
+    static function phone()
+    {
+        $phone = self::find()
+            ->select('phone_name as name, phone_id as id')
+            ->where(['parent_id' => '0'])
+            ->indexBy('id')
+            ->orderBy('phone_id')
+            ->column();
+
+        return $phone;
+    }
+
     function getPhone()
     {
         return $this->hasOne(self::className(),['phone_id' => 'parent_id']);

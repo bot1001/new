@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PhoneList */
+/* @var $model common\models\Instructions */
 
-$this->title = '新建';
-$this->params['breadcrumbs'][] = ['label' => 'Phone Lists', 'url' => ['index']];
+$this->title = '创建';
+$this->params['breadcrumbs'][] = ['label' => 'Instructions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="phone-list-create">
+<div class="instructions-create">
 
     <?= $this->render('_form', [
         'model' => $model,

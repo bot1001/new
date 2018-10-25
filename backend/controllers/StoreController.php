@@ -76,9 +76,13 @@ class StoreController extends Controller
         $search = new AddressSearch(); //实例化搜索模型
         $dataProvider = $search->search(Yii::$app->request->queryParams);
 
+        $order = Yii::$app->params['order']; //订单状态
+        unset($order['way']['0']);
+
         return $this->render('order',[
             'dataProvider' => $dataProvider,
-            'search' => $search
+            'search' => $search,
+            'order' => $order
         ]);
     }
 

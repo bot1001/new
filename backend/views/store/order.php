@@ -41,16 +41,42 @@ $this->params['breadcrumbs'][] = $this->title;
            'label' => '支付时间'],
 
        ['attribute' => 'status',
-           'value' => 'order.status',
+           'filterType' => GridView::FILTER_SELECT2,
+           'filter' => $order['status'],
+           'filterWidgetOptions' => [
+               'pluginOptions' => [ 'allowClear' => true ],
+           ],
+           'filterInputOptions' => [ 'placeholder' => '请选择' ],
+           'value' => function ( $model ) {
+               $e = Yii::$app->params['order']['status']; //订单状态数据
+               $s = $model['order'][ 'status' ]; //订单状态
+
+               if ( !$s ) {
+                   return '';
+               } else {
+                   return $e[ $s ];
+               };
+           },
            'label' => '状态'],
 
-//       ['attribute' => 'price',
-//           'value'=> 'products.product_price',
-//           'contentOptions' => ['class' => 'text-right']],
-//
-//       ['attribute' => 'price',
-//           'value'=> 'products.product_quantity',
-//           'contentOptions' => ['class' => 'text-right']],
+       ['attribute' => 'way',
+           'filterType' => GridView::FILTER_SELECT2,
+           'filter' => $order['way'],
+           'filterWidgetOptions' => [
+               'pluginOptions' => [ 'allowClear' => true ],
+           ],
+           'filterInputOptions' => [ 'placeholder' => '请选择' ],
+           'value' => function ( $model ) {
+               $e = Yii::$app->params['order']['way']; //订单状态数据
+               $s = $model['order'][ 'payment_gateway' ]; //订单状态
+
+               if ( !$s ) {
+                   return '';
+               } else {
+                   return $e[ $s ];
+               };
+           },
+           'label' => '付款方式'],
 
        ['attribute' => 'amount',
            'value' => 'order.order_amount',

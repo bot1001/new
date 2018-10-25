@@ -19,7 +19,7 @@ class AddressSearch extends OrderAddress
     {
         return [
             [['id', 'province_id', 'city_id', 'area_id'], 'integer'],
-            [['order_id', 'address', 'zipcode', 'mobile_phone', 'name', 'create_time', 'payment_time', 'status', 'amount'], 'safe'],
+            [['order_id', 'address', 'zipcode', 'mobile_phone', 'name', 'create_time', 'payment_time', 'status', 'amount', 'way'], 'safe'],
         ];
     }
 
@@ -74,6 +74,8 @@ class AddressSearch extends OrderAddress
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'area_id' => $this->area_id,
+            'order_basic.payment_gateway' => $this->way,
+            'order_basic.status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'order_id', $this->order_id])
@@ -81,6 +83,18 @@ class AddressSearch extends OrderAddress
             ->andFilterWhere(['like', 'zipcode', $this->zipcode])
             ->andFilterWhere(['like', 'mobile_phone', $this->mobile_phone])
             ->andFilterWhere(['like', 'name', $this->name]);
+
+        $dataProvider->sort->attributes['status'] =
+            [
+              'asc' => ['order_basic.status' => SORT_ASC],
+              'desc' => ['order_basic.status' => SORT_ASC],
+            ];
+
+        $dataProvider->sort->attributes['way'] =
+            [
+              'asc' => ['order_basic.payment_gateway' => SORT_ASC],
+              'desc' => ['order_basic.payment_gateway' => SORT_ASC],
+            ];
 
         return $dataProvider;
     }

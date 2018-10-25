@@ -224,13 +224,13 @@ $this->title = '订单管理';
 		[ 'attribute' => 'payment_gateway',
 			//'group' => true,
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8 => '优惠' ],
+			'filter' => $order['way'],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
 			],
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'value' => function ( $model ) {
-				$e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8 => '优惠' ];
+				$e = Yii::$app->params['order']['way'];
 				if ( empty( $model[ 'payment_gateway' ] ) ) {
 					return '';
 				} else {
@@ -265,9 +265,11 @@ $this->title = '订单管理';
                 return ( $model->verify == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
             },
             ],
+
 		/*['attribute' => 'payment_number',
 		 'width' => '200px',
 		 'hAlign' => 'center'],*/
+
 		[ 'attribute' => 'order_amount',
 			'pageSummary' => true,
 			'width' => '70px',
@@ -278,7 +280,7 @@ $this->title = '订单管理';
 			'value' => 'status0.name',
 			//'refreshGrid' => true,
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => Status::find()->select( [ 'name', 'order_basic_status' ] )->orderBy( 'name' )->indexBy( 'order_basic_status' )->column(),
+			'filter' => $order['status'],
 			'filterInputOptions' => [ 'placeholder' => '请选择' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
@@ -290,8 +292,8 @@ $this->title = '订单管理';
 			},
 			'editableOptions' => [
 				'formOptions' => [ 'action' => [ '/order/order' ] ], // point to the new action        
-				'inputType' => \kartik\ editable\ Editable::INPUT_DROPDOWN_LIST,
-				'data' => [ '1' => '未支付', '2' => '已支付', '3' => '已取消', '4' => '送货中', '5' => '已签收' ],
+				'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+				'data' => $order['status'],
 			],
 			'contentOptions' =>
 			    function ( $model ) {

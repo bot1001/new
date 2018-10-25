@@ -79,9 +79,13 @@ class OrderController extends Controller
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+		$order = Yii::$app->params['order']; //订单状态
+        unset($order['way']['0']);//卸掉第一个数组
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'order' => $order
         ]);
     }
 

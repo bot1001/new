@@ -5,28 +5,30 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "instructions".
+ * This is the model class for table "community_fees".
  *
  * @property int $id 文章ID
  * @property string $title 标题
  * @property int $author 作者
+ * @property int $community_id 小区
  * @property string $content 内容
  * @property int $create_time 创建时间
  * @property int $update_time 更新时间
- * @property int $type 类型，1=>后台, 2=>微信, 3 =>APP
  * @property string $version 版本号
+ * @property int $status 状态，0=> 禁用，1=>启用, 2=>审核
  * @property string $property 备注
  *
+ * @property CommunityBasic $community
  * @property SysUser $author0
  */
-class Instructions extends \yii\db\ActiveRecord
+class CommunityFees extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'instructions';
+        return 'community_fees';
     }
 
     /**
@@ -35,12 +37,13 @@ class Instructions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'type', 'version', 'status'], 'required'],
-            [['author', 'type', 'status'], 'integer'],
+            [['title', 'community_id', 'content', 'version', 'status'], 'required'],
+            [['author', 'community_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 50],
             [['content'], 'string', 'max' => 2000],
             [['version'], 'string', 'max' => 32],
             [['property'], 'string', 'max' => 64],
+            [['community_id'], 'exist', 'skipOnError' => true, 'targetClass' => Community::className(), 'targetAttribute' => ['community_id' => 'community_id']],
             [['author'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author' => 'id']],
         ];
     }
@@ -57,7 +60,7 @@ class Instructions extends \yii\db\ActiveRecord
             'content' => '内容',
             'create_time' => '创建时间',
             'update_time' => '修改时间',
-            'type' => '平台',
+            'community_id' => '小区',
             'version' => '版本号',
             'status' => '状态',
             'property' => '备注',
@@ -66,10 +69,9 @@ class Instructions extends \yii\db\ActiveRecord
 
     static function arr($one)
     {
-        $type = [0 => '后台', 1 => '微信', 2 => 'APP'];
         $status = [0 => '禁用', 1 => '启用', 2 => '审核'];
 
-        $result = ['type' => $type, 'status' => $status];
+        $result = [ 'status' => $status];
         return $result[$one];
     }
 
@@ -109,5 +111,10 @@ class Instructions extends \yii\db\ActiveRecord
     public function getAu()
     {
         return $this->hasOne(User::className(), ['id' => 'author']);
+    }
+
+    public function getCommunity()
+    {
+        return $this->hasOne(Community::className(), ['community_id' => 'community_id']);
     }
 }

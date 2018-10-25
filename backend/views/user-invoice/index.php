@@ -327,12 +327,12 @@ $this->title = '缴费管理';
 		],
 		[ 'attribute' => 'invoice_status',
 			'value' => function ( $model ) {
-				$data = [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ];
+				$data = Yii::$app->params['order']['way'];
 				return $data[ $model[ 'invoice_status' ] ];
 			},
 			//'refreshGrid' => 'true',
 			'filterType' => GridView::FILTER_SELECT2,
-			'filter' => [ '0' => '欠费', '1' => '支付宝', '2' => '微信', '3' => '刷卡', '4' => '银行', '5' => '政府', '6' => '现金', '7' => '建行', '8' => '优惠' ],
+			'filter' => Yii::$app->params['order']['way'],
 			'filterInputOptions' => [ 'placeholder' => '…' ],
 			'filterWidgetOptions' => [
 				'pluginOptions' => [ 'allowClear' => true ],
