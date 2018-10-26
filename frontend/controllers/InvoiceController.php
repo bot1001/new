@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Invoice;
-use common\models\OrderProducts as Order;
+use common\models\Products as Order;
 use frontend\models\InvoiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -14,7 +14,6 @@ $this->title = $model[ 'id' ];
 $this->params[ 'breadcrumbs' ][] = [ 'label' => '订单列表', 'url' => [ 'index' ] ];
 $this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
-
 <div class="order-basic-view">
 
 	<style>

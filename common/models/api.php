@@ -142,7 +142,10 @@ class Api extends \yii\db\ActiveRecord
 
              $a = $add->save(); //保存
 
-             if($p && $e && $a){
+            $add = self::Accumulate($account_id, $amount, $order_id, $income = '1', $type = '1'); //积累用户积分
+//            $reduce = self::Accumulate($account_id, $_amount, $order_id, $income = '2', $type = '1'); //消耗用户积分
+
+             if($p && $e && $a && $add){
                  $transaction->commit(); //提交事务
              }else{
                  $transaction->rollback(); //滚回事务
@@ -156,5 +159,26 @@ class Api extends \yii\db\ActiveRecord
         $order = Json::encode($order); //转换成json数据
 
         return $order;
+    }
+    
+    //添加用户积分
+    static function Accumulate($account_id, $amount, $order_id, $income, $type)
+    {
+        $accumulate = new StoreAccumulate(); //实例化
+
+        $accumulate->account_id = $account_id;
+        $accumulate->amount = $amount;
+        $accumulate->income = $income;
+        $accumulate->order_id = $order_id;
+        $accumulate->type = $type;
+        $accumulate->status = '2'; //默认为待确认
+
+        $accumulate->save();
+
+        if($accumulate){
+            return true;
+        }
+
+        return false;
     }
 }

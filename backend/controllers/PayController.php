@@ -40,10 +40,10 @@ class PayController extends Controller
 			->where(['order_id' => $order_id])
 			->one();
 		$status = $order['status'];
-		$c_time = $order['create_time'];
+		$c_time = strtotime($order['create_time']);
 		$time = time();
 		$t = $time - $c_time;
-		
+
 		$session=Yii::$app->session;
 
 		if($t >= 120 || $status != 1){//判断订单状态和订单有效期，两分钟内有效

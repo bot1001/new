@@ -1,8 +1,10 @@
 <?php
 namespace api\controllers;
 
+use common\models\Api;
 use common\models\Invoice;
 use common\models\Order;
+use common\models\Product;
 use common\models\Products;
 use Yii;
 use yii\data\Pagination;
@@ -191,5 +193,22 @@ class OrderController extends Controller
         $order = Json::encode($order); //数组转换
 
         return $order;
+    }
+
+    //生成商户订单
+    function actionCreate($realestate, $account, $count, $product_id, $address, $name, $phone)
+    {
+        $product = Product::find()
+            ->select('product_name as name, product_price as price, store_id')
+            ->where(['product_id' => $product_id])
+            ->asArray()
+            ->all();
+
+
+
+        $order_id = Order::getOrder02(); //生成订单
+
+        $add = Api::Accumulate($account, $amount, $order_id, $income = '1', $type = '2'); //积累用户积分
+        $reduce = Api::Accumulate($account, $amount, $order_id, $income = '2', $type = '2'); //扣除用户积分
     }
 }

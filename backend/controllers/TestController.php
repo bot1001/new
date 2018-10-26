@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use app\models\CommunityRealestate;
+use common\models\Api;
 use common\models\Order;
 use common\models\UserAccount;
 use common\models\UserOpenid;
@@ -108,14 +109,11 @@ class TestController extends \yii\web\Controller
         print_r($_SESSION);
     }
 
-    function actionTest()
+    function actionTest() //测试
     {
-        $invoice = (new \yii\db\Query())
-            ->select('count(*)')
-            ->from('user_invoice')
-            ->groupBy('realestate_id')
-            ->all();
-        print_r(count($invoice));
+        $accumulate = Api::Accumulate($account_id = 'a588f77f2546da16bfc3673713de62b9', $amount = '52', $order_id = '181026485583', $income = '1', $type = '1'); //更新用户积分
+
+        echo $accumulate;
     }
 
     //处理用户openID表
@@ -136,8 +134,5 @@ class TestController extends \yii\web\Controller
 
             $user_open->save();
         }
-
-//        echo '<pre />';
-//        print_r($user_accout);
     }
 }

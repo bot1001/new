@@ -3,14 +3,14 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\StoreAccumulate;
+use common\models\Accumulate;
 use common\models\AccumulateSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AccumulateController implements the CRUD actions for StoreAccumulate model.
+ * AccumulateController implements the CRUD actions for Accumulate model.
  */
 class AccumulateController extends Controller
 {
@@ -30,7 +30,7 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Lists all StoreAccumulate models.
+     * Lists all Accumulate models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Displays a single StoreAccumulate model.
+     * Displays a single Accumulate model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Creates a new StoreAccumulate model.
+     * Creates a new Accumulate model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new StoreAccumulate();
+        $model = new Accumulate();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Updates an existing StoreAccumulate model.
+     * Updates an existing Accumulate model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Deletes an existing StoreAccumulate model.
+     * Deletes an existing Accumulate model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AccumulateController extends Controller
     }
 
     /**
-     * Finds the StoreAccumulate model based on its primary key value.
+     * Finds the Accumulate model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return StoreAccumulate the loaded model
+     * @return Accumulate the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = StoreAccumulate::findOne($id)) !== null) {
+        if (($model = Accumulate::findOne($id)) !== null) {
             return $model;
         }
 

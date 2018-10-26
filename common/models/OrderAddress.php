@@ -26,6 +26,7 @@ class OrderAddress extends \yii\db\ActiveRecord
     public $amount;
     public $description;
     public $way;
+
     /**
      * {@inheritdoc}
      */

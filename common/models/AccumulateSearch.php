@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\StoreAccumulate;
+use common\models\Accumulate;
 
 /**
- * AccumulateSearch represents the model behind the search form of `common\models\StoreAccumulate`.
+ * AccumulateSearch represents the model behind the search form of `common\models\Accumulate`.
  */
-class AccumulateSearch extends StoreAccumulate
+class AccumulateSearch extends Accumulate
 {
     /**
      * {@inheritdoc}
@@ -18,9 +18,8 @@ class AccumulateSearch extends StoreAccumulate
     public function rules()
     {
         return [
-            [['id', 'type'], 'integer'],
-            [['account_id', 'property', 'name', 'phone', 'update_time'], 'safe'],
-            [['amount'], 'number'],
+            [['id', 'amount', 'income', 'type', 'create_time', 'status'], 'integer'],
+            [['account_id', 'order_id', 'property'], 'safe'],
         ];
     }
 
@@ -42,18 +41,14 @@ class AccumulateSearch extends StoreAccumulate
      */
     public function search($params)
     {
-        $query = StoreAccumulate::find();
-        $query->joinWith('account')
-            ->joinWith('data');
+        $query = Accumulate::find();
+        $query ->joinWith('address')
+        ->joinWith('order');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' =>[
-                'defaultOrder' =>
-                ['id' => SORT_DESC]
-            ]
         ]);
 
         $this->load($params);
@@ -64,40 +59,19 @@ class AccumulateSearch extends StoreAccumulate
             return $dataProvider;
         }
 
-        if($this->update_time != '')
-        {
-            $time = $this->update_time;
-            $t = explode(' to ', $time);
-            $first = strtotime(reset($t));
-            $second = strtotime(end($t));
-
-            $query->andFilterWhere(['in', 'update_time' , $first, $second]);
-        }
-
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'amount' => $this->amount,
+            'income' => $this->income,
             'type' => $this->type,
+            'create_time' => $this->create_time,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
-            ->andFilterWhere(['like', 'user_data.real_name', $this->name])
-            ->andFilterWhere(['like', 'user_account.mobile_phone', $this->phone])
+            ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'property', $this->property]);
-
-        $dataProvider->sort->attributes['name'] =
-            [
-                'asc' => ['user_data.real_name' => SORT_ASC],
-                'desc' => ['user_data.real_name' => SORT_DESC]
-            ];
-
-        $dataProvider->sort->attributes['phone'] =
-            [
-                'asc' => ['user_account.mobile_phone' => SORT_ASC],
-                'desc' => ['user_account.mobile_phone' => SORT_DESC],
-            ];
 
         return $dataProvider;
     }
