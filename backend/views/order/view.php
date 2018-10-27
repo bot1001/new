@@ -36,7 +36,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         .pay{
             display: flex;
         }
-        #success{
+        #success, #s{
             margin: auto;
         }
 
@@ -55,7 +55,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             width: 250px;
         }
 
-        #div2, #success{
+        #div2, #success, #s{
             margin: auto;
             text-align: center;
             font-size: 20px;
@@ -179,10 +179,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                     if ( this.responseText == '' ) {
                         //如果返回信息为空则不做任何操作
                     }else if ( this.responseText == '1' ) {
-                        document.getElementById( 'success' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">支付成功！</a>';
+                        document.getElementById( 's' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">支付成功！</a>';
                         clearInterval( intervalId ); //清除定时器
                     }else if ( this.responseText == '3' ) {
-                        document.getElementById( 'success' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">交易关闭！</a>';
+                        document.getElementById( 's' ).innerHTML = '<a href= "<?= Url::to(['/order/print', 'order_id' => $order]); ?>">交易关闭！</a>';
                         clearInterval( intervalId ); //清除定时器
                     }else{
                         var name = JSON.parse(this.responseText);
@@ -198,43 +198,47 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         }
     </script>
 
-    <div id="success">
-        <div id="div2"></div>
-        <div class="pay">
-            <div id="pay">
-                <button onclick="pay('alipay','1')"><img src="/image/zfb.png"></button>
-            </div>
+    <div id="s">
+        <div id="success">
+            <div id="div2"></div>
+            <div class="pay">
+                <div id="pay">
+                    <button onclick="pay('alipay','1')"><img src="/image/zfb.png"></button>
+                </div>
 
-            <div id="pay">
-                <button onclick="pay('wx','2')" title="微信支付"><img src="/image/wx.png"></button>
-            </div>
+                <div id="pay">
+                    <button onclick="pay('wx','2')" title="微信支付"><img src="/image/wx.png"></button>
+                </div>
 
-            <div id="pay">
-                <button onclick="pay('jh','')" title="建行龙支付"><img src="/image/j.png"></button>
-            </div>
+                <div id="pay">
+                    <button onclick="pay('jh','')" title="建行龙支付"><img src="/image/j.png"></button>
+                </div>
 
-            <div id="pay">
-                <button onclick="pay('xj','6')"><img src="/image/xj.png"></button>
+                <div id="pay">
+                    <button onclick="pay('xj','6')"><img src="/image/xj.png"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="success">
+            <div class="pay">
+                <div id="pay">
+                    <button onclick="pay('up','3')"><img src="/image/up.png"></button>
+                </div>
+
+                <div id="pay">
+                    <button title="银行代付"  onclick="pay('yh','4')"><img src="/image/yh.png"></button>
+                </div>
+
+                <div id="pay">
+                    <button title="政府代付" onclick="pay('zf','5')"><img src="/image/zf.png"></button>
+                </div>
+
+                <div id="pay">
+                    <button title="赠送优惠" onclick="pay('sal','8')"><img src="/image/sale.jpg"></button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="success">
-        <div class="pay">
-            <div id="pay">
-                <button onclick="pay('up','3')"><img src="/image/up.png"></button>
-            </div>
 
-            <div id="pay">
-                <button title="银行代付"  onclick="pay('yh','4')"><img src="/image/yh.png"></button>
-            </div>
-
-            <div id="pay">
-                <button title="政府代付" onclick="pay('zf','5')"><img src="/image/zf.png"></button>
-            </div>
-
-            <div id="pay">
-                <button title="赠送优惠" onclick="pay('sal','8')"><img src="/image/sale.jpg"></button>
-            </div>
-        </div>
-    </div>
 </div>

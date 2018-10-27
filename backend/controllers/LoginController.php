@@ -39,7 +39,7 @@ class LoginController extends Controller
             if(isset($login)){ //如果登陆成功则返回
                 return $this->goBack();
             }
-            return $this->redirect(['/site/logout']);
+            return $this->redirect(['/login/logout']);
         }
 
         return $this->render('index', [
