@@ -10,23 +10,39 @@ namespace api\controllers;
 
 
 use common\models\ShoppingAddress;
+use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\web\Controller;
 
 class ShoppingAddressController extends Controller
 {
     //获取地址栏列表
-    function actionIndex($account_id)
+    function actionIndex($account_id, $page)
     {
         $address = ShoppingAddress::find()
             ->select('id, name, phone, address')
             ->where(['account_id' => "$account_id"])
-            ->orderBy('update_time')
+            ->orderBy('update_time');
+
+        $count = $address->count(); //求总数
+        $p = '10'; //每页获取条数
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $address = $address->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->asArray()
             ->all();
 
-        $address = Json::encode($address);
-        return $address;
+        if($address){
+            $address = Json::encode($address);
+            return $address;
+        }
+
+        return false;
     }
 
     //添加用户常用收货地址

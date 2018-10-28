@@ -111,9 +111,46 @@ class TestController extends \yii\web\Controller
 
     function actionTest() //测试
     {
-        $accumulate = Api::Accumulate($account_id = 'a588f77f2546da16bfc3673713de62b9', $amount = '52', $order_id = '181026485583', $income = '1', $type = '1'); //更新用户积分
+//        require_once(dirname(__FILE__).'/../../vendor/ali-sms/TopSdk.php');
+        set_time_limit( 600 );
+        ini_set( 'memory_limit', '1024M' ); // 调整PHP由默认占用内存为1024M(1GB)
 
-        echo $accumulate;
+        //更新用户积分功能
+        $order = Order::find()
+            ->select('account_id, payment_time as time, order_id, order_amount as amount, order_type as type, status')
+            ->where(['and',['>=', 'order_amount', '1'], ['=', 'status' , '2']])
+            ->asArray();
+
+        foreach($order ->batch(500) as $d){
+            foreach ($d as $or){
+                $account_id = $or['account_id'];
+                if(strlen($account_id) < 16){ //判断是否是用户下单
+                    continue;
+                }
+                $amount = $or['amount'];
+                $amount = number_format($amount, '0');
+                $order_id = $or['order_id'];
+                $type = $or['type'];
+                $income = '1';
+                $status = '1';
+                $time = time();
+                $sql = "insert ignore into store_accumulate(account_id, amount, order_id, income, type, create_time, status, property)
+						values('$account_id', '$amount', '$order_id', '$income', '$type', '$time', '$status', '')";
+                $sql = Yii::$app->db->createCommand($sql)->execute();
+            }
+        }
+
+        return true;
+    }
+
+    function actionTest01()
+    {
+        $result = Api::up($order_id = '181028135050');
+        if($result){
+            return true;
+        }
+
+        return false;
     }
 
     //处理用户openID表

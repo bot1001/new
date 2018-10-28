@@ -54,7 +54,7 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 	   </div>
 
        <?php
-       echo '<pre />';
+//       echo '<pre />';
 //       $info = Yii::$app->request->hostInfo;
 //
 //       print_r($info);

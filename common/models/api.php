@@ -142,7 +142,11 @@ class Api extends \yii\db\ActiveRecord
 
              $a = $add->save(); //保存
 
-            $add = self::Accumulate($account_id, $amount, $order_id, $income = '1', $type = '1'); //积累用户积分
+            if ($amount >= 1){
+                $amount02 = number_format($amount, 0);
+                $add = self::Accumulate($account_id, $amount02, $order_id, $income = '1', $type = '1', $status = '2'); //积累用户积分
+            }
+
 //            $reduce = self::Accumulate($account_id, $_amount, $order_id, $income = '2', $type = '1'); //消耗用户积分
 
              if($p && $e && $a && $add){
@@ -162,7 +166,7 @@ class Api extends \yii\db\ActiveRecord
     }
     
     //添加用户积分
-    static function Accumulate($account_id, $amount, $order_id, $income, $type)
+    static function Accumulate($account_id, $amount, $order_id, $income, $type, $status)
     {
         $accumulate = new StoreAccumulate(); //实例化
 
@@ -171,11 +175,22 @@ class Api extends \yii\db\ActiveRecord
         $accumulate->income = $income;
         $accumulate->order_id = $order_id;
         $accumulate->type = $type;
-        $accumulate->status = '2'; //默认为待确认
+        $accumulate->status = $status; //默认为待确认
 
         $accumulate->save();
 
         if($accumulate){
+            return true;
+        }
+
+        return false;
+    }
+
+    //更新用户积分
+    static function up($order_id)
+    {
+        $result = StoreAccumulate::updateAll(['status' => '1'], 'order_id = :o_id', [':o_id' => $order_id]);
+        if ($result){
             return true;
         }
 

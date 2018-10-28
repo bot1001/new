@@ -22,6 +22,7 @@ use Yii;
  */
 class Accumulate extends \yii\db\ActiveRecord
 {
+    public $name;
     /**
      * {@inheritdoc}
      */

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AccumulateSearch */
@@ -24,9 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'kartik\grid\SerialColumn',
             'header' => '序<br />号'],
 
-        ['attribute' => 'address.name' ],
+        ['attribute' => 'name',
+            'value' => 'address.name',
+            'contentOptions' => ['class' => ['text-left']],
+            'label' => '姓名'
+        ],
 
-        ['attribute' => 'amount'],
+        ['attribute' => 'amount',
+            'contentOptions' => ['class' => ['text-right']]
+        ],
 
         ['attribute' => 'income',
             'value' => function($model){
@@ -70,13 +77,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'property'],
 
         ['class' => 'kartik\grid\ActionColumn',
+            'template' => Helper::filterActionColumn('{view}{update}{delete}'),
             'header' => '操<br />作'],
     ];
 
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'panel'=> ['type' => 'info', 'heading' => '用户积分记录'],
+        'panel'=> ['type' => 'info', 'heading' => '积分记录'],
         'columns' => $gridview,
     ]); ?>
 </div>

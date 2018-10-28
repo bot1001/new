@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
            'contentOptions' => ['class' => 'text-right'],
            'label' => '合计'],
 
-       ['class' => 'kartik\grid\checkBoxColumn'],
+       ['class' => 'kartik\grid\CheckboxColumn'],
 
        ['class' => 'kartik\grid\ActionColumn',
            'template' => '{view}{update}',

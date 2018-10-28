@@ -19,15 +19,29 @@ use yii\web\Controller;
 class RegisterController extends Controller
 {
     //小程序手机号码一键注册
-    function actionPhone($phone)
+    function actionPhone($phone, $page)
     {
-        $realestate = (new Query()) //通过手机号码查询房号
+        $r = (new Query()) //通过手机号码查询房号
             ->select(["community_realestate.realestate_id as id, concat(community_basic.community_name,' ', community_building.building_name, ' ', community_realestate.room_number, '-', community_realestate.room_name) as room, community_realestate.owners_name"])
             ->from('community_realestate')
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
             ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id' )
-            ->where(['owners_cellphone' => $phone])
+            ->where(['owners_cellphone' => $phone]);
+
+        $rs = $r->count(); //求总数
+        $p = '10';
+
+        $pa = ceil($rs/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $rs, 'pageSize' => "$p"]); //实例化分页模型并设置每页获取数量
+
+        $realestate = $r->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->all();
+
 
         if($realestate){ //判断查询是否存在
             $realestate = Json::encode($realestate);

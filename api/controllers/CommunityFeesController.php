@@ -14,7 +14,7 @@ use yii\web\Controller;
 
 class CommunityFeesController extends Controller
 {
-    //小程序操作指南标题列表
+    //小程序收费标准标题列表
     function actionIndex($community)
     {
         $fees = (new \yii\db\Query()) //获取指南标题数据
@@ -30,7 +30,7 @@ class CommunityFeesController extends Controller
         return $fees;
     }
 
-    //获取单条指南数据
+    //获取单条收费标准数据
     function actionOne($id)
     {
         $fees = (new Query())

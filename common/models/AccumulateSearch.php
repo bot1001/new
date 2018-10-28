@@ -19,7 +19,7 @@ class AccumulateSearch extends Accumulate
     {
         return [
             [['id', 'amount', 'income', 'type', 'create_time', 'status'], 'integer'],
-            [['account_id', 'order_id', 'property'], 'safe'],
+            [['account_id', 'order_id', 'property', 'name'], 'safe'],
         ];
     }
 
@@ -49,6 +49,11 @@ class AccumulateSearch extends Accumulate
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -71,7 +76,14 @@ class AccumulateSearch extends Accumulate
 
         $query->andFilterWhere(['like', 'account_id', $this->account_id])
             ->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'order_relationship_address.name', $this->name])
             ->andFilterWhere(['like', 'property', $this->property]);
+
+        $dataProvider->sort->attributes['name'] =
+            [
+                'asc' => ['order_relationship_address.name' => SORT_ASC],
+                'desc' => ['order_relationship_address.name' => SORT_DESC],
+            ];
 
         return $dataProvider;
     }
