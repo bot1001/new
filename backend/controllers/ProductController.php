@@ -79,17 +79,19 @@ class ProductController extends Controller
     {
         $host = Yii::$app->request->hostInfo; //请求网址
         $model = (new Query())
-//            ->select(["product_basic.product_name, product_basic.product_subhead, product_basic.product_taxonomy,
-//            product_basic.market_price, product_basic.concat($host, product_basic.product_image), product_basic.product_introduction,
-//            product_basic.product_sale, product_basic.product_accumulate, product_basic.product_status, product_basic.product_"])
+            ->select(["product_basic.product_name as name, product_basic.product_subhead as header,
+            product_basic.product_taxonomy as taxonomy, product_basic.market_price as price, 
+            concat('$host', product_basic.product_image) as image, product_basic.product_introduction as introduction,
+            product_basic.product_sale as sale, product_basic.product_accumulate as accumulate, 
+            product_basic.product_status as status,store_basic.store_name,
+            from_unixtime(product_basic.create_time) as create_time, from_unixtime( product_basic.update_time) as update_time,
+            store_taxonomy.name as taxonomy, product_basic.product_id as id
+            "])
             ->from('product_basic')
             ->join('inner join', 'store_basic', 'store_basic.store_id = product_basic.store_id')
+            ->join('inner join', 'store_taxonomy', 'store_taxonomy.id = product_basic.product_taxonomy')
             ->where(['product_id' => "$id"])
             ->one();
-
-        echo '<pre />';
-        print_r($model);
-        exit;
 
         return $this->render('view', [
             'model' => $model,

@@ -6,43 +6,65 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 
-$this->title = $model->product_id;
+$this->title = $model['name'];
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .p{
+        position: relative;
+        left: 50px;
+        float: right;
+    }
+    .product-view{
+        width: 800px;
+        border: solid 1px red;
+        border-radius: 10px;
+        /*margin: auto;*/
+    }
+    .title{
+        display: flex;
+    }
+    #title{
+        height: 5px;
+    }
+    #img{
+        width: 50px;
+    }
+</style>
 <div class="product-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->product_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->product_id], [
+    <div class="p">
+        <?= Html::a('更新', ['update', 'id' => $model['id']], ['class' => 'btn btn-primary']) ?>
+        <br />
+        <br />
+        <?= Html::a('删除', ['delete', 'id' => $model['id']], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'product_id',
-            'store_id',
-            'product_name',
-            'product_subhead',
-            'product_taxonomy',
-            'brand_id',
-            'market_price',
-            'product_image',
-            'product_introduction',
-            'product_sale',
-            'product_accumulate',
-            'product_status',
-            'create_time:datetime',
-            'update_time:datetime',
-        ],
-    ]) ?>
+    <div class="title">
+        <div id="title">
+            标题：<?= $model['name'] ?>
+            副标题：<?= $model['header'] ?>
+        </div>
+        <div class="image">
+            <img src="<?= $model['image'] ?>" id="img">
+        </div>
+
+    </div>
+
+    <div class="title">
+
+    </div>
+
+    <?php
+    echo '<pre />';
+    print_r($model);
+    ?>
 
 </div>
