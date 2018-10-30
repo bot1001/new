@@ -33,7 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'readonly' => function($model){
                 return $model->product_status == '2';
             },
-            'contentOptions' => ['class' => 'text-left']],
+            'contentOptions' => ['class' => 'text-left']
+        ],
 
         ['attribute' => 'product_name',
             'class' => 'kartik\grid\EditableColumn',
@@ -64,13 +65,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]],
             'value' => function($model){
 //                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
-                return "http://".$_SERVER['HTTP_HOST'].'/'.$model->product_image;
+                return Yii::$app->request->hostInfo.$model->product_image;
             },
             'header' => '缩略图',
             'mergeHeader' => true],
 
-//        ['attribute' => 'product_taxonomy'],
-//        ['attribute' => 'brand_id'],
         ['attribute' => 'market_price',
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
@@ -80,9 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'readonly' => function($model){
                 return $model->product_status == '2';
             },
-            'contentOptions' => ['class' => 'text-right']],
+            'contentOptions' => ['class' => 'text-right']
+        ],
 
-        ['attribute' => 'product_price',
+        ['attribute' => 'product_sale',
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'formOptions' => ['action' => ['product/product']],
@@ -91,20 +91,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'readonly' => function($model){
                 return $model->product_status == '2';
             },
-            'contentOptions' => ['class' => 'text-right']],
+            'contentOptions' => ['class' => 'text-right']
+        ],
 
-//        ['attribute' => 'product_introduction'],
-        ['attribute' => 'product_quantity',
+        ['attribute' => 'product_accumulate',
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'formOptions' => ['action' => ['product/product']],
                 'inputType' => kartik\editable\Editable::INPUT_TEXT,
-//                'data' => ['1' => '大型', 2 => '小型']
             ],
             'readonly' => function($model){
                 return $model->product_status == '2';
             },
-            'contentOptions' => ['class' => 'text-right']],
+            'contentOptions' => ['class' => 'text-right']
+        ],
 
         ['attribute' => 'product_status',
             'filterType' => GridView::FILTER_SELECT2,

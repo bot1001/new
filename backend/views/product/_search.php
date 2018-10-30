@@ -29,15 +29,19 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'market_price') ?>
 
-    <?php // echo $form->field($model, 'product_price') ?>
-
     <?php // echo $form->field($model, 'product_image') ?>
 
     <?php // echo $form->field($model, 'product_introduction') ?>
 
-    <?php // echo $form->field($model, 'product_quantity') ?>
+    <?php // echo $form->field($model, 'product_sale') ?>
+
+    <?php // echo $form->field($model, 'product_accumulate') ?>
 
     <?php // echo $form->field($model, 'product_status') ?>
+
+    <?php // echo $form->field($model, 'create_time') ?>
+
+    <?php // echo $form->field($model, 'update_time') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -373,7 +373,7 @@ class Pay extends \yii\db\ActiveRecord
                         if($invoice){
                             $transaction->commit();
                             Pay::delqr(); //自动判断并删除过期支付二维码
-                            Api::up($out_trade_no); //更新用户积分
+                            Api::up($out_trade_no, $status = '1'); //更新用户积分
                             return true;
                         }
                     }
@@ -394,7 +394,7 @@ class Pay extends \yii\db\ActiveRecord
                     if($order){
                         $transaction->commit();
                         Pay::delqr();
-                        Api::up($out_trade_no); //更新用户积分
+                        Api::up($out_trade_no, $status = '1'); //更新用户积分
                         return true;
                     }
                     $transaction->rollBack();

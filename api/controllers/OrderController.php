@@ -4,8 +4,10 @@ namespace api\controllers;
 use common\models\Api;
 use common\models\Invoice;
 use common\models\Order;
+use common\models\OrderAddress;
 use common\models\Product;
 use common\models\Products;
+use common\models\ShoppingAddress;
 use Yii;
 use yii\data\Pagination;
 use yii\db\Query;
@@ -196,19 +198,83 @@ class OrderController extends Controller
     }
 
     //生成商户订单
-    function actionCreate($realestate, $account, $count, $product_id, $address, $name, $phone)
+    function actionCreate($account_id, $address_id)
     {
-        $product = Product::find()
-            ->select('product_name as name, product_price as price, store_id')
-            ->where(['product_id' => $product_id])
+//        $product = $_GET['product']; //接收产品信息
+        //暂时赋值
+        $product = [['id'=> '8' , 'store' => '37', 'name' => '测试商品', 'price' => '40.8', 'amount' => '81.6', 'count' => '2'],
+            ['id'=> '7' , 'store' => '11', 'name' => '睡着饺子', 'price' => '25', 'amount' => '175', 'count' => '7']];
+
+        $amount = array_column($product, 'amount'); //提取金额合计
+        $amount = array_sum($amount);//求总金额
+
+        $address = ShoppingAddress::find()
+            ->where(['id' => "$address_id"])
             ->asArray()
-            ->all();
+            ->one();
 
+        $order_id = Order::getOrder02(); //生成订单ID
 
+        $transaction = Yii::$app->db->beginTransaction(); //标记事务
+        try{
+            $orderBasic = new Order(); //保存订单信息
 
-        $order_id = Order::getOrder02(); //生成订单
+            $orderBasic->account_id = $account_id;
+            $orderBasic->order_id = $order_id;
+            $orderBasic->create_time = time();
+            $orderBasic->order_type = '2'; //商城订单
+            $orderBasic->description = $address['address'];
+            $orderBasic->order_amount = $amount;
+            $orderBasic->verify = 0;
+            $orderBasic->status = 1;
 
-        $add = Api::Accumulate($account, $amount, $order_id, $income = '1', $type = '2'); //积累用户积分
-        $reduce = Api::Accumulate($account, $amount, $order_id, $income = '2', $type = '2'); //扣除用户积分
+            $orderResult = $orderBasic->save(); //保存订单
+            if($orderResult){
+                $orderAddress = new OrderAddress(); //添加订单地址簿
+
+                $orderAddress->order_id = $order_id;
+                $orderAddress->address = $address['address'];
+                $orderAddress->mobile_phone = $address['phone'];
+                $orderAddress->name = $address['name'];
+
+                $addressResult = $orderAddress->save(); //保存订单地址
+
+                if($addressResult)
+                {
+                    foreach ($product as $p){
+                        $model = new Products();
+
+                        $model->order_id = $order_id;
+                        $model->product_id = $p['id'];
+                        $model->product_quantity = $p['count'];
+                        $model->store_id = $p['store'];
+                        $model->product_name = $p['name'];
+                        $model->product_price = $p['price'];
+
+                        $modelResult = $model->save();
+                    }
+                }
+                if($modelResult)
+                {
+                    $transaction->commit();
+                } else{
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+        }catch (\Exception $e){
+            print_r($e);
+            $transaction->rollBack();
+        }
+        $add = Api::Accumulate($account_id, $amount, $order_id, $income = '1', $type = '2', $status = 2); //积累用户积分
+
+        $order = Order::find()
+            ->select('order_id, description, order_amount as amount')
+            ->where(['order_id' => "$order_id"])
+            ->asArray()
+            ->one();
+
+        $order = Json::encode($order);
+        return $order;
     }
 }

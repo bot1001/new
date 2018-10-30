@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -76,8 +77,22 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $host = Yii::$app->request->hostInfo; //请求网址
+        $model = (new Query())
+//            ->select(["product_basic.product_name, product_basic.product_subhead, product_basic.product_taxonomy,
+//            product_basic.market_price, product_basic.concat($host, product_basic.product_image), product_basic.product_introduction,
+//            product_basic.product_sale, product_basic.product_accumulate, product_basic.product_status, product_basic.product_"])
+            ->from('product_basic')
+            ->join('inner join', 'store_basic', 'store_basic.store_id = product_basic.store_id')
+            ->where(['product_id' => "$id"])
+            ->one();
+
+        echo '<pre />';
+        print_r($model);
+        exit;
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

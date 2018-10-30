@@ -50,6 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
 
+        [ 'attribute' => 'parent',
+            'value' => 'tax.name'],
+
         [ 'attribute' => 'creator',
             'value' => 'creator0.name'],
         [ 'attribute' => 'sort',

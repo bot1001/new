@@ -19,7 +19,7 @@ class TaxonomySearch extends StoreTaxonomy
     {
         return [
             [['id', 'type', 'sort', 'create_time'], 'integer'],
-            [['name', 'property', 'creator'], 'safe'],
+            [['name', 'property', 'creator', 'parent'], 'safe'],
         ];
     }
 
@@ -62,7 +62,7 @@ class TaxonomySearch extends StoreTaxonomy
         $query->andFilterWhere([
             'id' => $this->id,
             'type' => $this->type,
-//            'creator' => $this->creator,
+            'parent' => $this->parent,
             'sort' => $this->sort,
             'create_time' => $this->create_time,
         ]);

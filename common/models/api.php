@@ -187,9 +187,9 @@ class Api extends \yii\db\ActiveRecord
     }
 
     //更新用户积分
-    static function up($order_id)
+    static function up($order_id, $status)
     {
-        $result = StoreAccumulate::updateAll(['status' => '1'], 'order_id = :o_id', [':o_id' => $order_id]);
+        $result = StoreAccumulate::updateAll(['status' => "$status"], 'order_id = :o_id', [':o_id' => $order_id]);
         if ($result){
             return true;
         }

@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use kartik\depdrop\DepDrop;
 use kartik\form\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -28,7 +30,8 @@ use kartik\form\ActiveForm;
     .per_upload_img{
         border-radius: 10px;
     }
-    #product-product_name, #product-product_subhead, #product-brand_id, #product-product_taxonomy, #product-product_price, #product-product_quantity, #product-market_price{
+    #product-product_name, #product-product_subhead, #product-brand_id, #product-product_taxonomy, #product-product_price,
+    #product-product_quantity, #product-market_price, #brand, #product-product_sale, #product-product_status{
         border-radius: 5px;
     }
     .main{
@@ -66,14 +69,25 @@ use kartik\form\ActiveForm;
         </div>
 
         <div class="row">
-            <div class="col-lg-4"><?= $form->field($model, 'brand_id')->textInput(['maxlength' => true, 'placeHolder' => '品牌'])->label(false) ?></div>
-            <div class="col-lg-3"><?= $form->field($model, 'product_taxonomy')->textInput(['maxlength' => true, 'placeHolder' => '系列'])->label(false) ?></div>
+            <div class="col-lg-4"><?= $form->field($model, 'brand_id')->dropDownList(\common\models\StoreTaxonomy::Taxonomy($type = '2'),['maxlength' => true, 'prompt' => '品牌', 'id' => 'brand'])->label(false) ?></div>
+            <div class="col-lg-3">
+                <?= $form->field($model, 'product_taxonomy')->widget(DepDrop::classname(), [
+                    'type' => DepDrop::TYPE_SELECT2,
+                    'options'=>['id'=>'number'],
+                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                    'pluginOptions'=>[
+                        'depends'=>['brand'],
+                        'placeholder'=>'系列',
+                        'url'=>Url::to(['/taxonomy/tax'])
+                    ]
+                ])->label(false) ?>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-2"><?= $form->field($model, 'product_quantity')->input('number', ['placeHolder' => '库存'])->label(false) ?></div>
             <div class="col-lg-2"><?= $form->field($model, 'market_price')->textInput(['maxlength' => true, 'placeHolder' => '市场价格'])->label(false) ?></div>
-            <div class="col-lg-2"><?= $form->field($model, 'product_price')->textInput(['maxlength' => true, 'placeHolder' => '当前价格'])->label(false) ?></div>
+            <div class="col-lg-2"><?= $form->field($model, 'product_sale')->textInput(['maxlength' => true, 'placeHolder' => '优惠券低现'])->label(false) ?></div>
+            <div class="col-lg-2"><?= $form->field($model, 'product_status')->textInput(['maxlength' => true, 'placeHolder' => '积分低现'])->label(false) ?></div>
         </div>
 
         <div style="display: none">

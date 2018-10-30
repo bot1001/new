@@ -10,6 +10,7 @@ namespace api\controllers;
 
 
 use common\models\StoreAccumulate;
+use yii\data\Pagination;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -20,52 +21,41 @@ class AccumulateController extends Controller
     function actionIndex($accunt_id)
     {
         $count = StoreAccumulate::find() //查询用户积分
-            ->select('sum(amount) as amount, income')
-            ->where(['status' => '1'])
-            ->groupBy('income')
+            ->select('sum(amount) as amount')
+            ->where(['status' => '1', 'account_id' => "$accunt_id"])
             ->asArray()
-            ->all();
+            ->one();
 
-        if(!$count){
-            return false;
-        }
-        $out = '0'; //设置默认值
-        $income = '0';
-
-        if(count($count) == '2'){ //如果存在积分消费的情况
-            foreach ($count as $c){
-                if($c['income'] == '1')
-                {
-                    $income = $c['amount'];
-                }elseif ($c['income'] == '2'){
-                    $out = $c['amount'];
-                }
-            }
-        }else{ //仅有积分
-            foreach ($count as $c){
-                $income = $c['amount'];
+        if($count){ //如果
+            $a = $count['amount'];
+            if($a > 0)
+            {
+                return $a;
             }
         }
 
-        $total = $income - $out; //求积分差
-
-        if($total > '0')
-        {
-            return $total;
-        }
-
-        return false;
+        return '0';
     }
 
     //查看积分记录 concat(substr(community_news.content, 1,50), '.....')
-    function actionLog($accunt_id)
+    function actionLog($accunt_id, $page)
     {
-        $count = (new Query()) //查询用户积分记录
+        $log = (new Query()) //查询用户积分记录
             ->select(["from_unixtime(order_basic.payment_time) as payment_time, concat(substr(order_basic.description, 1, 10), '……') as description,
             order_basic.order_id, store_accumulate.income"])
             ->from('store_accumulate')
             ->join('inner join', 'order_basic', 'store_accumulate.order_id = order_basic.order_id')
-            ->where(['store_accumulate.account_id' => "$accunt_id", 'order_basic.status' => '2'])
+            ->where(['store_accumulate.account_id' => "$accunt_id", 'order_basic.status' => '2']);
+
+        $count = $log->count(); //总记录数
+        $p = '10';
+        $pa = ceil($count/$p); //求页数
+        if($page>$pa){
+            return false;
+        }
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]); //实例化分页并设置每页显示数量
+        $count = $log->offset($pagination->offset) //按业获取数据
+            ->limit($pagination->limit)
             ->all();
 
         if($count){ //判断记录是否为空

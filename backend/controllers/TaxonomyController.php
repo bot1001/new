@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\StoreTaxonomy;
 use common\models\TaxonomySearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -93,6 +94,34 @@ class TaxonomyController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    //二级联动获取商品子类别
+    function actionTax( $selected = null )
+    {
+        if ( isset( $_POST[ 'depdrop_parents' ] ) )
+        {
+            $id = $_POST[ 'depdrop_parents' ]; //接收传过来的id
+            $list = StoreTaxonomy::brand($id);//查询数据
+            $isSelectedIn = false;
+            if ( $list != null && $id != null && count( $list ) > 0 ) {
+                foreach ( $list as $i => $account ) {
+                    $out[] = [ 'id' => $account[ 'id' ], 'name' => $account[ 'name' ] ];
+                    if ( $i == 0 ) {
+                        $first = $account[ 'id' ];
+                    }
+                    if ( $account[ 'id' ] == $selected ) {
+                        $isSelectedIn = true;
+                    }
+                }
+                if ( !$isSelectedIn ) {
+                    $selected = $first;
+                }
+                echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+                return;
+            }
+        }
+        echo Json::encode( [ 'output' => '', 'selected' => '' ] );
     }
 
     /**

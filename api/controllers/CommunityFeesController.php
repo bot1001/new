@@ -8,6 +8,7 @@
 
 namespace api\controllers;
 
+use yii\data\Pagination;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -15,17 +16,31 @@ use yii\web\Controller;
 class CommunityFeesController extends Controller
 {
     //小程序收费标准标题列表
-    function actionIndex($community)
+    function actionIndex($community, $page)
     {
         $fees = (new \yii\db\Query()) //获取指南标题数据
             ->select('community_fees.id, community_fees.title')
             ->from('community_fees')
             ->join('inner join', 'community_basic', 'community_fees.community_id = community_basic.community_id')
-            ->where(['community_basic.community_name' => "$community", 'community_fees.status' => '1'])
-            ->all();
+            ->where(['community_basic.community_name' => "$community", 'community_fees.status' => '1']);
 
-        //数据转换
-        $fees = Json::encode($fees);
+        $count = $fees->count(); //求总页数
+        if($count == '0') //如果数据为空则返回空
+        {
+            return false;
+        }
+        $p = '10';
+        $pa = ceil($count/$p);
+        if($page > $pa)
+        {
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pa]);
+        $fees = $fees->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        $fees = Json::encode($fees);//数据转换
 
         return $fees;
     }

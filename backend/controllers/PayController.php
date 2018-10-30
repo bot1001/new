@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Api;
 use Yii;
 use yii\web\Controller;
 use app\models\OrderBasic;
@@ -291,7 +292,7 @@ class PayController extends Controller
 			->where(['status' => 1])
 			->asArray()
 			->all();
-		$time = date(time()); //获取当前时间戳
+		$time = time(); //获取当前时间戳
 		if(!empty($order)){
 			foreach($order as $key => $or )
 		    {
@@ -299,6 +300,7 @@ class PayController extends Controller
 				$between = $time - $o_time;
 				if($between >= 300){
 					OrderBasic::updateAll(['status' => 3], 'order_id = :oid', [':oid' => $or['order_id']]);
+					Api::up($or['order_id'], $status = '0'); //更新用户积分
 				}else{
 					continue;
 				}

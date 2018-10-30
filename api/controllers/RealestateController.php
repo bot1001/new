@@ -8,12 +8,24 @@
 
 namespace api\controllers;
 
+use common\models\Api;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
 
 class RealestateController extends Controller
 {
+    //批量获取房屋信息
+    function actionAll($account_id)
+    {
+        $house = Api::address($account_id); //获取用户关联房号
+        $h = json_decode($house);
+
+        if(empty($h)){ //判读数据是否为空
+            return false;
+        }
+        return $house;
+    }
     //单个房屋信息
     function actionOne($realestate)
     {

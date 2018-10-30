@@ -35,11 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'product_taxonomy',
             'brand_id',
             'market_price',
-            'product_price',
             'product_image',
             'product_introduction',
-            'product_quantity',
+            'product_sale',
+            'product_accumulate',
             'product_status',
+            'create_time:datetime',
+            'update_time:datetime',
         ],
     ]) ?>
 

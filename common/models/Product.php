@@ -11,16 +11,21 @@ use Yii;
  * @property int $store_id （关联商店ID）
  * @property string $product_name （商品名称）
  * @property string $product_subhead （商品副标题）
- * @property string $product_taxonomy （产品分类）
+ * @property string $product_taxonomy （商品系列）
  * @property int $brand_id （品牌ID）
- * @property string $market_price （市场价格，预留字段）
- * @property string $product_price （商品价格）
+ * @property string $market_price （市场价格）
  * @property string $product_image （商品缩略图）
  * @property string $product_introduction （商品介绍）
- * @property int $product_quantity （库存量）
+ * @property string $product_sale （最大优惠金额）
+ * @property string $product_accumulate （最大积分低现金额）
  * @property int $product_status （产品状态，1-上架，2-下架）
  * @property int $create_time （创建时间）
  * @property int $update_time （修改时间）
+ *
+ * @property StoreBasic $store
+ * @property ProductProperty[] $productProperties
+ * @property ShoppingCart[] $shoppingCarts
+ * @property UserAccount[] $accounts
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -38,27 +43,14 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['store_id', 'product_name', 'product_subhead', 'product_taxonomy', 'brand_id', 'market_price', 'product_price', 'product_image', 'product_introduction', 'product_quantity', 'product_status'], 'required'],
-            [['create_time', 'update_time'], function($attr, $params) {
-                if ($this->hasErrors()) return false;
-
-                $datetime = $this->{$attr};
-
-                $time = strtotime($datetime);
-                // 验证时间格式是否正确
-                if ($time === false) {
-                    $this->addError($attr, '时间格式错误.');
-                    return false;
-                }
-                // 将转换为时间戳后的时间赋值给time属性
-                $this->{$attr} = $time;
-                return true;
-            }],
-            [['store_id', 'brand_id', 'product_quantity', 'product_status'], 'integer'],
-            [['market_price', 'product_price'], 'number'],
+            [['store_id', 'product_name', 'product_subhead', 'product_taxonomy', 'brand_id', 'market_price', 'product_image', 'product_introduction', 'product_sale', 'product_accumulate', 'product_status'], 'required'],
+            [['store_id', 'brand_id', 'product_status'], 'integer'],
+            [['market_price', 'product_sale', 'product_accumulate'], 'number'],
             [['product_name', 'product_subhead', 'product_taxonomy'], 'string', 'max' => 64],
             [['product_image'], 'string', 'max' => 300],
             [['product_introduction'], 'string', 'max' => 20000],
+            [['store_id', 'product_name'], 'unique', 'targetAttribute' => ['store_id', 'product_name']],
+            [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'store_id']],
         ];
     }
 
@@ -68,20 +60,20 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => '序号',
-            'store_id' => '商店',
-            'product_name' => '标题',
-            'product_subhead' => '副标题',
-            'product_taxonomy' => '系列',
+            'product_id' => 'Product ID',
+            'store_id' => '商城',
+            'product_name' => '名称',
+            'product_subhead' => '标题',
+            'product_taxonomy' => '商品系列',
             'brand_id' => '品牌',
             'market_price' => '市场价',
-            'product_price' => '当前价',
             'product_image' => '缩略图',
-            'product_introduction' => '商品详情',
-            'product_quantity' => '库存量',
+            'product_introduction' => '详情',
+            'product_sale' => '优惠券金额',
+            'product_accumulate' => '积分优惠',
             'product_status' => '状态',
-            'create_time' => '提交时间',
-            'update_time' => '修改时间',
+            'create_time' => '创建时间',
+            'update_time' => '更新时间',
         ];
     }
 
@@ -100,6 +92,7 @@ class Product extends \yii\db\ActiveRecord
                 $this->update_time = time();
             }else{
                 $this->update_time = time();
+                $this->create_time = strtotime($this->create_time);
             }
             return true;
         }else{
@@ -113,5 +106,29 @@ class Product extends \yii\db\ActiveRecord
     public function getStore()
     {
         return $this->hasOne(Store::className(), ['store_id' => 'store_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+
+    public function getProductProperties()
+    {
+        return $this->hasMany(ProductProperty::className(), ['product_id' => 'product_id']);
+    }*/
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShoppingCarts()
+    {
+        return $this->hasMany(ShoppingCart::className(), ['product_id' => 'product_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAccounts()
+    {
+        return $this->hasMany(UserAccount::className(), ['account_id' => 'account_id'])->viaTable('shopping_cart', ['product_id' => 'product_id']);
     }
 }

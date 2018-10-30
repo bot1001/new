@@ -10,6 +10,7 @@ namespace api\controllers;
 
 
 use common\models\ShoppingCart;
+use yii\data\Pagination;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -17,7 +18,7 @@ use yii\web\Controller;
 class ShoppingCartController extends Controller
 {
     //小程序查询购物车列表
-    function actionIndex($account_id)
+    function actionIndex($account_id, $page)
     {
         $product = (new Query())
         ->select("product_basic.product_name as name, product_basic.product_subhead as subhead, product_basic.product_price as price,
@@ -25,12 +26,24 @@ class ShoppingCartController extends Controller
             ->from('shopping_cart')
             ->join('inner join', 'product_basic', 'product_basic.product_id = shopping_cart.product_id')
             ->andwhere(['shopping_cart.account_id' => $account_id])
-            ->andWhere(['>', 'summation', '0'])
-            ->all();
-        if(!$product)
+            ->andWhere(['>', 'summation', '0']);
+
+        $count = $product->count(); //求总记录数
+        if($count == '0')
         {
             return false;
         }
+
+        $p = '10';
+        $pa = ceil($count/$p);
+        if($page > $pa)
+        {
+            return false;
+        }
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]); //实例化是设置分页
+        $product = $product->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
         $product = Json::encode($product);
         return $product;
