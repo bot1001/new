@@ -78,20 +78,30 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $host = Yii::$app->request->hostInfo; //请求网址
-        $model = (new Query())
+        $model = (new Query()) //查找数据
             ->select(["product_basic.product_name as name, product_basic.product_subhead as header,
-            product_basic.brand_id as brand, product_basic.market_price as price, 
+            store_taxonomy.name as brand, product_basic.product_taxonomy as taxonomy, concat(product_basic.market_price, ' 元') as price,
             concat('$host', product_basic.product_image) as image, product_basic.product_introduction as introduction,
-            product_basic.product_sale as sale, product_basic.product_accumulate as accumulate, 
+            concat(product_basic.product_sale, ' 元') as sale, concat(product_basic.product_accumulate, ' 元') as accumulate,
             product_basic.product_status as status,store_basic.store_name,
             from_unixtime(product_basic.create_time) as create_time, from_unixtime( product_basic.update_time) as update_time,
-            store_taxonomy.name as taxonomy, product_basic.product_id as id
+            product_basic.product_id as id
             "])
             ->from('product_basic')
             ->join('inner join', 'store_basic', 'store_basic.store_id = product_basic.store_id')
-            ->join('inner join', 'store_taxonomy', 'store_taxonomy.id = product_basic.product_taxonomy')
+            ->join('inner join', 'store_taxonomy', 'store_taxonomy.id = product_basic.brand_id')
             ->where(['product_id' => "$id"])
             ->one();
+
+        $taxonomy = (new Query()) //查找产品子系列
+            ->select('name')
+            ->from('store_taxonomy')
+            ->where(['id' => $model['taxonomy']])
+            ->one();
+
+        $status = Yii::$app->params['product']['status'];//获取商品状态
+        $model['taxonomy'] = $taxonomy['name'];   //重新赋值产品信息
+        $model['status'] = $status['3'];
 
         return $this->render('view', [
             'model' => $model,
