@@ -12,9 +12,10 @@ use Yii;
  * @property int $product_id 产品ID
  * @property int $summation 数量
  * @property int $update_time 更新时间
- * @property string $property 备注
+ * @property int $property 商品属性
  *
  * @property ProductBasic $product
+ * @property ProductProperty $property0
  * @property UserAccount $account
  */
 class ShoppingCart extends \yii\db\ActiveRecord
@@ -34,10 +35,11 @@ class ShoppingCart extends \yii\db\ActiveRecord
     {
         return [
 //            [['account_id', 'product_id', 'summation', 'update_time'], 'required'],
-//            [['product_id', 'summation', 'update_time'], 'integer'],
-//            [['account_id', 'property'], 'string', 'max' => 50],
-//            [['account_id', 'product_id'], 'unique', 'targetAttribute' => ['account_id', 'product_id']],
+//            [['product_id', 'summation', 'update_time', 'property'], 'integer'],
+//            [['account_id'], 'string', 'max' => 50],
+//            [['account_id', 'product_id', 'property'], 'unique', 'targetAttribute' => ['account_id', 'product_id', 'property']],
 //            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'product_id']],
+//            [['property'], 'exist', 'skipOnError' => true, 'targetClass' => ProductProperty::className(), 'targetAttribute' => ['property' => 'id']],
 //            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
         ];
     }
@@ -49,11 +51,11 @@ class ShoppingCart extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'account_id' => 'Account ID',
-            'product_id' => 'Product ID',
+            'account_id' => '用户 ID',
+            'product_id' => '产品id',
             'summation' => '数量',
             'update_time' => '更新时间',
-            'property' => '备注',
+            'property' => '产品属性',
         ];
     }
 
@@ -63,6 +65,14 @@ class ShoppingCart extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['product_id' => 'product_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProperty0()
+    {
+        return $this->hasOne(ProductProperty::className(), ['id' => 'property']);
     }
 
     /**

@@ -9,6 +9,7 @@
 namespace api\controllers;
 
 
+use common\models\Product;
 use common\models\ShoppingCart;
 use yii\data\Pagination;
 use yii\db\Query;
@@ -18,15 +19,24 @@ use yii\web\Controller;
 class ShoppingCartController extends Controller
 {
     //小程序查询购物车列表
+    /**
+     * @param $account_id
+     * @param $page
+     * @return array|bool|string|Query
+     */
     function actionIndex($account_id, $page)
     {
         $product = (new Query())
-        ->select("product_basic.product_name as name, product_basic.product_subhead as subhead, product_basic.product_price as price,
-         product_basic.product_status as status, shopping_cart.summation, (product_basic.product_price)*(shopping_cart.summation) as amount")
+        ->select("product_basic.product_id as id, product_basic.product_name as name, product_basic.product_subhead as subhead, 
+        product_basic.product_status as status, product_property.price as price, product_property.size, product_property.id as property,
+        product_property.color, product_property.image,shopping_cart.summation, 
+        (product_property.price)*(shopping_cart.summation) as amount        
+        ")
             ->from('shopping_cart')
             ->join('inner join', 'product_basic', 'product_basic.product_id = shopping_cart.product_id')
+            ->join('inner join', 'product_property', 'product_property.id = shopping_cart.property')
             ->andwhere(['shopping_cart.account_id' => $account_id])
-            ->andWhere(['>', 'summation', '0']);
+            ->andWhere(['>', 'shopping_cart.summation', '0']);
 
         $count = $product->count(); //求总记录数
         if($count == '0')
@@ -50,15 +60,15 @@ class ShoppingCartController extends Controller
     }
 
     //购物车添加
-    function actionAdd($account_id, $product_id, $count)
+    function actionAdd($account_id, $product_id, $count, $property)
     {
-        if($count <= '0') //判断添加数量是否大于等于零
+        if($count == '0') //判断添加数量是否等于零
         {
             return false;
         }
         $product = ShoppingCart::find()
             ->select('summation')
-            ->where(['account_id' => "$account_id", 'product_id' => "$product_id"])
+            ->where(['account_id' => "$account_id", 'product_id' => "$product_id", 'property' => "$property"])
             ->asArray()
             ->one();
 
@@ -73,6 +83,7 @@ class ShoppingCartController extends Controller
             $product->product_id = $product_id;
             $product->summation = $count;
             $product->update_time = time();
+            $product->property = $property;
 
             $add = $product->save(); //保存用户数据
         }

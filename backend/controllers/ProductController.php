@@ -80,7 +80,7 @@ class ProductController extends Controller
         $host = Yii::$app->request->hostInfo; //请求网址
         $model = (new Query())
             ->select(["product_basic.product_name as name, product_basic.product_subhead as header,
-            product_basic.product_taxonomy as taxonomy, product_basic.market_price as price, 
+            product_basic.brand_id as brand, product_basic.market_price as price, 
             concat('$host', product_basic.product_image) as image, product_basic.product_introduction as introduction,
             product_basic.product_sale as sale, product_basic.product_accumulate as accumulate, 
             product_basic.product_status as status,store_basic.store_name,

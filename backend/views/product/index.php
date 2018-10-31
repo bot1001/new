@@ -127,7 +127,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //                if($model->product_status == '3')
                 return $model->product_status == '3';
             },
-            ],
+        ],
+
+        'reading',
 
         ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view}{update}',

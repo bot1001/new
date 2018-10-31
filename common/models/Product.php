@@ -44,7 +44,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['store_id', 'product_name', 'product_subhead', 'product_taxonomy', 'brand_id', 'market_price', 'product_image', 'product_introduction', 'product_sale', 'product_accumulate', 'product_status'], 'required'],
-            [['store_id', 'brand_id', 'product_status'], 'integer'],
+            [['store_id', 'brand_id', 'product_status', 'reading'], 'integer'],
             [['market_price', 'product_sale', 'product_accumulate'], 'number'],
             [['product_name', 'product_subhead', 'product_taxonomy'], 'string', 'max' => 64],
             [['product_image'], 'string', 'max' => 300],
@@ -72,6 +72,7 @@ class Product extends \yii\db\ActiveRecord
             'product_sale' => '优惠券金额',
             'product_accumulate' => '积分优惠',
             'product_status' => '状态',
+            'reading' => '点击量',
             'create_time' => '创建时间',
             'update_time' => '更新时间',
         ];
@@ -84,12 +85,17 @@ class Product extends \yii\db\ActiveRecord
         $this->update_time = date('Y-m-d H:i:s', $this->update_time);
     }
 
+    /**
+     * @param bool $insert
+     * @return bool
+     */
     function beforeSave($insert)
     {
         if(parent::beforeSave($insert)){
             if($insert){
                 $this->create_time = time();
                 $this->update_time = time();
+                $this->reading = '1';
             }else{
                 $this->update_time = time();
                 $this->create_time = strtotime($this->create_time);
@@ -110,18 +116,10 @@ class Product extends \yii\db\ActiveRecord
 
     /**
      * @return \yii\db\ActiveQuery
-
-    public function getProductProperties()
+     */
+    public function getProperties()
     {
         return $this->hasMany(ProductProperty::className(), ['product_id' => 'product_id']);
-    }*/
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getShoppingCarts()
-    {
-        return $this->hasMany(ShoppingCart::className(), ['product_id' => 'product_id']);
     }
 
     /**

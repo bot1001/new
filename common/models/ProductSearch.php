@@ -23,7 +23,7 @@ class ProductSearch extends Product
     {
         return [
             [['product_id', 'store_id', 'brand_id', 'product_status', 'create_time', 'update_time'], 'integer'],
-            [['product_name', 'product_subhead', 'product_taxonomy', 'product_image', 'product_introduction', 'store'], 'safe'],
+            [['product_name', 'product_subhead', 'product_taxonomy', 'product_image', 'product_introduction', 'store', 'reading'], 'safe'],
             [['market_price', 'product_sale', 'product_accumulate'], 'number'],
         ];
     }
@@ -88,6 +88,7 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'product_taxonomy', $this->product_taxonomy])
             ->andFilterWhere(['like', 'store_basic.store_name', $this->store])
             ->andFilterWhere(['like', 'product_image', $this->product_image])
+            ->andFilterWhere(['like', 'reading', $this->reading])
             ->andFilterWhere(['like', 'product_introduction', $this->product_introduction]);
 
         $dataProvider->sort->attributes['store']=[
