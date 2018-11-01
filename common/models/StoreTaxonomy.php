@@ -96,16 +96,29 @@ class StoreTaxonomy extends \yii\db\ActiveRecord
         return $this->hasOne(self::className(), ['id' => 'parent']);
     }
 
-    //获取数组
-    static function Tax($type)
+    //获取品牌
+    static function brand($type)
     {
-        if(empty($type['0']))
-        {
-            return '';
-        }
         $taxonomy = self::find() //查询数据
         ->select('name, id')
             ->where(['type' => "$type"])
+            ->asArray()
+            ->all();
+
+        return $taxonomy;
+    }
+
+    //获取分类
+    static function Tax($parent)
+    {
+        if(empty($parent))
+        {
+            return '';
+        }
+
+        $taxonomy = self::find() //查询数据
+        ->select('name, id')
+            ->where(['parent' => "$parent"])
             ->asArray()
             ->all();
 

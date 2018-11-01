@@ -29,6 +29,7 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    public $name;
     /**
      * {@inheritdoc}
      */
@@ -64,8 +65,8 @@ class Product extends \yii\db\ActiveRecord
             'store_id' => '商城',
             'product_name' => '名称',
             'product_subhead' => '标题',
-            'product_taxonomy' => '商品系列',
             'brand_id' => '品牌',
+            'product_taxonomy' => '商品系列',
             'market_price' => '市场价',
             'product_image' => '缩略图',
             'product_introduction' => '详情',
@@ -75,6 +76,7 @@ class Product extends \yii\db\ActiveRecord
             'reading' => '点击量',
             'create_time' => '创建时间',
             'update_time' => '更新时间',
+            'name' => '分类'
         ];
     }
 

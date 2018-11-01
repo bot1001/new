@@ -69,8 +69,25 @@ use kartik\form\ActiveForm;
         </div>
 
         <div class="row">
-            <div class="col-lg-4"><?= $form->field($model, 'brand_id')->dropDownList(\common\models\StoreTaxonomy::Taxonomy($type = '2'),['maxlength' => true, 'prompt' => '品牌', 'id' => 'brand'])->label(false) ?></div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
+                <?= $form->field($model, 'name')->dropDownList(\common\models\StoreTaxonomy::Taxonomy($type = '0'),['maxlength' => true, 'prompt' => '分类', 'id' => 'name'])->label(false) ?>
+            </div>
+
+            <div class="col-lg-2">
+                <?= $form->field($model, 'brand_id')->widget(DepDrop::classname(), [
+                    'type' => DepDrop::TYPE_SELECT2,
+                    'options'=>['id'=>'brand'],
+                    'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                    'pluginOptions'=>[
+                        'depends'=>['name'],
+                        'placeholder'=>'品牌',
+                        'url'=>Url::to(['/taxonomy/brand'])
+                    ]
+                ])->label(false) ?>
+
+            </div>
+
+            <div class="col-lg-2">
                 <?= $form->field($model, 'product_taxonomy')->widget(DepDrop::classname(), [
                     'type' => DepDrop::TYPE_SELECT2,
                     'options'=>['id'=>'number'],

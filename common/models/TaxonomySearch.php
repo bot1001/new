@@ -67,12 +67,13 @@ class TaxonomySearch extends StoreTaxonomy
         $query->andFilterWhere([
             'id' => $this->id,
             'type' => $this->type,
-            'parent' => $this->parent,
+//            'parent' => $this->parent,
             'sort' => $this->sort,
             'create_time' => $this->create_time,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'parent', $this->parent])
             ->andFilterWhere(['like', 'property', $this->property]);
 
         return $dataProvider;

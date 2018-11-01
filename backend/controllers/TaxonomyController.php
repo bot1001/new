@@ -42,7 +42,7 @@ class TaxonomyController extends Controller
         $dataProvider->query->where['type'] = '0';
 
         $data = $searchModel->search(Yii::$app->request->queryParams);
-        $data->query->where['type'] = '1';
+        $data->query->where['type'] = '-1';
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -55,7 +55,7 @@ class TaxonomyController extends Controller
     {
         $searchModel = new TaxonomySearch(); //实例化搜索模型
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where['type'] = '2';
+        $dataProvider->query->where['type'] = '-2';
 
         return $this->render('products', [
             'searchModel' => $searchModel,
@@ -114,13 +114,41 @@ class TaxonomyController extends Controller
         ]);
     }
 
-    //二级联动获取商品子类别
+    //三级级联动获取商城分类
+    function actionBrand( $selected = null )
+    {
+        if ( isset( $_POST[ 'depdrop_parents' ] ) )
+        {
+            $id = $_POST[ 'depdrop_parents' ]; //接收传过来的id
+            $list = StoreTaxonomy::brand($id['0']);//查询数据
+            $isSelectedIn = false;
+            if ( $list != null && $id != null && count( $list ) > 0 ) {
+                foreach ( $list as $i => $account ) {
+                    $out[] = [ 'id' => $account[ 'id' ], 'name' => $account[ 'name' ] ];
+                    if ( $i == 0 ) {
+                        $first = $account[ 'id' ];
+                    }
+                    if ( $account[ 'id' ] == $selected ) {
+                        $isSelectedIn = true;
+                    }
+                }
+                if ( !$isSelectedIn ) {
+                    $selected = $first;
+                }
+                echo Json::encode( [ 'output' => $out, 'selected' => $selected ] );
+                return;
+            }
+        }
+        echo Json::encode( [ 'output' => '', 'selected' => '' ] );
+    }
+
+    //三级级联动获取商品分类
     function actionTax( $selected = null )
     {
         if ( isset( $_POST[ 'depdrop_parents' ] ) )
         {
             $id = $_POST[ 'depdrop_parents' ]; //接收传过来的id
-            $list = StoreTaxonomy::brand($id);//查询数据
+            $list = StoreTaxonomy::tax($id['0']);//查询数据
             $isSelectedIn = false;
             if ( $list != null && $id != null && count( $list ) > 0 ) {
                 foreach ( $list as $i => $account ) {
