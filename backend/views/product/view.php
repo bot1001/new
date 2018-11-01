@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         margin-left: 10px;
     }
 
-    .table{
-        width: 300px;
-        font-size: 15px;
-    }
     th, td{
         border: solid 1px white;
+    }
+
+    th{
+        width: 80px;
     }
 
     #img{
@@ -59,6 +59,30 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
+<script>
+    function down(status) {
+        var p_message = '';
+        if (status == '2'){
+            p_message = '您确定要下架此宝贝吗？'
+        }else if(status == '3')
+        {
+            p_message = '你确定要申请上架吗？';
+        }
+        if(confirm(p_message)){
+            var xhr = new XMLHttpRequest(); //实例化ajax
+            xhr.open('get', "/product/down?id=<?= $model['id'] ?>&status="+status, true); //请求路由
+            xhr.onload = function () {
+                var text = this.responseText;
+                if( text == '1'){
+                    alert('操成功!');
+                    window.location.reload();
+                }
+            }
+            xhr.send(); //发送请求
+        }
+    }
+</script>
+
 <div class="product-view row">
 
     <div class="title col-lg-1">
@@ -69,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tbody>
                 <tr>
                     <th>副标题</th>
-                    <td><?= $model['name'] ?></td>
+                    <td><?= $model['header'] ?></td>
                 </tr>
                 <tr>
                     <th>品牌</th>
@@ -97,7 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <tr>
                     <th>状态</th>
-                    <td><?= $model['status'] ?></td>
+                    <td><?= $status[$model['status']] ?></td>
                 </tr>
 
                 <tr>
@@ -119,15 +143,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="p">
                 <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                     ['update', 'id' => $model['id']], ['class' => 'btn btn-primary', 'title'=>'更新']) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-trash"></span>',
-                    ['#', 'id' => $model['id']], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => '您确定要下架此商品吗？',
-                        'method' => 'post',
-                    ],
-                    'title'=>'删除',
-                ]) ?>
+
+                <?php
+                if($model['status'] == '2'){
+                    echo Html::a('<span class="glyphicon glyphicon-chevron-up"></span>', '#',
+                        [
+                            'class' => 'btn btn-info',
+                            'onclick' => "down( '3' )"
+                        ]);
+                }else{
+                    echo Html::a('<span class="glyphicon glyphicon-chevron-down"></span>', '#',
+                        [
+                            'class' => 'btn btn-danger',
+                            'onclick' => 'down(2)'
+                        ]);
+                }
+                 ?>
             </div>
     </div>
 
@@ -136,5 +167,4 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model['introduction'] ?>
         </div>
     </div>
-
 </div>

@@ -101,10 +101,10 @@ class ProductController extends Controller
 
         $status = Yii::$app->params['product']['status'];//获取商品状态
         $model['taxonomy'] = $taxonomy['name'];   //重新赋值产品信息
-        $model['status'] = $status['3'];
 
         return $this->render('view', [
             'model' => $model,
+            'status' => $status
         ]);
     }
 
@@ -124,6 +124,18 @@ class ProductController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    //下架商品
+    function actionDown($id, $status)
+    {
+        $result = Product::updateAll(['product_status' => $status], 'product_id = :p_id', [':p_id' => "$id"]);
+
+        if($result){
+            return true;
+        }
+
+        return false;
     }
 
     /**

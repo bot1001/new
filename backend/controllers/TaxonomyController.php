@@ -36,12 +36,30 @@ class TaxonomyController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TaxonomySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new TaxonomySearch(); //实例化搜索模型
+
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams); //设置数据提供器
+        $dataProvider->query->where['type'] = '0';
+
+        $data = $searchModel->search(Yii::$app->request->queryParams);
+        $data->query->where['type'] = '1';
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'data' => $data,
+        ]);
+    }
+
+    function actionProduct()
+    {
+        $searchModel = new TaxonomySearch(); //实例化搜索模型
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where['type'] = '2';
+
+        return $this->render('products', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
     }
 

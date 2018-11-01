@@ -1,11 +1,5 @@
 <?php
 
-use app\models\UserInvoice;
-use yii\jui\DatePicker;
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\Pjax;
 use backend\assets\AppAsset;
 use mdm\admin\components\Helper;
 
@@ -52,13 +46,4 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
        <div id="box6" class="col-lg-3">
 	       <?= $this->render('box6') ?>
 	   </div>
-
-       <?php
-//       echo '<pre />';
-//       $info = Yii::$app->request->hostInfo;
-//
-//       print_r($info);
-
-//       print_r($_SERVER);
-       ?>
  </div>

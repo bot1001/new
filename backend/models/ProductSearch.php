@@ -1,16 +1,16 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\StoreTaxonomy;
+use common\models\Products;
 
 /**
- * TaxonomySearch represents the model behind the search form of `common\models\StoreTaxonomy`.
+ * ProductSearch represents the model behind the search form of `common\models\Products`.
  */
-class TaxonomySearch extends StoreTaxonomy
+class ProductSearch extends Products
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,9 @@ class TaxonomySearch extends StoreTaxonomy
     public function rules()
     {
         return [
-            [['id', 'sort', 'create_time'], 'integer'],
-            [['name', 'property', 'creator', 'parent', 'type'], 'safe'],
+            [['id', 'product_quantity', 'sale'], 'integer'],
+            [['order_id', 'product_id', 'store_id', 'product_name'], 'safe'],
+            [['product_price'], 'number'],
         ];
     }
 
@@ -41,18 +42,13 @@ class TaxonomySearch extends StoreTaxonomy
      */
     public function search($params)
     {
-        $query = StoreTaxonomy::find();
+        $query = Products::find();
+//        $query->joinWith('order')->where(['order_basic.order_type' => '2']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => ['pageSize' => '10'],
-            'sort' => [
-                'defaultOrder' =>[
-                    'type' => SORT_ASC
-                ]
-            ]
         ]);
 
         $this->load($params);
@@ -66,14 +62,15 @@ class TaxonomySearch extends StoreTaxonomy
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'type' => $this->type,
-            'parent' => $this->parent,
-            'sort' => $this->sort,
-            'create_time' => $this->create_time,
+            'product_quantity' => $this->product_quantity,
+            'sale' => $this->sale,
+            'product_price' => $this->product_price,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'property', $this->property]);
+        $query->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'product_id', $this->product_id])
+            ->andFilterWhere(['like', 'store_id', $this->store_id])
+            ->andFilterWhere(['like', 'product_name', $this->product_name]);
 
         return $dataProvider;
     }

@@ -12,64 +12,106 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <style>
+    #taxonomy{
+        width: 400px;
+        height: 450px;
+        background: white;
+        margin-left: 10px;
+        border-radius: 5px;
+        /*border: solid 1px gray;*/
+    }
+    .tax-one{
+        height: 400px;
+        overflow-y: auto;
+    }
     th, td{
         text-align: center;
     }
+    .tax-menu{
+        text-align: center;
+        position: relative;
+        float: bottom;
+        bottom: -10px;
+    }
 </style>
-<div class="store-taxonomy-index">
+<div class="taxonomy-index row">
+    <?php $type = Yii::$app->params['taxonomy']['type']; ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="taxonomy">
+        <div id="taxonomy" class="col-lg-4">
+            <div class="tax-one">
+                <?php
+                $gridview = [
+                    ['class' => 'kartik\grid\SerialColumn',
+                        'header' => '序<br />号'],
 
-    <?php
-    $gridview = [
-        ['class' => 'kartik\grid\SerialColumn',
-            'header' => '序<br />号'],
+                    [ 'attribute' => 'name',
+                        'contentOptions' => [
+                                'class' => 'text-left'
+                        ],
+                        'label' => '类别',
+                    ],
 
-        [ 'attribute' => 'name',
-            'contentOptions' => ['class' => 'text-left']],
+                    ['class' => 'kartik\grid\ActionColumn',
+                        'template' => '{update}',
+                        'header' => '操<br />作'],
+                ];
 
-        [ 'attribute' => 'type',
-            'value' => function($model){
-                $date = ['1' => '行业', '2' => '类别'];
-                return $date[$model->type];
-            },
-            'class' => 'kartik\grid\EditableColumn',
-            'editableOptions' => [
-                'formOptions' => ['action' => ['taxonomy/taxonomy']],
-                'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-                'data' => ['1' => '行业', '2' => '类别'],
-            ],
-//            'readonly' => function($model){
-//                return $model->store_status == '0';
-//            },
-            'filterType' => GridView::FILTER_SELECT2,
-            'filter' => ['1' => '行业', '2' => '类别'],
-            'filterInputOptions' => ['placeholder' => '请选择'],
-            'filterWidgetOptions' => [
-                'pluginOptions' => ['allowClear' => true]
-            ]
-        ],
+                echo GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'panel' => ['type' => 'info', 'heading' => '行业'],
+                    'toolbar' => [],
+                    'pjax' => true,
+                    'columns' => $gridview,
+                ]); ?>
+            </div>
 
-        [ 'attribute' => 'parent',
-            'value' => 'tax.name'],
+            <div class="tax-menu">
+                <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create', 'id' => '1'], ['class' => 'btn btn-info']) ?>
+            </div>
 
-        [ 'attribute' => 'creator',
-            'value' => 'creator0.name'],
-        [ 'attribute' => 'sort',
-            'mergeHeader' => true],
-        [ 'attribute' => 'create_time',
-            'mergeHeader' => true],
-        [ 'attribute' => 'property'],
+        </div>
 
-        ['class' => 'kartik\grid\ActionColumn',
-            'header' => '操<br />作'],
-    ];
+        <div id="taxonomy" class="col-lg-4">
+            <div class="tax-one">
+                <?=
+                GridView::widget([
+                    'dataProvider' => $data,
+                    'filterModel' => $searchModel,
+                    'panel' => ['type' => 'danger', 'heading' => '品牌',
+                    ],
+                    'toolbar' => [],
+                    'columns' => [
+                        ['class' => 'kartik\grid\SerialColumn',
+                            'header' => '序<br />号'],
 
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'panel' => ['type' => 'info', 'heading' => '行业或类别列表',
-            'before' => Html::a('<span class="glyphicon glyphicon-plus"></span>', 'create', ['class' => 'btn btn-info'])],
-        'columns' => $gridview,
-    ]); ?>
+                        [ 'attribute' => 'name',
+                            'contentOptions' => ['class' => 'text-left'],
+                            'label' => '品牌名称',
+                        ],
+
+                        ['attribute' => 'parent',
+                            'value' => 'tax.name',
+                            'filterType' => GridView::FILTER_SELECT2,
+                            'filter' => \common\models\StoreTaxonomy::Taxonomy($type = '0'),
+                            'filterWidgetOptions' => [
+                                'pluginOptions' => [ 'allowClear' => true ],
+                            ],
+                            'filterInputOptions' => [ 'placeholder' => '请选择' ],
+                            'label' => '类别',],
+
+                        ['class' => 'kartik\grid\ActionColumn',
+                            'template' => '{update}',
+                            'header' => '操<br />作'],
+                    ],
+                    'pjax' => true
+                ])
+                ?>
+            </div>
+            <div class="tax-menu">
+                <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create', 'id' => '2'], ['class' => 'btn btn-info']) ?>
+            </div>
+        </div>
+    </div>
 </div>

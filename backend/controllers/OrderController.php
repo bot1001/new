@@ -6,6 +6,7 @@ use app\models\Pay;
 use common\models\Invoice;
 use common\models\Order;
 use common\models\OrderAddress;
+use common\models\Product;
 use common\models\Products;
 use common\models\Realestate;
 use Yii;
@@ -200,18 +201,21 @@ class OrderController extends Controller
 
 		//获取订单信息
 		$order = (new Query())
-			->select('order_basic.order_type as type, order_basic.order_amount, order_basic.order_id, order_basic.payment_time, order_basic.payment_gateway, order_basic.payment_time, order_relationship_address.address')
+			->select('order_basic.order_type as type, order_basic.order_amount, order_basic.order_id, 
+			order_basic.payment_time, order_basic.payment_gateway, order_basic.payment_time, order_relationship_address.address')
             ->join('inner join', 'order_relationship_address', 'order_relationship_address.order_id = order_basic.order_id')
             ->from('order_basic')
 			->andwhere(['order_basic.order_id' => $order_id])
 			->andwhere(['>','order_basic.payment_gateway',  '0'])
 			->one();
+
 		if(!$order){
 		    return $this->redirect(Yii::$app->request->referrer);
         }
+
         $amount = $order['order_amount']; //订单金额
-        $address = $order['address'];
-        $add = explode(' ', $address);//分割地址
+        $address = $order['address']; //订单地址
+
         //缴费房号信息
         $comm = (new \yii\db\Query())
             ->select('community_basic.community_name as community, community_realestate.owners_name as n, community_realestate.realestate_id as id')
@@ -219,36 +223,27 @@ class OrderController extends Controller
             ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
             ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id');
 
-        if(count($add) != '1'){
-            $number = (int)$add['2']; //强制转换成整数
-            $number=str_pad($number,2,"0",STR_PAD_LEFT); //单元自动补0
-            $comm = $comm->where(['community_basic.community_name' => reset($add), 'community_building.building_name' => $add['1'], 'community_realestate.room_number' => "$number", 'community_realestate.room_name' => end($add)])
+        $t = $order['type'];//提取支付方式
+
+        $e = Yii::$app->params['order']['way'];//订单状态
+        unset($e['0']); //卸载第一字符串
+
+        if($t == '1'){//判断是否是物业缴费
+            $id = (new Query()) //查询产品信息
+                ->select('realestate_id as id')
+                ->from('order_products')
+                ->join('inner join', 'user_invoice', 'order_products.product_id = user_invoice.invoice_id')
+                ->where(['order_products.order_id' => "$order_id"])
                 ->one();
-        }else{
-            $realestate = Products::find()
-                ->select('product_id as id')
-                ->where(['order_id' => "$order_id"])
-                ->asArray()
-                ->one();
-            //缴费房号信息
-            $comm = $comm->where(['community_realestate.realestate_id' => $realestate['id']])->one();
-        }
 
-
-        $type = $order['type']; //提取支付方式
-
-
-
-
-        $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行', 8=> '优惠' ]; //订单状态
-
-        if($type == '1'){//判断是否是物业缴费
+            $comm = $comm->where(['community_realestate.realestate_id' => $id['id']])->one();
             $invoice = UserInvoice::find()
                 ->select('realestate_id, year, month, description, invoice_amount, invoice_notes as note')
                 ->where(['order_id'=>$order_id])
                 ->orderBy('year,month ASC')
                 ->asArray()
                 ->all();
+
             if(!$invoice){ //如果不存在则说明订单未支付
                 $session->setFlash('m','1');
                 return $this->redirect(Yii::$app->request->referrer);
@@ -270,7 +265,16 @@ class OrderController extends Controller
                     'invoice' => $invoice,
                 ]);
             }
-        }else{
+        }elseif($t == '3'){
+            $realestate = (new Query())
+                ->select('realestate_id as id')
+                ->from('order_products')
+                ->join('inner join', 'user_invoice', 'order_products.product_id = user_invoice.invoice_id')
+                ->where(['order_products.order_id' => "$order_id"])
+                ->one();
+            //缴费房号信息
+            $comm = $comm->where(['community_realestate.realestate_id' => $realestate['id']])->one();
+
             $invoice = Products::find() //查询产品信息
                 ->where(['order_id' => "$order_id"])
                 ->asArray()
