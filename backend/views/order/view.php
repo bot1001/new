@@ -84,7 +84,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 ['attribute' => 'payment_gateway',
                     'label' => '支付方式',
                     'value'=> function($model){
-                        $e = [ 1 => '支付宝', 2 => '微信', 3 => '刷卡', 4 => '银行', '5' => '政府', 6 => '现金', 7 => '建行' ];
+                        $e = Yii::$app->params['order']['way'];
                         if(empty($model['payment_gateway'])){
                             return '';
                         }else{
@@ -122,7 +122,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
                 ['attribute' => 'status',
                     'value' => function($model){
-                        $data = [1=>'未支付',2=>'已支付',3=>'已取消', 4=>'送货中', 5=>'已签收', 6 => '其他'];
+                        $data = Yii::$app->params['order']['status'];
                         return $data[$model['status']];
                     },
                     'label' => '订单状态'],

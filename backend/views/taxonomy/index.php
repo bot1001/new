@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
+use mdm\admin\components\Helper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TaxonomySearch */
@@ -9,6 +11,9 @@ use kartik\grid\GridView;
 
 $this->title = '行业或类别';
 $this->params['breadcrumbs'][] = $this->title;
+
+//引入模态框文件
+echo $this->render(Yii::$app->params['modal']);
 ?>
 
 <style>
@@ -53,7 +58,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     ['class' => 'kartik\grid\ActionColumn',
-                        'template' => '{update}',
+                        'template' => Helper::filterActionColumn('{update}'),
+                        'buttons' =>[
+                                'update' => function($model){
+                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#',
+                                        [
+                                            'class' => 'pay',
+                                            'data-toggle' => 'modal',
+                                            'data-url' => Url::toRoute([$model.'&type=0']),
+                                            'data-title' => '修改', //如果不设置子标题，默认使用大标题
+                                            'data-target' => '#common-modal',
+                                        ]);
+                                }
+                        ],
                         'header' => '操<br />作'],
                 ];
 
@@ -68,15 +85,24 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <div class="tax-menu">
-                <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create', 'id' => '1'], ['class' => 'btn btn-info']) ?>
+                <?php
+                if(Helper::checkRoute('create')){
+                    echo Html::a('<span class="glyphicon glyphicon-plus"></span>', '#',
+                        [
+                            'class' => 'btn btn-info pay',
+                            'data-toggle' => 'modal',
+                            'data-url' => Url::toRoute(['create', 'type' => '0']),
+                            'data-title' => '添加', //如果不设置子标题，默认使用大标题
+                            'data-target' => '#common-modal',
+                        ]);
+                } ?>
             </div>
 
         </div>
 
         <div id="taxonomy" class="col-lg-4">
             <div class="tax-one">
-                <?=
-                GridView::widget([
+                <?=  GridView::widget([
                     'dataProvider' => $data,
                     'filterModel' => $searchModel,
                     'panel' => ['type' => 'danger', 'heading' => '品牌',
@@ -99,10 +125,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'pluginOptions' => [ 'allowClear' => true ],
                             ],
                             'filterInputOptions' => [ 'placeholder' => '请选择' ],
+                            'contentOptions' => ['class' => 'text-left'],
                             'label' => '类别',],
 
                         ['class' => 'kartik\grid\ActionColumn',
-                            'template' => '{update}',
+                            'template' => Helper::filterActionColumn('{update}'),
+                            'buttons' =>[
+                                'update' => function($model){
+                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#',
+                                        [
+                                            'class' => 'pay',
+                                            'data-toggle' => 'modal',
+                                            'data-url' => Url::toRoute([$model.'&type=-1']),
+                                            'data-title' => '修改', //如果不设置子标题，默认使用大标题
+                                            'data-target' => '#common-modal',
+                                        ]);
+                                }
+                            ],
                             'header' => '操<br />作'],
                     ],
                     'pjax' => true
@@ -110,7 +149,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </div>
             <div class="tax-menu">
-                <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', ['create', 'id' => '2'], ['class' => 'btn btn-info']) ?>
+                <?php
+                if(Helper::checkRoute('create')){
+                    echo Html::a('<span class="glyphicon glyphicon-plus"></span>', '#',
+                        [
+                            'class' => 'btn btn-info pay',
+                            'data-toggle' => 'modal',
+                            'data-url' => Url::toRoute(['create', 'type' => '-1']),
+                            'data-title' => '添加行业', //如果不设置子标题，默认使用大标题
+                            'data-target' => '#common-modal',
+                        ]);
+                }
+                 ?>
             </div>
         </div>
     </div>

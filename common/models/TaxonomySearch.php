@@ -50,6 +50,7 @@ class TaxonomySearch extends StoreTaxonomy
             'pagination' => ['pageSize' => '10'],
             'sort' => [
                 'defaultOrder' =>[
+                    'id' => SORT_DESC,
                     'type' => SORT_ASC
                 ]
             ]

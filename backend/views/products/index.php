@@ -10,8 +10,6 @@ use kartik\grid\GridView;
 $this->title = '确认';
 $this->params['breadcrumbs'][] = $this->title;
 
-//引入模态窗文件
-//echo $this->render('..\..\..\common\modal\modal.php');
 ?>
 <script>
     function pay(method, way) {

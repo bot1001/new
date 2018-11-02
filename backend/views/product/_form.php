@@ -48,12 +48,19 @@ use kartik\form\ActiveForm;
 
         <div id="title">
             <div class="col-lg-6 title">
-                <div class="col-lg-8"><?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'placeHolder' => '标题'])->label(false) ?></div>
-                <div class="col-lg-12"><?= $form->field($model, 'product_subhead')->textInput(['maxlength' => true, 'placeHolder' => '副标题'])->label(false) ?></div>
+                <div class="col-lg-8">
+                    <?= $form->field($model, 'product_name')->textInput(['maxlength' => true, 'placeHolder' => '标题'])->label(false) ?>
+                </div>
+
+                <div class="col-lg-12">
+                    <?= $form->field($model, 'product_subhead')->textInput(['maxlength' => true, 'placeHolder' => '副标题'])->label(false) ?>
+                </div>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-4">
-                <div class="col-lg-3"><?= $form->field($model, 'product_image')->widget('common\widgets\upload\FileUpload')->label(false) ?></div>
+                <div class="col-lg-3">
+                    <?= $form->field($model, 'product_image')->widget('common\widgets\upload\FileUpload')->label(false) ?>
+                </div>
             </div>
         </div>
 

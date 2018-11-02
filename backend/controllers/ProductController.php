@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\ProductProperty;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -99,12 +101,24 @@ class ProductController extends Controller
             ->where(['id' => $model['taxonomy']])
             ->one();
 
+        $property = ProductProperty::find()
+            ->where(['product_id' => $model['id']]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $property,
+            'sort' => false, //取消排序
+            'pagination' => [
+                'pageSize' => 20
+            ]
+        ]);
+
         $status = Yii::$app->params['product']['status'];//获取商品状态
         $model['taxonomy'] = $taxonomy['name'];   //重新赋值产品信息
 
         return $this->render('view', [
             'model' => $model,
-            'status' => $status
+            'status' => $status,
+            'data' => $dataProvider,
         ]);
     }
 
@@ -124,6 +138,14 @@ class ProductController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    //添加商品属性
+    function actionAdd()
+    {
+        $model = new ProductProperty();//实例化模型
+
+        return $this->renderAjax('add', ['model' => $model]);
     }
 
     //下架商品

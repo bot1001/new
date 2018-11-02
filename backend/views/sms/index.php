@@ -13,7 +13,7 @@ $this->title = '短信模板';
 $this->params['breadcrumbs'][] = $this->title;
 
 //引入模态文件
-echo $this->render('..\..\..\common\modal\modal.php');
+echo $this->render(Yii::$app->params['modal']);
 ?>
 
 <style>
