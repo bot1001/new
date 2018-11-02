@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     .p, .p_property, .add{
         margin-bottom: 5px;
-        text-align: center;
+        /*text-align: center;*/
     }
 
     .title{
@@ -64,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .add{
         background: white;
         border-radius: 5px;
+        display: none;
     }
 </style>
 
@@ -90,11 +91,11 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     }
 
-    function add() {
-        var add = document.getElementById('add');
-        // add.setAttribute('style', 'height: 100px; background: white;'); //设置样式
-        add.innerHTML = '<iframe src="./add"  frameborder="0" width="100%" height="40"></iframe>';
-    }
+    $(document).ready(function(){ //点击显示或隐藏输入框
+        $("#v_new").click(function(){
+            $("#add").toggle(1000);
+        });
+    });
 </script>
 
 <div class="product-view row">
@@ -154,11 +155,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </table>
 
         <div class="p_property"><?= $this->render('property.php', ['data' => $data]) ?></div>
-        <div class="add" id="add"></div>
+        <div class="add" id="add"><?= $this->render('add.php', ['id' => $model['id']]) ?></div>
 
-        <div class="p">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', '#',
-                ['class' => 'btn btn-default', 'onclick' => 'add()']); ?>
+        <div class="p" style="text-align: center">
+            <?= Html::button('<span class="glyphicon glyphicon-plus"></span>',
+                ['class' => 'btn btn-default', 'id' => 'v_new']); ?>
 
             <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                 ['update', 'id' => $model['id']], ['class' => 'btn btn-primary', 'title'=>'更新']) ?>
@@ -171,10 +172,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
             }else{
                 echo Html::a('<span class="glyphicon glyphicon-chevron-down"></span>', '#',
-                    ['class' => 'btn btn-danger',
+                    ['class' => 'btn btn-warning',
                         'onclick' => 'down(2)'
                     ]);
             } ?>
+
+            <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:void(0)',
+                ['class' => 'btn btn-danger trash']); ?>
+
         </div>
     </div>
 

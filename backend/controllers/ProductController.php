@@ -141,11 +141,40 @@ class ProductController extends Controller
     }
 
     //添加商品属性
-    function actionAdd()
+    function actionAdd($id, $price, $size, $color, $quantity, $image)
     {
         $model = new ProductProperty();//实例化模型
 
-        return $this->renderAjax('add', ['model' => $model]);
+        $model->product_id = $id;
+        $model->price = $price;
+        $model->size = $size;
+        $model->color = $color;
+        $model->quantity = $quantity;
+        $model->image = $image;
+
+        $reault = $model->save();//保存数据
+
+        if($reault){ //如果保存成功这返回真
+            return true;
+        }
+
+        return false; //默认返回false
+    }
+
+    //删除商品属性
+    function actionTrash()
+    {
+        $ids = $_GET['ids'];
+        $i = 0; //设置计数
+        foreach ($ids as $id){
+            $model = ProductProperty::findOne($id);
+            $result = $model->delete();
+            if($result){
+                $i ++;
+            }
+        }
+
+        return $i;
     }
 
     //下架商品

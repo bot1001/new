@@ -180,7 +180,7 @@ class RegisterController extends Controller
         if($name == ''){ $name = $nick; }//判断姓名是否为空，如果为空自默认和昵称相一致
 
         $user = UserAccount::find() //验证用户是否存在
-            ->where(['mobile_phone' => "$phone"])
+            ->where(['mobile_phone' => "$phone", 'account_role' => '0'])
             ->asArray()
             ->one();
 
