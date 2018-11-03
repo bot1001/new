@@ -6,6 +6,9 @@ use app\models\Information;
 use app\models\SmsLog;
 use app\models\TicketBasic;
 use common\models\Sms;
+use common\models\Up;
+use Yii;
+use yii\web\UploadedFile;
 
 class AutoController extends \yii\web\Controller
 {
@@ -173,4 +176,12 @@ class AutoController extends \yii\web\Controller
         }
         return false; //默认返回值
     }
+
+    //异步上传图片
+    function actionImage()
+    {
+//        $type_pic = $this->file_upload('1',array('jpg', 'gif', 'png', 'jpeg'),'filetest','myfile');
+//        echo $type_pic['img_path'];
+    }
+
 }

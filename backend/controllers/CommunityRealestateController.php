@@ -5,7 +5,7 @@ namespace backend\controllers;
 use common\models\Realestate;
 use Yii;
 use app\models\CommunityRealestate;
-use app\models\Up;
+use common\models\Up;
 use app\models\CommunityRealestatenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

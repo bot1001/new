@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Up;
 use common\models\ProductProperty;
 use Yii;
 use common\models\Product;
@@ -13,6 +14,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use kartik\grid\EditableColumnAction;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -45,11 +47,18 @@ class ProductController extends Controller
                     "imageMaxSize" => 1024000,
                 ],
             ],
-            'product' => [
+            'product' => [ //GridView直接编辑一
                 'class' => EditableColumnAction::className(),
                 'modelClass' => Product::className(),
                 'outputValue' => function ($model, $attribute, $key, $index) {
 
+                },
+                'ajaxOnly' => true
+            ],
+            'property' => [ //GridView直接编辑二
+                'class' => EditableColumnAction::className(),
+                'modelClass' => ProductProperty::className(),
+                'outputValue' => function ($model, $attribute, $key, $index) {
                 },
                 'ajaxOnly' => true
             ]
@@ -187,6 +196,50 @@ class ProductController extends Controller
         }
 
         return false;
+    }
+
+    //修改产品缩略图
+    function actionImg($id, $type, $image)
+    {
+        $model = new Up();
+        if(Yii::$app->request->isPost)
+        {
+            $model->file = UploadedFile::getInstance( $model, 'file' );
+            $name = $_FILES[ 'Up' ][ 'name' ][ 'file' ]; //保存文件名
+            $g = pathinfo( $name, PATHINFO_EXTENSION );
+            $g = strtolower($g); //全部转换成小写
+            $_format = ['png', 'jpg', 'jpeg', 'gif'];
+            if(!in_array($g, $_format) )
+            {
+                echo '文件类型错误';
+                return false;
+            }
+
+            $n = date(time()).rand(0, 9999).".$g";//新文件名
+            if ( $model->upload() ) {
+                $date = date('YmdH');
+                $dir = './img/market/'.$date; //图片保存路径
+                if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
+                    mkdir($dir);
+                }
+                rename("uplaod/$name", "img/market/$date/$n"); //修改文件名称
+            }
+
+            $name =  "/img/market/$date/$n"; //新文件名
+            if($type == 'property'){//判断更新类型
+                $result = ProductProperty::updateAll(['image' => $name], 'id = :id', ['id' => "$id"]);
+            }elseif($type == 'product'){
+                $result = Product::updateAll(['product_image' => $name], 'product_id = :id', [':id' => "$id"]);
+            }
+
+            if($result){
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+
+            return false;
+        }
+
+        return $this->renderAjax('image',['model' => $model , 'id' => $id, 'image' => $image]);
     }
 
     /**

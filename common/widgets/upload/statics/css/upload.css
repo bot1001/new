@@ -6,7 +6,6 @@
 .per_upload_img {
     width: 218px;
     height: 73px;
-    background: url(../images/bg.jpg) no-repeat center center;
     border: 1px solid #e4e4e4;
     cursor: pointer;
     float: left;
@@ -15,9 +14,7 @@
     line-height: 73px;
     text-align: center;
 }
-.per_upload_img.empty {
-    background: url(../images/white.png) repeat center center;
-}
+
 .per_real_img {
     position: absolute;
     width: 218px;

@@ -97,7 +97,7 @@ class Product extends \yii\db\ActiveRecord
             if($insert){
                 $this->create_time = time();
                 $this->update_time = time();
-                $this->reading = '1';
+                $this->reading = '0';
             }else{
                 $this->update_time = time();
                 $this->create_time = strtotime($this->create_time);

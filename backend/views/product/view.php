@@ -9,6 +9,8 @@ use yii\helpers\Url;
 $this->title = $model['name'];
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+echo $this->render(Yii::$app->params['modal']);
 ?>
 <style>
     .product-view{
@@ -43,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     #img{
         width: 120px;
+        border-radius: 15px;
     }
 
     th{
@@ -150,7 +153,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <tr>
                 <th>缩略图</th>
-                <td><img src="<?= $model['image'] ?>" id="img"></td>
+                <td>
+                     <?php
+                    $url = $model['image'];
+
+                    echo Html::a("<img src='$url', id = 'img' />", "#",
+                        [
+                                'class' => 'pay',
+                            'data-toggle' => 'modal',
+                            'data-url' => Url::toRoute(['img', 'id' => $model['id'], 'image' => $url, 'type' => 'product']),
+                            'data-title' => '修改产品缩略图',
+                            'data-target' => '#common-modal'
+                        ])
+                     ?>
+                </td>
             </tr>
         </table>
 
@@ -159,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="p" style="text-align: center">
             <?= Html::button('<span class="glyphicon glyphicon-plus"></span>',
-                ['class' => 'btn btn-default', 'id' => 'v_new']); ?>
+                ['class' => 'btn btn-default', 'id' => 'v_new', 'title'=>'添加属性']); ?>
 
             <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                 ['update', 'id' => $model['id']], ['class' => 'btn btn-primary', 'title'=>'更新']) ?>
@@ -168,17 +184,19 @@ $this->params['breadcrumbs'][] = $this->title;
             if($model['status'] == '2'){
                 echo Html::a('<span class="glyphicon glyphicon-chevron-up"></span>', '#',
                     ['class' => 'btn btn-info',
+                        'title' => '更新状态',
                         'onclick' => "down( '3' )"
                     ]);
             }else{
                 echo Html::a('<span class="glyphicon glyphicon-chevron-down"></span>', '#',
                     ['class' => 'btn btn-warning',
+                        'title' => '更新状态',
                         'onclick' => 'down(2)'
                     ]);
             } ?>
 
             <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:void(0)',
-                ['class' => 'btn btn-danger trash']); ?>
+                ['class' => 'btn btn-danger trash','title' => '删除属性',]); ?>
 
         </div>
     </div>

@@ -102,7 +102,7 @@ class StoreTaxonomy extends \yii\db\ActiveRecord
     {
         $taxonomy = self::find() //查询数据
         ->select('name, id')
-            ->where(['type' => "$type"])
+            ->where(['parent' => "$type"])
             ->asArray()
             ->all();
 

@@ -111,10 +111,10 @@ use kartik\form\ActiveForm;
         <div class="row">
             <div class="col-lg-2"><?= $form->field($model, 'market_price')->textInput(['maxlength' => true, 'placeHolder' => '市场价格'])->label(false) ?></div>
             <div class="col-lg-2"><?= $form->field($model, 'product_sale')->textInput(['maxlength' => true, 'placeHolder' => '优惠券低现'])->label(false) ?></div>
-            <div class="col-lg-2"><?= $form->field($model, 'product_status')->textInput(['maxlength' => true, 'placeHolder' => '积分低现'])->label(false) ?></div>
+            <div class="col-lg-2"><?= $form->field($model, 'product_accumulate')->textInput(['maxlength' => true, 'placeHolder' => '积分低现'])->label(false) ?></div>
         </div>
 
-        <div style="display: none">
+        <div style="">
             <?= $form->field($model, 'store_id')->textInput(['value' => reset($_SESSION['community'])]) ?>
             <?= $form->field($model, 'product_status')->textInput(['value' => '3']) ?>
         </div>

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
@@ -9,6 +10,9 @@ use kartik\grid\GridView;
 
 $this->title = '产品列表';
 $this->params['breadcrumbs'][] = $this->title;
+
+//引入模态框文件
+echo $this->render(Yii::$app->params['modal']);
 ?>
 <style>
     th, td{
@@ -20,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php
+    $status = Yii::$app->params['product']['status'];
+
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn', 'header' => '序<br />号'],
         ['attribute' => 'store',
@@ -59,13 +65,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => ['class' => 'text-left']],
 
         ['attribute' => 'product_image',
-            'format' => ['image',
-                [
-                    'height' =>'30px',
-                ]],
+            'format' => 'raw',
             'value' => function($model){
-//                return "http://epmscos3-10009107.image.myqcloud.com/".$model->product_image;
-                return Yii::$app->request->hostInfo.$model->product_image;
+                $url = Yii::$app->request->hostInfo.$model->product_image;
+                return Html::a("<img src='$url', style='height: 30px; border-radius: 5px' alt='更新' />", '#',
+                    [
+                        'class' => 'pay',
+                        'data-toggle' => 'modal',
+                        'data-url' => Url::toRoute(['img', 'id' => $model->product_id, 'image' => $url, 'type' => 'product']),
+                        'data-title' => '修改产品缩略图',
+                        'data-target' => '#common-modal'
+                    ]);
             },
             'header' => '缩略图',
             'mergeHeader' => true],
@@ -108,25 +118,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['attribute' => 'product_status',
             'filterType' => GridView::FILTER_SELECT2,
-            'filter' => ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中'],
+            'filter' => $status,
             'filterInputOptions' => ['placeholder' => '…'],
             'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
             ],
-            'value' => function($model){
-                $date = ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中'];
+            'value' => function($model, $status){
+                $date = Yii::$app->params['product']['status'];
                 return $date[$model->product_status];
             },
             'class' => 'kartik\grid\EditableColumn',
             'editableOptions' => [
                 'formOptions' => ['action' => ['product/product']],
                 'inputType' => kartik\editable\Editable::INPUT_DROPDOWN_LIST,
-                'data' => ['1' => '上架', '2' => '下架', '3' => '待审核', '4' => '审核中']
+                'data' => $status
             ],
             'readonly' => function($model){
 //                if($model->product_status == '3')
                 return $model->product_status == '3';
             },
+            'width' => '90px'
         ],
 
         'reading',

@@ -4,7 +4,7 @@ namespace backend\ controllers;
 
 use Yii;
 use app\models\UserInvoice;
-use app\models\Up;
+use common\models\Up;
 use yii\data\ActiveDataProvider;
 use yii\web\UploadedFile;
 use app\models\CommunityBasic;

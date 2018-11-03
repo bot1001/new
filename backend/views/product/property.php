@@ -8,6 +8,7 @@
 
 use kartik\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $script = <<<SCRIPT
 
@@ -44,6 +45,12 @@ $this->registerJs( $script );
      }
 </style>
 
+<script>
+    function test() {
+        alert('你好');
+    }
+</script>
+
 <div class="one">
     <?= GridView::widget([
             'dataProvider' => $data,
@@ -55,23 +62,58 @@ $this->registerJs( $script );
                     ['class' => 'kartik\grid\CheckboxColumn',
                         'name' => 'id'],
                     [ 'attribute'=> 'price',
-                        'label' => '价格'],
+                        'class' => 'kartik\grid\EditableColumn',
+                        'editableOptions' => [
+                            'formOptions' => ['action' => ['product/property']],
+                            'inputType' => kartik\editable\Editable::INPUT_TEXT,
+                        ],
+                        'label' => '价格'
+                    ],
 
                     [ 'attribute'=> 'size',
+                        'class' => 'kartik\grid\EditableColumn',
+                        'editableOptions' => [
+                            'formOptions' => ['action' => ['product/property']],
+                            'inputType' => kartik\editable\Editable::INPUT_TEXT,
+                        ],
                         'label' => '尺寸',
                         'width' => '70px'],
 
                     [ 'attribute'=> 'color',
+                        'class' => 'kartik\grid\EditableColumn',
+                        'editableOptions' => [
+                            'formOptions' => ['action' => ['product/property']],
+                            'inputType' => kartik\editable\Editable::INPUT_TEXT,
+                        ],
                         'label' => '颜色',
                         'width' => '80px'],
 
                     [ 'attribute'=> 'image',
-                        'format' => ['image', ['width' => '55px', 'height' => '25px']],
+                        'format' => 'raw',
+                        'value' => function($model, $key){
+                            $url = $model->image;
+                            return Html::a( "<img src='$url' style='width: 35px' alt = '更新'/>", '#',
+                                [
+                                    'class' => 'pay',
+                                    'alt' => '更新',
+                                    'style'=> 'color: red',
+                                    'data-toggle' => 'modal',
+                                    'data-url' => Url::toRoute(['img', 'id' => $model->id, 'image' => $url ,'type' => 'property']),
+                                    'data-title' => '更新图片', //如果不设置子标题，默认使用大标题
+                                    'data-target' => '#common-modal',
+                                ]
+                            );
+                        },
                         'label' => '缩略图',
                         'width' => '80px'],
 
                     [ 'attribute'=> 'quantity',
-                    'label' => '数量',
+                        'class' => 'kartik\grid\EditableColumn',
+                        'editableOptions' => [
+                            'formOptions' => ['action' => ['product/property']],
+                            'inputType' => kartik\editable\Editable::INPUT_TEXT,
+                        ],
+                        'label' => '数量',
                         'width' => '80px']
             ],
             'pjax' => true,

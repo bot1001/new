@@ -140,7 +140,7 @@ $model = new \common\models\ProductProperty();
 <div id="new">
     <div id="add_image">
         <?php $form = ActiveForm::begin() ?>
-            <?= $form->field($model, 'size')->widget('common\widgets\upload\FileUpload')->label(false) ?>
+            <?= $form->field($model, 'image')->widget('common\widgets\upload\FileUpload')->label(false) ?>
         <?php ActiveForm::end() ?>
     </div>
 
