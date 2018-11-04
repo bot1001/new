@@ -44,7 +44,7 @@ class ProductController extends Controller
                 'config' => [
                     "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
                     "imagePathFormat" => "/img/market/{yyyy}{mm}{dd}/{time}{rand:6}", //商城图片
-                    "imageMaxSize" => 1024000,
+                    "imageMaxSize" => 512000, //单张图片不得超过512K
                 ],
             ],
             'product' => [ //GridView直接编辑一

@@ -19,7 +19,7 @@ use yii\helpers\Html;
         border-radius: 8px;
         box-shadow: 5px 5px 5px #d0e1bc;
     }
-    .i_view{
+    .preview{
         margin: auto;
         height: 80px;
         background: rgba(182, 182, 182, 0.14);
@@ -28,7 +28,7 @@ use yii\helpers\Html;
         line-height: 70px;
     }
 
-    #view, #i_file, .i_input, .i_view{
+    #view, #i_file, .i_input, .preview{
         width: 140px;
         border-radius: 5px;
         position: relative;
@@ -56,47 +56,35 @@ use yii\helpers\Html;
 </style>
 
 <script>
-         var f = document.getElementById('i_file');
+    function setImage() {//下面用于图片上传预览功能
+        var img=document.getElementById("i_file");
 
-        // f.addEventListener("change", submit);
-         var data = new FormData();
-         data.append('upload_file'+i, file);
+        var img_p=document.getElementById("view");
 
-         var data = new FormData();
-         data.append("myfile", document.getElementById("i_file").files[0]);
+        if(img.files &&img.files[0])
+        {
+            //火狐下，直接设img属性
+            img_p.style.display = 'block';
+            img_p.style.width = '140px';
+            img_p.style.height = '80px';
 
-        function submit() {
-            $.ajax({
-                url:'/auto/image',
-                type:'POST',  /*提交方式*/
-                data:data,
-                cache: false,
-                contentType: false,        /*不可缺*/
-                processData: false,         /*不可缺*/
-                success:function(result){
-                    if(result == '')
-                    {
-                        alert('上传成功');
-                    }else{
-                        alert('上传失败');
-                    }
-                },
-                error:function(){
-                    alert('上传出错');
-                }
-            });
+            var data = window.URL.createObjectURL(img.files[0]); //临时文件路劲
+            img_p.src = data;
+            //img_p.src = img.files[0].getAsDataURL();//火狐7以上版本不再支持getAsDataURL()方式
+        }
+        return true;
     }
 </script>
 <div class="image_change">
-    <?php $form = ActiveForm::begin(  ); ?>
+    <?php $form = ActiveForm::begin( ); ?>
 
-    <div class="i_view">
+    <div class="preview">
         <?= Html::img($image, ['alt' => '图片预览', 'id' => 'view']) ?>
     </div>
 
-    <div class="i_input">
+    <div class="i_input form-group field-uploadform-file">
         <div class="">
-            <?= $form->field($model, 'file')->fileInput(['id' => 'i_file'])->label(false) ?>
+            <?= $form->field($model, 'file')->fileInput(['id' => 'i_file', 'onchange' => "setImage()"])->label(false) ?>
         </div>
 
         <div class="">
@@ -106,4 +94,3 @@ use yii\helpers\Html;
 
     <?php ActiveForm::end() ?>
 </div>
-
