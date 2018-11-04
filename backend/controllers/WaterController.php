@@ -69,7 +69,7 @@ class WaterController extends Controller
 	//手机抄表
 	public function actionPhone()
     {
-		$this->layout = 'main1';
+		$this->layout = 'water';
         $searchModel = new WaterSearch01();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		

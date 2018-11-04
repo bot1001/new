@@ -16,9 +16,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'remind_id') ?>
-
-    <?= $form->field($model, 'community') ?>
-
+    
     <?= $form->field($model, 'detail') ?>
 
     <?= $form->field($model, 'times') ?>

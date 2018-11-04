@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Information;
 use common\models\Up;
 use common\models\ProductProperty;
 use Yii;
@@ -80,6 +81,37 @@ class ProductController extends Controller
         ]);
     }
 
+    //审核产品
+    function actionCheck($id, $status, $store)
+    {
+        //更新数据
+        $result = Product::updateAll(['product_status' => "$status"], 'product_id = :id', [':id' => "$id"]);
+        if($result){ //如果更新成功则返回真
+
+            if($status == '1'){
+                $message = '您请求的商品通过审核，祝你生意兴隆。';
+            }else{
+                $message = '您请求的商品未通过审核，请重新修改。';
+            }
+
+            $model = new Information(); //实例化数据
+
+            $model->community = $store;
+            $model->target = '';
+            $model->detail = $message;
+            $model->times = '0';
+            $model->reading = 0;
+            $model->ticket_number = '';
+            $model->remind_time = time();
+            $model->type = '4';
+
+            $model->save(); //保存
+
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Displays a single Product model.
      * @param integer $id
@@ -90,7 +122,7 @@ class ProductController extends Controller
     {
         $host = Yii::$app->request->hostInfo; //请求网址
         $model = (new Query()) //查找数据
-            ->select(["product_basic.product_name as name, product_basic.product_subhead as header,
+            ->select(["product_basic.store_id, product_basic.product_name as name, product_basic.product_subhead as header,
             store_taxonomy.name as brand, product_basic.product_taxonomy as taxonomy, concat(product_basic.market_price, ' 元') as price,
             concat('$host', product_basic.product_image) as image, product_basic.product_introduction as introduction,
             concat(product_basic.product_sale, ' 元') as sale, concat(product_basic.product_accumulate, ' 元') as accumulate,
@@ -110,10 +142,10 @@ class ProductController extends Controller
             ->where(['id' => $model['taxonomy']])
             ->one();
 
-        $property = ProductProperty::find()
+        $property = ProductProperty::find() //查找商品属性
             ->where(['product_id' => $model['id']]);
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider([ //设置数据提供器
             'query' => $property,
             'sort' => false, //取消排序
             'pagination' => [

@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Information;
+use common\models\Information;
 
 /**
  * InformationSearch represents the model behind the search form of `app\models\Information`.
@@ -19,7 +19,7 @@ class InformationSearch extends Information
     {
         return [
             [['remind_id', 'community', 'times', 'reading', 'target', 'ticket_number', 'remind_time'], 'integer'],
-            [['detail', 'property'], 'safe'],
+            [['detail', 'property', 'type'], 'safe'],
         ];
     }
 
@@ -43,9 +43,9 @@ class InformationSearch extends Information
     {
 		$c = $_SESSION['community'];
 		
-        $query = Information::find()->where(['in', 'community', $c]);
+        $query = Information::find()->where(['in', 'information.community', $c]);
 
-		$query->joinWith('c');
+		$query->joinWith('c')->joinWith('target0');
 
         // add conditions that should always apply here
 
@@ -73,6 +73,7 @@ class InformationSearch extends Information
             'community' => $this->community,
             'times' => $this->times,
             'reading' => $this->reading,
+            'type' => $this->type,
             'target' => $this->target,
             'ticket_number' => $this->ticket_number,
             'remind_time' => $this->remind_time,

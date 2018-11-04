@@ -1,0 +1,42 @@
+.box{
+    height: 500px;
+    width: 400px;
+    position: relative;
+    margin-left: 15px;
+    border-radius: 10px;
+}
+
+th{
+    text-align: center;
+}
+
+.box1{
+    background: rgba(173, 255, 47, 0.11);
+}
+
+.box_main{
+    overflow-y: auto;
+    height: 500px;
+    width: 400px;
+    margin-left: -15px;
+    border-radius: 5px;
+}
+.box_detail{
+    height: 468px;
+    width: 400px;
+    background: white;
+}
+
+.box2{
+    background: rgba(0, 0, 255, 0.04);
+}
+.information_menu{
+    margin: auto;
+    text-align: center;
+    background: darkseagreen;
+    font-size: 18px;
+    width: 60px;
+    border-radius: 5px;
+    position: relative;
+    bottom: -3px;
+}

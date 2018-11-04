@@ -14,16 +14,12 @@ use kartik\select2\Select2;
 <style>
 		
 	#div1{
-        margin-left: 1%;
-		margin-left: -2%;
-		width: 100%;
-		margin: auto;
 		background: #AEE8DC;
-		border-radius: 20px;
+		border-radius: 10px;
 	}
 </style>
 
-<div id="div1" class="ticket-basic-form">
+<div id="div1" class="ticket-basic-form container">
 
     <?php $form = ActiveForm::begin(); ?>
     

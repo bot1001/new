@@ -2,13 +2,11 @@
 
 namespace backend\controllers;
 
-use app\models\Information;
+use common\models\Information;
 use app\models\SmsLog;
 use app\models\TicketBasic;
 use common\models\Sms;
-use common\models\Up;
 use Yii;
-use yii\web\UploadedFile;
 
 class AutoController extends \yii\web\Controller
 {
@@ -100,7 +98,7 @@ class AutoController extends \yii\web\Controller
         $community = $_SESSION['community']; //从session中提取小区
 
         $role = $session['0']['Role']; //用户角色
-        $name = $_SESSION['user']['0']['name']; //用户名称
+        $name = Yii::$app->user->id; //用户名称
 
         if($role == '收银员')
         {
@@ -168,6 +166,7 @@ class AutoController extends \yii\web\Controller
                     $info->reading = 0;
                     $info->ticket_number = $number;
                     $info->remind_time = date(time());
+                    $info->type = '1';
 
                     $info->save(); //保存
                 }
@@ -176,12 +175,4 @@ class AutoController extends \yii\web\Controller
         }
         return false; //默认返回值
     }
-
-    //异步上传图片
-    function actionImage()
-    {
-//        $type_pic = $this->file_upload('1',array('jpg', 'gif', 'png', 'jpeg'),'filetest','myfile');
-//        echo $type_pic['img_path'];
-    }
-
 }

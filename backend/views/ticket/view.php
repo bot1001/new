@@ -10,7 +10,7 @@ $this->title = $model->ticket_id;
 $this->params['breadcrumbs'][] = ['label' => 'Ticket Basics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ticket-basic-view">
+<div class="ticket-basic-view container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -67,7 +67,9 @@ $this->title = '消息';
 	         ],],
 		
             ['attribute' => 'target',
-                'contentOptions' => ['class' => 'text-left'],],
+                'value' => 'target0.name',
+                'contentOptions' => ['class' => 'text-left'],
+                ],
 		
             ['attribute' => 'ticket_number',
 			 'format' => 'raw',
