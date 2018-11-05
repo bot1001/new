@@ -249,7 +249,7 @@ class ProductController extends Controller
 
             $n = date(time()).rand(0, 9999).".$g";//新文件名
             if ( $model->upload() ) {
-                $date = date('YmdH');
+                $date = date('Ymd');
                 $dir = './img/market/'.$date; //图片保存路径
                 if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
                     mkdir($dir);

@@ -6,6 +6,7 @@ use app\models\SysUser;
 use common\models\AddressSearch;
 use common\models\Area;
 use common\models\OrderAddress;
+use common\models\Up;
 use common\models\User;
 use common\models\StoreAccount;
 use kartik\grid\EditableColumnAction;
@@ -18,6 +19,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * StoreController implements the CRUD actions for Store model.
@@ -49,6 +51,14 @@ class StoreController extends Controller
 
                 },
                 'ajaxOnly' => true
+            ],
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config' => [
+                    "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
+                    "imagePathFormat" => "/img/Adertising/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径、广告
+                    "imageMaxSize" => 1024000,
+                ],
             ]
         ]);
     }
@@ -94,8 +104,26 @@ class StoreController extends Controller
      */
     public function actionView($id)
     {
+        $model = (new Query())
+            ->select('store_basic.store_id as id, store_basic.store_name as name, store_basic.store_phone as phone,
+            store_basic.store_cover as cover, store_basic.province_id as province,
+            store_basic.city_id as city, area.area_name as area, store_basic.person,
+            store_basic.store_address as address, store_basic.store_introduce as introduce,
+            store_basic.store_code as code, store_basic.store_people as people, 
+            from_unixtime(store_basic.add_time) as time,
+            store_basic.is_certificate as certificate, store_basic.store_sort as sort,
+            store_basic.store_status as status, store_basic.type, store_taxonomy.name as taxonomy')
+            ->from('store_basic')
+            ->join('inner join', 'store_taxonomy', 'store_basic.store_taxonomy = store_taxonomy.id')
+            ->join('inner join', 'area', 'store_basic.area_id = area.id')
+            ->where(['store_basic.store_id' => "$id"])
+            ->one();
+
+        $model['province'] = Area::getOne($model['province']);
+        $model['city'] = Area::getOne($model['city']);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -223,6 +251,42 @@ class StoreController extends Controller
         }
 
         return false;
+    }
+
+    //更新缩略图
+    function actionImg($image, $id)
+    {
+        $model = new Up();
+        if(Yii::$app->request->isPost)
+        {
+            $model->file = UploadedFile::getInstance( $model, 'file' );
+            $name = $_FILES[ 'Up' ][ 'name' ][ 'file' ]; //保存文件名
+            $g = pathinfo( $name, PATHINFO_EXTENSION );
+            $g = strtolower($g); //全部转换成小写
+            $_format = ['png', 'jpg', 'jpeg', 'gif'];
+            if(!in_array($g, $_format) )
+            {
+                echo '文件类型错误';
+                return false;
+            }
+
+            $n = date(time()).rand(0, 9999).".$g";//新文件名
+            if ( $model->upload() ) {
+                $date = date('Ymd');
+                $dir = './img/market/'.$date; //图片保存路径
+                if ( !is_dir($dir) ) { //如果文件夹不存在，则创建此文件夹
+                    mkdir($dir);
+                }
+                rename("uplaod/$name", "img/market/$date/$n"); //修改文件名称
+            }
+
+            $name =  "/img/market/$date/$n"; //新文件名
+
+            $result = Store::updateAll(['store_cover' => $name], 'store_id = :id', ['id' => "$id"]);
+
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        return $this->renderAjax('image', ['model' => $model ,'image' => $image, 'id' => $id]);
     }
 
     //商户注册查询

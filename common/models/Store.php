@@ -61,7 +61,7 @@ class Store extends \yii\db\ActiveRecord
                 $this->{$model} = $time;
                 return true;
             }],
-            [['province_id', 'city_id', 'area_id', 'add_time', 'is_certificate', 'store_sort', 'type', 'store_taxonomy', 'store_people'], 'integer'],
+            [['province_id', 'city_id', 'area_id', 'is_certificate', 'store_sort', 'type', 'store_taxonomy', 'store_people'], 'integer'],
             [['store_name', 'store_phone', 'store_address', 'store_status'], 'string', 'max' => 64],
             [['store_cover', 'store_code'], 'string', 'max' => 300],
             [['person'], 'string', 'max' => 128],
@@ -102,7 +102,7 @@ class Store extends \yii\db\ActiveRecord
     }
 
     //时间转换
-    public function afterFind()
+    function afterFind()
     {
         parent::afterFind(); // 继承父级搜索
         $this->add_time = date('Y:m:d H:i:s', $this->add_time);

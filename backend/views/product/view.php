@@ -215,7 +215,7 @@ echo $this->render(Yii::$app->params['modal']);
                                 'class' => 'pay',
                             'data-toggle' => 'modal',
                             'data-url' => Url::toRoute(['img', 'id' => $model['id'], 'image' => $url, 'type' => 'product']),
-                            'data-title' => '修改产品缩略图',
+                            'data-title' => '修改缩略图',
                             'data-target' => '#common-modal'
                         ])
                      ?>
@@ -266,7 +266,7 @@ echo $this->render(Yii::$app->params['modal']);
 
     <div class="description col-lg-6">
         <div id="description">
-            <?php $model['introduction'] ?>
+            <?= $model['introduction'] ?>
         </div>
     </div>
 </div>
