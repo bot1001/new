@@ -8,7 +8,7 @@ use mdm\admin\components\Helper;
 $this->title = '裕家人';
 AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
 ?>
-
+<div>
     <!-- 投诉信息 -->
     <?php
 		if (Helper::checkRoute('/ticket/index')){ ?>
@@ -44,3 +44,4 @@ AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/home.css");
        <div id="box6" class="col-lg-3 box">
 	       <?= $this->render('box6') ?>
 	   </div>
+</div>
