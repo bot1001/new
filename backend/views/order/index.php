@@ -261,9 +261,9 @@ $this->title = '订单管理';
                 'data' => [ '0' => '否', '1' => '是'],
             ],
             'contentOptions' =>
-            function($model){
-                return ( $model->verify == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
-            },
+                function($model){
+                    return ( $model->verify == 0 ) ? [ 'class' => 'bg-warning' ] : []; // 根据值改变底色
+                },
             ],
 
 		/*['attribute' => 'payment_number',

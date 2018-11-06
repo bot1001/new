@@ -94,18 +94,7 @@ class ProductController extends Controller
                 $message = '您请求的商品未通过审核，请重新修改。';
             }
 
-            $model = new Information(); //实例化数据
-
-            $model->community = $store;
-            $model->target = '';
-            $model->detail = $message;
-            $model->times = '0';
-            $model->reading = 0;
-            $model->ticket_number = '';
-            $model->remind_time = time();
-            $model->type = '4';
-
-            $model->save(); //保存
+            Information::add($store,$message, $type = '4', $number = $id); //添加用信息提醒
 
             return true;
         }
@@ -172,7 +161,12 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())&& $model->save()) {
+            $post = $_POST['Product'];
+            $store = $post['store_id']; //获取商户商店ID
+            $message = '商户新发布产品，请及时审批';
+
+            Information::add($store,$message, $type = '3'); //添加用信息提醒
             return $this->redirect(['view', 'id' => $model->product_id]);
         }
 
@@ -286,6 +280,17 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $post = $_POST['Product'];
+
+//            echo '<pre />';
+//            print_r($post);
+//            exit;
+
+            $store = $post['store_id'];
+            $number = $id;
+            $message = '商户已更新产品详情，请及时审核';
+
+            Information::add($store,$message, $type = '3', $number); //添加用信息提醒
             return $this->redirect(['view', 'id' => $model->product_id]);
         }
 

@@ -35,16 +35,16 @@ $this->title = '消息';
 			'header' => '序<br />号'],
 
             //'remind_id',
-            ['attribute' => 'community',
-			 'value' => 'c.community_name',
-			 'filterType' => GridView::FILTER_SELECT2,
-			 'filter' => $comm,
-			 'filterInputOptions' => ['placeholder' => '请选择…'],
-			 'filterWidgetOptions' => [
-		         'pluginOptions' =>  ['allowClear' => true],
-	         ],
-                'contentOptions' => ['class' => 'text-left'],
-			'width' => '200px'],
+//            ['attribute' => 'community',
+//			 'value' => 'c.community_name',
+//			 'filterType' => GridView::FILTER_SELECT2,
+//			 'filter' => $comm,
+//			 'filterInputOptions' => ['placeholder' => '请选择…'],
+//			 'filterWidgetOptions' => [
+//		         'pluginOptions' =>  ['allowClear' => true],
+//	         ],
+//                'contentOptions' => ['class' => 'text-left'],
+//			'width' => '200px'],
 		
             ['attribute' => 'detail',
                 'contentOptions' => ['class' => 'text-left'],],
@@ -82,9 +82,6 @@ $this->title = '消息';
                 ]],
 		
             ['attribute' => 'remind_time',
-			 'value' => function($model){
-	         	return date('Y-m-d H:i:s', $model->remind_time);
-	         },
 			 'mergeHeader' => true,],
 		
             ['attribute' => 'property'],

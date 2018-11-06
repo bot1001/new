@@ -114,7 +114,7 @@ use kartik\form\ActiveForm;
             <div class="col-lg-2"><?= $form->field($model, 'product_accumulate')->textInput(['maxlength' => true, 'placeHolder' => '积分低现'])->label(false) ?></div>
         </div>
 
-        <div style="">
+        <div style="display: none">
             <?= $form->field($model, 'store_id')->textInput(['value' => reset($_SESSION['community'])]) ?>
             <?= $form->field($model, 'product_status')->textInput(['value' => '3']) ?>
         </div>

@@ -61,6 +61,27 @@ class Information extends \yii\db\ActiveRecord
         ];
     }
 
+    //添加商品审核
+    static function add($store, $message, $type, $number)
+    {
+        $model = new Information(); //实例化数据
+
+        $model->community = $store;
+        $model->target = '';
+        $model->detail = $message;
+        $model->times = '0';
+        $model->reading = 0;
+        $model->ticket_number = $number;
+        $model->remind_time = time();
+        $model->type = $type;
+
+        $resutl = $model->save(); //保存
+        if($resutl){
+            return true;
+        }
+        return false;
+    }
+
     //转换时间
     function afterFind()
     {

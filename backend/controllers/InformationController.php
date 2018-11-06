@@ -24,7 +24,7 @@ class InformationController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['get'],
                 ],
             ],
         ];
@@ -37,11 +37,11 @@ class InformationController extends Controller
     public function actionIndex()
     {
         $searchModel = new InformationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if(isset($_GET['type'])) //判断是否存在传值
         {
-            $searchModel->type = $_GET['type'];
+            $dataProvider->query->where(['in', 'type', $_GET['type']]);
         }
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -56,7 +56,16 @@ class InformationController extends Controller
         $searchModel->reading = '0';
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->setPageSize(8); //设置每页获取记录数量
-        $dataProvider->query->where(['in', 'type', ['2', '3']]);
+
+        $role =  Yii::$app->user->identity->salt; //用户数据角色
+        $comunity = $_SESSION['community'];
+        if($role == '2'){
+            $type = '4'; //消息类型
+            $dataProvider->query->where(['type' => "$type", 'information.community' => $comunity]);
+        }else{
+            $type = ['2', '3']; //消息类型
+            $dataProvider->query->where(['in', 'type', $type]);
+        }
 
         $wuye = $searchModel->search(Yii::$app->request->queryParams);
         $wuye->query->where(['type' => '1']);
@@ -64,7 +73,8 @@ class InformationController extends Controller
 
         return $this->render('list', [
             'dataProvider' => $dataProvider,
-            'wuye' => $wuye
+            'wuye' => $wuye,
+            'type' => $type
         ]);
     }
 
@@ -77,29 +87,18 @@ class InformationController extends Controller
     public function actionView($id, $type)
     {
         Information::updateAll(['reading' => '1'], 'remind_id = :o_id', [':o_id' => "$id"]);
-        if($type == '2' || $type == '3')
-        {
-            $model = (new Query())
-                ->select('information.remind_id as id, store_basic.store_name as name, information.detail,
+        $model = (new Query())
+            ->select('information.remind_id as id, store_basic.store_name as name, information.detail,
                 information.times, information.reading, information.ticket_number as number,
                 from_unixtime(information.remind_time) as time,
-                information.property, sys_user.name as user_name')
-                ->from('information')
-                ->join('inner join', 'store_basic', 'store_basic.store_id = information.community')
-                ->join('inner join', 'sys_user', 'sys_user.id = information.target')
-                ->where(['information.remind_id' => "$id"])
-                ->one();
-        }else{
-            $model = (new Query())
-                ->select('community_basic.community_name as name, information.detail,
-                information.times, information.reading, information.ticket_number, 
-                from_unixtime(information.remind_time) as time,
-                information.property, sys_user.name as user_name')
-                ->from('information')
-                ->join('inner join', 'community_basic', 'community_basic.community_id = information.community')
-                ->join('inner join', 'sys_user', 'sys_user.id = information.target')
-                ->where(['information.remind_id' => "$id"])
-                ->one();
+                information.property')
+            ->from('information')
+            ->join('inner join', 'store_basic', 'store_basic.store_id = information.community')
+            ->where(['information.remind_id' => "$id"])
+            ->one();
+
+        if (!$model){ //若果数据不存在则自动返回
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         return $this->render('view', [
@@ -155,9 +154,11 @@ class InformationController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $result = $this->findModel($id)->delete();
+        if($result){
+            return true;
+        }
+        return false;
     }
 
     /**

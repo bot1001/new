@@ -17,6 +17,7 @@ class Login extends \yii\db\ActiveRecord
 			         sys_user.role, 
 			         sys_user.salt as market, 
 			         sys_user.phone, 
+			         sys_user.salt, 
 			         sys_user.comment, 
 			         sys_user.create_id as create, 
 			         sys_user.create_time,
@@ -42,6 +43,7 @@ class Login extends \yii\db\ActiveRecord
         }
         //拆分用户关联小区
         $s = explode(',',$syscommuntiy['community_id']);
+        $s = array_unique($s);
 
         //获取关联小区名称
         $community = CommunityBasic::find()
@@ -76,6 +78,7 @@ class Login extends \yii\db\ActiveRecord
 			         sys_user.name, 
 			         store_account.role, 
 			         sys_user.phone, 
+			         sys_user.salt, 
 			         sys_user.salt as market, 
 			         sys_user.comment, 
 			         sys_user.create_id as create, 
@@ -88,6 +91,7 @@ class Login extends \yii\db\ActiveRecord
             ->all();
 
         $s = array_column($user, 'store'); //获取关联商店id
+        $s = array_unique($s);
 
         if (!$user){
             return false;

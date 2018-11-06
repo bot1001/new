@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
         max-height: 250px;
     }
 </style>
+
 <div class="information-view">
 
     <?php
@@ -58,12 +59,27 @@ $this->params['breadcrumbs'][] = $this->title;
         $name = '小区';
     }
     $reading = ['未读', '已读'];
-
-    if($type == '3'){
-        $url = '/product/view';
-    }
-
+    $id = $model['id'];
+    $url = '/product/view';
     ?>
+
+    <script>
+        function del() {
+            if(confirm('您确定要删除吗')){
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', 'delete/?id='+<?= $id ?>)
+                xhr.onload = function () {
+                    var text = xhr.responseText;
+                    if (text == '1'){
+                        alert('删除成功');
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+                xhr.send();
+            }
+        }
+    </script>
 
     <div id="information_view">
         <table class="table">
@@ -71,13 +87,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th><?= $name ?></th>
                 <td><?= $model['name'] ?></td>
             </tr>
-
-            <?php if ($type == '1'){ ?>
-                <tr>
-                    <th>收信人</th>
-                    <td><?= $model['user_name'] ?></td>
-                </tr>
-            <?php } ?>
 
             <tr class="i_detail">
                 <th class="i_title">详情</th>
@@ -94,6 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <th>对应单号</th>
                 <td><?= Html::a($model['number'], [$url, 'id' => $model['number']], [ 'title' => '点击查看' ]) ?></td>
+                <?= $model['number'] ?>
             </tr>
 
             <tr>
@@ -116,12 +126,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <p id="information">
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model['id']], [
+        <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
             'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '您确定要删除吗?',
-                'method' => 'post',
-            ],
+            'onclick' => "del($id)"
         ]) ?>
         <?= Html::a('<span class="glyphicon glyphicon-check"></span>', ["$url", 'id' => $model['number']],
             ['class' => 'btn btn-primary', 'title' => '点击查看' ]) ?>

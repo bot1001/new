@@ -14,7 +14,6 @@ use yii\helpers\Html;
 <div class="box_main">
     <div class="box_detail">
         <?php
-        $dataProvider->query->where['type'] = '1';
         $gridview = [
             ['class' => 'kartik\grid\SerialColumn',
                 'header' => '序号'],
@@ -36,7 +35,7 @@ use yii\helpers\Html;
     </div>
 
     <div class="information_menu">
-        <?= Html::a('更多', ['index', 'type' => '1']) ?>
+        <?= Html::a('更多', ['index', 'type' => $type]) ?>
     </div>
 
 </div>

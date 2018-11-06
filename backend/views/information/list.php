@@ -19,13 +19,13 @@ $this->title = '系统消息';
 <div class="row">
     <?php if(Helper::checkRoute('user-invoice/index')){ ?>
         <div class="box col-lg-4 box1">
-            <?= $this->render('box1', [ 'dataProvider' => $wuye]) ?>
+            <?= $this->render('box1', [ 'dataProvider' => $wuye, 'type' => '1']) ?>
         </div>
     <?php } ?>
 
     <?php if(Helper::checkRoute('product/index')){ ?>
         <div class="box col-lg-4 box2">
-            <?= $this->render('box2', ['dataProvider' => $dataProvider]) ?>
+            <?= $this->render('box2', ['dataProvider' => $dataProvider, 'type' => $type]) ?>
         </div>
     <?php } ?>
 

@@ -25,6 +25,10 @@ use yii\helpers\Html;
                     $url = Yii::$app->urlManager->createUrl(['/information/view', 'id' => $model->remind_id, 'type' => $model->type]);
                     return Html::a($model->D, $url);
                 },
+                'contentOptions' =>
+                    function($model){
+                        return ($model->reading == '0')?['class' => 'bg-warning'] : [];
+                    }
             ],
         ];
 
@@ -40,7 +44,7 @@ use yii\helpers\Html;
     </div>
 
     <div class="information_menu">
-        <?= Html::a('更多', ['index', 'type' => '2']) ?>
+        <?= Html::a('更多', ['index', 'type' => $type]) ?>
     </div>
 
 </div>
