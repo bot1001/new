@@ -166,7 +166,7 @@ class ProductController extends Controller
             $store = $post['store_id']; //获取商户商店ID
             $message = '商户新发布产品，请及时审批';
 
-            Information::add($store,$message, $type = '3'); //添加用信息提醒
+            Information::add($store,$message, $type = '3', $number = $model->store_id); //添加用信息提醒
             return $this->redirect(['view', 'id' => $model->product_id]);
         }
 

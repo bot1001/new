@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'header' => '序<br />号'],
 
         ['attribute' => 'name',
-            'value' => 'address.name',
+            'value' => 'data.real_name',
             'contentOptions' => ['class' => ['text-left']],
             'label' => '姓名'
         ],
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
 
-        ['attribute' => 'create_time'],
+        ['attribute' => 'create_time', 'mergeHeader' => true],
 
         ['attribute' => 'status',
             'value' => function($model){

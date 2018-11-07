@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -17,74 +18,65 @@ $this->params['breadcrumbs'][] = $this->title;
     .store-accumulate-index{
         max-width: 800px;
     }
+    #name, #from, #end{
+        border: solid 1px gray;
+        border-radius: 4px;
+        width: 70px;
+    }
+    #name{
+        width: 80px;
+    }
+    #submit{
+        border-radius: 5px;
+    }
 </style>
 <div class="store-accumulate-index" >
 
     <?php
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn',
-            'header' => '序<br />号'],
+            'header' => '序号'],
 
         ['attribute' => 'name',
-            'value' => 'data.real_name',
+            'format' => 'raw',
+            'value' => function($model){
+                $url = Url::toRoute(['index', 'account_id' => $model['id']]);
+                return Html::a($model['name'], $url);
+            },
             'contentOptions' => ['class' => 'text-left'],
             'label' => '姓名'],
 
-        ['attribute' => 'phone',
-            'value' => 'account.mobile_phone',
-            'label' => '手机号码'],
-
         ['attribute' => 'amount',
-            'contentOptions' => ['class' => 'text-right'],],
-
-        ['attribute' => 'type',
+            'format' => 'raw',
             'value' => function($model){
-                $date = ['1' => '物业', '2' => '商城'];
-                return $date[$model->type];
-            }],
-        ['attribute' => 'update_time',
-            'filterType' =>GridView::FILTER_DATE_RANGE,//'\kartik\daterange\DateRangePicker',//过滤的插件，
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>[
-                    'autoUpdateOnInit'=>false,
-                    //'showWeekNumbers' => false,
-                    'useWithAddon'=>true,
-                    'convertFormat'=>true,
-                    'timePicker'=>false,
-                    'locale'=>[
-                        'format' => 'YYYY-MM-DD',
-                        'separator'=>' to ',
-                        'applyLabel' => '确定',
-                        'cancelLabel' => '取消',
-                        'fromLabel' => '起始时间',
-                        'toLabel' => '结束时间',
-                        //'daysOfWeek'=>false,
-                    ],
-                    'opens'=>'center',
-                    //起止时间的最大间隔
-                    'dateLimit' =>[
-                        'days' => 90
-                    ]
-                ],
-                'options' => [
-                    'placeholder' => '请选择...',
-                    'style'=>'width:200px',
-                ],
+                $url = Url::toRoute(['index', 'account_id' => $model['id']]);
+                return Html::a($model['amount'], $url);
+            },
+            'contentOptions' => ['class' => 'text-right'],
+            'label' => '积分'
             ],
-        ] ,
 
-        ['attribute' => 'property',
-            'contentOptions' => ['class' => 'text-right'],],
+        ['attribute' => 'time',
+            'value' => function(){
+                return date('Y-d H:i:s');
+            },
+            'mergeHeader' => true,
+            'label' => '统计时间'],
 
-
-//        ['class' => 'kartik\grid\ActionColumn',
-//            'header' => '操<br />作'],
+        ['class' => 'kartik\grid\CheckboxColumn'],
     ];
 
     echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'panel' => ['type' => 'info', 'heading' => '用户积分列表'],
+        'panel' => ['type' => 'info', 'heading' => '总积分：'.$amount,
+            'before' => "<form action= '/accumulate/accumulate' method='get'>
+                               <input id='name' name='name' value= '$name' onkeyup=\"value=value.replace(/[^\u4E00-\u9FA5]/g,'')\" placeholder='姓名'>
+                               <input id='from' type='number' name='from' value='$from' oninput=\"this.value=this.value.replace(/[^0-9-]+/,'');\" placeholder='积分起'>
+                               <input id='end' type='number' name='to' value='$to' oninput=\"this.value=this.value.replace(/[^0-9-]+/,'');\"  placeholder='积分止'>
+                               <input id='submit' type='submit' value='搜索'>
+                           </form>"],
         'columns' => $gridview,
+        'hover' => true,
+        'pjax' => true
     ]); ?>
 </div>

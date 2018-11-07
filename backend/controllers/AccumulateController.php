@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use common\models\Accumulate;
 use common\models\AccumulateSearch;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,12 +38,51 @@ class AccumulateController extends Controller
     public function actionIndex()
     {
         $searchModel = new AccumulateSearch();
+        if(isset($_GET['account_id'])){ //判断是否是来自积分列表的查询
+            $account_id = $_GET['account_id'];
+            $searchModel->account_id = $account_id;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    //用户积分和
+    function actionAccumulate()
+    {
+        $name = '';
+        if(isset($_GET['name'])){
+            $name = $_GET['name'];
+        }
+
+        $from = '';
+        if(isset($_GET['from'])){
+            $from = $_GET['from'];
+        }
+
+        $to = '';
+        if(isset($_GET['to'])){
+            $to = $_GET['to'];
+        }
+
+        $searchModel = new \app\models\AccumulateSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        //获取积分综合
+        $amount = (new Query())->select('sum(amount) as amount')->from('store_accumulate')->one();
+
+        return $this->render('sum',
+            [
+                'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
+                'amount' => $amount['amount'],
+                'name' => $name,
+                'from' => $from,
+                'to' => $to
+            ]);
     }
 
     /**

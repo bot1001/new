@@ -42,7 +42,7 @@ class AccumulateSearch extends Accumulate
     public function search($params)
     {
         $query = Accumulate::find();
-        $query ->joinWith('address')
+        $query ->joinWith('data')
         ->joinWith('order');
 
         // add conditions that should always apply here
@@ -71,18 +71,18 @@ class AccumulateSearch extends Accumulate
             'income' => $this->income,
             'type' => $this->type,
             'create_time' => $this->create_time,
-            'status' => $this->status,
+            'store_accumulate.status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'account_id', $this->account_id])
-            ->andFilterWhere(['like', 'order_id', $this->order_id])
-            ->andFilterWhere(['like', 'order_relationship_address.name', $this->name])
+        $query->andFilterWhere(['like', 'store_accumulate.account_id', $this->account_id])
+            ->andFilterWhere(['like', 'store_accumulate.order_id', $this->order_id])
+            ->andFilterWhere(['like', 'user_data.real_name', $this->name])
             ->andFilterWhere(['like', 'property', $this->property]);
 
         $dataProvider->sort->attributes['name'] =
             [
-                'asc' => ['order_relationship_address.name' => SORT_ASC],
-                'desc' => ['order_relationship_address.name' => SORT_DESC],
+                'asc' => ['user_data.real_name' => SORT_ASC],
+                'desc' => ['user_data.real_name' => SORT_DESC],
             ];
 
         return $dataProvider;
