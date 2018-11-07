@@ -7,7 +7,7 @@
  */
 use yii\helpers\Url;
 
-$taxonomy = \common\models\StoreTaxonomy::brand($type = 1);
+$taxonomy = \common\models\StoreTaxonomy::brand($type = 0);
 ?>
 
 <style>

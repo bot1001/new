@@ -22,7 +22,11 @@ use yii\helpers\Html;
                 'format' => 'raw',
                 'value' => function($model)
                 {
-                    $url = Yii::$app->urlManager->createUrl(['/information/view', 'id' => $model->remind_id, 'type' => $model->type]);
+                    $id = $model->remind_id;//对应ID
+                    if ($model->community == '2'){ //判断是商户注册
+                        $id = $model->community;
+                    }
+                    $url = Yii::$app->urlManager->createUrl(['/information/view', 'id' => $id, 'type' => $model->type]);
                     return Html::a($model->D, $url);
                 },
                 'contentOptions' =>

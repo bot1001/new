@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -9,6 +10,9 @@ use kartik\grid\GridView;
 
 $this->title = '商城列表';
 $this->params['breadcrumbs'][] = $this->title;
+
+//引入模态框文件
+echo $this->render(Yii::$app->params['modal']);
 ?>
 <div class="store-index">
 <style>
@@ -16,9 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         text-align: center;
     }
 </style>
-<!--    <h1>--><?PHP //Html::encode($this->title) ?><!--</h1>-->
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?php
     $gridview = [
         ['class' => 'kartik\grid\SerialColumn',
@@ -37,11 +38,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'contentOptions' => ['class' => 'text-left']],
 
         ['attribute' => 'store_cover',
-            'format' => ['image',
-                ['height' =>'30px',]
-            ],
-            'value' => function($model){
-                return 'http://img.gxydwy.com/'.$model->store_cover;
+            'format' => 'raw',
+            'value' => function($model, $key){
+                $url = $model->store_cover;
+                return Html::a( "<img src='$url' style='width: 35px' alt = '更新'/>", '#',
+                    [
+                        'class' => 'pay',
+                        'alt' => '更新',
+                        'style'=> 'color: red',
+                        'data-toggle' => 'modal',
+                        'data-url' => Url::toRoute(['img', 'id' => $model['store_id'], 'image' => $url]),
+                        'data-title' => '更新图片',
+                        'data-target' => '#common-modal'
+                    ]
+                );
             },
             'header' => '缩略图',
             'width' => '80px',

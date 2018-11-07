@@ -109,7 +109,7 @@ use yii\helpers\Url;
 
         <div class="row">
             <div class="col-lg-3">
-                <?= $form->field($model, 'store_taxonomy')->dropDownList(\common\models\StoreTaxonomy::Taxonomy($type = '1'))->label(false) ?>
+                <?= $form->field($model, 'store_taxonomy')->dropDownList(\common\models\StoreTaxonomy::Taxonomy($type = '0'))->label(false) ?>
             </div>
             <div class="col-lg-2">
                 <?= $form->field($model, 'type')->dropDownList([1=> '股份制', 2 => '个体经营 '])->label(false) ?>

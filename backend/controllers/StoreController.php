@@ -5,6 +5,7 @@ namespace backend\controllers;
 use app\models\SysUser;
 use common\models\AddressSearch;
 use common\models\Area;
+use common\models\Information;
 use common\models\OrderAddress;
 use common\models\Up;
 use common\models\User;
@@ -102,8 +103,14 @@ class StoreController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
+        if (isset($_GET['id'])){
+            $id = $_GET['id'];
+        }else{
+            $id = $_SESSION['community']['0'] ;
+        }
+
         $model = (new Query())
             ->select('store_basic.store_id as id, store_basic.store_name as name, store_basic.store_phone as phone,
             store_basic.store_cover as cover, store_basic.province_id as province,
@@ -241,6 +248,9 @@ class StoreController extends Controller
 
                 if($reasult && $success){
                     $transaction->commit();
+                    $message = '新商户注册，请及时审批';
+                    Information::add($store = $store_id, $message, $type = '2', $number = $store_id);
+
                     return true;
                 }
             }
@@ -248,6 +258,28 @@ class StoreController extends Controller
 
         }catch (\Exception $e){
             $transaction -> rollBack();
+        }
+
+        return false;
+    }
+
+    //商户审核
+    function actionCheck($id, $status)
+    {
+        $result = Store::updateAll(['store_status' => "$status"], 'store_id = :id', [':id' => $id]);
+        if($result){
+            return true;
+        }
+
+        return false;
+    }
+
+    //商户关闭店铺
+    function actionDown($id, $status)
+    {
+        $result = Store::updateAll(['store_status' => "$status"], 'store_id = :id', [':id' => $id]);
+        if($result){
+            return true;
         }
 
         return false;

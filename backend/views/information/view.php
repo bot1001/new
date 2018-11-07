@@ -60,7 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     $reading = ['未读', '已读'];
     $id = $model['id'];
-    $url = '/product/view';
+
+
+    $url = '/product/view';//设置URL
+    if($type == '2')
+    {
+        $url = '/store/view';
+    }
+
     ?>
 
     <script>
@@ -103,7 +110,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <th>对应单号</th>
                 <td><?= Html::a($model['number'], [$url, 'id' => $model['number']], [ 'title' => '点击查看' ]) ?></td>
-                <?= $model['number'] ?>
             </tr>
 
             <tr>
@@ -120,8 +126,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th>备注</th>
                 <td><?= $model['property'] ?></td>
             </tr>
-
-
         </table>
     </div>
 

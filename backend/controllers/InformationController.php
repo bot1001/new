@@ -87,6 +87,7 @@ class InformationController extends Controller
     public function actionView($id, $type)
     {
         Information::updateAll(['reading' => '1'], 'remind_id = :o_id', [':o_id' => "$id"]);
+
         $model = (new Query())
             ->select('information.remind_id as id, store_basic.store_name as name, information.detail,
                 information.times, information.reading, information.ticket_number as number,

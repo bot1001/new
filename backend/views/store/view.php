@@ -65,17 +65,94 @@ echo $this->render(Yii::$app->params['modal']);
     #s_cover{
         line-height: 60px;
     }
+    #s_check{
+        display: none;
+        text-align: center;
+        margin: auto;
+        position: relative;
+        top: -15px;
+    }
+    .s_check{
+        display: none;
+    }
+
+    #c_pass, #c_fail{
+        height: 35px;
+        width: 30%;
+        border-radius: 5px;
+        font-size: 25px;
+        color: rgba(255, 255, 255, 0.56);padding: 0px;
+    }
+    #c_pass{
+        background: green;
+    }
+    #c_fail{
+        position: relative;
+        left: 10px;
+        background: orangered;
+    }
 </style>
 
 <script>
-    function image() {
-        alert('你好');
+    function check(status) {
+
+        var message = ''
+        if(status == '1'){
+            message = '您确定通过申请吗'
+        }else if(status == '0'){
+            message = '您确定要关闭店铺吗？';
+        }else{
+            message = '您确定拒绝申请吗'
+        }
+        if(confirm(message)){
+            var id = <?= $model['id'] ?>;
+            var xhr = new XMLHttpRequest();//实例化请求
+            xhr.open('get', "/store/check?id="+id+"&status="+status, true);
+            xhr.onload = function () {
+                var text = this.responseText;
+                if (text == '1'){
+                    alert('操作成功');
+                    location.reload();
+                }else{
+                    alert('操作失败');
+                }
+            }
+            xhr.send();
+        }
     }
 
-    function down() {
-        var id = <?= $model['id'] ?>;
-        alert(id);
+    function down(status) {
+
+        var message = ''
+        if(status == '1'){
+            message = '您确定通过申请吗'
+        }else if(status == '0'){
+            message = '您确定要关闭店铺吗？';
+        }else{
+            message = '您确定拒绝申请吗'
+        }
+        if(confirm(message)){
+            var id = <?= $model['id'] ?>;
+            var xhr = new XMLHttpRequest();//实例化请求
+            xhr.open('get', "/store/down?id="+id+"&status="+status, true);
+            xhr.onload = function () {
+                var text = this.responseText;
+                if (text == '1'){
+                    alert('操作成功');
+                    location.reload();
+                }else{
+                    alert('操作失败');
+                }
+            }
+            xhr.send();
+        }
     }
+
+    $(document).ready(function(){ //点击显示或隐藏输入框
+        $("#store_check").click(function(){
+            $("#s_check").toggle(500);
+        });
+    });
 </script>
 
 <div class="store-view">
@@ -85,7 +162,7 @@ echo $this->render(Yii::$app->params['modal']);
     $type = [ '1'=>'股份制', '2' => '个体经营户'];
     $certificate = ['0' => '否', '1' => '是'];
     //（状态,1启用,0禁用，2待审核，3锁定）
-    $status = [ '0' => '禁用' , '1' => '启用', '2' => '待审核', '3' => '锁定']
+    $status = Yii::$app->params['store']['status'];
     ?>
     <div class="detail row">
         <div class="left col-lg-4">
@@ -171,12 +248,42 @@ echo $this->render(Yii::$app->params['modal']);
                 </tr>
 
             </table>
+
+            <div id="s_check" class="s_check">
+                <div id="c_pass" class="btn" onclick="check(1)">通过</div>
+                <div id="c_fail" class="btn" onclick="check(0)">拒绝</div>
+            </div>
+
             <p class="p">
-                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model['id']], ['class' => 'btn btn-primary', 'title' => '更新']) ?>
-                <?= Html::button('<span class="glyphicon glyphicon-trash"></span>', [
-                    'class' => 'btn btn-danger',
-                    'onclick' => 'down()'
-                ]) ?>
+                <?php
+                $role = Yii::$app->user->identity;
+                $role = $role->salt;
+
+                if($role == '2'){
+                    echo Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model['id']],
+                        ['class' => 'btn btn-primary', 'title' => '更新']);
+                }
+                ?>
+
+                <?php
+                if($model['status'] != '0'){
+                    echo Html::button('<span class="glyphicon glyphicon-eye-close"></span>', [
+                        'class' => 'btn btn-danger',
+                        'onclick' => 'down(0)'
+                    ]);
+                }
+                ?>
+
+                <?php
+                $url = '/store/check';
+                $role = \app\models\Limit::limit($url);
+
+                if($model['status'] == '2' && $role == '1'){
+                    echo Html::button('<span class="glyphicon glyphicon-check"></span>', [
+                        'class' => 'btn btn-info',
+                        'id' => 'store_check'
+                    ]);
+                } ?>
             </p>
         </div>
 
