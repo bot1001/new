@@ -172,4 +172,9 @@ class TestController extends \yii\web\Controller
             $user_open->save();
         }
     }
+
+    function actionMd5(){
+        $test = md5('MERCHANTID=105635000000321&POSID=011945623&BRANCHID=450000000&ORDERID=201811081212&PAYMENT=0.1&CURCODE=01&TXCODE=530590&REMARK1=&REMARK2=&TYPE=1&PUB=42375f6a3517265797d7f877020113&GATEWAY=0&CLIENTIP=61.234.51.242&REGINFO=yuda&PROINFO=&REFERER=&TRADE_TYPE=undefined&SUB_APPID=wx7825cf3988c69de6&SUB_OPENID=oLCDr4uA5fzJTRGBklZ51T9__CDk');
+        echo $test;
+    }
 }

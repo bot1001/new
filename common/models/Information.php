@@ -36,8 +36,8 @@ class Information extends \yii\db\ActiveRecord
     {
         return [
             [['community', 'times', 'type', 'remind_time'], 'required'],
-            [['community', 'times', 'reading', 'remind_time'], 'integer'],
-            [['detail', 'target', 'property'], 'string', 'max' => 50],
+            [['community', 'times', 'reading', 'remind_time', 'target'], 'integer'],
+            [['detail', 'property'], 'string', 'max' => 50],
             [['ticket_number'], 'string', 'max' => 128],
         ];
     }

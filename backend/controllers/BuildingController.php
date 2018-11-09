@@ -107,6 +107,7 @@ class BuildingController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $company = Company::getCompany(); //获取公司数组
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index'/*, 'id' => $model->building_id*/]);
@@ -114,6 +115,7 @@ class BuildingController extends Controller
 
         return $this->renderAjax('update', [
             'model' => $model,
+            'company' => $company
         ]);
     }
 

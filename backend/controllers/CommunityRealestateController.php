@@ -172,15 +172,20 @@ class CommunityRealestateController extends Controller
 					if(empty($sheet['N'])){
 						$sheet['N'] = 0;
 					}
+					$building = $sheet['B']; //楼宇
+                    $number = $sheet[ 'D' ]; //房号
+                    if(is_numeric($number) && strlen($number) == '3'){
+                        $number = str_pad($number, '4', '0', STR_PAD_LEFT); //房号长度为3的自动补0
+                    }
 
 					//获取房屋信息
 					$r_id = (new \yii\db\Query())->select( 'community_basic.community_id, community_building.building_id, community_realestate.realestate_id' )
 					    ->from('community_realestate')
 					    ->join('inner join', 'community_basic', 'community_basic.community_id = community_realestate.community_id')
 					    ->join('inner join', 'community_building', 'community_building.building_id = community_realestate.building_id')
-					    ->where( [ 'community_basic.community_name' => $sheet[ 'A' ], 'community_building.building_name' => $sheet['B'], 'community_realestate.room_name' => $sheet[ 'D' ]] )
+					    ->where( [ 'community_basic.community_name' => $sheet[ 'A' ], 'community_building.building_name' => $building, 'community_realestate.room_name' => $number] )
 					    ->one();
-					
+
 						 if(!empty($r_id))
 						{
 							$transaction = Yii::$app->db->beginTransaction();
