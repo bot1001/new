@@ -13,19 +13,36 @@ use common\models\Instructions;
 use yii\db\Query;
 use yii\helpers\Json;
 use yii\web\Controller;
+use yii\data\Pagination;
 
 class InstructionController extends Controller
 {
     //小程序操作指南标题列表
-    function actionIndex($type)
+    function actionIndex($type, $page)
     {
         $instruction = Instructions::find() //获取指南标题数据
-            ->select('id, title')
-            ->where(['type' => "$type", 'status' => '1'])
-            ->asArray()
+            ->select('id, title, version, create_time, update_time')
+            ->where(['type' => "$type", 'status' => '1']);
+
+        $count = $instruction->count(); //求总页数
+        if($count == '0') //如果数据为空则返回空
+        {
+            return false;
+        }
+
+        $p = '10';
+        $pa = ceil($count/$p);
+        if($page > $pa)
+        {
+            return false;
+        }
+
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]);
+        $instruction = $instruction->offset($pagination->offset)
+            ->limit($pagination->limit)
             ->all();
-        //数据转换
-        $instruction = Json::encode($instruction);
+
+        $instruction = Json::encode($instruction);//数据转换
 
         return $instruction;
     }
@@ -41,9 +58,24 @@ class InstructionController extends Controller
             ->where(['instructions.id' => $id])
             ->one();
 
-        //数据转换
-        $instruction = Json::encode($instruction);
+        if($instruction){ //判断是否存在数据
+            //数据转换
+            $instruction = Json::encode($instruction);
+            return $instruction;
+        }
+        return false;
+    }
 
-        return $instruction;
+    function actionWeb($id)
+    {
+        $instruction = (new Query())
+            ->select('instructions.id, instructions.title, instructions.content, instructions.author, from_unixtime(instructions.create_time) as create_time,
+            from_unixtime(instructions.update_time) as update_time, instructions.version, instructions.property, sys_user.name')
+            ->from('instructions')
+            ->join('inner join', 'sys_user', 'sys_user.id = instructions.author')
+            ->where(['instructions.id' => $id])
+            ->one();
+
+        return $this->render('index',['model' => $instruction]);
     }
 }

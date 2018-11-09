@@ -19,7 +19,8 @@ class CommunityFeesController extends Controller
     function actionIndex($community, $page)
     {
         $fees = (new \yii\db\Query()) //获取指南标题数据
-            ->select('community_fees.id, community_fees.title')
+            ->select('community_fees.id, community_fees.title, community_fees.version,
+            from_unixtime(community_fees.create_time) as create_time, from_unixtime(community_fees.update_time) as update_time')
             ->from('community_fees')
             ->join('inner join', 'community_basic', 'community_fees.community_id = community_basic.community_id')
             ->where(['community_basic.community_name' => "$community", 'community_fees.status' => '1']);
@@ -36,7 +37,7 @@ class CommunityFeesController extends Controller
             return false;
         }
 
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $pa]);
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => $p]);
         $fees = $fees->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -56,9 +57,26 @@ class CommunityFeesController extends Controller
             ->where(['community_fees.id' => $id])
             ->one();
 
-        //数据转换
-        $fees = Json::encode($fees);
+        if($fees){
+            //数据转换
+            $fees = Json::encode($fees);
+            return $fees;
+        }
 
         return $fees;
+    }
+
+    //获取单条收费标准数据
+    function actionWeb($id)
+    {
+        $fees = (new Query())
+            ->select('community_fees.id, community_fees.title, community_fees.content, community_fees.author, from_unixtime(community_fees.create_time) as create_time,
+            from_unixtime(community_fees.update_time) as update_time, community_fees.version, community_fees.property, sys_user.name')
+            ->from('community_fees')
+            ->join('inner join', 'sys_user', 'sys_user.id = community_fees.author')
+            ->where(['community_fees.id' => $id])
+            ->one();
+
+        return $this->render('/instruction/index',['model' => $fees]);
     }
 }

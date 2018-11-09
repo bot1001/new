@@ -38,7 +38,7 @@ class Instructions extends \yii\db\ActiveRecord
             [['title', 'content', 'type', 'version', 'status'], 'required'],
             [['author', 'type', 'status'], 'integer'],
             [['title'], 'string', 'max' => 50],
-            [['content'], 'string', 'max' => 2000],
+            [['content'], 'string', 'max' => 10000],
             [['version'], 'string', 'max' => 32],
             [['property'], 'string', 'max' => 64],
             [['author'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author' => 'id']],
@@ -66,7 +66,7 @@ class Instructions extends \yii\db\ActiveRecord
 
     static function arr($one)
     {
-        $type = [0 => '后台', 1 => '微信', 2 => 'APP'];
+        $type = [0 => '后台', 1 => '微信', 2 => 'APP', '3' => '全部'];
         $status = [0 => '禁用', 1 => '启用', 2 => '审核'];
 
         $result = ['type' => $type, 'status' => $status];

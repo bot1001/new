@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use kartik\grid\EditableColumnAction;
 use common\models\CommunityFees;
 use common\models\CommunityFeesSearch;
 use yii\web\Controller;
@@ -28,6 +30,27 @@ class CommunityFeesController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config' => [
+                    "imageUrlPrefix"  => Yii::$app->request->hostInfo,//图片访问路径前缀
+                    "imagePathFormat" => "/img/fees/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径、广告
+                    "imageMaxSize" => 512000,
+                ],
+            ],
+            'fees' => [                                       // identifier for your editable action
+                'class' => EditableColumnAction::className(),     // action class name
+                'modelClass' => CommunityFees::className(),                // the update model class
+                'outputValue' => function ($model, $attribute, $key, $index) {
+                },
+                'ajaxOnly' => true,
+            ],
+        ]);
     }
 
     /**
