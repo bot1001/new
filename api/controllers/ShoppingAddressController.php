@@ -48,7 +48,7 @@ class ShoppingAddressController extends Controller
     //添加用户常用收货地址
     function actionAdd($id, $account_id, $name, $phone, $address)
     {
-        if(!$id){ //如果id不存在则添加新记录
+        if($id == ''){ //如果id不存在则添加新记录
             $model = new ShoppingAddress(); //实例化模型
 
             $model->account_id = $account_id;
@@ -63,6 +63,20 @@ class ShoppingAddressController extends Controller
 
         if($result)
         {
+            return true;
+        }
+        return false;
+    }
+
+    //删除收货地址
+    function actionDel($id){
+        $model = ShoppingAddress::findOne($id);
+        if(!$model){
+            return false;
+        }
+        $result = $model->delete();
+
+        if($result){
             return true;
         }
         return false;

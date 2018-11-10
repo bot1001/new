@@ -34,13 +34,13 @@ class ShoppingCart extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['account_id', 'product_id', 'summation', 'update_time'], 'required'],
-//            [['product_id', 'summation', 'update_time', 'property'], 'integer'],
-//            [['account_id'], 'string', 'max' => 50],
-//            [['account_id', 'product_id', 'property'], 'unique', 'targetAttribute' => ['account_id', 'product_id', 'property']],
-//            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'product_id']],
-//            [['property'], 'exist', 'skipOnError' => true, 'targetClass' => ProductProperty::className(), 'targetAttribute' => ['property' => 'id']],
-//            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
+            [['account_id', 'product_id', 'summation', 'update_time'], 'required'],
+            [['product_id', 'summation', 'update_time', 'property'], 'integer'],
+            [['account_id'], 'string', 'max' => 50],
+            [['account_id', 'product_id', 'property'], 'unique', 'targetAttribute' => ['account_id', 'product_id', 'property']],
+            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'product_id']],
+            [['property'], 'exist', 'skipOnError' => true, 'targetClass' => ProductProperty::className(), 'targetAttribute' => ['property' => 'id']],
+            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserAccount::className(), 'targetAttribute' => ['account_id' => 'account_id']],
         ];
     }
 

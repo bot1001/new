@@ -34,6 +34,7 @@ class ShoppingAddress extends \yii\db\ActiveRecord
     {
         return [
             [['account_id', 'name', 'phone', 'address'], 'required'],
+            [['account_id', 'name', 'phone', 'address'], 'unique', 'targetAttribute' => ['account_id', 'name', 'phone', 'address']],
             [['update_time'], 'integer'],
             [['account_id', 'name', 'phone', 'address', 'property'], 'string', 'max' => 50],
             [['account_id', 'name', 'phone', 'address'], 'unique', 'targetAttribute' => ['account_id', 'name', 'phone', 'address']],
