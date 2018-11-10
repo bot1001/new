@@ -23,7 +23,8 @@ class CommunityFeesController extends Controller
             from_unixtime(community_fees.create_time) as create_time, from_unixtime(community_fees.update_time) as update_time')
             ->from('community_fees')
             ->join('inner join', 'community_basic', 'community_fees.community_id = community_basic.community_id')
-            ->where(['community_basic.community_name' => "$community", 'community_fees.status' => '1']);
+            ->where(['community_basic.community_name' => "$community", 'community_fees.status' => '1'])
+        ->orderBy('sort DESC, update_time DESC');
 
         $count = $fees->count(); //求总页数
         if($count == '0') //如果数据为空则返回空
@@ -55,6 +56,7 @@ class CommunityFeesController extends Controller
             ->from('community_fees')
             ->join('inner join', 'sys_user', 'sys_user.id = community_fees.author')
             ->where(['community_fees.id' => $id])
+            ->orderBy('sort DESC, update_time DESC')
             ->one();
 
         if($fees){

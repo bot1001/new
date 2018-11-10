@@ -13,6 +13,52 @@ use yii\web\Controller;
  */
 class UserController extends Controller
 {
+    //小程序解密用户手机号码
+    function actionPhone($appid, $sessionKey, $encryptedData, $iv){
+
+        /**
+         * error code 说明.
+         * <ul>
+         *    <li>-41001: encodingAesKey 非法</li>
+         *    <li>-41003: aes 解密失败</li>
+         *    <li>-41004: 解密后得到的buffer非法</li>
+         *    <li>-41005: base64加密失败</li>
+         *    <li>-41016: base64解密失败</li>
+         * </ul>
+         */
+
+        $IllegalAesKey = -41001;
+        $IllegalIv = -41002;
+        $IllegalBuffer = -41003;
+        $DecodeBase64Error = -41004;
+
+         if (strlen($sessionKey) != 24) {
+             return $IllegalAesKey;
+         }
+         $aesKey=base64_decode($sessionKey);
+
+         if (strlen($iv) != 24) {
+             return $IllegalIv;
+         }
+         $aesIV=base64_decode($iv);
+
+         $aesCipher=base64_decode($encryptedData);
+
+         $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
+
+         $dataObj=json_decode( $result );
+         if( $dataObj  == NULL )
+         {
+             return $IllegalBuffer;
+         }
+         if( $dataObj->watermark->appid != $appid )
+         {
+             return $IllegalBuffer;
+         }
+
+         return $result;
+    }
+
     public function actionInfo($name, $password)
     {
         $info = User::find()
@@ -37,7 +83,7 @@ class UserController extends Controller
         return false;
     }
 
-    //裕家人小程序修改密码
+    //小程序旧密码修改密码
     function actionChange($account_id, $old_p, $new_p)
     {
         $account = UserAccount::find() //查找用户账户信息

@@ -74,8 +74,31 @@ class InstructionController extends Controller
             ->from('instructions')
             ->join('inner join', 'sys_user', 'sys_user.id = instructions.author')
             ->where(['instructions.id' => $id])
+            ->orderBy('sort DESC, update_time DESC')
             ->one();
 
-        return $this->render('index',['model' => $instruction]);
+        if($instruction){
+            return $this->render('index',['model' => $instruction]);
+        }
+
+        return false;
+    }
+
+    //通过指南类型查找
+    function actionAbout($id){
+        $instruction = (new Query())
+            ->select('instructions.id, instructions.title, instructions.content, instructions.author, from_unixtime(instructions.create_time) as create_time,
+            from_unixtime(instructions.update_time) as update_time, instructions.version, instructions.property, sys_user.name')
+            ->from('instructions')
+            ->join('inner join', 'sys_user', 'sys_user.id = instructions.author')
+            ->where(['instructions.type' => "$id"])
+            ->orderBy('sort DESC, update_time DESC')
+            ->one();
+
+        if($instruction){
+            return $this->render('index',['model' => $instruction]);
+        }
+
+        return false;
     }
 }

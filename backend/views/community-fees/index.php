@@ -49,6 +49,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ['attribute' => 'update_time',
             'mergeHeader' => true],
 
+        ['attribute' => 'sort',
+            'class' => 'kartik\grid\EditableColumn',
+            // 判断活动列是否可编辑
+            'readonly' => function ( $model, $key, $index, $widget ) {
+                return ( \app\models\Limit::limit($url = '/community-fees/fees') != 1 );
+            },
+            'editableOptions' => [
+                'formOptions' => [ 'action' => [ '/community-fees/fees' ] ], // point to the new action
+                'inputType' => \kartik\editable\ Editable::INPUT_TEXT,
+            ],
+        ],
+
         ['attribute' => 'version',
             'contentOptions' => [
                 'class' => ['text-left']
@@ -70,10 +82,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'kartik\grid\EditableColumn',
             // 判断活动列是否可编辑
             'readonly' => function ( $model, $key, $index, $widget ) {
-                return ( \app\models\Limit::limit($url = 'instructions/instructions') != 1 );
+                return ( \app\models\Limit::limit($url = '/community-fees/fees') != 1 );
             },
             'editableOptions' => [
-                'formOptions' => [ 'action' => [ '/instructions/instructions' ] ], // point to the new action
+                'formOptions' => [ 'action' => [ '/community-fees/fees' ] ], // point to the new action
                 'inputType' => \kartik\editable\ Editable::INPUT_DROPDOWN_LIST,
                 'data' => \common\models\Instructions::arr($one = 'status'),
             ],

@@ -14,6 +14,7 @@ use Yii;
  * @property string $content 内容
  * @property int $create_time 创建时间
  * @property int $update_time 更新时间
+ * @property int $sort 排序
  * @property string $version 版本号
  * @property int $status 状态，0=> 禁用，1=>启用, 2=>审核
  * @property string $property 备注
@@ -37,8 +38,8 @@ class CommunityFees extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'community_id', 'content', 'version', 'status'], 'required'],
-            [['author', 'community_id', 'status'], 'integer'],
+            [['title', 'community_id', 'content', 'version', 'status', 'sort'], 'required'],
+            [['author', 'community_id', 'status', 'sort'], 'integer'],
             [['title'], 'string', 'max' => 50],
             [['content'], 'string', 'max' => 2000],
             [['version'], 'string', 'max' => 32],
@@ -61,6 +62,7 @@ class CommunityFees extends \yii\db\ActiveRecord
             'create_time' => '创建时间',
             'update_time' => '修改时间',
             'community_id' => '小区',
+            'sort' => '排序',
             'version' => '版本号',
             'status' => '状态',
             'property' => '备注',

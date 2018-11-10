@@ -18,7 +18,7 @@ class InstructionsSearch extends Instructions
     public function rules()
     {
         return [
-            [['id', 'author', 'create_time', 'update_time', 'type', 'status'], 'integer'],
+            [['id', 'author', 'create_time', 'update_time', 'type', 'status', 'sort'], 'integer'],
             [['title', 'content', 'version', 'property'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class InstructionsSearch extends Instructions
         $query->andFilterWhere([
             'id' => $this->id,
             'author' => $this->author,
+            'sort' => $this->sort,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
             'type' => $this->type,

@@ -14,6 +14,7 @@ use Yii;
  * @property int $create_time 创建时间
  * @property int $update_time 更新时间
  * @property int $type 类型，1=>后台, 2=>微信, 3 =>APP
+ * @property int $sort 排序
  * @property string $version 版本号
  * @property string $property 备注
  *
@@ -35,8 +36,8 @@ class Instructions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'type', 'version', 'status'], 'required'],
-            [['author', 'type', 'status'], 'integer'],
+            [['title', 'content', 'type', 'version', 'status', 'sort'], 'required'],
+            [['author', 'type', 'status', 'sort'], 'integer'],
             [['title'], 'string', 'max' => 50],
             [['content'], 'string', 'max' => 10000],
             [['version'], 'string', 'max' => 32],
@@ -58,6 +59,7 @@ class Instructions extends \yii\db\ActiveRecord
             'create_time' => '创建时间',
             'update_time' => '修改时间',
             'type' => '平台',
+            'sort' => '排序',
             'version' => '版本号',
             'status' => '状态',
             'property' => '备注',
@@ -66,7 +68,7 @@ class Instructions extends \yii\db\ActiveRecord
 
     static function arr($one)
     {
-        $type = [0 => '后台', 1 => '微信', 2 => 'APP', '3' => '全部'];
+        $type = [0 => '后台', 1 => '微信', 2 => 'APP', '3' => '全部', '4'=> '服务协议', '5' => '隐私条款'];
         $status = [0 => '禁用', 1 => '启用', 2 => '审核'];
 
         $result = ['type' => $type, 'status' => $status];

@@ -51,6 +51,10 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col-lg-2">
+            <?= $form->field($model, 'sort')->input('number', ['placeholder' => '排序'])->label(false) ?>
+        </div>
+
+        <div class="col-lg-2">
             <?= $form->field($model, 'status')->dropDownList(\common\models\Instructions::arr($one = 'status'), ['prompt' => '状态'])->label(false) ?>
         </div>
 

@@ -18,7 +18,7 @@ class CommunityFeesSearch extends CommunityFees
     public function rules()
     {
         return [
-            [['id', 'author', 'community_id', 'create_time', 'update_time', 'status'], 'integer'],
+            [['id', 'author', 'community_id', 'create_time', 'update_time', 'status', 'sort'], 'integer'],
             [['title', 'content', 'version', 'property'], 'safe'],
         ];
     }
@@ -64,6 +64,7 @@ class CommunityFeesSearch extends CommunityFees
             'community_id' => $this->community_id,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
+            'sort' => $this->sort,
             'status' => $this->status,
         ]);
 
